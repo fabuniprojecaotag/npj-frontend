@@ -1,14 +1,14 @@
-# FrontEnd
+# Front-end do NPJ
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
+O Front-end foi gerado na versão do [Angular CLI](https://github.com/angular/angular-cli) 15.1.1.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+No terminal na raiz do Front-end coloque `ng serve` para rodar um servidor local. Navegyue para `http://localhost:4200/`. A aplicação irá automaticamente se atualizar caso você faça alguma mudança e salve
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Coloque `ng generate component nome-componente` para gerar um novo componente. Você também pode usar `ng generate directive|pipe|service|class|guard|interface|enum|module` para outras estruturas.
 
 ## Build
 
