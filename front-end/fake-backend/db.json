@@ -1,0 +1,12 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "email": "aemail@exemplo.com",
+      "senha": "asd",
+      "nome": "usuário 1",
+      "token": "abcdef",
+      "perfil_id": 1
+    }
+  ]
+}
