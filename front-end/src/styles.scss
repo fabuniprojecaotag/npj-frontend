@@ -2,20 +2,20 @@
 
 :root {
   /* cores */
-  --branco: #FFFFFF;
-  --preto: #000000;
+  $branco: #FFFFFF;
+  $preto: #000000;
 
-  --roxo: #393053;
-  --roxo-claro: #635985;
-  --roxo-escuro: #18122B;
+  $roxo: #393053;
+  $roxo-claro: #635985;
+  $roxo-escuro: #18122B;
 
-  --vermelho: #B3261E;
-  --vermelho-claro: #F9DEDC;
-  --vermelho-escuro: #410E0B;
+  $vermelho: #B3261E;
+  $vermelho-claro: #F9DEDC;
+  $vermelho-escuro: #410E0B;
 
   /* fontes */
-  --fonte-padrao: 'DM Sans', sans-serif;
-  --fonte-titulo: 'Bebas Neue', sans-serif;
+  $fonte-padrao: 'DM Sans', sans-serif;
+  $fonte-titulo: 'Bebas Neue', sans-serif;
 }
 
 /* reset css + fonte padronizada */
@@ -54,3 +54,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

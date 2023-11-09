@@ -1,15 +1,15 @@
 .cabecalho {
   display: flex;
-  background-color: var(--roxo-escuro);
+  background-color: $roxo-escuro;
   justify-content: center;
   padding-top: 1px;
   padding-bottom: 1em;
 
   &__titulo {
-    color: var(--branco);
+    color: $branco;
     font-size: 44px;
     font-weight: lighter;
-    font-family: var(--fonte-titulo);
+    font-family: $fonte-titulo;
     text-align: center;
   }
 }
