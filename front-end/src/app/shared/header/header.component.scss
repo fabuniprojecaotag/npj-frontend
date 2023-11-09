@@ -1,16 +1,16 @@
-.cabecalho {
-  display: flex;
-  background-color: $roxo-escuro;
-  justify-content: center;
-  padding-top: 1px;
-  padding-bottom: 1em;
-
-  &__titulo {
+@import '../../../styles.scss';
+.cabecalho{
+  .mat-toolbar {
+    align-items: center;
+    background-color: $roxo-escuro;
     color: $branco;
-    font-size: 44px;
-    font-weight: lighter;
-    font-family: $fonte-titulo;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+
+    .cabecalho__titulo {
+      font-size: 44px;
+      font-family: $fonte-titulo;
+    }
   }
 }
 
