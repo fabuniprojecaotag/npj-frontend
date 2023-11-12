@@ -57,6 +57,11 @@
     a {
       color: $roxo;
       margin: 2em 0;
+
+      &:hover {
+        cursor: pointer;
+        color: $roxo-escuro;
+      }
     }
   }
 }

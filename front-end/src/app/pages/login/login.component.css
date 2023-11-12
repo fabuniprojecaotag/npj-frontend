@@ -65,4 +65,8 @@ body {
 .login-page .card a {
   color: #393053;
   margin: 2em 0;
+}
+.login-page .card a:hover {
+  cursor: pointer;
+  color: #18122B;
 }/*# sourceMappingURL=login.component.css.map */
