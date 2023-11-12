@@ -1,10 +1,12 @@
 <header class="cabecalho">
   <mat-toolbar>
-    <mat-icon aria-hidden="false" aria-label="Menu icon" fontIcon="menu"></mat-icon>
-    <span class="spacer"></span>
+    <button mat-icon-button>
+      <mat-icon aria-hidden="false" aria-label="Menu icon" fontIcon="menu" ></mat-icon>
+    </button>
     <h1 class="cabecalho__titulo">GPRO</h1>
-    <span class="spacer"></span>
-    <mat-icon aria-hidden="false" aria-label="Menu icon" fontIcon="person"></mat-icon>
+    <button mat-icon-button>
+      <mat-icon aria-hidden="false" aria-label="User icon" fontIcon="person"></mat-icon>
+    </button>
   </mat-toolbar>
   <mat-toolbar-row>
     <span>{{ subtitulo }}</span>
