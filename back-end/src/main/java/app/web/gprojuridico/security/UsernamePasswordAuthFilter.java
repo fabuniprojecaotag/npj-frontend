@@ -1,7 +1,6 @@
-package app.web.gprojuridico.Security;
+package app.web.gprojuridico.security;
 
-import app.web.gprojuridico.Models.Credentials;
-import app.web.gprojuridico.Models.User;
+import app.web.gprojuridico.model.Credentials;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -38,13 +37,5 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request,response);
-
-
-
-
-
-
-
-
     }
 }

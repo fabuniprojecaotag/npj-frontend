@@ -1,4 +1,4 @@
-package app.web.gprojuridico.Firebase;
+package app.web.gprojuridico.repository;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
 
@@ -12,6 +12,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 @Service
 public class FirebaseConnection {
+
+    private static RuntimeException runtimeException;
 
     public static void  initialization(){
         FileInputStream serviceAccount = null;
@@ -30,7 +32,7 @@ public class FirebaseConnection {
                 Firestore db = FirestoreClient.getFirestore();
 
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw runtimeException;
             }
         }
     }

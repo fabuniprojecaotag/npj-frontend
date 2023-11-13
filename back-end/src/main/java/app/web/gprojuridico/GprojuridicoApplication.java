@@ -1,6 +1,6 @@
 package app.web.gprojuridico;
 
-import app.web.gprojuridico.Firebase.FirebaseConnection;
+import app.web.gprojuridico.repository.FirebaseConnection;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

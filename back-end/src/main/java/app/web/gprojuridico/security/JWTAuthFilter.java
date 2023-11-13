@@ -1,4 +1,4 @@
-package app.web.gprojuridico.Security;
+package app.web.gprojuridico.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,4 +1,4 @@
-package app.web.gprojuridico.Security;
+package app.web.gprojuridico.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;

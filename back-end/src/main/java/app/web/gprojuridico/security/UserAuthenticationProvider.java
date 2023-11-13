@@ -1,8 +1,8 @@
-package app.web.gprojuridico.Security;
+package app.web.gprojuridico.security;
 
-import app.web.gprojuridico.Models.Credentials;
-import app.web.gprojuridico.Models.User;
-import app.web.gprojuridico.Services.UserService;
+import app.web.gprojuridico.model.Credentials;
+import app.web.gprojuridico.model.User;
+import app.web.gprojuridico.service.UserService;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;

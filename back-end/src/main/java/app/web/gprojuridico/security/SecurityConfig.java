@@ -1,4 +1,4 @@
-package app.web.gprojuridico.Security;
+package app.web.gprojuridico.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

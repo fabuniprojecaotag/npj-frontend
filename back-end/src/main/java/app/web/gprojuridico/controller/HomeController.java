@@ -1,8 +1,7 @@
-package app.web.gprojuridico.Controllers;
-import app.web.gprojuridico.Models.Credentials;
-import app.web.gprojuridico.Models.User;
-import app.web.gprojuridico.Security.UserAuthenticationProvider;
-import app.web.gprojuridico.Services.UserService;
+package app.web.gprojuridico.controller;
+import app.web.gprojuridico.model.User;
+import app.web.gprojuridico.security.UserAuthenticationProvider;
+import app.web.gprojuridico.service.UserService;
 import org.springframework.core.SpringVersion;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

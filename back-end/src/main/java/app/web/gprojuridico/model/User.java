@@ -1,4 +1,4 @@
-package app.web.gprojuridico.Models;
+package app.web.gprojuridico.model;
 
 import org.apache.naming.factory.SendMailFactory;
 

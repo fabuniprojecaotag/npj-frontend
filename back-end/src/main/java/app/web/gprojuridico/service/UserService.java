@@ -1,6 +1,6 @@
-package app.web.gprojuridico.Services;
-import app.web.gprojuridico.Models.Credentials;
-import app.web.gprojuridico.Models.User;
+package app.web.gprojuridico.service;
+import app.web.gprojuridico.model.Credentials;
+import app.web.gprojuridico.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
