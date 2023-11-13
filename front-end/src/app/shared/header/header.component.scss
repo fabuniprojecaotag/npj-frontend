@@ -1,6 +1,9 @@
 @import '../../../styles.scss';
 
 .cabecalho{
+  position: relative;
+  height: auto;
+  width: 100%;
   mat-toolbar {
     align-items: center;
     background-color: $roxo-escuro;
@@ -25,3 +28,51 @@
     text-transform: uppercase;
   }
 }
+
+// menu lateral:
+.menu-nav {
+  align-items: flex-start;
+  background: $roxo-escuro;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: fixed;
+  transition: 0.5s;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 0;
+  z-index: 9999;
+
+  &.active {
+    overflow-x: visible;
+    width: 20%;
+  }
+
+  &__logo {
+    padding-top: 2em;
+    margin: 0 auto;
+    width: 240px;
+  }
+
+  &__lista {
+    padding: 1em;
+    list-style-type: none;
+
+    .lista__item  {
+      padding: 1em 0;
+      &___link {
+        align-items: center;
+        color: $branco;
+        display: flex;
+        text-decoration: none;
+
+        .mat-icon {
+          margin-right: 1em;
+          vertical-align: middle; // Alinha verticalmente o ícone
+        }
+      }
+    }
+  }
+}
+
