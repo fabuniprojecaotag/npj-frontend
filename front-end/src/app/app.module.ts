@@ -15,6 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
+import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
+import { UserMenuComponent } from './shared/user-menu/user-menu.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { UsersComponent } from './pages/users/users.component';
     HomeComponent,
     LoginComponent,
     UsersComponent,
+    NavMenuComponent,
+    UserMenuComponent,
   ],
   imports: [
     BrowserModule,

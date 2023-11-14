@@ -7,6 +7,7 @@ import { Component, HostListener, Input, ElementRef } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() subtitulo: string = '';
+  // logica para abrir e fechar menu
   iSmenuAtivo: boolean = false;
 
   constructor(private el: ElementRef) {}

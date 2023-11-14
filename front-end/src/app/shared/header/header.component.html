@@ -12,22 +12,4 @@
     <span>{{ subtitulo }}</span>
   </mat-toolbar-row>
 </header>
-<nav class="menu-nav" [class.active]="iSmenuAtivo">
-  <img src="./assets/images/gproFundoRoxo.png" alt="Logo do GPRO" class="menu-nav__logo">
-  <ul class="menu-nav__lista">
-    <li class="lista__item"><a routerLink="/home" class="lista__item___link"><mat-icon aria-hidden="false"
-          aria-label="Home icon" fontIcon="home"></mat-icon>Home</a></li>
-    <li class="lista__item"><a href="#" class="lista__item___link"><mat-icon aria-hidden="false"
-          aria-label="Article icon" fontIcon="article"></mat-icon>Processos</a></li>
-    <li class="lista__item"><a href="#" class="lista__item___link"><mat-icon aria-hidden="false"
-          aria-label="People icon" fontIcon="people"></mat-icon>Atendimentos</a></li>
-    <li class="lista__item"><a href="#" class="lista__item___link"><mat-icon aria-hidden="false"
-      aria-label="Agenda icon" fontIcon="event"></mat-icon>Agenda</a></li>
-    <li class="lista__item"><a routerLink="/users" class="lista__item___link"><mat-icon aria-hidden="false"
-      aria-label="Statistic icon" fontIcon="manage_accounts"></mat-icon>Usuários</a></li>
-    <li class="lista__item"><a href="#" class="lista__item___link"><mat-icon aria-hidden="false"
-      aria-label="Statistic icon" fontIcon="bar_chart_4_bars"></mat-icon>Estastisticas</a></li>
-    <li class="lista__item"><a href="#" class="lista__item___link"><mat-icon aria-hidden="false"
-      aria-label="Statistic icon" fontIcon="download"></mat-icon>Relatórios</a></li>
-  </ul>
-</nav>
+<app-nav-menu [iSmenuAtivo]="iSmenuAtivo" [logo]="'../../../assets/images/gproFundoRoxo.png'"></app-nav-menu>
