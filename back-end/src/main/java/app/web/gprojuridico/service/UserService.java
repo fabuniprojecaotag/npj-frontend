@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
-
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 @Service
 public class UserService {
@@ -47,6 +47,13 @@ public class UserService {
 
             int newUserId = lastUserId + 1;
             user.setId(newUserId);
+
+            String pw_hash = BCrypt.withDefaults().hashToString(12,user.getSenha().toCharArray());
+            user.setSenha(pw_hash);
+
+            System.out.println(pw_hash);
+            System.out.println(user.getSenha());
+
 
             DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document();
             ApiFuture<WriteResult> collectionApiFuture = documentReference.set(user);
@@ -116,7 +123,7 @@ public class UserService {
         try {
             matchingUsers = usersCollection
                     .whereEqualTo("email", email)
-                    .whereEqualTo("senha", password)
+//                    .whereEqualTo("senha", password)
                     .get().get().getDocuments();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
@@ -131,6 +138,13 @@ public class UserService {
             throw new RuntimeException("No user found with the provided email and password.");
         }
 
-        return foundUser;
+        BCrypt.Result isThePhRight = BCrypt.verifyer().verify(user.getPassword().toCharArray(),foundUser.getSenha());
+        if(isThePhRight.verified) {
+            return foundUser;
+        }else{
+            throw new RuntimeException("A Senha do usuário incorreta");
+        }
+
+
     }
 }
