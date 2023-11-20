@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  anoAtual: number = 2023;
+  anoAtual: number = new Date().getFullYear();
 }
