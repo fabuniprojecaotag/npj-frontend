@@ -18,7 +18,11 @@
     display: block;
     padding-top: 2em;
     margin: 0 auto;
-    width: 240px;
+    max-width: 240px;
+
+    @media screen and (max-width: 768px) {
+      max-width: 180px;
+    }
   }
 
   &__lista {
@@ -36,14 +40,21 @@
 
         .mat-icon {
           margin-right: 1em;
+          @media screen and (max-width: 768px) {
+            margin-right: 0.5em;
+          }
           vertical-align: middle;
         }
       }
     }
   }
-  // Estilos para a classe .active
+  // menu ativo
   &.active {
     overflow-x: visible;
     width: 20%;
+
+    @media screen and (max-width: 768px) {
+      width: 50vw;
+    }
   }
 }
