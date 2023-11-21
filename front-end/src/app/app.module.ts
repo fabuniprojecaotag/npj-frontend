@@ -18,7 +18,11 @@ import { UsersComponent } from './pages/users/users.component';
 import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
 import { UserMenuComponent } from './shared/user-menu/user-menu.component';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,9 +45,14 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatSortModule,
     FormsModule,
+    HttpClientModule,
+    MatPaginatorModule
   ],
-  providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
+  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

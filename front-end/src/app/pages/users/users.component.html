@@ -1,2 +1,38 @@
 <app-header [subtitulo]="tituloDaPagina"></app-header>
-<p>Texto teste</p>
+
+<section class="secao-usuarios">
+  <p>Tudo > Tipo de usuário = “Estagiário” > Status = Ativo</p>
+  <div class="secao-usuarios__mural">
+    <table class="tabela-usuarios">
+      <thead class="tabela-usuarios__cabecalho">
+        <tr>
+          <td><mat-checkbox color="primary"></mat-checkbox></td>
+          <td>Matrícula</td>
+          <td>Nome</td>
+          <td>Tipo</td>
+          <td>Status</td>
+          <td>Editar</td>
+          <td>Excluir</td>
+        </tr>
+      </thead>
+      <tbody class="tabela-usuarios__corpo" *ngIf="listaUsuarios.length > 0; else semUsuarios">
+        <tr *ngFor="let usuario of listaUsuarios">
+          <td><mat-checkbox color="primary" [checked]="usuario.status === 'Ativo'" (change)="toggleStatus(usuario)"></mat-checkbox></td>
+          <td>{{ usuario.matricula }}</td>
+          <td>{{ usuario.nome }}</td>
+          <td>{{ usuario.tipo }}</td>
+          <td>{{ usuario.status }}</td>
+          <td><mat-icon aria-hidden="false" aria-label="Icone de editar" fontIcon="settings" color="primary"></mat-icon></td>
+          <td><mat-icon aria-hidden="false" aria-label="Icone de editar" fontIcon="delete" color="primary"></mat-icon></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<ng-template #semUsuarios>
+  <div class="sem-Usuarios">
+    <p>Usuários não encontrados!</p>
+  </div>
+</ng-template>
