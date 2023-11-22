@@ -21,6 +21,12 @@
         font-family: $fonte-titulo;
         font-weight: bold;
         padding-left: 0.8em;
+        transition: visibility 0.1s;
+        min-width: 200px;
+
+        &.oculto {
+          visibility: hidden;
+        }
       }
 
       .cabecalho__subtitulo {
