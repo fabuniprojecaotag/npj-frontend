@@ -12,11 +12,27 @@
     color: $branco;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 
-    .cabecalho__titulo {
-      font-size: 44px;
-      font-family: $fonte-titulo;
-      font-weight: bold;
+    div {
+      align-items: center;
+      display: flex;
+      justify-content: space-around;
+
+      .cabecalho__titulo {
+        font-size: 40px;
+        font-family: $fonte-titulo;
+        font-weight: bold;
+        padding-left: 0.8em;
+      }
+
+      .cabecalho__subtitulo {
+        border: 2px solid $branco;
+        border-radius: 16px;
+        color: $branco;
+        font-weight: lighter;
+        padding: 0 3em;
+      }
     }
   }
 

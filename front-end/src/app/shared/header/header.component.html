@@ -1,15 +1,22 @@
 <header class="cabecalho">
   <mat-toolbar>
-    <button mat-icon-button (click)="toggle()">
-      <mat-icon aria-hidden="false" aria-label="Menu icon" fontIcon="menu"></mat-icon>
-    </button>
-    <h1 class="cabecalho__titulo">GPRO</h1>
-    <button mat-icon-button>
-      <mat-icon aria-hidden="false" aria-label="User icon" fontIcon="person"></mat-icon>
-    </button>
+    <div>
+      <button mat-icon-button (click)="toggle()">
+        <mat-icon aria-hidden="false" aria-label="Menu icon" fontIcon="menu"></mat-icon>
+      </button>
+      <h1 class="cabecalho__titulo">GPRO</h1>
+    </div>
+    <div>
+      <h2 class="cabecalho__subtitulo">{{ subtitulo }}</h2>
+    </div>
+    <div>
+      <button mat-icon-button>
+        <mat-icon aria-hidden="false" aria-label="help icon" fontIcon="help" appearence="outlined"></mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon aria-hidden="false" aria-label="user settings icon" fontIcon="settings"></mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
-  <mat-toolbar-row>
-    <span>{{ subtitulo }}</span>
-  </mat-toolbar-row>
 </header>
 <app-nav-menu [iSmenuAtivo]="iSmenuAtivo" [logo]="'../../../assets/images/gproFundoRoxo.png'"></app-nav-menu>
