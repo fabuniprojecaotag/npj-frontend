@@ -20,7 +20,7 @@
           <td><mat-checkbox color="primary" [checked]="usuario.status === 'Ativo'" (change)="toggleStatus(usuario)"></mat-checkbox></td>
           <td>{{ usuario.matricula }}</td>
           <td>{{ usuario.nome }}</td>
-          <td>{{ usuario.tipo }}</td>
+          <td>{{ getTipoUsuario(usuario.perfil_id) }}</td>
           <td>{{ usuario.status }}</td>
           <td><mat-icon aria-hidden="false" aria-label="Icone de editar" fontIcon="settings" color="primary"></mat-icon></td>
           <td><mat-icon aria-hidden="false" aria-label="Icone de editar" fontIcon="delete" color="primary"></mat-icon></td>

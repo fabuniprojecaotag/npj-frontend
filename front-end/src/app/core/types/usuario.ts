@@ -5,7 +5,6 @@ export interface Usuario {
   senha: string,
   matricula?: number,
   status?: string,
-  tipo?: string,
-  token?: string,
-  perfil_id?: number
+  token?: string, // token do jwt
+  perfil_id: number // ex: 1 = administrador, 2 = coord, 3 = secre, 4 = prof, 5 = estag
 }

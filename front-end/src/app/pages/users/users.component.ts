@@ -22,6 +22,17 @@ export class UsersComponent {
     })
   }
 
+  getTipoUsuario(perfilId: number): string {
+    switch (perfilId) {
+      case 1: return 'Administrador';
+      case 2: return 'Coordenador';
+      case 3: return 'Secretária';
+      case 4: return 'Professor';
+      case 5: return 'Estagiário';
+      default: return 'Desconhecido';
+    }
+  }
+
   // dica do gpt daora pro back
   toggleStatus(usuario: Usuario): void {
     usuario.status = usuario.status === 'Ativo' ? 'Inativo' : 'Ativo';
