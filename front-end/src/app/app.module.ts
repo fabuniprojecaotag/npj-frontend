@@ -24,6 +24,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatTableModule,
     MatSortModule,
     MatExpansionModule,
+    MatMenuModule,
     FormsModule,
     HttpClientModule,
     MatPaginatorModule,
