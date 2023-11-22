@@ -10,7 +10,7 @@ export class HeaderComponent {
   // logica para abrir e fechar menu
   iSmenuAtivo: boolean = false;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) { }
 
   toggle() {
     this.iSmenuAtivo = !this.iSmenuAtivo;

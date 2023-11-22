@@ -1,11 +1,8 @@
 @import '../../../styles.scss';
 
 .cabecalho{
-  position: relative;
-  top: 0;
-  left: 0;
   height: auto;
-  width: 100%;
+  width: 100vw;
   mat-toolbar {
     align-items: center;
     background-color: $roxo-escuro;
