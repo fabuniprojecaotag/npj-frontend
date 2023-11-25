@@ -1,21 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,700&display=swap");
 /* cores */
-$branco: #FFFFFF;
+$branco: #ffffff;
 $preto: #000000;
 
 $roxo: #393053;
 $roxo-claro: #635985;
-$roxo-escuro: #18122B;
+$roxo-escuro: #18122b;
 
-$vermelho: #B3261E;
-$vermelho-claro: #F9DEDC;
-$vermelho-escuro: #410E0B;
+$vermelho: #b3261e;
+$vermelho-claro: #f9dedc;
+$vermelho-escuro: #410e0b;
 
 /* fontes */
-$fonte-padrao: 'DM Sans', sans-serif;
-$fonte-titulo: 'Bebas Neue', sans-serif;
+$fonte-padrao: "DM Sans", sans-serif;
+$fonte-titulo: "Bebas Neue", sans-serif;
 
 /* reset css + fonte padronizada */
-html, body { height: 100%; }
-body { margin: 0; font-family: $fonte-padrao; }
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
 
+body {
+  height: 100%;
+  font-family: $fonte-padrao;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

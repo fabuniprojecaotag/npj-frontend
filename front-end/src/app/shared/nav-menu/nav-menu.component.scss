@@ -1,49 +1,98 @@
 @import "../../../styles.scss";
 
+@mixin estiloLink {
+  align-items: center;
+  color: $branco;
+  display: flex;
+  text-decoration: none;
+}
+
+@mixin estiloIcone {
+  color: $branco;
+  margin-right: 1em;
+  @media screen and (max-width: 768px) {
+    margin-right: 0.5em;
+  }
+  vertical-align: middle;
+}
+
 .menu-nav {
   align-items: flex-start;
   background: $roxo-escuro;
+  border-top: 1px solid $branco;
   display: flex;
   flex-direction: column;
   height: 100vh;
   position: fixed;
   transition: 0.5s;
   overflow: hidden;
-  top: 0;
-  left: 0;
   width: 0;
   z-index: 9999;
 
-  &__logo {
-    display: block;
-    padding-top: 2em;
-    margin: 0 auto;
-    width: 240px;
+  &__titulo {
+    align-self: center;
+    color: $branco;
+    font-size: 40px;
+    font-family: $fonte-titulo;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5em 0 0.2em;
   }
 
-  &__lista {
-    padding: 1em;
-    list-style-type: none;
+  mat-accordion {
+    margin: 0 auto;
+    width: 90%;
+    mat-expansion-panel {
+      background-color: transparent;
+      box-shadow: none;
+      margin: 0;
 
-    .lista__item {
-      padding: 1em 0;
-
-      &___link {
-        align-items: center;
+      mat-expansion-panel-header {
         color: $branco;
-        display: flex;
-        text-decoration: none;
+        /* navegação pai */
+        mat-panel-title {
+          .nav__link {
+            @include estiloLink();
 
-        .mat-icon {
-          margin-right: 1em;
-          vertical-align: middle;
+            .icone-nav {
+              @include estiloIcone();
+            }
+          }
+
+          .nav__link--disabled {
+            color: gray;
+
+            .icone-nav {
+              color: inherit;
+            }
+          }
+        }
+
+        ::ng-deep .mat-expansion-indicator:after {
+          color: $branco;
+        }
+      }
+      /* navegação filha */
+      .nav__link--filha {
+        @include estiloLink();
+        border-left: 1px solid white;
+        margin-left: 0.8em;
+        padding-left: 2em;
+
+        .icone-nav {
+          @include estiloIcone();
         }
       }
     }
   }
-  // Estilos para a classe .active
+
+  // menu ativo
   &.active {
     overflow-x: visible;
     width: 20%;
+
+    @media screen and (max-width: 768px) {
+      width: 50vw;
+    }
   }
 }

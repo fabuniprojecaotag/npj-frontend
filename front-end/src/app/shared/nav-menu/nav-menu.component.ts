@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class NavMenuComponent {
   @Input() iSmenuAtivo: boolean = false;
-  @Input() logo: string = './assets/images/gproFundoRoxo.png';
+  panelOpenState = false;
 }

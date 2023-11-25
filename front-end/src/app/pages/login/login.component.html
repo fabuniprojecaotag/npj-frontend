@@ -1,23 +1,31 @@
 <section class="login-page">
   <div class="card">
-    <img src="assets/images/logo.jpg" alt="logo do GPRO">
-  <h2>Login</h2>
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Digite seu email academico">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>Senha</mat-label>
-      <input matInput placeholder="Digite sua senha">
-    </mat-form-field>
-  </p>
-  <button routerLink="/home">Login</button>
-  <a href="#">Esqueceu a senha?</a>
-</div>
-<footer>
+    <img src="assets/images/logoGPROTransparente.png" alt="logo do GPRO">
+    <h2>Login</h2>
+    <form #loginForm="ngForm" (ngSubmit)="cadastrar(loginForm)" class="login__form">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input id="email" name="email" matInput type="email" placeholder="Digite seu email acadêmico" ngModel
+          #email="ngModel" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" minlength="2">
+        <mat-error *ngIf="(email?.invalid && email?.touched) || email?.dirty">
+          <span *ngIf="email?.errors?.['required']">O campo de email deve ser preenchido.</span>
+          <span *ngIf="email?.errors?.['pattern']">O campo de email deve seguir este padrão: "matricula&#64;projecao.edu.br"</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input id="senha" name="senha" type="password" matInput placeholder="Digite sua senha" ngModel #senha="ngModel"
+          required>
+        <mat-error *ngIf="(senha?.invalid && senha?.touched) || senha?.dirty">
+          O campo de senha deve ser preenchido.
+        </mat-error>
+      </mat-form-field>
+
+      <button class="form__botao" type="submit">Login</button>
+    </form>
+    <a href="#">Esqueceu a senha?</a>
+  </div>
   <div class="info-footer">
     <ul>
       <li><a href="#">Sobre</a></li>
@@ -28,5 +36,4 @@
       © {{anoAtual}} GPRO
     </span>
   </div>
-</footer>
 </section>
