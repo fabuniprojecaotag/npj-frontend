@@ -1,5 +1,6 @@
 package app.web.gprojuridico.service;
 import app.web.gprojuridico.model.Credentials;
+import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
@@ -15,7 +16,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 @Service
 public class UserService {
     private static final String COLLECTION_NAME = "acesso";
-    public String saveUser(User user) throws ExecutionException, InterruptedException {
+    public String create(User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
         // Verificar se nome e email sao unicos
@@ -65,25 +66,20 @@ public class UserService {
             }
         }
     }
-    public List<User> getAllUsers() {
+
+    public void deleteUserById(String documentId) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
 
+        DocumentReference documentReference = usersCollection.document(documentId);
+
+        ApiFuture<WriteResult> writeResult = documentReference.delete();
+
         try {
-            ApiFuture<QuerySnapshot> query = usersCollection.get();
-            QuerySnapshot querySnapshot = query.get();
-            List<User> userList = new ArrayList<>();
-
-            for (QueryDocumentSnapshot document : querySnapshot) {
-                // Convert Firestore document to your User object
-                User user = document.toObject(User.class);
-                userList.add(user);
-            }
-
-            return userList;
+            writeResult.get();
+            System.out.println("User with ID " + documentId + " successfully deleted.");
         } catch (InterruptedException | ExecutionException e) {
-            // Handle any exceptions
-            throw new RuntimeException("Erro ao retornar usuarios do fb: " + e.getMessage(), e);
+            throw new RuntimeException("Error deleting user: " + e.getMessage());
         }
     }
     public User findUserByEmail(String email){
@@ -132,6 +128,7 @@ public class UserService {
         if (!matchingUsers.isEmpty()) {
             // Assuming email and password combination is unique, return the first matching user
             foundUser = matchingUsers.get(0).toObject(User.class);
+            foundUser.setDocumentId(matchingUsers.get(0).getId());
         }
 
         if (foundUser == null) {
@@ -146,5 +143,79 @@ public class UserService {
         }
 
 
+    }
+    public ResponseModel toggleUserStatus(String documentId) {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+
+        try {
+            DocumentReference userDocument = dbFirestore.collection(COLLECTION_NAME).document(documentId);
+            ApiFuture<DocumentSnapshot> documentSnapshot = userDocument.get();
+
+            if (!documentSnapshot.get().exists()) {
+                return ResponseModel.failure("User not found.", null);
+            }
+
+            String currentStatus = documentSnapshot.get().getString("status");
+            String newStatus = "Ativo".equals(currentStatus) ? "Inativo" : "Ativo";
+
+            ApiFuture<WriteResult> updateResult = userDocument.update("status", newStatus);
+            updateResult.get();
+
+            // Include additional data if needed, e.g., updated status
+            return ResponseModel.success("User status updated successfully.", newStatus);
+        } catch (Exception e) {
+            return ResponseModel.failure("Error updating user status: " + e.getMessage(), null);
+        }
+    }
+    public List<User> getAllUsers() {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
+
+        try {
+            ApiFuture<QuerySnapshot> query = usersCollection.get();
+            QuerySnapshot querySnapshot = query.get();
+            List<User> userList = new ArrayList<>();
+
+            for (QueryDocumentSnapshot document : querySnapshot) {
+                // Convert Firestore document to your User object
+                User user = document.toObject(User.class);
+                user.setDocumentId(document.getId());
+
+                // Check if the user is already in the list
+                if (!userList.contains(user)) {
+                    userList.add(user);
+                }
+            }
+
+            return userList;
+        } catch (InterruptedException | ExecutionException e) {
+            // Handle any exceptions
+            throw new RuntimeException("Erro ao retornar usuarios do fb: " + e.getMessage(), e);
+        }
+    }
+
+    public List<User> getAllUsers(String nome) {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
+
+        try {
+            // Create a query with the filter on the "nome" field
+            Query query = usersCollection.whereEqualTo("nome", nome);
+
+            ApiFuture<QuerySnapshot> querySnapshot = query.get();
+            List<User> userList = new ArrayList<>();
+
+            for (QueryDocumentSnapshot document : querySnapshot.get().getDocuments()) {
+                // Convert Firestore document to your User object
+                User user = document.toObject(User.class);
+                user.setDocumentId(document.getId());
+                userList.add(user);
+            }
+
+            return userList;
+        } catch (InterruptedException | ExecutionException e) {
+            // Handle any exceptions
+            throw new RuntimeException("Erro ao retornar usuarios do fb: " + e.getMessage(), e);
+        }
     }
 }
