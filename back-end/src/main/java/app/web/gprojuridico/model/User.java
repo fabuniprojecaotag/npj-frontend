@@ -12,6 +12,23 @@ public class User {
     private String matricula;
     private String nome;
 
+    private String documentId;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "documentId='" + documentId + '\'' +
+                ", nome='" + nome + '\'' +
+                // ... include other fields as needed
+                '}';
+    }
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
     public String getToken() {
         return token;
     }
