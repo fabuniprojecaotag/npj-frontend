@@ -22,18 +22,12 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
             HttpServletRequest request,
             HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException {
-        if (isSwaggerResource(request.getRequestURI())) {
-            response.setStatus(HttpServletResponse.SC_OK); // Allow access
-            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-            OBJECT_MAPPER.writeValue(response.getOutputStream(), new Error("Sem autorização"));
-        } else {
+
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
             OBJECT_MAPPER.writeValue(response.getOutputStream(), new Error("Sem autorização"));
-        }
+
 
     }
-    private boolean isSwaggerResource(String requestUri) {
-        return requestUri.contains("swagger") || requestUri.contains("v3/api-docs");
-    }
+
 }
