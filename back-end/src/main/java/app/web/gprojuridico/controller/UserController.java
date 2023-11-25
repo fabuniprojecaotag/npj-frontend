@@ -1,9 +1,11 @@
 package app.web.gprojuridico.controller;
 
 
+import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User;
 import app.web.gprojuridico.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,12 +21,28 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping("/create")
-    public String saveUser(@RequestBody User user ) throws ExecutionException, InterruptedException {
-        return userService.saveUser(user);
+    public String create(@RequestBody User user ) throws ExecutionException, InterruptedException {
+        return userService.create(user);
+    }
+    @PostMapping("/filter")
+    public String filterUsers(@RequestBody User user ) throws ExecutionException, InterruptedException {
+        return userService.getAllUsers(user.getNome()).toString();
     }
     @GetMapping("/all")
     public List<User> getAllUsers() {
-        return userService.getAllUsers();
+        List<User> ls = userService.getAllUsers();
+        System.out.println("List size: " + ls.size());
+        return ls;
+    }
+    @DeleteMapping ("/delete/{docId}")
+    public ResponseEntity<String> delete(@PathVariable String docId) {
+         userService.deleteUserById(docId);
+        return ResponseEntity.ok("User deleted successfully");
+    }
+    @PutMapping ("/toggleStatus/{docId}")
+    public ResponseEntity<ResponseModel> toggleStatus(@PathVariable String docId) throws ExecutionException, InterruptedException {
+
+        return ResponseEntity.ok(userService.toggleUserStatus(docId));
     }
 }
 
