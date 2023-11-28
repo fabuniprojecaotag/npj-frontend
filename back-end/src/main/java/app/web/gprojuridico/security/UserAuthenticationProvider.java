@@ -1,6 +1,7 @@
 package app.web.gprojuridico.security;
 
 import app.web.gprojuridico.model.Credentials;
+import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User;
 import app.web.gprojuridico.service.UserService;
 import com.auth0.jwt.JWT;
@@ -16,6 +17,7 @@ import javax.annotation.PostConstruct;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 @Component
 public class UserAuthenticationProvider {
@@ -58,7 +60,7 @@ public class UserAuthenticationProvider {
 
     }
 
-    public Authentication validateCredentials(Credentials credentials) {
+    public Authentication validateCredentials(Credentials credentials) throws ExecutionException, InterruptedException {
         User user = userService.findUserByEmailAndPassword(credentials);
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
