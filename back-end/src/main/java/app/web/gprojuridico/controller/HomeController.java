@@ -6,10 +6,11 @@ import org.springframework.core.SpringVersion;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class HomeController {
 
@@ -30,10 +31,11 @@ public class HomeController {
         return "API is running.\nUptime: " + uptimeInSeconds + " seconds\nSpring Version:"+SpringVersion.getVersion();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/auth")
     public ResponseEntity<User> verifyLogin(@AuthenticationPrincipal User user){
         user.setToken(userAuthenticationProvider.createToken(user.getEmail()));
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok().body(user);
     }
 
     @PostMapping("/logout")
