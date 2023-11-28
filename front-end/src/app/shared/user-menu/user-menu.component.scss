@@ -1,0 +1,93 @@
+@import "../../../styles.scss";
+
+.user-nav {
+  align-items: flex-start;
+  background: $roxo-escuro;
+  border: 1px solid $branco;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  margin-left: 78%;
+  position: fixed;
+  transition: 0.5s;
+  overflow-y: hidden;
+  width: 20vw;
+  z-index: 9999;
+
+  &__informacoes {
+    align-items: flex-start;
+    display: flex;
+    color: $branco;
+    border-bottom: 1px solid $branco;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-height: 100px;
+    padding: 0.6em 0;
+    width: 85%;
+
+    img {
+      margin: 0 auto;
+      height: 100px;
+    }
+
+    &___nome {
+      padding-top: 1.6em;
+    }
+
+    &___tipo {
+      color: lightgray;
+      font-size: 12px;
+      font-weight: lighter;
+      padding-top: 0.6em;
+    }
+  }
+
+  &__acoes {
+    align-items: flex-start;
+    display: flex;
+    color: $branco;
+    border-bottom: 1px solid $branco;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 1em 0;
+    width: 85%;
+    a {
+      align-items: center;
+      color: $branco;
+      display: flex;
+      text-decoration: none;
+      padding-bottom: 0.5em;
+
+      mat-icon {
+        margin-right: 1em;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__versao {
+    align-items: center;
+    color: $branco;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  &.active {
+    overflow-y: visible;
+    height: 40vh;
+
+    @media screen and (max-width: 768px) {
+      width: 50vw;
+    }
+  }
+}

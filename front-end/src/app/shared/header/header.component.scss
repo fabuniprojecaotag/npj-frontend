@@ -48,8 +48,12 @@
 
       .botao-menu__usuario {
         font-size: 0.8em;
-        padding-right: 5em;
-
+        .icone-usuario {
+          order: -1;
+        }
+        mat-icon {
+          order: 2;
+        }
         @media screen and (max-width: 768px) {
           display: none;
         }
