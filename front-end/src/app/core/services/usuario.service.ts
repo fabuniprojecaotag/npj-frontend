@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../types/usuario';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Usuario } from '../types/usuario';
 export class UsuarioService {
   /* para iniciar o fake back-end acesse ele no terminal e digite "npm start" para rodar o programa,
   verifique os arquivos package e package-lock se estão compativeis, caso não, exclua e reinstale na sua maquina */
-  private readonly API = 'http://localhost:3000/usuarios';
+  private readonly API = environment.APIFake;
 
   constructor(private http: HttpClient) { }
 

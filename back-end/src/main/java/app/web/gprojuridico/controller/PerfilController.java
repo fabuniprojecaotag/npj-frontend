@@ -1,17 +1,12 @@
 package app.web.gprojuridico.controller;
 
 
-import app.web.gprojuridico.model.Perfil;
 import app.web.gprojuridico.model.ResponseModel;
-import app.web.gprojuridico.model.User;
 import app.web.gprojuridico.service.PerfilService;
-import app.web.gprojuridico.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/perfil")

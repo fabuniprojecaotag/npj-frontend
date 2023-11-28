@@ -2,7 +2,6 @@ package app.web.gprojuridico.service;
 
 import app.web.gprojuridico.model.Perfil;
 import app.web.gprojuridico.model.ResponseModel;
-import app.web.gprojuridico.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
@@ -58,7 +57,7 @@ public class PerfilService {
           if (perfilSnapshot.exists()) {
               Perfil perfil = perfilSnapshot.toObject(Perfil.class);
               perfil.setDocumentId(perfilSnapshot.getId());
-              System.out.println("Perfil found: " + perfil.toString());
+              System.out.println("Perfil found: " + perfil);
 
               // Return the result wrapped in a ResponseModel
               return ResponseEntity.ok(ResponseModel.success("Perfil found", perfil));

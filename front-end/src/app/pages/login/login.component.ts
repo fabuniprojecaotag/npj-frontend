@@ -14,9 +14,9 @@ export class LoginComponent implements OnInit {
   anoAtual: number = new Date().getFullYear();
   loading: boolean = false;
 
-  constructor(private router: Router, private requestService: RequestService) {}
+  constructor(private router: Router, private requestService: RequestService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   cadastrar(form: NgForm) {
     this.loading = true;
