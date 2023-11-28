@@ -40,8 +40,7 @@ public class UserController {
         return ResponseEntity.ok("User deleted successfully");
     }
     @PutMapping ("/toggleStatus/{docId}")
-    public ResponseEntity<ResponseModel> toggleStatus(@PathVariable String docId) throws ExecutionException, InterruptedException {
-
+    public ResponseEntity<ResponseModel> toggleqStatus(@PathVariable String docId) throws ExecutionException, InterruptedException {
         return ResponseEntity.ok(userService.toggleUserStatus(docId));
     }
 }

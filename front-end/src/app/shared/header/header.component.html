@@ -10,7 +10,13 @@
       <h2 class="cabecalho__subtitulo">{{ subtitulo }}</h2>
     </div>
     <div>
-      <button mat-button class="botao-menu__usuario"><mat-icon class="icone-usuario">account_circle</mat-icon>seu nome<mat-icon>arrow_drop_down</mat-icon></button>
+      <p class="botao-menu__usuario">seu nome</p>
+      <!-- <button mat-button [matMenuTriggerFor]="menu" class="botao-menu__usuario">seu nome</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Perfil</button>
+        <button mat-menu-item>Logout</button>
+        <p>versão 1.0</p>
+      </mat-menu> -->
       <button mat-icon-button id="botao-ajuda">
         <mat-icon aria-hidden="false" aria-label="help icon" fontIcon="help_outline"></mat-icon>
       </button>

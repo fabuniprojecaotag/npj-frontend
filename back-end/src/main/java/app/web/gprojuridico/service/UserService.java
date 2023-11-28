@@ -1,5 +1,6 @@
 package app.web.gprojuridico.service;
 import app.web.gprojuridico.model.Credentials;
+import app.web.gprojuridico.model.Perfil;
 import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User;
 import com.google.api.core.ApiFuture;
@@ -102,24 +103,22 @@ public class UserService {
             return null; // User not found
         }
     }
-    public User findUserByEmailAndPassword(Credentials user) {
+    public User findUserByEmailAndPassword(Credentials user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
+        CollectionReference perfisCollection = dbFirestore.collection("perfis");
 
         User foundUser = null;
-        System.out.println("Credentials");
-        System.out.println(user.getLogin());
 
         // Extract email and password from the user object
         String email = user.getLogin();
         String password = user.getPassword();
 
         // Query Firestore to find a user with matching email and password
-        List<QueryDocumentSnapshot> matchingUsers = null;
+        List<QueryDocumentSnapshot> matchingUsers;
         try {
             matchingUsers = usersCollection
                     .whereEqualTo("email", email)
-//                    .whereEqualTo("senha", password)
                     .get().get().getDocuments();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
@@ -127,23 +126,42 @@ public class UserService {
 
         if (!matchingUsers.isEmpty()) {
             // Assuming email and password combination is unique, return the first matching user
+            System.out.println(matchingUsers.get(0));
+
             foundUser = matchingUsers.get(0).toObject(User.class);
             foundUser.setDocumentId(matchingUsers.get(0).getId());
+
+            // Retrieve perfil data based on perfil_id
+            System.out.println(foundUser.toString());
+
+            String perfilId = foundUser.getPerfil_id();
+            System.out.println(perfilId);
+
+            if (perfilId != null) {
+                DocumentSnapshot perfilSnapshot;
+                perfilSnapshot = perfisCollection.document(perfilId).get().get();
+                if (perfilSnapshot.exists()) {
+                    // Assuming you have a Perfil class, adjust accordingly
+                    Perfil perfil = perfilSnapshot.toObject(Perfil.class);
+                    foundUser.setPerfil(perfil);
+                } else {
+                    throw new RuntimeException("Perfil not found for the user.");
+                }
+            }
         }
 
         if (foundUser == null) {
             throw new RuntimeException("No user found with the provided email and password.");
         }
 
-        BCrypt.Result isThePhRight = BCrypt.verifyer().verify(user.getPassword().toCharArray(),foundUser.getSenha());
-        if(isThePhRight.verified) {
+        BCrypt.Result isThePhRight = BCrypt.verifyer().verify(user.getPassword().toCharArray(), foundUser.getSenha());
+        if (isThePhRight.verified) {
             return foundUser;
-        }else{
+        } else {
             throw new RuntimeException("A Senha do usuário incorreta");
         }
-
-
     }
+
     public ResponseModel toggleUserStatus(String documentId) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
@@ -170,16 +188,30 @@ public class UserService {
     public List<User> getAllUsers() {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
+        CollectionReference perfisCollection = dbFirestore.collection("perfis");
 
         try {
             ApiFuture<QuerySnapshot> query = usersCollection.get();
             QuerySnapshot querySnapshot = query.get();
             List<User> userList = new ArrayList<>();
 
-            for (QueryDocumentSnapshot document : querySnapshot) {
+            for (QueryDocumentSnapshot userDocument : querySnapshot) {
                 // Convert Firestore document to your User object
-                User user = document.toObject(User.class);
-                user.setDocumentId(document.getId());
+                User user = userDocument.toObject(User.class);
+                user.setDocumentId(userDocument.getId());
+
+                // Retrieve perfil data based on perfil_id
+                String perfilId = user.getPerfil_id();
+                if (perfilId != null) {
+                    DocumentSnapshot perfilSnapshot = perfisCollection.document(perfilId).get().get();
+                    if (perfilSnapshot.exists()) {
+                        // Assuming you have a Perfil class, adjust accordingly
+                        Perfil perfil = perfilSnapshot.toObject(Perfil.class);
+                        user.setPerfil(perfil);
+                    } else {
+                        throw new RuntimeException("Perfil not found for the user.");
+                    }
+                }
 
                 // Check if the user is already in the list
                 if (!userList.contains(user)) {
@@ -193,6 +225,7 @@ public class UserService {
             throw new RuntimeException("Erro ao retornar usuarios do fb: " + e.getMessage(), e);
         }
     }
+
 
     public List<User> getAllUsers(String nome) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
