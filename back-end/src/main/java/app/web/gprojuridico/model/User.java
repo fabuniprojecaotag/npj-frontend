@@ -10,8 +10,12 @@ public class User {
     private String senha;
 
     private String matricula;
-    private String nome;
 
+    private Perfil perfil;
+
+    private String perfil_id;
+
+    private String nome;
     private String documentId;
 
     @Override
@@ -50,7 +54,13 @@ public class User {
     public String getEmail() {
         return email;
     }
+    public Perfil getPerfil() {
+        return perfil;
+    }
 
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
     public void setEmail(String email) {
         this.email = email;
     }
@@ -71,15 +81,7 @@ public class User {
         this.nome = nome;
     }
 
-    public int getPerfil_id() {
-        return perfil_id;
-    }
-
-    public void setPerfil_id(int perfil_id) {
-        this.perfil_id = perfil_id;
-    }
-
-    private int  perfil_id;
+   
 
     User(){
 
@@ -92,5 +94,13 @@ public class User {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getPerfil_id() {
+        return perfil_id;
+    }
+
+    public void setPerfil_id(String perfil_id) {
+        this.perfil_id = perfil_id;
     }
 }
