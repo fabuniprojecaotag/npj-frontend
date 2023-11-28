@@ -1,6 +1,7 @@
 <nav class="menu-nav" [class.active]="iSmenuAtivo">
   <h3 class="menu-nav__titulo">GPRO</h3>
   <mat-accordion multi color="secondary">
+    
     <!-- Home -->
     <mat-expansion-panel hideToggle disabled>
       <mat-expansion-panel-header>
@@ -10,66 +11,94 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
     </mat-expansion-panel>
-    <!-- Assistidos -->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
+    <div *ngFor="let modulo of permissoes">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
         <mat-panel-title>
-          <p class="nav__link"><mat-icon aria-hidden="false" aria-label="People icon" fontIcon="people"
-              class="icone-nav"></mat-icon>Assistidos</p>
+          <p class="nav__link"><mat-icon aria-hidden="false" aria-label="People icon" fontIcon="{{modulo.icon}}"
+              class="icone-nav"></mat-icon>{{modulo.modulo}}</p>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon" fontIcon="list"
-          class="icone-nav"></mat-icon>Visualizar</a>
-      <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="Add icon" fontIcon="add"
-          class="icone-nav"></mat-icon>Adicionar</a>
+      <div *ngFor="let opt of modulo.options">
+        <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon" fontIcon={{opt.icon}}
+            class="icone-nav"></mat-icon>{{opt?.title}}</a>
+      </div>
+      
     </mat-expansion-panel>
-    <!-- Processos -->
-    <mat-expansion-panel>
+  </div>
+   
+
+    <mat-expansion-panel hideToggle disabled>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <p class="nav__link"><mat-icon aria-hidden="false" aria-label="Article icon" fontIcon="article"
-              class="icone-nav"></mat-icon>Processos</p>
+          <a routerLink="/" (click)="clearLocalStorage()" class="nav__link"><mat-icon aria-hidden="false" aria-label="Logout icon" fontIcon="logout"
+              class="icone-nav"></mat-icon>Sair</a>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon" fontIcon="list"
-          class="icone-nav"></mat-icon>Visualizar</a>
-      <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="Add icon" fontIcon="add"
-          class="icone-nav"></mat-icon>Adicionar</a>
-    </mat-expansion-panel>
-    <!-- Agenda -->
-    <mat-expansion-panel disabled>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <p class="nav__link nav__link--disabled"><mat-icon aria-hidden="false" aria-label="Schedule icon"
-              fontIcon="event" class="icone-nav"></mat-icon>Agenda</p>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon" fontIcon="list"
-          class="icone-nav"></mat-icon>Visualizar</a>
-    </mat-expansion-panel>
-    <!-- usuários -->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <p class="nav__link"><mat-icon aria-hidden="false" aria-label="account icon"
-              fontIcon="manage_accounts" class="icone-nav"></mat-icon>Usuários</p>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <a routerLink="/users" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon"
-          fontIcon="list" class="icone-nav"></mat-icon>Visualizar</a>
-      <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="Add icon" fontIcon="add"
-          class="icone-nav"></mat-icon>Adicionar</a>
-    </mat-expansion-panel>
-    <!-- Estatísticas -->
-    <mat-expansion-panel disabled>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <p class="nav__link nav__link--disabled"><mat-icon aria-hidden="false" aria-label="Statistic icon"
-              fontIcon="bar_chart_4_bars" class="icone-nav"></mat-icon>Estatísticas</p>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon" fontIcon="list"
-          class="icone-nav"></mat-icon>Visualizar</a>
     </mat-expansion-panel>
   </mat-accordion>
 </nav>
+
+
+
+<!-- 
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <p class="nav__link"><mat-icon aria-hidden="false" aria-label="People icon" fontIcon="people"
+          class="icone-nav"></mat-icon>Assistidos</p>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon" fontIcon="list"
+      class="icone-nav"></mat-icon>Visualizar</a>
+  <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="Add icon" fontIcon="add"
+      class="icone-nav"></mat-icon>Adicionar</a>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <p class="nav__link"><mat-icon aria-hidden="false" aria-label="Article icon" fontIcon="article"
+          class="icone-nav"></mat-icon>Processos</p>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon" fontIcon="list"
+      class="icone-nav"></mat-icon>Visualizar</a>
+  <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="Add icon" fontIcon="add"
+      class="icone-nav"></mat-icon>Adicionar</a>
+</mat-expansion-panel>
+
+<mat-expansion-panel disabled>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <p class="nav__link nav__link--disabled"><mat-icon aria-hidden="false" aria-label="Schedule icon"
+          fontIcon="event" class="icone-nav"></mat-icon>Agenda</p>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon" fontIcon="list"
+      class="icone-nav"></mat-icon>Visualizar</a>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <p class="nav__link"><mat-icon aria-hidden="false" aria-label="account icon"
+          fontIcon="manage_accounts" class="icone-nav"></mat-icon>Usuários</p>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <a routerLink="/users" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon"
+      fontIcon="list" class="icone-nav"></mat-icon>Visualizar</a>
+  <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="Add icon" fontIcon="add"
+      class="icone-nav"></mat-icon>Adicionar</a>
+</mat-expansion-panel>
+
+<mat-expansion-panel disabled>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <p class="nav__link nav__link--disabled"><mat-icon aria-hidden="false" aria-label="Statistic icon"
+          fontIcon="bar_chart_4_bars" class="icone-nav"></mat-icon>Estatísticas</p>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <a href="#" class="nav__link--filha"><mat-icon aria-hidden="false" aria-label="list icon" fontIcon="list"
+      class="icone-nav"></mat-icon>Visualizar</a>
+</mat-expansion-panel> -->

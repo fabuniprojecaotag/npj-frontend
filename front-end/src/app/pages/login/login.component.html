@@ -2,7 +2,8 @@
   <div class="card">
     <img src="assets/images/logoGPROTransparente.png" alt="logo do GPRO">
     <h2>Login</h2>
-    <form #loginForm="ngForm" (ngSubmit)="cadastrar(loginForm)" class="login__form">
+    <div *ngIf="loading">Carregando</div>
+    <form *ngIf="!loading" #loginForm="ngForm" (ngSubmit)="cadastrar(loginForm)" class="login__form">
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input id="email" name="email" matInput type="email" placeholder="Digite seu email acadêmico" ngModel
