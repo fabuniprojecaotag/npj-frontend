@@ -5,12 +5,12 @@ import com.google.gson.JsonObject;
 public class ResponseModel {
     private boolean success;
     private String message;
-    private Object data;
+    private Object result;
 
-    public ResponseModel(boolean success, String message, Object data) {
+    public ResponseModel(boolean success, String message, Object result) {
         this.success = success;
         this.message = message;
-        this.data = data;
+        this.result = result;
     }
 
     public boolean isSuccess() {
@@ -21,15 +21,15 @@ public class ResponseModel {
         return message;
     }
 
-    public Object getData() {
-        return data;
+    public Object getResult() {
+        return result;
     }
 
-    public static ResponseModel success(String message, Object data) {
-        return new ResponseModel(true, message, data);
+    public static ResponseModel success(String message, Object result) {
+        return new ResponseModel(true, message, result);
     }
 
-    public static ResponseModel failure(String message, Object data) {
-        return new ResponseModel(false, message, data);
+    public static ResponseModel failure(String message, Object result) {
+        return new ResponseModel(false, message, result);
     }
 }
