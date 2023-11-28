@@ -185,7 +185,7 @@ public class UserService {
             return ResponseModel.failure("Error updating user status: " + e.getMessage(), null);
         }
     }
-    public List<User> MogetAllUsers() {
+    public List<User> getAllUsers() {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
         CollectionReference perfisCollection = dbFirestore.collection("perfis");
