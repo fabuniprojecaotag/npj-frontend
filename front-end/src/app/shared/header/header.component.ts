@@ -14,12 +14,11 @@ import {
 })
 export class HeaderComponent implements OnInit {
   @Input() subtitulo: string = '';
-  // logica para abrir e fechar menu
-  iSmenuAtivo: boolean = false;
-
+  isMenuAtivo: boolean = false;  // logica para abrir e fechar menu de nav
+  isUserMenuAtivo: boolean = false;
   userData: any = {};
 
-  constructor(private el: ElementRef, private cdr: ChangeDetectorRef) {}
+  constructor(private el: ElementRef, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.loadDataFromLocalStorage();
@@ -40,7 +39,7 @@ export class HeaderComponent implements OnInit {
   loadDataFromLocalStorage(): void {
     console.log('getting local');
     const userDataString = localStorage.getItem('user_data');
-    console.log(userDataString);
+    console.log("data do usuario:" + userDataString);
     if (userDataString) {
       console.log(JSON.parse(userDataString));
       this.userData = JSON.parse(userDataString);
@@ -50,15 +49,19 @@ export class HeaderComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  toggle() {
-    this.iSmenuAtivo = !this.iSmenuAtivo;
-    this.atualizarVisibilidadeTitulo();
+  toggle(menu: string) {
+    if (menu === 'mainMenu') {
+      this.isMenuAtivo = !this.isMenuAtivo;
+      this.atualizarVisibilidadeTitulo();
+    } else if (menu === 'userMenu') {
+      this.isUserMenuAtivo = !this.isUserMenuAtivo;
+    }
   }
 
   @HostListener('document:click', ['$event'])
-  handleDocumentClick(event: Event) {
+  fecharClicandoFora(event: Event) {
     if (!this.el.nativeElement.contains(event.target)) {
-      this.iSmenuAtivo = false;
+      this.isMenuAtivo = false;
     }
   }
 
@@ -66,7 +69,7 @@ export class HeaderComponent implements OnInit {
     const tituloElement =
       this.el.nativeElement.querySelector('.cabecalho__titulo');
     if (tituloElement) {
-      if (this.iSmenuAtivo) {
+      if (this.isMenuAtivo) {
         tituloElement.classList.add('oculto');
       } else {
         tituloElement.classList.remove('oculto');

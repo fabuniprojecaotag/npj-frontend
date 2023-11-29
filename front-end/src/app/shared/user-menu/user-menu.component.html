@@ -1,12 +1,12 @@
-<nav class="user-nav active">
+<nav class="user-nav" [class.active]="isMenuAtivo">
   <div class="user-nav__informacoes">
     <img src="https://openclipart.org/download/247319/abstract-user-flat-3.svg" alt="icone usuario">
-    <p class="user-nav__informacoes___nome">Seu Nome</p>
-    <p class="user-nav__informacoes___tipo">seu tipo de usuario</p>
+    <p class="user-nav__informacoes___nome">{{ nome }}</p>
+    <p class="user-nav__informacoes___tipo">{{ tipoUsuario }}</p>
   </div>
   <div class="user-nav__acoes">
-    <a><mat-icon>person</mat-icon>Perfil</a>
-    <a><mat-icon>logout</mat-icon>Log out</a>
+    <a><mat-icon aria-hidden="false" fontIcon="person"></mat-icon>Perfil</a>
+    <a routerLink="/" (click)="clearLocalStorage()"><mat-icon aria-hidden="false" fontIcon="logout"></mat-icon>Log out</a>
   </div>
   <div class="user-nav__versao">
     <span>v1.0</span>

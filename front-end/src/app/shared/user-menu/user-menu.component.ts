@@ -6,5 +6,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./user-menu.component.scss']
 })
 export class UserMenuComponent {
+  @Input() nome!: string;
+  @Input() tipoUsuario: string = "";
+  @Input() isMenuAtivo: boolean = false;
 
+  clearLocalStorage() {
+    localStorage.clear();
+  }
 }

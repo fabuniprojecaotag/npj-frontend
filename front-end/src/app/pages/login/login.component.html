@@ -7,7 +7,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input id="email" name="email" matInput type="email" placeholder="Digite seu email acadêmico" ngModel
-          #email="ngModel" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" minlength="2">
+          #email="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" minlength="2">
         <mat-error *ngIf="(email?.invalid && email?.touched) || email?.dirty">
           <span *ngIf="email?.errors?.['required']">O campo de email deve ser preenchido.</span>
           <span *ngIf="email?.errors?.['pattern']">O campo de email deve seguir este padrão: "matricula&#64;projecao.edu.br"</span>

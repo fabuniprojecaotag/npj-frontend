@@ -9,10 +9,9 @@ import { throwError } from 'rxjs';
   styleUrls: ['./nav-menu.component.scss'],
 })
 export class NavMenuComponent implements OnInit {
-  @Input() iSmenuAtivo: boolean = false;
+  @Input() isMenuAtivo: boolean = false;
   panelOpenState = false;
 
-  private loading: boolean = false;
   private userData: any;
   public permissoes: any;
 
@@ -50,7 +49,6 @@ export class NavMenuComponent implements OnInit {
       .get('perfil/' + this.userData.perfil_id)
       .pipe(
         catchError((error) => {
-          this.loading = false;
           if (error.status == '401') {
             alert('Dados incorretos');
           } else if (error.status === 0) {
@@ -60,7 +58,6 @@ export class NavMenuComponent implements OnInit {
         })
       )
       .subscribe((data) => {
-        this.loading = false;
         console.log('POST response:', data);
         this.permissoes = data.permissoes;
       });
