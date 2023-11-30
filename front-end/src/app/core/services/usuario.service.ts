@@ -8,18 +8,16 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class UsuarioService {
-  /* para iniciar o fake back-end acesse ele no terminal e digite "npm start" para rodar o programa,
-  verifique os arquivos package e package-lock se estão compativeis, caso não, exclua e reinstale na sua maquina */
   private readonly API = environment.APIFake;
 
   constructor(private http: HttpClient) { }
 
-  cadastrar(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.API, usuario);
+  autenticar (email: string, senha: string): Observable<any> {
+    return this.http.post(`${this.API}/auth`, {email, senha});
   }
 
-  logar(usuario: Usuario): Observable<boolean> {
-    return this.http.post<boolean>(`${this.API}/logar`, usuario);
+  cadastrar(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.API, usuario);
   }
 
   listar(pagina: number, filtro: string): Observable<Usuario[]> {

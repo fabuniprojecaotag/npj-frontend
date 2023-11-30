@@ -1,9 +1,10 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { RequestService } from 'src/app/core/services/request.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { UsuarioService } from 'src/app/core/services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +12,24 @@ import { throwError } from 'rxjs';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
   anoAtual: number = new Date().getFullYear();
   loading: boolean = false;
 
-  constructor(private router: Router, private requestService: RequestService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private requestService: RequestService, private usuarioService: UsuarioService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: [null, [Validators.required, Validators.email]],
+      senha: [null, Validators.required]
+    })
+  }
 
-  cadastrar(form: NgForm) {
+  cadastrar() {
     this.loading = true;
     try {
-      if (form.valid) {
-        const formData = form.value;
+      if (this.loginForm.valid) {
+        const formData = this.loginForm.value;
         const postData = { login: formData.email, password: formData.senha };
         this.requestService
           .logar('auth', postData)
@@ -41,7 +48,7 @@ export class LoginComponent implements OnInit {
           )
           .subscribe((data) => {
             this.loading = false;
-            console.log('POST response:', data);
+            console.log('POST resposta do login:', data);
             if (data.nome.length > 0) {
               localStorage.setItem('user_data', JSON.stringify(data));
               this.router.navigate(['./home']);
@@ -56,6 +63,24 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       console.log('level - 1 error');
       console.log(error);
+    }
+  }
+
+  /* prototipo do login feito pelo Rafael (eu) */
+  login() {
+    if (this.loginForm.valid) {
+      const email = this.loginForm.value.email;
+      const senha = this.loginForm.value.senha;
+
+      this.usuarioService.autenticar(email, senha).pipe().subscribe({
+        next: (resposta) => {
+          console.log('sucesso ao logar!', resposta);
+          this.router.navigate(['./home']);
+        },
+        error: (resposta) => {
+          console.log('Erro ao logar:', resposta);
+        }
+      });
     }
   }
 }

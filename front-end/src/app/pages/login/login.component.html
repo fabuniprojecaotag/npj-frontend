@@ -3,27 +3,21 @@
     <img src="assets/images/logoGPROTransparente.png" alt="logo do GPRO">
     <h2>Login</h2>
     <div *ngIf="loading">Carregando</div>
-    <form *ngIf="!loading" #loginForm="ngForm" (ngSubmit)="cadastrar(loginForm)" class="login__form">
+    <form [formGroup]="loginForm" *ngIf="!loading" class="login__form">
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input id="email" name="email" matInput type="email" placeholder="Digite seu email acadêmico" ngModel
-          #email="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" minlength="2">
-        <mat-error *ngIf="(email?.invalid && email?.touched) || email?.dirty">
-          <span *ngIf="email?.errors?.['required']">O campo de email deve ser preenchido.</span>
-          <span *ngIf="email?.errors?.['pattern']">O campo de email deve seguir este padrão: "matricula&#64;projecao.edu.br"</span>
-        </mat-error>
+        <input matInput type="email" placeholder="Digite seu email acadêmico" formControlName="email">
+        <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Email obrigatório!</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">Formato de e-mail invalido!</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Senha</mat-label>
-        <input id="senha" name="senha" type="password" matInput placeholder="Digite sua senha" ngModel #senha="ngModel"
-          required>
-        <mat-error *ngIf="(senha?.invalid && senha?.touched) || senha?.dirty">
-          O campo de senha deve ser preenchido.
-        </mat-error>
+        <input matInput type="password" placeholder="Digite sua senha" formControlName="senha">
+        <mat-error *ngIf="loginForm.get('senha')?.errors?.['required']">Senha é obrigatória!</mat-error>
       </mat-form-field>
 
-      <button class="form__botao" type="submit">Login</button>
+      <button [disabled]="loginForm.invalid" class="form__botao" type="submit" (click)="cadastrar()">Login</button>
     </form>
     <a href="#">Esqueceu a senha?</a>
   </div>

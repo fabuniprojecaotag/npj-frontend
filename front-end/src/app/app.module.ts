@@ -17,7 +17,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
 import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
 import { UserMenuComponent } from './shared/user-menu/user-menu.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
@@ -52,7 +52,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSortModule,
     MatExpansionModule,
     MatMenuModule,
-    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
   ],
