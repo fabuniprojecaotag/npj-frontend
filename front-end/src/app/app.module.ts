@@ -25,6 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
+import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {MatMenuModule} from '@angular/material/menu';
     UsersComponent,
     NavMenuComponent,
     UserMenuComponent,
+    AddUsersComponent,
   ],
   imports: [
     BrowserModule,

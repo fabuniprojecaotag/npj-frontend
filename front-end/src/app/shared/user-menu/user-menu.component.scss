@@ -29,8 +29,10 @@
 
     img {
       display: flex;
+      border-radius: 100%;
       margin: 0 auto;
       height: 100px;
+      width: 100px;
     }
 
     &___nome {

@@ -25,10 +25,6 @@ export class NavMenuComponent implements OnInit {
     this.loadPerfis();
   }
 
-  clearLocalStorage() {
-    localStorage.clear();
-  }
-
   loadDataFromLocalStorage(): void {
     console.log('getting local');
     const userDataString = localStorage.getItem('user_data');

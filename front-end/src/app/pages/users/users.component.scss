@@ -36,6 +36,18 @@
           }
         }
       }
+
+      .sem-usuarios {
+        color: $vermelho;
+        text-align: center;
+        font-weight: bold;
+        tr {
+          td {
+            padding: 5em 1em;
+          }
+        }
+      }
     }
   }
 }
+
