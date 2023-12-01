@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../types/usuario';
 import { environment } from 'src/environments/environment.development';
@@ -8,12 +8,42 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private readonly API = environment.APIFake;
+  private readonly API = environment.devAPI;
+  private authTokenKey = 'authToken';
+  private authToken: string | null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { this.authToken = localStorage.getItem(this.authTokenKey); }
 
-  autenticar (email: string, senha: string): Observable<any> {
-    return this.http.post(`${this.API}/auth`, {email, senha});
+  private saveAuthToken(token: string): void {
+    this.authToken = token;
+    localStorage.setItem(this.authTokenKey, token);
+  }
+
+  autenticar(login: string, password: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const data = { login, password };
+
+    if (this.authToken) {
+      headers.set('Authorization', `Bearer ${this.authToken}`);
+    }
+
+    const requisicao = this.http.post(`${this.API}/auth`, data, { headers });
+
+    requisicao.subscribe({
+      next: (resposta: any) => {
+        if (resposta && resposta.token) {
+          this.saveAuthToken(resposta.token);
+        }
+      },
+      error: (err) => {
+        console.log('Erro durante a autenticação:', err);
+        console.log('Resposta de erro:', err.error);
+      }
+    });
+
+    return requisicao;
   }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {

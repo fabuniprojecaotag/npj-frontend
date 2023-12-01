@@ -68,19 +68,30 @@ export class LoginComponent implements OnInit {
 
   /* prototipo do login feito pelo Rafael (eu) */
   login() {
+    this.loading = true;
     if (this.loginForm.valid) {
       const email = this.loginForm.value.email;
       const senha = this.loginForm.value.senha;
 
-      this.usuarioService.autenticar(email, senha).pipe().subscribe({
+      this.usuarioService.autenticar(email, senha).subscribe({
         next: (resposta) => {
+          this.loading = false;
+          if (resposta.nome.length > 0) {
+            localStorage.setItem('user_data', JSON.stringify(resposta));
+            this.router.navigate(['./home']);
+          }
           console.log('sucesso ao logar!', resposta);
           this.router.navigate(['./home']);
         },
-        error: (resposta) => {
-          console.log('Erro ao logar:', resposta);
+        error: (err) => {
+          this.loading = false;
+          console.log('Erro ao logar:', err);
         }
       });
+    } else {
+      alert('formulário invalido!')
     }
+
   }
+
 }

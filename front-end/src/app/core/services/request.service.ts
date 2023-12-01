@@ -36,16 +36,16 @@ export class RequestService {
     const req = this.http.post(url, data, { headers });
 
     // Handle the response to extract and save the token
-    req.subscribe(
-      (response: any) => {
-        if (response && response.token) {
-          this.saveAuthToken(response.token);
+    req.subscribe({
+      next: (resposta: any) => {
+        if (resposta && resposta.token) {
+          this.saveAuthToken(resposta.token);
         }
       },
-      (error: any) => {
-        console.error('Error during authentication:', error);
+      error: (error: any) => {
+        console.log('erro durante a autenticação:', error);
       }
-    );
+    });
 
     return req;
   }
