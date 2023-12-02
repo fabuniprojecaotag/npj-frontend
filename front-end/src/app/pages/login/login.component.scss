@@ -52,10 +52,12 @@
       width: 100%;
 
       mat-form-field {
+        background-color: #fff !important;
         border: none;
         min-width: 20em;
         margin: 0.6em 0;
       }
+
 
       .form__botao {
         background: $roxo;

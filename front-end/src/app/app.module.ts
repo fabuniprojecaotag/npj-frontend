@@ -21,10 +21,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { FormUsersComponent } from './shared/form-users/form-users.component';
@@ -47,6 +48,7 @@ import { FormUsersComponent } from './shared/form-users/form-users.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,
+    MatCardModule,
     MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,

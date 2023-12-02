@@ -4,14 +4,14 @@
     <h2>Login</h2>
     <div *ngIf="loading">Carregando</div>
     <form [formGroup]="loginForm" *ngIf="!loading" class="login__form">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput type="email" placeholder="Digite seu email acadêmico" formControlName="email">
         <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Email obrigatório!</mat-error>
         <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">Formato de e-mail invalido!</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>Senha</mat-label>
         <input matInput type="password" placeholder="Digite sua senha" formControlName="senha">
         <mat-error *ngIf="loginForm.get('senha')?.errors?.['required']">Senha é obrigatória!</mat-error>

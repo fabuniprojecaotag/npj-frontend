@@ -1,12 +1,77 @@
-.secao-form {
-  margin: 0 auto;
-  width: 85%;
+.secao-formUsuario {
+  width: 80%;
+  margin: 2em auto;
 
-  form {
-    .acesso-perfil {
-      h3 {
-        font-size: 40px;
-        font-weight: 700;
+  mat-card {
+    box-shadow: none;
+    .formUsuario-titulo {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 12px 16px 12px 0;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 16px;
+      .full-width {
+        grid-column: 1 / span 2;
+      }
+
+      .grid-item {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 8px;
+      }
+    }
+
+    mat-card-title {
+      font-size: 40px;
+      font-weight: 400;
+      margin-bottom: 32px;
+      margin-top: 40px;
+    }
+
+    mat-card-actions {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
+      button {
+        margin: 0 8px;
+      }
+    }
+
+    h3 {
+      font-weight: 400;
+      font-size: 22px;
+      color: #1D1B20;
+      margin-left: 16px;
+    }
+
+    .btn-editar {
+      background: #E6E0E9;
+    }
+
+    button {
+      img {
+        vertical-align: middle;
+      }
+    }
+
+    .acessoPerfil {
+      display: flex;
+      justify-content: space-between;
+      margin: 40px 16px 24px 0;
+    }
+
+    @media (max-width: 600px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: 1;
       }
     }
   }

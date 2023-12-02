@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-users',
@@ -15,7 +15,13 @@ export class FormUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCadastro = this.formBuilder.group({
-
+      matricula: [null, Validators.required],
+      nome: [null, Validators.required],
+      telefone: [null],
+      semestre: [null],
+      status: [null],
+      emailAcademico: [null, [Validators.required, Validators.email]],
+      senha: [null, Validators.required],
     })
   }
 
