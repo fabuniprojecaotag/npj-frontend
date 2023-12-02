@@ -1,0 +1,12 @@
+<section class="secao-form">
+  <form [formGroup]="formCadastro">
+    <div class="acesso-perfil">
+      <h3>Dados de Pessoais</h3>
+    </div>
+    <div class="acesso-perfil">
+      <h3>Dados de acesso</h3>
+    </div>
+    <button (click)="executarAcao()" mat-flat-button [disabled]="formCadastro.invalid"
+      color="primary">Submeter</button>
+  </form>
+</section>

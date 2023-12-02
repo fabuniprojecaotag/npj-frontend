@@ -26,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { FormUsersComponent } from './shared/form-users/form-users.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { AddUsersComponent } from './pages/users/add-users/add-users.component';
     NavMenuComponent,
     UserMenuComponent,
     AddUsersComponent,
+    MyProfileComponent,
+    FormUsersComponent,
   ],
   imports: [
     BrowserModule,

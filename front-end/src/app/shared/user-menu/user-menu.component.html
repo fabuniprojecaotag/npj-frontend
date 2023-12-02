@@ -5,7 +5,7 @@
     <p class="user-nav__informacoes___tipo">{{ tipoUsuario }}</p>
   </div>
   <div class="user-nav__acoes">
-    <a><mat-icon aria-hidden="false" fontIcon="person"></mat-icon>Perfil</a>
+    <a routerLink="/profile"><mat-icon aria-hidden="false" fontIcon="person"></mat-icon>Perfil</a>
     <a routerLink="/" (click)="clearLocalStorage()"><mat-icon aria-hidden="false" fontIcon="logout"></mat-icon>Log out</a>
   </div>
   <div class="user-nav__versao">

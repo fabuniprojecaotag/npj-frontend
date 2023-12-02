@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'users/add',
     component: AddUsersComponent
+  },
+  {
+    path: 'profile',
+    component: MyProfileComponent
   }
 ];
 
