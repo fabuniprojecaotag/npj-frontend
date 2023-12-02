@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
@@ -29,6 +30,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { FormUsersComponent } from './shared/form-users/form-users.component';
+import { UtilsBarComponent } from './shared/utils-bar/utils-bar.component';
+import { DropdownPerfilComponent } from './shared/dropdown-perfil/dropdown-perfil.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,8 @@ import { FormUsersComponent } from './shared/form-users/form-users.component';
     AddUsersComponent,
     MyProfileComponent,
     FormUsersComponent,
+    UtilsBarComponent,
+    DropdownPerfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +63,7 @@ import { FormUsersComponent } from './shared/form-users/form-users.component';
     MatCheckboxModule,
     MatTableModule,
     MatSortModule,
+    MatAutocompleteModule,
     MatExpansionModule,
     MatMenuModule,
     ReactiveFormsModule,

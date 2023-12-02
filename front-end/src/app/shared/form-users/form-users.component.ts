@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Perfil } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-form-users',
@@ -8,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormUsersComponent implements OnInit {
   formCadastro!: FormGroup;
+  perfilControl = new FormControl<Perfil | null>(null, Validators.required);
   @Input() perfilComponente!: boolean;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
 
@@ -20,6 +22,7 @@ export class FormUsersComponent implements OnInit {
       telefone: [null],
       semestre: [null],
       status: [null],
+      perfil: this.perfilControl,
       emailAcademico: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
     })

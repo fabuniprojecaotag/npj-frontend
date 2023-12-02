@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { Usuario } from 'src/app/core/types/usuario';
@@ -9,8 +10,9 @@ import { Usuario } from 'src/app/core/types/usuario';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-  listaUsuarios: Usuario[] = [];
   tituloDaPagina: string = 'Usuários';
+  listaUsuarios: Usuario[] = [];
+  displayedColumns: string[] = ['matricula', 'nome', 'tipo', 'semestre', 'status'];
   paginaAtual: number = 0;
   filtro: string = '';
 

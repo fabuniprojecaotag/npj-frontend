@@ -3,7 +3,7 @@
     <form [formGroup]="formCadastro">
       <section>
         <div class="formUsuario-titulo">
-          <h3>Dados pessoais</h3>
+          <h3>Dados Pessoais</h3>
         </div>
       </section>
       <mat-card-content>
@@ -19,6 +19,8 @@
               <input matInput formControlName="nome" placeholder="Nome">
               <mat-error *ngIf="formCadastro.get('nome')?.errors">Nome é obrigatório</mat-error>
             </mat-form-field>
+            <app-dropdown-perfil label="Perfil" placeholder="Perfil" [control]="perfilControl"></app-dropdown-perfil>
+            <mat-error *ngIf="formCadastro.get('perfil')?.errors">Perfil é obrigatório</mat-error>
           </div>
           <div class="grid-item">
             <mat-form-field appearance="outline">
@@ -36,7 +38,7 @@
         </div>
       </mat-card-content>
       <div class="acessoPerfil">
-        <h3>Dados de acesso</h3>
+        <h3>Dados de Acesso</h3>
       </div>
       <mat-card-content>
         <div class="grid-container">
@@ -77,6 +79,8 @@
         </div>
       </mat-card-content>
       <mat-card-actions class="full-width">
+        <button (click)="executarAcao()" mat-flat-button [disabled]="formCadastro.invalid">SALVAR
+        </button>
         <button (click)="executarAcao()" mat-flat-button [disabled]="formCadastro.invalid" color="primary">SUBMETER
         </button>
       </mat-card-actions>
