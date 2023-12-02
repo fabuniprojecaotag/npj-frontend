@@ -17,9 +17,9 @@ export class UsersComponent {
   constructor (private service: UsuarioService) {}
 
   ngOnInit(): void {
-    this.service.listar(this.paginaAtual, this.filtro).subscribe((listaUsuarios) => {
-      this.listaUsuarios = listaUsuarios
-    })
+    // this.service.listar(this.paginaAtual, this.filtro).subscribe((listaUsuarios) => {
+    //   this.listaUsuarios = listaUsuarios
+    // })
   }
 
   getTipoUsuario(perfilId: number): string {
