@@ -10,6 +10,8 @@ export class UserMenuComponent {
   @Input() tipoUsuario: string = "";
   @Input() isMenuAtivo: boolean = false;
 
+  constructor () {}
+
   clearLocalStorage() {
     localStorage.clear();
   }

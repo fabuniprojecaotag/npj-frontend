@@ -12,6 +12,7 @@ export class FormUsersComponent implements OnInit {
   perfilControl = new FormControl<Perfil | null>(null, Validators.required);
   @Input() perfilComponente!: boolean;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
+  escondido = true;
 
   constructor (private formBuilder: FormBuilder) {}
 
@@ -23,12 +24,12 @@ export class FormUsersComponent implements OnInit {
       semestre: [null],
       status: [null],
       perfil: this.perfilControl,
-      emailAcademico: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
     })
   }
 
-  // função pra chamar o cadastrar ou editar
+  // função pra chamar o cadastrar ou editar no componente pai
   executarAcao() {
     this.acaoClique.emit();
   }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../types/usuario';
@@ -14,5 +14,21 @@ export class CadastroService {
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.apiUrl}/user/create`, usuario);
+  }
+
+  buscarCadastro(token: string): Observable<Usuario> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<Usuario>(`${this.apiUrl}/perfil`, {headers});
+  }
+
+  editarCadastro(usuario: Usuario, token: string): Observable<Usuario> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.patch<Usuario>(`${this.apiUrl}/perfil`, usuario, {headers});
   }
 }

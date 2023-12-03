@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { TokenService } from 'src/app/core/services/token.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -7,6 +9,11 @@ import { Component } from '@angular/core';
 })
 export class MyProfileComponent {
   tituloPagina = 'Meu Perfil';
+
+  token = '';
+
+  constructor(private tokenService: TokenService, private cadastroService: CadastroService) {}
+
 
   atualizarUsuario() {
     alert('usuário atualizado (so testando a chamada da função)');
