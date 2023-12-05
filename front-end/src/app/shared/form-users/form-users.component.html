@@ -31,7 +31,6 @@
             <mat-form-field appearance="outline">
               <mat-label>Semestre</mat-label>
               <input matInput formControlName="semestre" placeholder="Digite seu Semestre">
-              <mat-error *ngIf="formCadastro.get('semestre')?.errors">CPF é obrigatório</mat-error>
             </mat-form-field>
             <mat-checkbox formControlName="status" color="primary" labelPosition="before">Ativo:</mat-checkbox>
           </div>

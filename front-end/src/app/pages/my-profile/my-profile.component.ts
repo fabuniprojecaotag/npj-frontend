@@ -13,6 +13,7 @@ import { Usuario, Perfil } from 'src/app/core/types/usuario';
 })
 export class MyProfileComponent implements OnInit {
   tituloPagina = 'Meu Perfil';
+  perfilComponente = true;
 
   token = '';
   cadastro!: Usuario;

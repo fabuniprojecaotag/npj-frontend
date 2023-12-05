@@ -18,7 +18,7 @@ export class NavMenuComponent implements OnInit {
   constructor(
     private requestService: RequestService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadDataFromLocalStorage();
@@ -52,10 +52,14 @@ export class NavMenuComponent implements OnInit {
           }
           return throwError(() => error);
         })
-      )
-      .subscribe((data) => {
-        console.log('POST response:', data);
-        this.permissoes = data.permissoes;
+      ).subscribe({
+        next: (data) => {
+          console.log('POST response:', data);
+          this.permissoes = data.permissoes;
+        },
+        error: (err) => {
+          console.log('Erro ao associar permissões:', err);
+        }
       });
   }
 }
