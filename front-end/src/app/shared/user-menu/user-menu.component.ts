@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/core/services/usuario.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -10,9 +12,10 @@ export class UserMenuComponent {
   @Input() tipoUsuario: string = "";
   @Input() isMenuAtivo: boolean = false;
 
-  constructor () {}
+  constructor (private router: Router, private userService: UsuarioService) {}
 
-  clearLocalStorage() {
-    localStorage.clear();
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/login']);
   }
 }

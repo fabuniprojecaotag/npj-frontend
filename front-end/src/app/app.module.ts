@@ -26,6 +26,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
@@ -66,6 +67,7 @@ import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interc
     MatSortModule,
     MatAutocompleteModule,
     MatExpansionModule,
+    MatSelectModule,
     MatMenuModule,
     ReactiveFormsModule,
     HttpClientModule,

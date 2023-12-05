@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Perfil } from 'src/app/core/types/usuario';
+import {formValidations} from '../form-validations';
 
 @Component({
   selector: 'app-form-users',
@@ -26,6 +27,8 @@ export class FormUsersComponent implements OnInit {
       perfil: this.perfilControl,
       email: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
+      confirmarEmail: [null, [Validators.required, Validators.email, formValidations.equalTo('email')]],
+      confirmarSenha: [null, [Validators.required, Validators.minLength(3), formValidations.equalTo('senha')]],
     })
   }
 
