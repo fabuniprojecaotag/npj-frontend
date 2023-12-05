@@ -52,7 +52,7 @@
               <mat-label>Senha</mat-label>
               <input matInput formControlName="senha" [type]="escondido ? 'password' : 'text'"
                 placeholder="Digite sua senha">
-              <button mat-icon-button matSuffix (click)="escondido = !escondido" [attr.aria-label]="'Hide password'"
+              <button mat-icon-button matSuffix (click)="escondido = !escondido" [attr.aria-label]="'Esconder a senha'"
                 [attr.aria-pressed]="escondido">
                 <mat-icon>{{escondido ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>

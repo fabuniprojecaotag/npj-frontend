@@ -37,6 +37,10 @@ export class UsuarioService {
     this.userSubject.next(null);
   }
 
+  estaLogado(): boolean {
+    return this.tokenService.possuiToken();
+  }
+
 
   // cadastrar(usuario: Usuario): Observable<Usuario> {
   //   return this.http.post<Usuario>(this.API, usuario);

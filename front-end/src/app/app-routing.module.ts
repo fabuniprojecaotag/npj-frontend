@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -15,22 +16,26 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     path: 'users',
-    component: UsersComponent
+    component: UsersComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'users/add',
-    component: AddUsersComponent
+    component: AddUsersComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'profile',
-    component: MyProfileComponent
+    component: MyProfileComponent,
+    canActivate: [authGuard]
   }
 ];
 
