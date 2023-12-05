@@ -18,19 +18,12 @@ export class AutenticacaoService {
   constructor(private http: HttpClient, private userService: UsuarioService) { }
 
   autenticar(login: string, password: string): Observable<HttpResponse<AuthResponse>> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
     const data = { login, password };
 
-    // if (this.authToken) {
-    //   headers.set('Authorization', `Bearer ${this.authToken}`);
-    // }
-
-    return this.http.post<AuthResponse>(`${this.API}/auth`, data, { headers, observe: 'response'}).pipe(
+    return this.http.post<AuthResponse>(`${this.API}/auth`, data, { observe: 'response' }).pipe(
       tap((resposta) => {
         const authToken = resposta.body?.acess_token || '';
-        this.userService.salvarToken(authToken)
+        this.userService.salvarToken(authToken);
       })
     );
   }

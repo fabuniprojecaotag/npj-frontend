@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment as devEnv } from 'src/environments/environment.development';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +12,9 @@ export class RequestService {
   private authTokenKey = 'authToken';
   private authToken: string | null;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private tokenService: TokenService) {
     // Retrieve the token from localStorage on service initialization
-    this.authToken = localStorage.getItem(this.authTokenKey);
+    this.authToken = this.tokenService.retornarToken();
   }
 
   private saveAuthToken(token: string): void {
@@ -24,16 +25,8 @@ export class RequestService {
 
   public logar(endpoint: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
 
-    // If there is a stored token, include it in the headers
-    if (this.authToken) {
-      headers.set('Authorization', `Bearer ${this.authToken}`);
-    }
-
-    const req = this.http.post(url, data, { headers });
+    const req = this.http.post(url, data);
 
     // Handle the response to extract and save the token
     req.subscribe({
@@ -52,19 +45,14 @@ export class RequestService {
 
   public get(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.authToken}`,
-    });
-    return this.http.get(url, { headers });
+
+    return this.http.get(url);
   }
 
   public post(endpoint: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post(url, data, { headers });
+
+    return this.http.post(url, data);
   }
 
   public createSendingLog(func: string, method: string, params: any) {

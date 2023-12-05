@@ -24,7 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
@@ -32,6 +32,7 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { FormUsersComponent } from './shared/form-users/form-users.component';
 import { UtilsBarComponent } from './shared/utils-bar/utils-bar.component';
 import { DropdownPerfilComponent } from './shared/dropdown-perfil/dropdown-perfil.component';
+import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,11 @@ import { DropdownPerfilComponent } from './shared/dropdown-perfil/dropdown-perfi
     HttpClientModule,
     MatPaginatorModule,
   ],
-  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }],
+  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AutenticacaoInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   anoAtual: number = new Date().getFullYear();
   loading: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private autenticacaoService: AutenticacaoService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private autenticacaoService: AutenticacaoService, private requestService: RequestService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -26,46 +26,46 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  // cadastrar() {
-  //   this.loading = true;
-  //   try {
-  //     if (this.loginForm.valid) {
-  //       const formData = this.loginForm.value;
-  //       const postData = { login: formData.email, password: formData.senha };
-  //       this.requestService
-  //         .logar('auth', postData)
-  //         .pipe(
-  //           catchError((error) => {
-  //             this.loading = false;
-  //             if (error.status == '401') {
-  //               alert('Dados incorretos');
-  //             } else if (error.status === 0) {
-  //               alert(
-  //                 'A API está offline ou inacessível. Verifique sua conexão.'
-  //               );
-  //             }
-  //             return throwError(() => error);
-  //           })
-  //         )
-  //         .subscribe((data) => {
-  //           this.loading = false;
-  //           console.log('POST resposta do login:', data);
-  //           if (data.nome.length > 0) {
-  //             localStorage.setItem('user_data', JSON.stringify(data));
-  //             this.router.navigate(['./home']);
-  //           }
-  //         });
-  //     } else {
-  //       console.log('else');
-  //       this.loading = false;
-  //       alert('Formulário inválido');
-  //     }
-  //   } catch (error: any) {
-  //     this.loading = false;
-  //     console.log('level - 1 error');
-  //     console.log(error);
-  //   }
-  // }
+  cadastrar() {
+    this.loading = true;
+    try {
+      if (this.loginForm.valid) {
+        const formData = this.loginForm.value;
+        const postData = { login: formData.email, password: formData.senha };
+        this.requestService
+          .logar('auth', postData)
+          .pipe(
+            catchError((error) => {
+              this.loading = false;
+              if (error.status == '401') {
+                alert('Dados incorretos');
+              } else if (error.status === 0) {
+                alert(
+                  'A API está offline ou inacessível. Verifique sua conexão.'
+                );
+              }
+              return throwError(() => error);
+            })
+          )
+          .subscribe((data) => {
+            this.loading = false;
+            console.log('POST resposta do login:', data);
+            if (data.nome.length > 0) {
+              localStorage.setItem('user_data', JSON.stringify(data));
+              this.router.navigate(['./home']);
+            }
+          });
+      } else {
+        console.log('else');
+        this.loading = false;
+        alert('Formulário inválido');
+      }
+    } catch (error: any) {
+      this.loading = false;
+      console.log('level - 1 error');
+      console.log(error);
+    }
+  }
 
   login() {
     this.loading = true;

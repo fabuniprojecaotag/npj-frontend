@@ -17,7 +17,7 @@
         <mat-error *ngIf="loginForm.get('senha')?.errors?.['required']">Senha é obrigatória!</mat-error>
       </mat-form-field>
 
-      <button [disabled]="loginForm.invalid" class="form__botao" type="submit" (click)="login()">Login</button>
+      <button [disabled]="loginForm.invalid" class="form__botao" type="submit" (click)="cadastrar()">Login</button>
     </form>
     <a href="#">Esqueceu a senha?</a>
   </div>

@@ -12,7 +12,6 @@ import { PerfilService } from 'src/app/core/services/perfil.service';
 export class DropdownPerfilComponent {
   @Input() label: string = '';
   @Input() iconePrefixo: string = '';
-  @Input() placeholder: string = '';
   @Input() control!: FormControl;
 
   usuarioTipos: Perfil[] = [];
