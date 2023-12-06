@@ -22,11 +22,10 @@ export class NavMenuComponent implements OnInit {
 
   ngOnInit() {
     this.loadDataFromLocalStorage();
-    this.loadPerfis();
   }
 
   loadDataFromLocalStorage(): void {
-    console.log('getting local');
+    console.log('Pegando a data:');
     const userDataString = localStorage.getItem('user_data');
     console.log(userDataString);
     if (userDataString) {
@@ -34,6 +33,7 @@ export class NavMenuComponent implements OnInit {
       this.userData = JSON.parse(userDataString);
       this.permissoes = this.userData.perfil.permissoes;
       console.log(this.permissoes);
+      this.loadPerfis();
     } else {
       this.userData = null;
     }
@@ -52,14 +52,10 @@ export class NavMenuComponent implements OnInit {
           }
           return throwError(() => error);
         })
-      ).subscribe({
-        next: (data) => {
-          console.log('POST response:', data);
-          this.permissoes = data.permissoes;
-        },
-        error: (err) => {
-          console.log('Erro ao associar permissões:', err);
-        }
-      });
+      ).subscribe((data) => {
+        console.log('POST response:', data);
+        this.permissoes = data.permissoes;
+      },
+      );
   }
 }

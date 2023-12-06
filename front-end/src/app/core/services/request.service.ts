@@ -9,18 +9,11 @@ import { TokenService } from './token.service';
 })
 export class RequestService {
   private apiUrl = devEnv.devAPI;
-  private authTokenKey = 'authToken';
   private authToken: string | null;
 
   constructor(private http: HttpClient, private tokenService: TokenService) {
     // Retrieve the token from localStorage on service initialization
     this.authToken = this.tokenService.retornarToken();
-  }
-
-  private saveAuthToken(token: string): void {
-    // Save the token to both the service property and localStorage
-    this.authToken = token;
-    localStorage.setItem(this.authTokenKey, token);
   }
 
   public logar(endpoint: string, data: any): Observable<any> {
@@ -32,7 +25,7 @@ export class RequestService {
     req.subscribe({
       next: (resposta: any) => {
         if (resposta && resposta.token) {
-          this.saveAuthToken(resposta.token);
+          this.tokenService.salvarToken(resposta.token);
         }
       },
       error: (error: any) => {

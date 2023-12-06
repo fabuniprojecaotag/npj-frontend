@@ -18,11 +18,9 @@ export class AutenticacaoService {
   constructor(private http: HttpClient, private userService: UsuarioService) { }
 
   autenticar(login: string, password: string): Observable<HttpResponse<AuthResponse>> {
-    const data = { login, password };
-
-    return this.http.post<AuthResponse>(`${this.API}/auth`, data, { observe: 'response' }).pipe(
-      tap((resposta) => {
-        const authToken = resposta.body?.acess_token || '';
+    return this.http.post<AuthResponse>(`${this.API}/auth`, {login, password}, { observe: 'response' }).pipe(
+      tap((response) => {
+        const authToken = response.body?.acess_token || '';
         this.userService.salvarToken(authToken);
       })
     );
