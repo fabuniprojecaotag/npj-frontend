@@ -15,14 +15,12 @@ public class User {
     private String nome;
     private String documentId;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "documentId='" + documentId + '\'' +
-                ", nome='" + nome + '\'' +
-                // ... include other fields as needed
-                '}';
+    private String token;
+
+    User() {
+
     }
+
     public String getDocumentId() {
         return documentId;
     }
@@ -30,6 +28,7 @@ public class User {
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
+
     public String getToken() {
         return token;
     }
@@ -37,8 +36,6 @@ public class User {
     public void setToken(String token) {
         this.token = token;
     }
-
-    private String token;
 
     public int getId() {
         return id;
@@ -51,6 +48,7 @@ public class User {
     public String getEmail() {
         return email;
     }
+
     public Perfil getPerfil() {
         return perfil;
     }
@@ -58,6 +56,7 @@ public class User {
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -78,13 +77,6 @@ public class User {
         this.nome = nome;
     }
 
-
-
-    User(){
-
-    }
-
-
     public String getSenha() {
         return senha;
     }
@@ -100,4 +92,14 @@ public class User {
     public void setPerfil_id(String perfil_id) {
         this.perfil_id = perfil_id;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "documentId='" + documentId + '\'' +
+                ", nome='" + nome + '\'' +
+                // ... include other fields as needed
+                '}';
+    }
+
 }

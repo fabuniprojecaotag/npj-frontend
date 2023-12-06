@@ -6,6 +6,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { authGuard } from './core/guards/auth.guard';
+import { EditUsersComponent } from './pages/users/edit-users/edit-users.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'users/add',
     component: AddUsersComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'users/edit',
+    component: EditUsersComponent,
     canActivate: [authGuard]
   },
   {

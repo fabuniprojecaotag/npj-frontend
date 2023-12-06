@@ -19,16 +19,13 @@ export class DropdownPerfilComponent {
   filteredOptions$?: Observable<Perfil[]>;
 
 
-  constructor(
-    private perfilTipoService: PerfilService) {
-
-  }
+  constructor(private perfilTipoService: PerfilService) { }
 
   ngOnInit(): void {
     this.perfilTipoService.listar()
       .subscribe(dados => {
         this.usuarioTipos = dados
-        console.log(this.usuarioTipos)
+        console.log('tipos de usuario:', this.usuarioTipos)
       })
     this.filteredOptions$ = this.control.valueChanges.pipe(
       startWith(''),
@@ -37,15 +34,15 @@ export class DropdownPerfilComponent {
   }
 
   filtrarPerfis(value: string | Perfil): Perfil[] {
-    const nomeUf = typeof value === 'string' ? value : value?.nome;
-    const valorFiltrado = nomeUf?.toLowerCase();
+    const nomePerfil = typeof value === 'string' ? value : value?.nome;
+    const valorFiltrado = nomePerfil?.toLowerCase();
     const result = this.usuarioTipos.filter(
       perfil => perfil.nome.toLowerCase().includes(valorFiltrado)
     )
     return result;
   }
 
-  displayFn (perfil: Perfil): string {
+  displayFn(perfil: Perfil): string {
     return perfil && perfil.nome ? perfil.nome : '';
   }
 }

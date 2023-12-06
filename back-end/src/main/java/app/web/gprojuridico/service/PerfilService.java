@@ -38,10 +38,10 @@ public class PerfilService {
             }
 
             // Assuming you want to return the perfilList as data in your ResponseModel
-            return ResponseModel.success("Success message", perfilList);
+            return ResponseModel.success("Perfis encontrados:", perfilList);
         } catch (InterruptedException | ExecutionException e) {
             // Handle any exceptions
-            return ResponseModel.failure("Error message", e.getMessage());
+            return ResponseModel.failure("Erro ao procurar perfis:", e.getMessage());
         }
     }
 
