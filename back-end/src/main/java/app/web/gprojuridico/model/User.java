@@ -14,6 +14,7 @@ public class User {
 
     private String nome;
     private String documentId;
+    private String status;
 
     private String token;
 
@@ -91,6 +92,14 @@ public class User {
 
     public void setPerfil_id(String perfil_id) {
         this.perfil_id = perfil_id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
