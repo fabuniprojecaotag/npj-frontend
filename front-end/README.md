@@ -5,6 +5,7 @@ O Front-end foi gerado na versão do [Angular CLI](https://github.com/angular/an
 ## Development server
 
 No terminal na raiz do Front-end coloque `ng serve` para rodar um servidor local. Navegue para `http://localhost:4200/`. A aplicação irá automaticamente se atualizar caso você faça alguma mudança e salve (certifique-se de estar na pasta correta no terminal).
+Certifique-se que você está com a versão do Node suportada pelo Angular 16.2 e o CLI na mesma versão, e utilize o 'npm install' para baixar as dependências.
 
 ## Code scaffolding
 
