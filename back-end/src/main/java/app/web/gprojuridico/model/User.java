@@ -1,8 +1,5 @@
 package app.web.gprojuridico.model;
 
-import org.apache.naming.factory.SendMailFactory;
-
-
 public class User {
 
     private int id;

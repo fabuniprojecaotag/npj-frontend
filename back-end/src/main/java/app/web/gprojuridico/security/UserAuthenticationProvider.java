@@ -1,7 +1,6 @@
 package app.web.gprojuridico.security;
 
 import app.web.gprojuridico.model.Credentials;
-import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User;
 import app.web.gprojuridico.service.UserService;
 import com.auth0.jwt.JWT;

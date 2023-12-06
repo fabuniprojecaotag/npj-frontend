@@ -1,7 +1,5 @@
 package app.web.gprojuridico.model;
 
-import com.google.gson.JsonObject;
-
 public class ResponseModel {
     private boolean success;
     private String message;

@@ -1,7 +1,6 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Subscription } from 'rxjs';
-import { UsuarioService } from 'src/app/core/services/usuario.service';
+import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
@@ -12,33 +11,35 @@ import { Usuario } from 'src/app/core/types/usuario';
 export class UsersComponent {
   tituloDaPagina: string = 'Usuários';
   listaUsuarios: Usuario[] = [];
-  displayedColumns: string[] = ['matricula', 'nome', 'tipo', 'semestre', 'status'];
+  colunasMostradas: string[] = ['select', 'matricula', 'nome', 'tipo', 'semestre', 'status'];
+  selection = new SelectionModel<Usuario>(true, []);
   paginaAtual: number = 0;
   filtro: string = '';
 
-  constructor (private service: UsuarioService) {}
+  constructor(private service: CadastroService) { }
 
   ngOnInit(): void {
-    // this.service.listar(this.paginaAtual, this.filtro).subscribe((listaUsuarios) => {
-    //   this.listaUsuarios = listaUsuarios
+    // this.service.listar().subscribe({
+    //   next: (resposta) => {
+    //     this.listaUsuarios = resposta;
+    //   },
+    //   error: (err) => {
+    //     console.log('erro ao consultar usuários:',err);
+    //   }
     // })
   }
 
-  getTipoUsuario(perfilId: number): string {
-    switch (perfilId) {
-      case 1: return 'Administrador';
-      case 2: return 'Coordenador';
-      case 3: return 'Secretária';
-      case 4: return 'Professor';
-      case 5: return 'Estagiário';
-      default: return 'Desconhecido';
-    }
+  /** Ve se tudo ta selecionado (do exemplo do material) */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.listaUsuarios.length;
+    return numSelected === numRows;
   }
 
-  // dica do gpt daora pro back
-  toggleStatus(usuario: Usuario): void {
-    usuario.status = usuario.status === 'Ativo' ? 'Inativo' : 'Ativo';
-    // Você também pode chamar o serviço para salvar a alteração no status no backend, se necessário
-    // this.service.atualizarStatus(usuario.id, usuario.status).subscribe(/* ... */);
+  /** Selecionar tudo (do exemplo do material) */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.listaUsuarios.forEach(row => this.selection.select(row));
   }
 }
