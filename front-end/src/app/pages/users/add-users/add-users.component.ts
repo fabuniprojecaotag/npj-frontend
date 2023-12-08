@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormUserService } from 'src/app/core/services/form-user.service';
 import { Usuario } from 'src/app/core/types/usuario';
+import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.component';
 
 @Component({
   selector: 'app-add-users',
@@ -12,7 +14,7 @@ import { Usuario } from 'src/app/core/types/usuario';
 export class AddUsersComponent {
   tituloDaPagina: string = 'Adicionar Usuários';
 
-  constructor (private formularioService: FormUserService, private cadastroService: CadastroService, private router: Router) {}
+  constructor (private formularioService: FormUserService, private cadastroService: CadastroService, private router: Router, private dialog: MatDialog) {}
 
   cadastrar() {
     const formCadastro = this.formularioService.getCadastro();
@@ -20,6 +22,7 @@ export class AddUsersComponent {
       const novoCadastro = formCadastro.getRawValue() as Usuario;
       this.cadastroService.cadastrar(novoCadastro).subscribe({
         next: (value) => {
+          this.abrirModal();
           this.router.navigate(['/users']);
           console.log('cadastro realizado com  sucesso: ', value);
         },
@@ -29,5 +32,11 @@ export class AddUsersComponent {
         }
       })
     }
+  }
+
+  abrirModal() {
+    this.dialog.open(ModalCriadoComponent, {
+      width: '50%',
+    })
   }
 }

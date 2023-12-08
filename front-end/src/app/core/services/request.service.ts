@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment as devEnv } from 'src/environments/environment.development';
 import { TokenService } from './token.service';
@@ -48,20 +48,20 @@ export class RequestService {
     return this.http.post(url, data);
   }
 
-  public createSendingLog(func: string, method: string, params: any) {
-    console.group('%cRequest Details:', 'color: yellow; font-weight: bold');
-    console.log('%c----------------', 'color: yellow; font-weight: bold');
-    console.log('%cFunction: %c' + func, 'color: yellow', 'color: orange');
-    console.log('%cURL: %c' + this.apiUrl, 'color: yellow', 'color: orange');
-    console.log(
-      '%cType of Request:%c' + method,
-      'color: yellow',
-      'color: orange'
-    );
-    console.log('%c', 'color: yellow'); // Empty line for spacing
-    console.log('%cSent Parameters:', 'color: yellow; font-weight: bold');
-    console.log('%c----------------', 'color: yellow; font-weight: bold');
-    console.log('%c' + JSON.stringify(params, null, 4), 'color: yellow');
-    console.groupEnd();
-  }
+  // public createSendingLog(func: string, method: string, params: any) {
+  //   console.group('%cRequest Details:', 'color: yellow; font-weight: bold');
+  //   console.log('%c----------------', 'color: yellow; font-weight: bold');
+  //   console.log('%cFunction: %c' + func, 'color: yellow', 'color: orange');
+  //   console.log('%cURL: %c' + this.apiUrl, 'color: yellow', 'color: orange');
+  //   console.log(
+  //     '%cType of Request:%c' + method,
+  //     'color: yellow',
+  //     'color: orange'
+  //   );
+  //   console.log('%c', 'color: yellow'); // Empty line for spacing
+  //   console.log('%cSent Parameters:', 'color: yellow; font-weight: bold');
+  //   console.log('%c----------------', 'color: yellow; font-weight: bold');
+  //   console.log('%c' + JSON.stringify(params, null, 4), 'color: yellow');
+  //   console.groupEnd();
+  // }
 }
