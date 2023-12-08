@@ -7,6 +7,8 @@ import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { authGuard } from './core/guards/auth.guard';
 import { EditUsersComponent } from './pages/users/edit-users/edit-users.component';
+import { AssistidosComponent } from './pages/assistidos/assistidos.component';
+import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
 
 const routes: Routes = [
   {
@@ -42,7 +44,15 @@ const routes: Routes = [
     path: 'profile',
     component: MyProfileComponent,
     canActivate: [authGuard]
-  }
+  },
+  {
+    path: 'assistidos',
+    component: AssistidosComponent
+  },
+  {
+    path: 'assistidos/adicionar',
+    component: AssistidoAddComponent
+  },
 ];
 
 @NgModule({

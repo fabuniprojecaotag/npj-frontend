@@ -37,6 +37,8 @@ import { DropdownPerfilComponent } from './shared/dropdown-perfil/dropdown-perfi
 import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
 import { EditUsersComponent } from './pages/users/edit-users/edit-users.component';
 import { ModalCriadoComponent } from './shared/modal-criado/modal-criado.component';
+import { AssistidosComponent } from './pages/assistidos/assistidos.component';
+import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { ModalCriadoComponent } from './shared/modal-criado/modal-criado.compone
     DropdownPerfilComponent,
     EditUsersComponent,
     ModalCriadoComponent,
+    AssistidosComponent,
+    AssistidoAddComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +81,7 @@ import { ModalCriadoComponent } from './shared/modal-criado/modal-criado.compone
     MatMenuModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatPaginatorModule,
+    MatPaginatorModule
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }, {
     provide: HTTP_INTERCEPTORS,
