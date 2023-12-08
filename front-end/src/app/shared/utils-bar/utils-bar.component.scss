@@ -1,0 +1,10 @@
+@import '../../../styles.scss';
+
+.utils-bar {
+  background-color: #EFEFEF;
+  color: $preto;
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+}

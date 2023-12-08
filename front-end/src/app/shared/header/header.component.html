@@ -1,26 +1,32 @@
 <header class="cabecalho">
   <mat-toolbar>
-    <div>
-      <button mat-icon-button (click)="toggle('mainMenu')">
-        <mat-icon aria-hidden="false" aria-label="Menu icon" fontIcon="menu"></mat-icon>
-      </button>
-      <h1 class="cabecalho__titulo">GPRO</h1>
-    </div>
-    <div>
-      <h2 class="cabecalho__subtitulo">{{ subtitulo }}</h2>
-    </div>
-    <div>
-      <button mat-button class="botao-menu__usuario" (click)="toggle('userMenu')"><mat-icon
-          class="icone-usuario">account_circle</mat-icon>{{formatFullName(userData.nome)}}<mat-icon
-          fontIcon="arrow_drop_down"></mat-icon></button>
-      <button mat-icon-button id="botao-ajuda">
-        <mat-icon aria-hidden="false" aria-label="help icon" fontIcon="help_outline"></mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon aria-hidden="false" aria-label="user settings icon" fontIcon="settings"></mat-icon>
-      </button>
-    </div>
+    <mat-toolbar-row>
+      <div>
+        <button mat-icon-button (click)="toggle('mainMenu')">
+          <mat-icon aria-hidden="false" aria-label="Menu icon" fontIcon="menu"></mat-icon>
+        </button>
+        <h1 class="cabecalho__titulo">GPRO</h1>
+      </div>
+      <span class="example-spacer"></span>
+      <div>
+        <h2 class="cabecalho__subtitulo">{{ subtitulo }}</h2>
+      </div>
+      <span class="example-spacer"></span>
+      <div>
+        <button mat-button class="botao-menu__usuario" (click)="toggle('userMenu')"><mat-icon
+            class="icone-usuario">account_circle</mat-icon>{{formatFullName(userData.nome)}}<mat-icon
+            fontIcon="arrow_drop_down"></mat-icon></button>
+        <button mat-icon-button id="botao-ajuda">
+          <mat-icon aria-hidden="false" aria-label="help icon" fontIcon="help_outline"></mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon aria-hidden="false" aria-label="user settings icon" fontIcon="settings"></mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+    <app-utils-bar></app-utils-bar>
   </mat-toolbar>
 </header>
 <app-nav-menu [isMenuAtivo]="isMenuAtivo"></app-nav-menu>
-<app-user-menu [nome]="userData.nome" [tipoUsuario]="userData.perfil.nome" [isMenuAtivo]="isUserMenuAtivo"></app-user-menu>
+<app-user-menu [nome]="userData.nome" [tipoUsuario]="userData.perfil.nome"
+  [isMenuAtivo]="isUserMenuAtivo"></app-user-menu>

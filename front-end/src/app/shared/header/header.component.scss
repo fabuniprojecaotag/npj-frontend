@@ -1,66 +1,70 @@
 @import "../../../styles.scss";
 
 .cabecalho {
-
   mat-toolbar {
-    align-items: center;
     background-color: $roxo-escuro;
     color: $branco;
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column-reverse;
 
     @media screen and (max-width: 768px) {
       flex-direction: row;
       justify-content: space-between;
     }
 
-    div {
-      align-items: center;
-      display: flex;
-      justify-content: none;
+    mat-toolbar-row {
+      justify-content: space-between;
+      div {
+        align-items: center;
+        display: flex;
+        justify-content: none;
 
-      .cabecalho__titulo {
-        font-size: 40px;
-        font-family: $fonte-titulo;
-        font-weight: bold;
-        padding-left: 0.8em;
-        transition: visibility 0.1s;
-        min-width: 200px;
+        .cabecalho__titulo {
+          font-size: 40px;
+          font-family: $fonte-titulo;
+          font-weight: bold;
+          padding-left: 0.8em;
+          transition: visibility 0.1s;
+          min-width: 200px;
 
-        @media screen and (max-width: 768px) {
-          display: none;
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
+
+          &.oculto {
+            visibility: hidden;
+          }
         }
 
-        &.oculto {
-          visibility: hidden;
+        .cabecalho__subtitulo {
+          border: 2px solid $branco;
+          border-radius: 16px;
+          color: $branco;
+          font-weight: lighter;
+          padding: 0 3em;
+        }
+
+        .botao-menu__usuario {
+          font-size: 0.8em;
+          .icone-usuario {
+            order: -1;
+          }
+          mat-icon {
+            order: 2;
+          }
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
+        }
+
+        #botao-ajuda {
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
         }
       }
 
-      .cabecalho__subtitulo {
-        border: 2px solid $branco;
-        border-radius: 16px;
-        color: $branco;
-        font-weight: lighter;
-        padding: 0 3em;
-      }
-
-      .botao-menu__usuario {
-        font-size: 0.8em;
-        .icone-usuario {
-          order: -1;
-        }
-        mat-icon {
-          order: 2;
-        }
-        @media screen and (max-width: 768px) {
-          display: none;
-        }
-      }
-
-      #botao-ajuda {
-        @media screen and (max-width: 768px) {
-          display: none;
-        }
+      .example-spacer {
+        flex: 1 1 auto;
       }
     }
   }
