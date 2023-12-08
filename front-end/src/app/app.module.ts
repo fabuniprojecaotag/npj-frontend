@@ -56,7 +56,7 @@ import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistid
     EditUsersComponent,
     ModalCriadoComponent,
     AssistidosComponent,
-    AssistidoAddComponent,
+    AssistidoAddComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +79,7 @@ import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistid
     MatMenuModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatPaginatorModule,
+    MatPaginatorModule
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }, {
     provide: HTTP_INTERCEPTORS,
