@@ -39,6 +39,7 @@ import { EditUsersComponent } from './pages/users/edit-users/edit-users.componen
 import { ModalCriadoComponent } from './shared/modal-criado/modal-criado.component';
 import { AssistidosComponent } from './pages/assistidos/assistidos.component';
 import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
+import { FormAssistidosComponent } from './shared/form-assistidos/form-assistidos.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistid
     EditUsersComponent,
     ModalCriadoComponent,
     AssistidosComponent,
-    AssistidoAddComponent
+    AssistidoAddComponent,
+    FormAssistidosComponent
   ],
   imports: [
     BrowserModule,

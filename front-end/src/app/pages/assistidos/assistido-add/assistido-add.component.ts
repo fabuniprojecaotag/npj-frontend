@@ -1,5 +1,10 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { FormAssistidosService } from 'src/app/core/services/form-assistidos.service';
+import { Assistido } from 'src/app/core/types/assistido';
+import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.component';
 
 @Component({
   selector: 'app-assistido-add',
@@ -8,36 +13,33 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AssistidoAddComponent {
   tituloDaPagina: string = 'Novo Assistido';
-  form!: FormGroup;
 
-  constructor(private fb: FormBuilder){ }
+  constructor(private formAssistidosService: FormAssistidosService, private cadastroService: CadastroService, private router: Router, private dialog: MatDialog) { }
 
-  ngOnInit(){
-    this.form = this.fb.group({
-      nome: null,
-      email: null,
-      cpf: null,
-      rg: null,
-      naturalidade: null,
-      nacionalidade: null,
-      dataNascimento: null,
-      estadoCivil: null,
-      telefone: null,
-      cidade: null,
-      cep: null,
-      enderecoResidencial: null,
-      escolaridade: null,
-      nomePai: null,
-      nomeMae: null,
-      profissao: null,
-      remuneracao: null,
-      cidadeComercial: null,
-      enderecoComercial: null,
-      numDependentes: null,
-    });
+  cadastrar(): void {
+    const formCadastroAssistido = this.formAssistidosService.getCadastro();
+
+    if (formCadastroAssistido?.valid) {
+      const novoAssistido = formCadastroAssistido.getRawValue() as Assistido;
+      console.log('meu assistido cadastrado:', novoAssistido);
+
+      this.cadastroService.cadastrarAssistido(novoAssistido).subscribe({
+        next: (value) => {
+          this.abrirModal();
+          this.router.navigate(['/users']);
+          console.log('cadastro realizado com  sucesso: ', value);
+        },
+        error: (err) => {
+          alert('erro ao realizar cadastro!');
+          console.log('erro ao realizar cadastro: ', err)
+        }
+      })
+    }
   }
 
-  onSubmit(){
-    alert("Submit button pressed.");
+  abrirModal() {
+    this.dialog.open(ModalCriadoComponent, {
+      width: '50%',
+    })
   }
 }

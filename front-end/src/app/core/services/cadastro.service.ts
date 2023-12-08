@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../types/usuario';
 import { Observable } from 'rxjs';
+import { Assistido } from '../types/assistido';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class CadastroService {
     return this.http.post<Usuario>(`${this.apiUrl}/user/create`, usuario);
   }
 
+  cadastrarAssistido(assistido: Assistido): Observable<Assistido> {
+    return this.http.post<Assistido>(`${this.apiUrl}/assistido/create`, assistido);
+  }
+
   buscarCadastro(): Observable<Usuario> {
     var perfilId;
     perfilId = this.usuarioService.retornarUsuario().subscribe({
@@ -28,7 +33,6 @@ export class CadastroService {
   }
 
   editarCadastro(usuario: Usuario ): Observable<Usuario> {
-
     return this.http.patch<Usuario>(`${this.apiUrl}/perfil`, usuario);
   }
 }

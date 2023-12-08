@@ -47,11 +47,13 @@ const routes: Routes = [
   },
   {
     path: 'assistidos',
-    component: AssistidosComponent
+    component: AssistidosComponent,
+    canActivate: [authGuard]
   },
   {
-    path: 'assistidos/adicionar',
-    component: AssistidoAddComponent
+    path: 'assistidos/add',
+    component: AssistidoAddComponent,
+    canActivate: [authGuard]
   },
 ];
 
