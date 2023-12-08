@@ -7,7 +7,7 @@ export interface Usuario {
   semestre?: string,
   status: string,
   token?: string,
-  perfil_id: number,
+  perfil_id: string,
   perfil: Perfil
 }
 

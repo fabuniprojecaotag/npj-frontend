@@ -23,6 +23,6 @@ export class PerfilService {
   }
 
   private requestPerfis(): Observable<Perfil[]> {
-    return this.http.get<Perfil[]>(`${this.apiUrl}/perfil`);
+    return this.http.get<Perfil[]>(`${this.apiUrl}/perfil/all`);
   }
 }

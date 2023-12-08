@@ -42,10 +42,6 @@ export class UsuarioService {
   }
 
 
-  // cadastrar(usuario: Usuario): Observable<Usuario> {
-  //   return this.http.post<Usuario>(this.API, usuario);
-  // }
-
   // listar(pagina: number, filtro: string): Observable<Usuario[]> {
   //   const itensPerPage = 7;
   //   let params = new HttpParams().set('page', pagina.toString()).set('limit', itensPerPage.toString());

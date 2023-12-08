@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Perfil } from 'src/app/core/types/usuario';
-import {formValidations} from '../form-validations';
+import { formValidations } from '../form-validations';
 import { FormUserService } from 'src/app/core/services/form-user.service';
 
 @Component({
@@ -11,12 +11,12 @@ import { FormUserService } from 'src/app/core/services/form-user.service';
 })
 export class FormUsersComponent implements OnInit {
   formCadastro!: FormGroup;
-  perfilControl = new FormControl<Perfil | null>(null, Validators.required);
   escondido = true;
   @Input() perfilComponente: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
+  perfilControl = new FormControl<Perfil | null>({ value: null, disabled: this.perfilComponente });
 
-  constructor (private formBuilder: FormBuilder, private formService: FormUserService) {}
+  constructor(private formBuilder: FormBuilder, private formService: FormUserService) { }
 
   ngOnInit(): void {
     this.formCadastro = this.formBuilder.group({
@@ -24,7 +24,7 @@ export class FormUsersComponent implements OnInit {
       nome: [null, Validators.required],
       telefone: [null],
       semestre: [null],
-      status: [{value: null, disabled: this.perfilComponente}],
+      status: [{ value: null, disabled: this.perfilComponente }],
       perfil: this.perfilControl,
       email: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
