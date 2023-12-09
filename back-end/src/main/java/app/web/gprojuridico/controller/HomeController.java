@@ -30,7 +30,7 @@ public class HomeController {
 
         return "API is running.\nUptime: " + uptimeInSeconds + " seconds\nSpring Version:"+SpringVersion.getVersion();
     }
-    
+
     @PostMapping("/auth")
     public ResponseEntity<User> verifyLogin(@AuthenticationPrincipal User user){
         user.setToken(userAuthenticationProvider.createToken(user.getEmail()));
