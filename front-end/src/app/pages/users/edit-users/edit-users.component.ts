@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-users',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit-users.component.scss']
 })
 export class EditUsersComponent {
+  tituloDaPagina: string = 'Editar Usuário';
 
+  constructor(private router: Router) {}
+
+  editar () {
+    alert('a ser implementado!');
+    this.router.navigate(['/home']);
+  }
 }
