@@ -30,8 +30,7 @@ public class HomeController {
 
         return "API is running.\nUptime: " + uptimeInSeconds + " seconds\nSpring Version:"+SpringVersion.getVersion();
     }
-
-    @CrossOrigin(origins = "http://localhost:4200")
+    
     @PostMapping("/auth")
     public ResponseEntity<User> verifyLogin(@AuthenticationPrincipal User user){
         user.setToken(userAuthenticationProvider.createToken(user.getEmail()));
