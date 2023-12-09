@@ -67,21 +67,32 @@
         flex: 1 1 auto;
       }
     }
-    app-utils-bar {
-      display: block;
+
+    .cabecalho-linha {
       background-color: #efefef;
       color: $preto;
-      width: 100vw;
 
-      section {
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+
+      app-utils-bar {
+        align-items: center;
         display: flex;
         justify-content: space-between;
+        height: 100%;
+        width: 100%;
 
         .example-spacer {
           flex: 1 1 auto;
         }
+
+        .botoes-acoes  {
+          button {
+            padding: 0 1em;
+          }
+        }
       }
     }
-
   }
 }

@@ -31,6 +31,10 @@
   width: 0;
   z-index: 9999;
 
+  @media screen and (max-width: 426px) {
+   top: 55px;
+  }
+
   &__titulo {
     align-self: center;
     color: $branco;
@@ -94,6 +98,10 @@
     width: 20%;
 
     @media screen and (max-width: 768px) {
+      width: 35vw;
+    }
+
+    @media screen and (max-width: 426px) {
       width: 50vw;
     }
   }
