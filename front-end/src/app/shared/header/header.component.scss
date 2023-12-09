@@ -67,5 +67,21 @@
         flex: 1 1 auto;
       }
     }
+    app-utils-bar {
+      display: block;
+      background-color: #efefef;
+      color: $preto;
+      width: 100vw;
+
+      section {
+        display: flex;
+        justify-content: space-between;
+
+        .example-spacer {
+          flex: 1 1 auto;
+        }
+      }
+    }
+
   }
 }

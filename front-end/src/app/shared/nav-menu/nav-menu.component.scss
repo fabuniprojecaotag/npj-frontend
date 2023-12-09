@@ -22,10 +22,12 @@
   border-top: 1px solid $branco;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 95vh;
   position: absolute;
   transition: 0.5s;
   overflow: hidden;
+  padding-bottom: 1em;
+  top: 65px;
   width: 0;
   z-index: 9999;
 
