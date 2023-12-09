@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             console.log('POST resposta do login:', data);
             if (data.nome.length > 0) {
               localStorage.setItem('user_data', JSON.stringify(data));
-              this.router.navigate(['./home']);
+              this.router.navigate(['/home']);
             }
           });
       } else {

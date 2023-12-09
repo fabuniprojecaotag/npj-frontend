@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 package app.web.gprojuridico.config;
 
 import app.web.gprojuridico.security.JWTAuthFilter;
 import app.web.gprojuridico.security.UserAuthenticationEntryPoint;
 import app.web.gprojuridico.security.UserAuthenticationProvider;
 import app.web.gprojuridico.security.UsernamePasswordAuthFilter;
-=======
-package app.web.gprojuridico.security;
-
->>>>>>> 024976651817e67bb0fdf73e34b84383c0da6a9f
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -54,19 +49,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults()) // Configuração CORS
+                .cors(Customizer.withDefaults())
                 .exceptionHandling(e -> e.authenticationEntryPoint(userAuthenticationEntryPoint))
-                .addFilterBefore(new UsernamePasswordAuthFilter(userAuthenticationProvider),
-                        BasicAuthenticationFilter.class)
-                .addFilterBefore(new JWTAuthFilter(userAuthenticationProvider),
-                        UsernamePasswordAuthFilter.class)
+                .addFilterBefore(new UsernamePasswordAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JWTAuthFilter(userAuthenticationProvider), UsernamePasswordAuthFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, WHITE_LIST)
-                        .permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, WHITE_LIST).permitAll()
+                        .requestMatchers(HttpMethod.GET, SWAGGER_WHITE_LIST).permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
