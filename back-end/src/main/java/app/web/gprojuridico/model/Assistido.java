@@ -29,34 +29,7 @@ public class Assistido {
     private String documentId;
 
     // Construtor
-    public Assistido(String nome, String email, String cpf, String rg, String naturalidade,
-                  String nacionalidade, String dataNascimento, String estadoCivil,
-                  String telefone, String cidade, String cep, String enderecoResidencial,
-                  String escolaridade, String nomePai, String nomeMae, String profissao,
-                  String remuneracao, String cidadeComercial, String enderecoComercial,
-                  String numDependentes, String documentId) {
-        this.nome = nome;
-        this.email = email;
-        this.cpf = cpf;
-        this.rg = rg;
-        this.naturalidade = naturalidade;
-        this.nacionalidade = nacionalidade;
-        this.dataNascimento = dataNascimento;
-        this.estadoCivil = estadoCivil;
-        this.telefone = telefone;
-        this.cidade = cidade;
-        this.cep = cep;
-        this.enderecoResidencial = enderecoResidencial;
-        this.escolaridade = escolaridade;
-        this.nomePai = nomePai;
-        this.nomeMae = nomeMae;
-        this.profissao = profissao;
-        this.remuneracao = remuneracao;
-        this.cidadeComercial = cidadeComercial;
-        this.enderecoComercial = enderecoComercial;
-        this.numDependentes = numDependentes;
-        this.documentId = documentId;
-    }
+
     public String getNome() {
         return nome;
     }

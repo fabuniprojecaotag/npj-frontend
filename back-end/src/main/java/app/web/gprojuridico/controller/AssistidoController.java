@@ -28,22 +28,33 @@ public class AssistidoController {
         return (ResponseModel<?>) assistidoService.getAllAssistidos();
     }
 
+    @GetMapping("/get/{assistidoId}")
+    public ResponseEntity<ResponseModel<?>> getAssistidoById(@PathVariable String assistidoId) {
+        Assistido assistido = assistidoService.getAssistidoById(assistidoId);
+
+        if (assistido != null) {
+            return ResponseEntity.ok(ResponseModel.success("Assistido encontrado", Collections.singletonList(assistido)));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseModel.failure("Assistido não encontrado", null));
+        }
+    }
     @PostMapping("/create")
     public ResponseModel<?> createAssistido(@RequestBody Assistido assistido) {
         return assistidoService.createAssistido(assistido);
     }
 
-//    @GetMapping("/{assistidoId}")
-//    public ResponseEntity<ResponseModel<?>> getAssistidoById(@PathVariable String assistidoId) {
-//        ResponseEntity<ResponseModel> assistidoResponse = assistidoService.getAssistidoById(assistidoId);
-//
-//        if (assistidoResponse.getBody() != null) {
-//            return new ResponseEntity<>(assistidoResponse.getBody(), assistidoResponse.getStatusCode());
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @PutMapping("/update/{assistidoId}")
+    public ResponseModel<?> updateAssistido(@PathVariable String assistidoId, @RequestBody Assistido assistido) {
+        return assistidoService.updateAssistido(assistidoId, assistido);
+    }
 
-    // Adicione métodos para criar, editar e deletar assistidos conforme necessário
+    @DeleteMapping("/delete/{assistidoId}")
+    public ResponseModel<?> deleteAssistido(@PathVariable String assistidoId) {
+        return assistidoService.deleteAssistido(assistidoId);
+    }
+
+
+
+
 
 }

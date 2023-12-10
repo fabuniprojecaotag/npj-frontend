@@ -19,7 +19,7 @@ public class AssistidoService {
 
     private static final String COLLECTION_NAME = "assistidos";
 
-    public ResponseModel getAllAssistidos() {
+    public ResponseModel<?> getAllAssistidos() {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference assistidosCollection = dbFirestore.collection(COLLECTION_NAME);
 
@@ -32,9 +32,7 @@ public class AssistidoService {
                 Assistido assistido = document.toObject(Assistido.class);
                 assistido.setDocumentId(document.getId());
 
-                if (!assistidoList.contains(assistido)) {
-                    assistidoList.add(assistido);
-                }
+                assistidoList.add(assistido);
             }
 
             return ResponseModel.success("Assistidos encontrados:", assistidoList);
@@ -43,7 +41,27 @@ public class AssistidoService {
         }
     }
 
-    public ResponseModel createAssistido(Assistido assistido) {
+    public Assistido getAssistidoById(String assistidoId) {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference assistidoDocRef = dbFirestore.collection(COLLECTION_NAME).document(assistidoId);
+
+        try {
+            DocumentSnapshot assistidoSnapshot = assistidoDocRef.get().get();
+
+            if (assistidoSnapshot.exists()) {
+                Assistido assistido = assistidoSnapshot.toObject(Assistido.class);
+                assert assistido != null;
+                assistido.setDocumentId(assistidoSnapshot.getId());
+                return assistido;
+            } else {
+                return null; // ou lance uma exceção para indicar que o assistido não foi encontrado
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("Erro ao buscar assistido: " + e.getMessage());
+            return null;
+        }
+    }
+    public ResponseModel<?> createAssistido(Assistido assistido) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference assistidosCollection = dbFirestore.collection(COLLECTION_NAME);
 
@@ -58,32 +76,27 @@ public class AssistidoService {
             return ResponseModel.failure("Erro ao criar assistido", null);
         }
     }
-    public ResponseEntity<ResponseModel<?>> getAssistidoById(String assistidoId) {
+
+    public ResponseModel<?> updateAssistido(String assistidoId, Assistido assistido) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         DocumentReference assistidoDocRef = dbFirestore.collection(COLLECTION_NAME).document(assistidoId);
 
-        try {
-            System.out.println("Attempting to fetch assistido for ID: " + assistidoId);
+        ApiFuture<WriteResult> result = assistidoDocRef.set(assistido);
+        System.out.println("Assistido atualizado com sucesso. ID: " + assistidoId);
 
-            DocumentSnapshot assistidoSnapshot = assistidoDocRef.get().get();
-
-            if (assistidoSnapshot.exists()) {
-                Assistido assistido = assistidoSnapshot.toObject(Assistido.class);
-                assert assistido != null;
-                assistido.setDocumentId(assistidoSnapshot.getId());
-                System.out.println("Assistido found: " + assistido);
-
-                return ResponseEntity.ok(ResponseModel.success("Assistido found", Collections.singletonList(assistido)));
-            } else {
-                System.out.println("Assistido not found for ID: " + assistidoId);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseModel.failure("Assistido not found", null));
-            }
-        } catch (InterruptedException | ExecutionException e) {
-            System.err.println("Error fetching assistido: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResponseModel.failure("Error fetching assistido", null));
-        }
+        return ResponseModel.success("Assistido atualizado com sucesso", Collections.singletonList(assistido));
     }
 
-    // Adicione métodos para criar, editar e deletar assistidos conforme necessário
+    public ResponseModel<?> deleteAssistido(String assistidoId) {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference assistidoDocRef = dbFirestore.collection(COLLECTION_NAME).document(assistidoId);
+
+        ApiFuture<WriteResult> result = assistidoDocRef.delete();
+        System.out.println("Assistido deletado com sucesso. ID: " + assistidoId);
+
+        return ResponseModel.success("Assistido deletado com sucesso", null);
+    }
+
+
 }
 
