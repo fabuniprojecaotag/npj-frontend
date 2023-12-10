@@ -11,7 +11,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatFormFieldModule,
+} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -41,6 +44,7 @@ import { AssistidosComponent } from './pages/assistidos/assistidos.component';
 import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
 import { FormAssistidosComponent } from './shared/form-assistidos/form-assistidos.component';
 import { PerfisComponent } from './pages/perfis/perfis.component';
+import { ModalExcluidoComponent } from './shared/modal-excluido/modal-excluido.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,8 @@ import { PerfisComponent } from './pages/perfis/perfis.component';
     AssistidosComponent,
     AssistidoAddComponent,
     FormAssistidosComponent,
-    PerfisComponent
+    PerfisComponent,
+    ModalExcluidoComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,13 +90,19 @@ import { PerfisComponent } from './pages/perfis/perfis.component';
     MatMenuModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
-  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AutenticacaoInterceptor,
-    multi: true,
-  }],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AutenticacaoInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

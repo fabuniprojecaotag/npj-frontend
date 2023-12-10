@@ -1,6 +1,7 @@
 <header class="cabecalho">
   <mat-toolbar>
     <mat-toolbar-row>
+      <!-- conteudo do cabeçalho -->
       <div>
         <button mat-icon-button (click)="toggle('mainMenu')">
           <mat-icon aria-hidden="false" aria-label="Menu icon" fontIcon="menu"></mat-icon>
@@ -24,7 +25,10 @@
         </button>
       </div>
     </mat-toolbar-row>
-    <app-utils-bar></app-utils-bar>
+    <mat-toolbar class="cabecalho-linha">
+      <!-- toolbar -->
+      <app-utils-bar></app-utils-bar>
+    </mat-toolbar>
   </mat-toolbar>
 </header>
 <app-nav-menu [isMenuAtivo]="isMenuAtivo"></app-nav-menu>

@@ -22,12 +22,18 @@
   border-top: 1px solid $branco;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 95vh;
   position: absolute;
   transition: 0.5s;
   overflow: hidden;
+  padding-bottom: 1em;
+  top: 65px;
   width: 0;
   z-index: 9999;
+
+  @media screen and (max-width: 426px) {
+   top: 55px;
+  }
 
   &__titulo {
     align-self: center;
@@ -92,6 +98,10 @@
     width: 20%;
 
     @media screen and (max-width: 768px) {
+      width: 35vw;
+    }
+
+    @media screen and (max-width: 426px) {
       width: 50vw;
     }
   }
