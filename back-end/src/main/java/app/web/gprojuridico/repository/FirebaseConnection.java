@@ -12,7 +12,6 @@ import java.io.FileInputStream;
 public class FirebaseConnection {
 
     public static void  initialization(){
-        System.out.println("SUCK");
         FileInputStream serviceAccount = null;
 
         {
