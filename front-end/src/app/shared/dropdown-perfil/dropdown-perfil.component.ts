@@ -16,31 +16,12 @@ export class DropdownPerfilComponent {
 
   usuarioTipos: Perfil[] = [];
 
-  filteredOptions$?: Observable<Perfil[]>;
-
   constructor(private perfilTipoService: PerfilService) {}
 
   ngOnInit(): void {
     this.perfilTipoService.listar().subscribe((dados) => {
-      this.usuarioTipos = dados;
+      this.usuarioTipos = dados.result;
       console.log('tipos de usuario:', this.usuarioTipos);
     });
-    this.filteredOptions$ = this.control.valueChanges.pipe(
-      startWith(''),
-      map((value) => this.filtrarPerfis(value))
-    );
-  }
-
-  filtrarPerfis(value: string | Perfil): Perfil[] {
-    const nomePerfil = typeof value === 'string' ? value : value?.nome;
-    const valorFiltrado = nomePerfil?.toLowerCase();
-    const result = this.usuarioTipos.filter((perfil) =>
-      perfil.nome.toLowerCase().includes(valorFiltrado)
-    );
-    return result;
-  }
-
-  displayFn(perfil: Perfil): string {
-    return perfil && perfil.nome ? perfil.nome : '';
   }
 }

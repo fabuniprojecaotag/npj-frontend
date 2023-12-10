@@ -44,26 +44,6 @@ export class UsuarioService {
   }
 
   listar() {
-    // Define headers with Authorization Bearer token
-
-    const jwtToken = localStorage.getItem('token');
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${jwtToken}`,
-    });
-
-    // Make the authenticated HTTP GET request
-    return this.http.get(`${this.API}/user/all`, { headers });
+    return this.http.get(`${this.API}/user/all`);
   }
-  // listar(pagina: number, filtro: string): Observable<Usuario[]> {
-  //   const itensPerPage = 7;
-  //   let params = new HttpParams().set('page', pagina.toString()).set('limit', itensPerPage.toString());
-
-  //   if (filtro.trim().length > 2) {
-  //     params = params.set('filtro', filtro);
-  //   }
-
-  //   return this.http.get<Usuario[]>(`${this.API}`, { params });
-  // }
 }
