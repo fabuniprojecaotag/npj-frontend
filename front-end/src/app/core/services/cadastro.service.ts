@@ -18,10 +18,6 @@ export class CadastroService {
     return this.http.post<Usuario>(`${this.apiUrl}/user/create`, usuario);
   }
 
-  cadastrarAssistido(assistido: Assistido): Observable<Assistido> {
-    return this.http.post<Assistido>(`${this.apiUrl}/assistido/create`, assistido);
-  }
-
   buscarCadastro(): Observable<Usuario> {
     var perfilId;
     perfilId = this.usuarioService.retornarUsuario().subscribe({

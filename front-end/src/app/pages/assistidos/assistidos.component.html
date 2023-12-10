@@ -1,2 +1,33 @@
 <app-header [subtitulo]="tituloPagina"></app-header>
-<p>assistidos listagem!</p>
+<section class="secao-assistidos">
+  <p>Tudo > Assistidos</p>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="listaAssistidos">
+      <!-- Nome Coluna -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let assistido"> {{assistido.nome}} </td>
+      </ng-container>
+
+      <!-- E-mail Coluna -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> E-mail </th>
+        <td mat-cell *matCellDef="let assistido"> {{assistido.email}} </td>
+      </ng-container>
+
+      <!-- CPF Coluna -->
+      <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef> CPF </th>
+        <td mat-cell *matCellDef="let assistido"> {{assistido.cpf}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunasMostradas"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunasMostradas;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Rows per page:">
+    </mat-paginator>
+  </div>
+
+</section>
+

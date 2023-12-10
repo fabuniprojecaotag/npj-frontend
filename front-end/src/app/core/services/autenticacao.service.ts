@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
@@ -15,7 +15,7 @@ interface AuthResponse {
 export class AutenticacaoService {
   private API = environment.devAPI;
 
-  constructor(private http: HttpClient, private userService: UsuarioService) {}
+  constructor(private http: HttpClient, private userService: UsuarioService) { }
 
   autenticar(
     login: string,
@@ -29,7 +29,7 @@ export class AutenticacaoService {
       )
       .pipe(
         tap((response) => {
-          console.log('RESP');
+          console.log('RESP:');
           console.log(response.body);
           const authToken = response.body?.result[0].token || '';
           this.userService.salvarToken(authToken);

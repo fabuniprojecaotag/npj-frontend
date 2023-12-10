@@ -10,17 +10,8 @@ public class Perfil {
     private String documentId;
     private List<Map<String, Object>> permissoes;
 
-    public Perfil() {
-        // Default constructor for Firestore deserialization
-    }
+    public Perfil() { } // Default constructor for Firestore deserialization
 
-    public String getDocumentId() {
-        return documentId;
-    }
-
-    public void setDocumentId(String documentId) {
-        this.documentId = documentId;
-    }
     public Perfil(int id, String nome, List<Map<String, Object>> permissoes) {
         this.id = id;
         this.nome = nome;
@@ -28,6 +19,14 @@ public class Perfil {
     }
 
     // Getter and setter methods
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private autenticacaoService: AutenticacaoService,
-    private requestService: RequestService,
-    private http: HttpClient
+    // private requestService: RequestService,
   ) {}
 
   ngOnInit(): void {
@@ -30,9 +29,7 @@ export class LoginComponent implements OnInit {
     const tokenString = localStorage.getItem('token');
     console.log(userDataString);
     if (userDataString != '' && tokenString != '') {
-      // console.log(JSON.parse(userDataString));
-      // let userData = JSON.parse(userDataString);
-      this.router.navigate(['./home']);
+      this.router.navigate(['/home']);
     }
     this.loginForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
@@ -40,47 +37,47 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  cadastrar() {
-    this.loading = true;
-    try {
-      if (this.loginForm.valid) {
-        const formData = this.loginForm.value;
-        const postData = { login: formData.email, password: formData.senha };
-        console.log(postData);
-        this.requestService
-          .logar('auth', postData)
-          .pipe(
-            catchError((error) => {
-              this.loading = false;
-              if (error.status == '401') {
-                alert('Dados incorretos');
-              } else if (error.status === 0) {
-                alert(
-                  'A API está offline ou inacessível. Verifique sua conexão.'
-                );
-              }
-              return throwError(() => error);
-            })
-          )
-          .subscribe((data) => {
-            this.loading = false;
-            console.log('POST resposta do login:', data);
-            if (data.nome.length > 0) {
-              localStorage.setItem('user_data', JSON.stringify(data));
-              this.router.navigate(['/home']);
-            }
-          });
-      } else {
-        console.log('else');
-        this.loading = false;
-        alert('Formulário inválido');
-      }
-    } catch (error: any) {
-      this.loading = false;
-      console.log('level - 1 error');
-      console.log(error);
-    }
-  }
+  // cadastrar() {
+  //   this.loading = true;
+  //   try {
+  //     if (this.loginForm.valid) {
+  //       const formData = this.loginForm.value;
+  //       const postData = { login: formData.email, password: formData.senha };
+  //       console.log(postData);
+  //       this.requestService
+  //         .logar('auth', postData)
+  //         .pipe(
+  //           catchError((error) => {
+  //             this.loading = false;
+  //             if (error.status == '401') {
+  //               alert('Dados incorretos');
+  //             } else if (error.status === 0) {
+  //               alert(
+  //                 'A API está offline ou inacessível. Verifique sua conexão.'
+  //               );
+  //             }
+  //             return throwError(() => error);
+  //           })
+  //         )
+  //         .subscribe((data) => {
+  //           this.loading = false;
+  //           console.log('POST resposta do login:', data);
+  //           if (data.nome.length > 0) {
+  //             localStorage.setItem('user_data', JSON.stringify(data));
+  //             this.router.navigate(['/home']);
+  //           }
+  //         });
+  //     } else {
+  //       console.log('else');
+  //       this.loading = false;
+  //       alert('Formulário inválido');
+  //     }
+  //   } catch (error: any) {
+  //     this.loading = false;
+  //     console.log('level - 1 error');
+  //     console.log(error);
+  //   }
+  // }
 
   login() {
     this.loading = true;
@@ -97,7 +94,7 @@ export class LoginComponent implements OnInit {
               'user_data',
               JSON.stringify(resposta.body?.result[0])
             );
-            this.router.navigate(['./home']);
+            this.router.navigate(['/home']);
           }
         },
         error: (err) => {
@@ -106,7 +103,7 @@ export class LoginComponent implements OnInit {
         },
       });
     } else {
-      alert('formulário invalido!');
+      alert('Campos invalidos!');
     }
   }
 }

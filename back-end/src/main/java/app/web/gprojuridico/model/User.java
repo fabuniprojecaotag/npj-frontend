@@ -13,9 +13,6 @@ public class User {
     private String perfil_id;
 
     private String nome;
-
-
-
     private String semestre;
 
     private String status;
@@ -113,6 +110,7 @@ public class User {
     public void setSemestre(String semestre) {
         this.semestre = semestre;
     }
+
     @Override
     public String toString() {
         return "User{" +

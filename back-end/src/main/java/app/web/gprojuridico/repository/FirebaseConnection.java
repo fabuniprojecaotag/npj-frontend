@@ -16,7 +16,7 @@ public class FirebaseConnection {
 
         {
             try {
-                serviceAccount = new FileInputStream("../back-end/firebaseAccountKey.json");
+                serviceAccount = new FileInputStream("./back-end/firebaseAccountKey.json");
 
                 GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
                 FirebaseOptions options = new FirebaseOptions.Builder()
