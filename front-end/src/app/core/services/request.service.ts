@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment as devEnv } from 'src/environments/environment.development';
 import { TokenService } from './token.service';
@@ -19,7 +20,12 @@ export class RequestService {
   public logar(endpoint: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
 
-    const req = this.http.post(url, data);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const req = this.http.post(url, JSON.stringify(data), { headers });
+    console.log('AQUI URL');
+    console.log(req);
 
     // Handle the response to extract and save the token
     req.subscribe({
@@ -30,7 +36,7 @@ export class RequestService {
       },
       error: (error: any) => {
         console.log('erro durante a autenticação:', error);
-      }
+      },
     });
 
     return req;

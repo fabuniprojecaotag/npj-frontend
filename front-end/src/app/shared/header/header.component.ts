@@ -14,11 +14,11 @@ import {
 })
 export class HeaderComponent implements OnInit {
   @Input() subtitulo: string = '';
-  isMenuAtivo: boolean = false;  // logica para abrir e fechar menu de nav
+  isMenuAtivo: boolean = false; // logica para abrir e fechar menu de nav
   isUserMenuAtivo: boolean = false;
   userData: any = {};
 
-  constructor(private el: ElementRef, private cdr: ChangeDetectorRef) { }
+  constructor(private el: ElementRef, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadDataFromLocalStorage();
@@ -26,10 +26,10 @@ export class HeaderComponent implements OnInit {
 
   //TODO: mover para utilitarios
   formatFullName(fullName: string): string {
-    const names = fullName.split(' ');
-    const firstTwoNames = names.slice(0, 2);
+    const names = (fullName && fullName.split(' ')) ?? [];
+    const firstTwoNames: any = names.slice(0, 2) ?? [];
     const formattedNames = firstTwoNames.map(
-      (name) => name.charAt(0).toUpperCase() + name.slice(1)
+      (name: any) => name.charAt(0).toUpperCase() + name.slice(1)
     );
     const formattedFullName = formattedNames.join(' ');
     return formattedFullName;
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
   loadDataFromLocalStorage(): void {
     console.log('getting local');
     const userDataString = localStorage.getItem('user_data');
-    console.log("data do usuario:" + userDataString);
+    console.log('data do usuario:' + userDataString);
     if (userDataString) {
       console.log(JSON.parse(userDataString));
       this.userData = JSON.parse(userDataString);

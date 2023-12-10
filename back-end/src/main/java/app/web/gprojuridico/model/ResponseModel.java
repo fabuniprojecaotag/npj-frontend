@@ -1,11 +1,13 @@
 package app.web.gprojuridico.model;
 
-public class ResponseModel {
+import java.util.List;
+
+public class ResponseModel<T> {
     private boolean success;
     private String message;
-    private Object result;
+    private List<T> result; // Change the type to List<T>
 
-    public ResponseModel(boolean success, String message, Object result) {
+    public ResponseModel(boolean success, String message, List<T> result) {
         this.success = success;
         this.message = message;
         this.result = result;
@@ -19,15 +21,15 @@ public class ResponseModel {
         return message;
     }
 
-    public Object getResult() {
+    public List<T> getResult() {
         return result;
     }
 
-    public static ResponseModel success(String message, Object result) {
-        return new ResponseModel(true, message, result);
+    public static <T> ResponseModel<T> success(String message, List<T> result) {
+        return new ResponseModel<>(true, message, result);
     }
 
-    public static ResponseModel failure(String message, Object result) {
-        return new ResponseModel(false, message, result);
+    public static <T> ResponseModel<T> failure(String message, List<T> result) {
+        return new ResponseModel<>(false, message, result);
     }
 }

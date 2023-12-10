@@ -49,16 +49,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())
+//                .cors(Customizer.withDefaults())
                 .exceptionHandling(e -> e.authenticationEntryPoint(userAuthenticationEntryPoint))
                 .addFilterBefore(new UsernamePasswordAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JWTAuthFilter(userAuthenticationProvider), UsernamePasswordAuthFilter.class)
+//                .addFilterBefore(new JWTAuthFilter(userAuthenticationProvider), UsernamePasswordAuthFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, WHITE_LIST).permitAll()
-                        .requestMatchers(HttpMethod.GET, SWAGGER_WHITE_LIST).permitAll()
-                        .anyRequest().authenticated());
+                ;
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers(HttpMethod.POST, WHITE_LIST).permitAll()
+//                        .requestMatchers(HttpMethod.GET, SWAGGER_WHITE_LIST).permitAll()
+//                        .anyRequest().authenticated());
         return http.build();
     }
 

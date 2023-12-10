@@ -5,6 +5,9 @@ import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 @Service
 public class UserService {
     private static final String COLLECTION_NAME = "acesso";
-    public String create(User user) throws ExecutionException, InterruptedException {
+    public ResponseModel<?> create(User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
         // Verificar se nome e email sao unicos
@@ -29,10 +32,12 @@ public class UserService {
 
         if (!emailQuerySnapshot.isEmpty()) {
             // Email ja cadastrado
-            return "Email já cadastrado";
+            return ResponseModel.failure("Email já cadastrado", new ArrayList<>());
+
         } else if (!nameQuerySnapshot.isEmpty()) {
             // Nome ja cadastrado
-            return "Nome já cadastrado";
+            return ResponseModel.failure("Nome já cadastrado", new ArrayList<>());
+
         } else {
             // Dados unicos? Incremento id e salvo
             user.setToken(null);
@@ -61,7 +66,7 @@ public class UserService {
             ApiFuture<WriteResult> collectionApiFuture = documentReference.set(user);
 
             try {
-                return "Criado com sucesso\nData da ação: " + collectionApiFuture.get().getUpdateTime().toString();
+                return ResponseModel.success("Usuário Criado com Sucesso", new ArrayList<>());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -180,7 +185,7 @@ public class UserService {
             updateResult.get();
 
             // Include additional data if needed, e.g., updated status
-            return ResponseModel.success("User status updated successfully.", newStatus);
+            return ResponseModel.success("User status updated successfully.", new ArrayList<>());
         } catch (Exception e) {
             return ResponseModel.failure("Error updating user status: " + e.getMessage(), null);
         }

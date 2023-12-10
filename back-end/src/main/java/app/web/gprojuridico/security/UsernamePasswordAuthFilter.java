@@ -24,14 +24,20 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException{
+        System.out.println("USERNAME PASS AUTG FUILC ENTRY");
+
         if("/auth".equals(request.getServletPath()) && HttpMethod.POST.matches(request.getMethod())){
            Credentials user = MAPPER.readValue(request.getInputStream(),Credentials.class);
 
             try{
+                System.out.println("VALIDANDO");
+
                 SecurityContextHolder.getContext().setAuthentication(
                         provider.validateCredentials(user)
                 );
             }catch(RuntimeException e){
+                System.out.println("ERROR VALIDAÇOA");
+
                 SecurityContextHolder.clearContext();
                 throw e;
             } catch (ExecutionException | InterruptedException e) {

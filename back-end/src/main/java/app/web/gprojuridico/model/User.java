@@ -13,14 +13,18 @@ public class User {
     private String perfil_id;
 
     private String nome;
-    private String documentId;
+
+
+
+    private String semestre;
+
     private String status;
+
+    private String documentId;
 
     private String token;
 
-    User() {
 
-    }
 
     public String getDocumentId() {
         return documentId;
@@ -102,6 +106,13 @@ public class User {
         this.status = status;
     }
 
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
     @Override
     public String toString() {
         return "User{" +
