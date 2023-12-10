@@ -7,7 +7,7 @@ import { PerfilService } from 'src/app/core/services/perfil.service';
 @Component({
   selector: 'app-dropdown-perfil',
   templateUrl: './dropdown-perfil.component.html',
-  styleUrls: ['./dropdown-perfil.component.scss']
+  styleUrls: ['./dropdown-perfil.component.scss'],
 })
 export class DropdownPerfilComponent {
   @Input() label: string = '';
@@ -18,27 +18,25 @@ export class DropdownPerfilComponent {
 
   filteredOptions$?: Observable<Perfil[]>;
 
-
-  constructor(private perfilTipoService: PerfilService) { }
+  constructor(private perfilTipoService: PerfilService) {}
 
   ngOnInit(): void {
-    this.perfilTipoService.listar()
-      .subscribe(dados => {
-        this.usuarioTipos = dados
-        console.log('tipos de usuario:', this.usuarioTipos)
-      })
+    this.perfilTipoService.listar().subscribe((dados) => {
+      this.usuarioTipos = dados;
+      console.log('tipos de usuario:', this.usuarioTipos);
+    });
     this.filteredOptions$ = this.control.valueChanges.pipe(
       startWith(''),
-      map(value => this.filtrarPerfis(value))
-    )
+      map((value) => this.filtrarPerfis(value))
+    );
   }
 
   filtrarPerfis(value: string | Perfil): Perfil[] {
     const nomePerfil = typeof value === 'string' ? value : value?.nome;
     const valorFiltrado = nomePerfil?.toLowerCase();
-    const result = this.usuarioTipos.filter(
-      perfil => perfil.nome.toLowerCase().includes(valorFiltrado)
-    )
+    const result = this.usuarioTipos.filter((perfil) =>
+      perfil.nome.toLowerCase().includes(valorFiltrado)
+    );
     return result;
   }
 

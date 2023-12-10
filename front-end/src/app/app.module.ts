@@ -40,6 +40,7 @@ import { ModalCriadoComponent } from './shared/modal-criado/modal-criado.compone
 import { AssistidosComponent } from './pages/assistidos/assistidos.component';
 import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
 import { FormAssistidosComponent } from './shared/form-assistidos/form-assistidos.component';
+import { PerfisComponent } from './pages/perfis/perfis.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { FormAssistidosComponent } from './shared/form-assistidos/form-assistido
     ModalCriadoComponent,
     AssistidosComponent,
     AssistidoAddComponent,
-    FormAssistidosComponent
+    FormAssistidosComponent,
+    PerfisComponent
   ],
   imports: [
     BrowserModule,

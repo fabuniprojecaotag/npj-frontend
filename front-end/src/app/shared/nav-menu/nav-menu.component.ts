@@ -18,7 +18,7 @@ export class NavMenuComponent implements OnInit {
   constructor(
     private requestService: RequestService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loadDataFromLocalStorage();
@@ -46,16 +46,16 @@ export class NavMenuComponent implements OnInit {
       .pipe(
         catchError((error) => {
           if (error.status == '401') {
-            alert('Dados incorretos');
+            // alert('Dados incorretos');
           } else if (error.status === 0) {
             alert('A API está offline ou inacessível. Verifique sua conexão.');
           }
           return throwError(() => error);
         })
-      ).subscribe((data) => {
+      )
+      .subscribe((data) => {
         console.log('POST response:', data);
-        this.permissoes = data.permissoes;
-      },
-      );
+        this.permissoes = data.result[0].permissoes;
+      });
   }
 }

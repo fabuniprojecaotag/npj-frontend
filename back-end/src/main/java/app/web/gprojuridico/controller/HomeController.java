@@ -1,4 +1,5 @@
 package app.web.gprojuridico.controller;
+import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User;
 import app.web.gprojuridico.security.UserAuthenticationProvider;
 import app.web.gprojuridico.service.UserService;
@@ -10,6 +11,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
+import java.util.List;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class HomeController {
@@ -23,6 +28,8 @@ public class HomeController {
     }
 
 
+
+
     @GetMapping("/")
     public String home() {
         long currentTime = System.currentTimeMillis();
@@ -33,15 +40,25 @@ public class HomeController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/auth")
-    public ResponseEntity<User> verifyLogin(@AuthenticationPrincipal User user){
+    public ResponseModel<Object> verifyLogin(@AuthenticationPrincipal User user) {
         user.setToken(userAuthenticationProvider.createToken(user.getEmail()));
-        return ResponseEntity.ok().body(user);
-    }
 
+        // Use Collections.singletonList to wrap the user in a list
+        List<Object> resultList = Collections.singletonList(user);
+
+        return ResponseModel.success("Users retrieved successfully", resultList);
+    }
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/logout")
     public ResponseEntity<User> logout(@AuthenticationPrincipal User user){
         SecurityContextHolder.clearContext();
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/running")
+    public ResponseEntity<String> running(){
+        String responseBody = "I'm running";
+        return ResponseEntity.ok(responseBody);
     }
 
 }

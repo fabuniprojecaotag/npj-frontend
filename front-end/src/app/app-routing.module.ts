@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
+import { PerfisComponent } from './pages/perfis/perfis.component';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { authGuard } from './core/guards/auth.guard';
@@ -19,46 +20,51 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'users',
     component: UsersComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'users/add',
     component: AddUsersComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'users/edit',
     component: EditUsersComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'profile',
     component: MyProfileComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'assistidos',
     component: AssistidosComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'assistidos/add',
     component: AssistidoAddComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+  },
+  {
+    path: 'perfis',
+    component: PerfisComponent,
+    canActivate: [authGuard],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

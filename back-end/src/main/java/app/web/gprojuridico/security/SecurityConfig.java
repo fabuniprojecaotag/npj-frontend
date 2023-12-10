@@ -56,17 +56,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())
+                //TODO: ISSO AQUI IMPEDE O SWAGGER
+//                .cors(Customizer.withDefaults())
                 .exceptionHandling(e-> e.authenticationEntryPoint(userAuthenticationEntryPoint))
                 .addFilterBefore(new UsernamePasswordAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JWTAuthFilter(userAuthenticationProvider), UsernamePasswordAuthFilter.class)
+                //TODO: ISSO ESTA CAUSANDO A DUPLICIDADE DE RESPOSTA
+//                .addFilterBefore(new JWTAuthFilter(userAuthenticationProvider), UsernamePasswordAuthFilter.class)
                 .csrf(AbstractHttpConfigurer::disable).sessionManagement(sess->sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth->auth
-                        .requestMatchers(HttpMethod.POST,WHITE_LIST)
-//                                .anyRequest()//Libera o acesso a todas as rotas
-                                .permitAll()
-                                .anyRequest().authenticated()
-                );
+
+        ;//REMOVER ESTA VIRGULA SE DESCOMENTAR A VALIDACAO JWT
+        //TODO: ISSO AQUI GARANTE A VALIDAÇÃO DO FILTRO JWT
+
+//                .authorizeHttpRequests(auth->auth
+//                        .requestMatchers(HttpMethod.POST,WHITE_LIST)
+//                                .permitAll()
+//                                .anyRequest().authenticated()
+//                );
         return http.build();
     }
 }

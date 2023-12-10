@@ -1,32 +1,42 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent {
   tituloDaPagina: string = 'Usuários';
-  listaUsuarios: Usuario[] = [];
-  colunasMostradas: string[] = ['select', 'matricula', 'nome', 'tipo', 'semestre', 'status'];
+  listaUsuarios: any[] = [];
+  colunasMostradas: string[] = [
+    'select',
+    'matricula',
+    'nome',
+    'tipo',
+    'semestre',
+    'status',
+    'opcoes',
+  ];
   selection = new SelectionModel<Usuario>(true, []);
   paginaAtual: number = 0;
   filtro: string = '';
 
-  constructor(private service: CadastroService) { }
+  constructor(private service: UsuarioService) {}
 
   ngOnInit(): void {
-    // this.service.listar().subscribe({
-    //   next: (resposta) => {
-    //     this.listaUsuarios = resposta;
-    //   },
-    //   error: (err) => {
-    //     console.log('erro ao consultar usuários:',err);
-    //   }
-    // })
+    this.service.listar().subscribe(
+      (response: any) => {
+        console.log('Response:', response);
+        this.listaUsuarios = response.result[0];
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
   }
 
   /** Ve se tudo ta selecionado (do exemplo do material) */
@@ -38,8 +48,13 @@ export class UsersComponent {
 
   /** Selecionar tudo (do exemplo do material) */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.listaUsuarios.forEach(row => this.selection.select(row));
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.listaUsuarios.forEach((row) => this.selection.select(row));
+  }
+
+  editUser(usuario: any) {
+    console.log('edit user');
+    console.log(usuario);
   }
 }

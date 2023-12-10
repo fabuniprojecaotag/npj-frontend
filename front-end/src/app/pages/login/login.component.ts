@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { AutenticacaoService } from 'src/app/core/services/autenticacao.service';
-
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,13 +17,27 @@ export class LoginComponent implements OnInit {
   anoAtual: number = new Date().getFullYear();
   loading: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private autenticacaoService: AutenticacaoService, private requestService: RequestService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private autenticacaoService: AutenticacaoService,
+    private requestService: RequestService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
+    const userDataString = localStorage.getItem('user_data');
+    const tokenString = localStorage.getItem('token');
+    console.log(userDataString);
+    if (userDataString != '' && tokenString != '') {
+      // console.log(JSON.parse(userDataString));
+      // let userData = JSON.parse(userDataString);
+      this.router.navigate(['./home']);
+    }
     this.loginForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
-      senha: [null, Validators.required]
-    })
+      senha: [null, Validators.required],
+    });
   }
 
   cadastrar() {
@@ -32,6 +46,7 @@ export class LoginComponent implements OnInit {
       if (this.loginForm.valid) {
         const formData = this.loginForm.value;
         const postData = { login: formData.email, password: formData.senha };
+        console.log(postData);
         this.requestService
           .logar('auth', postData)
           .pipe(
@@ -78,19 +93,20 @@ export class LoginComponent implements OnInit {
           this.loading = false;
           if (resposta.status == 200) {
             console.log('sucesso ao logar!', resposta);
-            localStorage.setItem('user_data', JSON.stringify(resposta));
+            localStorage.setItem(
+              'user_data',
+              JSON.stringify(resposta.body?.result[0])
+            );
             this.router.navigate(['./home']);
           }
         },
         error: (err) => {
           this.loading = false;
           console.log('Erro ao logar:', err);
-        }
+        },
       });
     } else {
-      alert('formulário invalido!')
+      alert('formulário invalido!');
     }
-
   }
-
 }

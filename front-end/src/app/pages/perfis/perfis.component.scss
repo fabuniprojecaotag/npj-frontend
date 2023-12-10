@@ -1,0 +1,53 @@
+@import "../../../styles.scss";
+
+.secao-usuarios {
+  height: 80vh;
+  margin: 0 auto;
+  width: 90vw;
+
+  p {
+    padding-top: 3em;
+  }
+  .secao-usuarios__mural {
+    overflow-x: auto;
+    .tabela-usuarios {
+      margin: 0 auto;
+      width: 100%;
+
+      &__cabecalho {
+        background-color: $roxo;
+        color: $branco;
+        font-weight: bold;
+        text-align: center;
+
+        tr {
+          td {
+            border: none;
+            padding: 0.5em 1em;
+          }
+        }
+      }
+
+      &__corpo {
+        text-align: center;
+        tr {
+          td {
+            padding: 0.5em 1em;
+          }
+        }
+      }
+
+      .sem-usuarios {
+        color: $vermelho;
+        text-align: center;
+        font-weight: bold;
+        tr {
+          td {
+            padding: 5em 1em;
+          }
+        }
+      }
+    }
+  }
+}
+
