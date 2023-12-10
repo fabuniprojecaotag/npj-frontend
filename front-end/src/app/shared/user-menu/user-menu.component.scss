@@ -3,7 +3,6 @@
 .user-nav {
   align-items: flex-start;
   background: $roxo-escuro;
-  border: 1px solid $branco;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -11,6 +10,7 @@
   margin-left: 78%;
   position: fixed;
   transition: 0.5s;
+  top: 65px;
   overflow-y: hidden;
   width: 20vw;
   z-index: 9999;
@@ -85,7 +85,9 @@
     width: 100%;
   }
 
+  /* menu aberto */
   &.active {
+    border: 1px solid $branco;
     overflow-y: visible;
     height: 40vh;
     transition: height 0.5s ease-out;

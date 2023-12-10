@@ -10,6 +10,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { EditUsersComponent } from './pages/users/edit-users/edit-users.component';
 import { AssistidosComponent } from './pages/assistidos/assistidos.component';
 import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
+import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assistidos-edit.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,11 @@ const routes: Routes = [
   {
     path: 'assistidos/add',
     component: AssistidoAddComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'assistidos/edit',
+    component: AssistidosEditComponent,
     canActivate: [authGuard],
   },
   {

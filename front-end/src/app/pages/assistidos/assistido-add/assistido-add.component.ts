@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AssistidosService } from 'src/app/core/services/assistidos.service';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormAssistidosService } from 'src/app/core/services/form-assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
@@ -14,7 +15,7 @@ import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.c
 export class AssistidoAddComponent {
   tituloDaPagina: string = 'Novo Assistido';
 
-  constructor(private formAssistidosService: FormAssistidosService, private cadastroService: CadastroService, private router: Router, private dialog: MatDialog) { }
+  constructor(private formAssistidosService: FormAssistidosService, private assistidoService: AssistidosService, private router: Router, private dialog: MatDialog) { }
 
   cadastrar(): void {
     const formCadastroAssistido = this.formAssistidosService.getCadastro();
@@ -23,7 +24,7 @@ export class AssistidoAddComponent {
       const novoAssistido = formCadastroAssistido.getRawValue() as Assistido;
       console.log('meu assistido cadastrado:', novoAssistido);
 
-      this.cadastroService.cadastrarAssistido(novoAssistido).subscribe({
+      this.assistidoService.cadastrarAssistido(novoAssistido).subscribe({
         next: (value) => {
           this.abrirModal();
           this.router.navigate(['/users']);

@@ -22,7 +22,6 @@ export class UsersComponent {
     'opcoes',
   ];
   selection = new SelectionModel<Usuario>(true, []);
-  paginaAtual: number = 0;
   filtro: string = '';
 
   constructor(private service: UsuarioService) {}
