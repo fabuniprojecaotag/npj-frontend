@@ -1,5 +1,6 @@
 package app.web.gprojuridico.controller;
 
+import app.web.gprojuridico.model.Assistido;
 import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User;
 import app.web.gprojuridico.service.UserService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -49,7 +51,24 @@ public class UserController {
 
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/get/{usuarioId}")
+    public ResponseEntity<ResponseModel<?>> getAssistidoById(@PathVariable String usuarioId) {
+        ResponseModel<User> user = userService.getUserById(usuarioId);
 
+        if (user != null) {
+            return ResponseEntity.ok(ResponseModel.success("Usuário encontrado", Collections.singletonList(user)));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseModel.failure("Usuário não encontrado", null));
+        }
+    }
+    @PutMapping("/update/{userId}")
+    public ResponseModel<?> update(@PathVariable String userId, @RequestBody User updatedUser) {
+        try {
+            return userService.update(userId, updatedUser);
+        } catch (InterruptedException | ExecutionException e) {
+            return ResponseModel.failure("Erro ao atualizar usuário"+e.getMessage(), new ArrayList<>());
+        }
+    }
     @DeleteMapping("/delete/{docId}")
     public ResponseEntity<String> delete(@PathVariable String docId) {
         userService.deleteUserById(docId);
