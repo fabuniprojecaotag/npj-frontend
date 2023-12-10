@@ -1,9 +1,9 @@
 package app.web.gprojuridico.model;
 
+
 import java.util.Date;
 
 public class Assistido {
-
 
     private String nome;
     private String email;
@@ -192,6 +192,9 @@ public class Assistido {
 
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
+    }
+    public String getDocumentId() {
+        return documentId;
     }
 }
 
