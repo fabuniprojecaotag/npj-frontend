@@ -22,7 +22,7 @@ export class AssistidosService {
   }
 
   editar (idParam: string, assistido: Assistido) {
-    return  this.http.post<Callback>(`${this.API}/assistido/update/${idParam}`, assistido);
+    return  this.http.put<Callback>(`${this.API}/assistido/update/${idParam}`, assistido);
   }
 
   excluir () {}
