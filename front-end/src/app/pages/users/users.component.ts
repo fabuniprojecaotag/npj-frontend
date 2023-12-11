@@ -1,7 +1,8 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
-import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
@@ -9,7 +10,7 @@ import { Usuario } from 'src/app/core/types/usuario';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
   tituloDaPagina: string = 'Usuários';
   listaUsuarios: any[] = [];
   colunasMostradas: string[] = [
@@ -19,7 +20,6 @@ export class UsersComponent {
     'tipo',
     'semestre',
     'status',
-    'opcoes',
   ];
   selection = new SelectionModel<Usuario>(true, []);
   filtro: string = '';
@@ -50,10 +50,5 @@ export class UsersComponent {
     this.isAllSelected()
       ? this.selection.clear()
       : this.listaUsuarios.forEach((row) => this.selection.select(row));
-  }
-
-  editUser(usuario: any) {
-    console.log('edit user');
-    console.log(usuario);
   }
 }

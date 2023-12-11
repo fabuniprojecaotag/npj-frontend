@@ -30,4 +30,8 @@ export class CadastroService {
   listar() {
     return this.http.get(`${this.apiUrl}/auth/list`);
   }
+
+  excluirCadastro(userId: string) {
+    return this.http.delete(`${this.apiUrl}/auth/delete/${userId}`)
+  }
 }

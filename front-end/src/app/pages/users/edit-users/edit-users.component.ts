@@ -64,10 +64,23 @@ export class EditUsersComponent implements OnInit {
     this.cadastroService.editarCadastro(dadosAtualizados).subscribe({
       next: (response) => {
         alert('Atualização feita com sucesso!');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/users']);
       },
       error: (err) => {
         console.log('erro ao atualizar:', err);
+      }
+    })
+  }
+
+  excluir () {
+    this.cadastroService.excluirCadastro(this.cadastro.perfil_id).subscribe({
+      next: (response) => {
+        alert("Usuário excluido com sucesso");
+        this.router.navigate(['/users']);
+        console.log("exclusão resp:", response);
+      },
+      error: (err) => {
+        console.log("Erro ao excluir:", err);
       }
     })
   }

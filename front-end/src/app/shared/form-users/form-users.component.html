@@ -1,6 +1,6 @@
 <section class="secao-formUsuario">
   <mat-card>
-    <form [formGroup]="formCadastro">
+    <form [formGroup]="formCadastro" (ngSubmit)="executarAcao()">
       <section>
         <div class="formUsuario-titulo">
           <h3>Dados Pessoais</h3>
@@ -83,9 +83,11 @@
         </div>
       </mat-card-content>
       <mat-card-actions class="full-width">
-        <button (click)="executarAcao()" mat-flat-button [disabled]="formCadastro.invalid">SALVAR
+        <button type="button" *ngIf="perfilComponente === false" (click)="excluir()" mat-flat-button color="warn">EXCLUIR
         </button>
-        <button (click)="executarAcao()" mat-flat-button [disabled]="formCadastro.invalid" color="primary">SUBMETER
+        <button mat-flat-button [disabled]="formCadastro.invalid">SALVAR
+        </button>
+        <button mat-flat-button [disabled]="formCadastro.invalid" color="primary">SUBMETER
         </button>
       </mat-card-actions>
     </form>
