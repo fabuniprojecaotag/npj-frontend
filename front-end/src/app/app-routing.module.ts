@@ -11,6 +11,7 @@ import { EditUsersComponent } from './pages/users/edit-users/edit-users.componen
 import { AssistidosComponent } from './pages/assistidos/assistidos.component';
 import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
 import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assistidos-edit.component';
+import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 
 const routes: Routes = [
   {
@@ -53,8 +54,8 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'assistidos/shortcut',
-    component: AssistidosComponent,
+    path: 'assistidos/shortcut/:documentId',
+    component: AssistidosShortcutsComponent,
     canActivate: [authGuard],
   },
   {

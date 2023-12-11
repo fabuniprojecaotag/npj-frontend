@@ -9,8 +9,7 @@ import { Callback } from 'src/app/core/types/callback';
   styleUrls: ['./assistidos.component.scss']
 })
 export class AssistidosComponent {
-  nomeAssistido = 'Carlos';
-  tituloPagina = `Assistido - ${this.nomeAssistido}`;
+  tituloPagina = `Assistidos`;
   listaAssistidos: Assistido[] = [];
   colunasMostradas: string[] = [
     'nome',
@@ -18,8 +17,6 @@ export class AssistidosComponent {
     'cpf',
     'enderecoResidencial',
   ];
-  paginaAtual: number = 0;
-  filtro: string = '';
 
   constructor(private service: AssistidosService) {}
 

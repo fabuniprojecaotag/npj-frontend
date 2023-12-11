@@ -7,13 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./utils-bar.component.scss']
 })
 export class UtilsBarComponent {
-  constructor(private localation: Location){}
+  constructor(private location: Location){}
 
   avancar(): void {
-    this.localation.forward();
+    this.location.forward();
   }
 
   voltar(): void {
-    this.localation.back();
+    this.location.back();
+  }
+
+  recarregar() {
+    window.location.reload();
   }
 }

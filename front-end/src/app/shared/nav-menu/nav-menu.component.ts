@@ -42,19 +42,13 @@ export class NavMenuComponent implements OnInit {
   loadPerfis() {
     this.requestService
       .get('perfil/' + this.userData.perfil_id)
-      .pipe(
-        catchError((error) => {
-          if (error.status == '401') {
-            // alert('Dados incorretos');
-          } else if (error.status === 0) {
-            alert('A API está offline ou inacessível. Verifique sua conexão.');
-          }
-          return throwError(() => error);
-        })
-      )
-      .subscribe((data) => {
-        // console.log('Perfil do Usuário:', data);
+      .pipe().subscribe({next: (data) => {
+        console.log('Perfil do Usuário do Menu:', data);
         this.permissoes = data.result[0].permissoes;
-      });
+      },
+      error: (err) => {
+        console.log('Erro ao carregar perfil:', err);
+      }
+    });
   }
 }

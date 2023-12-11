@@ -6,5 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./card-atalhos.component.scss']
 })
 export class CardAtalhosComponent {
+  @Input() iconeCard!: string;
   @Input() textoCard!: string;
+  @Input() linkCard!: string;
 }

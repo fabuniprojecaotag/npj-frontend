@@ -22,6 +22,7 @@ export class FormUsersComponent implements OnInit {
   perfis = [];
   @Input() perfilComponente: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
+  @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
   perfilControl = new FormControl<Perfil | null>({
     value: null,
     disabled: this.perfilComponente,
@@ -87,5 +88,9 @@ export class FormUsersComponent implements OnInit {
   // função pra chamar o cadastrar ou editar no componente pai
   executarAcao() {
     this.acaoClique.emit();
+  }
+
+  excluir(){
+    this.cliqueExcluir.emit();
   }
 }

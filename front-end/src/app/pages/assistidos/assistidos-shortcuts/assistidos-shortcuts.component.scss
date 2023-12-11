@@ -1,0 +1,13 @@
+.atalhos {
+  margin: 0 auto;
+  width: 80%;
+  .atalhos-titulo {
+    padding: 2em 0;
+    font-size: 32px;
+  }
+  .atalhos-card {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+}
