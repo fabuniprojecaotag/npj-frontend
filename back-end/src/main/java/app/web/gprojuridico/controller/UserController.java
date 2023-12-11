@@ -1,5 +1,6 @@
 package app.web.gprojuridico.controller;
 
+import app.web.gprojuridico.model.Assistido;
 import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User;
 import app.web.gprojuridico.service.UserService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -49,6 +51,9 @@ public class UserController {
 
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/get/{usuarioId}")
+    public ResponseEntity<ResponseModel<?>> getAssistidoById(@PathVariable String usuarioId) {
+        ResponseModel<User> user = userService.getUserById(usuarioId);
 
     @GetMapping("/get/{usuarioId}")
     public ResponseEntity<ResponseModel<?>> getAssistidoById(@PathVariable String usuarioId) {
@@ -60,7 +65,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseModel.failure("Usuário não encontrado", null));
         }
     }
-
     @DeleteMapping("/delete/{docId}")
     public ResponseEntity<String> delete(@PathVariable String docId) {
         userService.deleteUserById(docId);
