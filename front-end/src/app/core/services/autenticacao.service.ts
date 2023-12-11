@@ -17,20 +17,11 @@ export class AutenticacaoService {
 
   constructor(private http: HttpClient, private userService: UsuarioService) { }
 
-  autenticar(
-    login: string,
-    password: string
-  ): Observable<HttpResponse<AuthResponse>> {
-    return this.http
-      .post<AuthResponse>(
-        `${this.API}/auth`,
-        { login, password },
-        { observe: 'response' }
-      )
-      .pipe(
+  autenticar(login: string,password: string): Observable<HttpResponse<AuthResponse>> {
+    return this.http.post<AuthResponse>(`${this.API}/auth`, { login, password },{ observe: 'response'})
+    .pipe(
         tap((response) => {
-          console.log('RESP:');
-          console.log(response.body);
+          // console.log('Autenticação:', response.body);
           const authToken = response.body?.result[0].token || '';
           this.userService.salvarToken(authToken);
         })

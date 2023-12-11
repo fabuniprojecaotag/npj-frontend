@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     const userDataString = localStorage.getItem('user_data');
     const tokenString = localStorage.getItem('token');
-    console.log(userDataString);
+    // console.log(userDataString);
     if (userDataString != '' && tokenString != '') {
       this.router.navigate(['/home']);
     }

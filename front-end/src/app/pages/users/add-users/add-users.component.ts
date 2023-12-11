@@ -36,7 +36,8 @@ export class AddUsersComponent {
 
   abrirModal() {
     this.dialog.open(ModalCriadoComponent, {
-      width: '50%',
+      width: '552px',
+      height: '360px'
     })
   }
 }

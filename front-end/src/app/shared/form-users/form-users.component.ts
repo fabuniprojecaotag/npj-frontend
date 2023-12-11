@@ -25,7 +25,7 @@ export class FormUsersComponent implements OnInit {
   perfilControl = new FormControl<Perfil | null>({
     value: null,
     disabled: this.perfilComponente,
-  });
+  }, Validators.required);
 
   constructor(
     private formBuilder: FormBuilder,

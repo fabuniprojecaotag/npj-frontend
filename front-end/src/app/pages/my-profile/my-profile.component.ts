@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormUserService } from 'src/app/core/services/form-user.service';
 import { TokenService } from 'src/app/core/services/token.service';
+import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { Usuario, Perfil } from 'src/app/core/types/usuario';
 
 @Component({
@@ -19,14 +20,21 @@ export class MyProfileComponent implements OnInit {
   cadastro!: Usuario;
   form!: FormGroup<any> | null;
 
-  constructor(private tokenService: TokenService, private cadastroService: CadastroService, private formUserService: FormUserService, private router: Router) { }
+  constructor(private tokenService: TokenService,
+    private cadastroService: CadastroService,
+    private formUserService: FormUserService,
+    private router: Router,
+    private userService: UsuarioService) { }
 
   ngOnInit(): void {
+    const idParam = this.userService.retornarUsuario();
+    console.log(idParam);
+
     this.token = this.tokenService.retornarToken();
-    this.cadastroService.buscarCadastro().subscribe(cadastro => {
-      this.cadastro = cadastro;
-      this.carregarFormulario();
-    })
+    // this.cadastroService.buscarCadastro(idParam).subscribe(cadastro => {
+    //   this.cadastro = cadastro;
+    //   this.carregarFormulario();
+    // })
   }
 
   carregarFormulario (): void {

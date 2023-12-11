@@ -37,11 +37,10 @@ export class HeaderComponent implements OnInit {
 
   //isso aqui pode ser transformado em um servico separado para ser reutilizado
   loadDataFromLocalStorage(): void {
-    console.log('getting local');
     const userDataString = localStorage.getItem('user_data');
-    console.log('data do usuario:' + userDataString);
+    // console.log('data do usuario:' + userDataString);
     if (userDataString) {
-      console.log(JSON.parse(userDataString));
+      // console.log(JSON.parse(userDataString));
       this.userData = JSON.parse(userDataString);
     } else {
       this.userData = null;

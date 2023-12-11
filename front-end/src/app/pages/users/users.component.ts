@@ -24,7 +24,7 @@ export class UsersComponent {
   selection = new SelectionModel<Usuario>(true, []);
   filtro: string = '';
 
-  constructor(private service: UsuarioService) {}
+  constructor(private service: CadastroService) {}
 
   ngOnInit(): void {
     this.service.listar().subscribe(

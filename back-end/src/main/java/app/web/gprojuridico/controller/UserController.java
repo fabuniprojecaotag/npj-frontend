@@ -50,6 +50,17 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/get/{usuarioId}")
+    public ResponseEntity<ResponseModel<?>> getAssistidoById(@PathVariable String usuarioId) {
+        ResponseModel<User> user = userService.getUserById(usuarioId);
+
+        if (user != null) {
+            return ResponseEntity.ok(ResponseModel.success("Usuário encontrado", Collections.singletonList(user)));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseModel.failure("Usuário não encontrado", null));
+        }
+    }
+
     @DeleteMapping("/delete/{docId}")
     public ResponseEntity<String> delete(@PathVariable String docId) {
         userService.deleteUserById(docId);

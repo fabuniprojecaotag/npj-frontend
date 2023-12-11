@@ -16,6 +16,7 @@ export class AssistidosComponent {
     'nome',
     'email',
     'cpf',
+    'enderecoResidencial',
   ];
   paginaAtual: number = 0;
   filtro: string = '';

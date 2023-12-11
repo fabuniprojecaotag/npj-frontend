@@ -12,6 +12,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -254,6 +255,27 @@ public class UserService {
         } catch (InterruptedException | ExecutionException e) {
             // Handle any exceptions
             throw new RuntimeException("Erro ao retornar usuarios do fb: " + e.getMessage(), e);
+        }
+    }
+
+    public ResponseModel<User> getUserById(String userId) {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference userDocRef = dbFirestore.collection(COLLECTION_NAME).document(userId);
+
+        try {
+            DocumentSnapshot userSnapshot = userDocRef.get().get();
+
+            if (userSnapshot.exists()) {
+                User user = userSnapshot.toObject(User.class);
+                assert user != null;
+                user.setDocumentId(userSnapshot.getId());
+                return ResponseModel.success("Usuário encontrado:", Collections.singletonList(user));
+            } else {
+                return ResponseModel.failure("Usuário não encontrado", null);
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("Erro ao buscar usuário: " + e.getMessage());
+            return ResponseModel.failure("Erro ao buscar usuário", null);
         }
     }
 }

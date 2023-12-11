@@ -36,14 +36,11 @@ export class UsuarioService {
 
   logout() {
     this.tokenService.excluirToken();
+    localStorage.removeItem('user_data');
     this.userSubject.next(null);
   }
 
   estaLogado(): boolean {
     return this.tokenService.possuiToken();
-  }
-
-  listar() {
-    return this.http.get(`${this.API}/user/all`);
   }
 }

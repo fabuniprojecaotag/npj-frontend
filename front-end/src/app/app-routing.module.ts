@@ -38,7 +38,7 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'users/edit',
+    path: 'users/edit/:documentId',
     component: EditUsersComponent,
     canActivate: [authGuard],
   },
@@ -53,12 +53,17 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'assistidos/shortcut',
+    component: AssistidosComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: 'assistidos/add',
     component: AssistidoAddComponent,
     canActivate: [authGuard],
   },
   {
-    path: 'assistidos/edit',
+    path: 'assistidos/edit/:documentId',
     component: AssistidosEditComponent,
     canActivate: [authGuard],
   },

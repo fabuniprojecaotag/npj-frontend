@@ -25,14 +25,13 @@ export class NavMenuComponent implements OnInit {
   }
 
   loadDataFromLocalStorage(): void {
-    console.log('Pegando a data:');
     const userDataString = localStorage.getItem('user_data');
-    console.log(userDataString);
+    // console.log('Pegando a data:', userDataString);
     if (userDataString) {
-      console.log(JSON.parse(userDataString));
+      // console.log(JSON.parse(userDataString));
       this.userData = JSON.parse(userDataString);
       this.permissoes = this.userData.perfil.permissoes;
-      console.log(this.permissoes);
+      // console.log(this.permissoes);
       this.loadPerfis();
     } else {
       this.userData = null;
@@ -54,7 +53,7 @@ export class NavMenuComponent implements OnInit {
         })
       )
       .subscribe((data) => {
-        console.log('POST response:', data);
+        // console.log('Perfil do Usuário:', data);
         this.permissoes = data.result[0].permissoes;
       });
   }

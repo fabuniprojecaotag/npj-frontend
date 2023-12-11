@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../types/usuario';
 import { Observable } from 'rxjs';
-import { Assistido } from '../types/assistido';
+import { Callback } from '../types/callback';
 
 @Injectable({
   providedIn: 'root'
@@ -12,23 +12,22 @@ import { Assistido } from '../types/assistido';
 export class CadastroService {
   private apiUrl = environment.devAPI;
 
-  constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
+  constructor(private http: HttpClient) { }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.apiUrl}/user/create`, usuario);
   }
 
-  buscarCadastro(): Observable<Usuario> {
-    var perfilId;
-    perfilId = this.usuarioService.retornarUsuario().subscribe({
-      next: (response) => {
-        perfilId = response?.perfil_id;
-      }
-    })
-    return this.http.get<Usuario>(`${this.apiUrl}/perfil/${perfilId}`);
+  buscarCadastro(id: string): Observable<any> {
+
+    return this.http.get<any>(`${this.apiUrl}/user/get/${id}`);
   }
 
   editarCadastro(usuario: Usuario ): Observable<Usuario> {
-    return this.http.patch<Usuario>(`${this.apiUrl}/perfil`, usuario);
+    return this.http.patch<Usuario>(`${this.apiUrl}/user/update`, usuario);
+  }
+
+  listar() {
+    return this.http.get(`${this.apiUrl}/user/all`);
   }
 }

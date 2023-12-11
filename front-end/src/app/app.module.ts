@@ -46,6 +46,8 @@ import { FormAssistidosComponent } from './shared/form-assistidos/form-assistido
 import { PerfisComponent } from './pages/perfis/perfis.component';
 import { ModalExcluidoComponent } from './shared/modal-excluido/modal-excluido.component';
 import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assistidos-edit.component';
+import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
+import { CardAtalhosComponent } from './shared/card-atalhos/card-atalhos.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assi
     PerfisComponent,
     ModalExcluidoComponent,
     AssistidosEditComponent,
+    AssistidosShortcutsComponent,
+    CardAtalhosComponent,
   ],
   imports: [
     BrowserModule,

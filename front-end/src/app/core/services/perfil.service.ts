@@ -11,9 +11,9 @@ import { Callback } from '../types/callback';
 export class PerfilService {
   private apiUrl: string = environment.devAPI;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  listar(): Observable<Callback> {
+   listar(): Observable<Callback> {
     return this.http.get<Callback>(`${this.apiUrl}/perfil/all`);
   }
 }
