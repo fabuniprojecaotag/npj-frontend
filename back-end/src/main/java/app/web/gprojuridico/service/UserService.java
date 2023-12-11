@@ -21,26 +21,6 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 @Service
 public class UserService {
     private static final String COLLECTION_NAME = "acesso";
-    public ResponseModel<User> getUserById(String userId) {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        DocumentReference userDocRef = dbFirestore.collection(COLLECTION_NAME).document(userId);
-
-        try {
-            DocumentSnapshot userSnapshot = userDocRef.get().get();
-
-            if (userSnapshot.exists()) {
-                User user = userSnapshot.toObject(User.class);
-                assert user != null;
-                user.setDocumentId(userSnapshot.getId());
-                return ResponseModel.success("Usuário encontrado:", Collections.singletonList(user));
-            } else {
-                return ResponseModel.failure("Usuário não encontrado", null);
-            }
-        } catch (InterruptedException | ExecutionException e) {
-            System.err.println("Erro ao buscar usuário: " + e.getMessage());
-            return ResponseModel.failure("Erro ao buscar usuário", null);
-        }
-    }
     public ResponseModel<?> create(User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
@@ -88,38 +68,6 @@ public class UserService {
 
             try {
                 return ResponseModel.success("Usuário Criado com Sucesso", new ArrayList<>());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-    public ResponseModel<?> update(String userId, User updatedUser) throws ExecutionException, InterruptedException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-
-        // Verificar se o novo nome e email são únicos, excluindo o usuário atual
-        Query emailQuery = dbFirestore.collection(COLLECTION_NAME)
-                .whereEqualTo("email", updatedUser.getEmail())
-                .whereNotEqualTo("id", updatedUser.getId());
-        QuerySnapshot emailQuerySnapshot = emailQuery.get().get();
-
-        Query nameQuery = dbFirestore.collection(COLLECTION_NAME)
-                .whereEqualTo("name", updatedUser.getNome())
-                .whereNotEqualTo("id", updatedUser.getId());
-        QuerySnapshot nameQuerySnapshot = nameQuery.get().get();
-
-        if (!emailQuerySnapshot.isEmpty()) {
-            // Email já cadastrado
-            return ResponseModel.failure("Email já cadastrado", new ArrayList<>());
-        } else if (!nameQuerySnapshot.isEmpty()) {
-            // Nome já cadastrado
-            return ResponseModel.failure("Nome já cadastrado", new ArrayList<>());
-        } else {
-            // Dados únicos? Atualizar usuário
-            DocumentReference userDocRef = dbFirestore.collection(COLLECTION_NAME).document(userId);
-            ApiFuture<WriteResult> updateResult = userDocRef.set(updatedUser);
-
-            try {
-                return ResponseModel.success("Usuário atualizado com sucesso", new ArrayList<>());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
