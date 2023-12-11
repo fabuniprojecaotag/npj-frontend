@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
-import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -38,6 +37,7 @@ public class AssistidoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseModel.failure("Assistido não encontrado", null));
         }
     }
+
     @PostMapping("/create")
     public ResponseModel<?> createAssistido(@RequestBody Assistido assistido) {
         return assistidoService.createAssistido(assistido);
@@ -52,9 +52,4 @@ public class AssistidoController {
     public ResponseModel<?> deleteAssistido(@PathVariable String assistidoId) {
         return assistidoService.deleteAssistido(assistidoId);
     }
-
-
-
-
-
 }

@@ -22,11 +22,13 @@ public class PerfilController {
     public PerfilController(PerfilService perfilService) {
         this.perfilService = perfilService;
     }
+
     @GetMapping("/all")
     public ResponseModel getAllUsers() {
         ResponseModel data = perfilService.getAll();
         return data;
     }
+
     @GetMapping("/{perfilId}")
     public ResponseEntity<ResponseModel> getPerfilById(@PathVariable String perfilId) {
         ResponseEntity<ResponseModel> perfilResponse = perfilService.getPerfilById(perfilId);

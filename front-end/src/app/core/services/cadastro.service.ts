@@ -15,19 +15,19 @@ export class CadastroService {
   constructor(private http: HttpClient) { }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/user/create`, usuario);
+    return this.http.post<Usuario>(`${this.apiUrl}/auth/create`, usuario);
   }
 
   buscarCadastro(id: string): Observable<any> {
 
-    return this.http.get<any>(`${this.apiUrl}/user/get/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/auth/get/${id}`);
   }
 
   editarCadastro(usuario: Usuario ): Observable<Usuario> {
-    return this.http.patch<Usuario>(`${this.apiUrl}/user/update`, usuario);
+    return this.http.patch<Usuario>(`${this.apiUrl}/auth/update`, usuario);
   }
 
   listar() {
-    return this.http.get(`${this.apiUrl}/user/all`);
+    return this.http.get(`${this.apiUrl}/auth/list`);
   }
 }

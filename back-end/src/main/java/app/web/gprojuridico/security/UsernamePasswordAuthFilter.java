@@ -26,7 +26,7 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException{
         System.out.println("USERNAME PASS AUTG FUILC ENTRY");
 
-        if("/auth".equals(request.getServletPath()) && HttpMethod.POST.matches(request.getMethod())){
+        if("/auth/login".equals(request.getServletPath()) && HttpMethod.POST.matches(request.getMethod())){
            Credentials user = MAPPER.readValue(request.getInputStream(),Credentials.class);
 
             try{
@@ -36,7 +36,7 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
                         provider.validateCredentials(user)
                 );
             }catch(RuntimeException e){
-                System.out.println("ERROR VALIDAÇOA");
+                System.out.println("ERRO DE VALIDAÇAO");
 
                 SecurityContextHolder.clearContext();
                 throw e;

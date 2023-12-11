@@ -26,13 +26,13 @@ import java.util.stream.Stream;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    private final String[] AUTH_WHITE_LIST = { "/auth=", "/auth", "/logout", "/logout=", "/" };
-    private final String[] SWAGGER_WHITE_LIST = { "/swagger-ui.html", "/webjars/**", "/swagger-resources",
+    private final String[] AUTH_WHITE_LIST = {"/auth=", "/auth", "auth/login", "auth/login=", "auth/logout", "auth/logout=", "/"};
+    private final String[] SWAGGER_WHITE_LIST = {"/swagger-ui.html", "/webjars/**", "/swagger-resources",
             "/swagger-resources/**", "/v2/api-docs", "/configuration/ui", "/configuration/security", "/swagger-ui/**",
             "/v3/api-docs/**", "/swagger-ui/index.html", "/swagger-ui/index.html/**", "/swagger-ui/**", "/v2/api-docs",
             "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**",
             "/swagger-resources/configuration/ui", "/swagge‌​r-ui.html",
-            "/swagger-resources/configuration/security" };
+            "/swagger-resources/configuration/security"};
 
     // Create a new array with the calculated length
     private final String[] WHITE_LIST = Stream.concat(Arrays.stream(AUTH_WHITE_LIST), Arrays.stream(SWAGGER_WHITE_LIST))
@@ -55,7 +55,7 @@ public class SecurityConfig {
 //                .addFilterBefore(new JWTAuthFilter(userAuthenticationProvider), UsernamePasswordAuthFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                ;
+        ;
 //                .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers(HttpMethod.POST, WHITE_LIST).permitAll()
 //                        .requestMatchers(HttpMethod.GET, SWAGGER_WHITE_LIST).permitAll()
