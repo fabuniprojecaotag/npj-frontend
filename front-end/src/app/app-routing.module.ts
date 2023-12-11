@@ -54,7 +54,7 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'assistidos/shortcut',
+    path: 'assistidos/shortcut/:documentId',
     component: AssistidosShortcutsComponent,
     canActivate: [authGuard],
   },

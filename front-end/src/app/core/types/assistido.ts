@@ -1,4 +1,5 @@
 export interface Assistido {
+  documentId?: string,
   nome: string,
   email?: string,
   cpf?: string,
