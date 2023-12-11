@@ -13,28 +13,30 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
     private final UserAuthenticationProvider provider;
 
-    public JWTAuthFilter(UserAuthenticationProvider provider){
+    public JWTAuthFilter(UserAuthenticationProvider provider) {
         this.provider = provider;
     }
+
     @Override
-    protected  void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException{
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         System.out.println("JWT FILTER AC");
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if(header != null){
+        if (header != null) {
             String[] authElements = header.split(" ");
-            if(authElements.length==2 && "Bearer".equals(authElements[0])){
-                try{
+            if (authElements.length == 2 && "Bearer".equals(authElements[0])) {
+                try {
                     SecurityContextHolder.getContext().setAuthentication(
                             provider.validateToken(authElements[1])
                     );
-                }catch(RuntimeException e){
+                } catch (RuntimeException e) {
                     SecurityContextHolder.clearContext();
                     throw e;
                 }
             }
-            filterChain.doFilter(request,response);
         }
+
         filterChain.doFilter(request, response);
     }
 }
+
