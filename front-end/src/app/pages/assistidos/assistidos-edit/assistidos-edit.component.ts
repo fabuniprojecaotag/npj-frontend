@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./assistidos-edit.component.scss']
 })
 export class AssistidosEditComponent {
-  tituloDaPagina: string = 'Editar Usuário - Nome';
+  tituloDaPagina: string = 'Editar Assistido - Nome';
 
   editar() {
     alert('a implementar!');
