@@ -26,7 +26,7 @@ export class AssistidoAddComponent {
 
       this.assistidoService.cadastrarAssistido(novoAssistido).subscribe({
         next: (value) => {
-          this.abrirModal();
+          this.abrirModal(value);
           this.router.navigate(['/assistidos']);
           console.log('cadastro realizado com  sucesso: ', value);
         },
@@ -38,10 +38,11 @@ export class AssistidoAddComponent {
     }
   }
 
-  abrirModal() {
+  abrirModal(novoAssistido: Assistido) {
     this.dialog.open(ModalCriadoComponent, {
       width: '552px',
-      height: '360px'
+      height: '360px',
+      data: {tituloCriado: 'Assistido', nome: novoAssistido.nome, email: novoAssistido.email}
     })
   }
 }

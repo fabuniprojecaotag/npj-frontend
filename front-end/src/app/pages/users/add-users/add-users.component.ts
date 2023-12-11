@@ -22,7 +22,7 @@ export class AddUsersComponent {
       const novoCadastro = formCadastro.getRawValue() as Usuario;
       this.cadastroService.cadastrar(novoCadastro).subscribe({
         next: (value) => {
-          this.abrirModal();
+          this.abrirModal(novoCadastro);
           this.router.navigate(['/users']);
           console.log('cadastro realizado com  sucesso: ', value);
         },
@@ -34,10 +34,11 @@ export class AddUsersComponent {
     }
   }
 
-  abrirModal() {
+  abrirModal(novoCadastro: Usuario) {
     this.dialog.open(ModalCriadoComponent, {
       width: '552px',
-      height: '360px'
+      height: '360px',
+      data: {tituloCriado: 'Usuário', nome: novoCadastro.nome, email: novoCadastro.email}
     })
   }
 }

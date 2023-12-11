@@ -1,8 +1,10 @@
 <section class="modal">
+  <h4 mat-dialog-title>{{ data.tituloCriado }} cadastro com sucesso!</h4>
   <div mat-dialog-content>
-    <p>Usuário criado com sucesso!</p>
+    <p>Nome: {{ data.nome }}</p>
+    <p>Email: {{ data.email }}</p>
   </div>
   <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>fechar</button>
+    <button mat-button mat-dialog-close>FECHAR</button>
   </div>
 </section>

@@ -28,8 +28,8 @@ export class FormAssistidosComponent implements OnInit {
       cep: null,
       enderecoResidencial: null,
       escolaridade: null,
-      nomePai: null,
-      nomeMae: null,
+      nomePai: [null, Validators.required],
+      nomeMae: [null, Validators.required],
       profissao: null,
       remuneracao: null,
       cidadeComercial: null,
@@ -44,4 +44,6 @@ export class FormAssistidosComponent implements OnInit {
   executarAcao () {
     this.acaoClique.emit();
   }
+
+  excluir () {}
 }
