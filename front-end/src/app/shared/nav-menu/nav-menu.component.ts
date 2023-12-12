@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { RequestService } from 'src/app/core/services/request.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { PerfilService } from 'src/app/core/services/perfil.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -16,8 +17,8 @@ export class NavMenuComponent implements OnInit {
   public permissoes: any;
 
   constructor(
-    private requestService: RequestService,
-    private cdr: ChangeDetectorRef
+    private perfilService: PerfilService,
+    // private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -36,13 +37,12 @@ export class NavMenuComponent implements OnInit {
     } else {
       this.userData = null;
     }
-    this.cdr.detectChanges();
+    // this.cdr.detectChanges();
   }
 
   loadPerfis() {
-    this.requestService
-      .get('perfil/' + this.userData.perfil_id)
-      .pipe().subscribe({next: (data) => {
+    this.perfilService.consultar(this.userData.perfil_id).subscribe({
+      next: (data) => {
         console.log('Perfil do Usuário do Menu:', data);
         this.permissoes = data.result[0].permissoes;
       },

@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Usuario } from '../types/usuario';
 import { TokenService } from './token.service';
 import { jwtDecode } from 'jwt-decode';
-import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsuarioService {
   private userSubject = new BehaviorSubject<Usuario | null>(null);
-  private API = environment.devAPI;
 
-  constructor(private tokenService: TokenService, private http: HttpClient) {
+  constructor(private tokenService: TokenService) {
     if (this.tokenService.possuiToken()) {
       this.decodificarJWT();
     }

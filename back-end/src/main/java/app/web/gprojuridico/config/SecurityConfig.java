@@ -4,10 +4,9 @@ import app.web.gprojuridico.security.JWTAuthFilter;
 import app.web.gprojuridico.security.UserAuthenticationEntryPoint;
 import app.web.gprojuridico.security.UserAuthenticationProvider;
 import app.web.gprojuridico.security.UsernamePasswordAuthFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,31 +19,34 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    private final String[] AUTH_WHITE_LIST = {"/auth=", "/auth", "auth/login", "auth/login=", "auth/logout", "auth/logout=", "/"};
-    private final String[] SWAGGER_WHITE_LIST = {"/swagger-ui.html", "/webjars/**", "/swagger-resources",
-            "/swagger-resources/**", "/v2/api-docs", "/configuration/ui", "/configuration/security", "/swagger-ui/**",
-            "/v3/api-docs/**", "/swagger-ui/index.html", "/swagger-ui/index.html/**", "/swagger-ui/**", "/v2/api-docs",
-            "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**",
-            "/swagger-resources/configuration/ui", "/swagge‌​r-ui.html",
-            "/swagger-resources/configuration/security"};
+//    private final String[] AUTH_WHITE_LIST = {"/auth=", "/auth", "auth/login", "auth/login=", "auth/logout", "auth/logout=", "/"};
+//    private final String[] SWAGGER_WHITE_LIST = {"/swagger-ui.html", "/webjars/**", "/swagger-resources",
+//            "/swagger-resources/**", "/v2/api-docs", "/configuration/ui", "/configuration/security", "/swagger-ui/**",
+//            "/v3/api-docs/**", "/swagger-ui/index.html", "/swagger-ui/index.html/**", "/swagger-ui/**", "/v2/api-docs",
+//            "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**",
+//            "/swagger-resources/configuration/ui", "/swagge‌​r-ui.html",
+//            "/swagger-resources/configuration/security"};
 
     // Create a new array with the calculated length
-    private final String[] WHITE_LIST = Stream.concat(Arrays.stream(AUTH_WHITE_LIST), Arrays.stream(SWAGGER_WHITE_LIST))
-            .toArray(String[]::new);
-    private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
-    private final UserAuthenticationProvider userAuthenticationProvider;
+//    private final String[] WHITE_LIST = Stream.concat(Arrays.stream(AUTH_WHITE_LIST), Arrays.stream(SWAGGER_WHITE_LIST))
+//            .toArray(String[]::new);
+    @Autowired
+    private  UserAuthenticationEntryPoint userAuthenticationEntryPoint;
+    @Autowired
+    private  UserAuthenticationProvider userAuthenticationProvider;
 
-    public SecurityConfig(UserAuthenticationEntryPoint userAuthenticationEntryPoint,
-                          UserAuthenticationProvider userAuthenticationProvider) {
-        this.userAuthenticationEntryPoint = userAuthenticationEntryPoint;
-        this.userAuthenticationProvider = userAuthenticationProvider;
-    }
+//    public SecurityConfig(UserAuthenticationEntryPoint userAuthenticationEntryPoint,
+//                          UserAuthenticationProvider userAuthenticationProvider) {
+//        this.userAuthenticationEntryPoint = userAuthenticationEntryPoint;
+//        this.userAuthenticationProvider = userAuthenticationProvider;
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -66,9 +68,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedMethods(List.of("*"));
+        configuration.setAllowedHeaders(List.of("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

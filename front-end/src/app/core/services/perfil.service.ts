@@ -16,4 +16,8 @@ export class PerfilService {
    listar(): Observable<Callback> {
     return this.http.get<Callback>(`${this.apiUrl}/perfil/all`);
   }
+
+  consultar(perfilId: string): Observable<Callback> {
+    return this.http.get<Callback>(`${this.apiUrl}/perfil/${perfilId}`);
+  }
 }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Assistido } from '../types/assistido';
@@ -21,13 +21,13 @@ export class AssistidosService {
     return this.http.get<Callback>(`${this.API}/assistido/all`);
   }
 
-  editar (idParam: string, assistido: Assistido) {
-    return  this.http.put<Callback>(`${this.API}/assistido/update/${idParam}`, assistido);
+  editar(idParam: string, assistido: Assistido) {
+    return this.http.put<Callback>(`${this.API}/assistido/update/${idParam}`, assistido);
   }
 
-  excluir () {}
+  excluir() { }
 
-  consultar (idParam: string): Observable<Callback> {
-    return  this.http.get<Callback>(`${this.API}/assistido/get/${idParam}`);
+  consultar(idParam: string): Observable<Callback> {
+    return this.http.get<Callback>(`${this.API}/assistido/get/${idParam}`);
   }
- }
+}
