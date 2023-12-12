@@ -31,7 +31,6 @@ export class FormUsersComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formService: FormUserService,
-    private requestService: RequestService
   ) {}
 
   ngOnInit(): void {
@@ -63,27 +62,8 @@ export class FormUsersComponent implements OnInit {
     });
 
     this.formService.setCadastro(this.formCadastro);
-    this.loadPerfis();
   }
 
-  loadPerfis() {
-    this.requestService
-      .get('perfil/all')
-      .pipe(
-        catchError((error) => {
-          if (error.status == '401') {
-            // alert('Dados incorretos');
-          } else if (error.status === 0) {
-            alert('A API está offline ou inacessível. Verifique sua conexão.');
-          }
-          return throwError(() => error);
-        })
-      )
-      .subscribe((data) => {
-        console.log('POST response:', data);
-        this.perfis = data.result;
-      });
-  }
 
   // função pra chamar o cadastrar ou editar no componente pai
   executarAcao() {

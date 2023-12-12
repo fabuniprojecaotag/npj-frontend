@@ -29,4 +29,5 @@ export interface Permissoes {
 export interface Option {
   icon: string;
   title: string;
+  route: string;
 }

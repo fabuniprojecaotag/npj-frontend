@@ -11,14 +11,14 @@
     </mat-expansion-panel>
 
     <!-- Outros Modulos/Páginas -->
-    <div *ngFor="let modulo of permissoes">
+    <div *ngFor="let modulo of moduloPermissoes">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
             <p class="nav__link"><mat-icon aria-hidden="false" aria-label="People icon" fontIcon="{{modulo.icon}}" class="icone-nav"></mat-icon>{{modulo.modulo}}</p>
           </mat-panel-title>
         </mat-expansion-panel-header>
-    
+
         <!-- submodulos/sub-paginas -->
         <div *ngFor="let opt of modulo.options">
           <a [ngClass]="{'nav__link--filha': true, 'disabled': !opt.route}" [href]="opt.route ? opt.route : '#'" class="nav__link--filha">
@@ -27,6 +27,6 @@
         </div>
       </mat-expansion-panel>
     </div>
-    
+
   </mat-accordion>
 </nav>
