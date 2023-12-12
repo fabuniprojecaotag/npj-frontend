@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
 import { FormAssistidosService } from 'src/app/core/services/form-assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
+import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 
 @Component({
   selector: 'app-assistidos-edit',
@@ -19,7 +21,8 @@ export class AssistidosEditComponent {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private assistidoService: AssistidosService,
-    private formAssistidosService: FormAssistidosService,) { }
+    private formAssistidosService: FormAssistidosService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.idParam = this.route.snapshot.paramMap.get('documentId') as string;
@@ -95,16 +98,25 @@ export class AssistidosEditComponent {
     })
   }
 
-  // excluir() {
-  //   this.assistidoService.excluir(this.assistido.documentoId).subscribe({
-  //     next: (response) => {
-  //       alert("Usuário excluido com sucesso");
-  //       this.router.navigate(['/users']);
-  //       console.log("exclusão resp:", response);
-  //     },
-  //     error: (err) => {
-  //       console.log("Erro ao excluir:", err);
-  //     }
-  //   })
-  // }
+  excluir() {
+    console.log('Função excluir chamada...');
+    this.assistidoService.excluir(this.idParam).subscribe({
+      next: (response) => {
+        alert("Usuário excluído com sucesso");
+        this.router.navigate(['/assistidos']);
+      },
+      error: (err) => {
+        console.log("Erro ao excluir:", err);
+      }
+    });
+  }
+
+  abrirModal(assistido: Assistido) {
+    this.dialog.open(ModalExcluidoComponent, {
+      width: '372px',
+      height: '228px',
+      data: { tituloCriado: 'Assistido', nome: assistido.nome, funcaoDeletar: this.excluir.bind(this) }
+    });
+  }
+
 }

@@ -21,11 +21,13 @@ export class AssistidosService {
     return this.http.get<Callback>(`${this.API}/assistido/all`);
   }
 
-  editar(idParam: string, assistido: Assistido) {
+  editar(idParam: string, assistido: Assistido): Observable<Callback> {
     return this.http.put<Callback>(`${this.API}/assistido/update/${idParam}`, assistido);
   }
 
-  excluir() { }
+  excluir(idParam: string): Observable<Callback> {
+    return this.http.delete<Callback>(`${this.API}/assistido/delete/${idParam}`);
+   }
 
   consultar(idParam: string): Observable<Callback> {
     return this.http.get<Callback>(`${this.API}/assistido/get/${idParam}`);

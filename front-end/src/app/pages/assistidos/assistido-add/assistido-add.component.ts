@@ -15,7 +15,10 @@ import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.c
 export class AssistidoAddComponent {
   tituloDaPagina: string = 'Novo Assistido';
 
-  constructor(private formAssistidosService: FormAssistidosService, private assistidoService: AssistidosService, private router: Router, private dialog: MatDialog) { }
+  constructor(private formAssistidosService: FormAssistidosService,
+    private assistidoService: AssistidosService,
+    private router: Router,
+    private dialog: MatDialog) { }
 
   cadastrar(): void {
     const formCadastroAssistido = this.formAssistidosService.getCadastro();

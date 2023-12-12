@@ -10,6 +10,7 @@ import { FormAssistidosService } from 'src/app/core/services/form-assistidos.ser
 export class FormAssistidosComponent implements OnInit {
   formAssistidos!: FormGroup;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
+  @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private formBuilder: FormBuilder, private formAssistidosService: FormAssistidosService) { }
 
@@ -45,5 +46,7 @@ export class FormAssistidosComponent implements OnInit {
     this.acaoClique.emit();
   }
 
-  excluir () {}
+  excluir () {
+    this.cliqueExcluir.emit();
+  }
 }
