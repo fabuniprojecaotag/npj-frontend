@@ -1,10 +1,8 @@
-import { UsuarioService } from 'src/app/core/services/usuario.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../types/usuario';
 import { Observable } from 'rxjs';
-import { Callback } from '../types/callback';
 
 @Injectable({
   providedIn: 'root'

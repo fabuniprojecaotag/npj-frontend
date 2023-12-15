@@ -7,7 +7,6 @@ const KEY: string = 'token';
 })
 export class TokenService {
   salvarToken(token: string) {
-    // console.log('TOKEN AQUI:', token);
     return localStorage.setItem(KEY, token);
   }
 
