@@ -25,9 +25,9 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
         System.out.println("USER AUTH ENTRY");
         System.out.println(request.getMethod());
 
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-            OBJECT_MAPPER.writeValue(response.getOutputStream(), new Error("Sem autorização"));
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        OBJECT_MAPPER.writeValue(response.getOutputStream(), new Error("Sem autorização"));
 
     }
 
