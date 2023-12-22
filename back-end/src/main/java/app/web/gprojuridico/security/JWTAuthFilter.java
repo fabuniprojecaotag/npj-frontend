@@ -1,42 +1,52 @@
 package app.web.gprojuridico.security;
 
+import app.web.gprojuridico.model.User.User;
+import app.web.gprojuridico.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Collections;
 
+@Component
 public class JWTAuthFilter extends OncePerRequestFilter {
-    private UserAuthenticationProvider userAuthenticationProvider;
-
-    public JWTAuthFilter(UserAuthenticationProvider userAuthenticationProvider) {
-        this.userAuthenticationProvider = userAuthenticationProvider;
-    }
-
+    @Autowired
+    UserService userService;
+    @Autowired
+    TokenService tokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("JWT FILTER AC");
-        String header = request.getHeader(HttpHeaders.AUTHORIZATION);
+        System.out.println("Filtro JWT está sendo chamado");
+        var token = this.recoverToken(request);
 
-        if (header != null) {
-            String[] authElements = header.split(" ");
-            if (authElements.length == 2 && "Bearer".equals(authElements[0])) {
-                try {
-                    SecurityContextHolder.getContext().setAuthentication(
-                            this.userAuthenticationProvider.validateToken(authElements[1])
-                    );
-                } catch (RuntimeException e) {
-                    SecurityContextHolder.clearContext();
-                    throw e;
-                }
+        if (token != null) {
+            try {
+                var loginEmail = this.tokenService.validateToken(token);
+                User user = userService.findUserByEmail(loginEmail);
+
+                var autenticacao = new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+                SecurityContextHolder.getContext().setAuthentication(autenticacao);
+            } catch (RuntimeException e) {
+                SecurityContextHolder.clearContext();
+                throw e;
             }
         }
-
         filterChain.doFilter(request, response);
+    }
+
+    private String recoverToken(HttpServletRequest request) {
+        var authHeader = request.getHeader("Authorization");
+        if (authHeader == null) {
+            return null;
+        }
+        return authHeader.replace("Bearer ", "");
     }
 }

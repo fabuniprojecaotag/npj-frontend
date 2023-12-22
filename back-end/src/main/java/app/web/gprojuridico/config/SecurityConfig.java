@@ -1,8 +1,7 @@
 package app.web.gprojuridico.config;
 
 import app.web.gprojuridico.security.JWTAuthFilter;
-import app.web.gprojuridico.security.UserAuthenticationEntryPoint;
-import app.web.gprojuridico.security.UserAuthenticationProvider;
+import app.web.gprojuridico.security.TokenService;
 import app.web.gprojuridico.security.UsernamePasswordAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -38,17 +37,18 @@ public class SecurityConfig {
     @Autowired
     private UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     @Autowired
-    private UserAuthenticationProvider userAuthenticationProvider;
+    JWTAuthFilter jwtAuthFilter;
+    @Autowired
+    UsernamePasswordAuthFilter usernamePasswordAuthFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
                 .exceptionHandling(e -> e.authenticationEntryPoint(userAuthenticationEntryPoint))
-                .addFilterBefore(new UsernamePasswordAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JWTAuthFilter(userAuthenticationProvider), UsernamePasswordAuthFilter.class)
+                .addFilterBefore(usernamePasswordAuthFilter, BasicAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
 //                .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers(HttpMethod.POST, WHITE_LIST).permitAll()
 //                        .requestMatchers(HttpMethod.GET, SWAGGER_WHITE_LIST).permitAll()
@@ -67,7 +67,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
 
-        return source;
+        return source; // liberando tudo, ate corrigir o filter chain
     }
 
 }

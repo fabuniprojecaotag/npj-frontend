@@ -6,12 +6,14 @@ import app.web.gprojuridico.service.UserService;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.api.client.util.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.Instant;
@@ -22,8 +24,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
-@Component
-public class UserAuthenticationProvider {
+@Service
+public class TokenService {
     @Value("${security.jwt.token.secret-key:secret-key}")
     //Não esta pegando o valor do application.properties
     //TODO:Trocar secret para algum enconding/chave privada openssl
@@ -37,27 +39,28 @@ public class UserAuthenticationProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String login) {
+    public String generateToken(String emailLogin) {
         Algorithm algoritmo = Algorithm.HMAC256(secretKey);
         return JWT.create()
-                .withIssuer(login)
+                .withSubject(emailLogin)
+                .withIssuer("NPJ-Api")
                 .withIssuedAt(new Date())
                 .withExpiresAt(genExpirationDate())
                 .sign(algoritmo);
     }
 
-    public Authentication validateToken(String token) {
+    public String validateToken(String token) {
+        try{
+            Algorithm algoritmo = Algorithm.HMAC256(secretKey);
 
-        Algorithm algorithm = Algorithm.HMAC256(secretKey);
-
-        JWTVerifier verifier = JWT.require(algorithm).build();
-
-        DecodedJWT decoded = verifier.verify(token);
-
-        User user = userService.findUserByEmail(decoded.getIssuer());
-        return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
-
-
+            return JWT.require(algoritmo)
+                    .withIssuer("NPJ-Api")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        } catch (JWTVerificationException exception) {
+            throw new RuntimeException("Erro ao validar Token:" + exception);
+        }
     }
 
     public Authentication validateCredentials(Credentials credentials) throws ExecutionException, InterruptedException {

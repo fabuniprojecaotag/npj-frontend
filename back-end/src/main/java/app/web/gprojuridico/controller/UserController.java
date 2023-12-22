@@ -2,10 +2,9 @@ package app.web.gprojuridico.controller;
 
 import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User.User;
-import app.web.gprojuridico.security.UserAuthenticationProvider;
+import app.web.gprojuridico.security.TokenService;
 import app.web.gprojuridico.service.UserService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +23,11 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserAuthenticationProvider userAuthenticationProvider;
+    private TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseModel<Object> verifyLogin(@AuthenticationPrincipal User user) {
-        user.setToken(userAuthenticationProvider.createToken(user.getEmail()));
+        user.setToken(tokenService.generateToken(user.getEmail()));
 
         // Use Collections.singletonList to wrap the user in a list
         List<Object> resultList = Collections.singletonList(user);

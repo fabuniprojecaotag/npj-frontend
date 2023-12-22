@@ -1,4 +1,4 @@
-package app.web.gprojuridico.security;
+package app.web.gprojuridico.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
@@ -14,14 +14,11 @@ import java.io.IOException;
 
 @Component
 public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Override
-    public void commence(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            AuthenticationException authException) throws IOException, ServletException {
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
+            throws IOException, ServletException {
         System.out.println("USER AUTH ENTRY");
         System.out.println(request.getMethod());
 
@@ -29,5 +26,4 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         OBJECT_MAPPER.writeValue(response.getOutputStream(), new Error("Sem autorização"));
     }
-
 }
