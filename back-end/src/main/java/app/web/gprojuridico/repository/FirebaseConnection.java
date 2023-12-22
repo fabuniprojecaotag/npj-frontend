@@ -8,10 +8,11 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
+
 @Service
 public class FirebaseConnection {
 
-    public static void  initialization(){
+    public static void initialization() {
         FileInputStream serviceAccount = null;
 
         {

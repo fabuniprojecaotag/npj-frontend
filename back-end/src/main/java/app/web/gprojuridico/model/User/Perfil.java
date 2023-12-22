@@ -1,4 +1,4 @@
-package app.web.gprojuridico.model;
+package app.web.gprojuridico.model.User;
 
 import java.util.List;
 import java.util.Map;

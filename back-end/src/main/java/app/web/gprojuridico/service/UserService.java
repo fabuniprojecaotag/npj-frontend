@@ -1,13 +1,10 @@
 package app.web.gprojuridico.service;
 import app.web.gprojuridico.model.Credentials;
-import app.web.gprojuridico.model.Perfil;
+import app.web.gprojuridico.model.User.Perfil;
 import app.web.gprojuridico.model.ResponseModel;
-import app.web.gprojuridico.model.User;
+import app.web.gprojuridico.model.User.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.UserRecord;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 

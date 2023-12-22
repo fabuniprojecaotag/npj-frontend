@@ -1,6 +1,6 @@
 package app.web.gprojuridico.service;
 
-import app.web.gprojuridico.model.Perfil;
+import app.web.gprojuridico.model.User.Perfil;
 import app.web.gprojuridico.model.ResponseModel;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;

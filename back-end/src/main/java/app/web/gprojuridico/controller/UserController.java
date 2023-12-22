@@ -1,9 +1,11 @@
 package app.web.gprojuridico.controller;
 
 import app.web.gprojuridico.model.ResponseModel;
-import app.web.gprojuridico.model.User;
+import app.web.gprojuridico.model.User.User;
 import app.web.gprojuridico.security.UserAuthenticationProvider;
 import app.web.gprojuridico.service.UserService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,19 +17,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/auth")
 public class UserController {
     @Autowired
-    private final UserService userService;
-    private final UserAuthenticationProvider userAuthenticationProvider;
-
+    private UserService userService;
     @Autowired
-    public UserController(UserService userService, UserAuthenticationProvider userAuthenticationProvider) {
-        this.userService = userService;
-        this.userAuthenticationProvider = userAuthenticationProvider;
-    }
+    private UserAuthenticationProvider userAuthenticationProvider;
 
     @PostMapping("/login")
     public ResponseModel<Object> verifyLogin(@AuthenticationPrincipal User user) {
@@ -48,7 +45,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/create")
-    public ResponseEntity<ResponseModel<?>> create(@RequestBody User user) throws ExecutionException, InterruptedException {
+    public ResponseEntity<ResponseModel<?>> create(@RequestBody @Valid User user) throws ExecutionException, InterruptedException {
         ResponseModel<?> response = userService.create(user);
 
         return ResponseEntity.ok(response);

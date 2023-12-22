@@ -18,9 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Configuration
 @EnableWebSecurity
@@ -38,30 +36,24 @@ public class SecurityConfig {
 //    private final String[] WHITE_LIST = Stream.concat(Arrays.stream(AUTH_WHITE_LIST), Arrays.stream(SWAGGER_WHITE_LIST))
 //            .toArray(String[]::new);
     @Autowired
-    private  UserAuthenticationEntryPoint userAuthenticationEntryPoint;
+    private UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     @Autowired
-    private  UserAuthenticationProvider userAuthenticationProvider;
-
-//    public SecurityConfig(UserAuthenticationEntryPoint userAuthenticationEntryPoint,
-//                          UserAuthenticationProvider userAuthenticationProvider) {
-//        this.userAuthenticationEntryPoint = userAuthenticationEntryPoint;
-//        this.userAuthenticationProvider = userAuthenticationProvider;
-//    }
+    private UserAuthenticationProvider userAuthenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        return http
                 .exceptionHandling(e -> e.authenticationEntryPoint(userAuthenticationEntryPoint))
                 .addFilterBefore(new UsernamePasswordAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JWTAuthFilter(userAuthenticationProvider), UsernamePasswordAuthFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        ;
+
 //                .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers(HttpMethod.POST, WHITE_LIST).permitAll()
 //                        .requestMatchers(HttpMethod.GET, SWAGGER_WHITE_LIST).permitAll()
 //                        .anyRequest().authenticated());
-        return http.build();
+                .build();
     }
 
 

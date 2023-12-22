@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AssistidosShortcutsComponent } from './assistidos-shortcuts.component';
+import { RouterModule } from '@angular/router';
 
 describe('AssistidosShortcutsComponent', () => {
   let component: AssistidosShortcutsComponent;
