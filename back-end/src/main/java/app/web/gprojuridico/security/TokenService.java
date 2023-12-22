@@ -14,6 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
@@ -35,14 +38,12 @@ public class UserAuthenticationProvider {
     }
 
     public String createToken(String login) {
-        Algorithm algorithm = Algorithm.HMAC256(secretKey);
-        Date now = new Date();
-        Date validity = new Date(now.getTime() + (6 * 3600000)); // validade de 6 horas do login
+        Algorithm algoritmo = Algorithm.HMAC256(secretKey);
         return JWT.create()
                 .withIssuer(login)
-                .withIssuedAt(now)
-                .withExpiresAt(validity)
-                .sign(algorithm);
+                .withIssuedAt(new Date())
+                .withExpiresAt(genExpirationDate())
+                .sign(algoritmo);
     }
 
     public Authentication validateToken(String token) {
@@ -64,4 +65,7 @@ public class UserAuthenticationProvider {
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
 
+    private Instant genExpirationDate(){
+        return LocalDateTime.now().plusHours(6).toInstant(ZoneOffset.of("-03:00"));
+    }
 }
