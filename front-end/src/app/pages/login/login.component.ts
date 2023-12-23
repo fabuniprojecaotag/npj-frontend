@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private autenticacaoService: AutenticacaoService,
     // private requestService: RequestService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const userDataString = localStorage.getItem('user_data');
@@ -88,14 +88,13 @@ export class LoginComponent implements OnInit {
       this.autenticacaoService.autenticar(email, senha).subscribe({
         next: (resposta) => {
           this.loading = false;
-          if (resposta.status == 200) {
-            console.log('sucesso ao logar!', resposta);
-            localStorage.setItem(
-              'user_data',
-              JSON.stringify(resposta.body?.result[0])
-            );
-            this.router.navigate(['/home']);
-          }
+          console.log('sucesso ao logar!', resposta);
+          localStorage.setItem(
+            'user_data',
+            JSON.stringify(resposta.body?.user)
+          );
+          this.router.navigate(['/home']);
+
         },
         error: (err) => {
           this.loading = false;

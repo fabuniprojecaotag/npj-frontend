@@ -1,6 +1,8 @@
 package app.web.gprojuridico.controller;
 
 import app.web.gprojuridico.model.ResponseModel;
+import app.web.gprojuridico.model.User.AuthenticationDTO;
+import app.web.gprojuridico.model.User.LoginResponseDTO;
 import app.web.gprojuridico.model.User.User;
 import app.web.gprojuridico.security.TokenService;
 import app.web.gprojuridico.service.UserService;
@@ -8,6 +10,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -21,29 +25,22 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping("/auth")
 public class UserController {
     @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
     private UserService userService;
     @Autowired
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseModel<Object> verifyLogin(@AuthenticationPrincipal User user) {
-        user.setToken(tokenService.generateToken(user.getEmail()));
+    public ResponseEntity verifyLogin(@AuthenticationPrincipal User user) {
+        user.setToken(tokenService.generateToken(user));
+        String access_token = user.getToken();
 
-        // Use Collections.singletonList to wrap the user in a list
-        List<Object> resultList = Collections.singletonList(user);
-
-        return ResponseModel.success("Users retrieved successfully", resultList);
-    }
-
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/logout")
-    public ResponseEntity<User> logout(@AuthenticationPrincipal User user) {
-        SecurityContextHolder.clearContext();
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(new LoginResponseDTO(access_token, user));
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping("/create")
+    @PostMapping("/register")
     public ResponseEntity<ResponseModel<?>> create(@RequestBody @Valid User user) throws ExecutionException, InterruptedException {
         ResponseModel<?> response = userService.create(user);
 

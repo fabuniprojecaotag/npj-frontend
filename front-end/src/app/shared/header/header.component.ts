@@ -24,17 +24,6 @@ export class HeaderComponent implements OnInit {
     this.loadDataFromLocalStorage();
   }
 
-  //TODO: mover para utilitarios
-  formatFullName(fullName: string): string {
-    const names = (fullName && fullName.split(' ')) ?? [];
-    const firstTwoNames: any = names.slice(0, 2) ?? [];
-    const formattedNames = firstTwoNames.map(
-      (name: any) => name.charAt(0).toUpperCase() + name.slice(1)
-    );
-    const formattedFullName = formattedNames.join(' ');
-    return formattedFullName;
-  }
-
   //isso aqui pode ser transformado em um servico separado para ser reutilizado
   loadDataFromLocalStorage(): void {
     const userDataString = localStorage.getItem('user_data');

@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { UsuarioService } from './usuario.service';
+import { Usuario } from '../types/usuario';
 
 interface AuthResponse {
-  acess_token: string;
-  result: any;
+  access_token: string;
+  user: Usuario;
 }
 
 @Injectable({
@@ -18,11 +19,11 @@ export class AutenticacaoService {
   constructor(private http: HttpClient, private userService: UsuarioService) { }
 
   autenticar(login: string, password: string): Observable<HttpResponse<AuthResponse>> {
-    return this.http.post<AuthResponse>(`${this.API}/auth/login`, { login, password }, { observe: 'response' })
+    return this.http.post<AuthResponse>(`${this.API}/auth/login`, { login: login, password }, { observe: 'response' })
       .pipe(
         tap((response) => {
-          // console.log('Autenticação:', response.body);
-          const authToken = response.body?.result[0].token || '';
+          console.log('Autenticação:', response.body?.access_token);
+          const authToken = response.body?.access_token || '';
           this.userService.salvarToken(authToken);
         })
       );

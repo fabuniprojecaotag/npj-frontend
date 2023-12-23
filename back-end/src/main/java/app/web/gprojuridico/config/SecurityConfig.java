@@ -1,16 +1,19 @@
 package app.web.gprojuridico.config;
 
 import app.web.gprojuridico.security.JWTAuthFilter;
-import app.web.gprojuridico.security.TokenService;
 import app.web.gprojuridico.security.UsernamePasswordAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -31,11 +34,11 @@ public class SecurityConfig {
 //            "/swagger-resources/configuration/ui", "/swagge‌​r-ui.html",
 //            "/swagger-resources/configuration/security"};
 
-    // Create a new array with the calculated length
+    // Cria um array com as rotas que queremos desbloquear
 //    private final String[] WHITE_LIST = Stream.concat(Arrays.stream(AUTH_WHITE_LIST), Arrays.stream(SWAGGER_WHITE_LIST))
 //            .toArray(String[]::new);
     @Autowired
-    private UserAuthenticationEntryPoint userAuthenticationEntryPoint;
+    UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     @Autowired
     JWTAuthFilter jwtAuthFilter;
     @Autowired
@@ -45,15 +48,25 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .exceptionHandling(e -> e.authenticationEntryPoint(userAuthenticationEntryPoint))
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers(HttpMethod.POST, WHITE_LIST).permitAll().anyRequest().authenticated()
+//                        .requestMatchers(HttpMethod.GET, SWAGGER_WHITE_LIST).permitAll()
+//                        );
                 .addFilterBefore(usernamePasswordAuthFilter, BasicAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthFilter.class)
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers(HttpMethod.POST, WHITE_LIST).permitAll()
-//                        .requestMatchers(HttpMethod.GET, SWAGGER_WHITE_LIST).permitAll()
-//                        .anyRequest().authenticated());
                 .build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
 

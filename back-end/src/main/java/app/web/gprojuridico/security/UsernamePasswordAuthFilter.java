@@ -11,9 +11,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Component
 public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
@@ -32,7 +34,6 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
 
             try {
                 System.out.println("VALIDANDO");
-
                 SecurityContextHolder.getContext().setAuthentication(
                         provider.validateCredentials(user)
                 );

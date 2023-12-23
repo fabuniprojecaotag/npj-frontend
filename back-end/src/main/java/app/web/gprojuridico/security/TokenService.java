@@ -39,10 +39,10 @@ public class TokenService {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String generateToken(String emailLogin) {
+    public String generateToken(User user) {
         Algorithm algoritmo = Algorithm.HMAC256(secretKey);
         return JWT.create()
-                .withSubject(emailLogin)
+                .withSubject(user.getEmail())
                 .withIssuer("NPJ-Api")
                 .withIssuedAt(new Date())
                 .withExpiresAt(genExpirationDate())

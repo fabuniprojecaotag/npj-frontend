@@ -13,7 +13,7 @@ export class CadastroService {
   constructor(private http: HttpClient) { }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/auth/create`, usuario);
+    return this.http.post<Usuario>(`${this.apiUrl}/auth/register`, usuario);
   }
 
   buscarCadastro(id: string): Observable<any> {

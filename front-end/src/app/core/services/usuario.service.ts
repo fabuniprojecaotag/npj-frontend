@@ -9,6 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class UsuarioService {
   private userSubject = new BehaviorSubject<Usuario | null>(null);
+  private userDate = new BehaviorSubject<Usuario | null>(null);
 
   constructor(private tokenService: TokenService) {
     if (this.tokenService.possuiToken()) {

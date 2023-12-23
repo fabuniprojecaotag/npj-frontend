@@ -21,8 +21,8 @@ public class UserService {
     public ResponseModel<?> create(User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
-        // Verificar se nome e email sao unicos
-        Query emailQuery = dbFirestore.collection(COLLECTION_NAME).whereEqualTo("email", user.getEmail());
+        // Verificar se nome e login sao unicos
+        Query emailQuery = dbFirestore.collection(COLLECTION_NAME).whereEqualTo("login", user.getEmail());
         QuerySnapshot emailQuerySnapshot = emailQuery.get().get();
 
         Query nameQuery = dbFirestore.collection(COLLECTION_NAME).whereEqualTo("name", user.getNome());
@@ -90,16 +90,16 @@ public class UserService {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
 
-        // Use whereEqualTo to query for the user by email
+        // Use whereEqualTo to query for the user by login
         List<QueryDocumentSnapshot> matchingUsers;
         try {
-            matchingUsers = usersCollection.whereEqualTo("email", email).get().get().getDocuments();
+            matchingUsers = usersCollection.whereEqualTo("login", email).get().get().getDocuments();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
 
         if (!matchingUsers.isEmpty()) {
-            // Assuming email is unique, return the first matching user
+            // Assuming login is unique, return the first matching user
             DocumentSnapshot userDocument = matchingUsers.get(0);
             return userDocument.toObject(User.class);
         } else {
@@ -113,22 +113,22 @@ public class UserService {
 
         User foundUser = null;
 
-        // Extract email and password from the user object
+        // Extract login and password from the user object
         String email = user.getLogin();
         String password = user.getPassword();
 
-        // Query Firestore to find a user with matching email and password
+        // Query Firestore to find a user with matching login and password
         List<QueryDocumentSnapshot> matchingUsers;
         try {
             matchingUsers = usersCollection
                     .whereEqualTo("email", email)
                     .get().get().getDocuments();
         } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao consultar o banco firebase: " + e.getMessage(), e);
         }
 
         if (!matchingUsers.isEmpty()) {
-            // Assuming email and password combination is unique, return the first matching user
+            // Assuming login and password combination is unique, return the first matching user
             System.out.println(matchingUsers.get(0));
 
             foundUser = matchingUsers.get(0).toObject(User.class);
@@ -154,7 +154,7 @@ public class UserService {
         }
 
         if (foundUser == null) {
-            throw new RuntimeException("No user found with the provided email and password.");
+            throw new RuntimeException("Nenhum usuário encontrado com a senha e e-mail fornecidos.");
         }
 
         BCrypt.Result isThePhRight = BCrypt.verifyer().verify(user.getPassword().toCharArray(), foundUser.getSenha());
