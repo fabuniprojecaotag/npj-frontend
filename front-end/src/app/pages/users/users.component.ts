@@ -12,7 +12,7 @@ import { Usuario } from 'src/app/core/types/usuario';
 })
 export class UsersComponent implements OnInit {
   tituloDaPagina: string = 'Usuários';
-  listaUsuarios: any[] = [];
+  listaUsuarios: Usuario[] = [];
   colunasMostradas: string[] = [
     'select',
     'matricula',
@@ -27,15 +27,15 @@ export class UsersComponent implements OnInit {
   constructor(private service: CadastroService) {}
 
   ngOnInit(): void {
-    this.service.listar().subscribe(
-      (response: any) => {
+    this.service.listar().subscribe({
+      next: (response) => {
         console.log('Response:', response);
-        this.listaUsuarios = response.result[0];
+        this.listaUsuarios = response;
       },
-      (error) => {
-        console.error('Error:', error);
+      error: (err) => {
+        console.error('Error:', err);
       }
-    );
+    });
   }
 
   /** Ve se tudo ta selecionado (do exemplo do material) */

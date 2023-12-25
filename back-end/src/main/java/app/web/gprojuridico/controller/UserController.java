@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -32,19 +30,22 @@ public class UserController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity verifyLogin(@AuthenticationPrincipal User user) {
-        user.setToken(tokenService.generateToken(user));
-        String access_token = user.getToken();
+    public ResponseEntity<LoginResponseDTO> verifyLogin(@RequestBody @Valid AuthenticationDTO user) throws ExecutionException, InterruptedException {
+        User userFound = userService.findUserByEmailAndPassword(user);
+        String access_token = tokenService.generateToken(userFound);
 
-        return ResponseEntity.ok(new LoginResponseDTO(access_token, user));
+        return ResponseEntity.ok(new LoginResponseDTO(access_token, userFound));
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/register")
-    public ResponseEntity<ResponseModel<?>> create(@RequestBody @Valid User user) throws ExecutionException, InterruptedException {
-        ResponseModel<?> response = userService.create(user);
+    public ResponseEntity<User> create(@RequestBody @Valid User data) throws ExecutionException, InterruptedException {
+        if (this.userService.findUserByEmail(data.getEmail()) != null) {
+            return ResponseEntity.badRequest().build();
+        }
 
-        return ResponseEntity.ok(response);
+        userService.create(data);
+
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/filter")
@@ -54,17 +55,13 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<ResponseModel<?>> getAllUsers() {
+    public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
+
         System.out.println("Tamanho da lista de usuários: " + users.size());
+        System.out.println("Lista de usuários: " + users);
 
-        // Use Collections.singletonList to wrap the list of users
-        List<Object> resultList = Collections.singletonList(users);
-
-        ResponseModel<Object> response = ResponseModel.success("Users retrieved successfully", resultList);
-        System.out.println("Lista de usuários: " + response);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/get/{usuarioId}")

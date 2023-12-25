@@ -27,14 +27,9 @@ export class MyProfileComponent implements OnInit {
     private userService: UsuarioService) { }
 
   ngOnInit(): void {
-    const idParam = this.userService.retornarUsuario();
-    console.log(idParam);
-
+    const idParam = this.userService.retornarTokenUsuario();
     this.token = this.tokenService.retornarToken();
-    // this.cadastroService.buscarCadastro(idParam).subscribe(cadastro => {
-    //   this.cadastro = cadastro;
-    //   this.carregarFormulario();
-    // })
+    // this.cadastro.JSON.parse(this.userService.retornarUsuario());
   }
 
   carregarFormulario (): void {

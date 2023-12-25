@@ -1,6 +1,7 @@
 package app.web.gprojuridico.security;
 
 import app.web.gprojuridico.model.Credentials;
+import app.web.gprojuridico.model.User.AuthenticationDTO;
 import app.web.gprojuridico.model.User.User;
 import app.web.gprojuridico.service.UserService;
 import com.auth0.jwt.JWT;
@@ -63,7 +64,7 @@ public class TokenService {
         }
     }
 
-    public Authentication validateCredentials(Credentials credentials) throws ExecutionException, InterruptedException {
+    public Authentication validateCredentials(AuthenticationDTO credentials) throws ExecutionException, InterruptedException {
         User user = userService.findUserByEmailAndPassword(credentials);
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }

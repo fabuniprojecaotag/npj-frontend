@@ -1,6 +1,6 @@
+import { Usuario } from 'src/app/core/types/usuario';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Usuario } from '../types/usuario';
 import { TokenService } from './token.service';
 import { jwtDecode } from 'jwt-decode';
 
@@ -9,7 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class UsuarioService {
   private userSubject = new BehaviorSubject<Usuario | null>(null);
-  private userDate = new BehaviorSubject<Usuario | null>(null);
+  private userDescriptionSubject = new BehaviorSubject<Usuario | null>(null);
 
   constructor(private tokenService: TokenService) {
     if (this.tokenService.possuiToken()) {
@@ -23,7 +23,7 @@ export class UsuarioService {
     this.userSubject.next(usuario);
   }
 
-  retornarUsuario() {
+  retornarTokenUsuario() {
     return this.userSubject.asObservable();
   }
 

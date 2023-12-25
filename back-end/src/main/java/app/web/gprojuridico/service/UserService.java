@@ -1,5 +1,6 @@
 package app.web.gprojuridico.service;
 import app.web.gprojuridico.model.Credentials;
+import app.web.gprojuridico.model.User.AuthenticationDTO;
 import app.web.gprojuridico.model.User.Perfil;
 import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User.User;
@@ -37,9 +38,6 @@ public class UserService {
             return ResponseModel.failure("Nome já cadastrado", new ArrayList<>());
 
         } else {
-            // Dados unicos? Incremento id e salvo
-            user.setToken(null);
-
             // Pegar e incremtar id
             Query lastUserQuery = dbFirestore.collection(COLLECTION_NAME).orderBy("id", Query.Direction.DESCENDING).limit(1);
             QuerySnapshot lastUserQuerySnapshot = lastUserQuery.get().get();
@@ -106,7 +104,7 @@ public class UserService {
             return null; // User not found
         }
     }
-    public User findUserByEmailAndPassword(Credentials user) throws ExecutionException, InterruptedException {
+    public User findUserByEmailAndPassword(AuthenticationDTO user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
         CollectionReference perfisCollection = dbFirestore.collection("perfis");
@@ -114,8 +112,8 @@ public class UserService {
         User foundUser = null;
 
         // Extract login and password from the user object
-        String email = user.getLogin();
-        String password = user.getPassword();
+        String email = user.login();
+        String password = user.password();
 
         // Query Firestore to find a user with matching login and password
         List<QueryDocumentSnapshot> matchingUsers;
@@ -157,7 +155,7 @@ public class UserService {
             throw new RuntimeException("Nenhum usuário encontrado com a senha e e-mail fornecidos.");
         }
 
-        BCrypt.Result isThePhRight = BCrypt.verifyer().verify(user.getPassword().toCharArray(), foundUser.getSenha());
+        BCrypt.Result isThePhRight = BCrypt.verifyer().verify(user.password().toCharArray(), foundUser.getSenha());
         if (isThePhRight.verified) {
             return foundUser;
         } else {

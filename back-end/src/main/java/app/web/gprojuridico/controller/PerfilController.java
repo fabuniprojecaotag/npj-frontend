@@ -1,12 +1,14 @@
 package app.web.gprojuridico.controller;
 
 
-import app.web.gprojuridico.model.ResponseModel;
+import app.web.gprojuridico.model.User.Perfil;
 import app.web.gprojuridico.service.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -16,19 +18,20 @@ public class PerfilController {
     private PerfilService perfilService;
 
     @GetMapping("/all")
-    public ResponseModel getAllUsers() {
-        ResponseModel data = perfilService.getAll();
-        return data;
+    public ResponseEntity<List<Perfil>> getAllUsers() {
+        List<Perfil> listaPerfis = perfilService.getAll();
+
+        return ResponseEntity.ok(listaPerfis);
     }
 
-    @GetMapping("/{perfilId}")
-    public ResponseEntity<ResponseModel> getPerfilById(@PathVariable String perfilId) {
-        ResponseEntity<ResponseModel> perfilResponse = perfilService.getPerfilById(perfilId);
+    @GetMapping("/get/{perfilId}")
+    public ResponseEntity<Perfil> getPerfilById(@PathVariable String perfilId) {
+        Perfil perfilResponse = perfilService.getPerfilById(perfilId);
 
-        if (perfilResponse.getBody() != null) {
-            return new ResponseEntity<>(perfilResponse.getBody(), perfilResponse.getStatusCode());
+        if (perfilResponse != null) {
+            return ResponseEntity.ok(perfilResponse);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
 }

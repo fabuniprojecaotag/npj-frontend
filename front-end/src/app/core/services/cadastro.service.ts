@@ -25,8 +25,8 @@ export class CadastroService {
     return this.http.patch<Usuario>(`${this.apiUrl}/auth/update`, usuario);
   }
 
-  listar() {
-    return this.http.get(`${this.apiUrl}/auth/list`);
+  listar(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/auth/list`);
   }
 
   excluirCadastro(userId: string) {

@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 public class PerfilService {
 
     private static final String COLLECTION_NAME = "perfis";
-    public ResponseModel getAll() {
+    public List<Perfil> getAll() {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
 
@@ -37,16 +37,15 @@ public class PerfilService {
                     perfilList.add(perfil);
                 }
             }
-
             // Assuming you want to return the perfilList as data in your ResponseModel
-            return ResponseModel.success("Perfis encontrados:", perfilList);
+            return perfilList;
         } catch (InterruptedException | ExecutionException e) {
             // Handle any exceptions
-            return ResponseModel.failure("Erro ao procurar perfis:", new ArrayList<>());
+            throw new RuntimeException("Erro ao procurar perfis:", e);
         }
     }
 
-    public ResponseEntity<ResponseModel> getPerfilById(String perfilId) {
+    public Perfil getPerfilById(String perfilId) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         DocumentReference perfilDocRef = dbFirestore.collection(COLLECTION_NAME).document(perfilId);
 
@@ -60,18 +59,16 @@ public class PerfilService {
                 perfil.setDocumentId(perfilSnapshot.getId());
                 System.out.println("Perfil found: " + perfil);
 
-                // Return the result wrapped in a ResponseModel with a list containing the single perfil
-                return ResponseEntity.ok(ResponseModel.success("Perfil found", Collections.singletonList(perfil)));
+                return perfil;
             } else {
                 System.out.println("Perfil not found for ID: " + perfilId);
                 // Return null or handle the case where the perfil with the given ID doesn't exist
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseModel.failure("Perfil not found", null));
+                throw new RuntimeException("Perfil não encontrado para o id Fornecido");
             }
         } catch (InterruptedException | ExecutionException e) {
             // Handle any exceptions
-            System.err.println("Error fetching perfil: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResponseModel.failure("Error fetching perfil", null));
+            System.out.println("Error fetching perfil: " + e.getMessage());
+            throw new RuntimeException("Error fetching perfil", e);
         }
     }
-
 }

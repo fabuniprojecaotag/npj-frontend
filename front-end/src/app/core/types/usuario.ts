@@ -6,7 +6,6 @@ export interface Usuario {
   matricula?: string,
   semestre?: string,
   status: string,
-  token?: string,
   perfil_id: string,
   perfil: Perfil
 }
@@ -15,12 +14,12 @@ export interface Perfil {
   id: number;
   nome: string;
   documentId?: number;
-  permissoes?: Permissoes[];
+  permissoes: Permissoes[];
 }
 
 export interface Permissoes {
   acesso_total?: boolean;
-  icon: string;
+  icon?: string;
   options?: Option[];
   modulo?: string;
   acoes?: string[];

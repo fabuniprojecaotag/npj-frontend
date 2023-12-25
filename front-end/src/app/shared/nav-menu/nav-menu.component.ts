@@ -16,7 +16,6 @@ export class NavMenuComponent implements OnInit {
 
   constructor(
     private perfilService: PerfilService,
-    // private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -27,22 +26,21 @@ export class NavMenuComponent implements OnInit {
     const userDataString = localStorage.getItem('user_data');
     // console.log('Pegando a data:', userDataString);
     if (userDataString) {
-      // console.log(JSON.parse(userDataString));
+      console.log(JSON.parse(userDataString));
       this.userData = JSON.parse(userDataString);
       this.moduloPermissoes = this.userData.perfil.permissoes;
-      // console.log(this.moduloPermissoes);
+      console.log(this.moduloPermissoes);
       this.loadPerfis();
     } else {
       this.userData = null;
     }
-    // this.cdr.detectChanges();
   }
 
   loadPerfis() {
-    this.perfilService.consultar(this.userData.perfil_id).subscribe({
+    this.perfilService.consultar(this.userData.perfil.documentId).subscribe({
       next: (data) => {
         console.log('Perfil do Usuário do Menu:', data);
-        this.moduloPermissoes = data.result[0].permissoes;
+        this.moduloPermissoes = data.permissoes;
       },
       error: (err) => {
         console.log('Erro ao carregar perfil:', err);

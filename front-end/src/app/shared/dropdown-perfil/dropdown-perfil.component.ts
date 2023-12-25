@@ -20,7 +20,7 @@ export class DropdownPerfilComponent {
 
   ngOnInit(): void {
     this.perfilTipoService.listar().subscribe((dados) => {
-      this.usuarioTipos = dados.result;
+      this.usuarioTipos = dados;
       console.log('tipos de usuario:', this.usuarioTipos);
     });
   }
