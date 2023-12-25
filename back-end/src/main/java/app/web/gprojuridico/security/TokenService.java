@@ -1,19 +1,15 @@
 package app.web.gprojuridico.security;
 
-import app.web.gprojuridico.model.Credentials;
 import app.web.gprojuridico.model.User.AuthenticationDTO;
 import app.web.gprojuridico.model.User.User;
 import app.web.gprojuridico.service.UserService;
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.api.client.util.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

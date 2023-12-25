@@ -1,4 +1,5 @@
 export interface Usuario {
+  documentId?: string;
   id?: number,
   nome: string,
   email: string,
@@ -6,14 +7,13 @@ export interface Usuario {
   matricula?: string,
   semestre?: string,
   status: string,
-  perfil_id: string,
   perfil: Perfil
 }
 
 export interface Perfil {
-  id: number;
+  id?: number;
   nome: string;
-  documentId?: number;
+  documentId: string;
   permissoes: Permissoes[];
 }
 

@@ -42,7 +42,6 @@ export class EditUsersComponent implements OnInit {
       matricula: this.cadastro.matricula,
       semestre: this.cadastro.semestre,
       perfil: this.cadastro.perfil.nome,
-      perfil_id: this.cadastro.perfil_id,
       email: this.cadastro.email,
       status: this.cadastro.status,
     });
@@ -55,7 +54,6 @@ export class EditUsersComponent implements OnInit {
       matricula: this.form?.value.matricula,
       semestre: this.form?.value.semestre,
       perfil: this.form?.value.perfil,
-      perfil_id: this.form?.value.perfil_id,
       email: this.form?.value.email,
       status: this.form?.value.status,
       senha: this.form?.value.senha,
@@ -73,7 +71,7 @@ export class EditUsersComponent implements OnInit {
   }
 
   excluir () {
-    this.cadastroService.excluirCadastro(this.cadastro.perfil_id).subscribe({
+    this.cadastroService.excluirCadastro(this.cadastro.perfil.documentId).subscribe({
       next: (response) => {
         alert("Usuário excluido com sucesso");
         this.router.navigate(['/users']);

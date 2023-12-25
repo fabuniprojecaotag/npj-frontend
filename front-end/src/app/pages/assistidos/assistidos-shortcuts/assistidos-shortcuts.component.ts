@@ -23,7 +23,7 @@ export class AssistidosShortcutsComponent implements OnInit {
 
     this.assistidosService.consultar(idParam).subscribe({
       next: (resposta) => {
-        this.nomeAssistido = resposta.result[0].nome;
+        this.nomeAssistido = resposta.nome;
         this.tituloDaPagina = `Assisitido - ${this.nomeAssistido}`;
         console.log(this.nomeAssistido);
       },

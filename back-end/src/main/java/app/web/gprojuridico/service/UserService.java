@@ -1,25 +1,28 @@
 package app.web.gprojuridico.service;
-import app.web.gprojuridico.model.Credentials;
+
+import app.web.gprojuridico.exception.EmailAlreadyExistsException;
+import app.web.gprojuridico.exception.NameAlreadyExistsException;
 import app.web.gprojuridico.model.User.AuthenticationDTO;
 import app.web.gprojuridico.model.User.Perfil;
-import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User.User;
 import com.google.api.core.ApiFuture;
+import com.google.api.gax.rpc.NotFoundException;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
+
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 @Service
 public class UserService {
     private static final String COLLECTION_NAME = "acesso";
-    public ResponseModel<?> create(User user) throws ExecutionException, InterruptedException {
+
+    public User create(User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
         // Verificar se nome e login sao unicos
@@ -31,14 +34,14 @@ public class UserService {
 
         if (!emailQuerySnapshot.isEmpty()) {
             // Email ja cadastrado
-            return ResponseModel.failure("Email já cadastrado", new ArrayList<>());
+            throw new EmailAlreadyExistsException("Email já cadastrado");
 
         } else if (!nameQuerySnapshot.isEmpty()) {
             // Nome ja cadastrado
-            return ResponseModel.failure("Nome já cadastrado", new ArrayList<>());
+            throw new NameAlreadyExistsException("Nome já cadastrado");
 
         } else {
-            // Pegar e incremtar id
+            // Pegar e incrementar id
             Query lastUserQuery = dbFirestore.collection(COLLECTION_NAME).orderBy("id", Query.Direction.DESCENDING).limit(1);
             QuerySnapshot lastUserQuerySnapshot = lastUserQuery.get().get();
 
@@ -51,21 +54,16 @@ public class UserService {
             int newUserId = lastUserId + 1;
             user.setId(newUserId);
 
-            String pw_hash = BCrypt.withDefaults().hashToString(12,user.getSenha().toCharArray());
+            String pw_hash = BCrypt.withDefaults().hashToString(12, user.getSenha().toCharArray());
             user.setSenha(pw_hash);
 
             System.out.println(pw_hash);
             System.out.println(user.getSenha());
 
-
             DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document();
             ApiFuture<WriteResult> collectionApiFuture = documentReference.set(user);
 
-            try {
-                return ResponseModel.success("Usuário Criado com Sucesso", new ArrayList<>());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            return user; // Retorna o usuário criado
         }
     }
 
@@ -80,11 +78,14 @@ public class UserService {
         try {
             writeResult.get();
             System.out.println("User with ID " + documentId + " successfully deleted.");
+        } catch (NotFoundException e) {
+            throw new RuntimeException("Usuário não encontrado: ", e);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException("Error deleting user: " + e.getMessage());
         }
     }
-    public User findUserByEmail(String email){
+
+    public User findUserByEmail(String email) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
 
@@ -104,6 +105,7 @@ public class UserService {
             return null; // User not found
         }
     }
+
     public User findUserByEmailAndPassword(AuthenticationDTO user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
@@ -133,7 +135,7 @@ public class UserService {
             foundUser.setDocumentId(matchingUsers.get(0).getId());
 
             // Retrieve perfil data based on perfil_id
-            System.out.println(foundUser.toString());
+            System.out.println(foundUser);
 
             String perfilId = foundUser.getPerfil_id();
             System.out.println(perfilId);
@@ -163,16 +165,12 @@ public class UserService {
         }
     }
 
-    public ResponseModel toggleUserStatus(String documentId) {
+    public ArrayList toggleUserStatus(String documentId) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
         try {
             DocumentReference userDocument = dbFirestore.collection(COLLECTION_NAME).document(documentId);
             ApiFuture<DocumentSnapshot> documentSnapshot = userDocument.get();
-
-            if (!documentSnapshot.get().exists()) {
-                return ResponseModel.failure("User not found.", null);
-            }
 
             String currentStatus = documentSnapshot.get().getString("status");
             String newStatus = "Ativo".equals(currentStatus) ? "Inativo" : "Ativo";
@@ -181,11 +179,14 @@ public class UserService {
             updateResult.get();
 
             // Include additional data if needed, e.g., updated status
-            return ResponseModel.success("User status updated successfully.", new ArrayList<>());
+            return new ArrayList<>();
+        } catch (NotFoundException e) {
+            throw new RuntimeException("Error usuário não encontrado: " + e.getMessage());
         } catch (Exception e) {
-            return ResponseModel.failure("Error updating user status: " + e.getMessage(), null);
+            throw new RuntimeException("Error enquanto atualiza o status do usuário: " + e.getMessage());
         }
     }
+
     public List<User> getAllUsers() {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
@@ -202,7 +203,7 @@ public class UserService {
                 user.setDocumentId(userDocument.getId());
 
                 // Retrieve perfil data based on perfil_id
-                String perfilId = user.getPerfil_id();
+                String perfilId = user.getDocumentId();
                 if (perfilId != null) {
                     DocumentSnapshot perfilSnapshot = perfisCollection.document(perfilId).get().get();
                     if (perfilSnapshot.exists()) {
@@ -253,24 +254,22 @@ public class UserService {
         }
     }
 
-    public ResponseModel<User> getUserById(String userId) {
+    public User getUserById(String userId) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         DocumentReference userDocRef = dbFirestore.collection(COLLECTION_NAME).document(userId);
 
         try {
             DocumentSnapshot userSnapshot = userDocRef.get().get();
 
-            if (userSnapshot.exists()) {
-                User user = userSnapshot.toObject(User.class);
-                assert user != null;
-                user.setDocumentId(userSnapshot.getId());
-                return ResponseModel.success("Usuário encontrado:", Collections.singletonList(user));
-            } else {
-                return ResponseModel.failure("Usuário não encontrado", null);
-            }
+            User user = userSnapshot.toObject(User.class);
+            assert user != null;
+            user.setDocumentId(userSnapshot.getId());
+            return user;
+
+        } catch (NotFoundException e) {
+            throw new RuntimeException("Usuário não encontrado: ", e);
         } catch (InterruptedException | ExecutionException e) {
-            System.err.println("Erro ao buscar usuário: " + e.getMessage());
-            return ResponseModel.failure("Erro ao buscar usuário", null);
+            throw new RuntimeException("Erro ao buscar usuário: ", e);
         }
     }
 }

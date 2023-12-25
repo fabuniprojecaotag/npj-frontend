@@ -1,16 +1,13 @@
 package app.web.gprojuridico.service;
 
 import app.web.gprojuridico.model.User.Perfil;
-import app.web.gprojuridico.model.ResponseModel;
 import com.google.api.core.ApiFuture;
+import com.google.api.gax.rpc.NotFoundException;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -18,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 public class PerfilService {
 
     private static final String COLLECTION_NAME = "perfis";
+
     public List<Perfil> getAll() {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
@@ -54,17 +52,15 @@ public class PerfilService {
 
             DocumentSnapshot perfilSnapshot = perfilDocRef.get().get();
 
-            if (perfilSnapshot.exists()) {
-                Perfil perfil = perfilSnapshot.toObject(Perfil.class);
-                perfil.setDocumentId(perfilSnapshot.getId());
-                System.out.println("Perfil found: " + perfil);
+            Perfil perfil = perfilSnapshot.toObject(Perfil.class);
+            perfil.setDocumentId(perfilSnapshot.getId());
+            System.out.println("Perfil found: " + perfil);
 
-                return perfil;
-            } else {
-                System.out.println("Perfil not found for ID: " + perfilId);
-                // Return null or handle the case where the perfil with the given ID doesn't exist
-                throw new RuntimeException("Perfil não encontrado para o id Fornecido");
-            }
+            return perfil;
+        } catch (NotFoundException e) {
+            System.out.println("Perfil not found for ID: " + perfilId);
+            // Return null or handle the case where the perfil with the given ID doesn't exist
+            throw new RuntimeException("Perfil não encontrado para o id Fornecido", e);
         } catch (InterruptedException | ExecutionException e) {
             // Handle any exceptions
             System.out.println("Error fetching perfil: " + e.getMessage());

@@ -1,16 +1,12 @@
 package app.web.gprojuridico.service;
 
 import app.web.gprojuridico.model.Assistido;
-import app.web.gprojuridico.model.ResponseModel;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -19,7 +15,7 @@ public class AssistidoService {
 
     private static final String COLLECTION_NAME = "assistidos";
 
-    public ResponseModel<?> getAllAssistidos() {
+    public List<Assistido> getAllAssistidos() {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference assistidosCollection = dbFirestore.collection(COLLECTION_NAME);
 
@@ -35,9 +31,9 @@ public class AssistidoService {
                 assistidoList.add(assistido);
             }
 
-            return ResponseModel.success("Assistidos encontrados:", assistidoList);
+            return assistidoList;
         } catch (InterruptedException | ExecutionException e) {
-            return ResponseModel.failure("Erro ao procurar assistidos:", new ArrayList<>());
+            throw new RuntimeException("Erro ao procurar os assistidos: ", e);
         }
     }
 
@@ -61,7 +57,7 @@ public class AssistidoService {
             return null;
         }
     }
-    public ResponseModel<?> createAssistido(Assistido assistido) {
+    public Assistido createAssistido(Assistido assistido) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference assistidosCollection = dbFirestore.collection(COLLECTION_NAME);
 
@@ -70,31 +66,34 @@ public class AssistidoService {
             ApiFuture<DocumentReference> result = assistidosCollection.add(assistido);
             System.out.println("Assistido adicionado com sucesso. ID: " + result.get().getId());
 
-            return ResponseModel.success("Assistido criado com sucesso", Collections.singletonList(assistido));
+            return assistido;
         } catch (InterruptedException | ExecutionException e) {
-            System.err.println("Erro ao criar assistido: " + e.getMessage());
-            return ResponseModel.failure("Erro ao criar assistido", null);
+            throw new RuntimeException("Erro ao criar assistido: ", e);
         }
     }
 
-    public ResponseModel<?> updateAssistido(String assistidoId, Assistido assistido) {
+    public Assistido updateAssistido(String assistidoId, Assistido assistido) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         DocumentReference assistidoDocRef = dbFirestore.collection(COLLECTION_NAME).document(assistidoId);
 
         ApiFuture<WriteResult> result = assistidoDocRef.set(assistido);
         System.out.println("Assistido atualizado com sucesso. ID: " + assistidoId);
 
-        return ResponseModel.success("Assistido atualizado com sucesso", Collections.singletonList(assistido));
+        return assistido;
     }
 
-    public ResponseModel<?> deleteAssistido(String assistidoId) {
+    public void deleteAssistido(String assistidoId) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         DocumentReference assistidoDocRef = dbFirestore.collection(COLLECTION_NAME).document(assistidoId);
 
         ApiFuture<WriteResult> result = assistidoDocRef.delete();
-        System.out.println("Assistido deletado com sucesso. ID: " + assistidoId);
 
-        return ResponseModel.success("Assistido deletado com sucesso", null);
+        try {
+            result.get();
+            System.out.println("Assistido com a ID " + assistidoId + " deletado com sucesso.");
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Error ao deletar o assistido: " + e.getMessage());
+        }
     }
 
 

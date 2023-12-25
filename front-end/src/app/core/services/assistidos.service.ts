@@ -17,19 +17,19 @@ export class AssistidosService {
     return this.http.post<Assistido>(`${this.API}/assistido/create`, assistido);
   }
 
-  listarAssistidos(): Observable<Callback> {
-    return this.http.get<Callback>(`${this.API}/assistido/all`);
+  listarAssistidos(): Observable<Assistido[]> {
+    return this.http.get<Assistido[]>(`${this.API}/assistido/all`);
   }
 
-  editar(idParam: string, assistido: Assistido): Observable<Callback> {
-    return this.http.put<Callback>(`${this.API}/assistido/update/${idParam}`, assistido);
+  editar(idParam: string, assistido: Assistido): Observable<Assistido> {
+    return this.http.put<Assistido>(`${this.API}/assistido/update/${idParam}`, assistido);
   }
 
-  excluir(idParam: string): Observable<Callback> {
-    return this.http.delete<Callback>(`${this.API}/assistido/delete/${idParam}`);
+  excluir(idParam: string): Observable<Assistido> {
+    return this.http.delete<Assistido>(`${this.API}/assistido/delete/${idParam}`);
    }
 
-  consultar(idParam: string): Observable<Callback> {
-    return this.http.get<Callback>(`${this.API}/assistido/get/${idParam}`);
+  consultar(idParam: string): Observable<Assistido> {
+    return this.http.get<Assistido>(`${this.API}/assistido/get/${idParam}`);
   }
 }

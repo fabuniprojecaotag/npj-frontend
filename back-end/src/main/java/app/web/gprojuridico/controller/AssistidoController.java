@@ -1,14 +1,13 @@
 package app.web.gprojuridico.controller;
 
 import app.web.gprojuridico.model.Assistido;
-import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.service.AssistidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -23,33 +22,38 @@ public class AssistidoController {
     }
 
     @GetMapping("/all")
-    public ResponseModel<?> getAllAssistidos() {
-        return (ResponseModel<?>) assistidoService.getAllAssistidos();
+    public ResponseEntity<List<Assistido>> getAllAssistidos() {
+        List<Assistido> assistidoList = assistidoService.getAllAssistidos();
+
+        return ResponseEntity.ok(assistidoList);
     }
 
     @GetMapping("/get/{assistidoId}")
-    public ResponseEntity<ResponseModel<?>> getAssistidoById(@PathVariable String assistidoId) {
+    public ResponseEntity<Assistido> getAssistidoById(@PathVariable String assistidoId) {
         Assistido assistido = assistidoService.getAssistidoById(assistidoId);
 
         if (assistido != null) {
-            return ResponseEntity.ok(ResponseModel.success("Assistido encontrado", Collections.singletonList(assistido)));
+            return ResponseEntity.ok(assistido);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseModel.failure("Assistido não encontrado", null));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
     @PostMapping("/create")
-    public ResponseModel<?> createAssistido(@RequestBody Assistido assistido) {
-        return assistidoService.createAssistido(assistido);
+    public ResponseEntity<Assistido> createAssistido(@RequestBody Assistido assistido) {
+        Assistido assistidoCriado = assistidoService.createAssistido(assistido);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/update/{assistidoId}")
-    public ResponseModel<?> updateAssistido(@PathVariable String assistidoId, @RequestBody Assistido assistido) {
-        return assistidoService.updateAssistido(assistidoId, assistido);
+    public ResponseEntity<Assistido> updateAssistido(@PathVariable String assistidoId, @RequestBody Assistido assistido) {
+        Assistido assistoAtualizado = assistidoService.updateAssistido(assistidoId, assistido);
+        return ResponseEntity.ok(assistoAtualizado);
     }
 
     @DeleteMapping("/delete/{assistidoId}")
-    public ResponseModel<?> deleteAssistido(@PathVariable String assistidoId) {
-        return assistidoService.deleteAssistido(assistidoId);
+    public ResponseEntity deleteAssistido(@PathVariable String assistidoId) {
+        assistidoService.deleteAssistido(assistidoId);
+        return ResponseEntity.ok().build();
     }
 }

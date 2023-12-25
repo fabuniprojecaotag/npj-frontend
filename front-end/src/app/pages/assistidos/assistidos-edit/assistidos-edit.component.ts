@@ -28,7 +28,7 @@ export class AssistidosEditComponent {
     this.idParam = this.route.snapshot.paramMap.get('documentId') as string;
 
     this.assistidoService.consultar(this.idParam).subscribe(callback => {
-      this.assistido = callback.result[0];
+      this.assistido = callback;
       console.log("assistido para editar:", this.assistido)
       this.carregarFormulario();
     })

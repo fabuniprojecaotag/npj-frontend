@@ -1,6 +1,5 @@
 package app.web.gprojuridico.controller;
 
-import app.web.gprojuridico.model.ResponseModel;
 import app.web.gprojuridico.model.User.AuthenticationDTO;
 import app.web.gprojuridico.model.User.LoginResponseDTO;
 import app.web.gprojuridico.model.User.User;
@@ -10,11 +9,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -22,8 +19,8 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/auth")
 public class UserController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
     @Autowired
     private UserService userService;
     @Autowired
@@ -65,26 +62,26 @@ public class UserController {
     }
 
     @GetMapping("/get/{usuarioId}")
-    public ResponseEntity<ResponseModel<?>> getAssistidoById(@PathVariable String usuarioId) {
-        ResponseModel<User> user = userService.getUserById(usuarioId);
+    public ResponseEntity<User> getAssistidoById(@PathVariable String usuarioId) {
+       User user = userService.getUserById(usuarioId);
 
         if (user != null) {
-            return ResponseEntity.ok(ResponseModel.success("Usuário encontrado", Collections.singletonList(user)));
+            return ResponseEntity.ok(user);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResponseModel.failure("Usuário não encontrado", null));
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/delete/{docId}")
     public ResponseEntity<String> delete(@PathVariable String docId) {
         userService.deleteUserById(docId);
-        return ResponseEntity.ok("User deleted successfully");
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/toggleStatus/{docId}")
-    public ResponseEntity<ResponseModel> toggleStatus(@PathVariable String docId)
-            throws ExecutionException, InterruptedException {
-        ResponseModel response = userService.toggleUserStatus(docId);
+    public ResponseEntity<ArrayList> toggleStatus(@PathVariable String docId) throws ExecutionException,
+            InterruptedException {
+        ArrayList response = userService.toggleUserStatus(docId);
         return ResponseEntity.ok(response);
     }
 }

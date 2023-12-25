@@ -22,9 +22,9 @@ export class AssistidosComponent {
 
   ngOnInit(): void {
     this.service.listarAssistidos().subscribe({
-      next: (response: Callback) => {
-        this.listaAssistidos = response.result;
-        console.log("lista de assistidos:", response.result);
+      next: (response) => {
+        this.listaAssistidos = response;
+        console.log("lista de assistidos:", response);
       },
       error: (err) => {
         console.log("erro ao coletar lista de assistidos:", err);
