@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 @Component
-public class JWTAuthFilter extends OncePerRequestFilter {
+public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     UserService userService;
     @Autowired

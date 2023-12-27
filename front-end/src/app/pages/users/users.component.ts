@@ -1,7 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
@@ -29,11 +27,11 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.service.listar().subscribe({
       next: (response) => {
-        console.log('Response:', response);
+        console.log('Lista de usuários:', response);
         this.listaUsuarios = response;
       },
       error: (err) => {
-        console.error('Error:', err);
+        console.error('Erro ao listar usuários:', err);
       }
     });
   }

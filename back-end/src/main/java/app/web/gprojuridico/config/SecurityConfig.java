@@ -1,6 +1,6 @@
 package app.web.gprojuridico.config;
 
-import app.web.gprojuridico.security.JWTAuthFilter;
+import app.web.gprojuridico.security.SecurityFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,7 @@ public class SecurityConfig {
     @Autowired
     UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     @Autowired
-    JWTAuthFilter jwtAuthFilter;
+    SecurityFilter securityFilter;
 
 
     @Bean
@@ -62,7 +62,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/assistido/deleteUser/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 

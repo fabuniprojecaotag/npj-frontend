@@ -9,7 +9,7 @@
       </div>
       <span class="example-spacer"></span>
       <div>
-        <h2 class="cabecalho__subtitulo">{{ subtitulo }}</h2>
+        <h2 class="cabecalho__subtitulo">{{ subtitulo || '' }}</h2>
       </div>
       <span class="example-spacer"></span>
       <div>
@@ -30,5 +30,5 @@
   </mat-toolbar>
 </header>
 <app-nav-menu [isMenuAtivo]="isMenuAtivo"></app-nav-menu>
-<app-user-menu [nome]="userData.nome" [tipoUsuario]="userData.perfil.nome"
+<app-user-menu [nome]="nomeUser" [tipoUsuario]="userData.perfil.nome"
   [isMenuAtivo]="isUserMenuAtivo"></app-user-menu>

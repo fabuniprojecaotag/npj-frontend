@@ -234,7 +234,7 @@ public class UserService implements UserDetailsService {
                 user.setDocumentId(userDocument.getId());
 
                 // Retrieve perfil data based on perfil_id
-                String perfilId = user.getDocumentId();
+                String perfilId = user.getPerfil_id();
                 if (perfilId != null) {
                     DocumentSnapshot perfilSnapshot = perfisCollection.document(perfilId).get().get();
                     if (perfilSnapshot.exists()) {
@@ -259,8 +259,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-
-    public List<User> getAllUsers(String nome) {
+    public List<User> getUserByName(String nome) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
 

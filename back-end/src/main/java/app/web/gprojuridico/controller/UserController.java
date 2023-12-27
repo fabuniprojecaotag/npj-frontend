@@ -32,15 +32,10 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> verifyLogin(@RequestBody @Valid AuthenticationDTO data) throws ExecutionException, InterruptedException {
-        // User userFound = userService.findUserByEmailAndPassword(data);
-
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-        System.out.println(auth.getPrincipal());
 
         String access_token = tokenService.generateToken((User) auth.getPrincipal());
-        System.out.println(access_token);
-
 
         return ResponseEntity.ok(new LoginResponseDTO(access_token));
     }
@@ -56,12 +51,6 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/filter")
-    public ResponseEntity<String> filterUsers(@RequestBody User user) throws ExecutionException, InterruptedException {
-        List<User> filteredUsers = userService.getAllUsers(user.getNome());
-        return ResponseEntity.ok(filteredUsers.toString());
-    }
-
     @GetMapping("/list")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -74,16 +63,13 @@ public class UserController {
 
     @GetMapping("/my-profile")
     public ResponseEntity<User> obterMeuPerfil() {
-        // Obtém o usuário autenticado do contexto de segurança
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Verifica se o principal é do tipo User
         if (authentication.getPrincipal() instanceof User) {
             User usuarioAutenticado = (User) authentication.getPrincipal();
             return ResponseEntity.ok(usuarioAutenticado);
         } else {
             // Lida com a situação em que o principal não é do tipo User
-            // Pode ser um nome de usuário (String) ou outro tipo
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
