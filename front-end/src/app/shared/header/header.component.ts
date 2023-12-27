@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
-import { Usuario } from 'src/app/core/types/usuario';
+import { Permissoes, Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-header',
@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   userData!: Usuario;
   nomeUser: string = '';
   nomePerfil: string = '';
+  modulosPerfil!: Permissoes[];
 
   constructor(private el: ElementRef, private cadastroService: CadastroService) {}
 
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
         this.userData = usuario;
         this.nomeUser = usuario.nome;
         this.nomePerfil = usuario.perfil.nome;
+        this.modulosPerfil = usuario.perfil.permissoes;
       },
       error: (err) => {
         console.log("Erro ao procurar usuário: " + err);
