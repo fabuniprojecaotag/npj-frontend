@@ -16,12 +16,6 @@ public class Perfil implements GrantedAuthority {
 
     public Perfil() { } // Default constructor for Firestore deserialization
 
-    public Perfil(int id, String nome, List<Map<String, Object>> permissoes) {
-        this.id = id;
-        this.nome = nome;
-        this.permissoes = permissoes;
-    }
-
     @Override
     public String toString() {
         return "Perfil{" +

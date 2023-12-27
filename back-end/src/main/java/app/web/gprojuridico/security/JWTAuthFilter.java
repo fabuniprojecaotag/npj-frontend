@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 @Component
 public class JWTAuthFilter extends OncePerRequestFilter {
@@ -36,6 +37,8 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             } catch (RuntimeException e) {
                 SecurityContextHolder.clearContext();
                 throw e;
+            } catch (ExecutionException | InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
         filterChain.doFilter(request, response);

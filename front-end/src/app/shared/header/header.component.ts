@@ -19,14 +19,18 @@ export class HeaderComponent implements OnInit {
   isMenuAtivo: boolean = false; // logica para abrir e fechar menu de nav
   isUserMenuAtivo: boolean = false;
   userData!: Usuario;
+  nomeUser: string = '';
 
-  constructor(private el: ElementRef, private cdr: ChangeDetectorRef, private cadastroService: CadastroService) {}
+  constructor(private el: ElementRef, private cadastroService: CadastroService) {}
 
-  ngOnInit() {
-    // this.loadDataFromLocalStorage();
+  ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
         this.userData = usuario;
+        this.nomeUser = usuario.nome;
+      },
+      error: (err) => {
+        console.log("Erro ao procurar usuário: " + err);
       }
     })
   }

@@ -32,8 +32,6 @@ public class User implements UserDetails { //implements UserDetails
                 '}';
     }
 
-    /* metodos da interface userdetail */
-    // TODO: fazer os metodos
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Aqui você pode mapear os perfis (Perfil) para GrantedAuthority
@@ -41,7 +39,6 @@ public class User implements UserDetails { //implements UserDetails
 
         Set<GrantedAuthority> authorities = new HashSet<>();
 
-        // Adicione cada perfil como uma autoridade
         authorities.add(new SimpleGrantedAuthority("ROLE_" + perfil.getNome()));
 
         // Adicione mais autoridades conforme necessário

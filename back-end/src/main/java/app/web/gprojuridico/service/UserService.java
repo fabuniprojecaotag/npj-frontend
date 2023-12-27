@@ -28,7 +28,7 @@ public class UserService implements UserDetailsService {
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
         // Verificar se nome e login sao unicos
-        Query emailQuery = dbFirestore.collection(COLLECTION_NAME).whereEqualTo("login", user.getEmail());
+        Query emailQuery = dbFirestore.collection(COLLECTION_NAME).whereEqualTo("email", user.getEmail());
         QuerySnapshot emailQuerySnapshot = emailQuery.get().get();
 
         Query nameQuery = dbFirestore.collection(COLLECTION_NAME).whereEqualTo("name", user.getNome());
@@ -87,25 +87,54 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public User findUserByEmail(String email) {
+    public User findUserByEmail(String email) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
+        CollectionReference perfisCollection = dbFirestore.collection("perfis");
 
-        // Use whereEqualTo to query for the user by login
+        User foundUser = null;
+
+        // Query Firestore to find a user with matching login and password
         List<QueryDocumentSnapshot> matchingUsers;
         try {
-            matchingUsers = usersCollection.whereEqualTo("email", email).get().get().getDocuments();
+            matchingUsers = usersCollection
+                    .whereEqualTo("email", email)
+                    .get().get().getDocuments();
         } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao consultar o banco firebase: " + e.getMessage(), e);
         }
 
         if (!matchingUsers.isEmpty()) {
-            // Assuming login is unique, return the first matching user
-            DocumentSnapshot userDocument = matchingUsers.get(0);
-            return userDocument.toObject(User.class);
-        } else {
-            return null; // User not found
+            // Assuming login and password combination is unique, return the first matching user
+            System.out.println(matchingUsers.get(0));
+
+            foundUser = matchingUsers.get(0).toObject(User.class);
+            foundUser.setDocumentId(matchingUsers.get(0).getId());
+
+            // Retrieve perfil data based on perfil_id
+            System.out.println(foundUser);
+
+            String perfilId = foundUser.getPerfil_id();
+            System.out.println(perfilId);
+
+            if (perfilId != null) {
+                DocumentSnapshot perfilSnapshot;
+                perfilSnapshot = perfisCollection.document(perfilId).get().get();
+                if (perfilSnapshot.exists()) {
+                    // Assuming you have a Perfil class, adjust accordingly
+                    Perfil perfil = perfilSnapshot.toObject(Perfil.class);
+                    foundUser.setPerfil(perfil);
+                } else {
+                    throw new RuntimeException("Perfil not found for the user.");
+                }
+            }
         }
+
+        if (foundUser == null) {
+            throw new RuntimeException("Nenhum usuário encontrado com a senha e e-mail fornecidos.");
+        }
+
+        return foundUser;
     }
 
     public User findUserByEmailAndPassword(AuthenticationDTO user) throws ExecutionException, InterruptedException {
@@ -310,6 +339,12 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return findUserByEmail(username);
+        try {
+            return findUserByEmail(username);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
