@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   isUserMenuAtivo: boolean = false;
   userData!: Usuario;
   nomeUser: string = '';
+  nomePerfil: string = '';
 
   constructor(private el: ElementRef, private cadastroService: CadastroService) {}
 
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit {
       next: (usuario) => {
         this.userData = usuario;
         this.nomeUser = usuario.nome;
+        this.nomePerfil = usuario.perfil.nome;
       },
       error: (err) => {
         console.log("Erro ao procurar usuário: " + err);
