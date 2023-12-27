@@ -51,7 +51,7 @@ public class AssistidoController {
         return ResponseEntity.ok(assistoAtualizado);
     }
 
-    @DeleteMapping("/delete/{assistidoId}")
+    @DeleteMapping("/deleteUser/{assistidoId}")
     public ResponseEntity deleteAssistido(@PathVariable String assistidoId) {
         assistidoService.deleteAssistido(assistidoId);
         return ResponseEntity.ok().build();

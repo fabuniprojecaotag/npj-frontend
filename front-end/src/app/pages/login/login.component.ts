@@ -41,10 +41,10 @@ export class LoginComponent implements OnInit {
         next: (resposta) => {
           this.loading = false;
           console.log('sucesso ao logar!', resposta);
-          localStorage.setItem(
-            'user_data',
-            JSON.stringify(resposta.body?.user)
-          );
+          // localStorage.setItem(
+          //   'user_data',
+          //   JSON.stringify(resposta.body?.user)
+          // );
           this.router.navigate(['/home']);
         },
         error: (err) => {

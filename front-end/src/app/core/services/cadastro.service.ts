@@ -16,9 +16,12 @@ export class CadastroService {
     return this.http.post<Usuario>(`${this.apiUrl}/auth/register`, usuario);
   }
 
-  buscarCadastro(id: string): Observable<any> {
+  buscarCadastro(id: string): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.apiUrl}/auth/get/${id}`);
+  }
 
-    return this.http.get<any>(`${this.apiUrl}/auth/get/${id}`);
+  buscarMeuUsuario(): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.apiUrl}/auth/my-profile`);
   }
 
   editarCadastro(usuario: Usuario ): Observable<Usuario> {

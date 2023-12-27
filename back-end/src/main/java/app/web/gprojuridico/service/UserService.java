@@ -2,13 +2,17 @@ package app.web.gprojuridico.service;
 
 import app.web.gprojuridico.exception.EmailAlreadyExistsException;
 import app.web.gprojuridico.exception.NameAlreadyExistsException;
-import app.web.gprojuridico.model.User.AuthenticationDTO;
-import app.web.gprojuridico.model.User.Perfil;
-import app.web.gprojuridico.model.User.User;
+import app.web.gprojuridico.model.user.AuthenticationDTO;
+import app.web.gprojuridico.model.user.Perfil;
+import app.web.gprojuridico.model.user.User;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.google.api.core.ApiFuture;
 import com.google.api.gax.rpc.NotFoundException;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,10 +20,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
-
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private static final String COLLECTION_NAME = "acesso";
 
     public User create(User user) throws ExecutionException, InterruptedException {
@@ -92,7 +94,7 @@ public class UserService {
         // Use whereEqualTo to query for the user by login
         List<QueryDocumentSnapshot> matchingUsers;
         try {
-            matchingUsers = usersCollection.whereEqualTo("login", email).get().get().getDocuments();
+            matchingUsers = usersCollection.whereEqualTo("email", email).get().get().getDocuments();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
@@ -157,8 +159,8 @@ public class UserService {
             throw new RuntimeException("Nenhum usuário encontrado com a senha e e-mail fornecidos.");
         }
 
-        BCrypt.Result isThePhRight = BCrypt.verifyer().verify(user.password().toCharArray(), foundUser.getSenha());
-        if (isThePhRight.verified) {
+        BCrypt.Result passwordCheck = BCrypt.verifyer().verify(password.toCharArray(), foundUser.getSenha());
+        if (passwordCheck.verified) {
             return foundUser;
         } else {
             throw new RuntimeException("A Senha do usuário incorreta");
@@ -271,5 +273,43 @@ public class UserService {
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException("Erro ao buscar usuário: ", e);
         }
+    }
+
+    public User updateUser(User updatedUser) {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference userDocRef = dbFirestore.collection(COLLECTION_NAME).document(updatedUser.getDocumentId());
+
+        try {
+            DocumentSnapshot userSnapshot = userDocRef.get().get();
+            if (userSnapshot.exists()) {
+                userDocRef.update(
+                        "nome", updatedUser.getNome(),
+                        "email", updatedUser.getEmail(),
+                        "semestre", updatedUser.getSemestre(),
+                        "senha", updatedUser.getSenha(),
+                        "perfil", updatedUser.getPerfil(),
+                        "status", updatedUser.getStatus()
+                ).get();
+
+                // Recupere o usuário atualizado para retornar ao chamador
+                DocumentSnapshot updatedUserSnapshot = userDocRef.get().get();
+                User user = updatedUserSnapshot.toObject(User.class);
+                assert user != null;
+                user.setDocumentId(updatedUserSnapshot.getId());
+
+                return user;
+            } else {
+                throw new RuntimeException("Usuário não encontrado para atualização. ID: " + updatedUser.getDocumentId());
+            }
+        } catch (NotFoundException e) {
+            throw new RuntimeException("Usuário não encontrado: ", e);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Erro ao atualizar usuário: ", e);
+        }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return findUserByEmail(username);
     }
 }

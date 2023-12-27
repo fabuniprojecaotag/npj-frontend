@@ -1,14 +1,18 @@
 package app.web.gprojuridico.controller;
 
-import app.web.gprojuridico.model.User.AuthenticationDTO;
-import app.web.gprojuridico.model.User.LoginResponseDTO;
-import app.web.gprojuridico.model.User.User;
+import app.web.gprojuridico.model.user.AuthenticationDTO;
+import app.web.gprojuridico.model.user.LoginResponseDTO;
+import app.web.gprojuridico.model.user.User;
 import app.web.gprojuridico.security.TokenService;
 import app.web.gprojuridico.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,19 +23,26 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/auth")
 public class UserController {
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Autowired
     private UserService userService;
     @Autowired
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> verifyLogin(@RequestBody @Valid AuthenticationDTO user) throws ExecutionException, InterruptedException {
-        User userFound = userService.findUserByEmailAndPassword(user);
-        String access_token = tokenService.generateToken(userFound);
+    public ResponseEntity<LoginResponseDTO> verifyLogin(@RequestBody @Valid AuthenticationDTO data) throws ExecutionException, InterruptedException {
+        // User userFound = userService.findUserByEmailAndPassword(data);
 
-        return ResponseEntity.ok(new LoginResponseDTO(access_token, userFound));
+        var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
+        var auth = this.authenticationManager.authenticate(usernamePassword);
+        System.out.println(auth.getPrincipal());
+
+        String access_token = tokenService.generateToken((User) auth.getPrincipal());
+        System.out.println(access_token);
+
+
+        return ResponseEntity.ok(new LoginResponseDTO(access_token));
     }
 
     @PostMapping("/register")
@@ -61,9 +72,25 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/my-profile")
+    public ResponseEntity<User> obterMeuPerfil() {
+        // Obtém o usuário autenticado do contexto de segurança
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // Verifica se o principal é do tipo User
+        if (authentication.getPrincipal() instanceof User) {
+            User usuarioAutenticado = (User) authentication.getPrincipal();
+            return ResponseEntity.ok(usuarioAutenticado);
+        } else {
+            // Lida com a situação em que o principal não é do tipo User
+            // Pode ser um nome de usuário (String) ou outro tipo
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
     @GetMapping("/get/{usuarioId}")
     public ResponseEntity<User> getAssistidoById(@PathVariable String usuarioId) {
-       User user = userService.getUserById(usuarioId);
+        User user = userService.getUserById(usuarioId);
 
         if (user != null) {
             return ResponseEntity.ok(user);
@@ -72,8 +99,8 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{docId}")
-    public ResponseEntity<String> delete(@PathVariable String docId) {
+    @DeleteMapping("/deleteUser/{docId}")
+    public ResponseEntity<String> deleteUser(@PathVariable String docId) {
         userService.deleteUserById(docId);
         return ResponseEntity.ok().build();
     }
@@ -83,5 +110,11 @@ public class UserController {
             InterruptedException {
         ArrayList response = userService.toggleUserStatus(docId);
         return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/updateUser/{docId}")
+    public ResponseEntity<User> editUser(@PathVariable User data) {
+        userService.updateUser(data);
+        return ResponseEntity.ok().build();
     }
 }

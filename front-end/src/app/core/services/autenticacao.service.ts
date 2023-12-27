@@ -7,7 +7,6 @@ import { Usuario } from '../types/usuario';
 
 interface AuthResponse {
   access_token: string;
-  user: Usuario;
 }
 
 @Injectable({

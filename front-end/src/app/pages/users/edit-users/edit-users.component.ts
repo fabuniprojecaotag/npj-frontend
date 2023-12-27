@@ -29,7 +29,7 @@ export class EditUsersComponent implements OnInit {
 
     this.token = this.tokenService.retornarToken();
     this.usuarioService.buscarCadastro(idParam).subscribe(callback => {
-      this.cadastro = callback.result[0].result[0];
+      this.cadastro = callback;
       console.log("usuario para editar:", this.cadastro)
       this.carregarFormulario();
     })

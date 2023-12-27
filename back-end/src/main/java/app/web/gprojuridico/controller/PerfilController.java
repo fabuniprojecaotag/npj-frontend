@@ -1,7 +1,7 @@
 package app.web.gprojuridico.controller;
 
 
-import app.web.gprojuridico.model.User.Perfil;
+import app.web.gprojuridico.model.user.Perfil;
 import app.web.gprojuridico.service.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

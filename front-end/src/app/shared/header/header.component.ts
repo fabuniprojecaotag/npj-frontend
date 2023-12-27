@@ -6,6 +6,8 @@ import {
   ChangeDetectorRef,
   OnInit,
 } from '@angular/core';
+import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-header',
@@ -16,25 +18,17 @@ export class HeaderComponent implements OnInit {
   @Input() subtitulo: string = '';
   isMenuAtivo: boolean = false; // logica para abrir e fechar menu de nav
   isUserMenuAtivo: boolean = false;
-  userData: any = {};
+  userData!: Usuario;
 
-  constructor(private el: ElementRef, private cdr: ChangeDetectorRef) {}
+  constructor(private el: ElementRef, private cdr: ChangeDetectorRef, private cadastroService: CadastroService) {}
 
   ngOnInit() {
-    this.loadDataFromLocalStorage();
-  }
-
-  //isso aqui pode ser transformado em um servico separado para ser reutilizado
-  loadDataFromLocalStorage(): void {
-    const userDataString = localStorage.getItem('user_data');
-    // console.log('data do usuario:' + userDataString);
-    if (userDataString) {
-      // console.log(JSON.parse(userDataString));
-      this.userData = JSON.parse(userDataString);
-    } else {
-      this.userData = null;
-    }
-    this.cdr.detectChanges();
+    // this.loadDataFromLocalStorage();
+    this.cadastroService.buscarMeuUsuario().subscribe({
+      next: (usuario) => {
+        this.userData = usuario;
+      }
+    })
   }
 
   toggle(menu: string) {

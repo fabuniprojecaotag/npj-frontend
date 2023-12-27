@@ -1,9 +1,13 @@
-package app.web.gprojuridico.model.User;
+package app.web.gprojuridico.model.user;
+
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 import java.util.Map;
 
-public class Perfil {
+@Data
+public class Perfil implements GrantedAuthority {
     private int id;
     private String nome;
 
@@ -18,39 +22,6 @@ public class Perfil {
         this.permissoes = permissoes;
     }
 
-    // Getter and setter methods
-    public String getDocumentId() {
-        return documentId;
-    }
-
-    public void setDocumentId(String documentId) {
-        this.documentId = documentId;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public List<Map<String, Object>> getPermissoes() {
-        return permissoes;
-    }
-
-    public void setPermissoes(List<Map<String, Object>> permissoes) {
-        this.permissoes = permissoes;
-    }
-
     @Override
     public String toString() {
         return "Perfil{" +
@@ -58,5 +29,10 @@ public class Perfil {
                 ", nome='" + nome + '\'' +
                 ", permissoes=" + permissoes +
                 '}';
+    }
+
+    @Override
+    public String getAuthority() {
+        return nome;
     }
 }

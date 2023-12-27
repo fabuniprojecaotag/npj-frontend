@@ -1,7 +1,7 @@
 package app.web.gprojuridico.security;
 
-import app.web.gprojuridico.model.User.AuthenticationDTO;
-import app.web.gprojuridico.model.User.User;
+import app.web.gprojuridico.model.user.AuthenticationDTO;
+import app.web.gprojuridico.model.user.User;
 import app.web.gprojuridico.service.UserService;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

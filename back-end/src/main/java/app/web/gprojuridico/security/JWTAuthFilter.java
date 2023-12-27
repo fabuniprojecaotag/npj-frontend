@@ -1,6 +1,6 @@
 package app.web.gprojuridico.security;
 
-import app.web.gprojuridico.model.User.User;
+import app.web.gprojuridico.model.user.User;
 import app.web.gprojuridico.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 
 @Component
 public class JWTAuthFilter extends OncePerRequestFilter {
@@ -32,7 +31,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
                 var loginEmail = this.tokenService.validateToken(token);
                 User user = userService.findUserByEmail(loginEmail);
 
-                var autenticacao = new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+                var autenticacao = new UsernamePasswordAuthenticationToken(user, null,user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(autenticacao);
             } catch (RuntimeException e) {
                 SecurityContextHolder.clearContext();

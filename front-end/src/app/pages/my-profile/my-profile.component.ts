@@ -5,7 +5,7 @@ import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormUserService } from 'src/app/core/services/form-user.service';
 import { TokenService } from 'src/app/core/services/token.service';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
-import { Usuario, Perfil } from 'src/app/core/types/usuario';
+import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-my-profile',
@@ -23,28 +23,39 @@ export class MyProfileComponent implements OnInit {
   constructor(private tokenService: TokenService,
     private cadastroService: CadastroService,
     private formUserService: FormUserService,
-    private router: Router,
-    private userService: UsuarioService) { }
+    private router: Router) { }
 
   ngOnInit(): void {
-    const idParam = this.userService.retornarTokenUsuario();
     this.token = this.tokenService.retornarToken();
-    // this.cadastro.JSON.parse(this.userService.retornarUsuario());
+    this.cadastroService.buscarMeuUsuario().subscribe({
+      next: (user) => {
+        this.cadastro = user;
+        console.log(this.cadastro);
+        this.carregarFormulario();
+      },
+      error: (err) => {
+        console.log("Erro ao recupera Usuário:" + err);
+      }
+    });
   }
 
-  carregarFormulario (): void {
+  carregarFormulario(): void {
     this.form = this.formUserService.getCadastro();
     this.form?.patchValue({
-      nome: this.form?.value.nome,
+      nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
       // telefone: this.cadastro.telefone,
       semestre: this.cadastro.semestre,
       status: this.cadastro.status,
-      perfil: this.cadastro.perfil.nome,
+      perfil: this.cadastro.perfil,
       email: this.cadastro.email,
       senha: null,
-    })
+    });
 
+
+  }
+
+  atualizarUsuario() {
     const dadosAtualizados = {
       nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
@@ -52,13 +63,12 @@ export class MyProfileComponent implements OnInit {
       semestre: this.form?.value.semestre,
       status: this.form?.value.status,
       perfil: this.form?.value.perfil,
-      perfil_id: this.form?.value.perfil_id,
       email: this.form?.value.email,
       senha: this.form?.value.senha,
     }
 
     this.cadastroService.editarCadastro(dadosAtualizados).subscribe({
-      next: (response) => {
+      next: () => {
         alert('Cadastro editado com sucesso!');
         this.router.navigate(['/']);
       },
@@ -66,9 +76,5 @@ export class MyProfileComponent implements OnInit {
         console.log('erro ao atualiza cadastro: ', err);
       }
     });
-  }
-
-  atualizarUsuario() {
-    alert('usuário atualizado (so testando a chamada da função)');
   }
 }

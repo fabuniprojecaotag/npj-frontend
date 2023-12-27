@@ -1,4 +1,4 @@
-package app.web.gprojuridico.model.User;
+package app.web.gprojuridico.model.user;
 
-public record LoginResponseDTO(String access_token, User user) {
+public record LoginResponseDTO(String access_token) {
 }
