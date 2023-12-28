@@ -19,8 +19,7 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
-        System.out.println("USER AUTH ENTRY");
-        System.out.println(request.getMethod());
+        System.out.println("Método utilizado na requisição: " + request.getMethod());
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
