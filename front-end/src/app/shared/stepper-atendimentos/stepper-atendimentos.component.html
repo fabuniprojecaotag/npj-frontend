@@ -1,0 +1,33 @@
+<mat-stepper [linear]="isLinear" #stepper [formGroup]="atendimentoFormGroup">
+  <mat-step formGroupName="firstGroup">
+    <ng-template matStepLabel>Tipo de atendimento</ng-template>
+    <mat-form-field>
+      <mat-label>Estagiário</mat-label>
+      <input matInput placeholder="Nome do Estagiário" formControlName="estagiario" required>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button matStepperNext [disabled]="atendimentoFormGroup.get('firstGroup')?.invalid">Avançar</button>
+    </div>
+  </mat-step>
+  <mat-step formGroupName="secondGroup" label="Identificação do Assistido">
+    <mat-form-field>
+      <mat-label>Assistido</mat-label>
+      <input matInput formControlName="assistido" placeholder="Nome do assistido" required>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button matStepperPrevious>Voltar</button>
+      <button mat-raised-button matStepperNext [disabled]="atendimentoFormGroup.get('secondGroup')?.invalid">Avançar</button>
+    </div>
+  </mat-step>
+  <mat-step formGroupName="thirdGroup">
+    <ng-template matStepLabel>Finalização</ng-template>
+    <mat-form-field>
+      <mat-label>Histórico</mat-label>
+      <textarea matInput formControlName="historico" placeholder="Histórico do atendimento"></textarea>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button matStepperPrevious>Voltar</button>
+      <button mat-raised-button (click)="stepper.reset()">Concluir</button>
+    </div>
+  </mat-step>
+</mat-stepper>

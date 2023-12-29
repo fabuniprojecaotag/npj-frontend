@@ -16,6 +16,7 @@ import {
   MatFormFieldModule,
 } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
@@ -49,6 +50,8 @@ import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assi
 import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 import { CardAtalhosComponent } from './shared/card-atalhos/card-atalhos.component';
 import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atendimentos.component';
+import { StepperAtendimentosComponent } from './shared/stepper-atendimentos/stepper-atendimentos.component';
+import { NovoAtendimentoComponent } from './pages/novo-atendimento/novo-atendimento.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +78,8 @@ import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atend
     AssistidosShortcutsComponent,
     CardAtalhosComponent,
     CardAtendimentosComponent,
+    StepperAtendimentosComponent,
+    NovoAtendimentoComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +96,7 @@ import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atend
     MatDialogModule,
     MatCheckboxModule,
     MatTableModule,
+    MatStepperModule,
     MatSortModule,
     MatAutocompleteModule,
     MatExpansionModule,
@@ -113,4 +119,4 @@ import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atend
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
