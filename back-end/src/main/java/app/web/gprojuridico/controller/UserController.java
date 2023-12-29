@@ -30,7 +30,7 @@ public class UserController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> verifyLogin(@RequestBody @Valid AuthenticationDTO data) throws ExecutionException, InterruptedException {
+    public ResponseEntity<LoginResponseDTO> verifyLogin(@RequestBody @Valid AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @GetMapping("/get/{usuarioId}")
-    public ResponseEntity<User> getAssistidoById(@PathVariable String usuarioId) {
+    public ResponseEntity<User> getUserById(@PathVariable String usuarioId) {
         User user = userService.getUserById(usuarioId);
 
         if (user != null) {
@@ -91,8 +91,7 @@ public class UserController {
     }
 
     @PutMapping("/toggleStatus/{docId}")
-    public ResponseEntity<ArrayList> toggleStatus(@PathVariable String docId) throws ExecutionException,
-            InterruptedException {
+    public ResponseEntity<ArrayList> toggleStatus(@PathVariable String docId) {
         ArrayList response = userService.toggleUserStatus(docId);
         return ResponseEntity.ok(response);
     }

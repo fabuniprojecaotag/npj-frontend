@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService {
             user.setSenha(pw_hash);
 
             System.out.println(pw_hash);
-            System.out.println(user.getSenha());
+            System.out.println("Senha criada:" + user.getSenha());
 
             DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document();
             ApiFuture<WriteResult> collectionApiFuture = documentReference.set(user);
@@ -79,11 +79,11 @@ public class UserService implements UserDetailsService {
 
         try {
             writeResult.get();
-            System.out.println("User with ID " + documentId + " successfully deleted.");
+            System.out.println("Usuário com o ID " + documentId + " deletado com sucesso.");
         } catch (NotFoundException e) {
             throw new RuntimeException("Usuário não encontrado: ", e);
         } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException("Error deleting user: " + e.getMessage());
+            throw new RuntimeException("Erroao deletar o usuário: " + e.getMessage());
         }
     }
 
@@ -106,28 +106,13 @@ public class UserService implements UserDetailsService {
 
         if (!matchingUsers.isEmpty()) {
             // Assuming login and password combination is unique, return the first matching user
-            System.out.println(matchingUsers.get(0));
+            System.out.println("Usuário encontrado no Fb: " +matchingUsers.get(0));
 
             foundUser = matchingUsers.get(0).toObject(User.class);
             foundUser.setDocumentId(matchingUsers.get(0).getId());
 
             // Retrieve perfil data based on perfil_id
-            System.out.println(foundUser);
-
-            String perfilId = foundUser.getPerfil_id();
-            System.out.println(perfilId);
-
-            if (perfilId != null) {
-                DocumentSnapshot perfilSnapshot;
-                perfilSnapshot = perfisCollection.document(perfilId).get().get();
-                if (perfilSnapshot.exists()) {
-                    // Assuming you have a Perfil class, adjust accordingly
-                    Perfil perfil = perfilSnapshot.toObject(Perfil.class);
-                    foundUser.setPerfil(perfil);
-                } else {
-                    throw new RuntimeException("Perfil not found for the user.");
-                }
-            }
+            System.out.println("Usuário encontrado objeto: " + foundUser);
         }
 
         if (foundUser == null) {
@@ -168,20 +153,7 @@ public class UserService implements UserDetailsService {
             // Retrieve perfil data based on perfil_id
             System.out.println(foundUser);
 
-            String perfilId = foundUser.getPerfil_id();
-            System.out.println(perfilId);
 
-            if (perfilId != null) {
-                DocumentSnapshot perfilSnapshot;
-                perfilSnapshot = perfisCollection.document(perfilId).get().get();
-                if (perfilSnapshot.exists()) {
-                    // Assuming you have a Perfil class, adjust accordingly
-                    Perfil perfil = perfilSnapshot.toObject(Perfil.class);
-                    foundUser.setPerfil(perfil);
-                } else {
-                    throw new RuntimeException("Perfil not found for the user.");
-                }
-            }
         }
 
         if (foundUser == null) {
@@ -232,19 +204,6 @@ public class UserService implements UserDetailsService {
                 // Convert Firestore document to your User object
                 User user = userDocument.toObject(User.class);
                 user.setDocumentId(userDocument.getId());
-
-                // Retrieve perfil data based on perfil_id
-                String perfilId = user.getPerfil_id();
-                if (perfilId != null) {
-                    DocumentSnapshot perfilSnapshot = perfisCollection.document(perfilId).get().get();
-                    if (perfilSnapshot.exists()) {
-                        // Assuming you have a Perfil class, adjust accordingly
-                        Perfil perfil = perfilSnapshot.toObject(Perfil.class);
-                        user.setPerfil(perfil);
-                    } else {
-                        throw new RuntimeException("Perfil not found for the user.");
-                    }
-                }
 
                 // Check if the user is already in the list
                 if (!userList.contains(user)) {

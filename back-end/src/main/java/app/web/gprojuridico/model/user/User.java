@@ -1,6 +1,9 @@
 package app.web.gprojuridico.model.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,9 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class User implements UserDetails { //implements UserDetails
+public class User implements UserDetails {
 
     private int id;
     private String email;
@@ -20,18 +25,7 @@ public class User implements UserDetails { //implements UserDetails
     private String nome;
     private String semestre;
     private String status;
-    private String perfil_id;
     private String documentId;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "documentId='" + documentId + '\'' +
-                ", nome='" + nome + '\'' +
-                // ... include other fields as needed
-                '}';
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Aqui você pode mapear os perfis (Perfil) para GrantedAuthority
@@ -54,7 +48,7 @@ public class User implements UserDetails { //implements UserDetails
 
     @Override
     public String getUsername() {
-        return email;
+        return nome;
     }
 
     @Override
