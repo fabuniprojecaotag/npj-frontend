@@ -17,16 +17,6 @@ public class Perfil implements GrantedAuthority {
     private String nome;
     private String documentId;
     private List<Map<String, Object>> permissoes;
-
-    @Override
-    public String toString() {
-        return "Perfil{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", permissoes=" + permissoes +
-                '}';
-    }
-
     @Override
     public String getAuthority() {
         return nome;

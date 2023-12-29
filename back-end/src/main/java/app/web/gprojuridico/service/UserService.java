@@ -3,7 +3,6 @@ package app.web.gprojuridico.service;
 import app.web.gprojuridico.exception.EmailAlreadyExistsException;
 import app.web.gprojuridico.exception.NameAlreadyExistsException;
 import app.web.gprojuridico.model.user.AuthenticationDTO;
-import app.web.gprojuridico.model.user.Perfil;
 import app.web.gprojuridico.model.user.User;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.google.api.core.ApiFuture;
@@ -90,7 +89,6 @@ public class UserService implements UserDetailsService {
     public User findUserByEmail(String email) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
-        CollectionReference perfisCollection = dbFirestore.collection("perfis");
 
         User foundUser = null;
 
@@ -125,7 +123,6 @@ public class UserService implements UserDetailsService {
     public User findUserByEmailAndPassword(AuthenticationDTO user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference usersCollection = dbFirestore.collection(COLLECTION_NAME);
-        CollectionReference perfisCollection = dbFirestore.collection("perfis");
 
         User foundUser = null;
 
