@@ -8,8 +8,6 @@ import {
 import { Perfil } from 'src/app/core/types/usuario';
 import { formValidations } from '../form-validations';
 import { FormUserService } from 'src/app/core/services/form-user.service';
-import { RequestService } from 'src/app/core/services/request.service';
-import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-form-users',
@@ -31,7 +29,7 @@ export class FormUsersComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formService: FormUserService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formCadastro = this.formBuilder.group({
@@ -70,7 +68,7 @@ export class FormUsersComponent implements OnInit {
     this.acaoClique.emit();
   }
 
-  excluir(){
+  excluir() {
     this.cliqueExcluir.emit();
   }
 }

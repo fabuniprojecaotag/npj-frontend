@@ -1,4 +1,3 @@
-import { Observable, map, startWith } from 'rxjs';
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Perfil } from 'src/app/core/types/usuario';

@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
         this.userData = usuario;
-        this.nomeUser = usuario.nome;
+        this.nomeUser = usuario.username;
         this.nomePerfil = usuario.perfil.nome;
         this.modulosPerfil = usuario.perfil.permissoes;
       },
