@@ -38,25 +38,25 @@ export class EditUsersComponent implements OnInit {
   carregarFormulario() {
     this.form = this.formUserService.getCadastro();
     this.form?.patchValue({
-      nome: this.cadastro.nome,
+      username: this.cadastro.username,
       matricula: this.cadastro.matricula,
       semestre: this.cadastro.semestre,
       perfil: this.cadastro.perfil.nome,
       email: this.cadastro.email,
-      status: this.cadastro.status,
+      status: this.cadastro.accountNonLocked,
     });
 
   }
 
   editar() {
-    const dadosAtualizados = {
-      nome: this.form?.value.nome,
+    const dadosAtualizados: Usuario = {
+      username: this.form?.value.nome,
       matricula: this.form?.value.matricula,
       semestre: this.form?.value.semestre,
       perfil: this.form?.value.perfil,
       email: this.form?.value.email,
-      status: this.form?.value.status,
-      senha: this.form?.value.senha,
+      accountNonLocked: this.form?.value.status,
+      password: this.form?.value.senha,
     }
 
     this.cadastroService.editarCadastro(dadosAtualizados).subscribe({

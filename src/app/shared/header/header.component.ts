@@ -3,7 +3,6 @@ import {
   HostListener,
   Input,
   ElementRef,
-  ChangeDetectorRef,
   OnInit,
 } from '@angular/core';
 import { CadastroService } from 'src/app/core/services/cadastro.service';

@@ -1,12 +1,12 @@
 export interface Usuario {
   documentId?: string;
   id?: number,
-  username: string,
+  username: string, // nome
+  password: string, // senha
   email: string,
-  senha: string,
   matricula?: string,
   semestre?: string,
-  accountNonLocked: boolean,
+  accountNonLocked: boolean, // status
   perfil: Perfil
 }
 

@@ -1,6 +1,13 @@
+@import '../../../styles.scss';
+
 p {
-  color: gray;
-  font-style: italic;
-  margin: 200px 0;
+  font-size: 60px;
+  font-family: $fonte-titulo;
+  font-weight: bold;
+  padding: 200px 0;
   text-align: center;
 }
+.cabecalho-linha {
+  padding: 0;
+}
+
