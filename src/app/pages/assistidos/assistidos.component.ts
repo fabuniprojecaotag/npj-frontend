@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
-import { Callback } from 'src/app/core/types/callback';
 
 @Component({
   selector: 'app-assistidos',

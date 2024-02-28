@@ -52,6 +52,7 @@ import { CardAtalhosComponent } from './shared/card-atalhos/card-atalhos.compone
 import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atendimentos.component';
 import { StepperAtendimentosComponent } from './shared/stepper-atendimentos/stepper-atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/novo-atendimento/novo-atendimento.component';
+import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { NovoAtendimentoComponent } from './pages/novo-atendimento/novo-atendime
     CardAtendimentosComponent,
     StepperAtendimentosComponent,
     NovoAtendimentoComponent,
+    NavItemComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+<div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <p class="nav__link"><mat-icon aria-hidden="false" aria-label="People icon" fontIcon="{{ icon }}" class="icone-nav"></mat-icon>{{ titulo }}</p>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- submodulos/sub-paginas -->
+    <div>
+      <a routerLink="{{ caminhoListar }}" class="nav__link--filha">
+        <mat-icon aria-hidden="false" aria-label="list icon" fontIcon="list" class="icone-nav"></mat-icon>Visualizar
+      </a>
+    </div>
+    <div>
+      <a routerLink="{{ caminhoAdd }}" class="nav__link--filha">
+        <mat-icon aria-hidden="false" aria-label="list icon" fontIcon="add" class="icone-nav"></mat-icon>Adicionar
+      </a>
+    </div>
+  </mat-expansion-panel>
+</div>

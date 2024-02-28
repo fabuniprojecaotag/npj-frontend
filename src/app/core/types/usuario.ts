@@ -11,7 +11,7 @@ export interface Usuario {
 }
 
 export interface Perfil {
-  id?: number;
+  id: number;
   nome: string;
   documentId: string;
   permissoes: Permissoes[];

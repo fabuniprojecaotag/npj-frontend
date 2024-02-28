@@ -10,23 +10,24 @@
       </mat-expansion-panel-header>
     </mat-expansion-panel>
 
-    <!-- Outros Modulos/Páginas -->
-    <div *ngFor="let modulo of moduloPermissoes">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <p class="nav__link"><mat-icon aria-hidden="false" aria-label="People icon" fontIcon="{{modulo.icon}}" class="icone-nav"></mat-icon>{{modulo.modulo}}</p>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <!-- submodulos/sub-paginas -->
-        <div *ngFor="let opt of modulo.options">
-          <a [ngClass]="{'nav__link--filha': true, 'disabled': !opt.route}" [href]="opt.route ? opt.route : '#'" class="nav__link--filha">
-            <mat-icon aria-hidden="false" aria-label="list icon" [fontIcon]="opt.icon" class="icone-nav"></mat-icon>{{opt?.title}}
-          </a>
-        </div>
-      </mat-expansion-panel>
+    <!-- Novo modulo -->
+    <div *ngIf="perfilId >= 1">
+      <app-nav-item titulo="Assistidos" icon="person_search" caminhoListar="/assistidos" caminhoAdd="/assistidos/add"></app-nav-item>
     </div>
-
+    <div *ngIf="perfilId >= 1">
+      <app-nav-item titulo="Atendimentos" icon="check" caminhoListar="/atendimentos" caminhoAdd="/assistidos/novo-atendimento"></app-nav-item>
+    </div>
+    <div *ngIf="perfilId >= 1">
+      <app-nav-item titulo="Processos" icon="info" caminhoListar="/processos" caminhoAdd="/processos/novo-processo"></app-nav-item>
+    </div>
+    <div *ngIf="perfilId >= 4">
+      <app-nav-item titulo="Usuários" icon="manage_accounts" caminhoListar="/users" caminhoAdd="/users/add"></app-nav-item>
+    </div>
+    <div *ngIf="perfilId >= 1">
+      <app-nav-item titulo="Agenda" icon="schedule" caminhoListar="/agenda" caminhoAdd="/agenda/add"></app-nav-item>
+    </div>
+    <div *ngIf="perfilId >= 1">
+      <app-nav-item titulo="Estatisticas" icon="analytics" caminhoListar="/estatisticas" caminhoAdd="/estatisticas/add"></app-nav-item>
+    </div>
   </mat-accordion>
 </nav>

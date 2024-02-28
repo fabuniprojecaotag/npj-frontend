@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Assistido } from '../types/assistido';
 import { environment } from 'src/environments/environment.development';
-import { Callback } from '../types/callback';
 
 @Injectable({
   providedIn: 'root'

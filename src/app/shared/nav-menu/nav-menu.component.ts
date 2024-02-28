@@ -1,18 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
-import { PerfilService } from 'src/app/core/services/perfil.service';
-import { Permissoes, Usuario } from 'src/app/core/types/usuario';
+import { Permissoes } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.scss'],
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit {
   @Input() isMenuAtivo: boolean = false;
   @Input() moduloPermissoes!: Permissoes[];
   panelOpenState = false;
+  perfilId!: number;
 
 
-  constructor() {}
+  constructor(private cadastroService: CadastroService) { }
+
+  ngOnInit(): void {
+    this.cadastroService.buscarMeuUsuario().subscribe({
+      next: (usuario) => {
+        this.perfilId = usuario.perfil.id;
+      }
+    })
+  }
 }
