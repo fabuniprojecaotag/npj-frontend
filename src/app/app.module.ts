@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginatorIntl } from './shared/mat-paginatorIntl/CustomMatPaginatorIntl'; // Path to your custom implementation
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -15,6 +18,7 @@ import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldModule,
 } from '@angular/material/form-field';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { HomeComponent } from './pages/home/home.component';
@@ -24,10 +28,13 @@ import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
 import { UserMenuComponent } from './shared/user-menu/user-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -53,6 +60,9 @@ import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atend
 import { StepperAtendimentosComponent } from './shared/stepper-atendimentos/stepper-atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/novo-atendimento/novo-atendimento.component';
 import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component';
+import { ProcessosComponent } from './pages/processos/processos.component';
+import { ProcessoAddComponent } from './pages/processos/processo-add/processo-add.component';
+import { FormProcessosComponent } from './shared/form-processos/form-processos.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +92,9 @@ import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component'
     StepperAtendimentosComponent,
     NovoAtendimentoComponent,
     NavItemComponent,
+    ProcessosComponent,
+    ProcessoAddComponent,
+    FormProcessosComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +103,8 @@ import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component'
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -107,6 +122,7 @@ import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component'
     ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
@@ -118,6 +134,8 @@ import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component'
       useClass: AutenticacaoInterceptor,
       multi: true,
     },
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
   ],
   bootstrap: [AppComponent],
 })

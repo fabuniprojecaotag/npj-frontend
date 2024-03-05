@@ -1,0 +1,40 @@
+@import "../../../styles.scss";
+
+.secao-processos {
+  height: 80vh;
+  margin: 0 auto;
+  width: 90vw;
+
+  p {
+    padding-top: 3em;
+  }
+  background-color: transparent;
+}
+.border-radius-cont{
+    margin-top: 3%;
+    border-radius: 8px;
+    overflow:hidden !important;
+}
+
+.table {
+
+    th{
+        background-color:#18122B !important;
+        color: white;
+    text-align: center;
+
+    }
+    td{
+    text-align: center;
+
+    }
+   
+    .mat-mdc-checkbox mat-accent mat-mdc-checkbox-checked {
+        --mdc-checkbox-selected-icon-color: red !important;
+    }
+
+    .link{
+        color:#3F51B5
+    }
+}
+

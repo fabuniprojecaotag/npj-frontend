@@ -1,0 +1,176 @@
+<section class="container">
+    <h1>Identificação do Processo</h1>
+    <div *ngIf="listAtendimentos.length==0" class="skeleton-container">
+        <div class="skeleton" ></div>
+    </div>
+    <form  *ngIf="listAtendimentos.length>0" [formGroup]="formProcessos">
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nª do Processo</mat-label>
+            <input matInput formControlName="numero">
+            <mat-error *ngIf="formProcessos.get('numero')?.errors?.['required']">Número é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nome da ação</mat-label>
+            <input matInput formControlName="nome">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Data da distribuição</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dataDistribuicao">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+        </div>
+        <!-- <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>RG</mat-label>
+            <input matInput formControlName="rg">
+          </mat-form-field>
+        </div> -->
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Vara</mat-label>
+            <input matInput formControlName="vara">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Fórum</mat-label>
+            <input matInput formControlName="forum">
+          </mat-form-field>
+        </div>
+        <!-- <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Data de Nascimento</mat-label>
+            <input matInput formControlName="dataNascimento">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Estado Civil</mat-label>
+            <input matInput formControlName="estadoCivil">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="telefone">
+          </mat-form-field>
+        </div> -->
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Atendimento</mat-label>
+            <input type="text"
+                   placeholder="Escolha o atendimento"
+                   aria-label="Number"
+                   matInput
+                   matInput formControlName="atendimentoId"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async"  [value]="option.area">{{option.area}}</mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Status</mat-label>
+            <mat-select  matInput formControlName="status">
+                    <mat-option *ngFor="let status of statusList" [value]="status.value">{{status.label}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Endereço Residencial</mat-label>
+            <input matInput formControlName="enderecoResidencial">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Escolaridade</mat-label>
+            <input matInput formControlName="escolaridade">
+          </mat-form-field>
+        </div> -->
+      </div>
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nome do pai</mat-label>
+            <input matInput formControlName="nomePai">
+            <mat-error *ngIf="formProcessos.get('nomePai')?.errors?.['required']">Nome do Pai é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nome da mãe</mat-label>
+            <input matInput formControlName="nomeMae">
+            <mat-error *ngIf="formProcessos.get('nomeMae')?.errors?.['required']">Nome da Mãe é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Profissão</mat-label>
+            <input matInput formControlName="profissao">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Remuneração</mat-label>
+            <input matInput formControlName="remuneracao">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Cidade comercial</mat-label>
+            <input matInput formControlName="cidadeComercial">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Endereço comercial</mat-label>
+            <input matInput formControlName="enderecoComercial">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nº de dependentes</mat-label>
+            <input matInput formControlName="numDependentes">
+          </mat-form-field>
+        </div>
+      </div> -->
+    <h1>Documento necessário</h1>
+    <h4 class="upload-mgs" ><span class="upload-dot" >·</span> Protocolo da distribuição</h4>
+    <div style="display: flex;">
+    <button type="button" class="upload-btn" mat-raised-button (click)="fileInput.click()">UPLOAD DE PROTOCOLO
+        <mat-icon fontIcon="file_upload" ></mat-icon>
+    </button>
+    <input hidden  (change)="onFileSelected($event)" #fileInput type="file" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+        <span  class="file-name-info"  >Arquivos aceitos: .pdf, doc, .docx</span>
+       <span class="file-name"> {{selectedFile?.name}}</span>
+    </div>
+      <div class="btn-group">
+        <button mat-flat-button class="btn" color="warn" (click)="excluir()">EXCLUIR</button>
+        <button mat-flat-button type="reset" class="btn btn-basic">LIMPAR</button>
+        <button mat-flat-button type="submit" (click)="executarAcao()" class="btn btn-basic"
+          [disabled]="formProcessos.invalid">SALVAR</button>
+        <button mat-flat-button type="submit" (click)="executarAcao()" class="btn" color="primary"
+          [disabled]="formProcessos.invalid">SUBMETER</button>
+      </div> 
+    </form>
+  </section>
+  

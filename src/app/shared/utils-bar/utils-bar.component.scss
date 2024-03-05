@@ -16,6 +16,15 @@ mat-toolbar-row {
   .botoes-acoes {
     button {
       padding: 0 1em;
+      margin: 2%;
+    }
+    .btn-novo{
+      background-color:#3F51B5 !important;
+      color:white !important;
+    }
+    .btn-excluir{
+      margin-right: 1%;
+      background-color:rgb(246, 244, 244) !important;
     }
   }
 }

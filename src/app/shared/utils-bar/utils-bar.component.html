@@ -5,8 +5,12 @@
     <button mat-icon-button (click)="recarregar()"><mat-icon class="mat-18">restart_alt</mat-icon></button>
   </div>
   <span class="example-spacer"></span>
-  <div class="botoes-acoes">
+  <div *ngIf="!isFormButtonsAvailable().show" class="botoes-acoes">
     <button mat-button (click)="voltar()">VOLTAR</button>
     <button mat-raised-button (click)="avancar()">AVANÇAR</button>
+  </div>
+  <div *ngIf="isFormButtonsAvailable().show" class="botoes-acoes">
+    <button class="btn-excluir" mat-button (click)="voltar()">EXCLUIR</button>
+    <button class="btn-novo" mat-raised-button [routerLink]="[isFormButtonsAvailable().add]">NOVO</button>
   </div>
 </mat-toolbar-row>

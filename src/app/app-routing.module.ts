@@ -13,7 +13,8 @@ import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistid
 import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assistidos-edit.component';
 import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 import { NovoAtendimentoComponent } from './pages/novo-atendimento/novo-atendimento.component';
-
+import { ProcessosComponent } from './pages/processos/processos.component';
+import { ProcessoAddComponent } from './pages/processos/processo-add/processo-add.component';
 const routes: Routes = [
   {
     path: '',
@@ -77,6 +78,16 @@ const routes: Routes = [
   {
     path: 'perfis',
     component: PerfisComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'processos',
+    component: ProcessosComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'processos/novo-processo',
+    component: ProcessoAddComponent,
     canActivate: [authGuard],
   },
 ];

@@ -1,0 +1,77 @@
+<app-header [subtitulo]="tituloPagina"></app-header>
+<app-utils-bar></app-utils-bar>
+<section class="secao-processos">
+  <div class="mat-elevation-z8 border-radius-cont ">
+    <table mat-table class="table" color="red" [dataSource]="listaProcessos">
+        <!-- Checkbox  -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox 
+                            color="primary"
+                            (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox 
+                            color="primary"
+                            (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+    <!-- Número Coluna -->
+      <ng-container matColumnDef="numero">
+        <th mat-header-cell  *matHeaderCellDef > ID </th>
+        <td mat-cell *matCellDef="let processo" class="link"> {{processo.numero}} </td>
+      </ng-container>
+      <!-- Nome Coluna -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let processo"> {{processo.nome}} </td>
+      </ng-container>
+
+      <!-- Vara Coluna -->
+      <ng-container matColumnDef="vara">
+        <th mat-header-cell *matHeaderCellDef> Vara </th>
+        <td mat-cell *matCellDef="let processo"> {{ processo.vara}} </td>
+      </ng-container>
+       <!-- Data distribuicao Coluna -->
+       <ng-container matColumnDef="dataDistribuicao">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let processo"> {{processo.dataDistribuicao}} </td>
+      </ng-container>
+
+      <!-- Forum Coluna -->
+      <ng-container matColumnDef="forum">
+        <th mat-header-cell *matHeaderCellDef> Fórum </th>
+        <td mat-cell *matCellDef="let processo"> {{processo.forum}} </td>
+
+        <!-- <td mat-cell *matCellDef="let processo"><a [routerLink]="'/assistidos/shortcut/' + processo.documentId">{{processo.cpf}}</a></td> -->
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunasMostradas"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunasMostradas;"></tr>
+    </table>
+    <div 
+        *ngIf="isLoading" 
+        style="display: flex; justify-content: center; align-items: center;margin:2% 2%; background: white;">
+        <mat-progress-spinner 
+            color="primary" 
+            mode="indeterminate">
+        </mat-progress-spinner>
+    </div>
+    <div 
+        *ngIf="!isLoading && listaProcessos.length==0" 
+        style="display: flex; justify-content: center; align-items: center;margin:2% 2%; background: white;">
+        <h3>Não há nenhum processo!</h3>
+    </div>
+    <hr>
+    <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Rows per page:">
+    </mat-paginator>
+  </div>
+
+</section>
+

@@ -1,5 +1,16 @@
-<section class="modal">
-  <h4 mat-dialog-title>{{ data.tituloCriado }} cadastro com sucesso!</h4>
+<section [ngSwitch]="data.tituloCriado" class="modal">
+  <div *ngSwitchCase="'Processo'">
+  <h4 mat-dialog-title>{{ data.tituloCriado }} cadastrado com sucesso!</h4>
+  <div mat-dialog-content>
+    <p>Nome: {{ data.nome }}</p>
+    <p>Email: {{ data.numero }}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>FECHAR</button>
+  </div>
+  </div>
+  <div *ngSwitchCase="'Assistido'">
+  <h4 mat-dialog-title>{{ data.tituloCriado }} cadastrado com sucesso!</h4>
   <div mat-dialog-content>
     <p>Nome: {{ data.nome }}</p>
     <p>Email: {{ data.email }}</p>
@@ -7,4 +18,6 @@
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>FECHAR</button>
   </div>
+  </div>
+  <div *ngSwitchDefault class="">Nao especificado</div>
 </section>
