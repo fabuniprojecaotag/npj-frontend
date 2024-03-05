@@ -18,19 +18,17 @@ export class HeaderComponent implements OnInit {
   isMenuAtivo: boolean = false; // logica para abrir e fechar menu de nav
   isUserMenuAtivo: boolean = false;
   userData!: Usuario;
-  nomeUser: string = 'Nome';
-  nomePerfil: string = 'Perfil';
+  nomeUser: string = '';
+  nomePerfil: string = '';
 
   constructor(private el: ElementRef, private cadastroService: CadastroService) { }
 
   ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
-        console.log(usuario);
-
         this.userData = usuario;
         this.nomeUser = usuario.nome;
-        this.nomePerfil = usuario.role;
+        this.nomePerfil = this.formatarNomePerfil(usuario.role);
       },
       error: (err) => {
         console.log("Erro ao procurar usuário: " + err);
@@ -64,5 +62,9 @@ export class HeaderComponent implements OnInit {
         tituloElement.classList.remove('oculto');
       }
     }
+  }
+
+  private formatarNomePerfil(word: string): string {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }
 }

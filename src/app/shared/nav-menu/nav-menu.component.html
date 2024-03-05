@@ -18,7 +18,7 @@
       caminhoAdd="/assistidos/novo-atendimento"></app-nav-item>
     <app-nav-item titulo="Processos" icon="info" caminhoListar="/processos"
       caminhoAdd="/processos/novo-processo"></app-nav-item>
-    <div *ngIf="perfilNome == 'Coordenador'">
+    <div *ngIf="perfilNome == 'COORDENADOR' || 'ADMINISTRADOR'">
       <app-nav-item titulo="Usuários" icon="manage_accounts" caminhoListar="/users"
         caminhoAdd="/users/add"></app-nav-item>
     </div>
