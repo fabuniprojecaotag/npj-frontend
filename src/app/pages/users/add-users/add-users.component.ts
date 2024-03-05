@@ -38,7 +38,7 @@ export class AddUsersComponent {
     this.dialog.open(ModalCriadoComponent, {
       width: '552px',
       height: '360px',
-      data: {tituloCriado: 'Usuário', nome: novoCadastro.username, email: novoCadastro.email}
+      data: {tituloCriado: 'Usuário', nome: novoCadastro.nome, email: novoCadastro.email}
     })
   }
 }

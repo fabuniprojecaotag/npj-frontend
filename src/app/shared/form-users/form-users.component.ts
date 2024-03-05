@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Perfil } from 'src/app/core/types/usuario';
 import { formValidations } from '../form-validations';
 import { FormUserService } from 'src/app/core/services/form-user.service';
 
@@ -21,7 +20,7 @@ export class FormUsersComponent implements OnInit {
   @Input() perfilComponente: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
   @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
-  perfilControl = new FormControl<Perfil | null>({
+  perfilControl = new FormControl<string | null>({
     value: null,
     disabled: this.perfilComponente,
   }, Validators.required);

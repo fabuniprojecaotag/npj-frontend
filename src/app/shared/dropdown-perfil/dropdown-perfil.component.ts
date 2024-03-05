@@ -1,7 +1,6 @@
+import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Perfil } from 'src/app/core/types/usuario';
-import { PerfilService } from 'src/app/core/services/perfil.service';
 
 @Component({
   selector: 'app-dropdown-perfil',
@@ -13,13 +12,13 @@ export class DropdownPerfilComponent {
   @Input() iconePrefixo: string = '';
   @Input() control!: FormControl;
 
-  usuarioTipos: Perfil[] = [];
+  usuarioTipos!: string;
 
-  constructor(private perfilTipoService: PerfilService) {}
+  constructor(private cadastroService: CadastroService) {}
 
   ngOnInit(): void {
-    this.perfilTipoService.listar().subscribe((dados) => {
-      this.usuarioTipos = dados;
+    this.cadastroService.buscarMeuUsuario().subscribe((dados) => {
+      this.usuarioTipos = dados.role;
       console.log('tipos de usuario:', this.usuarioTipos);
     });
   }

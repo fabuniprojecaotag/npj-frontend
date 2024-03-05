@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
-import { PerfisComponent } from './pages/perfis/perfis.component';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { authGuard } from './core/guards/auth.guard';
@@ -72,11 +71,6 @@ const routes: Routes = [
   {
     path: 'assistidos/novo-atendimento',
     component: NovoAtendimentoComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'perfis',
-    component: PerfisComponent,
     canActivate: [authGuard],
   },
 ];

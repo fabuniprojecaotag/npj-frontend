@@ -38,28 +38,30 @@ export class EditUsersComponent implements OnInit {
   carregarFormulario() {
     this.form = this.formUserService.getCadastro();
     this.form?.patchValue({
-      username: this.cadastro.username,
+      id: this.cadastro.id,
+      username: this.cadastro.nome,
       matricula: this.cadastro.matricula,
       semestre: this.cadastro.semestre,
-      perfil: this.cadastro.perfil.nome,
+      perfil: this.cadastro.role,
       email: this.cadastro.email,
-      status: this.cadastro.accountNonLocked,
+      status: this.cadastro.status,
     });
 
   }
 
   editar() {
     const dadosAtualizados: Usuario = {
-      username: this.form?.value.nome,
+      id:  this.form?.value.id,
+      nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
       semestre: this.form?.value.semestre,
-      perfil: this.form?.value.perfil,
+      role: this.form?.value.perfil,
       email: this.form?.value.email,
-      accountNonLocked: this.form?.value.status,
-      password: this.form?.value.senha,
+      status: this.form?.value.status,
+      senha: this.form?.value.senha,
     }
 
-    this.cadastroService.editarCadastro(dadosAtualizados).subscribe({
+    this.cadastroService.editarCadastro(dadosAtualizados, this.cadastro.id).subscribe({
       next: (response) => {
         alert('Atualização feita com sucesso!');
         this.router.navigate(['/users']);
@@ -71,7 +73,7 @@ export class EditUsersComponent implements OnInit {
   }
 
   excluir () {
-    this.cadastroService.excluirCadastro(this.cadastro.perfil.documentId).subscribe({
+    this.cadastroService.excluirCadastro(this.cadastro.role).subscribe({
       next: (response) => {
         alert("Usuário excluido com sucesso");
         this.router.navigate(['/users']);

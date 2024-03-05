@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
-import { Permissoes, Usuario } from 'src/app/core/types/usuario';
+import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-header',
@@ -18,19 +18,19 @@ export class HeaderComponent implements OnInit {
   isMenuAtivo: boolean = false; // logica para abrir e fechar menu de nav
   isUserMenuAtivo: boolean = false;
   userData!: Usuario;
-  nomeUser: string = '';
-  nomePerfil: string = '';
-  modulosPerfil!: Permissoes[];
+  nomeUser: string = 'Nome';
+  nomePerfil: string = 'Perfil';
 
-  constructor(private el: ElementRef, private cadastroService: CadastroService) {}
+  constructor(private el: ElementRef, private cadastroService: CadastroService) { }
 
   ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
+        console.log(usuario);
+
         this.userData = usuario;
-        this.nomeUser = usuario.username;
-        this.nomePerfil = usuario.perfil.nome;
-        this.modulosPerfil = usuario.perfil.permissoes;
+        this.nomeUser = usuario.nome;
+        this.nomePerfil = usuario.role;
       },
       error: (err) => {
         console.log("Erro ao procurar usuário: " + err);

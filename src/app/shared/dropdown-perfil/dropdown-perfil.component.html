@@ -2,7 +2,7 @@
   <mat-label>Selecione o tipo de perfil</mat-label>
   <mat-select matInput [formControl]="control" ngDefaultControl>
     <mat-option *ngFor="let perfil of usuarioTipos" [value]="perfil">
-      {{ perfil.nome }}
+      {{ perfil }}
     </mat-option>
   </mat-select>
 </mat-form-field>

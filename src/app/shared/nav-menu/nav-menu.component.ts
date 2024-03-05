@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
-import { Permissoes } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,9 +8,8 @@ import { Permissoes } from 'src/app/core/types/usuario';
 })
 export class NavMenuComponent implements OnInit {
   @Input() isMenuAtivo: boolean = false;
-  @Input() moduloPermissoes!: Permissoes[];
   panelOpenState = false;
-  perfilId!: number;
+  perfilNome!: string;
 
 
   constructor(private cadastroService: CadastroService) { }
@@ -19,7 +17,7 @@ export class NavMenuComponent implements OnInit {
   ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
-        this.perfilId = usuario.perfil.id;
+        this.perfilNome = usuario.role;
       }
     })
   }

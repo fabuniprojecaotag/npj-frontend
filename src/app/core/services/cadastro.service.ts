@@ -13,26 +13,26 @@ export class CadastroService {
   constructor(private http: HttpClient) { }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/auth/register`, usuario);
+    return this.http.post<Usuario>(`${this.apiUrl}/usuários`, usuario);
   }
 
   buscarCadastro(id: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/auth/get/${id}`);
+    return this.http.get<Usuario>(`${this.apiUrl}/usuários/${id}`);
   }
 
   buscarMeuUsuario(): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/auth/my-profile`);
-  }
-
-  editarCadastro(usuario: Usuario ): Observable<Usuario> {
-    return this.http.patch<Usuario>(`${this.apiUrl}/auth/update`, usuario);
+    return this.http.get<Usuario>(`${this.apiUrl}/usuários/me`);
   }
 
   listar(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/auth/list`);
+    return this.http.get<Usuario[]>(`${this.apiUrl}/usuários`);
+  }
+
+  editarCadastro(usuario: Usuario, userId: string): Observable<Usuario> {
+    return this.http.patch<Usuario>(`${this.apiUrl}/usuários/${userId}`, usuario);
   }
 
   excluirCadastro(userId: string) {
-    return this.http.delete(`${this.apiUrl}/auth/delete/${userId}`)
+    return this.http.delete(`${this.apiUrl}/usuários/${userId}`)
   }
 }
