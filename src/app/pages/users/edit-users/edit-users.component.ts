@@ -39,7 +39,7 @@ export class EditUsersComponent implements OnInit {
     this.form = this.formUserService.getCadastro();
     this.form?.patchValue({
       id: this.cadastro.id,
-      username: this.cadastro.nome,
+      nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
       semestre: this.cadastro.semestre,
       perfil: this.cadastro.role,
