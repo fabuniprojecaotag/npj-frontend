@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { ProcessosService } from 'src/app/core/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
 import { isNull,formatDate } from 'src/app/utils/functios.service';
 import {SelectionModel} from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-processos',
@@ -24,6 +25,10 @@ export class ProcessosComponent {
     'forum',
     'dataDistribuicao',
   ];
+  displayedProcessos: Processo[] = [];
+  totalProcessos: number = 0;
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
   selection = new SelectionModel<any>(true, []);
 
   isAllSelected() {
@@ -54,6 +59,7 @@ export class ProcessosComponent {
             }
           });
         });
+        this.displayedProcessos=this.listaProcessos;
         this.isLoading = false;
         console.log("lista de processos:", response);
       },
@@ -62,5 +68,22 @@ export class ProcessosComponent {
         console.log("erro ao coletar lista de processos:", err);
       }
     });
+    this.updatePaginator()
+
+  }
+
+
+  updatePaginator(): void {
+    if(!this.paginator) return;
+    this.totalProcessos = this.listaProcessos.length;
+    this.displayedProcessos = this.listaProcessos.slice(
+      this.paginator.pageIndex * this.paginator.pageSize,
+      (this.paginator.pageIndex + 1) * this.paginator.pageSize
+    );
+  }
+
+  // Function to handle paginator page change
+  onPageChange(event: any): void {
+    this.updatePaginator();
   }
 }

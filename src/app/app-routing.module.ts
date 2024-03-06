@@ -80,6 +80,11 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'processos/novo-processo/:numero',
+    component: ProcessoAddComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: 'processos/novo-processo',
     component: ProcessoAddComponent,
     canActivate: [authGuard],

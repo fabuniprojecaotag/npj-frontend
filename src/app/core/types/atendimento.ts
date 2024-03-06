@@ -1,5 +1,5 @@
 export interface Atendimento {
-    id: string | null;
+    id: string;
     status: string;
     area: string;
     instante: {

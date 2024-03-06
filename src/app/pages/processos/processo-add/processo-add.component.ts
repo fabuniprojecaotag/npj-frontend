@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormProcessosService } from 'src/app/core/services/form-processos.service';
 import { ProcessosService } from 'src/app/core/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
@@ -11,15 +12,32 @@ import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.c
   templateUrl: './processo-add.component.html',
   styleUrls: ['./processo-add.component.scss']
 })
-export class ProcessoAddComponent {
+export class ProcessoAddComponent implements OnInit {
   tituloDaPagina: string = 'Novo Processo';
 
   constructor(private formProcessosService: FormProcessosService,
     private processoService: ProcessosService,
     private router: Router,
+    private route: ActivatedRoute,
     private dialog: MatDialog) { }
+    
+    isEditable: any = false
+
+    ngOnInit(): void {
+
+      const id = this.route.snapshot.paramMap.get('numero') as string
+      // console.log(this.isEditable)
+      if(id!=undefined){
+        console.log(`edicao`)
+      
+      }else{
+        console.log(`cadastro`)
+      }
+
+    }
 
   cadastrar(): void {
+
     const formCadastroProcessso = this.formProcessosService.getCadastro();
 
     if (formCadastroProcessso?.valid) {

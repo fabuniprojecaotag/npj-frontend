@@ -65,13 +65,13 @@ export class FormProcessosComponent implements OnInit{
     }
     
 statusList = [
-  {value: '1', label: 'Finalizado'},
-  {value: '2', label: 'Aguardando'},
+  {value: '1', label: 'Ativo'},
+  {value: '2', label: 'Arquivado'},
 ]
 
 private _filter(value: string): Atendimento[] {
   const filterValue = value.toLowerCase();
-  return this.listAtendimentos.filter(option => option.area.toLowerCase().includes(filterValue));
+  return this.listAtendimentos.filter(option => option?.id.toLowerCase().includes(filterValue));
 }
 
 selectedFile: any = null;

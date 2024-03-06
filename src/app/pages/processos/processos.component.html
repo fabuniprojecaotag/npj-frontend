@@ -2,7 +2,7 @@
 <app-utils-bar></app-utils-bar>
 <section class="secao-processos">
   <div class="mat-elevation-z8 border-radius-cont ">
-    <table mat-table class="table" color="red" [dataSource]="listaProcessos">
+    <table mat-table class="table" color="red" [dataSource]="displayedProcessos">
         <!-- Checkbox  -->
         <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>
@@ -25,7 +25,8 @@
     <!-- Número Coluna -->
       <ng-container matColumnDef="numero">
         <th mat-header-cell  *matHeaderCellDef > ID </th>
-        <td mat-cell *matCellDef="let processo" class="link"> {{processo.numero}} </td>
+        <td mat-cell class="link" *matCellDef="let processo"><a [routerLink]="'/processos/novo-processo/' + processo.numero">{{processo.numero}}</a></td>
+
       </ng-container>
       <!-- Nome Coluna -->
       <ng-container matColumnDef="nome">
@@ -69,7 +70,13 @@
         <h3>Não há nenhum processo!</h3>
     </div>
     <hr>
-    <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Rows per page:">
+    <mat-paginator 
+    #paginator
+    class="paginator"
+    [length]="listaProcessos.length"
+    [pageSize]="10"
+    (page)="onPageChange($event)"
+    [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Itens por página:">
     </mat-paginator>
   </div>
 
