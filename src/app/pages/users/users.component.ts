@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
@@ -15,7 +16,7 @@ export class UsersComponent implements OnInit {
     'select',
     'matricula',
     'nome',
-    'tipo',
+    'role',
     'semestre',
     'status',
   ];
@@ -35,6 +36,12 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+
+  // @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  // ngAfterViewInit() {
+  //   this.listaUsuarios.paginator = this.paginator;
+  // }
 
   /** Ve se tudo ta selecionado (do exemplo do material) */
   isAllSelected() {

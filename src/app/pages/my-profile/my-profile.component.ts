@@ -42,32 +42,31 @@ export class MyProfileComponent implements OnInit {
   carregarFormulario(): void {
     this.form = this.formUserService.getCadastro();
     this.form?.patchValue({
-      nome: this.cadastro.username,
+      nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
       // telefone: this.cadastro.telefone,
       semestre: this.cadastro.semestre,
-      status: this.cadastro.accountNonLocked,
-      perfil: this.cadastro.perfil,
+      status: this.cadastro.status,
+      perfil: this.cadastro.role,
       email: this.cadastro.email,
       senha: null,
     });
-
-
   }
 
   atualizarUsuario() {
     const dadosAtualizados: Usuario = {
-      username: this.form?.value.nome,
+      id: this.form?.value.id,
+      nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
       // telefone: this.form?.value.telefone,
       semestre: this.form?.value.semestre,
-      accountNonLocked: this.form?.value.status,
-      perfil: this.form?.value.perfil,
+      status: this.form?.value.status,
+      role: this.form?.value.perfil,
       email: this.form?.value.email,
-      password: this.form?.value.senha,
+      senha: this.form?.value.senha,
     }
 
-    this.cadastroService.editarCadastro(dadosAtualizados).subscribe({
+    this.cadastroService.editarCadastro(dadosAtualizados, dadosAtualizados.id).subscribe({
       next: () => {
         alert('Cadastro editado com sucesso!');
         this.router.navigate(['/']);

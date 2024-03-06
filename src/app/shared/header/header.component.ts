@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
-import { Permissoes, Usuario } from 'src/app/core/types/usuario';
+import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-header',
@@ -20,17 +20,15 @@ export class HeaderComponent implements OnInit {
   userData!: Usuario;
   nomeUser: string = '';
   nomePerfil: string = '';
-  modulosPerfil!: Permissoes[];
 
-  constructor(private el: ElementRef, private cadastroService: CadastroService) {}
+  constructor(private el: ElementRef, private cadastroService: CadastroService) { }
 
   ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
         this.userData = usuario;
-        this.nomeUser = usuario.username;
-        this.nomePerfil = usuario.perfil.nome;
-        this.modulosPerfil = usuario.perfil.permissoes;
+        this.nomeUser = usuario.nome;
+        this.nomePerfil = this.formatarNomePerfil(usuario.role);
       },
       error: (err) => {
         console.log("Erro ao procurar usuário: " + err);
@@ -64,5 +62,9 @@ export class HeaderComponent implements OnInit {
         tituloElement.classList.remove('oculto');
       }
     }
+  }
+
+  private formatarNomePerfil(word: string): string {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }
 }
