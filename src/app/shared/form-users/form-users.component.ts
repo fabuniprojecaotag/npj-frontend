@@ -16,14 +16,11 @@ import { FormUserService } from 'src/app/core/services/form-user.service';
 export class FormUsersComponent implements OnInit {
   formCadastro!: FormGroup;
   escondido = true;
-  perfis = [];
+  perfis = ["COORDENADOR", "ESTAGIARIO", "SECRETARIA", "ADMINISTRADOR"];
   @Input() perfilComponente: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
   @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
-  perfilControl = new FormControl<string | null>({
-    value: null,
-    disabled: this.perfilComponente,
-  }, Validators.required);
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,9 +34,9 @@ export class FormUsersComponent implements OnInit {
       telefone: [null],
       semestre: [null],
       status: [{ value: null, disabled: this.perfilComponente }],
-      perfil: this.perfilControl,
       email: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
+      perfil: [{value: null,disabled: this.perfilComponente,}, Validators.required],
       confirmarEmail: [
         null,
         [

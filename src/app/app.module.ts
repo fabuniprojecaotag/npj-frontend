@@ -37,7 +37,6 @@ import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { FormUsersComponent } from './shared/form-users/form-users.component';
 import { UtilsBarComponent } from './shared/utils-bar/utils-bar.component';
-import { DropdownPerfilComponent } from './shared/dropdown-perfil/dropdown-perfil.component';
 import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
 import { EditUsersComponent } from './pages/users/edit-users/edit-users.component';
 import { ModalCriadoComponent } from './shared/modal-criado/modal-criado.component';
@@ -66,7 +65,6 @@ import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component'
     MyProfileComponent,
     FormUsersComponent,
     UtilsBarComponent,
-    DropdownPerfilComponent,
     EditUsersComponent,
     ModalCriadoComponent,
     AssistidosComponent,

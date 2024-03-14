@@ -19,7 +19,14 @@
               <input matInput formControlName="nome" placeholder="Nome">
               <mat-error *ngIf="formCadastro.get('nome')?.errors">Nome é obrigatório</mat-error>
             </mat-form-field>
-            <app-dropdown-perfil label="Perfil" placeholder="Perfil" [control]="perfilControl"></app-dropdown-perfil>
+            <mat-form-field class="input-container" appearance="outline">
+              <mat-label>Selecione o tipo de perfil</mat-label>
+              <mat-select matInput formControlName="perfil" ngDefaultControl>
+                <mat-option *ngFor="let perfil of perfis" [value]="perfil">
+                  {{ perfil }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>            
             <mat-error *ngIf="formCadastro.get('perfil')?.errors">Perfil é obrigatório</mat-error>
           </div>
           <div class="grid-item">
