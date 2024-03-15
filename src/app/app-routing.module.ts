@@ -11,7 +11,8 @@ import { AssistidosComponent } from './pages/assistidos/assistidos.component';
 import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
 import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assistidos-edit.component';
 import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
-import { NovoAtendimentoComponent } from './pages/novo-atendimento/novo-atendimento.component';
+import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
+import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,11 @@ const routes: Routes = [
   {
     path: 'assistidos/novo-atendimento',
     component: NovoAtendimentoComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'atendimentos',
+    component: AtendimentosComponent,
     canActivate: [authGuard],
   },
 ];

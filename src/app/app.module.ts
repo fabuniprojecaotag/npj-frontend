@@ -49,8 +49,9 @@ import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shor
 import { CardAtalhosComponent } from './shared/card-atalhos/card-atalhos.component';
 import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atendimentos.component';
 import { StepperAtendimentosComponent } from './shared/stepper-atendimentos/stepper-atendimentos.component';
-import { NovoAtendimentoComponent } from './pages/novo-atendimento/novo-atendimento.component';
 import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component';
+import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
+import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component'
     StepperAtendimentosComponent,
     NovoAtendimentoComponent,
     NavItemComponent,
+    AtendimentosComponent,
   ],
   imports: [
     BrowserModule,
