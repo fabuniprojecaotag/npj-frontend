@@ -1,5 +1,4 @@
 export interface Usuario {
-  documentId?: string;
   id: string,
   nome: string,
   senha: string,

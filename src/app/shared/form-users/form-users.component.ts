@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -16,7 +15,7 @@ import { FormUserService } from 'src/app/core/services/form-user.service';
 export class FormUsersComponent implements OnInit {
   formCadastro!: FormGroup;
   escondido = true;
-  perfis = ["COORDENADOR", "ESTAGIARIO", "SECRETARIA", "ADMINISTRADOR"];
+  perfis = ["COORDENADOR", "ESTAGIARIO", "PROFESSOR", "SECRETARIA", "ADMINISTRADOR"];
   @Input() perfilComponente: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
   @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
@@ -36,7 +35,7 @@ export class FormUsersComponent implements OnInit {
       status: [{ value: null, disabled: this.perfilComponente }],
       email: [null, [Validators.required, Validators.email]],
       senha: [null, Validators.required],
-      perfil: [{value: null,disabled: this.perfilComponente,}, Validators.required],
+      perfil: [{ value: null, disabled: this.perfilComponente, }, Validators.required],
       confirmarEmail: [
         null,
         [

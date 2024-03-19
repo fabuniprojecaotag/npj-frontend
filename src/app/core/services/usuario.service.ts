@@ -17,9 +17,13 @@ export class UsuarioService {
   }
 
   decodificarJWT() {
-    const token = this.tokenService.retornarToken();
-    const usuario = jwtDecode(token) as Usuario;
-    this.userSubject.next(usuario);
+    try {
+      const token = this.tokenService.retornarToken();
+      const usuario = jwtDecode(token) as Usuario;
+      this.userSubject.next(usuario);
+    } catch (error) {
+      console.error('Erro ao decodificar o token JWT:', error);
+    }
   }
 
   retornarTokenUsuario() {
