@@ -16,8 +16,8 @@ export class CadastroService {
     return this.http.post<Usuario>(`${this.apiUrl}/usuários`, usuario);
   }
 
-  buscarCadastro(id: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/usuários/${id}`);
+  buscarCadastro(email: string): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.apiUrl}/usuários/${email}`);
   }
 
   buscarMeuUsuario(): Observable<Usuario> {
@@ -33,7 +33,7 @@ export class CadastroService {
     return this.http.patch<Usuario>(`${this.apiUrl}/usuários/${userId}`, usuario);
   }
 
-  excluirCadastro(userId: string) {
-    return this.http.delete(`${this.apiUrl}/usuários/${userId}`)
+  excluirCadastro(userEmail: string) {
+    return this.http.delete(`${this.apiUrl}/usuários/${userEmail}`)
   }
 }
