@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Usuario } from '../types/usuario';
@@ -24,8 +24,9 @@ export class CadastroService {
     return this.http.get<Usuario>(`${this.apiUrl}/usuários/me`);
   }
 
-  listar(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/usuários`);
+  listar(pagina: number): Observable<Usuario[]> {
+    let params = new HttpParams().set('value', pagina.toString())
+    return this.http.get<Usuario[]>(`${this.apiUrl}/usuários`, { params });
   }
 
   editarCadastro(usuario: Usuario, userId: string): Observable<Usuario> {

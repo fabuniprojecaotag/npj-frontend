@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AssistidoAddComponent } from './assistido-add.component';
+import { AppModule } from 'src/app/app.module';
 
 describe('AssistidoAddComponent', () => {
   let component: AssistidoAddComponent;
@@ -8,7 +9,8 @@ describe('AssistidoAddComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AssistidoAddComponent]
+      declarations: [AssistidoAddComponent],
+      imports: [AppModule]
     });
     fixture = TestBed.createComponent(AssistidoAddComponent);
     component = fixture.componentInstance;

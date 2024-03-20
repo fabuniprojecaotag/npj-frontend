@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
@@ -9,7 +10,7 @@ import { Usuario } from 'src/app/core/types/usuario';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements AfterViewInit {
   tituloDaPagina: string = 'Usuários';
   listaUsuarios: Usuario[] = [];
   colunasMostradas: string[] = [
@@ -25,23 +26,20 @@ export class UsersComponent implements OnInit {
 
   constructor(private service: CadastroService) {}
 
-  ngOnInit(): void {
-    this.service.listar().subscribe({
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit(): void {
+    this.service.listar(this.paginator.pageIndex = 0).subscribe({
       next: (response) => {
         console.log('Lista de usuários:', response);
         this.listaUsuarios = response;
+        this.paginator.pageIndex;
       },
       error: (err) => {
         console.error('Erro ao listar usuários:', err);
       }
     });
   }
-
-  // @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  // ngAfterViewInit() {
-  //   this.listaUsuarios.paginator = this.paginator;
-  // }
 
   /** Ve se tudo ta selecionado (do exemplo do material) */
   isAllSelected() {

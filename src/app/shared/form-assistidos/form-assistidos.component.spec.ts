@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormAssistidosComponent } from './form-assistidos.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AppModule } from 'src/app/app.module';
 
 describe(FormAssistidosComponent.name, () => {
   let component: FormAssistidosComponent;
@@ -8,7 +11,8 @@ describe(FormAssistidosComponent.name, () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FormAssistidosComponent]
+      declarations: [FormAssistidosComponent],
+      imports: [AppModule]
     });
     fixture = TestBed.createComponent(FormAssistidosComponent);
     component = fixture.componentInstance;

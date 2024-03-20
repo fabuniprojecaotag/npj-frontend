@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { NavItemComponent } from 'src/app/shared/nav-menu/nav-item/nav-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
+import { AppModule } from 'src/app/app.module';
 
 describe('AssistidosShortcutsComponent', () => {
   let component: AssistidosShortcutsComponent;
@@ -21,14 +22,14 @@ describe('AssistidosShortcutsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AssistidosShortcutsComponent, HeaderComponent, CardAtalhosComponent, NavMenuComponent, UserMenuComponent, NavItemComponent],
-      imports: [HttpClientModule, RouterModule, BrowserAnimationsModule, MatToolbarModule, MatIconModule, MatExpansionModule, MatCardModule],
+      imports: [AppModule],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
             snapshot: {
               paramMap: {
-                get: (key: string) => 'test' // Simule um valor para paramMap.get()
+                get: (key: string) => 'test'
               }
             }
           }

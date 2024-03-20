@@ -16,6 +16,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppModule } from 'src/app/app.module';
 
 describe('NovoAtendimentoComponent', () => {
   let component: NovoAtendimentoComponent;
@@ -24,17 +25,7 @@ describe('NovoAtendimentoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoAtendimentoComponent, HeaderComponent, UtilsBarComponent, StepperAtendimentosComponent, NavMenuComponent, UserMenuComponent, NavItemComponent],
-      imports: [
-        HttpClientModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatExpansionModule,
-        BrowserAnimationsModule,
-        MatStepperModule,
-        MatFormFieldModule,
-        RouterModule,
-        ReactiveFormsModule
-      ],
+      imports: [AppModule],
       providers: [
         {
           provide: ActivatedRoute,

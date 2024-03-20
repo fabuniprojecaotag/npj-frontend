@@ -104,7 +104,7 @@ import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/
     MatMenuModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatPaginatorModule,
+    MatPaginatorModule
   ],
   providers: [
     {

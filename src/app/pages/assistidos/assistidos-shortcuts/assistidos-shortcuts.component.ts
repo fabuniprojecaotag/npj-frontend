@@ -18,8 +18,8 @@ export class AssistidosShortcutsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('documentId') as string;
-    this.linkCardAssistido = `/assistidos/edit/${idParam}`;
+    const idParam = this.route.snapshot.paramMap.get('cpf') as string;
+    this.linkCardAssistido = `/assistidos/${idParam}`;
 
     this.assistidosService.consultar(idParam).subscribe({
       next: (resposta) => {
