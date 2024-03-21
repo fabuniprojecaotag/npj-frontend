@@ -60,4 +60,13 @@ export class UsersComponent implements AfterViewInit {
       ? this.selection.clear()
       : this.listaUsuarios.forEach((row) => this.selection.select(row));
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }

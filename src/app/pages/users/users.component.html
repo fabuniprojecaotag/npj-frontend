@@ -1,7 +1,10 @@
 <app-header [subtitulo]="tituloDaPagina"></app-header>
 <app-utils-bar></app-utils-bar>
 <section class="secao-usuarios">
-  <p>Tudo > Tipo de usuário = “Estagiário” > Status = Ativo</p>
+  <mat-form-field class="secao-usuarios__filtro">
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Carlos" #input>
+  </mat-form-field>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
 
