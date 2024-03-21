@@ -23,7 +23,6 @@ export class UsersComponent implements AfterViewInit {
     'status',
   ];
   selection = new SelectionModel<Usuario>(true, []);
-  // filtro: string = '';
 
   constructor(private service: CadastroService) {}
 

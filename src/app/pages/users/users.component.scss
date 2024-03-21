@@ -16,4 +16,15 @@
   .secao-usuarios__mural {
     overflow-x: auto;
   }
+
+  .mat-mdc-table thead,
+  .mat-mdc-table .mat-mdc-header-cell {
+    background: $roxo-escuro;
+    color: $branco;
+    text-align: center;
+  }
+
+  .mat-mdc-cell {
+    text-align: center;
+  }
 }

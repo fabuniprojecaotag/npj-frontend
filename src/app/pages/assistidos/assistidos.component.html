@@ -1,9 +1,12 @@
 <app-header [subtitulo]="tituloPagina"></app-header>
 <app-utils-bar></app-utils-bar>
 <section class="secao-assistidos">
-  <p>Tudo > Assistidos</p>
+  <mat-form-field class="secao-assistidos__filtro">
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ATE00001" #input>
+  </mat-form-field>
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="listaAssistidos">
+    <table mat-table [dataSource]="dataSource">
       <!-- Nome Coluna -->
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
