@@ -81,10 +81,11 @@ describe(CadastroService.name, () => {
   });
 
   it(`#${CadastroService.prototype.listar.name} should return a user list`, done => {
-    service.listar(1).subscribe(userList => {
+    service.listar().subscribe(userList => {
       expect(userList).not.toBeFalsy();
       done();
     });
-    httpController.expectOne(mockUserData.apiMyUser).flush(mockUserData.usuarios);
+
+    httpController.expectOne(mockUserData.api).flush(mockUserData.usuarios);
   });
 });

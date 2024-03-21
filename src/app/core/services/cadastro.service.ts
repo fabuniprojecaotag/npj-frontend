@@ -24,9 +24,8 @@ export class CadastroService {
     return this.http.get<Usuario>(`${this.apiUrl}/usuários/me`);
   }
 
-  listar(pagina: number): Observable<Usuario[]> {
-    let params = new HttpParams().set('value', pagina.toString())
-    return this.http.get<Usuario[]>(`${this.apiUrl}/usuários`, { params });
+  listar(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/usuários`);
   }
 
   editarCadastro(usuario: Usuario, userId: string): Observable<Usuario> {

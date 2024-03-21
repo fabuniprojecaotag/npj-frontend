@@ -1,7 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
@@ -13,6 +13,7 @@ import { Usuario } from 'src/app/core/types/usuario';
 export class UsersComponent implements AfterViewInit {
   tituloDaPagina: string = 'Usuários';
   listaUsuarios: Usuario[] = [];
+  dataSource: any;
   colunasMostradas: string[] = [
     'select',
     'matricula',
@@ -22,18 +23,23 @@ export class UsersComponent implements AfterViewInit {
     'status',
   ];
   selection = new SelectionModel<Usuario>(true, []);
-  filtro: string = '';
+  // filtro: string = '';
 
   constructor(private service: CadastroService) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit(): void {
-    this.service.listar(this.paginator.pageIndex = 0).subscribe({
+    this.service.listar().subscribe({
       next: (response) => {
         console.log('Lista de usuários:', response);
         this.listaUsuarios = response;
-        this.paginator.pageIndex;
+
+        // Inicializa a seleção com base no status dos usuários
+        this.selection = new SelectionModel<Usuario>(true, this.listaUsuarios.filter(user => user.status));
+
+        this.dataSource = new MatTableDataSource<Usuario>(this.listaUsuarios);
+        this.dataSource.paginator = this.paginator;
       },
       error: (err) => {
         console.error('Erro ao listar usuários:', err);
