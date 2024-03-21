@@ -14,6 +14,7 @@ import { NavItemComponent } from 'src/app/shared/nav-menu/nav-item/nav-item.comp
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { AppModule } from 'src/app/app.module';
 
 describe('AtendimentosComponent', () => {
   let component: AtendimentosComponent;
@@ -22,16 +23,7 @@ describe('AtendimentosComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AtendimentosComponent, HeaderComponent, UtilsBarComponent, NavMenuComponent, UserMenuComponent, NavItemComponent],
-      imports: [
-        HttpClientModule,
-        MatPaginatorModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatExpansionModule,
-        MatTableModule,
-        BrowserAnimationsModule,
-        RouterModule
-      ],
+      imports: [AppModule],
       providers: [
         {
           provide: ActivatedRoute,
