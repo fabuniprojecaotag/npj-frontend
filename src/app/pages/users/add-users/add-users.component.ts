@@ -14,11 +14,33 @@ import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.c
 export class AddUsersComponent {
   tituloDaPagina: string = 'Adicionar Usuários';
 
-  constructor (private formularioService: FormUserService, private cadastroService: CadastroService, private router: Router, private dialog: MatDialog) {}
+  constructor(
+    private formularioService: FormUserService,
+    private cadastroService: CadastroService,
+    private router: Router,
+    private dialog: MatDialog
+  ) { }
 
   cadastrar() {
     const formCadastro = this.formularioService.getCadastro();
-    if(formCadastro?.valid){
+    if (formCadastro?.valid) {
+      const novoCadastro = formCadastro.getRawValue() as Usuario;
+      this.cadastroService.cadastrar(novoCadastro).subscribe({
+        next: (value) => {
+          this.abrirModal(novoCadastro);
+          console.log('cadastro realizado com  sucesso: ', value);
+        },
+        error: (err) => {
+          alert('erro ao realizar cadastro!');
+          console.log('erro ao realizar cadastro: ', err);
+        }
+      })
+    }
+  }
+
+  cadastrarRedirecionando() {
+    const formCadastro = this.formularioService.getCadastro();
+    if (formCadastro?.valid) {
       const novoCadastro = formCadastro.getRawValue() as Usuario;
       this.cadastroService.cadastrar(novoCadastro).subscribe({
         next: (value) => {
@@ -28,7 +50,7 @@ export class AddUsersComponent {
         },
         error: (err) => {
           alert('erro ao realizar cadastro!');
-          console.log('erro ao realizar cadastro: ', err)
+          console.log('erro ao realizar cadastro: ', err);
         }
       })
     }
@@ -38,7 +60,7 @@ export class AddUsersComponent {
     this.dialog.open(ModalCriadoComponent, {
       width: '552px',
       height: '360px',
-      data: {tituloCriado: 'Usuário', nome: novoCadastro.nome, email: novoCadastro.email}
+      data: { tituloCriado: 'Usuário', nome: novoCadastro.nome, email: novoCadastro.email }
     })
   }
 }

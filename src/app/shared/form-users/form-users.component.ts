@@ -15,6 +15,7 @@ export class FormUsersComponent implements OnInit {
   @Input() myProfileComponente: boolean = false;
   @Input() editComponent: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
+  @Output() acaoClique2: EventEmitter<any> = new EventEmitter<any>();
   @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
 
 
@@ -43,6 +44,10 @@ export class FormUsersComponent implements OnInit {
 
   // função pra chamar o cadastrar ou editar no componente pai
   executarAcao() {
+    this.acaoClique.emit();
+  }
+
+  executarAcaoSemRedirecionar() {
     this.acaoClique.emit();
   }
 
