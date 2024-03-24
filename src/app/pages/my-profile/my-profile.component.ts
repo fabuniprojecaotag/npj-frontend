@@ -23,7 +23,8 @@ export class MyProfileComponent implements OnInit {
   constructor(private tokenService: TokenService,
     private cadastroService: CadastroService,
     private formUserService: FormUserService,
-    private router: Router) { }
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.token = this.tokenService.retornarToken();
@@ -44,7 +45,6 @@ export class MyProfileComponent implements OnInit {
     this.form?.patchValue({
       nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
-      // telefone: this.cadastro.telefone,
       semestre: this.cadastro.semestre,
       status: this.cadastro.status,
       perfil: this.cadastro.role,
@@ -55,10 +55,8 @@ export class MyProfileComponent implements OnInit {
 
   atualizarUsuario() {
     const dadosAtualizados: Usuario = {
-      id: this.form?.value.id,
       nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
-      // telefone: this.form?.value.telefone,
       semestre: this.form?.value.semestre,
       status: this.form?.value.status,
       role: this.form?.value.perfil,
@@ -66,7 +64,7 @@ export class MyProfileComponent implements OnInit {
       senha: this.form?.value.senha,
     }
 
-    this.cadastroService.editarCadastro(dadosAtualizados, dadosAtualizados.id).subscribe({
+    this.cadastroService.editarCadastro(dadosAtualizados, dadosAtualizados.email).subscribe({
       next: () => {
         alert('Cadastro editado com sucesso!');
         this.router.navigate(['/']);

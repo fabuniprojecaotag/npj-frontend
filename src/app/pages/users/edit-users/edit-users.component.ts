@@ -38,7 +38,6 @@ export class EditUsersComponent implements OnInit {
   carregarFormulario() {
     this.form = this.formUserService.getCadastro();
     this.form?.patchValue({
-      id: this.cadastro.id,
       nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
       semestre: this.cadastro.semestre,
@@ -51,7 +50,6 @@ export class EditUsersComponent implements OnInit {
 
   editar() {
     const dadosAtualizados: Usuario = {
-      id:  this.form?.value.id,
       nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
       semestre: this.form?.value.semestre,
@@ -61,12 +59,13 @@ export class EditUsersComponent implements OnInit {
       senha: this.form?.value.senha,
     }
 
-    this.cadastroService.editarCadastro(dadosAtualizados, this.cadastro.id).subscribe({
+    this.cadastroService.editarCadastro(dadosAtualizados, this.cadastro.email).subscribe({
       next: (response) => {
         alert('Atualização feita com sucesso!');
         this.router.navigate(['/users']);
       },
       error: (err) => {
+        alert('Erro ao atualizar usuário!');
         console.log('erro ao atualizar:', err);
       }
     })

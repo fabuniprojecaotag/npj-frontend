@@ -26,7 +26,7 @@
                   {{ perfil }}
                 </mat-option>
               </mat-select>
-            </mat-form-field>            
+            </mat-form-field>
             <mat-error *ngIf="formCadastro.get('perfil')?.errors">Perfil é obrigatório</mat-error>
           </div>
           <div class="grid-item">
@@ -90,7 +90,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions class="full-width">
-        <button type="button" *ngIf="perfilComponente === false" (click)="excluir()" mat-flat-button color="warn">EXCLUIR
+        <button type="button" *ngIf="editComponent === true" (click)="excluir()" mat-flat-button color="warn">EXCLUIR
         </button>
         <button mat-flat-button [disabled]="formCadastro.invalid">SALVAR
         </button>

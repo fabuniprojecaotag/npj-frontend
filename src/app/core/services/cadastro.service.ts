@@ -28,8 +28,8 @@ export class CadastroService {
     return this.http.get<Usuario[]>(`${this.apiUrl}/usuários`);
   }
 
-  editarCadastro(usuario: Usuario, userId: string): Observable<Usuario> {
-    return this.http.patch<Usuario>(`${this.apiUrl}/usuários/${userId}`, usuario);
+  editarCadastro(usuario: Usuario, userEmail: string): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/usuários/${userEmail}`, usuario);
   }
 
   excluirCadastro(userEmail: string) {
