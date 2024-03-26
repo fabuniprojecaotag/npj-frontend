@@ -52,6 +52,7 @@ import { StepperAtendimentosComponent } from './shared/stepper-atendimentos/step
 import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component';
 import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
+import { ProcessosComponent } from './pages/processos/processos.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/
     NovoAtendimentoComponent,
     NavItemComponent,
     AtendimentosComponent,
+    ProcessosComponent,
   ],
   imports: [
     BrowserModule,
