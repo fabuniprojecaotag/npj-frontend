@@ -71,7 +71,7 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>CEP</mat-label>
-          <input matInput formControlName="cep">
+          <input matInput formControlName="cep" (blur)="consultarCep()">
         </mat-form-field>
       </div>
       <div class="col">

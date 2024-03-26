@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormAssistidosService } from 'src/app/core/services/form-assistidos.service';
+import { ViacepService } from 'src/app/core/services/viacep.service';
 
 @Component({
   selector: 'app-form-assistidos',
@@ -12,7 +13,11 @@ export class FormAssistidosComponent implements OnInit {
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
   @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private formBuilder: FormBuilder, private formAssistidosService: FormAssistidosService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private formAssistidosService: FormAssistidosService,
+    private viaCepService: ViacepService
+  ) { }
 
   ngOnInit(): void {
     this.formAssistidos = this.formBuilder.group({
@@ -42,11 +47,30 @@ export class FormAssistidosComponent implements OnInit {
   }
 
   // cadastro ou edição de assistidos
-  executarAcao () {
+  executarAcao() {
     this.acaoClique.emit();
   }
 
-  excluir () {
+  excluir() {
     this.cliqueExcluir.emit();
+  }
+
+  consultarCep(): void {
+    let cep = this.formAssistidos.get('cep')?.value;
+    cep = cep.replace(/[.-]/g, '');
+
+    if (cep) {
+      this.viaCepService.consultarCep(cep).subscribe({
+        next: (data) => {
+          this.formAssistidos.patchValue({
+            cidade: data.localidade,
+            enderecoResidencial: data.logradouro
+          });
+        },
+        error: (err) => {
+          console.error('Erro ao consultar CEP:', err);
+        }
+      });
+    }
   }
 }

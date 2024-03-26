@@ -5,7 +5,7 @@ export interface Usuario {
   status: boolean,
   role: string,
   unidadeInstitucional?: string
-  // opcionais/ estagiário:
+  // opcionais/estagiário:
   matricula?: string,
   semestre?: string,
   supervisor?: string
