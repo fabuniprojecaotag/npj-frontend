@@ -1,6 +1,6 @@
-<mat-stepper [linear]="isLinear" #stepper [formGroup]="formAtendimentos">
-  <mat-step formGroupName="primeiroGrupo">
-      <ng-template matStepLabel>Tipo de atendimento</ng-template>
+<mat-stepper linear #stepper [formGroup]="formAtendimentos">
+  <mat-step [stepControl]="primeiroGrupo" label="Tipo de atendimento">
+    <form [formGroup]="primeiroGrupo">
       <mat-form-field>
         <mat-label>Estagiário</mat-label>
         <input matInput placeholder="Nome do Estagiário" formControlName="estagiario" required>
@@ -13,62 +13,75 @@
         <mat-datepicker-toggle matIconSuffix [for]="dataAtendimento" color="primary"></mat-datepicker-toggle>
         <mat-datepicker #dataAtendimento></mat-datepicker>
         <mat-error *ngIf="formAtendimentos.get('primeiroGrupo')?.get('dataAtendimento')?.errors?.['required']">Data de
-          atendimento é
-          obrigatória</mat-error>
+          atendimento é obrigatória</mat-error>
       </mat-form-field>
       <div>
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('primeiroGrupo')?.invalid"
           color="primary">Avançar</button>
       </div>
+    </form>
   </mat-step>
-  <mat-step formGroupName="segundoGrupo" label="Identificação do Assistido">
-    <mat-form-field>
-      <mat-label>Assistido</mat-label>
-      <input matInput formControlName="assistido" placeholder="Nome do assistido" required>
-      <mat-error *ngIf="formAtendimentos.get('segundoGrupo')?.get('assistido')?.errors?.['required']">Assistido é
-        obrigatório</mat-error>
-    </mat-form-field>
-    <button mat-raised-button disabled>Cadastrar Assistido</button>
-    <div>
-      <button mat-raised-button matStepperPrevious>Voltar</button>
-      <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('segundoGrupo')?.invalid"
-        color="primary">Avançar</button>
-    </div>
+  <mat-step [stepControl]="segundoGrupo" label="Identificação do Assistido">
+    <form [formGroup]="segundoGrupo">
+      <mat-form-field>
+        <mat-label>Assistido</mat-label>
+        <input matInput formControlName="assistido" placeholder="Nome do assistido" required>
+        <mat-error *ngIf="formAtendimentos.get('segundoGrupo')?.get('assistido')?.errors?.['required']">Assistido é
+          obrigatório</mat-error>
+      </mat-form-field>
+      <button mat-raised-button disabled>Cadastrar Assistido</button>
+      <div>
+        <button mat-raised-button matStepperPrevious>Voltar</button>
+        <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('segundoGrupo')?.invalid"
+          color="primary">Avançar</button>
+      </div>
+    </form>
   </mat-step>
-  <mat-step formGroupName="terceiroGrupo">
-    <ng-template matStepLabel>Testemunhas</ng-template>
-    <h3>Testemunha 1</h3>
-    <mat-form-field>
-      <mat-label>Nome</mat-label>
-      <input matInput formControlName="nomeTestemunha1" placeholder="nome">
-    </mat-form-field>
-    <div>
-      <button mat-raised-button matStepperPrevious>Voltar</button>
-      <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('terceiroGrupo')?.invalid"
-        color="primary">Avançar</button>
-    </div>
+  <mat-step [stepControl]="terceiroGrupo" label="Testemunhas">
+    <form [formGroup]="terceiroGrupo">
+      <h3>Testemunha 1</h3>
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nomeTestemunha1" placeholder="nome">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Qualificação</mat-label>
+        <input matInput formControlName="qualificacaoTestemunha1" placeholder="qualificação">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperPrevious>Voltar</button>
+        <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('terceiroGrupo')?.invalid"
+          color="primary">Avançar</button>
+      </div>
+    </form>
   </mat-step>
-  <mat-step formGroupName="quartoGrupo">
-    <ng-template matStepLabel>Parte Contrária</ng-template>
-    <mat-form-field>
-      <mat-label>Nome</mat-label>
-      <input matInput formControlName="nomeParteContraria" placeholder="nome">
-    </mat-form-field>
-    <div>
-      <button mat-raised-button matStepperPrevious>Voltar</button>
-      <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('terceiroGrupo')?.invalid"
-        color="primary">Avançar</button>
-    </div>
+  <mat-step [stepControl]="quartoGrupo" label="Parte Contrária">
+    <form [formGroup]="quartoGrupo">
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nomeParteContraria" placeholder="nome">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Qualificação</mat-label>
+        <input matInput formControlName="qualificacaoParteContraria" placeholder="qualificação">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperPrevious>Voltar</button>
+        <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('quartoGrupo')?.invalid"
+          color="primary">Avançar</button>
+      </div>
+    </form>
   </mat-step>
-  <mat-step formGroupName="quintoGrupo">
-    <ng-template matStepLabel>Finalização</ng-template>
-    <mat-form-field>
-      <mat-label>Histórico</mat-label>
-      <textarea matInput formControlName="historico" placeholder="Histórico do atendimento"></textarea>
-    </mat-form-field>
-    <div>
-      <button mat-raised-button matStepperPrevious>Voltar</button>
-      <button mat-raised-button [disabled]="formAtendimentos.invalid" (click)="stepper.reset()">Concluir</button>
-    </div>
+  <mat-step [stepControl]="quintoGrupo" label="Finalização">
+    <form [formGroup]="quintoGrupo">
+      <mat-form-field>
+        <mat-label>Histórico</mat-label>
+        <textarea matInput formControlName="historico" placeholder="Histórico do atendimento"></textarea>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperPrevious>Voltar</button>
+        <button mat-raised-button [disabled]="formAtendimentos.invalid" (click)="stepper.reset()">Concluir</button>
+      </div>
+    </form>
   </mat-step>
 </mat-stepper>

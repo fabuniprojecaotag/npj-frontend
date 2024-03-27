@@ -8,28 +8,52 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class StepperAtendimentosComponent implements OnInit {
   formAtendimentos!: FormGroup;
-  isLinear = true;
+  primeiroGrupo!: FormGroup;
+  segundoGrupo!: FormGroup;
+  terceiroGrupo!: FormGroup;
+  quartoGrupo!: FormGroup;
+  quintoGrupo!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.formAtendimentos = this.formBuilder.group({
-      primeiroGrupo: this.formBuilder.group({
-        estagiario: [null, Validators.required],
-        dataAtendimento: [null, Validators.required]
-      }),
-      segundoGrupo: this.formBuilder.group({
-        assistido: ['', Validators.required],
-      }),
-      terceiroGrupo: this.formBuilder.group({
-        nomeTestemunha1: [null],
-      }),
-      quartoGrupo: this.formBuilder.group({
-        nomeParteContraria: [null, Validators.required],
-      }),
-      quintoGrupo: this.formBuilder.group({
-        historico: [''],
-      })
+    this.primeiroGrupo = this.formBuilder.group({
+      estagiario: [null, Validators.required],
+      dataAtendimento: [this.pegarDataAtual(), Validators.required]
     });
+
+    this.segundoGrupo = this.formBuilder.group({
+      assistido: ['', Validators.required],
+    });
+
+    this.terceiroGrupo = this.formBuilder.group({
+      nomeTestemunha1: [null],
+      qualificacaoTestemunha1: [null]
+    });
+
+    this.quartoGrupo = this.formBuilder.group({
+      nomeParteContraria: [null, Validators.required],
+      qualificacaoParteContraria: [null, Validators.required]
+    });
+
+    this.quintoGrupo = this.formBuilder.group({
+      historico: [''],
+    });
+
+    this.formAtendimentos = this.formBuilder.group({
+      primeiroGrupo: this.primeiroGrupo,
+      segundoGrupo: this.segundoGrupo,
+      terceiroGrupo: this.terceiroGrupo,
+      quartoGrupo: this.quartoGrupo,
+      quintoGrupo: this.quintoGrupo
+    });
+  }
+
+  pegarDataAtual(): string {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }
