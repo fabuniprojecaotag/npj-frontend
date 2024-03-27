@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,19 +6,30 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './stepper-atendimentos.component.html',
   styleUrls: ['./stepper-atendimentos.component.scss']
 })
-export class StepperAtendimentosComponent {
-  atendimentoFormGroup: FormGroup = this._formBuilder.group({
-    firstGroup: this._formBuilder.group({
-      estagiario: ['', Validators.required],
-    }),
-    secondGroup: this._formBuilder.group({
-      assistido: ['', Validators.required],
-    }),
-    thirdGroup: this._formBuilder.group({
-      historico: [''],
-    }),
-  });
+export class StepperAtendimentosComponent implements OnInit {
+  formAtendimentos!: FormGroup;
   isLinear = true;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.formAtendimentos = this.formBuilder.group({
+      primeiroGrupo: this.formBuilder.group({
+        estagiario: [null, Validators.required],
+        dataAtendimento: [null, Validators.required]
+      }),
+      segundoGrupo: this.formBuilder.group({
+        assistido: ['', Validators.required],
+      }),
+      terceiroGrupo: this.formBuilder.group({
+        nomeTestemunha1: [null],
+      }),
+      quartoGrupo: this.formBuilder.group({
+        nomeParteContraria: [null, Validators.required],
+      }),
+      quintoGrupo: this.formBuilder.group({
+        historico: [''],
+      })
+    });
+  }
 }

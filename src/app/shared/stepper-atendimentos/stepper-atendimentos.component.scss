@@ -1,14 +1,15 @@
 mat-stepper {
-  box-shadow:
-  0px 1px 5px 0px #0000001F,
-  0px 2px 2px 0px #00000024,
-  0px 1px 1px 0px #00000033;
-
+  box-shadow: 0px 1px 5px 0px #0000001f, 0px 2px 2px 0px #00000024,
+    0px 1px 1px 0px #00000033;
   margin: 3em auto 0;
   width: 80%;
 
+  mat-step {
+    display: flex;
+    justify-content: center;
+  }
   .mat-mdc-form-field {
-    margin-top: 16px;
+    margin: 16px 1em 1em 2em;
   }
 
   button {
