@@ -13,6 +13,7 @@ import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assi
 import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
+import { ProcessosComponent } from './pages/processos/processos.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,11 @@ const routes: Routes = [
     component: AtendimentosComponent,
     canActivate: [authGuard],
   },
+  {
+    path: 'processos',
+    component: ProcessosComponent,
+    canActivate: [authGuard],
+  }
 ];
 
 @NgModule({
