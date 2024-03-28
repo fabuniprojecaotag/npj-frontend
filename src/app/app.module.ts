@@ -55,6 +55,7 @@ import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component'
 import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
 import { ProcessosComponent } from './pages/processos/processos.component';
+import { FormProcessoComponent } from './shared/form-processo/form-processo.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { ProcessosComponent } from './pages/processos/processos.component';
     NavItemComponent,
     AtendimentosComponent,
     ProcessosComponent,
+    FormProcessoComponent,
   ],
   imports: [
     BrowserModule,
