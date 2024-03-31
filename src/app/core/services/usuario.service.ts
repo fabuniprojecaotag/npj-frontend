@@ -37,7 +37,6 @@ export class UsuarioService {
 
   logout() {
     this.tokenService.excluirToken();
-    localStorage.removeItem('user_data');
     this.userSubject.next(null);
   }
 

@@ -21,7 +21,6 @@ export class AutenticacaoService {
     return this.http.post<AuthResponse>(`${this.API}/login`, { login: login, password: password }, { observe: 'response' })
       .pipe(
         tap((response) => {
-          console.log('Autenticação:', response.body?.access_token);
           const authToken = response.body?.access_token || '';
           this.userService.salvarToken(authToken);
         })
