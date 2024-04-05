@@ -1,10 +1,12 @@
 export interface Usuario {
-  nome: string,
-  senha: string,
+  id: string,
   email: string,
+  nome: string,
+  cpf?: string,
+  unidadeInstitucional?: string,
+  senha: string,
   status: boolean,
   role: string,
-  unidadeInstitucional?: string
   // opcionais/estagiário:
   matricula?: string,
   semestre?: string,

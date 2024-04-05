@@ -5,10 +5,9 @@
     <div *ngIf="loading">Carregando</div>
     <form [formGroup]="loginForm" *ngIf="!loading" class="login__form">
       <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Digite seu email acadêmico" formControlName="email">
+        <mat-label>Prefixo email</mat-label>
+        <input matInput type="text" placeholder="Digite o começo do seu e-mail sem a parte do @" formControlName="email">
         <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Email obrigatório!</mat-error>
-        <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">Formato de e-mail inválido!</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">

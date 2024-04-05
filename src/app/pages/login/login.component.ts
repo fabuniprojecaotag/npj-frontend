@@ -20,13 +20,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const userDataString = localStorage.getItem('user_data');
     const tokenString = localStorage.getItem('token');
-    if (userDataString != '' && tokenString != '') {
+    if (tokenString != '') {
       this.router.navigate(['/home']);
     }
     this.loginForm = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.required]],
       senha: [null, Validators.required],
     });
   }
@@ -41,10 +40,6 @@ export class LoginComponent implements OnInit {
         next: (resposta) => {
           this.loading = false;
           console.log('sucesso ao logar!', resposta);
-          // localStorage.setItem(
-          //   'user_data',
-          //   JSON.stringify(resposta.body?.user)
-          // );
           this.router.navigate(['/home']);
         },
         error: (err) => {

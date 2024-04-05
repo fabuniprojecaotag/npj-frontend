@@ -13,26 +13,26 @@ export class CadastroService {
   constructor(private http: HttpClient) { }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/usuários`, usuario);
+    return this.http.post<Usuario>(`${this.apiUrl}/usuarios`, usuario);
   }
 
   buscarCadastro(email: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/usuários/${email}`);
+    return this.http.get<Usuario>(`${this.apiUrl}/usuarios/${email}`);
   }
 
   buscarMeuUsuario(): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/usuários/me`);
+    return this.http.get<Usuario>(`${this.apiUrl}/usuarios/me`);
   }
 
   listar(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/usuários`);
+    return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`);
   }
 
   editarCadastro(usuario: Usuario, userEmail: string): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/usuários/${userEmail}`, usuario);
+    return this.http.post<Usuario>(`${this.apiUrl}/usuarios/${userEmail}`, usuario);
   }
 
   excluirCadastro(userEmail: string) {
-    return this.http.delete(`${this.apiUrl}/usuários/${userEmail}`)
+    return this.http.delete(`${this.apiUrl}/usuarios/${userEmail}`)
   }
 }

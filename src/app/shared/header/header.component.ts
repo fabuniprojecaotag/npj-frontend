@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
+        console.log("sucesso, usuário:" + usuario);
         this.userData = usuario;
         this.nomeUser = usuario.nome;
         this.nomePerfil = this.formatarNomePerfil(usuario.role);
