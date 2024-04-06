@@ -1,6 +1,6 @@
 <mat-stepper linear #stepper [formGroup]="formAtendimentos">
   <mat-step [stepControl]="primeiroGrupo" label="Tipo de atendimento">
-    <form [formGroup]="primeiroGrupo">
+    <form [formGroup]="primeiroGrupo" class="grupo-form">
       <mat-form-field>
         <mat-label>Estagiário</mat-label>
         <input matInput placeholder="Nome do Estagiário" formControlName="estagiario" required>
@@ -15,14 +15,14 @@
         <mat-error *ngIf="formAtendimentos.get('primeiroGrupo')?.get('dataAtendimento')?.errors?.['required']">Data de
           atendimento é obrigatória</mat-error>
       </mat-form-field>
-      <div>
+      <div class="input-full">
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('primeiroGrupo')?.invalid"
           color="primary">Avançar</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="segundoGrupo" label="Identificação do Assistido">
-    <form [formGroup]="segundoGrupo">
+    <form [formGroup]="segundoGrupo" class="grupo-form">
       <mat-form-field>
         <mat-label>Assistido</mat-label>
         <input matInput formControlName="assistido" placeholder="Nome do assistido" required>
@@ -30,7 +30,7 @@
           obrigatório</mat-error>
       </mat-form-field>
       <button mat-raised-button routerLink="/assistidos/add">Cadastrar Assistido</button>
-      <div>
+      <div class="input-full">
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('segundoGrupo')?.invalid"
           color="primary">Avançar</button>
@@ -38,7 +38,7 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="terceiroGrupo" label="Parte Contrária">
-    <form [formGroup]="terceiroGrupo">
+    <form [formGroup]="terceiroGrupo" class="grupo-form">
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input matInput formControlName="nomeParteContraria" placeholder="nome">
@@ -59,15 +59,20 @@
         <mat-label>Telefone</mat-label>
         <input matInput formControlName="telefoneParteContraria" placeholder="Telefone">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="input-metade">
         <mat-label>E-mail</mat-label>
         <input matInput formControlName="emailParteContraria" placeholder="E-mail">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field  class="input-metade">
         <mat-label>Endereço</mat-label>
         <input matInput formControlName="enderecoParteContraria" placeholder="Endereço">
       </mat-form-field>
-      <div>
+      <mat-form-field class="input-full">
+        <mat-label>Informações Complementares</mat-label>
+        <textarea matInput formControlName="informacoesComplementares"
+          placeholder="Informações Complementares"></textarea>
+      </mat-form-field>
+      <div class="input-full">
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('terceiroGrupo')?.invalid"
           color="primary">Avançar</button>
@@ -75,8 +80,10 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="quartoGrupo" label="Testemunhas">
-    <form [formGroup]="quartoGrupo">
-      <h3>Testemunha 1</h3>
+    <form [formGroup]="quartoGrupo" class="grupo-form">
+      <div class="input-full">
+        <h3 class="subtitulo">Testemunha 1</h3>
+      </div>
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input matInput formControlName="nomeTestemunha1" placeholder="nome">
@@ -85,11 +92,13 @@
         <mat-label>Qualificação</mat-label>
         <input matInput formControlName="qualificacaoTestemunha1" placeholder="qualificação">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="input-full">
         <mat-label>Endereço</mat-label>
         <input matInput formControlName="enderecoTestemunha1" placeholder="endereço da testemunha">
       </mat-form-field>
-      <h3>Testemunha 2</h3>
+      <div class="input-full">
+        <h3 class="subtitulo">Testemunha 2</h3>
+      </div>
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input matInput formControlName="nomeTestemunha2" placeholder="nome">
@@ -98,15 +107,11 @@
         <mat-label>Qualificação</mat-label>
         <input matInput formControlName="qualificacaoTestemunha2" placeholder="qualificação">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="input-full">
         <mat-label>Endereço</mat-label>
         <input matInput formControlName="enderecoTestemunha2" placeholder="endereço da testemunha">
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Informações Complementares</mat-label>
-        <textarea matInput formControlName="informacoesTe" placeholder="Informações Complementares"></textarea>
-      </mat-form-field>
-      <div>
+      <div class="input-full">
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('quartoGrupo')?.invalid"
           color="primary">Avançar</button>
@@ -114,12 +119,29 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="quintoGrupo" label="Finalização">
-    <form [formGroup]="quintoGrupo">
-      <mat-form-field>
+    <form [formGroup]="quintoGrupo" class="grupo-form">
+      <mat-form-field class="input-full">
         <mat-label>Histórico</mat-label>
         <textarea matInput formControlName="historico" placeholder="Histórico do atendimento"></textarea>
       </mat-form-field>
-      <div>
+      <mat-form-field class="input-full">
+        <mat-label>Medida Jurídica Cabível</mat-label>
+        <input matInput formControlName="medidaJuridica" placeholder="Medida Jurídica">
+      </mat-form-field>
+      <div class="input-full">
+        <mat-form-field>
+          <mat-label>Status</mat-label>
+          <mat-select matInput formControlName="status" ngDefaultControl>
+            <mat-option *ngFor="let statu of status" [value]="statu">
+              {{ statu }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="input-full">
+        <h3 class="subtitulo">Assinatura</h3>
+      </div>
+      <div class="input-full">
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button [disabled]="formAtendimentos.invalid" (click)="stepper.reset()">Concluir</button>
       </div>

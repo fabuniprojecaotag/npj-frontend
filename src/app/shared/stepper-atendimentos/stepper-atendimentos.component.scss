@@ -1,3 +1,5 @@
+@import "../../../styles.scss";
+
 mat-stepper {
   box-shadow: 0px 1px 5px 0px #0000001f, 0px 2px 2px 0px #00000024,
     0px 1px 1px 0px #00000033;
@@ -6,10 +8,33 @@ mat-stepper {
 
   mat-step {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+
+    .mat-mdc-form-field {
+      margin: 16px 1em 1em 2em;
+    }
   }
-  .mat-mdc-form-field {
-    margin: 16px 1em 1em 2em;
+
+  .grupo-form {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 1em 0;
+
+    .input-full {
+      width: 100%;
+    }
+
+    .input-metade {
+      width: 49%;
+    }
+
+    .subtitulo {
+      font-family: $fonte-padrao;
+      font-size: 28px;
+      font-weight: 400;
+    }
   }
 
   button {

@@ -13,6 +13,7 @@ export class StepperAtendimentosComponent implements OnInit {
   terceiroGrupo!: FormGroup;
   quartoGrupo!: FormGroup;
   quintoGrupo!: FormGroup;
+  status = ['ATIVO', 'ARQUIVADO']
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -34,6 +35,7 @@ export class StepperAtendimentosComponent implements OnInit {
       telefoneParteContraria: [null],
       emailParteContraria: [null],
       enderecoParteContraria: [null],
+      informacoesComplementares: [null]
     });
 
     this.quartoGrupo = this.formBuilder.group({
@@ -42,11 +44,13 @@ export class StepperAtendimentosComponent implements OnInit {
       enderecoTestemunha1: [null],
       nomeTestemunha2: [null],
       qualificacaoTestemunha2: [null],
-      enderecoTestemunha2: [null]
+      enderecoTestemunha2: [null],
     });
 
     this.quintoGrupo = this.formBuilder.group({
       historico: [''],
+      medidaJuridica: [''],
+      status: [''],
     });
 
     this.formAtendimentos = this.formBuilder.group({
