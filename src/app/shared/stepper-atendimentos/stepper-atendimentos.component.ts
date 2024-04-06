@@ -14,7 +14,7 @@ export class StepperAtendimentosComponent implements OnInit {
   quartoGrupo!: FormGroup;
   quintoGrupo!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.primeiroGrupo = this.formBuilder.group({
@@ -27,13 +27,22 @@ export class StepperAtendimentosComponent implements OnInit {
     });
 
     this.terceiroGrupo = this.formBuilder.group({
-      nomeTestemunha1: [null],
-      qualificacaoTestemunha1: [null]
+      nomeParteContraria: [null, Validators.required],
+      qualificacaoParteContraria: [null, Validators.required],
+      rgParteContraria: [null],
+      cpfParteContraria: [null],
+      telefoneParteContraria: [null],
+      emailParteContraria: [null],
+      enderecoParteContraria: [null],
     });
 
     this.quartoGrupo = this.formBuilder.group({
-      nomeParteContraria: [null, Validators.required],
-      qualificacaoParteContraria: [null, Validators.required]
+      nomeTestemunha1: [null],
+      qualificacaoTestemunha1: [null],
+      enderecoTestemunha1: [null],
+      nomeTestemunha2: [null],
+      qualificacaoTestemunha2: [null],
+      enderecoTestemunha2: [null]
     });
 
     this.quintoGrupo = this.formBuilder.group({

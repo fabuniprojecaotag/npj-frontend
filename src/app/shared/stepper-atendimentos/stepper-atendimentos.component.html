@@ -29,7 +29,7 @@
         <mat-error *ngIf="formAtendimentos.get('segundoGrupo')?.get('assistido')?.errors?.['required']">Assistido é
           obrigatório</mat-error>
       </mat-form-field>
-      <button mat-raised-button disabled>Cadastrar Assistido</button>
+      <button mat-raised-button routerLink="/assistidos/add">Cadastrar Assistido</button>
       <div>
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('segundoGrupo')?.invalid"
@@ -37,8 +37,45 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="terceiroGrupo" label="Testemunhas">
+  <mat-step [stepControl]="terceiroGrupo" label="Parte Contrária">
     <form [formGroup]="terceiroGrupo">
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nomeParteContraria" placeholder="nome">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Qualificação</mat-label>
+        <input matInput formControlName="qualificacaoParteContraria" placeholder="qualificação">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>RG</mat-label>
+        <input matInput formControlName="rgParteContraria" placeholder="RG">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>CPF</mat-label>
+        <input matInput formControlName="cpfParteContraria" placeholder="CPF">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="telefoneParteContraria" placeholder="Telefone">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="emailParteContraria" placeholder="E-mail">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="enderecoParteContraria" placeholder="Endereço">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperPrevious>Voltar</button>
+        <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('terceiroGrupo')?.invalid"
+          color="primary">Avançar</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="quartoGrupo" label="Testemunhas">
+    <form [formGroup]="quartoGrupo">
       <h3>Testemunha 1</h3>
       <mat-form-field>
         <mat-label>Nome</mat-label>
@@ -48,22 +85,26 @@
         <mat-label>Qualificação</mat-label>
         <input matInput formControlName="qualificacaoTestemunha1" placeholder="qualificação">
       </mat-form-field>
-      <div>
-        <button mat-raised-button matStepperPrevious>Voltar</button>
-        <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('terceiroGrupo')?.invalid"
-          color="primary">Avançar</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="quartoGrupo" label="Parte Contrária">
-    <form [formGroup]="quartoGrupo">
+      <mat-form-field>
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="enderecoTestemunha1" placeholder="endereço da testemunha">
+      </mat-form-field>
+      <h3>Testemunha 2</h3>
       <mat-form-field>
         <mat-label>Nome</mat-label>
-        <input matInput formControlName="nomeParteContraria" placeholder="nome">
+        <input matInput formControlName="nomeTestemunha2" placeholder="nome">
       </mat-form-field>
       <mat-form-field>
         <mat-label>Qualificação</mat-label>
-        <input matInput formControlName="qualificacaoParteContraria" placeholder="qualificação">
+        <input matInput formControlName="qualificacaoTestemunha2" placeholder="qualificação">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="enderecoTestemunha2" placeholder="endereço da testemunha">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Informações Complementares</mat-label>
+        <textarea matInput formControlName="informacoesTe" placeholder="Informações Complementares"></textarea>
       </mat-form-field>
       <div>
         <button mat-raised-button matStepperPrevious>Voltar</button>
