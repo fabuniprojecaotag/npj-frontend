@@ -14,6 +14,8 @@ import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shor
 import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
 import { ProcessosComponent } from './pages/processos/processos.component';
+import { ProcessoAddComponent } from './pages/processos/processo-add/processo-add.component';
+import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
 
 const routes: Routes = [
   {
@@ -83,6 +85,16 @@ const routes: Routes = [
   {
     path: 'processos',
     component: ProcessosComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'processos/add',
+    component: ProcessoAddComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'processos/edit/:atendimentoId',
+    component: ProcessoEditComponent,
     canActivate: [authGuard],
   }
 ];

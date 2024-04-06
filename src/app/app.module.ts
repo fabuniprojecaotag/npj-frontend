@@ -56,6 +56,8 @@ import { AtendimentosComponent } from './pages/atendimentos/atendimentos.compone
 import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
 import { ProcessosComponent } from './pages/processos/processos.component';
 import { FormProcessoComponent } from './shared/form-processo/form-processo.component';
+import { ProcessoAddComponent } from './pages/processos/processo-add/processo-add.component';
+import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import { FormProcessoComponent } from './shared/form-processo/form-processo.comp
     AtendimentosComponent,
     ProcessosComponent,
     FormProcessoComponent,
+    ProcessoAddComponent,
+    ProcessoEditComponent,
   ],
   imports: [
     BrowserModule,
