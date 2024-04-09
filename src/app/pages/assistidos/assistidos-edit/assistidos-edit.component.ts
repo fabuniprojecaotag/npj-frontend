@@ -25,7 +25,7 @@ export class AssistidosEditComponent {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.idParam = this.route.snapshot.paramMap.get('id') as string;
+    this.idParam = this.route.snapshot.paramMap.get('cpf') as string;
 
     this.assistidoService.consultar(this.idParam).subscribe(callback => {
       this.assistido = callback;

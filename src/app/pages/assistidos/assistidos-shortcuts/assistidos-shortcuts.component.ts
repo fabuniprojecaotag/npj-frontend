@@ -10,25 +10,26 @@ import { AssistidosService } from 'src/app/core/services/assistidos.service';
 export class AssistidosShortcutsComponent implements OnInit {
   tituloDaPagina: string;
   nomeAssistido!: string;
-  linkCardAssistido = '';
+  cpf!: string;
 
-
-  constructor(private route: ActivatedRoute, private assistidosService: AssistidosService) {
+  constructor(
+    private route: ActivatedRoute,
+    private assistidosService: AssistidosService
+  ) {
     this.tituloDaPagina = 'Assisitido - ';
   }
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('cpf') as string;
-    this.linkCardAssistido = `/assistidos/${idParam}`;
+    this.cpf = this.route.snapshot.paramMap.get('cpf') as string;
 
-    this.assistidosService.consultar(idParam).subscribe({
+    this.assistidosService.consultar(this.cpf).subscribe({
       next: (resposta) => {
         this.nomeAssistido = resposta.nome;
         this.tituloDaPagina = `Assisitido - ${this.nomeAssistido}`;
         console.log(this.nomeAssistido);
       },
       error: (err) => {
-        console.log(err);
+        console.log("Erro ao procurar assistido: " + err);
       }
     });
   }

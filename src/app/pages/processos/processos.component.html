@@ -9,35 +9,35 @@
       <table mat-table [dataSource]="dataSource">
         <!-- Nome Coluna -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID </th>
-          <td mat-cell *matCellDef="let processo"><a [routerLink]="'/processos/edit/' + processo.atendimentoId"> {{processo.atendimentoId}} </a></td>
+          <th mat-header-cell *matHeaderCellDef> Numéro </th>
+          <td mat-cell *matCellDef="let processo"><a [routerLink]="'/processos/edit/' + processo.numero"> {{processo.numero}} </a></td>
         </ng-container>
-  
+
         <!-- Matricula Column -->
         <ng-container matColumnDef="data">
           <th mat-header-cell *matHeaderCellDef> Data </th>
           <td mat-cell *matCellDef="let processo"> {{ processo.dataDistribuicao }} </td>
         </ng-container>
-  
+
         <!-- Status Column -->
         <ng-container matColumnDef="vara">
           <th mat-header-cell *matHeaderCellDef> Vara </th>
           <td mat-cell *matCellDef="let processo"> {{ processo.vara}} </td>
         </ng-container>
-  
+
         <!-- Semestre Column -->
         <ng-container matColumnDef="forum">
           <th mat-header-cell *matHeaderCellDef> Fórum </th>
           <td mat-cell *matCellDef="let processo"> {{processo.forum}} </td>
         </ng-container>
-  
+
         <tr mat-header-row *matHeaderRowDef="colunasMostradas"></tr>
         <tr mat-row *matRowDef="let row; columns: colunasMostradas;"></tr>
       </table>
-  
+
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Itens por pagina:"
         aria-label="Selecione a pagina">
       </mat-paginator>
     </div>
-  
+
   </section>
