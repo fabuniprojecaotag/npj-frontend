@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { formValidations } from '../form-validations';
-import { FormUserService } from 'src/app/core/services/form-user.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 
 @Component({
   selector: 'app-form-users',
@@ -21,7 +21,7 @@ export class FormUsersComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private formUserService: FormUserService,
+    private formUserService: FormsService,
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class FormUsersComponent implements OnInit {
       confirmarSenha: [null,[Validators.required, Validators.minLength(3),formValidations.equalTo('senha')]],
     });
 
-    this.formUserService.setCadastro(this.formCadastro);
+    this.formUserService.setForm(this.formCadastro);
   }
 
 

@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
-import { FormUserService } from 'src/app/core/services/form-user.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 
 @Component({
   selector: 'app-edit-users',
@@ -21,7 +21,7 @@ export class EditUsersComponent implements OnInit {
     private route: ActivatedRoute,
     private usuarioService: CadastroService,
     private tokenService: TokenService,
-    private formUserService: FormUserService,
+    private formUserService: FormsService,
     private cadastroService: CadastroService) { }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class EditUsersComponent implements OnInit {
   }
 
   carregarFormulario() {
-    this.form = this.formUserService.getCadastro();
+    this.form = this.formUserService.getForm();
     this.form?.patchValue({
       id: this.cadastro.id,
       nome: this.cadastro.nome,

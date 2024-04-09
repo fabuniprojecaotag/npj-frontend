@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
-import { FormUserService } from 'src/app/core/services/form-user.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 import { TokenService } from 'src/app/core/services/token.service';
-import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
@@ -22,7 +21,7 @@ export class MyProfileComponent implements OnInit {
 
   constructor(private tokenService: TokenService,
     private cadastroService: CadastroService,
-    private formUserService: FormUserService,
+    private formUserService: FormsService,
     private router: Router
     ) { }
 
@@ -41,7 +40,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   carregarFormulario(): void {
-    this.form = this.formUserService.getCadastro();
+    this.form = this.formUserService.getForm();
     this.form?.patchValue({
       nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,

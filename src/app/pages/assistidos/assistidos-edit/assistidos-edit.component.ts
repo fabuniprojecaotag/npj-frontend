@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
-import { FormAssistidosService } from 'src/app/core/services/form-assistidos.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 import { Assistido } from 'src/app/core/types/assistido';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 
@@ -21,11 +21,11 @@ export class AssistidosEditComponent {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private assistidoService: AssistidosService,
-    private formAssistidosService: FormAssistidosService,
+    private formAssistidosService: FormsService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.idParam = this.route.snapshot.paramMap.get('cpf') as string;
+    this.idParam = this.route.snapshot.paramMap.get('id') as string;
 
     this.assistidoService.consultar(this.idParam).subscribe(callback => {
       this.assistido = callback;
@@ -35,7 +35,7 @@ export class AssistidosEditComponent {
   }
 
   carregarFormulario() {
-    this.form = this.formAssistidosService.getCadastro();
+    this.form = this.formAssistidosService.getForm();
     this.form?.patchValue({
       documentId: this.assistido.documentId,
       nome: this.assistido.nome,

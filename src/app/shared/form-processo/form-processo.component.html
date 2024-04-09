@@ -4,13 +4,9 @@
   <form class="formulario" [formGroup]="formProcessos">
     <mat-form-field>
       <mat-label>N° do processo</mat-label>
-      <input
-        matInput
-        placeholder="N° do processo"
-        formControlName="nProcesso"
-      />
+      <input matInput placeholder="N° do processo" formControlName="nProcesso" />
       <mat-error *ngIf="formProcessos.get('nProcesso')?.errors?.['required']">
-        Número do processo obrigatório!
+        Número do processo é obrigatório!
       </mat-error>
     </mat-form-field>
 
@@ -18,28 +14,17 @@
       <mat-label>Nome da ação</mat-label>
       <input matInput placeholder="Nome da ação" formControlName="nomeAcao" />
       <mat-error *ngIf="formProcessos.get('nomeAcao')?.errors?.['required']">
-        Nome da ação obrigatória!
+        Nome da ação é obrigatória!
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Data da distribuição</mat-label>
-      <input
-        matInput
-        [matDatepicker]="dataDistribuicao"
-        formControlName="dataDistribuicao"
-        required
-      />
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="dataDistribuicao"
-        color="primary"
-      ></mat-datepicker-toggle>
+      <input matInput [matDatepicker]="dataDistribuicao" formControlName="dataDistribuicao" required />
+      <mat-datepicker-toggle matIconSuffix [for]="dataDistribuicao" color="primary"></mat-datepicker-toggle>
       <mat-datepicker #dataDistribuicao></mat-datepicker>
-      <mat-error
-        *ngIf="formProcessos.get('dataDistribuicao')?.errors?.['required']"
-      >
-        Data de distribuição obrigatória!
+      <mat-error *ngIf="formProcessos.get('dataDistribuicao')?.errors?.['required']">
+        Data de distribuição é obrigatória!
       </mat-error>
     </mat-form-field>
 
@@ -47,7 +32,7 @@
       <mat-label>Vara</mat-label>
       <input matInput placeholder="Vara" formControlName="vara" />
       <mat-error *ngIf="formProcessos.get('vara')?.errors?.['required']">
-        Vara obrigatória!
+        Vara é obrigatória!
       </mat-error>
     </mat-form-field>
 
@@ -55,7 +40,7 @@
       <mat-label>Forúm</mat-label>
       <input matInput placeholder="Forúm" formControlName="forum" />
       <mat-error *ngIf="formProcessos.get('forum')?.errors?.['required']">
-        Forúm obrigatório!
+        Forúm é obrigatório!
       </mat-error>
     </mat-form-field>
 
@@ -63,7 +48,7 @@
       <mat-label>Atendimento</mat-label>
       <input matInput placeholder="Atendimento" formControlName="atendimento" />
       <mat-error *ngIf="formProcessos.get('atendimento')?.errors?.['required']">
-        Atendimento obrigatória!
+        Atendimento é obrigatório!
       </mat-error>
     </mat-form-field>
 
@@ -75,34 +60,23 @@
         </mat-option>
       </mat-select>
       <mat-error *ngIf="formProcessos.get('status')?.errors?.['required']">
-        status obrigatório!
+        Status é obrigatório!
       </mat-error>
     </mat-form-field>
 
-    <div class="espacador">
-        
-    </div>
+    <div class="espacador"></div>
 
     <div class="input-documento">
       <h4>Documento necessário</h4>
       <p class="input-documento__label">• Protocolo da distribuição</p>
       <mat-form-field>
-        <input
-          matInput
-          placeholder="Anexar documentos"
-          formControlName="documento"
-        />
+        <input matInput placeholder="Anexar documentos" formControlName="documento" />
       </mat-form-field>
     </div>
 
     <div class="btn-group">
       <button mat-flat-button [disabled]="formProcessos.invalid">Salvar</button>
-      <button
-        mat-flat-button
-        color="primary"
-        (click)="executarAcao()"
-        [disabled]="formProcessos.invalid"
-      >
+      <button mat-flat-button color="primary" (click)="executarAcao()" [disabled]="formProcessos.invalid">
         Submeter
       </button>
     </div>

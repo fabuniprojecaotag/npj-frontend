@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { FormProcessosService } from 'src/app/core/services/form-processos.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 import { ProcessosService } from 'src/app/core/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
 
@@ -14,11 +14,11 @@ export class ProcessoEditComponent implements OnInit {
   tituloPagina = 'Editar Processo';
   idParam!: string;
   processo!: Processo;
-  form!: FormGroup<any> | null; 
+  form!: FormGroup<any> | null;
 
   constructor(
     private processsoService: ProcessosService,
-    private formService: FormProcessosService,
+    private formService: FormsService,
     private route: ActivatedRoute
   ) {}
 
@@ -32,8 +32,8 @@ export class ProcessoEditComponent implements OnInit {
   }
 
   carregarFormulario() {
-    this.form = this.formService.getCadastro();
-    this.form?.patchValue({ 
+    this.form = this.formService.getForm();
+    this.form?.patchValue({
       numero: this.processo.numero,
       nome: this.processo.nome,
       dataDistribuicao: this.processo.dataDistribuicao,

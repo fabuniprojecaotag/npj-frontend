@@ -16,7 +16,9 @@ export class StepperAtendimentosComponent implements OnInit {
   status = ['ATIVO', 'ARQUIVADO'];
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    ) { }
 
   ngOnInit(): void {
     this.primeiroGrupo = this.formBuilder.group({

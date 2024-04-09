@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FormAssistidosService } from 'src/app/core/services/form-assistidos.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 import { ViacepService } from 'src/app/core/services/viacep.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class FormAssistidosComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private formAssistidosService: FormAssistidosService,
+    private formAssistidosService: FormsService,
     private viaCepService: ViacepService
   ) { }
 
@@ -43,7 +43,7 @@ export class FormAssistidosComponent implements OnInit {
       numDependentes: null,
     });
 
-    this.formAssistidosService.setCadastro(this.formAssistidos);
+    this.formAssistidosService.setForm(this.formAssistidos);
   }
 
   // cadastro ou edição de assistidos

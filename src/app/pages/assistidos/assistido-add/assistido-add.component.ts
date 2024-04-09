@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
-import { CadastroService } from 'src/app/core/services/cadastro.service';
-import { FormAssistidosService } from 'src/app/core/services/form-assistidos.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 import { Assistido } from 'src/app/core/types/assistido';
 import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.component';
 
@@ -15,13 +14,13 @@ import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.c
 export class AssistidoAddComponent {
   tituloDaPagina: string = 'Novo Assistido';
 
-  constructor(private formAssistidosService: FormAssistidosService,
+  constructor(private formAssistidosService: FormsService,
     private assistidoService: AssistidosService,
     private router: Router,
     private dialog: MatDialog) { }
 
   cadastrar(): void {
-    const formCadastroAssistido = this.formAssistidosService.getCadastro();
+    const formCadastroAssistido = this.formAssistidosService.getForm();
 
     if (formCadastroAssistido?.valid) {
       const novoAssistido = formCadastroAssistido.getRawValue() as Assistido;

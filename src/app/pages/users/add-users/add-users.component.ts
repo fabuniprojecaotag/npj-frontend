@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
-import { FormUserService } from 'src/app/core/services/form-user.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.component';
 
@@ -15,14 +15,14 @@ export class AddUsersComponent {
   tituloDaPagina: string = 'Adicionar Usuários';
 
   constructor(
-    private formularioService: FormUserService,
+    private formularioService: FormsService,
     private cadastroService: CadastroService,
     private router: Router,
     private dialog: MatDialog
   ) { }
 
   cadastrar() {
-    const formCadastro = this.formularioService.getCadastro();
+    const formCadastro = this.formularioService.getForm();
     if (formCadastro?.valid) {
       const novoCadastro = formCadastro.getRawValue() as Usuario;
       this.cadastroService.cadastrar(novoCadastro).subscribe({
@@ -39,7 +39,7 @@ export class AddUsersComponent {
   }
 
   cadastrarRedirecionando() {
-    const formCadastro = this.formularioService.getCadastro();
+    const formCadastro = this.formularioService.getForm();
     if (formCadastro?.valid) {
       const novoCadastro = formCadastro.getRawValue() as Usuario;
       this.cadastroService.cadastrar(novoCadastro).subscribe({

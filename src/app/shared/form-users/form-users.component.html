@@ -26,8 +26,8 @@
                   {{ perfil }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="formCadastro.get('perfil')?.errors">Perfil é obrigatório</mat-error>
             </mat-form-field>
-            <mat-error *ngIf="formCadastro.get('perfil')?.errors">Perfil é obrigatório</mat-error>
           </div>
           <div class="grid-item">
             <mat-form-field appearance="outline">

@@ -4,14 +4,15 @@ import { FormGroup } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
-export class FormAssistidosService {
+export class FormsService {
   cadastroForm: FormGroup | null = null;
 
-  getCadastro(): FormGroup | null {
+
+  getForm(): FormGroup | null {
     return this.cadastroForm;
   }
 
-  setCadastro(form: FormGroup) {
+  setForm(form: FormGroup) {
     this.cadastroForm = form;
   }
 }

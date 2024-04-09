@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormProcessosService } from 'src/app/core/services/form-processos.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 import { ProcessosService } from 'src/app/core/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
 
@@ -11,23 +11,25 @@ import { Processo } from 'src/app/core/types/processo';
 export class ProcessoAddComponent {
   tituloPagina = 'Processo';
 
-  constructor(private processsoService: ProcessosService, 
-      private formService: FormProcessosService) {}
+  constructor(
+    private processsoService: ProcessosService,
+    private formService: FormsService
+    ) { }
 
   cadastrar() {
-    const formCadastroProcesso = this.formService.getCadastro();
+    const formCadastroProcesso = this.formService.getForm();
 
     if (formCadastroProcesso?.valid) {
       const novoCadastro = formCadastroProcesso.getRawValue() as Processo;
-      this.processsoService.cadastraProcesso(novoCadastro).subscribe({ 
-        next: (value)=> {
+      this.processsoService.cadastraProcesso(novoCadastro).subscribe({
+        next: () => {
           alert("Processo cadastrado com sucesso!");
         },
-        error: (err)=> {
+        error: (err) => {
           alert("Erro ao criar processo!");
           console.log(err);
-        }      
-       });
+        }
+      });
     }
   }
 }

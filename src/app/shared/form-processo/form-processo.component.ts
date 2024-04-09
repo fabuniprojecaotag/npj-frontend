@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormProcessosService } from 'src/app/core/services/form-processos.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 
 @Component({
   selector: 'app-form-processo',
@@ -8,15 +8,14 @@ import { FormProcessosService } from 'src/app/core/services/form-processos.servi
   styleUrls: ['./form-processo.component.scss']
 })
 export class FormProcessoComponent implements OnInit {
-
-  @Output() acaoClick: EventEmitter<any> = new EventEmitter<any>(); 
+  @Output() acaoClick: EventEmitter<any> = new EventEmitter<any>();
   formProcessos!: FormGroup;
   status = ['ATIVO', 'ARQUIVADO'];
 
-  constructor(private formBuilder: FormBuilder, 
-      private formService: FormProcessosService) {
-
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    private formService: FormsService
+  ) { }
 
   ngOnInit(): void {
     this.formProcessos = this.formBuilder.group({
@@ -29,7 +28,7 @@ export class FormProcessoComponent implements OnInit {
       status: [null, Validators.required],
       documento: [null]
     });
-    this.formService.setCadastro(this.formProcessos); 
+    this.formService.setForm(this.formProcessos);
   }
 
   executarAcao() {
