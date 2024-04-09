@@ -9,14 +9,10 @@ mat-stepper {
   mat-step {
     display: flex;
     justify-content: space-around;
-
-    .mat-mdc-form-field {
-      margin: 16px 1em 1em 2em;
-    }
   }
 
   .grupo-form {
-    align-items: center;
+    align-content: center;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -26,14 +22,39 @@ mat-stepper {
       width: 100%;
     }
 
-    .input-metade {
+    .input-muitoPequeno {
+      width: 23.6%;
+    }
+
+    .input-pequeno {
+      width: 34%;
+    }
+
+    .input-medio {
       width: 49%;
+    }
+
+    .input-grande {
+      width: 64%;
     }
 
     .subtitulo {
       font-family: $fonte-padrao;
       font-size: 28px;
       font-weight: 400;
+    }
+
+    .botao-cadastro {
+      height: 100%;
+      padding: 16px 16px;
+    }
+
+    .arquivos-label {
+      display: inline;
+      color: #CCCCCC;
+      font-weight: 400;
+      font-size: 12px;
+      height: 30px;
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -13,7 +13,8 @@ export class StepperAtendimentosComponent implements OnInit {
   terceiroGrupo!: FormGroup;
   quartoGrupo!: FormGroup;
   quintoGrupo!: FormGroup;
-  status = ['ATIVO', 'ARQUIVADO']
+  status = ['ATIVO', 'ARQUIVADO'];
+  @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -51,6 +52,7 @@ export class StepperAtendimentosComponent implements OnInit {
       historico: [''],
       medidaJuridica: [''],
       status: [''],
+      arquivos: [null]
     });
 
     this.formAtendimentos = this.formBuilder.group({
@@ -68,5 +70,10 @@ export class StepperAtendimentosComponent implements OnInit {
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const day = String(currentDate.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    this.quintoGrupo.get('arquivos')?.setValue(file);
   }
 }
