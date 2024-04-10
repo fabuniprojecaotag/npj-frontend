@@ -14,18 +14,25 @@
         <mat-form-field class="full-width">
           <mat-label>E-mail</mat-label>
           <input matInput formControlName="email">
+          <mat-error *ngIf="formAssistidos.get('email')?.errors?.['email']">Padrão de E-mail inválido</mat-error>
         </mat-form-field>
       </div>
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>CPF</mat-label>
           <input matInput formControlName="cpf">
+          <mat-error *ngIf="formAssistidos.get('cpf')?.errors?.['minlength']">CPF precisa ter no mínimo 11
+            dígitos</mat-error>
         </mat-form-field>
       </div>
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>RG</mat-label>
           <input matInput formControlName="rg">
+          <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['required']">RG é
+            obrigatório</mat-error>
+          <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['minlength']">RG precisa ter no mínimo 8
+            dígitos</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -45,7 +52,9 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Data de Nascimento</mat-label>
-          <input matInput formControlName="dataNascimento">
+          <input matInput [matDatepicker]="dataNascimento" formControlName="dataNascimento">
+          <mat-datepicker-toggle matIconSuffix [for]="dataNascimento" color="primary"></mat-datepicker-toggle>
+          <mat-datepicker #dataNascimento></mat-datepicker>
         </mat-form-field>
       </div>
       <div class="col">
@@ -73,6 +82,8 @@
         <mat-form-field class="full-width">
           <mat-label>CEP</mat-label>
           <input matInput formControlName="cep" (blur)="consultarCep()">
+          <mat-error *ngIf="formAssistidos.get('cep')?.errors?.['minlength']">CEP precisa ter no mínimo 8
+            dígitos</mat-error>
         </mat-form-field>
       </div>
       <div class="col">
@@ -139,7 +150,8 @@
       </div>
     </div>
     <div class="btn-group">
-      <button mat-flat-button class="btn" color="warn" (click)="excluir()">EXCLUIR</button>
+      <button type="button" *ngIf="editComponent === true" mat-flat-button class="btn" color="warn"
+        (click)="excluir()">EXCLUIR</button>
       <button mat-flat-button type="reset" class="btn btn-basic">LIMPAR</button>
       <button mat-flat-button type="submit" (click)="executarAcao()" class="btn btn-basic"
         [disabled]="formAssistidos.invalid">SALVAR</button>

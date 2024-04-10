@@ -20,7 +20,7 @@
 
     <mat-form-field>
       <mat-label>Data da distribuição</mat-label>
-      <input matInput [matDatepicker]="dataDistribuicao" formControlName="dataDistribuicao" required />
+      <input matInput [matDatepicker]="dataDistribuicao" formControlName="dataDistribuicao">
       <mat-datepicker-toggle matIconSuffix [for]="dataDistribuicao" color="primary"></mat-datepicker-toggle>
       <mat-datepicker #dataDistribuicao></mat-datepicker>
       <mat-error *ngIf="formProcessos.get('dataDistribuicao')?.errors?.['required']">

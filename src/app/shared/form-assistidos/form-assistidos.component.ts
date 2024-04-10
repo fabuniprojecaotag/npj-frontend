@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { ViacepService } from 'src/app/core/services/viacep.service';
@@ -10,6 +10,7 @@ import { ViacepService } from 'src/app/core/services/viacep.service';
 })
 export class FormAssistidosComponent implements OnInit {
   formAssistidos!: FormGroup;
+  @Input() editComponent: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
   @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
 
@@ -22,16 +23,16 @@ export class FormAssistidosComponent implements OnInit {
   ngOnInit(): void {
     this.formAssistidos = this.formBuilder.group({
       nome: [null, Validators.required],
-      email: null,
-      cpf: null,
-      rg: null,
+      email: [null, Validators.email],
+      cpf: [null, [Validators.minLength(11)]],
+      rg: [null, [Validators.required, Validators.minLength(8)]],
       naturalidade: null,
       nacionalidade: null,
       dataNascimento: null,
       estadoCivil: null,
       telefone: null,
       cidade: null,
-      cep: null,
+      cep: [null, Validators.minLength(8)],
       enderecoResidencial: null,
       escolaridade: null,
       nomePai: [null, Validators.required],
