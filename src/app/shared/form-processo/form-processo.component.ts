@@ -19,12 +19,12 @@ export class FormProcessoComponent implements OnInit {
 
   ngOnInit(): void {
     this.formProcessos = this.formBuilder.group({
-      nProcesso: [null, Validators.required],
-      nomeAcao: [null, Validators.required],
+      numero: [null, Validators.required],
+      nome: [null, Validators.required],
       dataDistribuicao: [null, Validators.required],
       vara: [null, Validators.required],
       forum: [null, Validators.required],
-      atendimento: [null, Validators.required],
+      atendimentoId: [null, Validators.required],
       status: [null, Validators.required],
       documento: [null]
     });

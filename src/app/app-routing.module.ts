@@ -93,7 +93,7 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'processos/edit/:atendimentoId',
+    path: 'processos/edit/:numero',
     component: ProcessoEditComponent,
     canActivate: [authGuard],
   }

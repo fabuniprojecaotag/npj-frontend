@@ -4,16 +4,16 @@
   <form class="formulario" [formGroup]="formProcessos">
     <mat-form-field>
       <mat-label>N° do processo</mat-label>
-      <input matInput placeholder="N° do processo" formControlName="nProcesso" />
-      <mat-error *ngIf="formProcessos.get('nProcesso')?.errors?.['required']">
+      <input matInput placeholder="N° do processo" formControlName="numero" />
+      <mat-error *ngIf="formProcessos.get('numero')?.errors?.['required']">
         Número do processo é obrigatório!
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Nome da ação</mat-label>
-      <input matInput placeholder="Nome da ação" formControlName="nomeAcao" />
-      <mat-error *ngIf="formProcessos.get('nomeAcao')?.errors?.['required']">
+      <input matInput placeholder="Nome da ação" formControlName="nome" />
+      <mat-error *ngIf="formProcessos.get('nome')?.errors?.['required']">
         Nome da ação é obrigatória!
       </mat-error>
     </mat-form-field>
@@ -46,8 +46,8 @@
 
     <mat-form-field>
       <mat-label>Atendimento</mat-label>
-      <input matInput placeholder="Atendimento" formControlName="atendimento" />
-      <mat-error *ngIf="formProcessos.get('atendimento')?.errors?.['required']">
+      <input matInput placeholder="Atendimento" formControlName="atendimentoId" />
+      <mat-error *ngIf="formProcessos.get('atendimentoId')?.errors?.['required']">
         Atendimento é obrigatório!
       </mat-error>
     </mat-form-field>

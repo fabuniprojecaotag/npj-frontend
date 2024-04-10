@@ -23,7 +23,7 @@ export class ProcessoEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.idParam = this.route.snapshot.paramMap.get('atendimentoId') as string;
+    this.idParam = this.route.snapshot.paramMap.get('numero') as string;
     this.processsoService.consultarProcesso(this.idParam).subscribe(callback=>{
       this.processo = callback;
       console.log(this.processo);
