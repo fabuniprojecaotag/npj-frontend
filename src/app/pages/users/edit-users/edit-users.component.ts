@@ -25,7 +25,7 @@ export class EditUsersComponent implements OnInit {
     private cadastroService: CadastroService) { }
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id') as string;
+    const idParam = this.route.snapshot.paramMap.get('cpf') as string;
 
     this.token = this.tokenService.retornarToken();
     this.usuarioService.buscarCadastro(idParam).subscribe(callback => {
@@ -38,7 +38,6 @@ export class EditUsersComponent implements OnInit {
   carregarFormulario() {
     this.form = this.formUserService.getForm();
     this.form?.patchValue({
-      id: this.cadastro.id,
       nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
       semestre: this.cadastro.semestre,
@@ -51,7 +50,7 @@ export class EditUsersComponent implements OnInit {
 
   editar() {
     const dadosAtualizados: Usuario = {
-      id: this.form?.value.id,
+      "@type": this.form?.value.type,
       nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
       semestre: this.form?.value.semestre,

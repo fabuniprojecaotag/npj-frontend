@@ -26,6 +26,7 @@ export class FormUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCadastro = this.formBuilder.group({
+      "@type": [null],
       matricula: [null],
       nome: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
@@ -33,16 +34,37 @@ export class FormUsersComponent implements OnInit {
       semestre: [null],
       status: [{ value: true, disabled: this.myProfileComponente }],
       senha: [null, Validators.required],
-      perfil: [{ value: null, disabled: this.myProfileComponente, }, Validators.required],
+      perfil: [{ value: null, disabled: this.myProfileComponente }, Validators.required],
       confirmarEmail: [null, [Validators.required, Validators.email, formValidations.equalTo('email')]],
-      confirmarSenha: [null,[Validators.required, Validators.minLength(3),formValidations.equalTo('senha')]],
+      confirmarSenha: [null, [Validators.required, Validators.minLength(3), formValidations.equalTo('senha')]],
+    });
+
+    this.formCadastro.get('perfil')?.valueChanges.subscribe(perfil => {
+      const matriculaControl = this.formCadastro.get('matricula');
+      const telefoneControl = this.formCadastro.get('telefone');
+      const semestreControl = this.formCadastro.get('semestre');
+      const typeControl = this.formCadastro.get('@type');
+
+      if (perfil === 'ESTAGIARIO') {
+        matriculaControl?.setValidators(Validators.required);
+        telefoneControl?.setValidators(Validators.required);
+        semestreControl?.setValidators(Validators.required);
+        typeControl?.setValue('Estagiario');
+      } else {
+        matriculaControl?.clearValidators();
+        telefoneControl?.clearValidators();
+        semestreControl?.clearValidators();
+        typeControl?.setValue('Usuario');
+      }
+
+      matriculaControl?.updateValueAndValidity();
+      telefoneControl?.updateValueAndValidity();
+      semestreControl?.updateValueAndValidity();
     });
 
     this.formUserService.setForm(this.formCadastro);
   }
 
-
-  // função pra chamar o cadastrar ou editar no componente pai
   executarAcao() {
     this.acaoClique.emit();
   }

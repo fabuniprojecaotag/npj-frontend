@@ -54,7 +54,7 @@ export class MyProfileComponent implements OnInit {
 
   atualizarUsuario() {
     const dadosAtualizados: Usuario = {
-      id: this.form?.value.id,
+      "@type": this.form?.value.type,
       nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
       semestre: this.form?.value.semestre,
