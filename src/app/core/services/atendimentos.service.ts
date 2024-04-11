@@ -8,11 +8,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AtendimentosService {
-
   private API = environment.devAPI;
+
   constructor(private http: HttpClient) { }
 
-  listagemAtendimentos(): Observable<Atendimento[]>{
+  listagemAtendimentos(): Observable<Atendimento[]> {
     return this.http.get<Atendimento[]>(`${this.API}/atendimentos`);
   };
+
+  consultaAtendimento(idAtendimento: string): Observable<Atendimento> {
+    return this.http.get<Atendimento>(`${this.API}/atendimentos/${idAtendimento}`);
+  }
+
+  cadastrarAtendimento(atendimento: Atendimento): Observable<Atendimento> {
+    return this.http.post<Atendimento>(`${this.API}/atendimentos`, atendimento);
+  }
+
+  excluirAtendimento(idAtendimento: string): Observable<Atendimento> {
+    return this.http.delete<Atendimento>(`${this.API}/atendimentos/${idAtendimento}`);
+  }
 }

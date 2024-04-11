@@ -8,7 +8,6 @@ import { Processo } from '../types/processo';
   providedIn: 'root'
 })
 export class ProcessosService {
-
   private API = environment.devAPI;
 
   constructor(private http: HttpClient) { }

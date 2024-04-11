@@ -1,1 +1,19 @@
+section {
+  display: flex;
+  flex-direction: column;
 
+  h3 {
+    font-weight: bold;
+    font-size: 26px;
+    text-align: center;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 60vh;
+    margin: 0 auto;
+    width: 50%;
+  }
+}

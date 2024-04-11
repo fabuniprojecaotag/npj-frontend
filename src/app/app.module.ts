@@ -50,7 +50,7 @@ import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assi
 import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 import { CardAtalhosComponent } from './shared/card-atalhos/card-atalhos.component';
 import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atendimentos.component';
-import { StepperAtendimentosComponent } from './shared/stepper-atendimentos/stepper-atendimentos.component';
+import { StepperAtendimentosComponent } from './shared/stepper-atendimento-civil/stepper-atendimentos.component';
 import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component';
 import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
@@ -58,6 +58,8 @@ import { ProcessosComponent } from './pages/processos/processos.component';
 import { FormProcessoComponent } from './shared/form-processo/form-processo.component';
 import { ProcessoAddComponent } from './pages/processos/processo-add/processo-add.component';
 import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
+import { AtendimentoCivilComponent } from './pages/atendimentos/novo-atendimento/atendimento-civil/atendimento-civil.component';
+import { StepperAtendimentoTrabalhistaComponent } from './shared/stepper-atendimento-trabalhista/stepper-atendimento-trabalhista.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-
     FormProcessoComponent,
     ProcessoAddComponent,
     ProcessoEditComponent,
+    AtendimentoCivilComponent,
+    StepperAtendimentoTrabalhistaComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
+import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { FormsService } from 'src/app/core/services/forms.service';
 
 @Component({
   selector: 'app-stepper-atendimentos',
@@ -13,17 +16,29 @@ export class StepperAtendimentosComponent implements OnInit {
   terceiroGrupo!: FormGroup;
   quartoGrupo!: FormGroup;
   quintoGrupo!: FormGroup;
-  status = ['ATIVO', 'ARQUIVADO'];
+  status: string[] = ['ATIVO', 'ARQUIVADO'];
+  estagiarioControl: FormControl = new FormControl();
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
 
   constructor(
     private formBuilder: FormBuilder,
-    ) { }
+    private formService: FormsService,
+    private usuarioService: CadastroService,
+  ) { }
 
   ngOnInit(): void {
+    this.usuarioService.buscarMeuUsuario().subscribe({
+      next: (usuario) => {
+        this.estagiarioControl.setValue(usuario.nome);
+      },
+      error: (err) => {
+        console.log("Usuário não encontrado!");
+      }
+    });
+
     this.primeiroGrupo = this.formBuilder.group({
-      estagiario: [null, Validators.required],
-      dataAtendimento: [this.pegarDataAtual(), Validators.required]
+      estagiario: this.estagiarioControl,
+      dataAtendimento: [new Date().toISOString(), Validators.required]
     });
 
     this.segundoGrupo = this.formBuilder.group({
@@ -58,20 +73,14 @@ export class StepperAtendimentosComponent implements OnInit {
     });
 
     this.formAtendimentos = this.formBuilder.group({
-      primeiroGrupo: this.primeiroGrupo,
-      segundoGrupo: this.segundoGrupo,
-      terceiroGrupo: this.terceiroGrupo,
-      quartoGrupo: this.quartoGrupo,
-      quintoGrupo: this.quintoGrupo
+      primeiroGrupo: this.primeiroGrupo.getRawValue(),
+      segundoGrupo: this.segundoGrupo.getRawValue(),
+      terceiroGrupo: this.terceiroGrupo.getRawValue(),
+      quartoGrupo: this.quartoGrupo.getRawValue(),
+      quintoGrupo: this.quintoGrupo.getRawValue()
     });
-  }
 
-  pegarDataAtual(): string {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const day = String(currentDate.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    this.formService.setForm(this.formAtendimentos);
   }
 
   onFileSelected(event: any): void {
