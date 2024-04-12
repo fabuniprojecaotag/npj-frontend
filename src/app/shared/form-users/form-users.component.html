@@ -9,7 +9,7 @@
       <mat-card-content>
         <div class="grid-container">
           <div class="grid-item">
-            <mat-form-field appearance="outline" *ngIf="formCadastro.get('perfil')?.value === 'ESTAGIARIO'">
+            <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
               <mat-label>Matrícula</mat-label>
               <input matInput formControlName="matricula" placeholder="matricula">
               <mat-error *ngIf="formCadastro.get('matricula')?.errors">Matrícula é obrigatória</mat-error>
@@ -21,21 +21,21 @@
             </mat-form-field>
             <mat-form-field class="input-container" appearance="outline">
               <mat-label>Selecione o tipo de perfil</mat-label>
-              <mat-select matNativeControl formControlName="perfil">
-                <mat-option *ngFor="let perfil of perfis" [value]="perfil.perfil">
-                  {{ perfil.viewperfil }}
+              <mat-select matNativeControl formControlName="role">
+                <mat-option *ngFor="let role of perfis" [value]="role.perfil">
+                  {{ role.viewperfil }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="formCadastro.get('perfil')?.errors">Perfil é obrigatório</mat-error>
+              <mat-error *ngIf="formCadastro.get('role')?.errors">Perfil é obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="grid-item">
-            <mat-form-field appearance="outline" *ngIf="formCadastro.get('perfil')?.value === 'ESTAGIARIO'">
+            <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
               <mat-label>Telefone</mat-label>
               <input matInput formControlName="telefone" placeholder="+XX XXXX-XXXX">
               <mat-error *ngIf="formCadastro.get('telefone')?.errors">Telefone é obrigatório</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" *ngIf="formCadastro.get('perfil')?.value === 'ESTAGIARIO'">
+            <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
               <mat-label>Semestre</mat-label>
               <input matInput formControlName="semestre" placeholder="Digite seu Semestre">
               <mat-error *ngIf="formCadastro.get('semestre')?.errors">Semestre é obrigatório</mat-error>

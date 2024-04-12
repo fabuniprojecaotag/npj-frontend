@@ -29,7 +29,7 @@ export class CadastroService {
   }
 
   editarCadastro(usuario: Usuario, userEmail: string): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/usuarios/${userEmail}`, usuario);
+    return this.http.put<Usuario>(`${this.apiUrl}/usuarios/${userEmail}`, usuario);
   }
 
   excluirCadastro(userEmail: string) {

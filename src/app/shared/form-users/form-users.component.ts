@@ -41,18 +41,18 @@ export class FormUsersComponent implements OnInit {
       semestre: [null],
       status: [{ value: true, disabled: this.myProfileComponente }],
       senha: [null, Validators.required],
-      perfil: [{ value: null, disabled: this.myProfileComponente }, Validators.required],
+      role: [{ value: null, disabled: this.myProfileComponente }, Validators.required],
       confirmarEmail: [null, [Validators.required, Validators.email, formValidations.equalTo('email')]],
       confirmarSenha: [null, [Validators.required, Validators.minLength(3), formValidations.equalTo('senha')]],
     });
 
-    this.formCadastro.get('perfil')?.valueChanges.subscribe(perfil => {
+    this.formCadastro.get('role')?.valueChanges.subscribe(role => {
       const matriculaControl = this.formCadastro.get('matricula');
       const telefoneControl = this.formCadastro.get('telefone');
       const semestreControl = this.formCadastro.get('semestre');
       const typeControl = this.formCadastro.get('@type');
 
-      if (perfil === 'ESTAGIARIO') {
+      if (role === 'ESTAGIARIO') {
         matriculaControl?.setValidators(Validators.required);
         telefoneControl?.setValidators(Validators.required);
         semestreControl?.setValidators(Validators.required);

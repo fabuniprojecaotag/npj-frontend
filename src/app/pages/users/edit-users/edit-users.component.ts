@@ -26,9 +26,10 @@ export class EditUsersComponent implements OnInit {
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('email') as string;
+    const nomeUsuario = idParam.split('@')[0];
 
     this.token = this.tokenService.retornarToken();
-    this.usuarioService.buscarCadastro(idParam).subscribe(callback => {
+    this.usuarioService.buscarCadastro(nomeUsuario).subscribe(callback => {
       this.cadastro = callback;
       console.log("usuario para editar:", this.cadastro)
       this.carregarFormulario();
@@ -38,10 +39,12 @@ export class EditUsersComponent implements OnInit {
   carregarFormulario() {
     this.form = this.formUserService.getForm();
     this.form?.patchValue({
+      // "@type": this.cadastro['@type'],
+      id: this.cadastro.id,
       nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
       semestre: this.cadastro.semestre,
-      perfil: this.cadastro.role,
+      role: this.cadastro.role,
       email: this.cadastro.email,
       status: this.cadastro.status,
     });
@@ -51,17 +54,21 @@ export class EditUsersComponent implements OnInit {
   editar() {
     const dadosAtualizados: Usuario = {
       "@type": this.form?.value.type,
+      id: this.form?.value.id,
       nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
       semestre: this.form?.value.semestre,
-      role: this.form?.value.perfil,
+      role: this.form?.value.role,
       email: this.form?.value.email,
       status: this.form?.value.status,
       senha: this.form?.value.senha,
       unidadeInstitucional: ''
     }
 
-    this.cadastroService.editarCadastro(dadosAtualizados, this.cadastro.email).subscribe({
+    const idParam = this.route.snapshot.paramMap.get('email') as string;
+    const nomeUsuario = idParam.split('@')[0];
+
+    this.cadastroService.editarCadastro(dadosAtualizados, nomeUsuario).subscribe({
       next: (response) => {
         alert('Atualização feita com sucesso!');
         this.router.navigate(['/users']);
@@ -73,8 +80,8 @@ export class EditUsersComponent implements OnInit {
     })
   }
 
-  excluir () {
-    this.cadastroService.excluirCadastro(this.cadastro.role).subscribe({
+  excluir() {
+    this.cadastroService.excluirCadastro(this.cadastro.id).subscribe({
       next: (response) => {
         alert("Usuário excluido com sucesso");
         this.router.navigate(['/users']);

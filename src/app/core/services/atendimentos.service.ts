@@ -21,7 +21,7 @@ export class AtendimentosService {
   }
 
   cadastrarAtendimento(atendimento: Atendimento): Observable<Atendimento> {
-    return this.http.post<Atendimento>(`${this.API}/atendimentos`, atendimento);
+    return this.http.put<Atendimento>(`${this.API}/atendimentos`, atendimento);
   }
 
   excluirAtendimento(idAtendimento: string): Observable<Atendimento> {
