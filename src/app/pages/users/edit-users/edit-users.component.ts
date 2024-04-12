@@ -25,7 +25,7 @@ export class EditUsersComponent implements OnInit {
     private cadastroService: CadastroService) { }
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('cpf') as string;
+    const idParam = this.route.snapshot.paramMap.get('email') as string;
 
     this.token = this.tokenService.retornarToken();
     this.usuarioService.buscarCadastro(idParam).subscribe(callback => {

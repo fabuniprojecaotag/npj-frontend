@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 
@@ -10,7 +9,7 @@ import { FormsService } from 'src/app/core/services/forms.service';
   styleUrls: ['./stepper-atendimentos.component.scss']
 })
 export class StepperAtendimentosComponent implements OnInit {
-  formAtendimentos!: FormGroup;
+  formAtendimentos!: any;
   primeiroGrupo!: FormGroup;
   segundoGrupo!: FormGroup;
   terceiroGrupo!: FormGroup;
@@ -19,6 +18,7 @@ export class StepperAtendimentosComponent implements OnInit {
   status: string[] = ['ATIVO', 'ARQUIVADO'];
   estagiarioControl: FormControl = new FormControl();
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
+  @Output() acaoClique: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -73,11 +73,11 @@ export class StepperAtendimentosComponent implements OnInit {
     });
 
     this.formAtendimentos = this.formBuilder.group({
-      primeiroGrupo: this.primeiroGrupo.getRawValue(),
-      segundoGrupo: this.segundoGrupo.getRawValue(),
-      terceiroGrupo: this.terceiroGrupo.getRawValue(),
-      quartoGrupo: this.quartoGrupo.getRawValue(),
-      quintoGrupo: this.quintoGrupo.getRawValue()
+      primeiroGrupo: this.primeiroGrupo,
+      segundoGrupo: this.segundoGrupo,
+      terceiroGrupo: this.terceiroGrupo,
+      quartoGrupo: this.quartoGrupo,
+      quintoGrupo: this.quintoGrupo
     });
 
     this.formService.setForm(this.formAtendimentos);
@@ -86,5 +86,9 @@ export class StepperAtendimentosComponent implements OnInit {
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     this.quintoGrupo.get('arquivos')?.setValue(file);
+  }
+
+  executarAcao() {
+    this.acaoClique.emit();
   }
 }

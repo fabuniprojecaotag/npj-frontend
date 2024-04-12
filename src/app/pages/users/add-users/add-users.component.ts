@@ -47,6 +47,7 @@ export class AddUsersComponent {
           this.abrirModal(novoCadastro);
           this.router.navigate(['/users']);
           console.log('cadastro realizado com  sucesso: ', value);
+          console.log('Novo cadastro pego: ', novoCadastro);
         },
         error: (err) => {
           alert('erro ao realizar cadastro!');

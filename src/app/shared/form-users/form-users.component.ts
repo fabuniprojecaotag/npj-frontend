@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { formValidations } from '../form-validations';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-form-users',
@@ -11,7 +12,13 @@ import { FormsService } from 'src/app/core/services/forms.service';
 export class FormUsersComponent implements OnInit {
   formCadastro!: FormGroup;
   escondido = true;
-  perfis = ["COORDENADOR", "ESTAGIARIO", "PROFESSOR", "SECRETARIA", "ADMINISTRADOR"];
+  perfis = [
+    {perfil: 'COORDENADOR', viewperfil: 'Coordenador'},
+    {perfil: 'ADMINISTRADOR', viewperfil: 'Administrador'},
+    {perfil: 'ESTAGIARIO', viewperfil: 'Estagiario'},
+    {perfil: 'SECRETARIA', viewperfil: 'Secretária'},
+    {perfil: 'PROFESSOR', viewperfil: 'Professor'},
+  ];
   @Input() myProfileComponente: boolean = false;
   @Input() editComponent: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();

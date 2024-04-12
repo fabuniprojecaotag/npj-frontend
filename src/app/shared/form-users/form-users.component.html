@@ -21,9 +21,9 @@
             </mat-form-field>
             <mat-form-field class="input-container" appearance="outline">
               <mat-label>Selecione o tipo de perfil</mat-label>
-              <mat-select matInput formControlName="perfil" ngDefaultControl>
-                <mat-option *ngFor="let perfil of perfis" [value]="perfil">
-                  {{ perfil }}
+              <mat-select matNativeControl formControlName="perfil">
+                <mat-option *ngFor="let perfil of perfis" [value]="perfil.perfil">
+                  {{ perfil.viewperfil }}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="formCadastro.get('perfil')?.errors">Perfil é obrigatório</mat-error>

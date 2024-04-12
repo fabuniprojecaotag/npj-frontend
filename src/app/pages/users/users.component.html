@@ -23,7 +23,7 @@
       <!-- Nome Coluna -->
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let usuario"><a [routerLink]="'/users/edit/' + usuario.cpf"> {{usuario.nome}} </a></td>
+        <td mat-cell *matCellDef="let usuario"><a [routerLink]="'/users/edit/' + usuario.email"> {{usuario.nome}} </a></td>
       </ng-container>
 
       <!-- Matricula Column -->
