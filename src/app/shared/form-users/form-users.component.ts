@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { formValidations } from '../form-validations';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { Usuario } from 'src/app/core/types/usuario'; // Certifique-se de importar o tipo Usuario
 
 @Component({
   selector: 'app-form-users',
@@ -24,6 +25,7 @@ export class FormUsersComponent implements OnInit {
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
   @Output() acaoClique2: EventEmitter<any> = new EventEmitter<any>();
   @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
+  supervisorControl: FormControl<Usuario | null> = new FormControl<Usuario | null>({value: null, disabled: this.myProfileComponente});
 
 
   constructor(
@@ -38,7 +40,7 @@ export class FormUsersComponent implements OnInit {
       matricula: [null],
       nome: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
-      supervisor: [{ value: null, disabled: this.myProfileComponente }],
+      supervisor: this.supervisorControl,
       semestre: [null],
       unidadeInstitucional: [null, Validators.required],
       status: [{ value: true, disabled: this.myProfileComponente }],
@@ -50,24 +52,23 @@ export class FormUsersComponent implements OnInit {
 
     this.formCadastro.get('role')?.valueChanges.subscribe(role => {
       const matriculaControl = this.formCadastro.get('matricula');
-      const supervisorControl = this.formCadastro.get('supervisor');
       const semestreControl = this.formCadastro.get('semestre');
       const typeControl = this.formCadastro.get('@type');
 
       if (role === 'ESTAGIARIO') {
         matriculaControl?.setValidators(Validators.required);
-        supervisorControl?.setValidators(Validators.required);
+        this.supervisorControl?.setValidators(Validators.required);
         semestreControl?.setValidators(Validators.required);
         typeControl?.setValue('Estagiario');
       } else {
         matriculaControl?.clearValidators();
-        supervisorControl?.clearValidators();
+        this.supervisorControl?.clearValidators();
         semestreControl?.clearValidators();
         typeControl?.setValue('Usuario');
       }
 
       matriculaControl?.updateValueAndValidity();
-      supervisorControl?.updateValueAndValidity();
+      this.supervisorControl?.updateValueAndValidity();
       semestreControl?.updateValueAndValidity();
     });
 

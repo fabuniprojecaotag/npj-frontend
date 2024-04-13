@@ -60,6 +60,7 @@ import { ProcessoAddComponent } from './pages/processos/processo-add/processo-ad
 import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
 import { AtendimentoCivilComponent } from './pages/atendimentos/novo-atendimento/atendimento-civil/atendimento-civil.component';
 import { StepperAtendimentoTrabalhistaComponent } from './shared/stepper-atendimento-trabalhista/stepper-atendimento-trabalhista.component';
+import { SupervisorAutocompleteComponent } from './shared/supervisor-autocomplete/supervisor-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { StepperAtendimentoTrabalhistaComponent } from './shared/stepper-atendim
     ProcessoEditComponent,
     AtendimentoCivilComponent,
     StepperAtendimentoTrabalhistaComponent,
+    SupervisorAutocompleteComponent,
   ],
   imports: [
     BrowserModule,

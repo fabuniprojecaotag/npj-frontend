@@ -11,6 +11,10 @@ export interface Usuario {
   // opcionais/estagiário:
   matricula?: string,
   semestre?: string,
-  supervisor?: string
+  supervisor?: Supervisor
 }
 
+export interface Supervisor {
+  id: string,
+  nome: string
+}

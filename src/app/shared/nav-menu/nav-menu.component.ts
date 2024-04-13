@@ -11,13 +11,12 @@ export class NavMenuComponent implements OnInit {
   panelOpenState = false;
   perfilNome!: string;
 
-
   constructor(private cadastroService: CadastroService) { }
 
   ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
-        this.perfilNome = usuario.role;
+        this.perfilNome = usuario.role.toUpperCase();
       }
     })
   }
