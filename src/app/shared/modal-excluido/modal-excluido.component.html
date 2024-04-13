@@ -4,8 +4,8 @@
     <p>Deseja deletar o usuário: {{ data.nome }}?</p>
   </div>
   <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>FECHAR</button>
-    <button mat-flat-button mat-dialog-close color="warn" (click)="deletar()"><mat-icon
+    <button mat-button mat-dialog-close (click)="cancelar()">FECHAR</button>
+    <button mat-flat-button mat-dialog-close color="warn" (click)="openDialog()"><mat-icon
         class="mat-18">delete</mat-icon>DELETAR</button>
   </div>
 </section>

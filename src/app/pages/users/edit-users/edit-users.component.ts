@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 
 @Component({
   selector: 'app-edit-users',
@@ -22,7 +24,8 @@ export class EditUsersComponent implements OnInit {
     private usuarioService: CadastroService,
     private tokenService: TokenService,
     private formUserService: FormsService,
-    private cadastroService: CadastroService) { }
+    private cadastroService: CadastroService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('email') as string;
@@ -83,13 +86,24 @@ export class EditUsersComponent implements OnInit {
   excluir() {
     this.cadastroService.excluirCadastro(this.cadastro.id).subscribe({
       next: (response) => {
-        alert("Usuário excluido com sucesso");
+        //alert("Usuário excluido com sucesso");
+        this.abrirModal(this.cadastro)
         this.router.navigate(['/users']);
-        console.log("exclusão resp:", response);
+        //console.log("exclusão resp:", response);
       },
       error: (err) => {
         console.log("Erro ao excluir:", err);
       }
     })
   }
+
+abrirModal(user: Usuario) {
+  this.dialog.open(ModalExcluidoComponent, {
+    width: '372px',
+    height: '228px',
+    data: { tituloCriado: 'Usuario', nome: user.nome, deletar: this.excluir()}
+  });
 }
+
+}
+
