@@ -42,9 +42,14 @@
     img {
       max-width: 300px;
       min-height: 177px;
-
-
     }
+
+    &__carregando {
+      mat-spinner {
+        margin-top: 2em;
+      }
+    }
+
     .login__form {
       align-items: center;
       display: flex;

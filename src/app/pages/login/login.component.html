@@ -2,12 +2,15 @@
   <div class="card">
     <img src="assets/images/logoGPROTransparente.png" alt="logo do GPRO">
     <h2>Login</h2>
-    <div *ngIf="loading">Carregando</div>
+    <div class="card__carregando" *ngIf="loading">
+      <p>Carregando</p>
+      <mat-spinner></mat-spinner>
+    </div>
     <form [formGroup]="loginForm" *ngIf="!loading" class="login__form">
       <mat-form-field appearance="fill">
-        <mat-label>Prefixo email</mat-label>
-        <input matInput type="text" placeholder="Digite o começo do seu e-mail sem a parte do @" formControlName="email">
-        <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Email obrigatório!</mat-error>
+        <mat-label>Prefixo email/matricula</mat-label>
+        <input matInput type="text" placeholder="Digite o começo do seu e-mail ou matricula" formControlName="email">
+        <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Email/Matrícula obrigatório(a)!</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">

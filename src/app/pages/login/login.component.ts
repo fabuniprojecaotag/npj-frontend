@@ -37,13 +37,13 @@ export class LoginComponent implements OnInit {
       const senha = this.loginForm.value.senha;
 
       this.autenticacaoService.autenticar(email, senha).subscribe({
-        next: (resposta) => {
+        next: () => {
           this.loading = false;
-          console.log('sucesso ao logar!', resposta);
           this.router.navigate(['/home']);
         },
         error: (err) => {
           this.loading = false;
+          alert('Erro ao logar!');
           console.log('Erro ao logar:', err);
         },
       });
