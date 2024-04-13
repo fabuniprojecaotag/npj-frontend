@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Atendimento } from '../types/atendimento';
 import { Observable } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AtendimentosService {
-  private API = environment.devAPI;
+  private API = environment.API_URL;
 
   constructor(private http: HttpClient) { }
 

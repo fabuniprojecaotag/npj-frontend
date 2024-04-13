@@ -1,3 +1,4 @@
 export const environment = {
-  API: 'http://gprojuridico.web.app'
+  production: true,
+  API_URL: 'http://gprojuridico.uc.r.appspot.com',
 };
