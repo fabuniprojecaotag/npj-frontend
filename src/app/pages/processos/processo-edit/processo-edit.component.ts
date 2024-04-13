@@ -36,7 +36,7 @@ export class ProcessoEditComponent implements OnInit {
     this.form?.patchValue({
       numero: this.processo.numero,
       nome: this.processo.nome,
-      dataDistribuicao: this.processo.dataDistribuicao,
+      dataDistribuicao: new Date(this.processo.dataDistribuicao),
       vara: this.processo.vara,
       forum: this.processo.forum,
       atendimentoId: this.processo.atendimentoId

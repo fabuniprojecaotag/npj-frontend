@@ -4,7 +4,7 @@ export interface Usuario {
   email: string,
   nome: string,
   cpf?: string,
-  unidadeInstitucional?: string,
+  unidadeInstitucional: string,
   senha: string,
   status: boolean,
   role: string,

@@ -28,19 +28,32 @@
               </mat-select>
               <mat-error *ngIf="formCadastro.get('role')?.errors">Perfil é obrigatório</mat-error>
             </mat-form-field>
+            <mat-checkbox formControlName="status" color="primary" labelPosition="before">Ativo:</mat-checkbox>
           </div>
           <div class="grid-item">
+            <mat-form-field appearance="outline">
+              <mat-label>CPF</mat-label>
+              <input matInput formControlName="cpf" placeholder="CPF">
+            </mat-form-field>
+            <mat-form-field class="input-container" appearance="outline">
+              <mat-label>Selecione a Unidade</mat-label>
+              <mat-select matNativeControl formControlName="unidadeInstitucional">
+                <mat-option *ngFor="let unidade of unidadeInstitucional" [value]="unidade">
+                  {{ unidade }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formCadastro.get('unidadeInstitucional')?.errors">Unidade é obrigatória</mat-error>
+            </mat-form-field>
             <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
-              <mat-label>Telefone</mat-label>
-              <input matInput formControlName="telefone" placeholder="+XX XXXX-XXXX">
-              <mat-error *ngIf="formCadastro.get('telefone')?.errors">Telefone é obrigatório</mat-error>
+              <mat-label>Supervisor</mat-label>
+              <input matInput formControlName="supervisor" placeholder="Nome do Supervisor">
+              <mat-error *ngIf="formCadastro.get('supervisor')?.errors">Supervisor é obrigatório</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
               <mat-label>Semestre</mat-label>
               <input matInput formControlName="semestre" placeholder="Digite seu Semestre">
               <mat-error *ngIf="formCadastro.get('semestre')?.errors">Semestre é obrigatório</mat-error>
             </mat-form-field>
-            <mat-checkbox formControlName="status" color="primary" labelPosition="before">Ativo:</mat-checkbox>
           </div>
         </div>
       </mat-card-content>

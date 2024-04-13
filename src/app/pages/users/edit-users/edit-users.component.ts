@@ -16,25 +16,21 @@ import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excl
 export class EditUsersComponent implements OnInit {
   tituloDaPagina: string = 'Editar Usuário';
   form!: FormGroup<any> | null;
-  token = '';
   cadastro!: Usuario;
+  idParam = this.route.snapshot.paramMap.get('email') as string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private usuarioService: CadastroService,
-    private tokenService: TokenService,
     private formUserService: FormsService,
     private cadastroService: CadastroService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('email') as string;
-    const nomeUsuario = idParam.split('@')[0];
+    const nomeUsuario = this.idParam.split('@')[0];
 
-    this.token = this.tokenService.retornarToken();
-    this.usuarioService.buscarCadastro(nomeUsuario).subscribe(callback => {
-      this.cadastro = callback;
-      console.log("usuario para editar:", this.cadastro)
+    this.usuarioService.buscarCadastro(nomeUsuario).subscribe(usuario => {
+      this.cadastro = usuario;
       this.carregarFormulario();
     })
   }
@@ -50,6 +46,9 @@ export class EditUsersComponent implements OnInit {
       role: this.cadastro.role,
       email: this.cadastro.email,
       status: this.cadastro.status,
+      cpf: this.cadastro.cpf,
+      unidadeInstitucional: this.cadastro.unidadeInstitucional,
+      supervisor: this.cadastro.supervisor
     });
 
   }
@@ -58,6 +57,7 @@ export class EditUsersComponent implements OnInit {
     const dadosAtualizados: Usuario = {
       "@type": this.form?.value.type,
       id: this.form?.value.id,
+      cpf: this.form?.value.cpf,
       nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
       semestre: this.form?.value.semestre,
@@ -65,14 +65,14 @@ export class EditUsersComponent implements OnInit {
       email: this.form?.value.email,
       status: this.form?.value.status,
       senha: this.form?.value.senha,
-      unidadeInstitucional: ''
+      unidadeInstitucional: this.form?.value.unidadeInstitucional,
+      supervisor: this.form?.value.supervisor,
     }
 
-    const idParam = this.route.snapshot.paramMap.get('email') as string;
-    const nomeUsuario = idParam.split('@')[0];
+    const nomeUsuario = this.idParam.split('@')[0];
 
     this.cadastroService.editarCadastro(dadosAtualizados, nomeUsuario).subscribe({
-      next: (response) => {
+      next: () => {
         alert('Atualização feita com sucesso!');
         this.router.navigate(['/users']);
       },

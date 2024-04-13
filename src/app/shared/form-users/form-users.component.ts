@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { formValidations } from '../form-validations';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-form-users',
@@ -13,12 +12,13 @@ export class FormUsersComponent implements OnInit {
   formCadastro!: FormGroup;
   escondido = true;
   perfis = [
-    {perfil: 'COORDENADOR', viewperfil: 'Coordenador'},
-    {perfil: 'ADMINISTRADOR', viewperfil: 'Administrador'},
-    {perfil: 'ESTAGIARIO', viewperfil: 'Estagiario'},
-    {perfil: 'SECRETARIA', viewperfil: 'Secretária'},
-    {perfil: 'PROFESSOR', viewperfil: 'Professor'},
+    { perfil: 'COORDENADOR', viewperfil: 'Coordenador' },
+    { perfil: 'ADMINISTRADOR', viewperfil: 'Administrador' },
+    { perfil: 'ESTAGIARIO', viewperfil: 'Estagiario' },
+    { perfil: 'SECRETARIA', viewperfil: 'Secretária' },
+    { perfil: 'PROFESSOR', viewperfil: 'Professor' },
   ];
+  unidadeInstitucional = ['Taguatinga', 'Guará', 'Ceilândia'];
   @Input() myProfileComponente: boolean = false;
   @Input() editComponent: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
@@ -34,11 +34,13 @@ export class FormUsersComponent implements OnInit {
   ngOnInit(): void {
     this.formCadastro = this.formBuilder.group({
       "@type": [null],
+      cpf: [null],
       matricula: [null],
       nome: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
-      telefone: [null],
+      supervisor: [{ value: null, disabled: this.myProfileComponente }],
       semestre: [null],
+      unidadeInstitucional: [null, Validators.required],
       status: [{ value: true, disabled: this.myProfileComponente }],
       senha: [null, Validators.required],
       role: [{ value: null, disabled: this.myProfileComponente }, Validators.required],
@@ -48,24 +50,24 @@ export class FormUsersComponent implements OnInit {
 
     this.formCadastro.get('role')?.valueChanges.subscribe(role => {
       const matriculaControl = this.formCadastro.get('matricula');
-      const telefoneControl = this.formCadastro.get('telefone');
+      const supervisorControl = this.formCadastro.get('supervisor');
       const semestreControl = this.formCadastro.get('semestre');
       const typeControl = this.formCadastro.get('@type');
 
       if (role === 'ESTAGIARIO') {
         matriculaControl?.setValidators(Validators.required);
-        telefoneControl?.setValidators(Validators.required);
+        supervisorControl?.setValidators(Validators.required);
         semestreControl?.setValidators(Validators.required);
         typeControl?.setValue('Estagiario');
       } else {
         matriculaControl?.clearValidators();
-        telefoneControl?.clearValidators();
+        supervisorControl?.clearValidators();
         semestreControl?.clearValidators();
         typeControl?.setValue('Usuario');
       }
 
       matriculaControl?.updateValueAndValidity();
-      telefoneControl?.updateValueAndValidity();
+      supervisorControl?.updateValueAndValidity();
       semestreControl?.updateValueAndValidity();
     });
 

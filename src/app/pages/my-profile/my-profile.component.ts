@@ -23,7 +23,7 @@ export class MyProfileComponent implements OnInit {
     private cadastroService: CadastroService,
     private formUserService: FormsService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.token = this.tokenService.retornarToken();
@@ -44,11 +44,13 @@ export class MyProfileComponent implements OnInit {
     this.form?.patchValue({
       nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
+      cpf: this.cadastro.cpf,
       semestre: this.cadastro.semestre,
       status: this.cadastro.status,
       perfil: this.cadastro.role,
       email: this.cadastro.email,
       senha: null,
+      unidadeInstitucional: this.cadastro.unidadeInstitucional,
     });
   }
 
@@ -56,6 +58,7 @@ export class MyProfileComponent implements OnInit {
     const dadosAtualizados: Usuario = {
       "@type": this.form?.value.type,
       id: this.form?.value.id,
+      cpf: this.form?.value.cpf,
       nome: this.form?.value.nome,
       matricula: this.form?.value.matricula,
       semestre: this.form?.value.semestre,
@@ -63,11 +66,13 @@ export class MyProfileComponent implements OnInit {
       role: this.form?.value.perfil,
       email: this.form?.value.email,
       senha: this.form?.value.senha,
+      unidadeInstitucional: this.form?.value.unidadeInstitucional,
+      supervisor: this.form?.value.supervisor
     }
 
     this.cadastroService.editarCadastro(dadosAtualizados, dadosAtualizados.email).subscribe({
       next: () => {
-        alert('Cadastro editado com sucesso!');
+        alert('Cadastro atualizado com sucesso!');
         this.router.navigate(['/']);
       },
       error: (err) => {
