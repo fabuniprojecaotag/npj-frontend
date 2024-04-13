@@ -1,9 +1,8 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { UsuarioService } from './usuario.service';
-import { Usuario } from '../types/usuario';
 
 interface AuthResponse {
   access_token: string;
@@ -13,7 +12,7 @@ interface AuthResponse {
   providedIn: 'root',
 })
 export class AutenticacaoService {
-  private API = environment.devAPI;
+  private API = environment.API_URL;
 
   constructor(private http: HttpClient, private userService: UsuarioService) { }
 
