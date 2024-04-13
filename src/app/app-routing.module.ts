@@ -59,7 +59,7 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'assistidos/shortcut/:documentId',
+    path: 'assistidos/shortcut/:rg',
     component: AssistidosShortcutsComponent,
     canActivate: [authGuard],
   },
@@ -69,7 +69,7 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'assistidos/edit/:documentId',
+    path: 'assistidos/edit/:rg',
     component: AssistidosEditComponent,
     canActivate: [authGuard],
   },

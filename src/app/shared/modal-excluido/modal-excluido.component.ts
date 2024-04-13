@@ -13,19 +13,15 @@ export class ModalExcluidoComponent {
   constructor(
     public dialogRef: MatDialogRef<ModalExcluidoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private router: Router
   ) {}
 
-  deletar() {
-    console.log('Função deletar chamada...');
-    console.log('Valor de this.funcaoDeletar', this.funcaoDeletar);
-    if (this.funcaoDeletar) {
-      this.funcaoDeletar();
-    } else {
-      console.error('Função de exclusão não definida.');
-    }
-
+  openDialog() {
+    this.data.deletar()
     this.dialogRef.close();
   }
+
+  cancelar () {
+    this.dialogRef.close();
+}
 
 }
