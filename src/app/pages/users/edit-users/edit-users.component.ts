@@ -17,7 +17,7 @@ export class EditUsersComponent implements OnInit {
   tituloDaPagina: string = 'Editar Usuário';
   form!: FormGroup<any> | null;
   cadastro!: Usuario;
-  idParam = this.route.snapshot.paramMap.get('email') as string;
+  idParam = this.route.snapshot.paramMap.get('id') as string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -27,9 +27,7 @@ export class EditUsersComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    const nomeUsuario = this.idParam.split('@')[0];
-
-    this.usuarioService.buscarCadastro(nomeUsuario).subscribe(usuario => {
+    this.usuarioService.buscarCadastro(this.idParam).subscribe(usuario => {
       this.cadastro = usuario;
       this.carregarFormulario();
     })
@@ -69,9 +67,7 @@ export class EditUsersComponent implements OnInit {
       supervisor: this.form?.value.supervisor,
     }
 
-    const nomeUsuario = this.idParam.split('@')[0];
-
-    this.cadastroService.editarCadastro(dadosAtualizados, nomeUsuario).subscribe({
+    this.cadastroService.editarCadastro(dadosAtualizados, this.idParam).subscribe({
       next: () => {
         alert('Atualização feita com sucesso!');
         this.router.navigate(['/users']);

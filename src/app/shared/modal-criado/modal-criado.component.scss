@@ -1,4 +1,4 @@
-section {
+.modal {
   margin: 1em;
   h4 {
     font-size: 30px;
@@ -10,9 +10,11 @@ section {
     p {
       padding-bottom: 0.7em;
     }
+  }
 
-    button {
-      padding-left: 0.5em;
-    }
+  &__botoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
   }
 }

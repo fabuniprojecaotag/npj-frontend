@@ -11,15 +11,14 @@ export class ModalExcluidoComponent {
   constructor(
     public dialogRef: MatDialogRef<ModalExcluidoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  ) {}
+  ) { }
 
   openDialog() {
     this.data.deletar();
     this.dialogRef.close();
   }
 
-  cancelar () {
+  cancelar() {
     this.dialogRef.close();
-}
-
+  }
 }
