@@ -83,27 +83,24 @@ export class EditUsersComponent implements OnInit {
     })
   }
 
-  excluir() {
-    this.cadastroService.excluirCadastro(this.cadastro.id).subscribe({
-      next: (response) => {
-        //alert("Usuário excluido com sucesso");
-        this.abrirModal(this.cadastro)
+  excluir(idCadastro: string) {
+    this.cadastroService.excluirCadastro(idCadastro).subscribe({
+      next: () => {
         this.router.navigate(['/users']);
-        //console.log("exclusão resp:", response);
       },
       error: (err) => {
+        alert('Erro ao excluir o usuário!\n Tente novamente mais tarde');
         console.log("Erro ao excluir:", err);
       }
     })
   }
 
-abrirModal(user: Usuario) {
-  this.dialog.open(ModalExcluidoComponent, {
-    width: '372px',
-    height: '228px',
-    data: { tituloCriado: 'Usuario', nome: user.nome, deletar: this.excluir()}
-  });
-}
-
+  abrirModal(user: Usuario) {
+    this.dialog.open(ModalExcluidoComponent, {
+      width: '372px',
+      height: '228px',
+      data: { tituloCriado: 'Usuário', nome: user.nome, deletar: () => this.excluir(user.id)}
+    });
+  }
 }
 

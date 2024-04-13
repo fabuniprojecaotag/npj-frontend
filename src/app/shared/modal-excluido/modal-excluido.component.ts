@@ -8,15 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./modal-excluido.component.scss']
 })
 export class ModalExcluidoComponent {
-  funcaoDeletar: (() => void) | undefined;
-
   constructor(
     public dialogRef: MatDialogRef<ModalExcluidoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
   openDialog() {
-    this.data.deletar()
+    this.data.deletar();
     this.dialogRef.close();
   }
 

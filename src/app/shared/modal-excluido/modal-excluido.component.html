@@ -1,10 +1,10 @@
 <section class="modal">
   <h4 mat-dialog-title>Deletar {{ data.tituloCriado }}</h4>
-  <div mat-dialog-content>
-    <p>Deseja deletar o usuário: {{ data.nome }}?</p>
+  <div mat-dialog-content class="modal__conteudo">
+    <p>Deseja deletar o {{ data.tituloCriado.toLowerCase() }}: {{ data.nome }}?</p>
   </div>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="cancelar()">FECHAR</button>
+  <div mat-dialog-actions class="modal__botoes">
+    <button mat-button mat-dialog-close (click)="cancelar()">CANCELAR</button>
     <button mat-flat-button mat-dialog-close color="warn" (click)="openDialog()"><mat-icon
         class="mat-18">delete</mat-icon>DELETAR</button>
   </div>

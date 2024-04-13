@@ -1,4 +1,4 @@
-section {
+.modal {
   margin: 1em;
   h4 {
     font-size: 30px;
@@ -6,13 +6,16 @@ section {
     margin-bottom: 0.8em;
   }
 
-  div {
+  .modal__conteudo {
     p {
       color: black;
-      text-align: center;
       padding-bottom: 0.7em;
     }
+  }
 
-    padding-left: 1em;
+  .modal__botoes {
+    display: flex;
+    justify-content: flex-end; /* alinha os botões no final da tela */
+    margin-top: auto; /* empurra os botões para o final da tela */
   }
 }

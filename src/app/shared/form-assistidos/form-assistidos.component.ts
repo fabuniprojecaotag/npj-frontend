@@ -22,6 +22,7 @@ export class FormAssistidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.formAssistidos = this.formBuilder.group({
+      "@type": ["AssistidoCivilDTO"],
       nome: [null, Validators.required],
       email: [null, Validators.email],
       cpf: [null, [Validators.minLength(11)]],

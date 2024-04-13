@@ -1,4 +1,5 @@
 export interface Assistido {
+  "@type"?: string,
   documentId?: string,
   nome: string,
   email?: string,
