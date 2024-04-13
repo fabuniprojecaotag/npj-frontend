@@ -25,8 +25,6 @@ export class AssistidosEditComponent {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    const assistidoT = "rafael.oliveira@example.com";
-
     this.idParam = this.route.snapshot.paramMap.get('rg') as string;
 
     this.assistidoService.consultar(this.idParam).subscribe(callback => {
@@ -89,13 +87,13 @@ export class AssistidosEditComponent {
       senha: this.form?.value.senha,
     }
 
-    this.assistidoService.editar(this.idParam,dadosAtualizados).subscribe({
-      next: (response) => {
-        alert('Atualização feita com sucesso!');
+    this.assistidoService.editar(this.idParam, dadosAtualizados).subscribe({
+      next: () => {
         this.router.navigate(['/assistidos']);
       },
       error: (err) => {
-        console.log('erro ao atualizar:', err);
+        alert('Erro ao atualizar Assisitido! Tente novamente mais tarde!');
+        console.log('Erro ao atualizar:', err);
       }
     })
   }
@@ -103,11 +101,11 @@ export class AssistidosEditComponent {
   excluir() {
     console.log('Função excluir chamada...');
     this.assistidoService.excluir(this.idParam).subscribe({
-      next: (response) => {
-        alert("Usuário excluído com sucesso");
+      next: () => {
         this.router.navigate(['/assistidos']);
       },
       error: (err) => {
+        alert('Erro ao excluir Assisitido! Tente novamente mais tarde!');
         console.log("Erro ao excluir:", err);
       }
     });
