@@ -24,8 +24,14 @@ export class CadastroService {
     return this.http.get<Usuario>(`${this.apiUrl}/usuarios/me`);
   }
 
-  listar(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`);
+  listar(filtro?: string): Observable<Usuario[]> {
+    let params = new HttpParams();
+    if(filtro){
+      params = params.set('field', 'role').set('filter', 'EQUAL').set('value', filtro);
+      console.log('filtro funcionando');
+
+    }
+    return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`, { params });
   }
 
   editarCadastro(usuario: Usuario, userEmail: string): Observable<Usuario> {

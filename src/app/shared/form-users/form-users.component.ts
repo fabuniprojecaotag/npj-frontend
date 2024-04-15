@@ -36,7 +36,7 @@ export class FormUsersComponent implements OnInit {
   ngOnInit(): void {
     this.formCadastro = this.formBuilder.group({
       "@type": [null],
-      cpf: [null],
+      cpf: [null, Validators.minLength(11)],
       matricula: [null],
       nome: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],

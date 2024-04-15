@@ -19,7 +19,8 @@ export class SupervisorAutocompleteComponent implements OnInit {
   constructor(private cadastroService: CadastroService){}
 
   ngOnInit(): void {
-    this.cadastroService.listar().subscribe(
+    const role = 'PROFESSOR';
+    this.cadastroService.listar(role).subscribe(
       dados => {
         this.supervisores = dados;
       }

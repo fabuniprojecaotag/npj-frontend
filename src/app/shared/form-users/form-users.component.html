@@ -34,6 +34,8 @@
             <mat-form-field appearance="outline">
               <mat-label>CPF</mat-label>
               <input matInput formControlName="cpf" placeholder="CPF">
+              <mat-error *ngIf="formCadastro.get('cpf')?.errors?.['minlength']">CPF precisa ter no mínimo 11
+                dígitos</mat-error>
             </mat-form-field>
             <mat-form-field class="input-container" appearance="outline">
               <mat-label>Selecione a Unidade</mat-label>
@@ -44,11 +46,6 @@
               </mat-select>
               <mat-error *ngIf="formCadastro.get('unidadeInstitucional')?.errors">Unidade é obrigatória</mat-error>
             </mat-form-field>
-            <!-- <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
-              <mat-label>Supervisor</mat-label>
-              <input matInput formControlName="supervisor" placeholder="Nome do Supervisor">
-              <mat-error *ngIf="formCadastro.get('supervisor')?.errors">Supervisor é obrigatório</mat-error>
-            </mat-form-field> -->
             <app-supervisor-autocomplete *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'" [control]="supervisorControl"></app-supervisor-autocomplete>
             <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
               <mat-label>Semestre</mat-label>
