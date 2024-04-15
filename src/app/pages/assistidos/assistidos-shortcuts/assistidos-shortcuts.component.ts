@@ -10,7 +10,7 @@ import { AssistidosService } from 'src/app/core/services/assistidos.service';
 export class AssistidosShortcutsComponent implements OnInit {
   tituloDaPagina: string;
   nomeAssistido!: string;
-  rg!: string;
+  cpf!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,9 +20,9 @@ export class AssistidosShortcutsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.rg = this.route.snapshot.paramMap.get('rg') as string;
+    this.cpf = this.route.snapshot.paramMap.get('cpf') as string;
 
-    this.assistidosService.consultar(this.rg).subscribe({
+    this.assistidosService.consultar(this.cpf).subscribe({
       next: (resposta) => {
         this.nomeAssistido = resposta.nome;
         this.tituloDaPagina = `Assisitido - ${this.nomeAssistido}`;

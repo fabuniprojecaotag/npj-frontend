@@ -59,8 +59,12 @@
       </div>
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-label>Estado Civil</mat-label>
-          <input matInput formControlName="estadoCivil">
+          <mat-label>Estado civil</mat-label>
+          <mat-select matInput formControlName="estadoCivil">
+            <mat-option *ngFor="let estado of estadosCivis" [value]="estado.valor">
+              {{ estado.texto }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="col">
@@ -68,68 +72,99 @@
           <mat-label>Telefone</mat-label>
           <input matInput formControlName="telefone">
           <mat-icon matSuffix>phone</mat-icon>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>Cidade</mat-label>
-          <input matInput formControlName="cidade">
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>CEP</mat-label>
-          <input matInput formControlName="cep" (blur)="consultarCep()">
-          <mat-error *ngIf="formAssistidos.get('cep')?.errors?.['minlength']">CEP precisa ter no mínimo 8
+          <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['minlength']">Telefone precisa ter no mínimo 8
             dígitos</mat-error>
         </mat-form-field>
       </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>Endereço Residencial</mat-label>
-          <input matInput formControlName="enderecoResidencial">
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>Escolaridade</mat-label>
-          <input matInput formControlName="escolaridade">
-        </mat-form-field>
-      </div>
     </div>
+    <ng-container formGroupName="endereco">
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>CEP</mat-label>
+            <input matInput formControlName="cep" (blur)="consultarCep()">
+            <mat-error *ngIf="formAssistidos.get('endereco')?.get('cep')?.errors?.['minlength']">CEP precisa
+              ter no mínimo 8
+              dígitos</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Cidade</mat-label>
+            <input matInput formControlName="cidade">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Logradouro</mat-label>
+            <input matInput formControlName="logradouro">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Bairro</mat-label>
+            <input matInput formControlName="bairro">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Número</mat-label>
+            <input matInput formControlName="numero">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Complemento</mat-label>
+            <input matInput formControlName="complemento">
+          </mat-form-field>
+        </div>
+      </div>
+    </ng-container>
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-label>Nome do pai</mat-label>
-          <input matInput formControlName="nomePai">
-          <mat-error *ngIf="formAssistidos.get('nomePai')?.errors?.['required']">Nome do Pai é
-            obrigatório</mat-error>
+          <mat-label>Escolaridade</mat-label>
+          <mat-select matInput formControlName="escolaridade">
+            <mat-option *ngFor="let escolaridade of escolaridades" [value]="escolaridade.valor">
+              {{ escolaridade.texto }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>Nome da mãe</mat-label>
-          <input matInput formControlName="nomeMae">
-          <mat-error *ngIf="formAssistidos.get('nomeMae')?.errors?.['required']">Nome da Mãe é
-            obrigatório</mat-error>
-        </mat-form-field>
-      </div>
+      <ng-container formGroupName="filiacao">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nome do pai</mat-label>
+            <input matInput formControlName="pai">
+            <mat-error *ngIf="formAssistidos.get('filiacao')?.get('pai')?.errors?.['required']">Nome do Pai é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nome da mãe</mat-label>
+            <input matInput formControlName="mae">
+            <mat-error *ngIf="formAssistidos.get('filiacao')?.get('mae')?.errors?.['required']">Nome da Mãe é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Profissão</mat-label>
           <input matInput formControlName="profissao">
         </mat-form-field>
       </div>
+    </div>
+    <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Remuneração</mat-label>
           <input matInput formControlName="remuneracao">
         </mat-form-field>
       </div>
-    </div>
-    <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Cidade comercial</mat-label>
@@ -142,10 +177,25 @@
           <input matInput formControlName="enderecoComercial">
         </mat-form-field>
       </div>
+    </div>
+    <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Nº de dependentes</mat-label>
           <input matInput formControlName="numDependentes">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Tipo de Assistido</mat-label>
+          <mat-select matInput formControlName="@type">
+            <mat-option *ngFor="let tipo of tipoAssistido" [value]="tipo.valor">
+              {{ tipo.texto }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formAssistidos.get('@type')?.errors?.['required']">
+            Tipo de assistido é obrigatório!
+          </mat-error>
         </mat-form-field>
       </div>
     </div>

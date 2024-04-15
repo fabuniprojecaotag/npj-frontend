@@ -1,3 +1,4 @@
+import { Endereco } from './../../../core/types/assistido';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,14 +19,15 @@ export class AssistidosEditComponent {
   assistido!: Assistido;
   idParam!: string;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private assistidoService: AssistidosService,
     private formAssistidosService: FormsService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.idParam = this.route.snapshot.paramMap.get('rg') as string;
+    this.idParam = this.route.snapshot.paramMap.get('cpf') as string;
 
     this.assistidoService.consultar(this.idParam).subscribe(callback => {
       this.assistido = callback;
@@ -47,12 +49,11 @@ export class AssistidosEditComponent {
       dataNascimento: this.assistido.dataNascimento,
       estadoCivil: this.assistido.estadoCivil,
       telefone: this.assistido.telefone,
-      cidade: this.assistido.cidade,
-      cep: this.assistido.cep,
-      enderecoResidencial: this.assistido.enderecoResidencial,
+      cidade: this.assistido.endereco.cidade,
+      cep: this.assistido.endereco.cep,
       escolaridade: this.assistido.escolaridade,
-      nomePai: this.assistido.nomePai,
-      nomeMae: this.assistido.nomeMae,
+      nomePai: this.assistido.filiacao.pai,
+      nomeMae: this.assistido.filiacao.mae,
       profissao: this.assistido.profissao,
       remuneracao: this.assistido.remuneracao,
       cidadeComercial: this.assistido.cidadeComercial,
@@ -73,12 +74,19 @@ export class AssistidosEditComponent {
       dataNascimento: this.form?.value.dataNascimento,
       estadoCivil: this.form?.value.estadoCivil,
       telefone: this.form?.value.telefone,
-      cidade: this.form?.value.cidade,
-      cep: this.form?.value.cep,
-      enderecoResidencial: this.form?.value.enderecoResidencial,
+      endereco: {
+        logradouro: this.form?.value.logradouro,
+        bairro: this.form?.value.bairro,
+        numero: this.form?.value.numero,
+        complemento: this.form?.value.complemento,
+        cep: this.form?.value.cep,
+        cidade: this.form?.value.cidade
+      },
       escolaridade: this.form?.value.escolaridade,
-      nomePai: this.form?.value.nomePai,
-      nomeMae: this.form?.value.nomeMae,
+      filiacao: {
+        pai: this.form?.value.pai,
+        mae: this.form?.value.mae
+      },
       profissao: this.form?.value.profissao,
       remuneracao: this.form?.value.remuneracao,
       cidadeComercial: this.form?.value.cidadeComercial,

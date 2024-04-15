@@ -9,6 +9,31 @@ import { ViacepService } from 'src/app/core/services/viacep.service';
   styleUrls: ['./form-assistidos.component.scss']
 })
 export class FormAssistidosComponent implements OnInit {
+  tipoAssistido = [
+    { valor: 'Civil', texto: 'Civil' },
+    { valor: 'Trabalhista', texto: 'Trabalhista' },
+    { valor: 'Full', texto: 'Ambos' },
+  ];
+  estadosCivis = [
+    { texto: 'Solteiro', valor: 'SOLTEIRO' },
+    { texto: 'Solteira', valor: 'SOLTEIRA' },
+    { texto: 'Casado', valor: 'CASADO' },
+    { texto: 'Casada', valor: 'CASADA' },
+    { texto: 'Separado', valor: 'SEPARADA' },
+    { texto: 'Separada', valor: 'SEPARADO' },
+    { texto: 'Divorciado', valor: 'DIVORCIADO' },
+    { texto: 'Divorciada', valor: 'DIVORCIADA' },
+    { texto: 'Viúvo', valor: 'VIUVO' },
+    { texto: 'Viúva', valor: 'VIUVA' },
+  ];
+  escolaridades = [
+    { texto: 'Fundamental', valor: 'FUNDAMENTAL' },
+    { texto: 'Médio', valor: 'MEDIO' },
+    { texto: 'Superior', valor: 'SUPERIOR' },
+    { texto: 'Pós Graduação', valor: 'POS_GRADUACAO' },
+    { texto: 'Mestrado', valor: 'MESTRADO' },
+    { texto: 'Doutorado', valor: 'DOUTORADO' },
+  ]
   formAssistidos!: FormGroup;
   @Input() editComponent: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
@@ -22,7 +47,7 @@ export class FormAssistidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.formAssistidos = this.formBuilder.group({
-      "@type": ["AssistidoCivilDTO"],
+      "@type": [null, Validators.required],
       nome: [null, Validators.required],
       email: [null, Validators.email],
       cpf: [null, [Validators.minLength(11)]],
@@ -31,13 +56,20 @@ export class FormAssistidosComponent implements OnInit {
       nacionalidade: null,
       dataNascimento: null,
       estadoCivil: null,
-      telefone: null,
-      cidade: null,
-      cep: [null, Validators.minLength(8)],
-      enderecoResidencial: null,
-      escolaridade: null,
-      nomePai: [null, Validators.required],
-      nomeMae: [null, Validators.required],
+      telefone: [null, Validators.minLength(8)],
+      endereco: this.formBuilder.group({
+        bairro: [null],
+        complemento: [null],
+        cidade: [null],
+        cep: [null, Validators.minLength(8)],
+        logradouro: [null],
+        numero: [null]
+      }),
+      escolaridade: [null],
+      filiacao: this.formBuilder.group({
+        pai: [null, Validators.required],
+        mae: [null, Validators.required],
+      }),
       profissao: null,
       remuneracao: null,
       cidadeComercial: null,
@@ -58,15 +90,17 @@ export class FormAssistidosComponent implements OnInit {
   }
 
   consultarCep(): void {
-    let cep = this.formAssistidos.get('cep')?.value;
-    cep = cep.replace(/[.-]/g, '');
+    let cep = this.formAssistidos.get('endereco')?.get('cep')?.value;
+    cep = cep?.replace(/[.-]/g, '');
 
     if (cep) {
       this.viaCepService.consultarCep(cep).subscribe({
         next: (data) => {
-          this.formAssistidos.patchValue({
+          this.formAssistidos.get('endereco')?.patchValue({
+            bairro: data.bairro,
             cidade: data.localidade,
-            enderecoResidencial: data.logradouro
+            logradouro: data.logradouro,
+            complemento: data.complemento,
           });
         },
         error: (err) => {
@@ -75,4 +109,5 @@ export class FormAssistidosComponent implements OnInit {
       });
     }
   }
+
 }

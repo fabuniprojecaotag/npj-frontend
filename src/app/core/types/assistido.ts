@@ -10,15 +10,26 @@ export interface Assistido {
   dataNascimento?: string,
   estadoCivil?: string,
   telefone?: string,
-  cidade?: string,
-  cep?: string,
-  enderecoResidencial?: string,
+  endereco: Endereco,
   escolaridade?: string,
-  nomePai: string,
-  nomeMae: string,
+  filiacao: Filiacao,
   profissao?: string,
   remuneracao?: string,
   cidadeComercial?: string,
   enderecoComercial?: string,
   numDependentes?: string,
+}
+
+export interface Filiacao {
+  pai: string,
+  mae: string,
+}
+
+export interface Endereco {
+  logradouro?: string,
+  bairro?: string,
+  numero?: string,
+  complemento?: string,
+  cep?: string,
+  cidade?: string
 }
