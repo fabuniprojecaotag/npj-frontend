@@ -62,6 +62,9 @@ import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-
 import { AtendimentoCivilComponent } from './pages/atendimentos/novo-atendimento/atendimento-civil/atendimento-civil.component';
 import { StepperAtendimentoTrabalhistaComponent } from './shared/stepper-atendimento-trabalhista/stepper-atendimento-trabalhista.component';
 import { SupervisorAutocompleteComponent } from './shared/supervisor-autocomplete/supervisor-autocomplete.component';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginatorIntl } from './shared/customMatPaginator/CustomMatPaginator'; // Path to your custom implementation
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -136,6 +139,8 @@ import { SupervisorAutocompleteComponent } from './shared/supervisor-autocomplet
       useClass: AutenticacaoInterceptor,
       multi: true,
     },
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
   ],
   bootstrap: [AppComponent],
 })
