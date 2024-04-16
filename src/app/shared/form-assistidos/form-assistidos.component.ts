@@ -15,24 +15,24 @@ export class FormAssistidosComponent implements OnInit {
     { valor: 'Full', texto: 'Ambos' },
   ];
   estadosCivis = [
-    { texto: 'Solteiro', valor: 'SOLTEIRO' },
-    { texto: 'Solteira', valor: 'SOLTEIRA' },
-    { texto: 'Casado', valor: 'CASADO' },
-    { texto: 'Casada', valor: 'CASADA' },
-    { texto: 'Separado', valor: 'SEPARADA' },
-    { texto: 'Separada', valor: 'SEPARADO' },
-    { texto: 'Divorciado', valor: 'DIVORCIADO' },
-    { texto: 'Divorciada', valor: 'DIVORCIADA' },
-    { texto: 'Viúvo', valor: 'VIUVO' },
-    { texto: 'Viúva', valor: 'VIUVA' },
+    'Solteiro',
+    'Solteira',
+    'Casado',
+    'Casada',
+    'Separado',
+    'Separada',
+    'Divorciado',
+    'Divorciada',
+    'Viúvo',
+    'Viúva',
   ];
   escolaridades = [
-    { texto: 'Fundamental', valor: 'FUNDAMENTAL' },
-    { texto: 'Médio', valor: 'MEDIO' },
-    { texto: 'Superior', valor: 'SUPERIOR' },
-    { texto: 'Pós Graduação', valor: 'POS_GRADUACAO' },
-    { texto: 'Mestrado', valor: 'MESTRADO' },
-    { texto: 'Doutorado', valor: 'DOUTORADO' },
+    'Fundamental',
+    'Médio',
+    'Superior',
+    'Pós Graduação',
+    'Mestrado',
+    'Doutorado',
   ]
   formAssistidos!: FormGroup;
   @Input() editComponent: boolean = false;
@@ -57,13 +57,23 @@ export class FormAssistidosComponent implements OnInit {
       dataNascimento: null,
       estadoCivil: null,
       telefone: [null, Validators.minLength(8)],
-      endereco: this.formBuilder.group({
-        bairro: [null],
-        complemento: [null],
-        cidade: [null],
-        cep: [null, Validators.minLength(8)],
-        logradouro: [null],
-        numero: [null]
+      enderecos: this.formBuilder.group({
+        enderecoResidencial: this.formBuilder.group({
+          cep: [null, Validators.minLength(8)],
+          bairro: [null],
+          complemento: [null],
+          cidade: [null],
+          logradouro: [null],
+          numero: [null]
+        }),
+        enderecoComercial: this.formBuilder.group({
+          cep: [null, Validators.minLength(8)],
+          bairro: [null],
+          complemento: [null],
+          cidade: [null],
+          logradouro: [null],
+          numero: [null]
+        }),
       }),
       escolaridade: [null],
       filiacao: this.formBuilder.group({
@@ -72,9 +82,7 @@ export class FormAssistidosComponent implements OnInit {
       }),
       profissao: null,
       remuneracao: null,
-      cidadeComercial: null,
-      enderecoComercial: null,
-      numDependentes: null,
+      dependentes: null,
     });
 
     this.formAssistidosService.setForm(this.formAssistidos);
@@ -89,14 +97,15 @@ export class FormAssistidosComponent implements OnInit {
     this.cliqueExcluir.emit();
   }
 
-  consultarCep(): void {
-    let cep = this.formAssistidos.get('endereco')?.get('cep')?.value;
+  consultarCep(tipoEndereco: string): void {
+    let enderecoGroup = this.formAssistidos.get('enderecos')?.get(`endereco${tipoEndereco}`);
+    let cep = enderecoGroup?.get('cep')?.value;
     cep = cep?.replace(/[.-]/g, '');
 
     if (cep) {
       this.viaCepService.consultarCep(cep).subscribe({
         next: (data) => {
-          this.formAssistidos.get('endereco')?.patchValue({
+          enderecoGroup?.patchValue({
             bairro: data.bairro,
             cidade: data.localidade,
             logradouro: data.logradouro,
@@ -109,5 +118,4 @@ export class FormAssistidosComponent implements OnInit {
       });
     }
   }
-
 }

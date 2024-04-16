@@ -69,7 +69,7 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'assistidos/edit/:rg',
+    path: 'assistidos/edit/:cpf',
     component: AssistidosEditComponent,
     canActivate: [authGuard],
   },

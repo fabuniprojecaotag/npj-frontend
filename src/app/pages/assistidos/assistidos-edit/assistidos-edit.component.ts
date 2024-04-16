@@ -1,5 +1,5 @@
 import { Endereco } from './../../../core/types/assistido';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,7 +31,7 @@ export class AssistidosEditComponent {
 
     this.assistidoService.consultar(this.idParam).subscribe(callback => {
       this.assistido = callback;
-      console.log("assistido para editar:", this.assistido)
+      console.log("assistido para editar: ", this.assistido);
       this.carregarFormulario();
     })
   }
@@ -39,7 +39,7 @@ export class AssistidosEditComponent {
   carregarFormulario() {
     this.form = this.formAssistidosService.getForm();
     this.form?.patchValue({
-      documentId: this.assistido.documentId,
+      "@type": this.assistido['@type'],
       nome: this.assistido.nome,
       email: this.assistido.email,
       cpf: this.assistido.cpf,
@@ -49,22 +49,21 @@ export class AssistidosEditComponent {
       dataNascimento: this.assistido.dataNascimento,
       estadoCivil: this.assistido.estadoCivil,
       telefone: this.assistido.telefone,
-      cidade: this.assistido.endereco.cidade,
-      cep: this.assistido.endereco.cep,
+      endereco: this.assistido.endereco,
       escolaridade: this.assistido.escolaridade,
-      nomePai: this.assistido.filiacao.pai,
-      nomeMae: this.assistido.filiacao.mae,
+      filiacao: this.assistido.filiacao,
       profissao: this.assistido.profissao,
       remuneracao: this.assistido.remuneracao,
       cidadeComercial: this.assistido.cidadeComercial,
       enderecoComercial: this.assistido.enderecoComercial,
-      numDependentes: this.assistido.numDependentes,
+      dependentes: this.assistido.dependentes,
     });
 
   }
 
   editar() {
-    const dadosAtualizados = {
+    const dadosAtualizados: Assistido = {
+      ['@type']: this.form?.value.type,
       nome: this.form?.value.nome,
       email: this.form?.value.email,
       cpf: this.form?.value.cpf,
@@ -75,12 +74,22 @@ export class AssistidosEditComponent {
       estadoCivil: this.form?.value.estadoCivil,
       telefone: this.form?.value.telefone,
       endereco: {
-        logradouro: this.form?.value.logradouro,
-        bairro: this.form?.value.bairro,
-        numero: this.form?.value.numero,
-        complemento: this.form?.value.complemento,
-        cep: this.form?.value.cep,
-        cidade: this.form?.value.cidade
+        residencial: {
+          logradouro: this.form?.value.logradouro,
+          bairro: this.form?.value.bairro,
+          numero: this.form?.value.numero,
+          complemento: this.form?.value.complemento,
+          cep: this.form?.value.cep,
+          cidade: this.form?.value.cidade
+        },
+        comercial: {
+          logradouro: this.form?.value.logradouro,
+          bairro: this.form?.value.bairro,
+          numero: this.form?.value.numero,
+          complemento: this.form?.value.complemento,
+          cep: this.form?.value.cep,
+          cidade: this.form?.value.cidade
+        }
       },
       escolaridade: this.form?.value.escolaridade,
       filiacao: {
@@ -89,10 +98,7 @@ export class AssistidosEditComponent {
       },
       profissao: this.form?.value.profissao,
       remuneracao: this.form?.value.remuneracao,
-      cidadeComercial: this.form?.value.cidadeComercial,
-      enderecoComercial: this.form?.value.enderecoComercial,
-      numDependentes: this.form?.value.numDependentes,
-      senha: this.form?.value.senha,
+      dependentes: this.form?.value.dependentes,
     }
 
     this.assistidoService.editar(this.idParam, dadosAtualizados).subscribe({
@@ -107,7 +113,6 @@ export class AssistidosEditComponent {
   }
 
   excluir() {
-    console.log('Função excluir chamada...');
     this.assistidoService.excluir(this.idParam).subscribe({
       next: () => {
         this.router.navigate(['/assistidos']);
@@ -126,5 +131,4 @@ export class AssistidosEditComponent {
       data: { tituloCriado: 'Assistido', nome: assistido.nome, funcaoDeletar: this.excluir.bind(this) }
     });
   }
-
 }

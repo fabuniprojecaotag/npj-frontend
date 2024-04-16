@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cep } from '../types/cep';
+import { CepDados } from '../types/cep';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ViacepService {
 
   constructor(private http: HttpClient) { }
 
-  consultarCep(cep: String): Observable<Cep>{
-    return this.http.get<Cep>(`${this.baseUrl}${cep}/json`);
+  consultarCep(cep: String): Observable<CepDados>{
+    return this.http.get<CepDados>(`${this.baseUrl}${cep}/json`);
   }
 }

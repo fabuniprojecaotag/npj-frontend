@@ -26,7 +26,7 @@ export class FormProcessoComponent implements OnInit {
       forum: [null, Validators.required],
       atendimentoId: [null, Validators.required],
       status: [null, Validators.required],
-      documento: [null]
+      // documento: [null]
     });
     this.formService.setForm(this.formProcessos);
   }
