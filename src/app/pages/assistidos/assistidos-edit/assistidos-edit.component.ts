@@ -54,8 +54,6 @@ export class AssistidosEditComponent {
       filiacao: this.assistido.filiacao,
       profissao: this.assistido.profissao,
       remuneracao: this.assistido.remuneracao,
-      cidadeComercial: this.assistido.cidadeComercial,
-      enderecoComercial: this.assistido.enderecoComercial,
       dependentes: this.assistido.dependentes,
     });
 

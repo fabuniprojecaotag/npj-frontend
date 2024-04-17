@@ -31,7 +31,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
@@ -65,6 +65,7 @@ import { SupervisorAutocompleteComponent } from './shared/supervisor-autocomplet
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginatorIntl } from './shared/customMatPaginator/CustomMatPaginator'; // Path to your custom implementation
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -127,7 +128,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatProgressSpinnerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskDirective, NgxMaskPipe
   ],
   providers: [
     {
@@ -140,7 +142,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
       multi: true,
     },
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl },
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    provideNgxMask()
   ],
   bootstrap: [AppComponent],
 })

@@ -20,19 +20,19 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>CPF</mat-label>
-          <input matInput formControlName="cpf">
-          <mat-error *ngIf="formAssistidos.get('cpf')?.errors?.['minlength']">CPF precisa ter no mínimo 11
-            dígitos</mat-error>
+          <input matInput type="text" formControlName="cpf" mask="000.000.000-00" [showMaskTyped]="true" [dropSpecialCharacters]="false">
+          <mat-error *ngIf="formAssistidos.get('cpf')?.errors?.['pattern']">CPF fora do padrão
+            (000.000.000-00)</mat-error>
+          <mat-error *ngIf="formAssistidos.get('cpf')?.errors?.['required']">CPF é obrigatório</mat-error>
         </mat-form-field>
       </div>
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>RG</mat-label>
-          <input matInput formControlName="rg">
-          <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['required']">RG é
-            obrigatório</mat-error>
-          <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['minlength']">RG precisa ter no mínimo 8
-            dígitos</mat-error>
+          <input matInput type="text" formControlName="rg" mask="0.000.000" [showMaskTyped]="true" [dropSpecialCharacters]="false">
+          <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['pattern']">RG fora do padrão
+            (00.000.0000-00)</mat-error>
+          <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['required']">RG é obrigatório</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -70,10 +70,12 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Telefone</mat-label>
-          <input matInput formControlName="telefone">
+          <input matInput formControlName="telefone" mask="(00) 00000-0000" [showMaskTyped]="true" [dropSpecialCharacters]="false">
           <mat-icon matSuffix>phone</mat-icon>
-          <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['minlength']">Telefone precisa ter no mínimo 8
+          <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['minlength']">Telefone precisa ter no mínimo 11
             dígitos</mat-error>
+          <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['pattern']">Padrão de telefone inválido! (Ex:(00)
+            00000-0000)</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -117,7 +119,7 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Remuneração</mat-label>
-          <input matInput formControlName="remuneracao">
+          <input matInput type="text" prefix="R$ " mask="separator,2" thousandSeparator="." />
         </mat-form-field>
       </div>
       <div class="col">
@@ -140,8 +142,8 @@
         </mat-form-field>
       </div>
     </div>
-    <ng-container [formGroupName]="'enderecos'" *ngFor="let tipoEndereco of ['Residencial', 'Comercial']">
-      <ng-container [formGroupName]="'endereco' + tipoEndereco">
+    <ng-container [formGroupName]="'endereco'" *ngFor="let tipoEndereco of ['residencial', 'comercial']">
+      <ng-container [formGroupName]="tipoEndereco">
         <div class="row">
           <h4>{{ "Endereço " + tipoEndereco }}</h4>
         </div>
@@ -150,7 +152,7 @@
             <mat-form-field class="full-width">
               <mat-label>CEP</mat-label>
               <input matInput formControlName="cep" (blur)="consultarCep(tipoEndereco)">
-              <mat-error *ngIf="formAssistidos.get('endereco' + tipoEndereco)?.get('cep')?.errors?.['minlength']">CEP
+              <mat-error *ngIf="formAssistidos.get(tipoEndereco)?.get('cep')?.errors?.['minlength']">CEP
                 precisa ter no mínimo 8 dígitos</mat-error>
             </mat-form-field>
           </div>

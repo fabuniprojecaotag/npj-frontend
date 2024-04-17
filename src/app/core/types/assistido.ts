@@ -2,7 +2,7 @@ export interface Assistido {
   "@type"?: string,
   nome: string,
   email?: string,
-  cpf?: string,
+  cpf: string,
   rg?: string,
   naturalidade?: string,
   nacionalidade?: string,
