@@ -15,8 +15,9 @@ export class StepperAtendimentosComponent implements OnInit {
   terceiroGrupo!: FormGroup;
   quartoGrupo!: FormGroup;
   quintoGrupo!: FormGroup;
-  status: string[] = ['ATIVO', 'ARQUIVADO'];
+  status: string[] = ['Reprovado', 'Arquivado', 'Aguardando documentos', 'Pendente distribuição', 'Processo ativo', 'Processo arquivado'];
   estagiarioControl: FormControl = new FormControl();
+  assistidoControl: FormControl = new FormControl();
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<any> = new EventEmitter();
 
@@ -32,7 +33,7 @@ export class StepperAtendimentosComponent implements OnInit {
         this.estagiarioControl.setValue(usuario.nome);
       },
       error: (err) => {
-        console.log("Usuário não encontrado!");
+        console.log("Usuário não encontrado!", err);
       }
     });
 
@@ -42,7 +43,7 @@ export class StepperAtendimentosComponent implements OnInit {
     });
 
     this.segundoGrupo = this.formBuilder.group({
-      assistido: ['', Validators.required],
+      assistido: this.assistidoControl,
     });
 
     this.terceiroGrupo = this.formBuilder.group({

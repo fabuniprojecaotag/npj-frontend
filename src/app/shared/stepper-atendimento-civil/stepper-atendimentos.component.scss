@@ -15,27 +15,35 @@ mat-stepper {
     align-content: center;
     display: flex;
     flex-wrap: wrap;
+    min-height: 30vh;
     gap: 20px;
     padding: 1em 0;
+    width: auto;
+
+    .container {
+      display: flex;
+      gap: inherit;
+      width: 100%;
+    }
 
     .input-full {
       width: 100%;
     }
 
     .input-muitoPequeno {
-      width: 23.6%;
+      flex-grow: 1;
     }
 
     .input-pequeno {
-      width: 34%;
+      flex-grow: 1.5;
     }
 
     .input-medio {
-      width: 49%;
+      flex-grow: 2;
     }
 
     .input-grande {
-      width: 64%;
+      flex-grow: 3;
     }
 
     .subtitulo {

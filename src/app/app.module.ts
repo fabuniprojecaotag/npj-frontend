@@ -66,6 +66,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginatorIntl } from './shared/customMatPaginator/CustomMatPaginator'; // Path to your custom implementation
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { AssistidoAutocompleteComponent } from './shared/assistido-autocomplete/assistido-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     AtendimentoCivilComponent,
     StepperAtendimentoTrabalhistaComponent,
     SupervisorAutocompleteComponent,
+    AssistidoAutocompleteComponent,
   ],
   imports: [
     BrowserModule,

@@ -50,7 +50,7 @@ export class FormAssistidosComponent implements OnInit {
       "@type": [null, Validators.required],
       nome: [null, Validators.required],
       email: [null, Validators.email],
-      cpf: [null, [Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/), Validators.required]],
+      cpf: [null, [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
       rg: [null, [Validators.required, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)]],
       naturalidade: null,
       nacionalidade: null,

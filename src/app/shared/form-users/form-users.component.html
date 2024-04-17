@@ -11,7 +11,7 @@
           <div class="grid-item">
             <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
               <mat-label>Matrícula</mat-label>
-              <input matInput formControlName="matricula" placeholder="matricula">
+              <input matInput formControlName="matricula" placeholder="matricula" mask="000000000">
               <mat-error *ngIf="formCadastro.get('matricula')?.errors">Matrícula é obrigatória</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
@@ -33,7 +33,7 @@
           <div class="grid-item">
             <mat-form-field appearance="outline">
               <mat-label>CPF</mat-label>
-              <input matInput formControlName="cpf" placeholder="CPF">
+              <input matInput formControlName="cpf" placeholder="CPF" mask="000.000.000-00" [dropSpecialCharacters]="false">
               <mat-error *ngIf="formCadastro.get('cpf')?.errors?.['minlength']">CPF precisa ter no mínimo 11
                 dígitos</mat-error>
             </mat-form-field>

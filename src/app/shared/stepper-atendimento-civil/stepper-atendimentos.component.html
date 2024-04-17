@@ -23,12 +23,7 @@
   </mat-step>
   <mat-step [stepControl]="segundoGrupo" label="Identificação do Assistido">
     <form [formGroup]="segundoGrupo" class="grupo-form">
-      <mat-form-field class="input-medio">
-        <mat-label>Assistido</mat-label>
-        <input matInput formControlName="assistido" placeholder="Nome do assistido" required>
-        <mat-error *ngIf="formAtendimentos.get('segundoGrupo')?.get('assistido')?.errors?.['required']">Assistido é
-          obrigatório</mat-error>
-      </mat-form-field>
+      <app-assistido-autocomplete [control]="assistidoControl" class="input-grande"></app-assistido-autocomplete>
       <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
       <div class="input-full">
         <button mat-raised-button matStepperPrevious>Voltar</button>
@@ -39,33 +34,38 @@
   </mat-step>
   <mat-step [stepControl]="terceiroGrupo" label="Parte Contrária">
     <form [formGroup]="terceiroGrupo" class="grupo-form">
-      <mat-form-field class="input-grande">
-        <mat-label>Nome</mat-label>
-        <input matInput formControlName="nomeParteContraria" placeholder="nome">
-        <mat-error *ngIf="formAtendimentos.get('terceiroGrupo')?.get('nomeParteContraria')?.errors?.['required']">Nome
-          da Parte Contrária é
-          obrigatória</mat-error>
-      </mat-form-field>
-      <mat-form-field class="input-pequeno">
-        <mat-label>Qualificação</mat-label>
-        <input matInput formControlName="qualificacaoParteContraria" placeholder="qualificação">
-        <mat-error
-          *ngIf="formAtendimentos.get('terceiroGrupo')?.get('nomeParteContraria')?.errors?.['required']">Qualificação
-          da Parte Contrária é
-          obrigatória</mat-error>
-      </mat-form-field>
-      <mat-form-field class="input-muitoPequeno">
-        <mat-label>RG</mat-label>
-        <input matInput formControlName="rgParteContraria" placeholder="RG">
-      </mat-form-field>
-      <mat-form-field class="input-muitoPequeno">
-        <mat-label>CPF</mat-label>
-        <input matInput formControlName="cpfParteContraria" placeholder="CPF">
-      </mat-form-field>
-      <mat-form-field class="input-medio">
-        <mat-label>Telefone</mat-label>
-        <input matInput formControlName="telefoneParteContraria" placeholder="Telefone">
-      </mat-form-field>
+      <div class="container">
+        <mat-form-field class="input-grande">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nomeParteContraria" placeholder="nome">
+          <mat-error *ngIf="formAtendimentos.get('terceiroGrupo')?.get('nomeParteContraria')?.errors?.['required']">Nome
+            da Parte Contrária é
+            obrigatória</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-pequeno">
+          <mat-label>Qualificação</mat-label>
+          <input matInput formControlName="qualificacaoParteContraria" placeholder="qualificação">
+          <mat-error
+            *ngIf="formAtendimentos.get('terceiroGrupo')?.get('nomeParteContraria')?.errors?.['required']">Qualificação
+            da Parte Contrária é
+            obrigatória</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="container">
+        <mat-form-field class="input-muitoPequeno">
+          <mat-label>RG</mat-label>
+          <input matInput formControlName="rgParteContraria" placeholder="RG">
+        </mat-form-field>
+        <mat-form-field class="input-muitoPequeno">
+          <mat-label>CPF</mat-label>
+          <input matInput formControlName="cpfParteContraria" placeholder="CPF">
+        </mat-form-field>
+        <mat-form-field class="input-medio">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="telefoneParteContraria" mask="(00) 00000-0000" [showMaskTyped]="true" [dropSpecialCharacters]="false">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+      </div>
       <mat-form-field class="input-medio">
         <mat-label>E-mail</mat-label>
         <input matInput formControlName="emailParteContraria" placeholder="E-mail">
@@ -157,7 +157,8 @@
       </div>
       <div class="input-full">
         <button mat-raised-button matStepperPrevious>Voltar</button>
-        <button mat-raised-button [disabled]="formAtendimentos.invalid" type="submit" (click)="executarAcao()">Concluir</button>
+        <button mat-raised-button [disabled]="formAtendimentos.invalid" type="submit"
+          (click)="executarAcao()">Concluir</button>
       </div>
     </form>
   </mat-step>

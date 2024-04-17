@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
 
@@ -10,15 +11,25 @@ import { Atendimento } from 'src/app/core/types/atendimento';
 export class AtendimentoCivilComponent {
   tituloPagina = 'Atendimento Civil';
 
-  constructor(private formAtendimentoService: FormsService) { }
+  constructor(private formAtendimentoService: FormsService, private atendimentoService: AtendimentosService) { }
 
   cadastrar() {
     const formAtendimentoCivil = this.formAtendimentoService.getForm();
 
     if(formAtendimentoCivil?.valid){
       const novoAtendimentoCivil = formAtendimentoCivil.getRawValue() as Atendimento;
-      console.log('meu atendumento cadastrado:', novoAtendimentoCivil);
-      alert("Cadastro realizado!(teste)");
+      console.log('Meu atendumento cadastrado:', novoAtendimentoCivil);
+
+
+      this.atendimentoService.cadastrarAtendimento(novoAtendimentoCivil).subscribe({
+        next: () => {
+          alert("Cadastro realizado!");
+        },
+        error: (err) => {
+          alert("Erro ao cadastrar atendimento!");
+          console.log("Erro ao cadastrar atendimento: ", err);
+        }
+      })
     }
   }
 }
