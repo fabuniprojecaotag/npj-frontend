@@ -50,7 +50,7 @@ export class FormAssistidosComponent implements OnInit {
       "@type": [null, Validators.required],
       nome: [null, Validators.required],
       email: [null, Validators.email],
-      cpf: [null, [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
+      cpf: [{ value: null, disabled: this.editComponent }, [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
       rg: [null, [Validators.required, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)]],
       naturalidade: null,
       nacionalidade: null,
@@ -81,7 +81,7 @@ export class FormAssistidosComponent implements OnInit {
         mae: [null, Validators.required],
       }),
       profissao: null,
-      remuneracao: [null, [Validators.pattern(/^R\$ \d{1,3}(.\d{3})*,\d{2}$/)]],
+      remuneracao: [null, [Validators.pattern(/^R\$ \d{1,3}(?:[.,]\d{3})*(?:,\d{1,2})?$/)]],
       dependentes: null,
     });
 

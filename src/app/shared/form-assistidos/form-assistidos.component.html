@@ -20,7 +20,8 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>CPF</mat-label>
-          <input matInput type="text" formControlName="cpf" mask="000.000.000-00" [showMaskTyped]="true" [dropSpecialCharacters]="false">
+          <input matInput type="text" formControlName="cpf" mask="000.000.000-00" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false">
           <mat-error *ngIf="formAssistidos.get('cpf')?.errors?.['pattern']">CPF fora do padrão
             (000.000.000-00)</mat-error>
           <mat-error *ngIf="formAssistidos.get('cpf')?.errors?.['required']">CPF é obrigatório</mat-error>
@@ -29,7 +30,8 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>RG</mat-label>
-          <input matInput type="text" formControlName="rg" mask="0.000.000" [showMaskTyped]="true" [dropSpecialCharacters]="false">
+          <input matInput type="text" formControlName="rg" mask="0.000.000" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false">
           <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['pattern']">RG fora do padrão
             (00.000.0000-00)</mat-error>
           <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['required']">RG é obrigatório</mat-error>
@@ -70,7 +72,8 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Telefone</mat-label>
-          <input matInput formControlName="telefone" mask="(00) 00000-0000" [showMaskTyped]="true" [dropSpecialCharacters]="false">
+          <input matInput formControlName="telefone" mask="(00) 00000-0000" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false">
           <mat-icon matSuffix>phone</mat-icon>
           <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['minlength']">Telefone precisa ter no mínimo 11
             dígitos</mat-error>
@@ -119,7 +122,8 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Remuneração</mat-label>
-          <input matInput type="text" prefix="R$ " mask="separator,2" thousandSeparator="." />
+          <input matInput type="text" formControlName="remuneracao" prefix="R$ " />
+          <mat-error *ngIf="formAssistidos.get('remuneracao')?.errors?.['pattern']">Padrão incorreto (ex esperado: R$ 12.000)</mat-error>
         </mat-form-field>
       </div>
       <div class="col">

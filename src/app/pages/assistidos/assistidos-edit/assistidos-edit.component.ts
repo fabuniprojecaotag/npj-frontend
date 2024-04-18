@@ -64,7 +64,7 @@ export class AssistidosEditComponent {
       ['@type']: this.form?.value.type,
       nome: this.form?.value.nome,
       email: this.form?.value.email,
-      cpf: this.form?.value.cpf,
+      cpf: this.form?.value.cpf, // não enviar CPF, pois ocorrera conflito entre documentId e CPF
       rg: this.form?.value.rg,
       naturalidade: this.form?.value.naturalidade,
       nacionalidade: this.form?.value.nacionalidade,
@@ -126,7 +126,7 @@ export class AssistidosEditComponent {
     this.dialog.open(ModalExcluidoComponent, {
       width: '372px',
       height: '228px',
-      data: { tituloCriado: 'Assistido', nome: assistido.nome, funcaoDeletar: this.excluir.bind(this) }
+      data: { tituloCriado: 'Assistido', nome: assistido.nome, deletar: () => this.excluir() }
     });
   }
 }

@@ -17,13 +17,12 @@ export class AtendimentoCivilComponent {
   cadastrar() {
     const formAtendimentoCivil = this.formAtendimentoService.getForm();
 
-    if(formAtendimentoCivil?.valid){
+    if (formAtendimentoCivil?.valid) {
       const novoAtendimentoCivil = formAtendimentoCivil.getRawValue() as AtendimentoStepper;
-      console.log('Meu atendimento cadastrado:', novoAtendimentoCivil);
       const novoAtendimentoFormatado: Atendimento = {
         id: '',
         area: novoAtendimentoCivil.primeiroGrupo.area,
-        instante:  novoAtendimentoCivil.primeiroGrupo.instante,
+        instante: novoAtendimentoCivil.primeiroGrupo.instante,
         ficha: {
           assinatura: '',
           dadosSensiveis: false
