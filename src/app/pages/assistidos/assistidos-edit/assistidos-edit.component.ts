@@ -1,11 +1,10 @@
-import { Endereco } from './../../../core/types/assistido';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Assistido } from 'src/app/core/types/assistido';
+import { Assistido, AssistidoFull } from 'src/app/core/types/assistido';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 
 @Component({
@@ -16,7 +15,7 @@ import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excl
 export class AssistidosEditComponent {
   tituloDaPagina: string = 'Editar Assistido';
   form!: FormGroup<any> | null;
-  assistido!: Assistido;
+  assistido!: AssistidoFull;
   idParam!: string;
 
   constructor(
@@ -60,11 +59,11 @@ export class AssistidosEditComponent {
   }
 
   editar() {
-    const dadosAtualizados: Assistido = {
+    const dadosAtualizados: AssistidoFull = {
       ['@type']: this.form?.value.type,
       nome: this.form?.value.nome,
       email: this.form?.value.email,
-      cpf: this.form?.value.cpf, // não enviar CPF, pois ocorrera conflito entre documentId e CPF
+      // cpf: this.form?.value.cpf, // não enviar CPF, pois ocorrera conflito entre documentId e CPF
       rg: this.form?.value.rg,
       naturalidade: this.form?.value.naturalidade,
       nacionalidade: this.form?.value.nacionalidade,
@@ -97,6 +96,13 @@ export class AssistidosEditComponent {
       profissao: this.form?.value.profissao,
       remuneracao: this.form?.value.remuneracao,
       dependentes: this.form?.value.dependentes,
+      ctps: {
+        numero: undefined,
+        serie: undefined,
+        uf: undefined
+      },
+      pis: '',
+      empregadoAtualmente: false
     }
 
     this.assistidoService.editar(this.idParam, dadosAtualizados).subscribe({

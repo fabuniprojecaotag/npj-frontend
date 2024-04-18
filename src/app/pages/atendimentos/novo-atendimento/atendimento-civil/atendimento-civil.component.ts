@@ -1,3 +1,5 @@
+import { ParteContraria } from './../../../../core/types/atendimento';
+import { Supervisor } from './../../../../core/types/usuario';
 import { Component } from '@angular/core';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
@@ -20,15 +22,52 @@ export class AtendimentoCivilComponent {
     if (formAtendimentoCivil?.valid) {
       const novoAtendimentoCivil = formAtendimentoCivil.getRawValue() as AtendimentoStepper;
       const novoAtendimentoFormatado: Atendimento = {
+        "@type": this.tipoAtendimento,
         id: '',
         area: novoAtendimentoCivil.primeiroGrupo.area,
         instante: novoAtendimentoCivil.primeiroGrupo.instante,
         ficha: {
-          assinatura: '',
-          dadosSensiveis: false
+          assinatura: novoAtendimentoCivil.quintoGrupo.arquivos,
+          dadosSensiveis: false,
+          testemunhas: [
+            {
+              nome: novoAtendimentoCivil.quartoGrupo.nomeTestemunha1,
+              qualificacao: novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha1,
+              endereco: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha1,
+            },
+            {
+              nome: novoAtendimentoCivil.quartoGrupo.nomeTestemunha2,
+              qualificacao: novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha2,
+              endereco: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha2,
+            },
+          ],
+          parteContraria: {
+            nome: novoAtendimentoCivil.terceiroGrupo.nome,
+            qualificacao: novoAtendimentoCivil.terceiroGrupo.qualificacao,
+            rg: novoAtendimentoCivil.terceiroGrupo.rg,
+            cpf: novoAtendimentoCivil.terceiroGrupo.cpf,
+            email: novoAtendimentoCivil.terceiroGrupo.email,
+            endereco: novoAtendimentoCivil.terceiroGrupo.endereco,
+            telefone: novoAtendimentoCivil.terceiroGrupo.telefone,
+          },
+          medidaJudicial: novoAtendimentoCivil.quintoGrupo.medidaJuridica
         },
         prazoEntregaDocumentos: '',
         status: novoAtendimentoCivil.primeiroGrupo.area,
+        envolvidos: [
+          {
+            id: '',
+            nome: novoAtendimentoCivil.segundoGrupo.assistido
+          },
+          {
+            id: '',
+            nome: novoAtendimentoCivil.primeiroGrupo.estagiario
+          },
+          {
+            id: '',
+            nome: novoAtendimentoCivil.primeiroGrupo.professor
+          },
+        ]
       }
       console.log('Meu atendimento cadastrado:', novoAtendimentoFormatado);
 

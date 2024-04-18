@@ -1,12 +1,12 @@
+import { Endereco } from "./endereco";
+
 export interface Assistido {
   "@type"?: string,
   nome: string,
   email?: string,
   cpf?: string,
   rg?: string,
-  naturalidade?: string,
   nacionalidade?: string,
-  dataNascimento?: string,
   estadoCivil?: string,
   telefone?: string,
   endereco: TipoEndereco,
@@ -16,8 +16,21 @@ export interface Assistido {
   remuneracao?: string,
   cidadeComercial?: string,
   enderecoComercial?: string,
+}
+
+export interface AssistidoCivil extends Assistido {
+  dataNascimento?: string,
+  naturalidade?: string,
   dependentes?: string,
 }
+
+export interface AssistidoTrabalhista extends Assistido {
+  ctps: Ctps,
+  pis: string,
+  empregadoAtualmente: boolean,
+}
+
+export interface AssistidoFull extends AssistidoCivil, AssistidoTrabalhista { }
 
 export interface Filiacao {
   pai: string,
@@ -29,11 +42,9 @@ export interface TipoEndereco {
   comercial?: Endereco,
 }
 
-export interface Endereco {
-  logradouro?: string,
-  bairro?: string,
-  numero?: string,
-  complemento?: string,
-  cep?: string,
-  cidade?: string
+export interface Ctps {
+  numero?: String,
+  serie?: String,
+  uf?: String,
 }
+

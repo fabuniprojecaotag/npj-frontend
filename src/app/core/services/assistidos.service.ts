@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Assistido } from '../types/assistido';
+import { Assistido, AssistidoFull } from '../types/assistido';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,19 +16,19 @@ export class AssistidosService {
     return this.http.post<Assistido>(`${this.API}/assistidos`, assistido);
   }
 
-  listarAssistidos(): Observable<Assistido[]> {
-    return this.http.get<Assistido[]>(`${this.API}/assistidos`);
+  listarAssistidos(): Observable<AssistidoFull[]> {
+    return this.http.get<AssistidoFull[]>(`${this.API}/assistidos`);
   }
 
-  editar(idParam: string, assistido: Assistido): Observable<Assistido> {
-    return this.http.put<Assistido>(`${this.API}/assistidos/${idParam}`, assistido);
+  editar(idParam: string, assistido: Assistido): Observable<AssistidoFull> {
+    return this.http.put<AssistidoFull>(`${this.API}/assistidos/${idParam}`, assistido);
   }
 
-  excluir(idParam: string): Observable<Assistido> {
-    return this.http.delete<Assistido>(`${this.API}/assistidos/${idParam}`);
+  excluir(idParam: string): Observable<AssistidoFull> {
+    return this.http.delete<AssistidoFull>(`${this.API}/assistidos/${idParam}`);
    }
 
-  consultar(idParam: string): Observable<Assistido> {
-    return this.http.get<Assistido>(`${this.API}/assistidos/${idParam}`);
+  consultar(idParam: string): Observable<AssistidoFull> {
+    return this.http.get<AssistidoFull>(`${this.API}/assistidos/${idParam}`);
   }
 }
