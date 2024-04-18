@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Atendimento } from 'src/app/core/types/atendimento';
+import { Atendimento, AtendimentoStepper } from 'src/app/core/types/atendimento';
 
 @Component({
   selector: 'app-atendimento-civil',
@@ -18,10 +18,22 @@ export class AtendimentoCivilComponent {
     const formAtendimentoCivil = this.formAtendimentoService.getForm();
 
     if(formAtendimentoCivil?.valid){
-      const novoAtendimentoCivil = formAtendimentoCivil.getRawValue() as Atendimento;
+      const novoAtendimentoCivil = formAtendimentoCivil.getRawValue() as AtendimentoStepper;
       console.log('Meu atendimento cadastrado:', novoAtendimentoCivil);
+      const novoAtendimentoFormatado: Atendimento = {
+        id: '',
+        area: novoAtendimentoCivil.primeiroGrupo.area,
+        instante:  novoAtendimentoCivil.primeiroGrupo.instante,
+        ficha: {
+          assinatura: '',
+          dadosSensiveis: false
+        },
+        prazoEntregaDocumentos: '',
+        status: novoAtendimentoCivil.primeiroGrupo.area,
+      }
+      console.log('Meu atendimento cadastrado:', novoAtendimentoFormatado);
 
-      this.atendimentoService.cadastrarAtendimento(novoAtendimentoCivil).subscribe({
+      this.atendimentoService.cadastrarAtendimento(novoAtendimentoFormatado).subscribe({
         next: () => {
           alert("Cadastro realizado!");
         },

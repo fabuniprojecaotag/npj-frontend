@@ -3,10 +3,10 @@
     <form [formGroup]="primeiroGrupo" class="grupo-form">
       <mat-form-field class="input-muitoPequeno">
         <mat-label>Data</mat-label>
-        <input matInput [matDatepicker]="dataAtendimento" formControlName="dataAtendimento" required>
+        <input matInput [matDatepicker]="dataAtendimento" formControlName="instante" required>
         <mat-datepicker-toggle matIconSuffix [for]="dataAtendimento" color="primary"></mat-datepicker-toggle>
         <mat-datepicker #dataAtendimento></mat-datepicker>
-        <mat-error *ngIf="formAtendimentos.get('primeiroGrupo')?.get('dataAtendimento')?.errors?.['required']">Data de
+        <mat-error *ngIf="formAtendimentos.get('primeiroGrupo')?.get('instante')?.errors?.['required']">Data de
           atendimento é obrigatória</mat-error>
       </mat-form-field>
       <mat-form-field class="input-grande">
@@ -127,7 +127,7 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="quintoGrupo" label="Finalização">
-    <form [formGroupName]="'quintoGrupo'" class="grupo-form">
+    <form [formGroup]="quintoGrupo" class="grupo-form">
       <mat-form-field class="input-full">
         <mat-label>Histórico</mat-label>
         <textarea matInput formControlName="historico" placeholder="Histórico do atendimento"></textarea>

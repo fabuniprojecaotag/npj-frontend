@@ -41,39 +41,45 @@ export class StepperAtendimentosComponent implements OnInit {
       }
     });
 
+    this.primeiroGrupo = this.formBuilder.group({
+      estagiario: this.estagiarioControl,
+      instante: [new Date().toISOString(), Validators.required],
+      area: [this.tipoAtendimento]
+    }),
+    this.segundoGrupo = this.formBuilder.group({
+      assistido: this.assistidoControl,
+    }),
+    this.terceiroGrupo = this.formBuilder.group({
+      nomeParteContraria: [null, Validators.required],
+      qualificacaoParteContraria: [null, Validators.required],
+      rgParteContraria: [null],
+      cpfParteContraria: [null],
+      telefoneParteContraria: [null],
+      emailParteContraria: [null],
+      enderecoParteContraria: [null],
+      informacoesComplementares: [null]
+    }),
+    this.quartoGrupo = this.formBuilder.group({
+      nomeTestemunha1: [null],
+      qualificacaoTestemunha1: [null],
+      enderecoTestemunha1: [null],
+      nomeTestemunha2: [null],
+      qualificacaoTestemunha2: [null],
+      enderecoTestemunha2: [null],
+    }),
+    this.quintoGrupo = this.formBuilder.group({
+      historico: [''],
+      medidaJuridica: [''],
+      status: [''],
+      arquivos: [null]
+    });
+
     this.formAtendimentos = this.formBuilder.group({
-      primeiroGrupo: this.formBuilder.group({
-        estagiario: this.estagiarioControl,
-        dataAtendimento: [new Date().toISOString(), Validators.required],
-        area: [this.tipoAtendimento]
-      }),
-      segundoGrupo: this.formBuilder.group({
-        assistido: this.assistidoControl,
-      }),
-      terceiroGrupo: this.formBuilder.group({
-        nomeParteContraria: [null, Validators.required],
-        qualificacaoParteContraria: [null, Validators.required],
-        rgParteContraria: [null],
-        cpfParteContraria: [null],
-        telefoneParteContraria: [null],
-        emailParteContraria: [null],
-        enderecoParteContraria: [null],
-        informacoesComplementares: [null]
-      }),
-      quartoGrupo: this.formBuilder.group({
-        nomeTestemunha1: [null],
-        qualificacaoTestemunha1: [null],
-        enderecoTestemunha1: [null],
-        nomeTestemunha2: [null],
-        qualificacaoTestemunha2: [null],
-        enderecoTestemunha2: [null],
-      }),
-      quintoGrupo: this.formBuilder.group({
-        historico: [''],
-        medidaJuridica: [''],
-        status: [''],
-        arquivos: [null]
-      })
+      primeiroGrupo: this.primeiroGrupo,
+      segundoGrupo: this.segundoGrupo,
+      terceiroGrupo: this.terceiroGrupo,
+      quartoGrupo: this.quartoGrupo,
+      quintoGrupo: this.quintoGrupo
     });
 
     this.formService.setForm(this.formAtendimentos);
