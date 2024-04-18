@@ -10,6 +10,7 @@ import { Atendimento } from 'src/app/core/types/atendimento';
 })
 export class AtendimentoCivilComponent {
   tituloPagina = 'Atendimento Civil';
+  tipoAtendimento = 'Civil';
 
   constructor(private formAtendimentoService: FormsService, private atendimentoService: AtendimentosService) { }
 
@@ -18,8 +19,7 @@ export class AtendimentoCivilComponent {
 
     if(formAtendimentoCivil?.valid){
       const novoAtendimentoCivil = formAtendimentoCivil.getRawValue() as Atendimento;
-      console.log('Meu atendumento cadastrado:', novoAtendimentoCivil);
-
+      console.log('Meu atendimento cadastrado:', novoAtendimentoCivil);
 
       this.atendimentoService.cadastrarAtendimento(novoAtendimentoCivil).subscribe({
         next: () => {

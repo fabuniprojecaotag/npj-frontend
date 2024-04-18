@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { Atendimento } from 'src/app/core/types/atendimento';
 
 @Component({
   selector: 'app-stepper-atendimentos',
@@ -17,7 +18,10 @@ export class StepperAtendimentosComponent implements OnInit {
   quintoGrupo!: FormGroup;
   status: string[] = ['Reprovado', 'Arquivado', 'Aguardando documentos', 'Pendente distribuição', 'Processo ativo', 'Processo arquivado'];
   estagiarioControl: FormControl = new FormControl();
-  assistidoControl: FormControl = new FormControl();
+  assistidoControl: FormControl = new FormControl(null, Validators.required);
+  arquivoSelecionado: string | null = null; // Variável para armazenar o nome do arquivo selecionado
+
+  @Input() tipoAtendimento!: string;
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<any> = new EventEmitter();
 
@@ -37,48 +41,39 @@ export class StepperAtendimentosComponent implements OnInit {
       }
     });
 
-    this.primeiroGrupo = this.formBuilder.group({
-      estagiario: this.estagiarioControl,
-      dataAtendimento: [new Date().toISOString(), Validators.required]
-    });
-
-    this.segundoGrupo = this.formBuilder.group({
-      assistido: this.assistidoControl,
-    });
-
-    this.terceiroGrupo = this.formBuilder.group({
-      nomeParteContraria: [null, Validators.required],
-      qualificacaoParteContraria: [null, Validators.required],
-      rgParteContraria: [null],
-      cpfParteContraria: [null],
-      telefoneParteContraria: [null],
-      emailParteContraria: [null],
-      enderecoParteContraria: [null],
-      informacoesComplementares: [null]
-    });
-
-    this.quartoGrupo = this.formBuilder.group({
-      nomeTestemunha1: [null],
-      qualificacaoTestemunha1: [null],
-      enderecoTestemunha1: [null],
-      nomeTestemunha2: [null],
-      qualificacaoTestemunha2: [null],
-      enderecoTestemunha2: [null],
-    });
-
-    this.quintoGrupo = this.formBuilder.group({
-      historico: [''],
-      medidaJuridica: [''],
-      status: [''],
-      arquivos: [null]
-    });
-
     this.formAtendimentos = this.formBuilder.group({
-      primeiroGrupo: this.primeiroGrupo,
-      segundoGrupo: this.segundoGrupo,
-      terceiroGrupo: this.terceiroGrupo,
-      quartoGrupo: this.quartoGrupo,
-      quintoGrupo: this.quintoGrupo
+      primeiroGrupo: this.formBuilder.group({
+        estagiario: this.estagiarioControl,
+        dataAtendimento: [new Date().toISOString(), Validators.required],
+        area: [this.tipoAtendimento]
+      }),
+      segundoGrupo: this.formBuilder.group({
+        assistido: this.assistidoControl,
+      }),
+      terceiroGrupo: this.formBuilder.group({
+        nomeParteContraria: [null, Validators.required],
+        qualificacaoParteContraria: [null, Validators.required],
+        rgParteContraria: [null],
+        cpfParteContraria: [null],
+        telefoneParteContraria: [null],
+        emailParteContraria: [null],
+        enderecoParteContraria: [null],
+        informacoesComplementares: [null]
+      }),
+      quartoGrupo: this.formBuilder.group({
+        nomeTestemunha1: [null],
+        qualificacaoTestemunha1: [null],
+        enderecoTestemunha1: [null],
+        nomeTestemunha2: [null],
+        qualificacaoTestemunha2: [null],
+        enderecoTestemunha2: [null],
+      }),
+      quintoGrupo: this.formBuilder.group({
+        historico: [''],
+        medidaJuridica: [''],
+        status: [''],
+        arquivos: [null]
+      })
     });
 
     this.formService.setForm(this.formAtendimentos);
@@ -86,7 +81,14 @@ export class StepperAtendimentosComponent implements OnInit {
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
-    this.quintoGrupo.get('arquivos')?.setValue(file);
+    this.arquivoSelecionado = file.name; // Define o nome do arquivo selecionado
+  }
+
+
+  // Método para remover o arquivo selecionado
+  removerArquivoSelecionado(): void {
+    this.quintoGrupo.get('arquivos')?.setValue(null);
+    this.arquivoSelecionado = null; // Reseta o nome do arquivo selecionado
   }
 
   executarAcao() {
