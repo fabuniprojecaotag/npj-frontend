@@ -52,7 +52,7 @@ export class StepperAtendimentosComponent implements OnInit {
     this.primeiroGrupo = this.formBuilder.group({
       estagiario: this.estagiarioControl,
       professor: this.professorControl,
-      instante: [new Date().toISOString(), Validators.required],
+      instante: [new Date(), Validators.required],
       area: [this.tipoAtendimento]
     }),
       this.segundoGrupo = this.formBuilder.group({
@@ -61,9 +61,9 @@ export class StepperAtendimentosComponent implements OnInit {
       this.terceiroGrupo = this.formBuilder.group({
         nomeParteContraria: [null, Validators.required],
         qualificacaoParteContraria: [null, Validators.required],
-        rgParteContraria: [null],
-        cpfParteContraria: [null],
-        telefoneParteContraria: [null],
+        rgParteContraria: [null, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)],
+        cpfParteContraria: [null, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)],
+        telefoneParteContraria: [null, [Validators.minLength(11)]],
         emailParteContraria: [null],
         enderecoParteContraria: [null],
         informacoesComplementares: [null]
@@ -79,8 +79,9 @@ export class StepperAtendimentosComponent implements OnInit {
       this.quintoGrupo = this.formBuilder.group({
         historico: [''],
         medidaJuridica: [''],
-        status: [''],
-        arquivos: [null]
+        status: ['', Validators.required],
+        arquivos: [null],
+        dadosSensiveis: [false]
       });
 
     this.formAtendimentos = this.formBuilder.group({

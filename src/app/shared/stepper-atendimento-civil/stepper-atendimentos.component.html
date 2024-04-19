@@ -55,17 +55,23 @@
           <mat-label>RG</mat-label>
           <input matInput formControlName="rgParteContraria" placeholder="RG" mask="0.000.000" [showMaskTyped]="true"
             [dropSpecialCharacters]="false">
+            <mat-error *ngIf="formAtendimentos.get('terceiroGrupo')?.get('rgParteContraria')?.errors?.['pattern']">RG fora do padrão
+              (00.000.0000-00)</mat-error>
         </mat-form-field>
         <mat-form-field class="input-muitoPequeno">
           <mat-label>CPF</mat-label>
           <input matInput formControlName="cpfParteContraria" placeholder="CPF" mask="000.000.000-00"
             [showMaskTyped]="true" [dropSpecialCharacters]="false">
+            <mat-error *ngIf="formAtendimentos.get('terceiroGrupo')?.get('cpfParteContraria')?.errors?.['pattern']">CPF fora do padrão
+              (000.000.000-00)</mat-error>
         </mat-form-field>
         <mat-form-field class="input-medio">
           <mat-label>Telefone</mat-label>
           <input matInput formControlName="telefoneParteContraria" mask="(00) 00000-0000" [showMaskTyped]="true"
             [dropSpecialCharacters]="false">
           <mat-icon matSuffix>phone</mat-icon>
+          <mat-error *ngIf="formAtendimentos.get('terceiroGrupo')?.get('telefoneParteContraria')?.errors?.['pattern']">Padrão de telefone inválido! (Ex:(00)
+            00000-0000)</mat-error>
         </mat-form-field>
       </div>
       <mat-form-field class="input-medio">
@@ -162,6 +168,9 @@
           <mat-icon>upload_2</mat-icon>Upload
         </button>
         <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx</p>
+      </div>
+      <div class="input-full">
+        <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados Sensiveis:</mat-checkbox>
       </div>
       <div class="input-full">
         <button mat-raised-button matStepperPrevious>Voltar</button>

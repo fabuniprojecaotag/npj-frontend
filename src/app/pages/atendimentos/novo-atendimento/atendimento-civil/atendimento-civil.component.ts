@@ -25,10 +25,10 @@ export class AtendimentoCivilComponent {
         "@type": this.tipoAtendimento,
         id: '',
         area: novoAtendimentoCivil.primeiroGrupo.area,
-        instante: novoAtendimentoCivil.primeiroGrupo.instante,
+        instante: novoAtendimentoCivil.primeiroGrupo.instante.toISOString(),
         ficha: {
           assinatura: novoAtendimentoCivil.quintoGrupo.arquivos,
-          dadosSensiveis: false,
+          dadosSensiveis: novoAtendimentoCivil.quintoGrupo.dadosSensiveis,
           testemunhas: [
             {
               nome: novoAtendimentoCivil.quartoGrupo.nomeTestemunha1,

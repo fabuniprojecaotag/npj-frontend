@@ -47,7 +47,7 @@ export interface AtendimentoStepper {
   primeiroGrupo: {
     estagiario: string;
     professor: string;
-    instante: string;
+    instante: Date;
     area: string;
   };
   segundoGrupo: {
@@ -76,6 +76,7 @@ export interface AtendimentoStepper {
     medidaJuridica: string;
     status: string;
     arquivos: string;
+    dadosSensiveis: boolean;
   };
 }
 
