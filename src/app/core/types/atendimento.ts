@@ -1,17 +1,17 @@
 export interface Atendimento {
   "@type": string,
-  id: String,
-  status: String,
-  area: String,
-  instante: String,
+  id: string,
+  status: string,
+  area: string,
+  instante: string,
   ficha: Ficha | FichaCivil,
-  prazoEntregaDocumentos: String,
-  historico?: String,
+  prazoEntregaDocumentos: string,
+  historico?: string,
   envolvidos?: Envolvido[]
 }
 
 export interface Ficha {
-  assinatura: String,
+  assinatura: string,
   dadosSensiveis: Boolean,
   testemunhas?: Testemunha[],
 }
@@ -22,23 +22,23 @@ export interface FichaCivil extends Ficha {
 }
 
 export interface ParteContraria {
-  nome: String,
-  qualificacao: String,
-  rg?: String,
-  cpf?: String,
-  email?: String,
-  endereco?: String,
-  telefone?: String,
+  nome: string,
+  qualificacao: string,
+  rg?: string,
+  cpf?: string,
+  email?: string,
+  endereco?: string,
+  telefone?: string,
 }
 
 export interface Testemunha {
-  nome: String,
-  qualificacao: String,
+  nome: string,
+  qualificacao: string,
   endereco: string,
 }
 export interface Envolvido {
-  id: String,
-  nome: String,
+  id: string,
+  nome: string,
 }
 
 /* Interaface do Stepper Civil para ser traduzida para atendimento */

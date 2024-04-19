@@ -69,6 +69,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AssistidoAutocompleteComponent } from './shared/assistido-autocomplete/assistido-autocomplete.component';
 import { ModalProcessoCriadoComponent } from './shared/modal-processo-criado/modal-processo-criado.component';
 import { ModalExcluirProcessoComponent } from './shared/modal-excluir-processo/modal-excluir-processo.component';
+import { AtendimentoAutocompleteComponent } from './shared/atendimento-autocomplete/atendimento-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { ModalExcluirProcessoComponent } from './shared/modal-excluir-processo/m
     AssistidoAutocompleteComponent,
     ModalProcessoCriadoComponent,
     ModalExcluirProcessoComponent,
+    AtendimentoAutocompleteComponent,
   ],
   imports: [
     BrowserModule,

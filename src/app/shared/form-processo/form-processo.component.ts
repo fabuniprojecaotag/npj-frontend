@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { Atendimento } from 'src/app/core/types/atendimento';
 
 @Component({
   selector: 'app-form-processo',
@@ -13,6 +14,7 @@ export class FormProcessoComponent implements OnInit {
   @Input() editComponent: boolean = false;
   formProcessos!: FormGroup;
   status = ['ATIVO', 'ARQUIVADO'];
+  atendimentoControl: FormControl<Atendimento | null> = new FormControl<Atendimento | null>(null ,[Validators.required]);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,7 +28,7 @@ export class FormProcessoComponent implements OnInit {
       dataDistribuicao: [null, Validators.required],
       vara: [null, Validators.required],
       forum: [null, Validators.required],
-      atendimentoId: [null, Validators.required],
+      atendimentoId: this.atendimentoControl,
       status: [null, Validators.required],
       // documento: [null]
     });

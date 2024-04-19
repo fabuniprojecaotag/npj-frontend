@@ -1,0 +1,10 @@
+<mat-form-field appearance="outline">
+    <mat-label>Atendimento</mat-label>
+    <input matInput placeholder="Digite o identificador do atendimento" [formControl]="control" ngDefaultControl [matAutocomplete]="auto">
+    <mat-icon matSuffix>search</mat-icon>
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let atendimento of filteredOptions$ | async" [value]="atendimento">
+        {{atendimento.id}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>

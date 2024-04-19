@@ -44,13 +44,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Atendimento</mat-label>
-      <input matInput placeholder="Atendimento" formControlName="atendimentoId" />
-      <mat-error *ngIf="formProcessos.get('atendimentoId')?.errors?.['required']">
-        Atendimento é obrigatório!
-      </mat-error>
-    </mat-form-field>
+    <app-atendimento-autocomplete [control]="atendimentoControl" class="input-pequeno"></app-atendimento-autocomplete>
 
     <mat-form-field>
       <mat-label>Status</mat-label>
