@@ -1,0 +1,21 @@
+.modal {
+    margin: 1em;
+    h4 {
+      font-size: 30px;
+      font-weight: 400;
+      margin-bottom: 0.8em;
+    }
+  
+    .modal__conteudo {
+      p {
+        color: black;
+        padding-bottom: 0.7em;
+      }
+    }
+  
+    .modal__botoes {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: auto;
+    }
+  }

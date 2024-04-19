@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsService } from 'src/app/core/services/forms.service';
 
@@ -9,6 +9,8 @@ import { FormsService } from 'src/app/core/services/forms.service';
 })
 export class FormProcessoComponent implements OnInit {
   @Output() acaoClick: EventEmitter<any> = new EventEmitter<any>();
+  @Output() acaoExcluir: EventEmitter<any> = new EventEmitter<any>();
+  @Input() editComponent: boolean = false;
   formProcessos!: FormGroup;
   status = ['ATIVO', 'ARQUIVADO'];
 
@@ -33,5 +35,9 @@ export class FormProcessoComponent implements OnInit {
 
   executarAcao() {
     this.acaoClick.emit();
+  }
+
+  excluir() {
+    this.acaoExcluir.emit();
   }
 }

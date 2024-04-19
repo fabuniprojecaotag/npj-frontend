@@ -1,5 +1,5 @@
 export interface Processo {
-    numero: string;
+    numero?: string;
     nome: string;
     dataDistribuicao: string;
     vara: string;

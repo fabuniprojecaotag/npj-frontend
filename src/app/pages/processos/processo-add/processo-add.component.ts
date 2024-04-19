@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { ProcessosService } from 'src/app/core/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
+import { ModalProcessoCriadoComponent } from 'src/app/shared/modal-processo-criado/modal-processo-criado.component';
 
 @Component({
   selector: 'app-processo-add',
@@ -13,7 +16,9 @@ export class ProcessoAddComponent {
 
   constructor(
     private processsoService: ProcessosService,
-    private formService: FormsService
+    private formService: FormsService,
+    private dialog: MatDialog,
+    private router: Router
     ) { }
 
   cadastrar() {
@@ -23,7 +28,8 @@ export class ProcessoAddComponent {
       const novoCadastro = formCadastroProcesso.getRawValue() as Processo;
       this.processsoService.cadastraProcesso(novoCadastro).subscribe({
         next: () => {
-          alert("Processo cadastrado com sucesso!");
+          this.abrirModal(novoCadastro);
+          this.router.navigate(['/processos']);
         },
         error: (err) => {
           alert("Erro ao criar processo!");
@@ -31,5 +37,13 @@ export class ProcessoAddComponent {
         }
       });
     }
+  }
+
+  abrirModal(novoProcesso: Processo) {
+    this.dialog.open(ModalProcessoCriadoComponent, {
+      width: '552px',
+      height: '360px',
+      data: { numero: novoProcesso.numero, nome: novoProcesso.nome, atendimentoId: novoProcesso.atendimentoId}
+    })
   }
 }

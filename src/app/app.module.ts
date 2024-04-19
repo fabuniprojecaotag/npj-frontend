@@ -67,6 +67,8 @@ import { CustomMatPaginatorIntl } from './shared/customMatPaginator/CustomMatPag
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AssistidoAutocompleteComponent } from './shared/assistido-autocomplete/assistido-autocomplete.component';
+import { ModalProcessoCriadoComponent } from './shared/modal-processo-criado/modal-processo-criado.component';
+import { ModalExcluirProcessoComponent } from './shared/modal-excluir-processo/modal-excluir-processo.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +105,8 @@ import { AssistidoAutocompleteComponent } from './shared/assistido-autocomplete/
     StepperAtendimentoTrabalhistaComponent,
     SupervisorAutocompleteComponent,
     AssistidoAutocompleteComponent,
+    ModalProcessoCriadoComponent,
+    ModalExcluirProcessoComponent,
   ],
   imports: [
     BrowserModule,

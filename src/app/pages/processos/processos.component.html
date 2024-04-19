@@ -16,7 +16,7 @@
         <!-- Matricula Column -->
         <ng-container matColumnDef="data">
           <th mat-header-cell *matHeaderCellDef> Data </th>
-          <td mat-cell *matCellDef="let processo"> {{ processo.dataDistribuicao }} </td>
+          <td mat-cell *matCellDef="let processo"> {{ processo.dataDistribuicao | date:'dd/MM/yyyy'}} </td>
         </ng-container>
 
         <!-- Status Column -->

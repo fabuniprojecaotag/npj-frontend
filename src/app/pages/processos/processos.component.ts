@@ -1,11 +1,8 @@
-import { SelectionModel } from '@angular/cdk/collections';
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { ProcessosService } from 'src/app/core/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
-import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-processos',
@@ -50,4 +47,5 @@ export class ProcessosComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+
 }

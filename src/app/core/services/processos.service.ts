@@ -23,4 +23,12 @@ export class ProcessosService {
   consultarProcesso(idProcesso: string): Observable<Processo> {
     return this.http.get<Processo>(`${this.API}/processos/${idProcesso}`);
   }
+
+  editarProcesso(idProcesso: string, processo: Processo): Observable<Processo> {
+    return this.http.put<Processo>(`${this.API}/processos/${idProcesso}`, processo);
+  }
+
+  excluirProcesso(idProcesso: string): Observable<Processo> {
+    return this.http.delete<Processo>(`${this.API}/processos/${idProcesso}`);
+  }
 }

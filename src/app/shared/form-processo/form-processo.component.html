@@ -75,6 +75,7 @@
     </div> -->
 
     <div class="btn-group">
+      <button mat-flat-button color="warn" type="button" *ngIf="editComponent === true" (click)="excluir()">Excluir</button>
       <button mat-flat-button [disabled]="formProcessos.invalid">Salvar</button>
       <button mat-flat-button color="primary" (click)="executarAcao()" [disabled]="formProcessos.invalid">
         Submeter
