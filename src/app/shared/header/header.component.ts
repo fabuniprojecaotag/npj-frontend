@@ -26,13 +26,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
-        console.log("sucesso, usuário:" + usuario);
         this.userData = usuario;
+        console.log("sucesso, meu usuário: " + this.userData);
         this.nomeUser = usuario.nome;
         this.nomePerfil = this.formatarNomePerfil(usuario.role);
       },
       error: (err) => {
-        console.log("Erro ao procurar usuário: " + err);
+        console.log("Erro ao procurar meu usuário: " + err);
       }
     })
   }

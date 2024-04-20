@@ -8,6 +8,10 @@
           <input matInput formControlName="nome">
           <mat-error *ngIf="formAssistidos.get('nome')?.errors?.['required']">Nome é
             obrigatório</mat-error>
+          <mat-error *ngIf="formAssistidos.get('nome')?.errors?.['minlength']">Nome deve conter mais de 2
+            caracteres!</mat-error>
+            <mat-error *ngIf="formAssistidos.get('nome')?.errors?.['maxlength']">Nome deve conter ate 60
+              caracteres!</mat-error>
         </mat-form-field>
       </div>
       <div class="col">
@@ -40,9 +44,12 @@
     </div>
     <div class="row">
       <div class="col">
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width"
+          *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
           <mat-label>Naturalidade</mat-label>
           <input matInput formControlName="naturalidade">
+          <mat-error *ngIf="formAssistidos.get('naturalidade')?.errors?.['required']">Naturalidade é
+            obrigatória</mat-error>
         </mat-form-field>
       </div>
       <div class="col">
@@ -51,12 +58,15 @@
           <input matInput formControlName="nacionalidade">
         </mat-form-field>
       </div>
-      <div class="col">
+      <div class="col"
+        *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
         <mat-form-field class="full-width">
           <mat-label>Data de Nascimento</mat-label>
           <input matInput [matDatepicker]="dataNascimento" formControlName="dataNascimento">
           <mat-datepicker-toggle matIconSuffix [for]="dataNascimento" color="primary"></mat-datepicker-toggle>
           <mat-datepicker #dataNascimento></mat-datepicker>
+          <mat-error *ngIf="formAssistidos.get('dataNascimento')?.errors?.['required']">Data de Nascimento é
+            obrigatória</mat-error>
         </mat-form-field>
       </div>
       <div class="col">
@@ -115,25 +125,6 @@
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-label>Profissão</mat-label>
-          <input matInput formControlName="profissao">
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>Remuneração</mat-label>
-          <input matInput type="text" formControlName="remuneracao" prefix="R$ " />
-          <mat-error *ngIf="formAssistidos.get('remuneracao')?.errors?.['pattern']">Padrão incorreto (ex esperado: R$ 12.000)</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          <mat-label>Nº de dependentes</mat-label>
-          <input matInput formControlName="dependentes">
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="full-width">
           <mat-label>Tipo de Assistido</mat-label>
           <mat-select matInput formControlName="@type">
             <mat-option *ngFor="let tipo of tipoAssistido" [value]="tipo.valor">
@@ -145,8 +136,31 @@
           </mat-error>
         </mat-form-field>
       </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Profissão</mat-label>
+          <input matInput formControlName="profissao">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Remuneração</mat-label>
+          <input matInput type="text" formControlName="remuneracao" prefix="R$ " />
+          <mat-error *ngIf="formAssistidos.get('remuneracao')?.errors?.['pattern']">Padrão incorreto (ex esperado: R$
+            12.000)</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width"
+          *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
+          <mat-label>Nº de dependentes</mat-label>
+          <input matInput formControlName="dependentes" mask="00">
+          <mat-error *ngIf="formAssistidos.get('dependentes')?.errors?.['required']">Dependentes é
+            obrigatório</mat-error>
+        </mat-form-field>
+      </div>
     </div>
-    <ng-container [formGroupName]="'endereco'" *ngFor="let tipoEndereco of ['residencial', 'comercial']">
+    <ng-container formGroupName="endereco" *ngFor="let tipoEndereco of ['residencial', 'comercial']">
       <ng-container [formGroupName]="tipoEndereco">
         <div class="row">
           <h4>{{ "Endereço " + tipoEndereco }}</h4>

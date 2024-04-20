@@ -14,10 +14,12 @@ import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.c
 export class AssistidoAddComponent {
   tituloDaPagina: string = 'Novo Assistido';
 
-  constructor(private formAssistidosService: FormsService,
+  constructor(
+    private formAssistidosService: FormsService,
     private assistidoService: AssistidosService,
     private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog
+  ) { }
 
   cadastrar(): void {
     const formCadastroAssistido = this.formAssistidosService.getForm();
@@ -44,7 +46,7 @@ export class AssistidoAddComponent {
     this.dialog.open(ModalCriadoComponent, {
       width: '552px',
       height: '360px',
-      data: {tituloCriado: 'Assistido', nome: novoAssistido.nome, email: novoAssistido.email}
+      data: { tituloCriado: 'Assistido', nome: novoAssistido.nome, email: novoAssistido.email }
     })
   }
 }

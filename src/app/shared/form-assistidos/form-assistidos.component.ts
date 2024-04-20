@@ -48,15 +48,20 @@ export class FormAssistidosComponent implements OnInit {
   ngOnInit(): void {
     this.formAssistidos = this.formBuilder.group({
       "@type": [null, Validators.required],
-      nome: [null, Validators.required],
+      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       email: [null, Validators.email],
       cpf: [{ value: null, disabled: this.editComponent }, [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
       rg: [null, [Validators.required, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)]],
-      naturalidade: null,
-      nacionalidade: null,
-      dataNascimento: null,
-      estadoCivil: null,
+      naturalidade: [null],
+      estadoCivil: [null],
+      profissao: [null],
+      remuneracao: [null, [Validators.pattern(/^R\$ \d{1,3}(?:[.,]\d{3})*(?:,\d{1,2})?$/)]],
       telefone: [null, [Validators.minLength(11)],],
+      escolaridade: [null],
+      filiacao: this.formBuilder.group({
+        pai: [null, Validators.required],
+        mae: [null, Validators.required],
+      }),
       endereco: this.formBuilder.group({
         residencial: this.formBuilder.group({
           cep: [null, Validators.minLength(8)],
@@ -75,16 +80,35 @@ export class FormAssistidosComponent implements OnInit {
           numero: [null]
         }),
       }),
-      escolaridade: [null],
-      filiacao: this.formBuilder.group({
-        pai: [null, Validators.required],
-        mae: [null, Validators.required],
+      /* campos de assistido cívil */
+      nacionalidade: [null],
+      dataNascimento: [null],
+      dependentes: [null],
+      /* campos de assistido trabalhista */
+      ctps: this.formBuilder.group({
+        numero: [null],
+        serie: [null],
+        uf: [null],
       }),
-      profissao: null,
-      remuneracao: [null, [Validators.pattern(/^R\$ \d{1,3}(?:[.,]\d{3})*(?:,\d{1,2})?$/)]],
-      dependentes: null,
+      pis: [null],
+      empregadoAtualmente: [null],
     });
 
+    this.formAssistidos.get('@type')?.valueChanges.subscribe(tipo => {
+      const dataNascimentoControler = this.formAssistidos.get('dataNascimento');
+      const naturalidade = this.formAssistidos.get('naturalidade');
+      const dependentes = this.formAssistidos.get('dependentes');
+
+      if (tipo === 'Civil' || tipo === 'Full') {
+        dataNascimentoControler?.setValidators(Validators.required);
+        naturalidade?.setValidators(Validators.required);
+        dependentes?.setValidators(Validators.required);
+      } else {
+        dataNascimentoControler?.clearValidators();
+        naturalidade?.clearValidators();
+        dependentes?.clearValidators();
+      }
+    });
     this.formAssistidosService.setForm(this.formAssistidos);
   }
 

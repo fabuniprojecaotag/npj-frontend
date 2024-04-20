@@ -17,7 +17,7 @@ export class AssistidosComponent implements AfterViewInit {
     'nome',
     'email',
     'cpf',
-    'enderecoResidencial',
+    'telefone',
   ];
 
   constructor(private service: AssistidosService) {}

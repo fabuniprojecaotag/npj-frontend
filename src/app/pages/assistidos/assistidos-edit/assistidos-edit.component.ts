@@ -1,3 +1,4 @@
+import { AssistidoCivil, AssistidoTrabalhista } from './../../../core/types/assistido';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,7 +31,7 @@ export class AssistidosEditComponent {
 
     this.assistidoService.consultar(this.idParam).subscribe(callback => {
       this.assistido = callback;
-      console.log("assistido para editar: ", this.assistido);
+      this.tituloDaPagina = `Editar Assistido - ${this.assistido.nome}`;
       this.carregarFormulario();
     })
   }
@@ -48,18 +49,22 @@ export class AssistidosEditComponent {
       dataNascimento: this.assistido.dataNascimento,
       estadoCivil: this.assistido.estadoCivil,
       telefone: this.assistido.telefone,
-      endereco: this.assistido.endereco,
+      endereco: {
+        residencial: {
+          cep: this.assistido.endereco.residencial.cep
+        },
+        comercial: this.assistido.endereco.comercial
+      },
       escolaridade: this.assistido.escolaridade,
       filiacao: this.assistido.filiacao,
       profissao: this.assistido.profissao,
       remuneracao: this.assistido.remuneracao,
       dependentes: this.assistido.dependentes,
     });
-
   }
 
   editar() {
-    const dadosAtualizados: AssistidoFull = {
+    const dadosAtualizados: AssistidoTrabalhista | AssistidoCivil | AssistidoFull = {
       ['@type']: this.form?.value.type,
       nome: this.form?.value.nome,
       email: this.form?.value.email,
@@ -97,12 +102,12 @@ export class AssistidosEditComponent {
       remuneracao: this.form?.value.remuneracao,
       dependentes: this.form?.value.dependentes,
       ctps: {
-        numero: undefined,
-        serie: undefined,
-        uf: undefined
+        numero: this.form?.value.numero,
+        serie: this.form?.value.serie,
+        uf: this.form?.value.uf
       },
-      pis: '',
-      empregadoAtualmente: false
+      pis: this.form?.value.pis,
+      empregadoAtualmente: this.form?.value.empregadoAtualmente
     }
 
     this.assistidoService.editar(this.idParam, dadosAtualizados).subscribe({

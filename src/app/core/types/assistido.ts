@@ -5,7 +5,7 @@ export interface Assistido {
   nome: string,
   email?: string,
   cpf?: string,
-  rg?: string,
+  rg: string,
   nacionalidade?: string,
   estadoCivil?: string,
   telefone?: string,
@@ -14,8 +14,6 @@ export interface Assistido {
   filiacao: Filiacao,
   profissao?: string,
   remuneracao?: string,
-  cidadeComercial?: string,
-  enderecoComercial?: string,
 }
 
 export interface AssistidoCivil extends Assistido {
@@ -43,8 +41,8 @@ export interface TipoEndereco {
 }
 
 export interface Ctps {
-  numero?: String,
-  serie?: String,
-  uf?: String,
+  numero?: string,
+  serie?: string,
+  uf?: string,
 }
 
