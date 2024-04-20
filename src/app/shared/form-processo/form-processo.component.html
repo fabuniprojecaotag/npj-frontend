@@ -2,61 +2,68 @@
   <h3>Processo</h3>
 
   <form class="formulario" [formGroup]="formProcessos">
-    <mat-form-field>
-      <mat-label>N° do processo</mat-label>
-      <input matInput placeholder="N° do processo" formControlName="numero" />
-      <mat-error *ngIf="formProcessos.get('numero')?.errors?.['required']">
-        Número do processo é obrigatório!
-      </mat-error>
-    </mat-form-field>
+    <div class="linha">
+      <mat-form-field>
+        <mat-label>N° do processo</mat-label>
+        <input matInput placeholder="N° do processo" formControlName="numero" />
+        <mat-error *ngIf="formProcessos.get('numero')?.errors?.['required']">
+          Número do processo é obrigatório!
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Nome da ação</mat-label>
-      <input matInput placeholder="Nome da ação" formControlName="nome" />
-      <mat-error *ngIf="formProcessos.get('nome')?.errors?.['required']">
-        Nome da ação é obrigatória!
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nome da ação</mat-label>
+        <input matInput placeholder="Nome da ação" formControlName="nome" />
+        <mat-error *ngIf="formProcessos.get('nome')?.errors?.['required']">
+          Nome da ação é obrigatória!
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Data da distribuição</mat-label>
-      <input matInput [matDatepicker]="dataDistribuicao" formControlName="dataDistribuicao">
-      <mat-datepicker-toggle matIconSuffix [for]="dataDistribuicao" color="primary"></mat-datepicker-toggle>
-      <mat-datepicker #dataDistribuicao></mat-datepicker>
-      <mat-error *ngIf="formProcessos.get('dataDistribuicao')?.errors?.['required']">
-        Data de distribuição é obrigatória!
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Data da distribuição</mat-label>
+        <input matInput [matDatepicker]="dataDistribuicao" formControlName="dataDistribuicao">
+        <mat-datepicker-toggle matIconSuffix [for]="dataDistribuicao" color="primary"></mat-datepicker-toggle>
+        <mat-datepicker #dataDistribuicao></mat-datepicker>
+        <mat-error *ngIf="formProcessos.get('dataDistribuicao')?.errors?.['required']">
+          Data de distribuição é obrigatória!
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field class="medio-inputs">
-      <mat-label>Vara</mat-label>
-      <input matInput placeholder="Vara" formControlName="vara" />
-      <mat-error *ngIf="formProcessos.get('vara')?.errors?.['required']">
-        Vara é obrigatória!
-      </mat-error>
-    </mat-form-field>
+    <div class="linha">
+      <mat-form-field class="inputs-medios">
+        <mat-label>Vara</mat-label>
+        <input matInput placeholder="Vara" formControlName="vara" />
+        <mat-error *ngIf="formProcessos.get('vara')?.errors?.['required']">
+          Vara é obrigatória!
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field class="medio-inputs">
-      <mat-label>Forúm</mat-label>
-      <input matInput placeholder="Forúm" formControlName="forum" />
-      <mat-error *ngIf="formProcessos.get('forum')?.errors?.['required']">
-        Forúm é obrigatório!
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field class="inputs-medios">
+        <mat-label>Forúm</mat-label>
+        <input matInput placeholder="Forúm" formControlName="forum" />
+        <mat-error *ngIf="formProcessos.get('forum')?.errors?.['required']">
+          Forúm é obrigatório!
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="linha linha-menor">
+      <app-atendimento-autocomplete [control]="atendimentoControl" class="input-pequeno"></app-atendimento-autocomplete>
 
-    <app-atendimento-autocomplete [control]="atendimentoControl" class="input-pequeno"></app-atendimento-autocomplete>
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select matInput="" formControlName="status">
+          <mat-option *ngFor="let statu of status" [value]="status">
+            {{ statu }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formProcessos.get('status')?.errors?.['required']">
+          Status é obrigatório!
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field>
-      <mat-label>Status</mat-label>
-      <mat-select matInput="" formControlName="status">
-        <mat-option *ngFor="let statu of status" [value]="status">
-          {{ statu }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="formProcessos.get('status')?.errors?.['required']">
-        Status é obrigatório!
-      </mat-error>
-    </mat-form-field>
+
 
     <div class="espacador"></div>
 
@@ -69,9 +76,10 @@
     </div> -->
 
     <div class="btn-group">
-      <button mat-flat-button color="warn" type="button" *ngIf="editComponent === true" (click)="excluir()">Excluir</button>
-      <button mat-flat-button [disabled]="formProcessos.invalid">Salvar</button>
-      <button mat-flat-button color="primary" (click)="executarAcao()" [disabled]="formProcessos.invalid">
+      <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true"
+        (click)="excluir()">Excluir</button>
+      <button mat-flat-button class="btn btn-basic" [disabled]="formProcessos.invalid">Salvar</button>
+      <button mat-flat-button class="btn" color="primary" (click)="executarAcao()" [disabled]="formProcessos.invalid">
         Submeter
       </button>
     </div>

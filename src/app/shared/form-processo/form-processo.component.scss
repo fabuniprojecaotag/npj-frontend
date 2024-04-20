@@ -8,21 +8,24 @@
     font-size: 28px;
   }
   .formulario {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: space-between;
-    align-content: center;
-    flex-wrap: wrap;
-    mat-form-field, .input-pequeno {
-      width: 33%;
-    }
-    .medio-inputs {
-      width: 48.5%;
+    .linha, .linha-menor {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 30px;
+
+      mat-form-field,
+      .input-pequeno,
+      .espacador {
+        flex-grow: 1.2;
+      }
+      .inputs-medios {
+        flex-grow: 5;
+      }
     }
 
-    .espacador {
-        width: 33%;
+    .linha-menor {
+      width: 75%;
     }
 
     .input-documento {
@@ -35,13 +38,20 @@
         padding-bottom: 1em;
       }
     }
+
     .btn-group {
-      width: 100%;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      button:nth-child(2) {
-        margin-left: 1em;
+      padding-top: 32px;
+
+      .btn {
+        margin-right: 12px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+        &.btn-basic {
+          background-color: #f5f5f5 !important;
+          color: rgba($color: #000, $alpha: 0.87) !important;
+        }
       }
     }
   }
