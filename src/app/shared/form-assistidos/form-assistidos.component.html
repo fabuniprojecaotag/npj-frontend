@@ -10,8 +10,8 @@
             obrigatório</mat-error>
           <mat-error *ngIf="formAssistidos.get('nome')?.errors?.['minlength']">Nome deve conter mais de 2
             caracteres!</mat-error>
-            <mat-error *ngIf="formAssistidos.get('nome')?.errors?.['maxlength']">Nome deve conter ate 60
-              caracteres!</mat-error>
+          <mat-error *ngIf="formAssistidos.get('nome')?.errors?.['maxlength']">Nome deve conter ate 60
+            caracteres!</mat-error>
         </mat-form-field>
       </div>
       <div class="col">
@@ -43,9 +43,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col">
-        <mat-form-field class="full-width"
-          *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
+      <div class="col"
+        *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
+        <mat-form-field class="full-width">
           <mat-label>Naturalidade</mat-label>
           <input matInput formControlName="naturalidade">
           <mat-error *ngIf="formAssistidos.get('naturalidade')?.errors?.['required']">Naturalidade é
@@ -150,15 +150,28 @@
             12.000)</mat-error>
         </mat-form-field>
       </div>
-      <div class="col">
-        <mat-form-field class="full-width"
-          *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
+      <div class="col" *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
+        <mat-form-field class="full-width">
           <mat-label>Nº de dependentes</mat-label>
           <input matInput formControlName="dependentes" mask="00">
           <mat-error *ngIf="formAssistidos.get('dependentes')?.errors?.['required']">Dependentes é
             obrigatório</mat-error>
         </mat-form-field>
       </div>
+    </div>
+    <div class="row"
+      *ngIf="formAssistidos.get('@type')?.value === 'Trabalhista' || formAssistidos.get('@type')?.value === 'Full'">
+      <mat-form-field class="full-width">
+        <mat-label>PIS</mat-label>
+        <input matInput formControlName="pis">
+        <mat-error *ngIf="formAssistidos.get('pis')?.errors?.['required']">PIS é
+          obrigatório</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row"
+      *ngIf="formAssistidos.get('@type')?.value === 'Trabalhista' || formAssistidos.get('@type')?.value === 'Full'">
+      <mat-checkbox formControlName="empregadoAtualmente" color="primary" labelPosition="before">Empregado
+        Atualmente:</mat-checkbox>
     </div>
     <ng-container formGroupName="endereco" *ngFor="let tipoEndereco of ['residencial', 'comercial']">
       <ng-container [formGroupName]="tipoEndereco">

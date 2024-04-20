@@ -98,15 +98,24 @@ export class FormAssistidosComponent implements OnInit {
       const dataNascimentoControler = this.formAssistidos.get('dataNascimento');
       const naturalidade = this.formAssistidos.get('naturalidade');
       const dependentes = this.formAssistidos.get('dependentes');
+      // const ctps = this.formAssistidos.get('ctps');
+      const pis = this.formAssistidos.get('pis');
 
-      if (tipo === 'Civil' || tipo === 'Full') {
+      if (tipo === 'Civil') {
         dataNascimentoControler?.setValidators(Validators.required);
         naturalidade?.setValidators(Validators.required);
         dependentes?.setValidators(Validators.required);
-      } else {
+        pis?.clearValidators();
+      } else if (tipo === 'Trabalhista') {
+        pis?.setValidators(Validators.required);
         dataNascimentoControler?.clearValidators();
         naturalidade?.clearValidators();
         dependentes?.clearValidators();
+      } else {
+        dataNascimentoControler?.setValidators(Validators.required);
+        naturalidade?.setValidators(Validators.required);
+        dependentes?.setValidators(Validators.required);
+        pis?.setValidators(Validators.required);
       }
     });
     this.formAssistidosService.setForm(this.formAssistidos);

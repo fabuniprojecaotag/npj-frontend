@@ -16,22 +16,19 @@ h4 {
   margin: 60px 5em;
   padding: var(--gp-gutter-x, 0.75rem);
 
-
   .row {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   .col {
     flex: 1;
-    margin-right: 24px;
 
     .full-width {
       width: 100%;
-    }
-
-    &:last-child {
-      margin-right: 0;
+      flex-grow: 10;
     }
   }
 
