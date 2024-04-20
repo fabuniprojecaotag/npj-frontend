@@ -9,7 +9,7 @@ import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.c
 @Component({
   selector: 'app-add-users',
   templateUrl: './add-users.component.html',
-  styleUrls: ['./add-users.component.scss']
+  styleUrls: ['./add-users.component.scss'],
 })
 export class AddUsersComponent {
   tituloDaPagina: string = 'Adicionar Usuários';
@@ -19,7 +19,7 @@ export class AddUsersComponent {
     private cadastroService: CadastroService,
     private router: Router,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   cadastrar() {
     const formCadastro = this.formularioService.getForm();
@@ -28,13 +28,11 @@ export class AddUsersComponent {
       this.cadastroService.cadastrar(novoCadastro).subscribe({
         next: (value) => {
           this.abrirModal(novoCadastro);
-          console.log('cadastro realizado com  sucesso: ', value);
         },
-        error: (err) => {
-          alert('erro ao realizar cadastro!');
-          console.log('erro ao realizar cadastro: ', err);
-        }
-      })
+        error: () => {
+          alert('Erro ao realizar cadastro!');
+        },
+      });
     }
   }
 
@@ -46,14 +44,11 @@ export class AddUsersComponent {
         next: (value) => {
           this.abrirModal(novoCadastro);
           this.router.navigate(['/users']);
-          console.log('cadastro realizado com  sucesso: ', value);
-          console.log('Novo cadastro pego: ', novoCadastro);
         },
-        error: (err) => {
-          alert('erro ao realizar cadastro!');
-          console.log('erro ao realizar cadastro: ', err);
-        }
-      })
+        error: () => {
+          alert('Erro ao realizar cadastro!');
+        },
+      });
     }
   }
 
@@ -61,7 +56,11 @@ export class AddUsersComponent {
     this.dialog.open(ModalCriadoComponent, {
       width: '552px',
       height: '360px',
-      data: { tituloCriado: 'Usuário', nome: novoCadastro.nome, email: novoCadastro.email }
-    })
+      data: {
+        tituloCriado: 'Usuário',
+        nome: novoCadastro.nome,
+        email: novoCadastro.email,
+      },
+    });
   }
 }

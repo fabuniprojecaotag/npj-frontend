@@ -5,12 +5,12 @@ import { Usuario } from '../types/usuario';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CadastroService {
   private apiUrl = environment.API_URL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.apiUrl}/usuarios`, usuario);
@@ -26,19 +26,23 @@ export class CadastroService {
 
   listar(filtro?: string): Observable<Usuario[]> {
     let params = new HttpParams();
-    if(filtro){
-      params = params.set('field', 'role').set('filter', 'EQUAL').set('value', filtro);
-      console.log('filtro funcionando');
-
+    if (filtro) {
+      params = params
+        .set('field', 'role')
+        .set('filter', 'EQUAL')
+        .set('value', filtro);
     }
     return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`, { params });
   }
 
   editarCadastro(usuario: Usuario, userEmail: string): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.apiUrl}/usuarios/${userEmail}`, usuario);
+    return this.http.put<Usuario>(
+      `${this.apiUrl}/usuarios/${userEmail}`,
+      usuario
+    );
   }
 
   excluirCadastro(userEmail: string) {
-    return this.http.delete(`${this.apiUrl}/usuarios/${userEmail}`)
+    return this.http.delete(`${this.apiUrl}/usuarios/${userEmail}`);
   }
 }

@@ -9,7 +9,7 @@ import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.c
 @Component({
   selector: 'app-assistido-add',
   templateUrl: './assistido-add.component.html',
-  styleUrls: ['./assistido-add.component.scss']
+  styleUrls: ['./assistido-add.component.scss'],
 })
 export class AssistidoAddComponent {
   tituloDaPagina: string = 'Novo Assistido';
@@ -26,19 +26,15 @@ export class AssistidoAddComponent {
 
     if (formCadastroAssistido?.valid) {
       const novoAssistido = formCadastroAssistido.getRawValue() as Assistido;
-      console.log('meu assistido cadastrado:', novoAssistido);
-
       this.assistidoService.cadastrarAssistido(novoAssistido).subscribe({
         next: (value) => {
           this.abrirModal(value);
           this.router.navigate(['/assistidos']);
-          console.log('cadastro realizado com  sucesso: ', value);
         },
-        error: (err) => {
-          alert('erro ao realizar cadastro!');
-          console.log('erro ao realizar cadastro: ', err)
-        }
-      })
+        error: () => {
+          alert('Erro ao realizar cadastro!');
+        },
+      });
     }
   }
 

@@ -21,7 +21,10 @@ export class HeaderComponent implements OnInit {
   nomeUser: string = '';
   nomePerfil: string = '';
 
-  constructor(private el: ElementRef, private cadastroService: CadastroService) { }
+  constructor(
+    private el: ElementRef,
+    private cadastroService: CadastroService
+  ) {}
 
   ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
@@ -32,9 +35,10 @@ export class HeaderComponent implements OnInit {
         this.nomePerfil = this.formatarNomePerfil(usuario.role);
       },
       error: (err) => {
+        alert('Não foi possível carregar usuário logado!');
         console.log("Erro ao procurar meu usuário: " + err);
       }
-    })
+    });
   }
 
   toggle(menu: string) {

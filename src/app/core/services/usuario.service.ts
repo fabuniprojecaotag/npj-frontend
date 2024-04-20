@@ -22,7 +22,7 @@ export class UsuarioService {
       const usuario = jwtDecode(token) as Usuario;
       this.userSubject.next(usuario);
     } catch (error) {
-      console.error('Erro ao decodificar o token JWT:', error);
+      alert('Erro ao decodificar token');
     }
   }
 

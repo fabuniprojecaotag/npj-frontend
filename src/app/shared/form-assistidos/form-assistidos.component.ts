@@ -137,7 +137,7 @@ export class FormAssistidosComponent implements OnInit {
           });
         },
         error: (err) => {
-          console.error('Erro ao consultar CEP:', err);
+          alert('Erro ao consultar CEP');
         }
       });
     }

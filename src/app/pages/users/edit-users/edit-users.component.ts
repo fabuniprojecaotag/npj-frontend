@@ -1,4 +1,3 @@
-import { TokenService } from 'src/app/core/services/token.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +10,7 @@ import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excl
 @Component({
   selector: 'app-edit-users',
   templateUrl: './edit-users.component.html',
-  styleUrls: ['./edit-users.component.scss']
+  styleUrls: ['./edit-users.component.scss'],
 })
 export class EditUsersComponent implements OnInit {
   tituloDaPagina: string = 'Editar Usuário';
@@ -19,18 +18,20 @@ export class EditUsersComponent implements OnInit {
   cadastro!: Usuario;
   idParam = this.route.snapshot.paramMap.get('id') as string;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private usuarioService: CadastroService,
     private formUserService: FormsService,
     private cadastroService: CadastroService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.usuarioService.buscarCadastro(this.idParam).subscribe(usuario => {
+    this.usuarioService.buscarCadastro(this.idParam).subscribe((usuario) => {
       this.cadastro = usuario;
       this.carregarFormulario();
-    })
+    });
   }
 
   carregarFormulario() {
@@ -46,14 +47,13 @@ export class EditUsersComponent implements OnInit {
       status: this.cadastro.status,
       cpf: this.cadastro.cpf,
       unidadeInstitucional: this.cadastro.unidadeInstitucional,
-      supervisor: this.cadastro.supervisor
+      supervisor: this.cadastro.supervisor,
     });
-
   }
 
   editar() {
     const dadosAtualizados: Usuario = {
-      "@type": this.form?.value.type,
+      '@type': this.form?.value.type,
       id: this.form?.value.id,
       cpf: this.form?.value.cpf,
       nome: this.form?.value.nome,
@@ -65,18 +65,19 @@ export class EditUsersComponent implements OnInit {
       senha: this.form?.value.senha,
       unidadeInstitucional: this.form?.value.unidadeInstitucional,
       supervisor: this.form?.value.supervisor,
-    }
+    };
 
-    this.cadastroService.editarCadastro(dadosAtualizados, this.idParam).subscribe({
-      next: () => {
-        alert('Atualização feita com sucesso!');
-        this.router.navigate(['/users']);
-      },
-      error: (err) => {
-        alert('Erro ao atualizar usuário!');
-        console.log('erro ao atualizar:', err);
-      }
-    })
+    this.cadastroService
+      .editarCadastro(dadosAtualizados, this.idParam)
+      .subscribe({
+        next: () => {
+          alert('Atualização feita com sucesso!');
+          this.router.navigate(['/users']);
+        },
+        error: (err) => {
+          alert('Erro ao atualizar usuário!');
+        },
+      });
   }
 
   excluir(idCadastro: string) {
@@ -84,19 +85,21 @@ export class EditUsersComponent implements OnInit {
       next: () => {
         this.router.navigate(['/users']);
       },
-      error: (err) => {
-        alert('Erro ao excluir o usuário!\n Tente novamente mais tarde');
-        console.log("Erro ao excluir:", err);
-      }
-    })
+      error: () => {
+        alert('Erro ao excluir o usuário!');
+      },
+    });
   }
 
   abrirModal(user: Usuario) {
     this.dialog.open(ModalExcluidoComponent, {
       width: '372px',
       height: '228px',
-      data: { tituloCriado: 'Usuário', nome: user.nome, deletar: () => this.excluir(user.id)}
+      data: {
+        tituloCriado: 'Usuário',
+        nome: user.nome,
+        deletar: () => this.excluir(user.id),
+      },
     });
   }
 }
-

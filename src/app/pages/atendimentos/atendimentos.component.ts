@@ -13,13 +13,7 @@ export class AtendimentosComponent implements AfterViewInit {
   tituloPagina = 'Lista de Atendimentos';
   listaAtendimentos: Atendimento[] = [];
   dataSource: any;
-  colunasMostradas: string[] = [
-    'id',
-    //'assistido',
-    'tipo',
-    'status',
-    'dataDeCriacao',
-  ];
+  colunasMostradas: string[] = ['id', 'tipo', 'status', 'dataDeCriacao'];
 
   constructor(private atendimentoService: AtendimentosService) {}
 
@@ -29,12 +23,13 @@ export class AtendimentosComponent implements AfterViewInit {
     this.atendimentoService.listagemAtendimentos().subscribe({
       next: (response) => {
         this.listaAtendimentos = response;
-        this.dataSource = new MatTableDataSource<Atendimento>(this.listaAtendimentos);
+        this.dataSource = new MatTableDataSource<Atendimento>(
+          this.listaAtendimentos
+        );
         this.dataSource.paginator = this.paginator;
-        console.log('lista de atendimentos:', response);
       },
-      error: (err) => {
-        console.log('erro ao coletar lista de atendimentos:', err);
+      error: () => {
+        alert('Erro ao listar atendimentos');
       },
     });
   }

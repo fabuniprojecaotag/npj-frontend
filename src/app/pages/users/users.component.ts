@@ -23,7 +23,6 @@ export class UsersComponent implements AfterViewInit {
     'status',
   ];
   selection = new SelectionModel<Usuario>(true, []);
-
   constructor(private service: CadastroService) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,18 +30,20 @@ export class UsersComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.service.listar().subscribe({
       next: (response) => {
-        console.log('Lista de usuários:', response);
         this.listaUsuarios = response;
 
         // Inicializa a seleção com base no status dos usuários
-        this.selection = new SelectionModel<Usuario>(true, this.listaUsuarios.filter(user => user.status));
+        this.selection = new SelectionModel<Usuario>(
+          true,
+          this.listaUsuarios.filter((user) => user.status)
+        );
 
         this.dataSource = new MatTableDataSource<Usuario>(this.listaUsuarios);
         this.dataSource.paginator = this.paginator;
       },
-      error: (err) => {
-        console.error('Erro ao listar usuários:', err);
-      }
+      error: () => {
+        alert('Erro ao listar usuários');
+      },
     });
   }
 

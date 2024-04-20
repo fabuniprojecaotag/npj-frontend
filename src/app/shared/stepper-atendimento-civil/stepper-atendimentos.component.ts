@@ -1,13 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Atendimento } from 'src/app/core/types/atendimento';
 
 @Component({
   selector: 'app-stepper-atendimentos',
   templateUrl: './stepper-atendimentos.component.html',
-  styleUrls: ['./stepper-atendimentos.component.scss']
+  styleUrls: ['./stepper-atendimentos.component.scss'],
 })
 export class StepperAtendimentosComponent implements OnInit {
   formAtendimentos!: any;
@@ -22,7 +26,7 @@ export class StepperAtendimentosComponent implements OnInit {
     'Aguardando documentos',
     'Pendente distribuição',
     'Processo ativo',
-    'Processo arquivado'
+    'Processo arquivado',
   ];
   estagiarioControl: FormControl = new FormControl();
   professorControl: FormControl = new FormControl();
@@ -36,60 +40,63 @@ export class StepperAtendimentosComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formService: FormsService,
-    private usuarioService: CadastroService,
-  ) { }
+    private usuarioService: CadastroService
+  ) {}
 
   ngOnInit(): void {
     this.usuarioService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
         this.estagiarioControl.setValue(usuario.nome);
       },
-      error: (err) => {
-        console.log("Usuário não encontrado!", err);
-      }
+      error: () => {
+        alert('Usuário não encontrado!');
+      },
     });
 
-    this.primeiroGrupo = this.formBuilder.group({
+    (this.primeiroGrupo = this.formBuilder.group({
       estagiario: this.estagiarioControl,
       professor: this.professorControl,
       instante: [new Date(), Validators.required],
-      area: [this.tipoAtendimento]
-    }),
-      this.segundoGrupo = this.formBuilder.group({
+      area: [this.tipoAtendimento],
+    })),
+      (this.segundoGrupo = this.formBuilder.group({
         assistido: this.assistidoControl,
-      }),
-      this.terceiroGrupo = this.formBuilder.group({
+      })),
+      (this.terceiroGrupo = this.formBuilder.group({
         nomeParteContraria: [null, Validators.required],
         qualificacaoParteContraria: [null, Validators.required],
         rgParteContraria: [null, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)],
-        cpfParteContraria: [null, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)],
+        cpfParteContraria: [
+          null,
+          Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
+        ],
         telefoneParteContraria: [null, [Validators.minLength(11)]],
         emailParteContraria: [null],
         enderecoParteContraria: [null],
-        informacoesComplementares: [null]
-      }),
-      this.quartoGrupo = this.formBuilder.group({
+        informacoesComplementares: [null],
+      })),
+      (this.quartoGrupo = this.formBuilder.group({
         nomeTestemunha1: [null],
         qualificacaoTestemunha1: [null],
         enderecoTestemunha1: [null],
         nomeTestemunha2: [null],
         qualificacaoTestemunha2: [null],
         enderecoTestemunha2: [null],
-      }),
-      this.quintoGrupo = this.formBuilder.group({
+      })),
+      (this.quintoGrupo = this.formBuilder.group({
         historico: [''],
         medidaJuridica: [''],
         status: ['', Validators.required],
         arquivos: [null],
-        dadosSensiveis: [false]
-      });
+        dadosSensiveis: [false],
+      }));
 
     this.formAtendimentos = this.formBuilder.group({
       primeiroGrupo: this.primeiroGrupo,
       segundoGrupo: this.segundoGrupo,
       terceiroGrupo: this.terceiroGrupo,
       quartoGrupo: this.quartoGrupo,
-      quintoGrupo: this.quintoGrupo
+      quintoGrupo: this.quintoGrupo,
     });
 
     this.formService.setForm(this.formAtendimentos);
@@ -99,7 +106,6 @@ export class StepperAtendimentosComponent implements OnInit {
     const file: File = event.target.files[0];
     this.arquivoSelecionado = file.name; // Define o nome do arquivo selecionado
   }
-
 
   // Método para remover o arquivo selecionado
   removerArquivoSelecionado(): void {
