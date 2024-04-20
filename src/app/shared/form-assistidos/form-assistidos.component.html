@@ -145,9 +145,11 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Remuneração</mat-label>
-          <input matInput type="text" formControlName="remuneracao" prefix="R$ " />
-          <mat-error *ngIf="formAssistidos.get('remuneracao')?.errors?.['pattern']">Padrão incorreto (ex esperado: R$
-            12.000)</mat-error>
+          <input matInput formControlName="remuneracao" placeholder="R$ 0,00" prefix="R$ " thousandSeparator="."
+            decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+          <mat-error *ngIf="formAssistidos.get('remuneracao')?.errors?.['pattern']">
+            Padrão incorreto (ex esperado: R$ 12.000)
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="col"
