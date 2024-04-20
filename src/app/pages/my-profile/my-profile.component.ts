@@ -9,7 +9,7 @@ import { Usuario } from 'src/app/core/types/usuario';
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
-  styleUrls: ['./my-profile.component.scss']
+  styleUrls: ['./my-profile.component.scss'],
 })
 export class MyProfileComponent implements OnInit {
   tituloPagina = 'Meu Perfil';
@@ -19,23 +19,23 @@ export class MyProfileComponent implements OnInit {
   cadastro!: Usuario;
   form!: FormGroup<any> | null;
 
-  constructor(private tokenService: TokenService,
+  constructor(
+    private tokenService: TokenService,
     private cadastroService: CadastroService,
     private formUserService: FormsService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.token = this.tokenService.retornarToken();
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (user) => {
         this.cadastro = user;
-        console.log(this.cadastro);
         this.carregarFormulario();
       },
-      error: (err) => {
-        console.log("Erro ao recupera Usuário:" + err);
-      }
+      error: () => {
+        alert('Erro ao recuperar usuário');
+      },
     });
   }
 
@@ -56,7 +56,7 @@ export class MyProfileComponent implements OnInit {
 
   atualizarUsuario() {
     const dadosAtualizados: Usuario = {
-      "@type": this.form?.value.type,
+      '@type': this.form?.value.type,
       id: this.form?.value.id,
       cpf: this.form?.value.cpf,
       nome: this.form?.value.nome,
@@ -67,17 +67,19 @@ export class MyProfileComponent implements OnInit {
       email: this.form?.value.email,
       senha: this.form?.value.senha,
       unidadeInstitucional: this.form?.value.unidadeInstitucional,
-      supervisor: this.form?.value.supervisor
-    }
+      supervisor: this.form?.value.supervisor,
+    };
 
-    this.cadastroService.editarCadastro(dadosAtualizados, dadosAtualizados.email).subscribe({
-      next: () => {
-        alert('Cadastro atualizado com sucesso!');
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.log('erro ao atualiza cadastro: ', err);
-      }
-    });
+    this.cadastroService
+      .editarCadastro(dadosAtualizados, dadosAtualizados.email)
+      .subscribe({
+        next: () => {
+          alert('Cadastro atualizado com sucesso!');
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          alert('Erro ao atualizar cadastro');
+        },
+      });
   }
 }

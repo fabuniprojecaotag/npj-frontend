@@ -7,18 +7,13 @@ import { Assistido } from 'src/app/core/types/assistido';
 @Component({
   selector: 'app-assistidos',
   templateUrl: './assistidos.component.html',
-  styleUrls: ['./assistidos.component.scss']
+  styleUrls: ['./assistidos.component.scss'],
 })
 export class AssistidosComponent implements AfterViewInit {
   tituloPagina = `Assistidos`;
   listaAssistidos: Assistido[] = [];
   dataSource: any;
-  colunasMostradas: string[] = [
-    'nome',
-    'email',
-    'cpf',
-    'enderecoResidencial',
-  ];
+  colunasMostradas: string[] = ['nome', 'email', 'cpf', 'enderecoResidencial'];
 
   constructor(private service: AssistidosService) {}
 
@@ -28,13 +23,14 @@ export class AssistidosComponent implements AfterViewInit {
     this.service.listarAssistidos().subscribe({
       next: (response) => {
         this.listaAssistidos = response;
-        this.dataSource = new MatTableDataSource<Assistido>(this.listaAssistidos);
+        this.dataSource = new MatTableDataSource<Assistido>(
+          this.listaAssistidos
+        );
         this.dataSource.paginator = this.paginator;
-        console.log("lista de assistidos:", response);
       },
-      error: (err) => {
-        console.log("erro ao coletar lista de assistidos:", err);
-      }
+      error: () => {
+        alert('Erro ao listar assistidos');
+      },
     });
   }
 

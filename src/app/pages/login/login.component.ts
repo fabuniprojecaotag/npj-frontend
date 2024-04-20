@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private autenticacaoService: AutenticacaoService,
-  ) { }
+    private autenticacaoService: AutenticacaoService
+  ) {}
 
   ngOnInit(): void {
     const tokenString = localStorage.getItem('token');
@@ -44,11 +44,10 @@ export class LoginComponent implements OnInit {
         error: (err) => {
           this.loading = false;
           alert('Erro ao logar!');
-          console.log('Erro ao logar:', err);
         },
       });
     } else {
-      alert('Campos invalidos!');
+      alert('Campos inválidos!');
     }
   }
 }

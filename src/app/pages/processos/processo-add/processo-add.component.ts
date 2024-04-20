@@ -9,7 +9,7 @@ import { ModalProcessoCriadoComponent } from 'src/app/shared/modal-processo-cria
 @Component({
   selector: 'app-processo-add',
   templateUrl: './processo-add.component.html',
-  styleUrls: ['./processo-add.component.scss']
+  styleUrls: ['./processo-add.component.scss'],
 })
 export class ProcessoAddComponent {
   tituloPagina = 'Processo';
@@ -19,7 +19,7 @@ export class ProcessoAddComponent {
     private formService: FormsService,
     private dialog: MatDialog,
     private router: Router
-    ) { }
+  ) {}
 
   cadastrar() {
     const formCadastroProcesso = this.formService.getForm();
@@ -32,9 +32,8 @@ export class ProcessoAddComponent {
           this.router.navigate(['/processos']);
         },
         error: (err) => {
-          alert("Erro ao criar processo!");
-          console.log(err);
-        }
+          alert('Erro ao criar processo!');
+        },
       });
     }
   }
@@ -43,7 +42,11 @@ export class ProcessoAddComponent {
     this.dialog.open(ModalProcessoCriadoComponent, {
       width: '552px',
       height: '360px',
-      data: { numero: novoProcesso.numero, nome: novoProcesso.nome, atendimentoId: novoProcesso.atendimentoId}
-    })
+      data: {
+        numero: novoProcesso.numero,
+        nome: novoProcesso.nome,
+        atendimentoId: novoProcesso.atendimentoId,
+      },
+    });
   }
 }

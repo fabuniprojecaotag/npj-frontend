@@ -5,7 +5,7 @@ import { AssistidosService } from 'src/app/core/services/assistidos.service';
 @Component({
   selector: 'app-assistidos-shortcuts',
   templateUrl: './assistidos-shortcuts.component.html',
-  styleUrls: ['./assistidos-shortcuts.component.scss']
+  styleUrls: ['./assistidos-shortcuts.component.scss'],
 })
 export class AssistidosShortcutsComponent implements OnInit {
   tituloDaPagina: string;
@@ -26,11 +26,10 @@ export class AssistidosShortcutsComponent implements OnInit {
       next: (resposta) => {
         this.nomeAssistido = resposta.nome;
         this.tituloDaPagina = `Assisitido - ${this.nomeAssistido}`;
-        console.log(this.nomeAssistido);
       },
-      error: (err) => {
-        console.log("Erro ao procurar assistido: " + err);
-      }
+      error: () => {
+        alert('Erro ao procurar assistido');
+      },
     });
   }
 }

@@ -10,7 +10,7 @@ import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excl
 @Component({
   selector: 'app-assistidos-edit',
   templateUrl: './assistidos-edit.component.html',
-  styleUrls: ['./assistidos-edit.component.scss']
+  styleUrls: ['./assistidos-edit.component.scss'],
 })
 export class AssistidosEditComponent {
   tituloDaPagina: string = 'Editar Assistido';
@@ -23,22 +23,22 @@ export class AssistidosEditComponent {
     private route: ActivatedRoute,
     private assistidoService: AssistidosService,
     private formAssistidosService: FormsService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.idParam = this.route.snapshot.paramMap.get('cpf') as string;
 
-    this.assistidoService.consultar(this.idParam).subscribe(callback => {
+    this.assistidoService.consultar(this.idParam).subscribe((callback) => {
       this.assistido = callback;
-      console.log("assistido para editar: ", this.assistido);
       this.carregarFormulario();
-    })
+    });
   }
 
   carregarFormulario() {
     this.form = this.formAssistidosService.getForm();
     this.form?.patchValue({
-      "@type": this.assistido['@type'],
+      '@type': this.assistido['@type'],
       nome: this.assistido.nome,
       email: this.assistido.email,
       cpf: this.assistido.cpf,
@@ -55,7 +55,6 @@ export class AssistidosEditComponent {
       remuneracao: this.assistido.remuneracao,
       dependentes: this.assistido.dependentes,
     });
-
   }
 
   editar() {
@@ -77,7 +76,7 @@ export class AssistidosEditComponent {
           numero: this.form?.value.numero,
           complemento: this.form?.value.complemento,
           cep: this.form?.value.cep,
-          cidade: this.form?.value.cidade
+          cidade: this.form?.value.cidade,
         },
         comercial: {
           logradouro: this.form?.value.logradouro,
@@ -85,13 +84,13 @@ export class AssistidosEditComponent {
           numero: this.form?.value.numero,
           complemento: this.form?.value.complemento,
           cep: this.form?.value.cep,
-          cidade: this.form?.value.cidade
-        }
+          cidade: this.form?.value.cidade,
+        },
       },
       escolaridade: this.form?.value.escolaridade,
       filiacao: {
         pai: this.form?.value.pai,
-        mae: this.form?.value.mae
+        mae: this.form?.value.mae,
       },
       profissao: this.form?.value.profissao,
       remuneracao: this.form?.value.remuneracao,
@@ -99,21 +98,20 @@ export class AssistidosEditComponent {
       ctps: {
         numero: undefined,
         serie: undefined,
-        uf: undefined
+        uf: undefined,
       },
       pis: '',
-      empregadoAtualmente: false
-    }
+      empregadoAtualmente: false,
+    };
 
     this.assistidoService.editar(this.idParam, dadosAtualizados).subscribe({
       next: () => {
         this.router.navigate(['/assistidos']);
       },
-      error: (err) => {
-        alert('Erro ao atualizar Assisitido! Tente novamente mais tarde!');
-        console.log('Erro ao atualizar:', err);
-      }
-    })
+      error: () => {
+        alert('Erro ao atualizar Assisitido!');
+      },
+    });
   }
 
   excluir() {
@@ -121,10 +119,9 @@ export class AssistidosEditComponent {
       next: () => {
         this.router.navigate(['/assistidos']);
       },
-      error: (err) => {
-        alert('Erro ao excluir Assisitido! Tente novamente mais tarde!');
-        console.log("Erro ao excluir:", err);
-      }
+      error: () => {
+        alert('Erro ao excluir Assisitido!');
+      },
     });
   }
 
@@ -132,7 +129,11 @@ export class AssistidosEditComponent {
     this.dialog.open(ModalExcluidoComponent, {
       width: '372px',
       height: '228px',
-      data: { tituloCriado: 'Assistido', nome: assistido.nome, deletar: () => this.excluir() }
+      data: {
+        tituloCriado: 'Assistido',
+        nome: assistido.nome,
+        deletar: () => this.excluir(),
+      },
     });
   }
 }

@@ -7,18 +7,13 @@ import { Processo } from 'src/app/core/types/processo';
 @Component({
   selector: 'app-processos',
   templateUrl: './processos.component.html',
-  styleUrls: ['./processos.component.scss']
+  styleUrls: ['./processos.component.scss'],
 })
 export class ProcessosComponent {
-  tituloPagina = "Processos";
+  tituloPagina = 'Processos';
   listaProcesso: Processo[] = [];
   dataSource: any;
-  colunasMostradas: string[] = [
-    'id',
-    'data',
-    'vara',
-    'forum'
-  ];
+  colunasMostradas: string[] = ['id', 'data', 'vara', 'forum'];
 
   constructor(private service: ProcessosService) {}
 
@@ -27,15 +22,14 @@ export class ProcessosComponent {
   ngAfterViewInit(): void {
     this.service.listar().subscribe({
       next: (response) => {
-        console.log('Lista de processos:', response);
         this.listaProcesso = response;
 
         this.dataSource = new MatTableDataSource<Processo>(this.listaProcesso);
         this.dataSource.paginator = this.paginator;
       },
-      error: (err) => {
-        console.error('Erro ao listar processos:', err);
-      }
+      error: () => {
+        alert('Erro ao listar processos');
+      },
     });
   }
 
@@ -47,5 +41,4 @@ export class ProcessosComponent {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }
