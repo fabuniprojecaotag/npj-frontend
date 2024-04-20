@@ -18,7 +18,7 @@ export class AtendimentoCivilComponent {
   constructor(
     private formAtendimentoService: FormsService,
     private atendimentoService: AtendimentosService
-  ) {}
+  ) { }
 
   cadastrar() {
     const formAtendimentoCivil = this.formAtendimentoService.getForm();
@@ -30,8 +30,9 @@ export class AtendimentoCivilComponent {
         '@type': this.tipoAtendimento,
         id: '',
         area: novoAtendimentoCivil.primeiroGrupo.area,
-        instante: novoAtendimentoCivil.primeiroGrupo.instante.toISOString(),
+        instante: undefined,
         ficha: {
+          '@type': this.tipoAtendimento,
           assinatura: novoAtendimentoCivil.quintoGrupo.arquivos,
           dadosSensiveis: novoAtendimentoCivil.quintoGrupo.dadosSensiveis,
           testemunhas: [
@@ -60,21 +61,25 @@ export class AtendimentoCivilComponent {
           medidaJudicial: novoAtendimentoCivil.quintoGrupo.medidaJuridica,
         },
         prazoEntregaDocumentos: '',
-        status: novoAtendimentoCivil.primeiroGrupo.area,
-        envolvidos: [
-          {
+        status: novoAtendimentoCivil.quintoGrupo.status,
+        envolvidos: {
+          assistido: {
             id: '',
-            nome: novoAtendimentoCivil.segundoGrupo.assistido,
+            nome: '',
           },
-          {
+          estagiario: {
             id: '',
-            nome: novoAtendimentoCivil.primeiroGrupo.estagiario,
+            nome: '',
           },
-          {
+          professor: {
             id: '',
-            nome: novoAtendimentoCivil.primeiroGrupo.professor,
+            nome: '',
           },
-        ],
+          secretaria: {
+            id: '',
+            nome: '',
+          }
+        },
       };
 
       this.atendimentoService
@@ -82,9 +87,12 @@ export class AtendimentoCivilComponent {
         .subscribe({
           next: () => {
             alert('Cadastro realizado!');
+            console.log(novoAtendimentoFormatado);
           },
           error: (err) => {
             alert('Erro ao cadastrar atendimento!');
+            console.log(novoAtendimentoFormatado);
+            console.log(err);
           },
         });
     }

@@ -119,15 +119,25 @@ export class FormAssistidosComponent implements OnInit {
         dataNascimentoControler?.clearValidators();
         naturalidade?.clearValidators();
         dependentes?.clearValidators();
-      } else {
+      } else if (tipo === 'Ambos') {
         dataNascimentoControler?.setValidators(Validators.required);
         naturalidade?.setValidators(Validators.required);
         dependentes?.setValidators(Validators.required);
         ctpsNumero?.setValidators(Validators.required);
         ctpsSerie?.setValidators(Validators.required);
+        ctpsUF?.setValidators(Validators.required);
         pis?.setValidators(Validators.required);
       }
+
+      dataNascimentoControler?.updateValueAndValidity();
+      naturalidade?.updateValueAndValidity();
+      dependentes?.updateValueAndValidity();
+      ctpsNumero?.updateValueAndValidity();
+      ctpsSerie?.updateValueAndValidity();
+      ctpsUF?.updateValueAndValidity();
+      pis?.updateValueAndValidity();
     });
+
     this.formAssistidosService.setForm(this.formAssistidos);
   }
 

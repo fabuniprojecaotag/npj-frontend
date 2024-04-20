@@ -63,50 +63,23 @@ export class AssistidosEditComponent {
   }
 
   editar() {
-    const dadosAtualizados: AssistidoTrabalhista | AssistidoCivil | AssistidoFull = {
-      ['@type']: this.form?.value.type,
-      nome: this.form?.value.nome,
-      email: this.form?.value.email,
-      // cpf: this.form?.value.cpf, // não enviar CPF, pois ocorrera conflito entre documentId e CPF
-      rg: this.form?.value.rg,
-      naturalidade: this.form?.value.naturalidade,
-      nacionalidade: this.form?.value.nacionalidade,
-      dataNascimento: this.form?.value.dataNascimento,
-      estadoCivil: this.form?.value.estadoCivil,
-      telefone: this.form?.value.telefone,
-      endereco: {
-        residencial: {
-          logradouro: this.form?.value.logradouro,
-          bairro: this.form?.value.bairro,
-          numero: this.form?.value.numero,
-          complemento: this.form?.value.complemento,
-          cep: this.form?.value.cep,
-          cidade: this.form?.value.cidade,
-        },
-        comercial: {
-          logradouro: this.form?.value.logradouro,
-          bairro: this.form?.value.bairro,
-          numero: this.form?.value.numero,
-          complemento: this.form?.value.complemento,
-          cep: this.form?.value.cep,
-          cidade: this.form?.value.cidade,
-        },
-      },
-      escolaridade: this.form?.value.escolaridade,
-      filiacao: {
-        pai: this.form?.value.pai,
-        mae: this.form?.value.mae,
-      },
-      profissao: this.form?.value.profissao,
-      remuneracao: this.form?.value.remuneracao,
-      dependentes: this.form?.value.dependentes,
-      ctps: {
-        numero: this.form?.value.numero,
-        serie: this.form?.value.serie,
-        uf: this.form?.value.uf
-      },
-      pis: this.form?.value.pis,
-      empregadoAtualmente: this.form?.value.empregadoAtualmente
+    let dadosAtualizados: AssistidoTrabalhista | AssistidoCivil | AssistidoFull;
+
+    if (this.assistido['@type'] === 'Trabalhista') {
+      dadosAtualizados = {
+        ...this.form?.value,
+        ['@type']: this.form?.value['@type'] as 'AssistidoTrabalhista'
+      } as AssistidoTrabalhista;
+    } else if (this.assistido['@type'] === 'Civil') {
+      dadosAtualizados = {
+        ...this.form?.value,
+        ['@type']: this.form?.value['@type'] as 'AssistidoCivil'
+      } as AssistidoCivil;
+    } else {
+      dadosAtualizados = {
+        ...this.form?.value,
+        ['@type']: this.form?.value['@type'] as 'AssistidoFull'
+      } as AssistidoFull;
     }
 
     this.assistidoService.editar(this.idParam, dadosAtualizados).subscribe({

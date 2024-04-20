@@ -3,14 +3,15 @@ export interface Atendimento {
   id: string,
   status: string,
   area: string,
-  instante: string,
+  instante?: string,
   ficha: Ficha | FichaCivil,
   prazoEntregaDocumentos: string,
   historico?: string,
-  envolvidos?: Envolvido[]
+  envolvidos?: Envolvido
 }
 
 export interface Ficha {
+  "@type": string,
   assinatura: string,
   dadosSensiveis: Boolean,
   testemunhas?: Testemunha[],
@@ -37,6 +38,12 @@ export interface Testemunha {
   endereco: string,
 }
 export interface Envolvido {
+  estagiario: tipoEnvolvido,
+  professor: tipoEnvolvido,
+  secretaria: tipoEnvolvido,
+  assistido: tipoEnvolvido,
+}
+export interface tipoEnvolvido {
   id: string,
   nome: string,
 }
@@ -47,7 +54,7 @@ export interface AtendimentoStepper {
   primeiroGrupo: {
     estagiario: string;
     professor: string;
-    instante: Date;
+    instante?: Date;
     area: string;
   };
   segundoGrupo: {

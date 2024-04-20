@@ -175,7 +175,7 @@
           <mat-form-field class="full-width">
             <mat-label>Número da CTPS</mat-label>
             <input matInput formControlName="numero">
-            <mat-error *ngIf="formAssistidos.get('numero')?.errors?.['required']">Número da CTPS é
+            <mat-error *ngIf="formAssistidos.get('ctps')?.get('numero')?.errors?.['required']">Número da CTPS é
               obrigatório</mat-error>
           </mat-form-field>
         </div>
@@ -183,7 +183,7 @@
           <mat-form-field class="full-width">
             <mat-label>Série (CTPS)</mat-label>
             <input matInput formControlName="serie">
-            <mat-error *ngIf="formAssistidos.get('serie')?.errors?.['required']">Número da CTPS é
+            <mat-error *ngIf="formAssistidos.get('ctps')?.get('serie')?.errors?.['required']">Número da CTPS é
               obrigatório</mat-error>
           </mat-form-field>
         </div>
@@ -191,7 +191,7 @@
           <mat-form-field class="full-width">
             <mat-label>UF (CTPS)</mat-label>
             <input matInput type="text" formControlName="uf" mask="AA">
-            <mat-error *ngIf="formAssistidos.get('uf')?.errors?.['required']">UF da CTPS é
+            <mat-error *ngIf="formAssistidos.get('ctps')?.get('uf')?.errors?.['required']">UF da CTPS é
               obrigatório</mat-error>
           </mat-form-field>
         </div>
