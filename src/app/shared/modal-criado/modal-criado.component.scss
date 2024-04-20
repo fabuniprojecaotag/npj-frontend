@@ -1,12 +1,18 @@
 .modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: -webkit-fill-available;
   margin: 1em;
+
   h4 {
     font-size: 30px;
     font-weight: 400;
     margin-bottom: 0.8em;
   }
 
-  div {
+  &__conteudo {
+    height: max-content;
     p {
       padding-bottom: 0.7em;
     }
@@ -15,6 +21,5 @@
   &__botoes {
     display: flex;
     justify-content: flex-end;
-    margin-top: auto;
   }
 }

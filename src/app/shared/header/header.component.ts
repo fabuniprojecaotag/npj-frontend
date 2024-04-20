@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
         this.userData = usuario;
-        console.log("sucesso, meu usuário: " + this.userData);
+        // console.log("sucesso, meu usuário: " + this.userData);
         this.nomeUser = usuario.nome;
         this.nomePerfil = this.formatarNomePerfil(usuario.role);
       },

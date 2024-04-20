@@ -22,7 +22,8 @@
   border-top: 1px solid $branco;
   display: flex;
   flex-direction: column;
-  min-height: 95vh;
+  left: 0;
+  min-height: calc(100vh - 75px);
   position: absolute;
   transition: 0.5s;
   overflow: hidden;
@@ -48,6 +49,7 @@
   mat-accordion {
     margin: 0 auto;
     width: 90%;
+
     mat-expansion-panel {
       background-color: transparent;
       box-shadow: none;
