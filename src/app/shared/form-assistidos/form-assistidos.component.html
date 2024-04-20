@@ -95,12 +95,15 @@
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-label>Escolaridade</mat-label>
-          <mat-select matInput formControlName="escolaridade">
-            <mat-option *ngFor="let escolaridade of escolaridades" [value]="escolaridade">
-              {{ escolaridade }}
+          <mat-label>Tipo de Assistido</mat-label>
+          <mat-select matInput formControlName="@type">
+            <mat-option *ngFor="let tipo of tipoAssistido" [value]="tipo.valor">
+              {{ tipo.texto }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="formAssistidos.get('@type')?.errors?.['required']">
+            Tipo de assistido é obrigatório!
+          </mat-error>
         </mat-form-field>
       </div>
       <ng-container formGroupName="filiacao">
@@ -125,15 +128,12 @@
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-label>Tipo de Assistido</mat-label>
-          <mat-select matInput formControlName="@type">
-            <mat-option *ngFor="let tipo of tipoAssistido" [value]="tipo.valor">
-              {{ tipo.texto }}
+          <mat-label>Escolaridade</mat-label>
+          <mat-select matInput formControlName="escolaridade">
+            <mat-option *ngFor="let escolaridade of escolaridades" [value]="escolaridade">
+              {{ escolaridade }}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="formAssistidos.get('@type')?.errors?.['required']">
-            Tipo de assistido é obrigatório!
-          </mat-error>
         </mat-form-field>
       </div>
       <div class="col">
@@ -150,7 +150,8 @@
             12.000)</mat-error>
         </mat-form-field>
       </div>
-      <div class="col" *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
+      <div class="col"
+        *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
         <mat-form-field class="full-width">
           <mat-label>Nº de dependentes</mat-label>
           <input matInput type="number" formControlName="dependentes" mask="09">
@@ -161,12 +162,40 @@
     </div>
     <div class="row"
       *ngIf="formAssistidos.get('@type')?.value === 'Trabalhista' || formAssistidos.get('@type')?.value === 'Full'">
-      <mat-form-field class="full-width">
-        <mat-label>PIS</mat-label>
-        <input matInput formControlName="pis"  mask="000.000000.0-0" [dropSpecialCharacters]="false">
-        <mat-error *ngIf="formAssistidos.get('pis')?.errors?.['required']">PIS é
-          obrigatório</mat-error>
-      </mat-form-field>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>PIS</mat-label>
+          <input matInput formControlName="pis" mask="000.000000.0-0" [dropSpecialCharacters]="false">
+          <mat-error *ngIf="formAssistidos.get('pis')?.errors?.['required']">PIS é
+            obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+      <ng-container formGroupName="ctps">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Número da CTPS</mat-label>
+            <input matInput formControlName="numero">
+            <mat-error *ngIf="formAssistidos.get('numero')?.errors?.['required']">Número da CTPS é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Série (CTPS)</mat-label>
+            <input matInput formControlName="serie">
+            <mat-error *ngIf="formAssistidos.get('serie')?.errors?.['required']">Número da CTPS é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>UF (CTPS)</mat-label>
+            <input matInput type="text" formControlName="uf" mask="AA">
+            <mat-error *ngIf="formAssistidos.get('uf')?.errors?.['required']">UF da CTPS é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
     </div>
     <div class="row"
       *ngIf="formAssistidos.get('@type')?.value === 'Trabalhista' || formAssistidos.get('@type')?.value === 'Full'">
@@ -182,7 +211,8 @@
           <div class="col">
             <mat-form-field class="full-width">
               <mat-label>CEP</mat-label>
-              <input matInput formControlName="cep" (blur)="consultarCep(tipoEndereco)"  mask="00000-000" [dropSpecialCharacters]="false">
+              <input matInput formControlName="cep" (blur)="consultarCep(tipoEndereco)" mask="00000-000"
+                [dropSpecialCharacters]="false">
               <mat-error *ngIf="formAssistidos.get(tipoEndereco)?.get('cep')?.errors?.['minlength']">CEP
                 precisa ter no mínimo 8 dígitos</mat-error>
             </mat-form-field>

@@ -98,16 +98,24 @@ export class FormAssistidosComponent implements OnInit {
       const dataNascimentoControler = this.formAssistidos.get('dataNascimento');
       const naturalidade = this.formAssistidos.get('naturalidade');
       const dependentes = this.formAssistidos.get('dependentes');
-      // const ctps = this.formAssistidos.get('ctps');
       const pis = this.formAssistidos.get('pis');
+      const ctpsNumero = this.formAssistidos.get('ctps')?.get('numero');
+      const ctpsSerie = this.formAssistidos.get('ctps')?.get('serie');
+      const ctpsUF = this.formAssistidos.get('ctps')?.get('uf');
 
       if (tipo === 'Civil') {
         dataNascimentoControler?.setValidators(Validators.required);
         naturalidade?.setValidators(Validators.required);
         dependentes?.setValidators(Validators.required);
         pis?.clearValidators();
+        ctpsNumero?.clearValidators();
+        ctpsSerie?.clearValidators();
+        ctpsUF?.clearValidators();
       } else if (tipo === 'Trabalhista') {
         pis?.setValidators(Validators.required);
+        ctpsNumero?.setValidators(Validators.required);
+        ctpsSerie?.setValidators(Validators.required);
+        ctpsUF?.setValidators(Validators.required);
         dataNascimentoControler?.clearValidators();
         naturalidade?.clearValidators();
         dependentes?.clearValidators();
@@ -115,6 +123,8 @@ export class FormAssistidosComponent implements OnInit {
         dataNascimentoControler?.setValidators(Validators.required);
         naturalidade?.setValidators(Validators.required);
         dependentes?.setValidators(Validators.required);
+        ctpsNumero?.setValidators(Validators.required);
+        ctpsSerie?.setValidators(Validators.required);
         pis?.setValidators(Validators.required);
       }
     });
