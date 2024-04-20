@@ -13,9 +13,10 @@
       </div>
       <span class="example-spacer"></span>
       <div>
-        <button mat-button class="botao-menu__usuario" (click)="toggle('userMenu')"><mat-icon
-            class="icone-usuario">account_circle</mat-icon>{{ nomeUser || 'Usuário' }}<mat-icon
-            fontIcon="arrow_drop_down"></mat-icon></button>
+        <button mat-button class="botao-menu__usuario" (click)="toggle('userMenu')">
+          <mat-icon class="icone-usuario">account_circle</mat-icon><span class="texto-menu">{{ nomeUser || 'Usuário'
+            }}</span><mat-icon fontIcon="arrow_drop_down"></mat-icon>
+        </button>
         <button mat-icon-button id="botao-ajuda">
           <mat-icon aria-hidden="false" aria-label="help icon" fontIcon="help_outline"></mat-icon>
         </button>
@@ -27,5 +28,4 @@
   </mat-toolbar>
 </header>
 <app-nav-menu [isMenuAtivo]="isMenuAtivo"></app-nav-menu>
-<app-user-menu [nome]="nomeUser" [tipoUsuario]="nomePerfil"
-  [isMenuAtivo]="isUserMenuAtivo"></app-user-menu>
+<app-user-menu [nome]="nomeUser" [tipoUsuario]="nomePerfil" [isMenuAtivo]="isUserMenuAtivo"></app-user-menu>

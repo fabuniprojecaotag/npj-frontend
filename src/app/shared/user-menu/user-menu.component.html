@@ -1,9 +1,13 @@
 <nav class="user-nav" [class.active]="isMenuAtivo">
-  <div class="user-nav__informacoes">
-    <img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="icone usuario">
-    <p class="user-nav__informacoes___nome">{{ nome }}</p>
-    <p class="user-nav__informacoes___tipo">{{ tipoUsuario }}</p>
-  </div>
+  <section class="user-nav__informacoes">
+    <img
+      src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg"
+      alt="icone usuario">
+    <div class="user-nav__texto">
+      <p class="user-nav__texto___nome">{{ nome }}</p>
+      <p class="user-nav__texto___perfil">{{ tipoUsuario }}</p>
+    </div>
+  </section>
   <div class="user-nav__acoes">
     <a routerLink="/profile"><mat-icon aria-hidden="false" fontIcon="person"></mat-icon>Perfil</a>
     <a routerLink="/" (click)="logout()"><mat-icon aria-hidden="false" fontIcon="logout"></mat-icon>Log out</a>

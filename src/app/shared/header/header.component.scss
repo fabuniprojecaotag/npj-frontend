@@ -20,7 +20,7 @@
 
         .cabecalho__titulo {
           font-size: 40px;
-          font-family: $fonte-titulo;
+          font-family: $fonte-logo;
           font-weight: bold;
           padding-left: 0.8em;
           transition: visibility 0.1s;
@@ -45,14 +45,18 @@
 
         .botao-menu__usuario {
           font-size: 0.8em;
+
           .icone-usuario {
             order: -1;
           }
           mat-icon {
             order: 2;
           }
-          @media screen and (max-width: 768px) {
-            display: none;
+
+          .texto-menu {
+            @media screen and (max-width: 768px) {
+              display: none;
+            }
           }
         }
 

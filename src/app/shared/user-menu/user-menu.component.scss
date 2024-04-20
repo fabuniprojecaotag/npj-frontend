@@ -7,44 +7,70 @@
   display: flex;
   flex-direction: column;
   height: 0;
-  margin-left: 78%;
+  justify-content: space-around;
+  margin-left: 70vw;
   position: absolute;
-  transition: 0.5s;
+  transition: height 0.5s ease-out, border 0.5s ease;
   top: 50px;
   overflow-y: hidden;
-  width: 20vw;
+  width: 25vw;
   z-index: 9999;
 
+  @media screen and (max-width: 768px) {
+    margin-left: 40vw;
+  }
+
   &__informacoes {
-    align-items: flex-start;
+    align-items: center;
     display: flex;
     color: $branco;
     border-bottom: 1px solid $branco;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
-    margin: 1em auto 0;
+    margin: 0.5em auto 0;
     max-height: 100px;
-    padding: 0.6em 0;
+    padding: 1.3em 0;
     width: 85%;
 
+    @media screen and (max-width: 768px) {
+      height: auto;
+      max-height: none;
+      flex-direction: column;
+    }
+
     img {
-      display: flex;
       border-radius: 100%;
-      margin: 0 1em 0 auto;
       height: 100px;
       width: 100px;
+
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
     }
 
-    &___nome {
-      padding-top: 1.6em;
-    }
+    .user-nav__texto {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      height: 100%;
+      justify-content: center;
+      max-width: calc(100% - 100px - 1.5em);
+      padding-left: 1.5em;
 
-    &___tipo {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 12px;
-      font-weight: lighter;
-      letter-spacing: 0.1em;
-      padding-top: 0.6em;
+      &___nome {
+        color: $branco;
+        font-family: $fonte-padraoMedia;
+        font-size: 24px;
+        word-break: break-word;
+      }
+
+      &___perfil {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 16px;
+        letter-spacing: 0.1em;
+        padding-top: 0.6em;
+      }
     }
   }
 
@@ -52,23 +78,29 @@
     align-items: flex-start;
     display: flex;
     color: $branco;
-    border-bottom: 1px solid $branco;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     flex-direction: column;
     flex-wrap: wrap;
     margin: 0 auto;
     padding: 1em 0;
     width: 85%;
+
+    @media screen and (max-width: 768px) {
+      padding-bottom: 3em;
+    }
+
     a {
       align-items: center;
       color: $branco;
       display: flex;
-      font-weight: 500;
+      font-family: $fonte-padraoLarga;
+      font-size: 22px;
       line-height: 28px;
       text-decoration: none;
       padding-bottom: 0.5em;
 
       mat-icon {
-        margin-right: 1em;
+        margin-right: 1.5em;
       }
 
       &:hover {
@@ -78,17 +110,17 @@
   }
 
   &__versao {
-    align-items: center;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
     width: 100%;
 
     p {
       color: $branco;
-      font-weight: 500;
+      font-family: $fonte-padraoMedia;
       font-size: 16px;
+      letter-spacing: 0.1em;
       text-align: center;
     }
   }
@@ -97,12 +129,12 @@
   &.active {
     border: 1px solid $branco;
     overflow-y: visible;
-    height: 40vh;
-    transition: height 0.5s ease-out;
+    height: 45vh;
     z-index: 9999;
 
     @media screen and (max-width: 768px) {
-      width: 50vw;
+      height: 80vh;
+      width: 60vw;
     }
   }
 }
