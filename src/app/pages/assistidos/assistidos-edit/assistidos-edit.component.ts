@@ -25,7 +25,7 @@ export class AssistidosEditComponent {
     private assistidoService: AssistidosService,
     private formAssistidosService: FormsService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.idParam = this.route.snapshot.paramMap.get('cpf') as string;
@@ -51,9 +51,7 @@ export class AssistidosEditComponent {
       estadoCivil: this.assistido.estadoCivil,
       telefone: this.assistido.telefone,
       endereco: {
-        residencial: {
-          cep: this.assistido.endereco.residencial.cep
-        },
+        residencial: this.assistido.endereco.residencial,
         comercial: this.assistido.endereco.comercial
       },
       escolaridade: this.assistido.escolaridade,

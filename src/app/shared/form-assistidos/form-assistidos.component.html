@@ -163,7 +163,7 @@
       *ngIf="formAssistidos.get('@type')?.value === 'Trabalhista' || formAssistidos.get('@type')?.value === 'Full'">
       <mat-form-field class="full-width">
         <mat-label>PIS</mat-label>
-        <input matInput formControlName="pis">
+        <input matInput formControlName="pis"  mask="000.000000.0-0" [dropSpecialCharacters]="false">
         <mat-error *ngIf="formAssistidos.get('pis')?.errors?.['required']">PIS é
           obrigatório</mat-error>
       </mat-form-field>
@@ -182,7 +182,7 @@
           <div class="col">
             <mat-form-field class="full-width">
               <mat-label>CEP</mat-label>
-              <input matInput formControlName="cep" (blur)="consultarCep(tipoEndereco)">
+              <input matInput formControlName="cep" (blur)="consultarCep(tipoEndereco)"  mask="00000-000" [dropSpecialCharacters]="false">
               <mat-error *ngIf="formAssistidos.get(tipoEndereco)?.get('cep')?.errors?.['minlength']">CEP
                 precisa ter no mínimo 8 dígitos</mat-error>
             </mat-form-field>
