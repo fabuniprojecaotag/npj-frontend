@@ -153,7 +153,7 @@
       <div class="col" *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
         <mat-form-field class="full-width">
           <mat-label>Nº de dependentes</mat-label>
-          <input matInput formControlName="dependentes" mask="00">
+          <input matInput type="number" formControlName="dependentes" mask="09">
           <mat-error *ngIf="formAssistidos.get('dependentes')?.errors?.['required']">Dependentes é
             obrigatório</mat-error>
         </mat-form-field>

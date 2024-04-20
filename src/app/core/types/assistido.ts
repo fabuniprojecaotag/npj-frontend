@@ -19,7 +19,7 @@ export interface Assistido {
 export interface AssistidoCivil extends Assistido {
   dataNascimento?: string,
   naturalidade?: string,
-  dependentes?: string,
+  dependentes?: number,
 }
 
 export interface AssistidoTrabalhista extends Assistido {
