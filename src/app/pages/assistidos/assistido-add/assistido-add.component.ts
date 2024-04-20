@@ -33,7 +33,6 @@ export class AssistidoAddComponent {
         },
         error: () => {
           alert('Erro ao realizar cadastro!');
-          console.log(novoAssistido);
         },
       });
     }
