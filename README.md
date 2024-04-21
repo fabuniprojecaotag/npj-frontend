@@ -2,7 +2,7 @@
 
 Este repositório contém o front-end do sistema **GProJurídico**, um sistema **eficiente** para gestão e controle de **processos** e **atendimentos jurídicos**, destinado a uma organização que presta atendimentos às pessoas de baixa renda.
 
-As tecnologias envolvidas são: **Typescript**, **HTML**, **SCSS**, **Angular**, **Angular Material**, **JWT** (JSON Web Token), **Firebase/Firestore do GCP** (Google Cloud Platform), **Jasmine**, **Karma** e **Node.js**.
+As tecnologias envolvidas no front-end são: **Typescript**, **HTML**, **SCSS**, **Angular**, **Angular Material**, **JWT** (JSON Web Token), **Firebase/Firestore**, **Jasmine**, **Karma** e **Node.js**.
 
 As versões das tecnologias acima encontram-se no arquivo **package.json**.
 
@@ -36,7 +36,7 @@ As versões das tecnologias acima encontram-se no arquivo **package.json**.
        ```ng
         serve --o
         ```
-3. Realize o login (de algum usuário cadastro) para acessar a aplicação.
+3. Realize o login (de algum usuário cadastrado) para acessar a aplicação.
 
 ## Mais sobre o Projeto
 
