@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./atendimento-edit.component.scss']
 })
 export class AtendimentoEditComponent {
-
+  tituloPagina = 'Editar atendimento';
 }

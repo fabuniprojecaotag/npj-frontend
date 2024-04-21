@@ -41,7 +41,7 @@ export class StepperAtendimentosComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formService: FormsService,
     private usuarioService: CadastroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.usuarioService.buscarMeuUsuario().subscribe({
@@ -53,43 +53,43 @@ export class StepperAtendimentosComponent implements OnInit {
       },
     });
 
-    (this.primeiroGrupo = this.formBuilder.group({
+    this.primeiroGrupo = this.formBuilder.group({
       estagiario: this.estagiarioControl,
       professor: this.professorControl,
-      instante: [new Date(), Validators.required],
+      instante: [new Date()], // não necessario, o back irá retornar
       area: [this.tipoAtendimento],
-    })),
-      (this.segundoGrupo = this.formBuilder.group({
-        assistido: this.assistidoControl,
-      })),
-      (this.terceiroGrupo = this.formBuilder.group({
-        nomeParteContraria: [null, Validators.required],
-        qualificacaoParteContraria: [null, Validators.required],
-        rgParteContraria: [null, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)],
-        cpfParteContraria: [
-          null,
-          Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
-        ],
-        telefoneParteContraria: [null, [Validators.minLength(11)]],
-        emailParteContraria: [null],
-        enderecoParteContraria: [null],
-        informacoesComplementares: [null],
-      })),
-      (this.quartoGrupo = this.formBuilder.group({
-        nomeTestemunha1: [null],
-        qualificacaoTestemunha1: [null],
-        enderecoTestemunha1: [null],
-        nomeTestemunha2: [null],
-        qualificacaoTestemunha2: [null],
-        enderecoTestemunha2: [null],
-      })),
-      (this.quintoGrupo = this.formBuilder.group({
-        historico: [''],
-        medidaJuridica: [''],
-        status: ['', Validators.required],
-        arquivos: [null],
-        dadosSensiveis: [false],
-      }));
+    });
+    this.segundoGrupo = this.formBuilder.group({
+      assistido: this.assistidoControl,
+    });
+    this.terceiroGrupo = this.formBuilder.group({
+      nomeParteContraria: [null, Validators.required],
+      qualificacaoParteContraria: [null, Validators.required],
+      rgParteContraria: [null, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)],
+      cpfParteContraria: [
+        null,
+        Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
+      ],
+      telefoneParteContraria: [null, [Validators.minLength(11)]],
+      emailParteContraria: [null],
+      enderecoParteContraria: [null],
+      informacoesComplementares: [null],
+    });
+    this.quartoGrupo = this.formBuilder.group({
+      nomeTestemunha1: [null],
+      qualificacaoTestemunha1: [null],
+      enderecoTestemunha1: [null],
+      nomeTestemunha2: [null],
+      qualificacaoTestemunha2: [null],
+      enderecoTestemunha2: [null],
+    });
+    this.quintoGrupo = this.formBuilder.group({
+      historico: [''],
+      medidaJuridica: [''],
+      status: ['', Validators.required],
+      arquivos: [null],
+      dadosSensiveis: [false],
+    });
 
     this.formAtendimentos = this.formBuilder.group({
       primeiroGrupo: this.primeiroGrupo,

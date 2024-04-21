@@ -1,1 +1,28 @@
-<p>stepper-atendimento-trabalhista works!</p>
+<mat-stepper linear #stepper [formGroup]="formAtendimentosTrabalhista">
+  <mat-step [stepControl]="primeiroGrupo">
+    <form [formGroup]="primeiroGrupo" class="grupo-form">
+      <mat-form-field class="input-grande">
+        <mat-label>Estagiário</mat-label>
+        <input matInput placeholder="Nome do Estagiário" formControlName="estagiario" required>
+        <mat-error *ngIf="formAtendimentosTrabalhista.get('primeiroGrupo')?.get('estagiario')?.errors?.['required']">Estagiário é
+          obrigatório</mat-error>
+      </mat-form-field>
+      <app-supervisor-autocomplete [control]="professorControl" class="input-grande"></app-supervisor-autocomplete>
+      <div class="input-full">
+        <button mat-raised-button matStepperNext [disabled]="formAtendimentosTrabalhista.get('primeiroGrupo')?.invalid"
+          color="primary">Avançar</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="segundoGrupo" label="Identificação do Assistido">
+    <form [formGroup]="segundoGrupo" class="grupo-form">
+      <app-assistido-autocomplete [control]="assistidoControl" class="input-grande"></app-assistido-autocomplete>
+      <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
+      <div class="input-full">
+        <button mat-raised-button matStepperPrevious>Voltar</button>
+        <button mat-raised-button matStepperNext [disabled]="formAtendimentosTrabalhista.get('segundoGrupo')?.invalid"
+          color="primary">Avançar</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>

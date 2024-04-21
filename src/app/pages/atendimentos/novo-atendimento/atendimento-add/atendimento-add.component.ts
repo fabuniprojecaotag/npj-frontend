@@ -31,7 +31,7 @@ export class AtendimentoAddComponent implements OnInit {
     }
   }
 
-  cadastrar() {
+  cadastrarCivil() {
     const formAtendimentoCivil = this.formAtendimentoService.getForm();
 
     if (formAtendimentoCivil?.valid) {
@@ -93,6 +93,15 @@ export class AtendimentoAddComponent implements OnInit {
             console.log(err);
           },
         });
+    }
+  }
+
+  cadastrarTrabalhista() {
+    const formAtendimentoTrabalhista = this.formAtendimentoService.getForm();
+
+    if(formAtendimentoTrabalhista?.valid){
+      console.log('atendimento trabalhista está com os campos validados e pronto para enviar!');
+      // implementar desserialização e cadastro na service
     }
   }
 }

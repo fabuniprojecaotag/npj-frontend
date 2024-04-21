@@ -48,7 +48,7 @@ export interface tipoEnvolvido {
   nome: string,
 }
 
-/* Interaface do Stepper Civil para ser traduzida para atendimento */
+/* Interaface do Steppers de atendimentos para ser traduzida para atendimento */
 
 export interface AtendimentoStepper {
   primeiroGrupo: {
@@ -87,4 +87,6 @@ export interface AtendimentoStepper {
     dadosSensiveis: boolean;
   };
 }
+
+// TODO: interface do stepper trabalhista
 

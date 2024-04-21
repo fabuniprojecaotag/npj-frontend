@@ -1,14 +1,14 @@
 <mat-stepper linear #stepper [formGroup]="formAtendimentos">
   <mat-step [stepControl]="primeiroGrupo" label="Identificação do Estagiário">
     <form [formGroup]="primeiroGrupo" class="grupo-form">
-      <mat-form-field class="input-muitoPequeno">
+      <!-- <mat-form-field class="input-muitoPequeno">
         <mat-label>Data</mat-label>
         <input matInput [matDatepicker]="dataAtendimento" formControlName="instante" required>
         <mat-datepicker-toggle matIconSuffix [for]="dataAtendimento" color="primary"></mat-datepicker-toggle>
         <mat-datepicker #dataAtendimento></mat-datepicker>
         <mat-error *ngIf="formAtendimentos.get('primeiroGrupo')?.get('instante')?.errors?.['required']">Data de
           atendimento é obrigatória</mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
       <mat-form-field class="input-grande">
         <mat-label>Estagiário</mat-label>
         <input matInput placeholder="Nome do Estagiário" formControlName="estagiario" required>
