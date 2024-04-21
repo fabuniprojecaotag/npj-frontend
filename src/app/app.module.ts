@@ -59,7 +59,7 @@ import { ProcessosComponent } from './pages/processos/processos.component';
 import { FormProcessoComponent } from './shared/form-processo/form-processo.component';
 import { ProcessoAddComponent } from './pages/processos/processo-add/processo-add.component';
 import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
-import { AtendimentoCivilComponent } from './pages/atendimentos/novo-atendimento/atendimento-civil/atendimento-civil.component';
+import { AtendimentoAddComponent } from './pages/atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
 import { StepperAtendimentoTrabalhistaComponent } from './shared/stepper-atendimento-trabalhista/stepper-atendimento-trabalhista.component';
 import { SupervisorAutocompleteComponent } from './shared/supervisor-autocomplete/supervisor-autocomplete.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
@@ -70,6 +70,7 @@ import { AssistidoAutocompleteComponent } from './shared/assistido-autocomplete/
 import { ModalProcessoCriadoComponent } from './shared/modal-processo-criado/modal-processo-criado.component';
 import { ModalExcluirProcessoComponent } from './shared/modal-excluir-processo/modal-excluir-processo.component';
 import { AtendimentoAutocompleteComponent } from './shared/atendimento-autocomplete/atendimento-autocomplete.component';
+import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
 
 @NgModule({
   declarations: [
@@ -102,13 +103,14 @@ import { AtendimentoAutocompleteComponent } from './shared/atendimento-autocompl
     FormProcessoComponent,
     ProcessoAddComponent,
     ProcessoEditComponent,
-    AtendimentoCivilComponent,
+    AtendimentoAddComponent,
     StepperAtendimentoTrabalhistaComponent,
     SupervisorAutocompleteComponent,
     AssistidoAutocompleteComponent,
     ModalProcessoCriadoComponent,
     ModalExcluirProcessoComponent,
     AtendimentoAutocompleteComponent,
+    AtendimentoEditComponent,
   ],
   imports: [
     BrowserModule,

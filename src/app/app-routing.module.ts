@@ -16,7 +16,8 @@ import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/
 import { ProcessosComponent } from './pages/processos/processos.component';
 import { ProcessoAddComponent } from './pages/processos/processo-add/processo-add.component';
 import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
-import { AtendimentoCivilComponent } from './pages/atendimentos/novo-atendimento/atendimento-civil/atendimento-civil.component';
+import { AtendimentoAddComponent } from './pages/atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
+import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
 
 const routes: Routes = [
   {
@@ -79,13 +80,18 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'atendimentos/edit/:id/:area',
+    component: AtendimentoEditComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: 'assistidos/novo-atendimento',
     component: NovoAtendimentoComponent,
     canActivate: [authGuard],
   },
   {
-    path: 'assistidos/novo-atendimento/atendimentoCivil',
-    component: AtendimentoCivilComponent,
+    path: 'assistidos/novo-atendimento/:area',
+    component: AtendimentoAddComponent,
     canActivate: [authGuard],
   },
   {

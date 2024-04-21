@@ -1,24 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import {
-  Atendimento,
-  AtendimentoStepper,
-} from 'src/app/core/types/atendimento';
+import { Atendimento, AtendimentoStepper } from 'src/app/core/types/atendimento';
 
 @Component({
-  selector: 'app-atendimento-civil',
-  templateUrl: './atendimento-civil.component.html',
-  styleUrls: ['./atendimento-civil.component.scss'],
+  selector: 'app-atendimento-add',
+  templateUrl: './atendimento-add.component.html',
+  styleUrls: ['./atendimento-add.component.scss'],
 })
-export class AtendimentoCivilComponent {
-  tituloPagina = 'Atendimento Civil';
-  tipoAtendimento = 'Civil';
+export class AtendimentoAddComponent implements OnInit {
+  tituloPagina = 'Atendimento - ';
+  tipoAtendimento!: string;
+  tipoFicha!: string;
 
   constructor(
     private formAtendimentoService: FormsService,
-    private atendimentoService: AtendimentosService
+    private atendimentoService: AtendimentosService,
+    private route: ActivatedRoute,
   ) { }
+
+  ngOnInit(): void {
+    this.tipoAtendimento = this.route.snapshot.paramMap.get('area') as string;
+    this.tituloPagina += this.tipoAtendimento;
+
+    if (this.tipoAtendimento.toLowerCase() !== 'trabalhista') {
+      this.tipoFicha = 'Civil';
+    } else {
+      this.tipoFicha = 'Trabalhista';
+    }
+  }
 
   cadastrar() {
     const formAtendimentoCivil = this.formAtendimentoService.getForm();
@@ -26,26 +37,25 @@ export class AtendimentoCivilComponent {
     if (formAtendimentoCivil?.valid) {
       const novoAtendimentoCivil =
         formAtendimentoCivil.getRawValue() as AtendimentoStepper;
+
       const novoAtendimentoFormatado: Atendimento = {
-        '@type': this.tipoAtendimento,
+        '@type': this.tipoFicha,
         id: '',
         area: novoAtendimentoCivil.primeiroGrupo.area,
         instante: undefined,
         ficha: {
-          '@type': this.tipoAtendimento,
+          '@type': this.tipoFicha,
           assinatura: novoAtendimentoCivil.quintoGrupo.arquivos,
           dadosSensiveis: novoAtendimentoCivil.quintoGrupo.dadosSensiveis,
           testemunhas: [
             {
               nome: novoAtendimentoCivil.quartoGrupo.nomeTestemunha1,
-              qualificacao:
-                novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha1,
+              qualificacao: novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha1,
               endereco: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha1,
             },
             {
               nome: novoAtendimentoCivil.quartoGrupo.nomeTestemunha2,
-              qualificacao:
-                novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha2,
+              qualificacao: novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha2,
               endereco: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha2,
             },
           ],
@@ -63,22 +73,10 @@ export class AtendimentoCivilComponent {
         prazoEntregaDocumentos: '',
         status: novoAtendimentoCivil.quintoGrupo.status,
         envolvidos: {
-          assistido: {
-            id: '',
-            nome: '',
-          },
-          estagiario: {
-            id: '',
-            nome: '',
-          },
-          professor: {
-            id: '',
-            nome: '',
-          },
-          secretaria: {
-            id: '',
-            nome: '',
-          }
+          assistido: { ...novoAtendimentoCivil.segundoGrupo.assistido },
+          estagiario: { ...novoAtendimentoCivil.primeiroGrupo.estagiario },
+          professor: { ...novoAtendimentoCivil.primeiroGrupo.professor },
+          secretaria: { id: '', nome: '' },
         },
       };
 

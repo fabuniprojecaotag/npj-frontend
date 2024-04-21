@@ -52,13 +52,14 @@ export interface tipoEnvolvido {
 
 export interface AtendimentoStepper {
   primeiroGrupo: {
-    estagiario: string;
-    professor: string;
+    estagiario: tipoEnvolvido;
+    professor: tipoEnvolvido;
+    secretaria: tipoEnvolvido;
     instante?: Date;
     area: string;
   };
   segundoGrupo: {
-    assistido: string;
+    assistido: tipoEnvolvido;
   };
   terceiroGrupo: {
     nome: string;
