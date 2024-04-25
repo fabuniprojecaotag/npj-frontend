@@ -63,16 +63,16 @@ export class StepperAtendimentosComponent implements OnInit {
       assistido: this.assistidoControl,
     });
     this.terceiroGrupo = this.formBuilder.group({
-      nomeParteContraria: [null, Validators.required],
-      qualificacaoParteContraria: [null, Validators.required],
-      rgParteContraria: [null, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)],
-      cpfParteContraria: [
+      nome: [null, Validators.required],
+      qualificacao: [null, Validators.required],
+      rg: [null, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)],
+      cpf: [
         null,
         Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
       ],
-      telefoneParteContraria: [null, [Validators.minLength(11)]],
-      emailParteContraria: [null],
-      enderecoParteContraria: [null],
+      telefone: [null, [Validators.minLength(11)]],
+      email: [null],
+      endereco: [null],
       informacoesComplementares: [null],
     });
     this.quartoGrupo = this.formBuilder.group({

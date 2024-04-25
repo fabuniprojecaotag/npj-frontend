@@ -24,6 +24,7 @@
   flex-direction: column;
   left: 0;
   min-height: calc(100vh - 75px);
+  max-height: 500vh;
   position: absolute;
   transition: 0.5s;
   overflow: hidden;
@@ -33,7 +34,7 @@
   z-index: 9999;
 
   @media screen and (max-width: 426px) {
-   top: 55px;
+    top: 55px;
   }
 
   &__titulo {

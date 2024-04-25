@@ -39,14 +39,14 @@ export class FormUsersComponent implements OnInit {
       cpf: [null, Validators.minLength(11)],
       matricula: [null],
       nome: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.required, Validators.email, formValidations.domainValidator]],
       supervisor: this.supervisorControl,
       semestre: [null],
       unidadeInstitucional: [null, Validators.required],
       status: [{ value: true, disabled: this.myProfileComponente }],
       senha: [null, Validators.required],
       role: [{ value: null, disabled: this.myProfileComponente }, Validators.required],
-      confirmarEmail: [null, [Validators.required, Validators.email, formValidations.equalTo('email')]],
+      confirmarEmail: [null, [Validators.required, Validators.email, formValidations.equalTo('email'), formValidations.domainValidator]],
       confirmarSenha: [null, [Validators.required, Validators.minLength(3), formValidations.equalTo('senha')]],
     });
 

@@ -1,12 +1,15 @@
+import { Endereco } from "./endereco";
+import { UsuarioCriador } from "./usuario";
+
 export interface Atendimento {
   "@type": string,
   id: string,
   status: string,
   area: string,
   instante?: string,
-  ficha: Ficha | FichaCivil,
-  prazoEntregaDocumentos: string,
-  historico?: string,
+  ficha: FichaCivil | FichaTrabalhista,
+  prazoEntregaDocumentos?: string,
+  historico?: EntradaHistorico,
   envolvidos?: Envolvido
 }
 
@@ -22,20 +25,27 @@ export interface FichaCivil extends Ficha {
   medidaJudicial: string;
 }
 
+export interface FichaTrabalhista extends Ficha {
+  //  Reclamado reclamado;
+  //    RelacaoEmpregaticia relacaoEmpregaticia;
+  //    DocumentosDepositadosNpj documentosDepositadosNpj;
+    outrasInformacoes?: string;
+}
+
 export interface ParteContraria {
   nome: string,
   qualificacao: string,
   rg?: string,
   cpf?: string,
   email?: string,
-  endereco?: string,
+  endereco?: Endereco,
   telefone?: string,
 }
 
 export interface Testemunha {
   nome: string,
   qualificacao: string,
-  endereco: string,
+  endereco: Endereco,
 }
 export interface Envolvido {
   estagiario: tipoEnvolvido,
@@ -46,6 +56,14 @@ export interface Envolvido {
 export interface tipoEnvolvido {
   id: string,
   nome: string,
+}
+
+export interface EntradaHistorico {
+  id?: string,
+  titulo: '',
+  descricao: string,
+  instante?: string,
+  criadoPor: UsuarioCriador,
 }
 
 /* Interaface do Steppers de atendimentos para ser traduzida para atendimento */
@@ -68,16 +86,16 @@ export interface AtendimentoStepper {
     cpf?: string;
     telefone?: string;
     email?: string;
-    endereco?: string;
+    endereco?: Endereco;
     informacoesComplementares?: string;
   };
   quartoGrupo: {
     nomeTestemunha1: string;
     qualificacaoTestemunha1: string;
-    enderecoTestemunha1: string;
+    enderecoTestemunha1: Endereco;
     nomeTestemunha2: string;
     qualificacaoTestemunha2: string;
-    enderecoTestemunha2: string;
+    enderecoTestemunha2: Endereco;
   };
   quintoGrupo: {
     historico: string;

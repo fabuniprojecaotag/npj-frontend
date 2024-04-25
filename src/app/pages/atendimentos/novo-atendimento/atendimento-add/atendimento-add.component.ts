@@ -51,12 +51,16 @@ export class AtendimentoAddComponent implements OnInit {
             {
               nome: novoAtendimentoCivil.quartoGrupo.nomeTestemunha1,
               qualificacao: novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha1,
-              endereco: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha1,
+              endereco: {
+                cep: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha1.cep,
+              }
             },
             {
               nome: novoAtendimentoCivil.quartoGrupo.nomeTestemunha2,
               qualificacao: novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha2,
-              endereco: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha2,
+              endereco: {
+                cep: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha2.cep,
+              }
             },
           ],
           parteContraria: {
@@ -78,6 +82,13 @@ export class AtendimentoAddComponent implements OnInit {
           professor: { ...novoAtendimentoCivil.primeiroGrupo.professor },
           secretaria: { id: '', nome: '' },
         },
+        historico: {
+          titulo: '',
+          descricao: novoAtendimentoCivil.quintoGrupo.historico,
+          criadoPor: {
+            nome: novoAtendimentoCivil.primeiroGrupo.estagiario.nome
+          }
+        }
       };
 
       this.atendimentoService
