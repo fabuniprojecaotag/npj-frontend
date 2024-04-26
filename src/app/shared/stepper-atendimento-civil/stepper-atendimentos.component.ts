@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -72,16 +73,16 @@ export class StepperAtendimentosComponent implements OnInit {
       ],
       telefone: [null, [Validators.minLength(11)]],
       email: [null],
-      endereco: [null],
+      cep: [null],
+      cidade: [null],
+      logradouro: [null],
+      bairro: [null],
+      numero: [null],
+      complemento: [null],
       informacoesComplementares: [null],
     });
     this.quartoGrupo = this.formBuilder.group({
-      nomeTestemunha1: [null],
-      qualificacaoTestemunha1: [null],
-      enderecoTestemunha1: [null],
-      nomeTestemunha2: [null],
-      qualificacaoTestemunha2: [null],
-      enderecoTestemunha2: [null],
+      testemunhas: this.formBuilder.array([this.criarGrupoTestemunha()])
     });
     this.quintoGrupo = this.formBuilder.group({
       historico: [''],
@@ -111,6 +112,31 @@ export class StepperAtendimentosComponent implements OnInit {
   removerArquivoSelecionado(): void {
     this.quintoGrupo.get('arquivos')?.setValue(null);
     this.arquivoSelecionado = null; // Reseta o nome do arquivo selecionado
+  }
+
+  adicionarTestemunha(): void {
+    const testemunhaGroup = this.criarGrupoTestemunha();
+    (this.quartoGrupo.get('testemunhas') as FormArray).push(testemunhaGroup);
+  }
+
+  criarGrupoTestemunha(): FormGroup {
+    return this.formBuilder.group({
+      nome: [null],
+      qualificacao: [null],
+      endereco: this.formBuilder.group({
+        cep: [null],
+        cidade: [null],
+        logradouro: [null],
+        bairro: [null],
+        numero: [null],
+        complemento: [null]
+      })
+    });
+  }
+
+
+  get testemunhas(): FormArray {
+    return this.quartoGrupo.get('testemunhas') as FormArray;
   }
 
   executarAcao() {

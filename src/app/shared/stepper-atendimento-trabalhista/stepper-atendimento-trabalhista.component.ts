@@ -15,6 +15,14 @@ export class StepperAtendimentoTrabalhistaComponent implements OnInit {
   terceiroGrupo!: FormGroup;
   quartoGrupo!: FormGroup;
   quintoGrupo!: FormGroup;
+  status: string[] = [
+    'Reprovado',
+    'Arquivado',
+    'Aguardando documentos',
+    'Pendente distribuição',
+    'Processo ativo',
+    'Processo arquivado',
+  ];
 
   estagiarioControl: FormControl = new FormControl();
   professorControl: FormControl = new FormControl();

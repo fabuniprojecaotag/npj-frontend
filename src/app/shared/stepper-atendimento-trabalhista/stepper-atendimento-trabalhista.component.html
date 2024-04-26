@@ -25,4 +25,46 @@
       </div>
     </form>
   </mat-step>
+  <mat-step [stepControl]="quintoGrupo" label="Finalização">
+    <form [formGroup]="quintoGrupo" class="grupo-form">
+      <mat-form-field class="input-full">
+        <mat-label>Histórico</mat-label>
+        <textarea matInput formControlName="historico" placeholder="Histórico do atendimento"></textarea>
+      </mat-form-field>
+      <div class="input-full">
+        <mat-form-field class="input-pequeno">
+          <mat-label>Status</mat-label>
+          <mat-select matInput formControlName="status" ngDefaultControl>
+            <mat-option *ngFor="let statu of status" [value]="statu">
+              {{ statu }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formAtendimentosTrabalhista.get('quintoGrupo')?.get('status')?.errors?.['required']">Status é
+            obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-full">
+        <h3 class="subtitulo">Assinatura</h3>
+      </div>
+      <!-- <div class="input-full">
+        <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado }} <button mat-icon-button color="warn"
+            (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
+        <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
+          accept=".pdf,.doc,.docx, image/png" formControlName="arquivos">
+        <button mat-raised-button color="primary" (click)="fileInput.click()">
+          <mat-icon>upload_2</mat-icon>Upload
+        </button>
+        <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx</p>
+      </div> -->
+      <div class="input-full">
+        <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados
+          Sensiveis:</mat-checkbox>
+      </div>
+      <div class="input-full">
+        <button mat-raised-button matStepperPrevious>Voltar</button>
+        <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit"
+          (click)="executarAcao()">Concluir</button>
+      </div>
+    </form>
+  </mat-step>
 </mat-stepper>

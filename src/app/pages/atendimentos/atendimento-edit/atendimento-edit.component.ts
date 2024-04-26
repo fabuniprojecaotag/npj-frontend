@@ -1,3 +1,4 @@
+import { FichaCivil } from './../../../core/types/atendimento';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { FormsService } from './../../../core/services/forms.service';
 import { Component } from '@angular/core';
@@ -65,9 +66,30 @@ export class AtendimentoEditComponent {
           nome: this.atendimento.envolvidos?.assistido.nome
         }
       },
-      terceiroGrupo: {
+      quintoGrupo: {
+        historico: this.atendimento.historico?.descricao,
+        status: this.atendimento.status
       }
     });
+
+    if ('parteContraria' in this.atendimento.ficha) {
+      this.form?.patchValue({
+        terceiroGrupo: {
+          nome: this.atendimento.ficha.parteContraria.nome,
+          rg: this.atendimento.ficha.parteContraria.rg,
+          cpf: this.atendimento.ficha.parteContraria.cpf,
+          qualificacao: this.atendimento.ficha.parteContraria.qualificacao,
+          telefone: this.atendimento.ficha.parteContraria.telefone,
+          email: this.atendimento.ficha.parteContraria.email,
+          cep: this.atendimento.ficha.parteContraria.endereco?.cep,
+          bairro: this.atendimento.ficha.parteContraria.endereco?.bairro,
+          logradouro: this.atendimento.ficha.parteContraria.endereco?.logradouro,
+        },
+        quartoGrupo: {
+          testemunhas: this.atendimento.ficha.testemunhas
+        }
+      })
+    }
   }
 
   editarCivil() {

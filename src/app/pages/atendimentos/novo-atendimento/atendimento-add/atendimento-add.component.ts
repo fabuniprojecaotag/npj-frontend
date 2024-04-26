@@ -47,29 +47,34 @@ export class AtendimentoAddComponent implements OnInit {
           '@type': this.tipoFicha,
           assinatura: novoAtendimentoCivil.quintoGrupo.arquivos,
           dadosSensiveis: novoAtendimentoCivil.quintoGrupo.dadosSensiveis,
-          testemunhas: [
-            {
-              nome: novoAtendimentoCivil.quartoGrupo.nomeTestemunha1,
-              qualificacao: novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha1,
+          testemunhas: novoAtendimentoCivil.quartoGrupo.testemunhas.map((testemunha) => {
+            return {
+              nome: testemunha.nome,
+              qualificacao: testemunha.qualificacao,
               endereco: {
-                cep: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha1.cep,
+                cep: testemunha.endereco.cep,
+                cidade: testemunha.endereco.cidade,
+                logradouro: testemunha.endereco.logradouro,
+                bairro: testemunha.endereco.bairro,
+                complemento: testemunha.endereco.complemento,
+                numero: testemunha.endereco.numero,
               }
-            },
-            {
-              nome: novoAtendimentoCivil.quartoGrupo.nomeTestemunha2,
-              qualificacao: novoAtendimentoCivil.quartoGrupo.qualificacaoTestemunha2,
-              endereco: {
-                cep: novoAtendimentoCivil.quartoGrupo.enderecoTestemunha2.cep,
-              }
-            },
-          ],
+            };
+          }),
           parteContraria: {
             nome: novoAtendimentoCivil.terceiroGrupo.nome,
             qualificacao: novoAtendimentoCivil.terceiroGrupo.qualificacao,
             rg: novoAtendimentoCivil.terceiroGrupo.rg,
             cpf: novoAtendimentoCivil.terceiroGrupo.cpf,
             email: novoAtendimentoCivil.terceiroGrupo.email,
-            endereco: novoAtendimentoCivil.terceiroGrupo.endereco,
+            endereco: {
+              cep: novoAtendimentoCivil.terceiroGrupo.cep,
+              cidade: novoAtendimentoCivil.terceiroGrupo.cidade,
+              logradouro: novoAtendimentoCivil.terceiroGrupo.logradouro,
+              bairro: novoAtendimentoCivil.terceiroGrupo.bairro,
+              complemento: novoAtendimentoCivil.terceiroGrupo.complemento,
+              numero: novoAtendimentoCivil.terceiroGrupo.numero,
+            },
             telefone: novoAtendimentoCivil.terceiroGrupo.telefone,
           },
           medidaJudicial: novoAtendimentoCivil.quintoGrupo.medidaJuridica,

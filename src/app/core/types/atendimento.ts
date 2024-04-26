@@ -86,16 +86,16 @@ export interface AtendimentoStepper {
     cpf?: string;
     telefone?: string;
     email?: string;
-    endereco?: Endereco;
+    logradouro?: string,
+    bairro?: string,
+    numero?: string,
+    complemento?: string,
+    cep?: string,
+    cidade?: string
     informacoesComplementares?: string;
   };
   quartoGrupo: {
-    nomeTestemunha1: string;
-    qualificacaoTestemunha1: string;
-    enderecoTestemunha1: Endereco;
-    nomeTestemunha2: string;
-    qualificacaoTestemunha2: string;
-    enderecoTestemunha2: Endereco;
+    testemunhas: Testemunha[];
   };
   quintoGrupo: {
     historico: string;
