@@ -18,3 +18,9 @@ export interface Supervisor {
   id: string,
   nome: string
 }
+
+export interface UsuarioCriador {
+  email?: string,
+  nome: string
+  role?: string,
+}

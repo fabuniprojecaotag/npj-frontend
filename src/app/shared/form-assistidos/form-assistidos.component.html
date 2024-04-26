@@ -71,8 +71,9 @@
       </div>
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-label>Estado civil</mat-label>
-          <mat-select matInput formControlName="estadoCivil">
+          <mat-label for="estadoCivil">Estado civil</mat-label>
+          <mat-select matNativeControl formControlName="estadoCivil" id="estadoCivil">
+            <mat-option label="Selecione o Estado Civil:"></mat-option>
             <mat-option *ngFor="let estado of estadosCivis" [value]="estado">
               {{ estado }}
             </mat-option>
@@ -96,7 +97,7 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Tipo de Assistido</mat-label>
-          <mat-select matInput formControlName="@type">
+          <mat-select matNativeControl formControlName="@type">
             <mat-option *ngFor="let tipo of tipoAssistido" [value]="tipo.valor">
               {{ tipo.texto }}
             </mat-option>
@@ -129,7 +130,7 @@
       <div class="col">
         <mat-form-field class="full-width">
           <mat-label>Escolaridade</mat-label>
-          <mat-select matInput formControlName="escolaridade">
+          <mat-select matNativeControl formControlName="escolaridade">
             <mat-option *ngFor="let escolaridade of escolaridades" [value]="escolaridade">
               {{ escolaridade }}
             </mat-option>
