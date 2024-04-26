@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -139,7 +139,8 @@ import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/
     MatNativeDateModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxMaskDirective, NgxMaskPipe
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
   providers: [
     {
@@ -156,5 +157,6 @@ import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/
     provideNgxMask()
   ],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

@@ -31,4 +31,9 @@ export class AssistidosService {
   consultar(idParam: string): Observable<AssistidoFull | AssistidoCivil | AssistidoTrabalhista> {
     return this.http.get<AssistidoFull | AssistidoCivil | AssistidoTrabalhista>(`${this.API}/assistidos/${idParam}`);
   }
+  getApiUrl(): string {
+    return this.API;
+  }
 }
+
+export { AssistidoFull };
