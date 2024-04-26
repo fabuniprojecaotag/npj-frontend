@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { CadastroService } from './cadastro.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { Usuario } from '../types/usuario';
 
 const mockUserData = {
   api: 'http://localhost:8080/usuários',
@@ -65,7 +66,17 @@ describe(CadastroService.name, () => {
 
   it(`#${CadastroService.prototype.buscarCadastro.name} should return a user`, done => {
     const email = 'teste2@projecao.edu.br';
-    const usuarioEsperado = mockUserData.usuarios.find(u => u.email === email);
+    const data = mockUserData.usuarios.find(u => u.email === email);
+    const usuarioEsperado: Usuario = {
+      nome: data?.nome ?? '',
+      email: data?.email ??'',
+      id: data?.id ?? '',
+      status: data?.status ?? false,
+      senha: data?.senha ?? '',
+      role: data?.role ?? '',
+      unidadeInstitucional: '',
+      "@type": ''
+    };
 
     if (!usuarioEsperado) {
       fail(`Usuário com o e-mail ${email} não encontrado na lista mockada.`);

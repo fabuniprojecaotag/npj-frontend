@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  tituloDaPagina: string = 'Home';
+  subtituloDaPagina: string = 'Home';
 }
