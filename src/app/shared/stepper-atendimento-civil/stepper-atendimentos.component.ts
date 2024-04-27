@@ -15,7 +15,7 @@ import { FormsService } from 'src/app/core/services/forms.service';
   styleUrls: ['./stepper-atendimentos.component.scss'],
 })
 export class StepperAtendimentosComponent implements OnInit {
-  formAtendimentos!: any;
+  formAtendimentos!: FormGroup;
   primeiroGrupo!: FormGroup;
   segundoGrupo!: FormGroup;
   terceiroGrupo!: FormGroup;
@@ -32,7 +32,7 @@ export class StepperAtendimentosComponent implements OnInit {
   estagiarioControl: FormControl = new FormControl();
   professorControl: FormControl = new FormControl();
   assistidoControl: FormControl = new FormControl(null, Validators.required);
-  arquivoSelecionado: string | null = null; // Variável para armazenar o nome do arquivo selecionado
+  arquivoSelecionado: File | null = null; // Variável para armazenar o nome do arquivo selecionado
 
   @Input() tipoAtendimento!: string;
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
@@ -84,6 +84,7 @@ export class StepperAtendimentosComponent implements OnInit {
     this.quartoGrupo = this.formBuilder.group({
       testemunhas: this.formBuilder.array([this.criarGrupoTestemunha()])
     });
+    this.adicionarTestemunha();
     this.quintoGrupo = this.formBuilder.group({
       historico: [''],
       medidaJuridica: [''],
@@ -105,7 +106,7 @@ export class StepperAtendimentosComponent implements OnInit {
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
-    this.arquivoSelecionado = file.name; // Define o nome do arquivo selecionado
+    this.arquivoSelecionado = file; // Define o nome do arquivo selecionado
   }
 
   // Método para remover o arquivo selecionado
@@ -115,8 +116,7 @@ export class StepperAtendimentosComponent implements OnInit {
   }
 
   adicionarTestemunha(): void {
-    const testemunhaGroup = this.criarGrupoTestemunha();
-    (this.quartoGrupo.get('testemunhas') as FormArray).push(testemunhaGroup);
+    (this.quartoGrupo.get('testemunhas') as FormArray).push(this.criarGrupoTestemunha());
   }
 
   criarGrupoTestemunha(): FormGroup {

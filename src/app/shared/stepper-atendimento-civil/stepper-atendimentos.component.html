@@ -16,7 +16,7 @@
           obrigatório</mat-error>
       </mat-form-field>
       <app-supervisor-autocomplete [control]="professorControl" class="input-grande"></app-supervisor-autocomplete>
-      <div class="input-full">
+      <div class="container">
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('primeiroGrupo')?.invalid"
           color="primary">Avançar</button>
       </div>
@@ -26,7 +26,7 @@
     <form [formGroup]="segundoGrupo" class="grupo-form">
       <app-assistido-autocomplete [control]="assistidoControl" class="input-grande"></app-assistido-autocomplete>
       <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
-      <div class="input-full">
+      <div class="container">
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('segundoGrupo')?.invalid"
           color="primary">Avançar</button>
@@ -115,7 +115,7 @@
         <textarea matInput formControlName="informacoesComplementares"
           placeholder="Informações Complementares"></textarea>
       </mat-form-field>
-      <div class="input-full">
+      <div class="container">
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('terceiroGrupo')?.invalid"
           color="primary">Avançar</button>
@@ -124,46 +124,58 @@
   </mat-step>
   <mat-step [stepControl]="quartoGrupo" label="Testemunhas">
     <form [formGroup]="quartoGrupo" class="grupo-form">
-      <ng-container *ngFor="let testemunha of testemunhas.controls; let i = index">
-        <div class="input-full">
-          <h3 class="subtitulo">Testemunha {{ + i+1 }}</h3>
-        </div>
-        <ng-container [formGroupName]="i">
-          <mat-form-field class="input-grande">
-            <mat-label>Nome</mat-label>
-            <input matInput formControlName="nome" placeholder="nome">
-          </mat-form-field>
-          <mat-form-field class="input-pequeno">
-            <mat-label>Qualificação</mat-label>
-            <input matInput formControlName="qualificacao" placeholder="qualificação">
-          </mat-form-field>
-          <mat-form-field class="input-full">
-            <mat-label>CEP</mat-label>
-            <input matInput formControlName="cep" placeholder="CEP da testemunha">
-          </mat-form-field>
+      <ng-container formArrayName="testemunhas">
+        <ng-container *ngFor="let testemunha of testemunhas.controls; let i = index">
+          <ng-container [formGroupName]="i">
+            <div class="input-full">
+              <h3 class="subtitulo">Testemunha {{ i+1 }}</h3>
+            </div>
+            <mat-form-field class="input-grande">
+              <mat-label>Nome</mat-label>
+              <input matInput formControlName="nome" placeholder="nome">
+            </mat-form-field>
+            <mat-form-field class="input-pequeno">
+              <mat-label>Qualificação</mat-label>
+              <input matInput formControlName="qualificacao" placeholder="qualificação">
+            </mat-form-field>
+            <ng-container formGroupName="endereco">
+              <div class="container">
+                <mat-form-field class="input-medio">
+                  <mat-label>CEP</mat-label>
+                  <input matInput formControlName="cep" placeholder="CEP da testemunha">
+                </mat-form-field>
+                <mat-form-field class="input-medio">
+                  <mat-label>Cidade</mat-label>
+                  <input matInput formControlName="cidade" placeholder="Cidade da testemunha">
+                </mat-form-field>
+                <mat-form-field class="input-medio">
+                  <mat-label>Logradouro</mat-label>
+                  <input matInput formControlName="logradouro" placeholder="Logradouro da testemunha">
+                </mat-form-field>
+              </div>
+              <div class="container">
+                <mat-form-field class="input-medio">
+                  <mat-label>Número</mat-label>
+                  <input matInput formControlName="numero" placeholder="Número da testemunha">
+                </mat-form-field>
+                <mat-form-field class="input-medio">
+                  <mat-label>Complemento</mat-label>
+                  <input matInput formControlName="complemento" placeholder="Complemento da testemunha">
+                </mat-form-field>
+                <mat-form-field class="input-medio">
+                  <mat-label>Bairro</mat-label>
+                  <input matInput formControlName="bairro" placeholder="Bairro da testemunha">
+                </mat-form-field>
+              </div>
+            </ng-container>
+          </ng-container>
         </ng-container>
       </ng-container>
-
-
-      <!-- <div class="input-full">
-        <h3 class="subtitulo">Testemunha 2</h3>
-      </div>
-      <mat-form-field class="input-grande">
-        <mat-label>Nome</mat-label>
-        <input matInput formControlName="nomeTestemunha2" placeholder="nome">
-      </mat-form-field>
-      <mat-form-field class="input-pequeno">
-        <mat-label>Qualificação</mat-label>
-        <input matInput formControlName="qualificacaoTestemunha2" placeholder="qualificação">
-      </mat-form-field>
-      <mat-form-field class="input-full">
-        <mat-label>Endereço</mat-label>
-        <input matInput formControlName="enderecoTestemunha2" placeholder="endereço da testemunha">
-      </mat-form-field> -->
-      <div class="input-full">
+      <div class="container">
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('quartoGrupo')?.invalid"
           color="primary">Avançar</button>
+        <button mat-raised-button (click)="adicionarTestemunha()" class="botao-criar">Adicionar Testemunha</button>
       </div>
     </form>
   </mat-step>
@@ -207,7 +219,7 @@
         <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados
           Sensiveis:</mat-checkbox>
       </div>
-      <div class="input-full">
+      <div class="container">
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button [disabled]="formAtendimentos.invalid" type="submit"
           (click)="executarAcao()">Concluir</button>

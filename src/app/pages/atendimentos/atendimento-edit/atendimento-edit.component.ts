@@ -86,7 +86,18 @@ export class AtendimentoEditComponent {
           logradouro: this.atendimento.ficha.parteContraria.endereco?.logradouro,
         },
         quartoGrupo: {
-          testemunhas: this.atendimento.ficha.testemunhas
+          testemunhas: this.atendimento.ficha.testemunhas?.map((testemunha: any) => ({
+            nome: testemunha.nome,
+            qualificacao: testemunha.qualificacao,
+            endereco: {
+              cep: testemunha.endereco?.cep,
+              cidade: testemunha.endereco?.cidade,
+              logradouro: testemunha.endereco?.logradouro,
+              bairro: testemunha.endereco?.bairro,
+              numero: testemunha.endereco?.numero,
+              complemento: testemunha.endereco?.complemento
+            }
+          }))
         }
       })
     }
