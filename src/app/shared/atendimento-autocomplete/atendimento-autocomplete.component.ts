@@ -27,7 +27,7 @@ export class AtendimentoAutocompleteComponent {
     this.filteredOptions$ = this.control.valueChanges.pipe(
       startWith(''),
       map(value => this.filtrarAtendimento(value))
-    )
+    );
   }
 
   filtrarAtendimento(value: string | Atendimento): Atendimento[] {

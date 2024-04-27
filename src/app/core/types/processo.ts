@@ -1,9 +1,9 @@
 export interface Processo {
-    numero?: string;
-    nome: string;
-    dataDistribuicao: string;
-    vara: string;
-    forum: string;
-    atendimentoId: string;
-    status: string
+  atendimentoId: string;
+  numero?: string;
+  nome: string;
+  dataDistribuicao: string;
+  vara: string;
+  forum: string;
+  status: string
 }

@@ -14,7 +14,7 @@ import { ModalExcluirProcessoComponent } from 'src/app/shared/modal-excluir-proc
 })
 export class ProcessoEditComponent implements OnInit {
   tituloPagina = 'Editar Processo';
-  idParam!: string;
+  numeroParam!: string;
   processo!: Processo;
   form!: FormGroup<any> | null;
 
@@ -27,12 +27,12 @@ export class ProcessoEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.idParam = this.route.snapshot.paramMap.get('numero') as string;
+    this.numeroParam = this.route.snapshot.paramMap.get('numero') as string;
     this.processsoService
-      .consultarProcesso(this.idParam)
+      .consultarProcesso(this.numeroParam)
       .subscribe((callback) => {
         this.processo = callback;
-        console.log(this.processo);
+        console.log(callback);
 
         this.carregarFormulario();
       });
@@ -41,12 +41,12 @@ export class ProcessoEditComponent implements OnInit {
   carregarFormulario() {
     this.form = this.formService.getForm();
     this.form?.patchValue({
+      atendimentoId: this.processo.atendimentoId,
       numero: this.processo.numero,
       nome: this.processo.nome,
       dataDistribuicao: new Date(this.processo.dataDistribuicao),
       vara: this.processo.vara,
       forum: this.processo.forum,
-      atendimentoId: this.processo.atendimentoId,
       status: this.processo.status,
     });
   }
@@ -62,7 +62,7 @@ export class ProcessoEditComponent implements OnInit {
       status: this.form?.value.status
     };
     this.processsoService
-      .editarProcesso(this.idParam, dadosAtualizados)
+      .editarProcesso(this.numeroParam, dadosAtualizados)
       .subscribe({
         next: () => {
           this.router.navigate(['/processos']);
@@ -90,7 +90,7 @@ export class ProcessoEditComponent implements OnInit {
       height: '228px',
       data: {
         numero: this.processo.numero,
-        deletar: () => this.excluirProcesso(this.idParam),
+        deletar: () => this.excluirProcesso(this.numeroParam),
       },
     });
   }

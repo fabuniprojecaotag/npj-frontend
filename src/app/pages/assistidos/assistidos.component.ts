@@ -15,7 +15,7 @@ export class AssistidosComponent implements AfterViewInit {
   dataSource: any;
   colunasMostradas: string[] = ['nome', 'email', 'cpf', 'telefone'];
 
-  constructor(private service: AssistidosService) {}
+  constructor(private service: AssistidosService) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -23,9 +23,9 @@ export class AssistidosComponent implements AfterViewInit {
     this.service.listarAssistidos().subscribe({
       next: (response) => {
         this.listaAssistidos = response;
-        this.dataSource = new MatTableDataSource<Assistido>(
-          this.listaAssistidos
-        );
+        console.log(response);
+
+        this.dataSource = new MatTableDataSource<Assistido>(this.listaAssistidos);
         this.dataSource.paginator = this.paginator;
       },
       error: () => {
