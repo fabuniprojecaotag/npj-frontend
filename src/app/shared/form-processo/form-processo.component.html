@@ -48,12 +48,11 @@
       </mat-form-field>
     </div>
     <div class="linha linha-menor">
-      <app-atendimento-autocomplete [control]="atendimentoControl" class="input-pequeno"></app-atendimento-autocomplete>
-
+      <app-atendimento-autocomplete [control]="atendimentoControl" class="input-pequeno" />
       <mat-form-field>
         <mat-label>Status</mat-label>
         <mat-select matInput="" formControlName="status">
-          <mat-option *ngFor="let statu of status" [value]="status">
+          <mat-option *ngFor="let statu of status" [value]="statu">
             {{ statu }}
           </mat-option>
         </mat-select>

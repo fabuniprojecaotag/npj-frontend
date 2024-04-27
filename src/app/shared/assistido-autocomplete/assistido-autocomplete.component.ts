@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { Observable, startWith, map } from 'rxjs';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
-import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-assistido-autocomplete',

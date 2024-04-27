@@ -35,6 +35,7 @@ export class StepperAtendimentosComponent implements OnInit {
   arquivoSelecionado: File | null = null; // Variável para armazenar o nome do arquivo selecionado
 
   @Input() tipoAtendimento!: string;
+  @Input() editarComponente: boolean = false;
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<any> = new EventEmitter();
 
@@ -47,7 +48,9 @@ export class StepperAtendimentosComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
-        this.estagiarioControl.setValue(usuario.nome);
+        if (usuario.role.toLowerCase() === 'estagiario' && this.editarComponente === false) {
+          this.estagiarioControl.setValue(usuario);
+        }
       },
       error: () => {
         alert('Usuário não encontrado!');
@@ -108,7 +111,6 @@ export class StepperAtendimentosComponent implements OnInit {
     this.arquivoSelecionado = file; // Define o nome do arquivo selecionado
   }
 
-  // Método para remover o arquivo selecionado
   removerArquivoSelecionado(): void {
     this.quintoGrupo.get('arquivos')?.setValue(null);
     this.arquivoSelecionado = null; // Reseta o nome do arquivo selecionado

@@ -32,6 +32,8 @@ export class ProcessoEditComponent implements OnInit {
       .consultarProcesso(this.idParam)
       .subscribe((callback) => {
         this.processo = callback;
+        console.log(this.processo);
+
         this.carregarFormulario();
       });
   }
@@ -45,6 +47,7 @@ export class ProcessoEditComponent implements OnInit {
       vara: this.processo.vara,
       forum: this.processo.forum,
       atendimentoId: this.processo.atendimentoId,
+      status: this.processo.status,
     });
   }
 
@@ -56,6 +59,7 @@ export class ProcessoEditComponent implements OnInit {
       vara: this.form?.value.vara,
       forum: this.form?.value.forum,
       atendimentoId: this.form?.value.atendimentoId,
+      status: this.form?.value.status
     };
     this.processsoService
       .editarProcesso(this.idParam, dadosAtualizados)

@@ -5,4 +5,5 @@ export interface Processo {
     vara: string;
     forum: string;
     atendimentoId: string;
+    status: string
 }

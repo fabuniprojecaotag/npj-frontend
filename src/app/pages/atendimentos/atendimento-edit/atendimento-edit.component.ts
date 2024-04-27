@@ -50,10 +50,7 @@ export class AtendimentoEditComponent {
     this.form = this.formService.getForm();
     this.form?.patchValue({
       primeiroGrupo: {
-        estagiario: {
-          id: this.atendimento.envolvidos?.estagiario.id,
-          nome: this.atendimento.envolvidos?.estagiario.nome
-        },
+        estagiario: this.atendimento.envolvidos?.estagiario.nome,
         professor: {
           id: this.atendimento.envolvidos?.professor.id,
           nome: this.atendimento.envolvidos?.professor.nome

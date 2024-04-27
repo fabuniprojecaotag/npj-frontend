@@ -31,8 +31,8 @@ export class AtendimentoAutocompleteComponent {
   }
 
   filtrarAtendimento(value: string | Atendimento): Atendimento[] {
-    const nomeAtendimento = typeof value === 'string' ? value : value?.id;
-    const valorFiltrado = nomeAtendimento?.toLowerCase();
+    const idAtendimento = typeof value === 'string' ? value : value?.id;
+    const valorFiltrado = idAtendimento?.toLowerCase();
     const result = this.atendimento.filter(
       atendimento => atendimento.id.toLowerCase().includes(valorFiltrado)
     )
