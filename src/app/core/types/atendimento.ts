@@ -99,7 +99,7 @@ export interface AtendimentoStepper {
   };
   quintoGrupo: {
     historico: string;
-    medidaJuridica: string;
+    medidaJudicial: string;
     status: string;
     arquivos: string;
     dadosSensiveis: boolean;

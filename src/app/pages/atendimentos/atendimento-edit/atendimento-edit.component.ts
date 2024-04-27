@@ -1,8 +1,8 @@
-import { FichaCivil } from './../../../core/types/atendimento';
+import { FichaCivil, Testemunha } from './../../../core/types/atendimento';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { FormsService } from './../../../core/services/forms.service';
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 
@@ -21,6 +21,7 @@ export class AtendimentoEditComponent {
 
   constructor(
     private formService: FormsService,
+    private formBuilder: FormBuilder,
     private atendimentoService: AtendimentosService,
     private route: ActivatedRoute,
   ) { }
@@ -68,7 +69,9 @@ export class AtendimentoEditComponent {
       },
       quintoGrupo: {
         historico: this.atendimento.historico?.descricao,
-        status: this.atendimento.status
+        status: this.atendimento.status,
+        assinatura: this.atendimento.ficha.assinatura,
+        dadosSensiveis: this.atendimento.ficha.dadosSensiveis
       }
     });
 
@@ -85,21 +88,28 @@ export class AtendimentoEditComponent {
           bairro: this.atendimento.ficha.parteContraria.endereco?.bairro,
           logradouro: this.atendimento.ficha.parteContraria.endereco?.logradouro,
         },
-        quartoGrupo: {
-          testemunhas: this.atendimento.ficha.testemunhas?.map((testemunha: any) => ({
+
+      });
+
+      const testemunhas = this.atendimento.ficha.testemunhas || [];
+      const testemunhasFormArray = this.form?.get('quartoGrupo.testemunhas') as FormArray;
+      testemunhasFormArray.clear();
+      testemunhas.forEach(testemunha => {
+        testemunhasFormArray.push(
+          this.formBuilder.group({
             nome: testemunha.nome,
             qualificacao: testemunha.qualificacao,
-            endereco: {
+            endereco: this.formBuilder.group({
               cep: testemunha.endereco?.cep,
               cidade: testemunha.endereco?.cidade,
               logradouro: testemunha.endereco?.logradouro,
               bairro: testemunha.endereco?.bairro,
               numero: testemunha.endereco?.numero,
               complemento: testemunha.endereco?.complemento
-            }
-          }))
-        }
-      })
+            })
+          })
+        );
+      });
     }
   }
 

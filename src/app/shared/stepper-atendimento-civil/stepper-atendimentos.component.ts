@@ -82,12 +82,11 @@ export class StepperAtendimentosComponent implements OnInit {
       informacoesComplementares: [null],
     });
     this.quartoGrupo = this.formBuilder.group({
-      testemunhas: this.formBuilder.array([this.criarGrupoTestemunha()])
+      testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()])
     });
-    this.adicionarTestemunha();
     this.quintoGrupo = this.formBuilder.group({
       historico: [''],
-      medidaJuridica: [''],
+      medidaJudicial: [''],
       status: ['', Validators.required],
       arquivos: [null],
       dadosSensiveis: [false],

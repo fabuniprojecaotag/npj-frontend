@@ -42,7 +42,7 @@ export class AtendimentoAddComponent implements OnInit {
         '@type': this.tipoFicha,
         id: '',
         area: novoAtendimentoCivil.primeiroGrupo.area,
-        instante: undefined,
+        instante: undefined, // back irá adicionar
         ficha: {
           '@type': this.tipoFicha,
           assinatura: novoAtendimentoCivil.quintoGrupo.arquivos,
@@ -77,7 +77,7 @@ export class AtendimentoAddComponent implements OnInit {
             },
             telefone: novoAtendimentoCivil.terceiroGrupo.telefone,
           },
-          medidaJudicial: novoAtendimentoCivil.quintoGrupo.medidaJuridica,
+          medidaJudicial: novoAtendimentoCivil.quintoGrupo.medidaJudicial,
         },
         prazoEntregaDocumentos: '',
         status: novoAtendimentoCivil.quintoGrupo.status,
