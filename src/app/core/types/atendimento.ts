@@ -21,15 +21,15 @@ export interface Ficha {
 }
 
 export interface FichaCivil extends Ficha {
-  parteContraria: ParteContraria;
-  medidaJudicial: string;
+  parteContraria: ParteContraria,
+  medidaJudicial: string,
 }
 
 export interface FichaTrabalhista extends Ficha {
-  //  Reclamado reclamado;
-  //    RelacaoEmpregaticia relacaoEmpregaticia;
-  //    DocumentosDepositadosNpj documentosDepositadosNpj;
-  outrasInformacoes?: string;
+  reclamado: Reclamado,
+  relacaoEmpregaticia?: RelacaoEmpregaticia,
+  documentosDepositadosNpj?: DocumentosDepositadosNpj,
+  outrasInformacoes?: string,
 }
 
 export interface ParteContraria {
@@ -66,45 +66,57 @@ export interface EntradaHistorico {
   criadoPor: UsuarioCriador,
 }
 
-/* Interaface do Steppers de atendimentos para ser traduzida para atendimento */
-
-export interface AtendimentoStepper {
-  primeiroGrupo: {
-    estagiario: tipoEnvolvido;
-    professor: tipoEnvolvido;
-    secretaria: tipoEnvolvido;
-    instante?: Date;
-    area: string;
-  };
-  segundoGrupo: {
-    assistido: tipoEnvolvido;
-  };
-  terceiroGrupo: {
-    nome: string;
-    qualificacao: string;
-    rg?: string;
-    cpf?: string;
-    telefone?: string;
-    email?: string;
-    logradouro?: string,
-    bairro?: string,
-    numero?: string,
-    complemento?: string,
-    cep?: string,
-    cidade?: string
-    informacoesComplementares?: string;
-  };
-  quartoGrupo: {
-    testemunhas: Testemunha[];
-  };
-  quintoGrupo: {
-    historico: EntradaHistorico[];
-    medidaJudicial: string;
-    status: string;
-    arquivos: string;
-    dadosSensiveis: boolean;
-  };
+export interface Reclamado {
+  nome: string,
+  tipoPessoa: string,
+  numCadastro: string,
+  endereco: Endereco,
 }
 
-// TODO: interface do stepper trabalhista
+export interface RelacaoEmpregaticia {
+  dataAdmissao?: string,
+  dataSaida?: string,
+  funcaoExercida?: string,
+  valorSalarioCtps?: number,
+  salarioAnotadoCtps?: boolean,
+  valorUltimaRemuneracao?: number,
+  ctpsAssinadaCerto?: boolean,
+  dispensa?: string,
+  jornadaTrabalho?: string,
+  tempoAlmoco?: string,
+  faziaHorasExtras?: boolean,
+  horarioHorasExtras?: string,
+  trabalhavaDomingosFeriados?: string,
+  recebiaGratificacoes?: boolean,
+  cumpriuAvisoPrevio?: boolean,
+  temFeriasVencidasGozar?: boolean,
+  recebeu13SalarioAnoAnterior?: boolean,
+  fgtsDepositado?: boolean,
+  recebeuGuiasSaqueFgts?: boolean,
+  recebeuFormSeguroDesemprego?: boolean,
+  inssRecolhido?: boolean,
+  pagaAlgumaVerba?: string,
+  saldoSalario?: number,
+  avisoPrevioIndenizado?: string,
+  _13SalarioProporcional?: string,
+  feriasVencidas?: string,
+  feriasProporcionais?: string,
+  umTercoConstitucionalFerias?: number,
+  comissoes?: string,
+  outrasInformacoes?: string,
+}
 
+export interface DocumentosDepositadosNpj {
+  procuracao: boolean,
+  declaracaoPobreza: boolean,
+  ctps: boolean,
+  identidade: boolean,
+  cpf: boolean,
+  pis: boolean,
+  contrachequeUltimos3Meses: boolean,
+  extratoAnaliticoContaFgts: boolean,
+  trct: boolean,
+  comprovanteRecAntecip13: boolean,
+  acordoColetivoTrabalho: boolean,
+  outrosDocumentos: string;
+}

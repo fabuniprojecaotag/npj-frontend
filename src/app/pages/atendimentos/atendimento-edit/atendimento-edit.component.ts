@@ -1,4 +1,4 @@
-import { FichaCivil, Testemunha } from './../../../core/types/atendimento';
+import { FichaCivil, Testemunha, FichaTrabalhista } from './../../../core/types/atendimento';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { FormsService } from './../../../core/services/forms.service';
 import { Component } from '@angular/core';
@@ -71,32 +71,32 @@ export class AtendimentoEditComponent {
           nome: this.atendimento.envolvidos?.assistido.nome
         }
       },
-      quintoGrupo: {
-        historico: this.atendimento.historico,
-        status: this.atendimento.status,
-        assinatura: this.atendimento.ficha.assinatura,
-        dadosSensiveis: this.atendimento.ficha.dadosSensiveis,
-      }
     });
 
-    if ('parteContraria' in this.atendimento.ficha) {
+    if (this.tipoFicha === 'Civil') {
+      const fichaCivil = this.atendimento.ficha as FichaCivil;
+
       this.form?.patchValue({
         terceiroGrupo: {
-          nome: this.atendimento.ficha.parteContraria.nome,
-          rg: this.atendimento.ficha.parteContraria.rg,
-          cpf: this.atendimento.ficha.parteContraria.cpf,
-          qualificacao: this.atendimento.ficha.parteContraria.qualificacao,
-          telefone: this.atendimento.ficha.parteContraria.telefone,
-          email: this.atendimento.ficha.parteContraria.email,
-          cep: this.atendimento.ficha.parteContraria.endereco?.cep,
-          cidade: this.atendimento.ficha.parteContraria.endereco?.cidade,
-          numero: this.atendimento.ficha.parteContraria.endereco?.numero,
-          logradouro: this.atendimento.ficha.parteContraria.endereco?.logradouro,
-          complemento: this.atendimento.ficha.parteContraria.endereco?.complemento,
-          bairro: this.atendimento.ficha.parteContraria.endereco?.bairro,
+          nome: fichaCivil.parteContraria.nome,
+          rg: fichaCivil.parteContraria.rg,
+          cpf: fichaCivil.parteContraria.cpf,
+          qualificacao: fichaCivil.parteContraria.qualificacao,
+          telefone: fichaCivil.parteContraria.telefone,
+          email: fichaCivil.parteContraria.email,
+          cep: fichaCivil.parteContraria.endereco?.cep,
+          cidade: fichaCivil.parteContraria.endereco?.cidade,
+          numero: fichaCivil.parteContraria.endereco?.numero,
+          logradouro: fichaCivil.parteContraria.endereco?.logradouro,
+          complemento: fichaCivil.parteContraria.endereco?.complemento,
+          bairro: fichaCivil.parteContraria.endereco?.bairro,
         },
         quintoGrupo: {
-          medidaJudicial: this.atendimento.ficha.medidaJudicial
+          historico: this.atendimento.historico,
+          status: this.atendimento.status,
+          assinatura: fichaCivil.assinatura,
+          dadosSensiveis: fichaCivil.dadosSensiveis,
+          medidaJudicial: fichaCivil.medidaJudicial,
         }
       });
 
@@ -119,6 +119,23 @@ export class AtendimentoEditComponent {
           })
         );
       });
+    } else {
+      const fichaTrabalhista = this.atendimento.ficha as FichaTrabalhista;
+      this.form?.patchValue({
+        terceiroGrupo: {
+          nome: fichaTrabalhista.reclamado.nome,
+          tipoPessoa: fichaTrabalhista.reclamado.tipoPessoa,
+          numCadastro: fichaTrabalhista.reclamado.numCadastro,
+          endereco: {
+            cep: fichaTrabalhista.reclamado.endereco?.cep,
+            cidade: fichaTrabalhista.reclamado.endereco?.cidade,
+            logradouro: fichaTrabalhista.reclamado.endereco?.logradouro,
+            bairro: fichaTrabalhista.reclamado.endereco?.bairro,
+            numero: fichaTrabalhista.reclamado.endereco?.numero,
+            complemento: fichaTrabalhista.reclamado.endereco?.complemento
+          }
+        }
+      })
     }
   }
 

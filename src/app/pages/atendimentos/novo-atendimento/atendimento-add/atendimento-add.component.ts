@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Atendimento, AtendimentoStepper } from 'src/app/core/types/atendimento';
+import { Atendimento } from 'src/app/core/types/atendimento';
+import { StepperCivil, StepperTrabalhista } from 'src/app/core/types/steppers';
 
 @Component({
   selector: 'app-atendimento-add',
@@ -36,14 +37,13 @@ export class AtendimentoAddComponent implements OnInit {
     const formAtendimentoCivil = this.formAtendimentoService.getForm();
 
     if (formAtendimentoCivil?.valid) {
-      const novoAtendimentoCivil =
-        formAtendimentoCivil.getRawValue() as AtendimentoStepper;
+      const novoAtendimentoCivil = formAtendimentoCivil.getRawValue() as StepperCivil;
 
       const novoAtendimentoFormatado: Atendimento = {
         '@type': this.tipoFicha,
-        id: '',
+        id: '', // back-end irá implementar
         area: novoAtendimentoCivil.primeiroGrupo.area,
-        instante: undefined, // back irá adicionar
+        instante: undefined, // back-end irá implementar
         ficha: {
           '@type': this.tipoFicha,
           assinatura: novoAtendimentoCivil.quintoGrupo.arquivos,
@@ -120,8 +120,54 @@ export class AtendimentoAddComponent implements OnInit {
     const formAtendimentoTrabalhista = this.formAtendimentoService.getForm();
 
     if (formAtendimentoTrabalhista?.valid) {
+      const novoAtendimentoTrabalhista = formAtendimentoTrabalhista.getRawValue() as StepperTrabalhista;
       console.log('atendimento trabalhista está com os campos validados e pronto para enviar!');
+
+      const novoAtendimentoFormatado: Atendimento = {
+        '@type': this.tipoFicha,
+        id: '', // back-end irá implementar
+        area: novoAtendimentoTrabalhista.primeiroGrupo.area,
+        instante: undefined, // back-end irá implementar
+        ficha: {
+          '@type': this.tipoFicha,
+          assinatura: '',
+          dadosSensiveis: novoAtendimentoTrabalhista.quintoGrupo.dadosSensiveis,
+          reclamado: {
+            nome: '',
+            endereco: {
+              cep: '',
+              cidade: '',
+              logradouro: '',
+              bairro: '',
+              complemento: '',
+              numero: '',
+            },
+            tipoPessoa: '',
+            numCadastro: ''
+          },
+          testemunhas: [],
+          relacaoEmpregaticia: {
+
+          }
+        },
+        status: ''
+      }
       // implementar desserialização e cadastro na service
+
+      this.atendimentoService
+        .cadastrarAtendimento(novoAtendimentoFormatado)
+        .subscribe({
+          next: () => {
+            alert('Cadastro realizado!');
+            console.log(novoAtendimentoFormatado);
+            this.router.navigate(['/atendimentos']);
+          },
+          error: (err) => {
+            alert('Erro ao cadastrar atendimento!');
+            console.log(novoAtendimentoFormatado);
+            console.log(err);
+          },
+        });
     }
   }
 }

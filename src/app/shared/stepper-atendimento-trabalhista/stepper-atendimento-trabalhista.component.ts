@@ -26,6 +26,7 @@ export class StepperAtendimentoTrabalhistaComponent implements OnInit {
 
   estagiarioControl: FormControl = new FormControl();
   professorControl: FormControl = new FormControl();
+  secretariaControl: FormControl = new FormControl();
   assistidoControl: FormControl = new FormControl(null, Validators.required);
 
   @Input() tipoAtendimento: string = 'Trabalhista';
@@ -57,7 +58,17 @@ export class StepperAtendimentoTrabalhistaComponent implements OnInit {
       assistido: this.assistidoControl,
     });
     this.terceiroGrupo = this.formBuilder.group({
-
+      nome: ['', Validators.required],
+      tipoPessoa: [''],
+      numCadastro: [''],
+      endereco: this.formBuilder.group({
+        cep: [null],
+        cidade: [null],
+        logradouro: [null],
+        bairro: [null],
+        numero: [null],
+        complemento: [null]
+      }),
     });
     this.quartoGrupo = this.formBuilder.group({
 

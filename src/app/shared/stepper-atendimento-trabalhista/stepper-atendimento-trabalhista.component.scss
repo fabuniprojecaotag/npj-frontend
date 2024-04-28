@@ -18,12 +18,16 @@ mat-stepper {
     min-height: 30vh;
     gap: 20px;
     padding: 1em 0;
-    width: auto;
+    width: inherit;
 
     .container {
       display: flex;
-      gap: inherit;
+      gap: 20px;
       width: 100%;
+
+      .botao-criar {
+        margin-left: auto;
+      }
     }
 
     .input-full {
@@ -42,7 +46,7 @@ mat-stepper {
       flex-grow: 2;
     }
 
-    .input-grande {
+    .input-grande, .espacador {
       flex-grow: 3;
     }
 
@@ -66,7 +70,7 @@ mat-stepper {
     }
   }
 
-  button {
-    margin-right: 1em;
-  }
+  // button {
+  //   margin-right: 1em;
+  // }
 }
