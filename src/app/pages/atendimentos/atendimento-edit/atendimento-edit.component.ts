@@ -50,10 +50,17 @@ export class AtendimentoEditComponent {
     this.form = this.formService.getForm();
     this.form?.patchValue({
       primeiroGrupo: {
-        estagiario: this.atendimento.envolvidos?.estagiario.nome,
+        estagiario: {
+          id: this.atendimento.envolvidos?.estagiario.id,
+          nome: this.atendimento.envolvidos?.estagiario.nome
+        },
         professor: {
           id: this.atendimento.envolvidos?.professor.id,
           nome: this.atendimento.envolvidos?.professor.nome
+        },
+        secretaria: {
+          id: this.atendimento.envolvidos?.secretaria.id,
+          nome: this.atendimento.envolvidos?.secretaria.nome
         },
         instante: this.atendimento.instante,
         area: this.atendimento.area,
@@ -65,10 +72,10 @@ export class AtendimentoEditComponent {
         }
       },
       quintoGrupo: {
-        historico: this.atendimento.historico?.descricao,
+        historico: this.atendimento.historico,
         status: this.atendimento.status,
         assinatura: this.atendimento.ficha.assinatura,
-        dadosSensiveis: this.atendimento.ficha.dadosSensiveis
+        dadosSensiveis: this.atendimento.ficha.dadosSensiveis,
       }
     });
 
@@ -82,10 +89,15 @@ export class AtendimentoEditComponent {
           telefone: this.atendimento.ficha.parteContraria.telefone,
           email: this.atendimento.ficha.parteContraria.email,
           cep: this.atendimento.ficha.parteContraria.endereco?.cep,
-          bairro: this.atendimento.ficha.parteContraria.endereco?.bairro,
+          cidade: this.atendimento.ficha.parteContraria.endereco?.cidade,
+          numero: this.atendimento.ficha.parteContraria.endereco?.numero,
           logradouro: this.atendimento.ficha.parteContraria.endereco?.logradouro,
+          complemento: this.atendimento.ficha.parteContraria.endereco?.complemento,
+          bairro: this.atendimento.ficha.parteContraria.endereco?.bairro,
         },
-
+        quintoGrupo: {
+          medidaJudicial: this.atendimento.ficha.medidaJudicial
+        }
       });
 
       const testemunhas = this.atendimento.ficha.testemunhas || [];

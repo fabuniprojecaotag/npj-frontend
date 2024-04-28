@@ -7,7 +7,7 @@
         <mat-error *ngIf="formAtendimentosTrabalhista.get('primeiroGrupo')?.get('estagiario')?.errors?.['required']">Estagiário é
           obrigatório</mat-error>
       </mat-form-field>
-      <app-supervisor-autocomplete [control]="professorControl" class="input-grande"></app-supervisor-autocomplete>
+      <app-funcionario-autocomplete cargo="Professor" [control]="professorControl" class="input-grande" />
       <div class="input-full">
         <button mat-raised-button matStepperNext [disabled]="formAtendimentosTrabalhista.get('primeiroGrupo')?.invalid"
           color="primary">Avançar</button>

@@ -47,8 +47,7 @@
               </mat-select>
               <mat-error *ngIf="formCadastro.get('unidadeInstitucional')?.errors">Unidade é obrigatória</mat-error>
             </mat-form-field>
-            <app-supervisor-autocomplete *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'"
-              [control]="supervisorControl"></app-supervisor-autocomplete>
+            <app-funcionario-autocomplete cargo="Professor" [control]="supervisorControl" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'"  />
             <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
               <mat-label>Semestre</mat-label>
               <input matInput formControlName="semestre" placeholder="Digite seu Semestre">

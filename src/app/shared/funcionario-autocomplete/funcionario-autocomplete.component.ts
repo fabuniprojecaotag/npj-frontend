@@ -5,24 +5,24 @@ import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
-  selector: 'app-supervisor-autocomplete',
-  templateUrl: './supervisor-autocomplete.component.html',
-  styleUrls: ['./supervisor-autocomplete.component.scss']
+  selector: 'app-funcionario-autocomplete',
+  templateUrl: './funcionario-autocomplete.component.html',
+  styleUrls: ['./funcionario-autocomplete.component.scss']
 })
-export class SupervisorAutocompleteComponent implements OnInit {
+export class FuncionarioAutocompleteComponent implements OnInit {
   @Input() control!: FormControl;
+  @Input() cargo!: string;
 
-  supervisores: Usuario[] = [];
+  funcionarios: Usuario[] = [];
 
   filteredOptions$?: Observable<Usuario[]>;
 
   constructor(private cadastroService: CadastroService){}
 
   ngOnInit(): void {
-    const role = 'PROFESSOR';
-    this.cadastroService.listar(role).subscribe(
+    this.cadastroService.listar(this.cargo.toLocaleUpperCase()).subscribe(
       dados => {
-        this.supervisores = dados;
+        this.funcionarios = dados;
       }
     );
     this.filteredOptions$ = this.control.valueChanges.pipe(
@@ -34,7 +34,7 @@ export class SupervisorAutocompleteComponent implements OnInit {
   filtrarSupervisores(value: string | Usuario): Usuario[] {
     const nomeSupervisor = typeof value === 'string' ? value : value?.nome;
     const valorFiltrado = nomeSupervisor?.toLowerCase();
-    const result = this.supervisores.filter(
+    const result = this.funcionarios.filter(
       usuario => usuario.nome.toLowerCase().includes(valorFiltrado)
     )
     return result;

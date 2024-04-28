@@ -29,8 +29,9 @@ export class StepperAtendimentosComponent implements OnInit {
     'Processo ativo',
     'Processo arquivado',
   ];
-  estagiarioControl: FormControl = new FormControl();
+  estagiarioControl: FormControl = new FormControl(null);
   professorControl: FormControl = new FormControl();
+  secretariaControl: FormControl = new FormControl();
   assistidoControl: FormControl = new FormControl(null, Validators.required);
   arquivoSelecionado: File | null = null; // Variável para armazenar o nome do arquivo selecionado
 
@@ -60,6 +61,7 @@ export class StepperAtendimentosComponent implements OnInit {
     this.primeiroGrupo = this.formBuilder.group({
       estagiario: this.estagiarioControl,
       professor: this.professorControl,
+      secretaria: this.secretariaControl,
       instante: [new Date()], // não necessario, o back irá retornar
       area: [this.tipoAtendimento],
     });
@@ -88,7 +90,7 @@ export class StepperAtendimentosComponent implements OnInit {
       testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()])
     });
     this.quintoGrupo = this.formBuilder.group({
-      historico: [''],
+      historico: this.formBuilder.array([this.criarGrupoHistorico()]),
       medidaJudicial: [''],
       status: ['', Validators.required],
       arquivos: [null],
@@ -116,6 +118,7 @@ export class StepperAtendimentosComponent implements OnInit {
     this.arquivoSelecionado = null; // Reseta o nome do arquivo selecionado
   }
 
+  /* funções para arrays */
   adicionarTestemunha(): void {
     (this.quartoGrupo.get('testemunhas') as FormArray).push(this.criarGrupoTestemunha());
   }
@@ -135,9 +138,28 @@ export class StepperAtendimentosComponent implements OnInit {
     });
   }
 
+  adicionarHistorico(): void {
+    (this.quintoGrupo.get('historico') as FormArray).push(this.criarGrupoHistorico());
+  }
+
+  criarGrupoHistorico(): FormGroup {
+    return this.formBuilder.group({
+      titulo: [null],
+      descricao: [null],
+      instante: [new Date()], // não necessario, o back irá retornar
+      criadoPor: this.formBuilder.group({
+        nome: [null]
+      })
+    });
+  }
+
 
   get testemunhas(): FormArray {
     return this.quartoGrupo.get('testemunhas') as FormArray;
+  }
+
+  get historico(): FormArray {
+    return this.quintoGrupo.get('historico') as FormArray;
   }
 
   executarAcao() {

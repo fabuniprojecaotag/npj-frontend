@@ -9,7 +9,7 @@ export interface Atendimento {
   instante?: string,
   ficha: FichaCivil | FichaTrabalhista,
   prazoEntregaDocumentos?: string,
-  historico?: EntradaHistorico,
+  historico?: EntradaHistorico[],
   envolvidos?: Envolvido
 }
 
@@ -29,7 +29,7 @@ export interface FichaTrabalhista extends Ficha {
   //  Reclamado reclamado;
   //    RelacaoEmpregaticia relacaoEmpregaticia;
   //    DocumentosDepositadosNpj documentosDepositadosNpj;
-    outrasInformacoes?: string;
+  outrasInformacoes?: string;
 }
 
 export interface ParteContraria {
@@ -98,7 +98,7 @@ export interface AtendimentoStepper {
     testemunhas: Testemunha[];
   };
   quintoGrupo: {
-    historico: string;
+    historico: EntradaHistorico[];
     medidaJudicial: string;
     status: string;
     arquivos: string;

@@ -9,13 +9,14 @@
         <mat-error *ngIf="formAtendimentos.get('primeiroGrupo')?.get('instante')?.errors?.['required']">Data de
           atendimento é obrigatória</mat-error>
       </mat-form-field> -->
-      <mat-form-field class="input-grande">
-        <mat-label>Estagiário</mat-label>
-        <input matInput placeholder="Nome do Estagiário" formControlName="estagiario" required>
-        <mat-error *ngIf="formAtendimentos.get('primeiroGrupo')?.get('estagiario')?.errors?.['required']">Estagiário é
-          obrigatório</mat-error>
-      </mat-form-field>
-      <app-supervisor-autocomplete [control]="professorControl" class="input-grande"></app-supervisor-autocomplete>
+      <div class="container">
+        <app-funcionario-autocomplete cargo="Estagiario" [control]="estagiarioControl" class="input-medio" />
+        <app-funcionario-autocomplete cargo="Professor" [control]="professorControl" class="input-medio" />
+      </div>
+      <div class="container">
+        <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-medio" />
+        <div class="espacador"></div>
+      </div>
       <div class="container">
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('primeiroGrupo')?.invalid"
           color="primary">Avançar</button>
@@ -25,7 +26,7 @@
   <mat-step [stepControl]="segundoGrupo" label="Identificação do Assistido">
     <form [formGroup]="segundoGrupo" class="grupo-form">
       <app-assistido-autocomplete [control]="assistidoControl" class="input-grande"></app-assistido-autocomplete>
-      <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
+      <button mat-raised-button routerLink="/assistidos/adRd" class="botao-cadastro">Cadastrar Assistido</button>
       <div class="container">
         <button mat-raised-button matStepperPrevious>Voltar</button>
         <button mat-raised-button matStepperNext [disabled]="formAtendimentos.get('segundoGrupo')?.invalid"
@@ -179,10 +180,14 @@
   </mat-step>
   <mat-step [stepControl]="quintoGrupo" label="Finalização">
     <form [formGroup]="quintoGrupo" class="grupo-form">
-      <mat-form-field class="input-full">
-        <mat-label>Histórico</mat-label>
-        <textarea matInput formControlName="historico" placeholder="Histórico do atendimento"></textarea>
-      </mat-form-field>
+      <ng-container formArrayName="historico">
+        <ng-container *ngFor="let historicoItem of historico.controls; let i = index" [formGroupName]="i">
+          <mat-form-field class="input-full">
+            <mat-label>Histórico</mat-label>
+            <textarea matInput formControlName="descricao" placeholder="Histórico do atendimento"></textarea>
+          </mat-form-field>
+        </ng-container>
+      </ng-container>
       <mat-form-field class="input-full">
         <mat-label>Medida Jurídica Cabível</mat-label>
         <input matInput formControlName="medidaJudicial" placeholder="Medida Jurídica">

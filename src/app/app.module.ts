@@ -61,7 +61,7 @@ import { ProcessoAddComponent } from './pages/processos/processo-add/processo-ad
 import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
 import { AtendimentoAddComponent } from './pages/atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
 import { StepperAtendimentoTrabalhistaComponent } from './shared/stepper-atendimento-trabalhista/stepper-atendimento-trabalhista.component';
-import { SupervisorAutocompleteComponent } from './shared/supervisor-autocomplete/supervisor-autocomplete.component';
+import { FuncionarioAutocompleteComponent } from './shared/funcionario-autocomplete/funcionario-autocomplete.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginatorIntl } from './shared/customMatPaginator/CustomMatPaginator'; // Path to your custom implementation
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -105,7 +105,7 @@ import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/
     ProcessoEditComponent,
     AtendimentoAddComponent,
     StepperAtendimentoTrabalhistaComponent,
-    SupervisorAutocompleteComponent,
+    FuncionarioAutocompleteComponent,
     AssistidoAutocompleteComponent,
     ModalProcessoCriadoComponent,
     ModalExcluirProcessoComponent,
@@ -157,6 +157,6 @@ import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/
     provideNgxMask()
   ],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule { }

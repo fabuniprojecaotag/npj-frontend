@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Atendimento, AtendimentoStepper } from 'src/app/core/types/atendimento';
@@ -18,6 +18,7 @@ export class AtendimentoAddComponent implements OnInit {
     private formAtendimentoService: FormsService,
     private atendimentoService: AtendimentosService,
     private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -87,13 +88,15 @@ export class AtendimentoAddComponent implements OnInit {
           professor: { ...novoAtendimentoCivil.primeiroGrupo.professor },
           secretaria: { id: '', nome: '' },
         },
-        historico: {
-          titulo: '',
-          descricao: novoAtendimentoCivil.quintoGrupo.historico,
-          criadoPor: {
-            nome: novoAtendimentoCivil.primeiroGrupo.estagiario.nome
+        historico: novoAtendimentoCivil.quintoGrupo.historico.map((historicos) => {
+          return {
+            id: '',
+            titulo: '',
+            descricao: historicos.descricao,
+            instante: undefined,
+            criadoPor: historicos.criadoPor,
           }
-        }
+        })
       };
 
       this.atendimentoService
@@ -102,6 +105,7 @@ export class AtendimentoAddComponent implements OnInit {
           next: () => {
             alert('Cadastro realizado!');
             console.log(novoAtendimentoFormatado);
+            this.router.navigate(['/atendimentos']);
           },
           error: (err) => {
             alert('Erro ao cadastrar atendimento!');
@@ -115,7 +119,7 @@ export class AtendimentoAddComponent implements OnInit {
   cadastrarTrabalhista() {
     const formAtendimentoTrabalhista = this.formAtendimentoService.getForm();
 
-    if(formAtendimentoTrabalhista?.valid){
+    if (formAtendimentoTrabalhista?.valid) {
       console.log('atendimento trabalhista está com os campos validados e pronto para enviar!');
       // implementar desserialização e cadastro na service
     }
