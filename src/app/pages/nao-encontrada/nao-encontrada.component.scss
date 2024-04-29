@@ -1,0 +1,19 @@
+section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 83vh;
+
+  .titulo-erro {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 5em auto 1em;
+    text-align: center;
+  }
+
+  p {
+    color: gray;
+    font-style: italic;
+    font-weight: lighter;
+  }
+}

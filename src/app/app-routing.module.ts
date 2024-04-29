@@ -18,6 +18,7 @@ import { ProcessoAddComponent } from './pages/processos/processo-add/processo-ad
 import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
 import { AtendimentoAddComponent } from './pages/atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
 import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
+import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.component';
 
 const routes: Routes = [
   {
@@ -108,6 +109,10 @@ const routes: Routes = [
     path: 'processos/edit/:numero',
     component: ProcessoEditComponent,
     canActivate: [authGuard],
+  },
+  {
+    path: '**',
+    component: NaoEncontradaComponent
   }
 ];
 

@@ -71,6 +71,7 @@ import { ModalProcessoCriadoComponent } from './shared/modal-processo-criado/mod
 import { ModalExcluirProcessoComponent } from './shared/modal-excluir-processo/modal-excluir-processo.component';
 import { AtendimentoAutocompleteComponent } from './shared/atendimento-autocomplete/atendimento-autocomplete.component';
 import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
+import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/
     ModalExcluirProcessoComponent,
     AtendimentoAutocompleteComponent,
     AtendimentoEditComponent,
+    NaoEncontradaComponent,
   ],
   imports: [
     BrowserModule,
