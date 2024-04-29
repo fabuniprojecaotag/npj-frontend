@@ -90,6 +90,7 @@
             dígitos</mat-error>
           <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['pattern']">Padrão de telefone inválido! (Ex:(00)
             00000-0000)</mat-error>
+          <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['required']">Telefone é obrigatório</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -218,18 +219,24 @@
                 [dropSpecialCharacters]="false">
               <mat-error *ngIf="formAssistidos.get(tipoEndereco)?.get('cep')?.errors?.['minlength']">CEP
                 precisa ter no mínimo 8 dígitos</mat-error>
+              <mat-error *ngIf="formAssistidos.get(tipoEndereco)?.get('cep')?.errors?.['required']">CEP
+                é obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col">
             <mat-form-field class="full-width">
               <mat-label>Cidade</mat-label>
               <input matInput formControlName="cidade">
+              <mat-error *ngIf="formAssistidos.get(tipoEndereco)?.get('cidade')?.errors?.['required']">CEP
+                é obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col">
             <mat-form-field class="full-width">
               <mat-label>Logradouro</mat-label>
               <input matInput formControlName="logradouro">
+              <mat-error *ngIf="formAssistidos.get(tipoEndereco)?.get('logradouro')?.errors?.['required']">CEP
+                é obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -238,6 +245,8 @@
             <mat-form-field class="full-width">
               <mat-label>Bairro</mat-label>
               <input matInput formControlName="bairro">
+              <mat-error *ngIf="formAssistidos.get(tipoEndereco)?.get('bairro')?.errors?.['required']">CEP
+                é obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col">
