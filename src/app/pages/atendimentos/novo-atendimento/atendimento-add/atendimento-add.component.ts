@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
-import { StepperCivil, StepperTrabalhista } from 'src/app/core/types/steppers';
 
 @Component({
   selector: 'app-atendimento-add',
@@ -11,7 +10,7 @@ import { StepperCivil, StepperTrabalhista } from 'src/app/core/types/steppers';
   styleUrls: ['./atendimento-add.component.scss'],
 })
 export class AtendimentoAddComponent implements OnInit {
-  tituloPagina = 'Atendimento - ';
+  tituloPagina = 'Nova Ficha';
   tipoAtendimento!: string;
   tipoFicha!: string;
 
@@ -24,7 +23,6 @@ export class AtendimentoAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.tipoAtendimento = this.route.snapshot.paramMap.get('area') as string;
-    this.tituloPagina += this.tipoAtendimento;
 
     if (this.tipoAtendimento.toLowerCase() !== 'trabalhista') {
       this.tipoFicha = 'Civil';
@@ -37,18 +35,18 @@ export class AtendimentoAddComponent implements OnInit {
     const formAtendimentoCivil = this.formAtendimentoService.getForm();
 
     if (formAtendimentoCivil?.valid) {
-      const novoAtendimentoCivil = formAtendimentoCivil.getRawValue() as StepperCivil;
+      const novoAtendimentoCivil = formAtendimentoCivil.getRawValue() as Atendimento;
 
       const novoAtendimentoFormatado: Atendimento = {
         '@type': this.tipoFicha,
         id: '', // back-end irá implementar
-        area: novoAtendimentoCivil.primeiroGrupo.area,
+        area: novoAtendimentoCivil.area,
         instante: undefined, // back-end irá implementar
         ficha: {
           '@type': this.tipoFicha,
-          assinatura: novoAtendimentoCivil.quintoGrupo.arquivos,
-          dadosSensiveis: novoAtendimentoCivil.quintoGrupo.dadosSensiveis,
-          testemunhas: novoAtendimentoCivil.quartoGrupo.testemunhas.map((testemunha) => {
+          assinatura: novoAtendimentoCivil.ficha.assinatura,
+          dadosSensiveis: novoAtendimentoCivil.ficha.dadosSensiveis,
+          testemunhas: novoAtendimentoCivil.ficha.testemunhas?.map((testemunha) => {
             return {
               nome: testemunha.nome,
               qualificacao: testemunha.qualificacao,
@@ -63,32 +61,32 @@ export class AtendimentoAddComponent implements OnInit {
             };
           }),
           parteContraria: {
-            nome: novoAtendimentoCivil.terceiroGrupo.nome,
-            qualificacao: novoAtendimentoCivil.terceiroGrupo.qualificacao,
-            rg: novoAtendimentoCivil.terceiroGrupo.rg,
-            cpf: novoAtendimentoCivil.terceiroGrupo.cpf,
-            email: novoAtendimentoCivil.terceiroGrupo.email,
+            nome: novoAtendimentoCivil.ficha.parteContraria.nome,
+            qualificacao: novoAtendimentoCivil.ficha.parteContraria.qualificacao,
+            rg: novoAtendimentoCivil.ficha.parteContraria.rg,
+            cpf: novoAtendimentoCivil.ficha.parteContraria.cpf,
+            email: novoAtendimentoCivil.ficha.parteContraria.email,
             endereco: {
-              cep: novoAtendimentoCivil.terceiroGrupo.cep,
-              cidade: novoAtendimentoCivil.terceiroGrupo.cidade,
-              logradouro: novoAtendimentoCivil.terceiroGrupo.logradouro,
-              bairro: novoAtendimentoCivil.terceiroGrupo.bairro,
-              complemento: novoAtendimentoCivil.terceiroGrupo.complemento,
-              numero: novoAtendimentoCivil.terceiroGrupo.numero,
+              cep: novoAtendimentoCivil.ficha.parteContraria.cep,
+              cidade: novoAtendimentoCivil.ficha.parteContraria.cidade,
+              logradouro: novoAtendimentoCivil.ficha.parteContraria.logradouro,
+              bairro: novoAtendimentoCivil.ficha.parteContraria.bairro,
+              complemento: novoAtendimentoCivil.ficha.parteContraria.complemento,
+              numero: novoAtendimentoCivil.ficha.parteContraria.numero,
             },
-            telefone: novoAtendimentoCivil.terceiroGrupo.telefone,
+            telefone: novoAtendimentoCivil.ficha.parteContraria.telefone,
           },
-          medidaJudicial: novoAtendimentoCivil.quintoGrupo.medidaJudicial,
+          medidaJudicial: novoAtendimentoCivil.ficha.parteContraria.medidaJudicial,
         },
         prazoEntregaDocumentos: '',
-        status: novoAtendimentoCivil.quintoGrupo.status,
+        status: novoAtendimentoCivil.status,
         envolvidos: {
-          assistido: { ...novoAtendimentoCivil.segundoGrupo.assistido },
-          estagiario: { ...novoAtendimentoCivil.primeiroGrupo.estagiario },
-          professor: { ...novoAtendimentoCivil.primeiroGrupo.professor },
-          secretaria: { id: '', nome: '' },
+          assistido: { id: novoAtendimentoCivil.envolvidos?.assistido.id, nome: novoAtendimentoCivil.envolvidos.assistido.nome },
+          estagiario: { id: novoAtendimentoCivil.envolvidos.estagiario.id, nome: novoAtendimentoCivil.envolvidos.estagiario.nome },
+          professor: { id: novoAtendimentoCivil.envolvidos.professor.id, nome: novoAtendimentoCivil.envolvidos.professor.id },
+          secretaria: { id: novoAtendimentoCivil.envolvidos.secretaria.id, nome: novoAtendimentoCivil.envolvidos.secretaria.nome },
         },
-        historico: novoAtendimentoCivil.quintoGrupo.historico.map((historicos) => {
+        historico: novoAtendimentoCivil.historico?.map((historicos) => {
           return {
             id: '',
             titulo: '',
@@ -120,7 +118,7 @@ export class AtendimentoAddComponent implements OnInit {
     const formAtendimentoTrabalhista = this.formAtendimentoService.getForm();
 
     if (formAtendimentoTrabalhista?.valid) {
-      const novoAtendimentoTrabalhista = formAtendimentoTrabalhista.getRawValue() as StepperTrabalhista;
+      const novoAtendimentoTrabalhista = formAtendimentoTrabalhista.getRawValue() as Atendimento;
       console.log('atendimento trabalhista está com os campos validados e pronto para enviar!');
 
       const novoAtendimentoFormatado: Atendimento = {

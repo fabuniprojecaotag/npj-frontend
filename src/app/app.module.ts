@@ -51,7 +51,7 @@ import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assi
 import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 import { CardAtalhosComponent } from './shared/card-atalhos/card-atalhos.component';
 import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atendimentos.component';
-import { StepperAtendimentosComponent } from './shared/stepper-atendimento-civil/stepper-atendimentos.component';
+import { StepperAtendimentosComponent } from './shared/form-atendimento-civil/form-atendimento-civil.component';
 import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component';
 import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';

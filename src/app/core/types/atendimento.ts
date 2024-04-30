@@ -10,7 +10,7 @@ export interface Atendimento {
   ficha: FichaCivil | FichaTrabalhista,
   prazoEntregaDocumentos?: string,
   historico?: EntradaHistorico[],
-  envolvidos?: Envolvido
+  envolvidos: Envolvido
 }
 
 export interface Ficha {
@@ -60,7 +60,7 @@ export interface tipoEnvolvido {
 
 export interface EntradaHistorico {
   id?: string,
-  titulo: '',
+  titulo: string,
   descricao: string,
   instante?: string,
   criadoPor: UsuarioCriador,

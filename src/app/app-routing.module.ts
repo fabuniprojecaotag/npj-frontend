@@ -112,7 +112,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NaoEncontradaComponent
+    component: NaoEncontradaComponent,
+    canActivate: [authGuard]
   }
 ];
 

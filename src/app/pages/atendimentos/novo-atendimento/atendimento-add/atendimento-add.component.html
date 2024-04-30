@@ -1,8 +1,8 @@
 <app-header [subtitulo]="tituloPagina"></app-header>
 <app-utils-bar></app-utils-bar>
 <ng-container *ngIf="tipoAtendimento !== 'trabalhista'; else stepperTrabalhista">
-  <app-stepper-atendimentos (acaoClique)="cadastrarCivil()" [tipoAtendimento]="tipoAtendimento"></app-stepper-atendimentos>
+  <app-form-atendimento-civil (acaoClique)="cadastrarCivil()" [tipoAtendimento]="tipoAtendimento" />
 </ng-container>
 <ng-template #stepperTrabalhista>
-  <app-stepper-atendimento-trabalhista (acaoClique)="cadastrarTrabalhista()"></app-stepper-atendimento-trabalhista>
+  <app-stepper-atendimento-trabalhista (acaoClique)="cadastrarTrabalhista()" />
 </ng-template>

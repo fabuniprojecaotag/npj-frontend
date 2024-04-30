@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StepperAtendimentosComponent } from './stepper-atendimentos.component';
+import { StepperAtendimentosComponent } from './form-atendimento-civil.component';
 import { AppModule } from 'src/app/app.module';
 
 describe('StepperAtendimentosComponent', () => {

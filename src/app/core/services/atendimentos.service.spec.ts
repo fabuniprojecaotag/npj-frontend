@@ -1,9 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AtendimentosService } from './atendimentos.service';
-import { Atendimento, Envolvido, ParteContraria, Testemunha, FichaCivil, FichaTrabalhista, EntradaHistorico, tipoEnvolvido } from '../types/atendimento';
-import { Endereco } from '../types/endereco';
-import { UsuarioCriador } from '../types/usuario';
+import { Atendimento } from '../types/atendimento';
 
 describe('AtendimentosService', () => {
   let service: AtendimentosService;
@@ -56,16 +54,18 @@ describe('AtendimentosService', () => {
       medidaJudicial: "Medida Judicial"
     },
     prazoEntregaDocumentos: "2024-04-11",
-    historico: {
-      id: "1",
-      titulo: "",
-      descricao: "Atendimento criado",
-      criadoPor: {
-        email: "teste@email.com",
-        nome: "",
-        role:""
+    historico: [
+      {
+        id: "1",
+        titulo: "",
+        descricao: "Atendimento criado",
+        criadoPor: {
+          email: "teste@email.com",
+          nome: "",
+          role: ""
+        }
       }
-    },
+    ],
     envolvidos: {
       estagiario: { id: "1", nome: "" },
       professor: { id: "1", nome: "" },

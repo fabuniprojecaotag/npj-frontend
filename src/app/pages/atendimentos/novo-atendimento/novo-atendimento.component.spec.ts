@@ -4,7 +4,7 @@ import { NovoAtendimentoComponent } from './novo-atendimento.component';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component';
-import { StepperAtendimentosComponent } from 'src/app/shared/stepper-atendimento-civil/stepper-atendimentos.component';
+import { StepperAtendimentosComponent } from 'src/app/shared/form-atendimento-civil/form-atendimento-civil.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { NavMenuComponent } from 'src/app/shared/nav-menu/nav-menu.component';

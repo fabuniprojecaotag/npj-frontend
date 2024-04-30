@@ -1,26 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 
 @Component({
-  selector: 'app-stepper-atendimentos',
-  templateUrl: './stepper-atendimentos.component.html',
-  styleUrls: ['./stepper-atendimentos.component.scss'],
+  selector: 'app-form-atendimento-civil',
+  templateUrl: './form-atendimento-civil.component.html',
+  styleUrls: ['./form-atendimento-civil.component.scss'],
 })
 export class StepperAtendimentosComponent implements OnInit {
   formAtendimentos!: FormGroup;
-  primeiroGrupo!: FormGroup;
-  segundoGrupo!: FormGroup;
-  terceiroGrupo!: FormGroup;
-  quartoGrupo!: FormGroup;
-  quintoGrupo!: FormGroup;
   status: string[] = [
     'Reprovado',
     'Arquivado',
@@ -58,51 +47,36 @@ export class StepperAtendimentosComponent implements OnInit {
       },
     });
 
-    this.primeiroGrupo = this.formBuilder.group({
+    this.formAtendimentos = this.formBuilder.group({
       estagiario: this.estagiarioControl,
       professor: this.professorControl,
       secretaria: this.secretariaControl,
       instante: [new Date()], // não necessario, o back irá retornar
       area: [this.tipoAtendimento],
-    });
-    this.segundoGrupo = this.formBuilder.group({
       assistido: this.assistidoControl,
-    });
-    this.terceiroGrupo = this.formBuilder.group({
-      nome: [null, Validators.required],
-      qualificacao: [null, Validators.required],
-      rg: [null, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)],
-      cpf: [
-        null,
-        Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
-      ],
-      telefone: [null, [Validators.minLength(11)]],
-      email: [null],
-      cep: [null],
-      cidade: [null],
-      logradouro: [null],
-      bairro: [null],
-      numero: [null],
-      complemento: [null],
-      informacoesComplementares: [null],
-    });
-    this.quartoGrupo = this.formBuilder.group({
-      testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()])
-    });
-    this.quintoGrupo = this.formBuilder.group({
       historico: this.formBuilder.array([this.criarGrupoHistorico()]),
-      medidaJudicial: [''],
       status: ['', Validators.required],
-      arquivos: [null],
-      dadosSensiveis: [false],
-    });
-
-    this.formAtendimentos = this.formBuilder.group({
-      primeiroGrupo: this.primeiroGrupo,
-      segundoGrupo: this.segundoGrupo,
-      terceiroGrupo: this.terceiroGrupo,
-      quartoGrupo: this.quartoGrupo,
-      quintoGrupo: this.quintoGrupo,
+      ficha: this.formBuilder.group({
+        dadosSensiveis: [false],
+        testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()]),
+        parteContraria: this.formBuilder.group({
+          nome: [null, Validators.required],
+          qualificacao: [null, Validators.required],
+          rg: [null, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)],
+          cpf: [null, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),],
+          telefone: [null, [Validators.minLength(11)]],
+          email: [null],
+          cep: [null],
+          cidade: [null],
+          logradouro: [null],
+          bairro: [null],
+          numero: [null],
+          complemento: [null],
+          informacoesComplementares: [null]
+        }),
+        medidaJudicial: ['']
+      }),
+      assinatura: [null],
     });
 
     this.formService.setForm(this.formAtendimentos);
@@ -114,13 +88,13 @@ export class StepperAtendimentosComponent implements OnInit {
   }
 
   removerArquivoSelecionado(): void {
-    this.quintoGrupo.get('arquivos')?.setValue(null);
+    this.formAtendimentos.get('arquivos')?.setValue(null);
     this.arquivoSelecionado = null; // Reseta o nome do arquivo selecionado
   }
 
   /* funções para arrays */
   adicionarTestemunha(): void {
-    (this.quartoGrupo.get('testemunhas') as FormArray).push(this.criarGrupoTestemunha());
+    (this.formAtendimentos.get('testemunhas') as FormArray).push(this.criarGrupoTestemunha());
   }
 
   criarGrupoTestemunha(): FormGroup {
@@ -139,7 +113,7 @@ export class StepperAtendimentosComponent implements OnInit {
   }
 
   adicionarHistorico(): void {
-    (this.quintoGrupo.get('historico') as FormArray).push(this.criarGrupoHistorico());
+    (this.formAtendimentos.get('historico') as FormArray).push(this.criarGrupoHistorico());
   }
 
   criarGrupoHistorico(): FormGroup {
@@ -155,14 +129,18 @@ export class StepperAtendimentosComponent implements OnInit {
 
 
   get testemunhas(): FormArray {
-    return this.quartoGrupo.get('testemunhas') as FormArray;
+    return this.formAtendimentos.get('testemunhas') as FormArray;
   }
 
   get historico(): FormArray {
-    return this.quintoGrupo.get('historico') as FormArray;
+    return this.formAtendimentos.get('historico') as FormArray;
   }
 
   executarAcao() {
+    this.acaoClique.emit();
+  }
+
+  executarAcaoExcluir() {
     this.acaoClique.emit();
   }
 }

@@ -1,0 +1,65 @@
+@import "../../../styles.scss";
+
+.secao-form-civil {
+  margin: 0 auto;
+  width: 80%;
+
+  .titulo-form {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .grupo-form {
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 1em 0;
+    width: 100%;
+
+    .botao-criar {
+      margin-left: auto;
+    }
+
+    .full {
+      width: 100%;
+
+      .subtitulo {
+        font-family: $fonte-padrao;
+        font-size: 28px;
+        font-weight: 400;
+      }
+
+      .arquivos-label {
+        display: inline;
+        color: #cccccc;
+        font-weight: 400;
+        font-size: 12px;
+        height: 30px;
+      }
+    }
+
+    .input-muitoPequeno {
+      flex-grow: 1;
+    }
+
+    .input-pequeno {
+      flex-grow: 1.5;
+    }
+
+    .input-medio {
+      flex-grow: 2;
+    }
+
+    .input-grande,
+    .espacador {
+      flex-grow: 3;
+    }
+
+    .botao-cadastro {
+      height: 100%;
+      padding: 16px 16px;
+    }
+  }
+}
