@@ -1,6 +1,6 @@
 @import "../../../styles.scss";
 
-.secao-form-civil {
+.secao-form-trabalhista {
   margin: 0 auto;
   width: 80%;
 
@@ -22,14 +22,24 @@
       margin-left: auto;
     }
 
-    .full {
-      width: 100%;
+    .subtitulo {
+      font-family: $fonte-padrao;
+      font-size: 28px;
+      font-weight: 400;
+    }
 
-      .subtitulo {
-        font-family: $fonte-padrao;
-        font-size: 28px;
-        font-weight: 400;
-      }
+    .titulo-secundario {
+      font-family: $fonte-padrao;
+      font-size: 20px;
+      font-weight: 400;
+      padding-bottom: 1.2em;
+    }
+
+    .full {
+      display: flex;
+      flex: inherit inherit inherit;
+      gap: 20px;
+      width: 100%;
 
       .arquivos-label {
         display: inline;

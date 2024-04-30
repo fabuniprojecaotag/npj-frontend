@@ -7,10 +7,14 @@
       <div class="full">
         <h3 class="subtitulo">Envolvidos</h3>
       </div>
-      <app-funcionario-autocomplete cargo="Estagiario" [control]="estagiarioControl" class="input-medio" />
-      <app-funcionario-autocomplete cargo="Professor" [control]="professorControl" class="input-medio" />
-      <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-medio" />
-      <app-assistido-autocomplete [control]="assistidoControl" class="input-grande" />
+      <div class="full">
+        <app-funcionario-autocomplete cargo="Estagiario" [control]="estagiarioControl" class="input-medio" />
+        <app-funcionario-autocomplete cargo="Professor" [control]="professorControl" class="input-medio" />
+      </div>
+      <div class="full">
+        <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-grande" />
+        <app-assistido-autocomplete [control]="assistidoControl" class="input-grande" />
+      </div>
       <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
     </div>
 
@@ -163,8 +167,8 @@
           <!-- Exibe o nome do arquivo selecionado se existir -->
           <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado }} <button mat-icon-button color="warn"
               (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
-          <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
-            accept=".pdf,.doc,.docx, image/png" formControlName="assinatura">
+              <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
+              accept=".pdf,.doc,.docx, image/png" formControlName="assinatura">
           <button mat-raised-button color="primary" (click)="fileInput.click()">
             <mat-icon>upload_2</mat-icon>Upload
           </button>

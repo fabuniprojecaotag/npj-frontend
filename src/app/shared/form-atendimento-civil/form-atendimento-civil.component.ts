@@ -86,8 +86,10 @@ export class FormAtendimentoCivilComponent implements OnInit {
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
-    this.arquivoSelecionado = file; // Define o nome do arquivo selecionado
+    this.arquivoSelecionado = file;
+    this.formAtendimentos.get('ficha.assinatura')?.setValue(file);
   }
+
 
   removerArquivoSelecionado(): void {
     this.formAtendimentos.get('arquivos')?.setValue(null);

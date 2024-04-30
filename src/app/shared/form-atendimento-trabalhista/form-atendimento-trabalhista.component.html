@@ -1,90 +1,104 @@
-<form [formGroup]="formAtendimentosTrabalhista" class="grupo-form">
-  <div class="container">
-    <app-funcionario-autocomplete cargo="Estagiario" [control]="estagiarioControl" class="input-medio" />
-    <app-funcionario-autocomplete cargo="Professor" [control]="professorControl" class="input-medio" />
-  </div>
-  <div class="container">
-    <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-medio" />
-    <div class="espacador"></div>
-  </div>
-  <app-assistido-autocomplete [control]="assistidoControl" class="input-grande" />
-  <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
-  <div class="container">
-    <mat-form-field class="input-grande">
-      <mat-label>Nome</mat-label>
-      <input matInput formControlName="nome" placeholder="nome">
-      <mat-error *ngIf="formAtendimentosTrabalhista.get('terceiroGrupo')?.get('nome')?.errors?.['required']">Nome
-        do Reclamado é obrigatório</mat-error>
+<section class="secao-form-trabalhista">
+  <h3 class="titulo-form">Atendimento {{ tipoAtendimento }}</h3>
+  <form [formGroup]="formAtendimentosTrabalhista">
+
+    <!-- Envolvidos -->
+    <div class="grupo-form" formGroupName="envolvidos">
+      <div class="full">
+        <h3 class="subtitulo">Envolvidos</h3>
+      </div>
+      <div class="full">
+        <app-funcionario-autocomplete cargo="Estagiario" [control]="estagiarioControl" class="input-medio" />
+        <app-funcionario-autocomplete cargo="Professor" [control]="professorControl" class="input-medio" />
+      </div>
+      <div class="full">
+        <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-grande" />
+        <app-assistido-autocomplete [control]="assistidoControl" class="input-grande" />
+      </div>
+      <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
+    </div>
+
+    <!-- Ficha -->
+    <ng-container formGroupName="ficha">
+
+      <!-- Reclamado -->
+      <div formGroupName="reclamado" class="grupo-form">
+        <div class="full">
+          <h3 class="subtitulo">Reclamado</h3>
+        </div>
+        <mat-form-field class="input-grande">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" placeholder="nome">
+          <mat-error *ngIf="formAtendimentosTrabalhista.get('terceiroGrupo')?.get('nome')?.errors?.['required']">Nome
+            do Reclamado é obrigatório</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-grande">
+          <mat-label>Tipo de Pessoa</mat-label>
+          <input matInput formControlName="tipoPessoa" placeholder="Tipo de Pessoa">
+        </mat-form-field>
+        <mat-form-field class="input-grande">
+          <mat-label>Número Cadastro</mat-label>
+          <input matInput formControlName="numCadastro" placeholder="Número Cadastro">
+        </mat-form-field>
+        <div class="full">
+          <h3 class="subtitulo">Endereço</h3>
+        </div>
+        <ng-container formGroupName="endereco">
+          <div class="container">
+            <mat-form-field class="input-grande">
+              <mat-label>CEP</mat-label>
+              <input matInput formControlName="cep" placeholder="CEP">
+            </mat-form-field>
+            <mat-form-field class="input-grande">
+              <mat-label>Cidade</mat-label>
+              <input matInput formControlName="cidade" placeholder="Cidade">
+            </mat-form-field>
+            <mat-form-field class="input-grande">
+              <mat-label>Logradouro</mat-label>
+              <input matInput formControlName="logradouro" placeholder="Logradouro">
+            </mat-form-field>
+            <mat-form-field class="input-grande">
+              <mat-label>Bairro</mat-label>
+              <input matInput formControlName="bairro" placeholder="Bairro">
+            </mat-form-field>
+            <mat-form-field class="input-grande">
+              <mat-label>Número</mat-label>
+              <input matInput formControlName="numero" placeholder="Número">
+            </mat-form-field>
+            <mat-form-field class="input-grande">
+              <mat-label>Complemento</mat-label>
+              <input matInput formControlName="complemento" placeholder="Complemento">
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+    <mat-form-field class="input-full">
+      <mat-label>Histórico</mat-label>
+      <textarea matInput formControlName="historico" placeholder="Histórico do atendimento"></textarea>
     </mat-form-field>
-    <mat-form-field class="input-grande">
-      <mat-label>Tipo de Pessoa</mat-label>
-      <input matInput formControlName="tipoPessoa" placeholder="Tipo de Pessoa">
-    </mat-form-field>
-  </div>
-  <div class="container">
-    <mat-form-field class="input-grande">
-      <mat-label>Número Cadastro</mat-label>
-      <input matInput formControlName="numCadastro" placeholder="Número Cadastro">
-    </mat-form-field>
-  </div>
-  <div class="container">
-    <h3 class="subtitulo">Endereço</h3>
-  </div>
-  <ng-container formGroupName="endereco">
-    <div class="container">
-      <mat-form-field class="input-grande">
-        <mat-label>CEP</mat-label>
-        <input matInput formControlName="cep" placeholder="CEP">
-      </mat-form-field>
-      <mat-form-field class="input-grande">
-        <mat-label>Cidade</mat-label>
-        <input matInput formControlName="cidade" placeholder="Cidade">
-      </mat-form-field>
-      <mat-form-field class="input-grande">
-        <mat-label>Logradouro</mat-label>
-        <input matInput formControlName="logradouro" placeholder="Logradouro">
+    <div class="input-full">
+      <mat-form-field class="input-pequeno">
+        <mat-label>Status</mat-label>
+        <mat-select matInput formControlName="status" ngDefaultControl>
+          <mat-option *ngFor="let statu of status" [value]="statu">
+            {{ statu }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formAtendimentosTrabalhista.get('quintoGrupo')?.get('status')?.errors?.['required']">Status
+          é obrigatório</mat-error>
       </mat-form-field>
     </div>
-    <div class="container">
-      <mat-form-field class="input-grande">
-        <mat-label>Bairro</mat-label>
-        <input matInput formControlName="bairro" placeholder="Bairro">
-      </mat-form-field>
-      <mat-form-field class="input-grande">
-        <mat-label>Número</mat-label>
-        <input matInput formControlName="numero" placeholder="Número">
-      </mat-form-field>
-      <mat-form-field class="input-grande">
-        <mat-label>Complemento</mat-label>
-        <input matInput formControlName="complemento" placeholder="Complemento">
-      </mat-form-field>
+    <div class="input-full">
+      <h3 class="subtitulo">Assinatura</h3>
     </div>
-  </ng-container>
-  <mat-form-field class="input-full">
-    <mat-label>Histórico</mat-label>
-    <textarea matInput formControlName="historico" placeholder="Histórico do atendimento"></textarea>
-  </mat-form-field>
-  <div class="input-full">
-    <mat-form-field class="input-pequeno">
-      <mat-label>Status</mat-label>
-      <mat-select matInput formControlName="status" ngDefaultControl>
-        <mat-option *ngFor="let statu of status" [value]="statu">
-          {{ statu }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="formAtendimentosTrabalhista.get('quintoGrupo')?.get('status')?.errors?.['required']">Status
-        é obrigatório</mat-error>
-    </mat-form-field>
-  </div>
-  <div class="input-full">
-    <h3 class="subtitulo">Assinatura</h3>
-  </div>
-  <div class="input-full">
-    <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados
-      Sensiveis:</mat-checkbox>
-  </div>
-  <div class="container">
-    <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit"
-      (click)="executarAcao()">Concluir</button>
-  </div>
-</form>
+    <div class="input-full">
+      <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados
+        Sensiveis:</mat-checkbox>
+    </div>
+    <div class="container">
+      <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit"
+        (click)="executarAcao()">Concluir</button>
+    </div>
+  </form>
+</section>
