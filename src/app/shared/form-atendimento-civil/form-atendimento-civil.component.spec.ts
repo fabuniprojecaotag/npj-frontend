@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StepperAtendimentosComponent } from './form-atendimento-civil.component';
+import { FormAtendimentoCivilComponent } from './form-atendimento-civil.component';
 import { AppModule } from 'src/app/app.module';
 
 describe('StepperAtendimentosComponent', () => {
-  let component: StepperAtendimentosComponent;
-  let fixture: ComponentFixture<StepperAtendimentosComponent>;
+  let component: FormAtendimentoCivilComponent;
+  let fixture: ComponentFixture<FormAtendimentoCivilComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StepperAtendimentosComponent],
+      declarations: [FormAtendimentoCivilComponent],
       imports: [AppModule]
     }).compileComponents();
-    fixture = TestBed.createComponent(StepperAtendimentosComponent);
+    fixture = TestBed.createComponent(FormAtendimentoCivilComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

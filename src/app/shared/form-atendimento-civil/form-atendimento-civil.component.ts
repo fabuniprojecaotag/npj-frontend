@@ -8,7 +8,7 @@ import { FormsService } from 'src/app/core/services/forms.service';
   templateUrl: './form-atendimento-civil.component.html',
   styleUrls: ['./form-atendimento-civil.component.scss'],
 })
-export class StepperAtendimentosComponent implements OnInit {
+export class FormAtendimentoCivilComponent implements OnInit {
   formAtendimentos!: FormGroup;
   status: string[] = [
     'Reprovado',
@@ -48,15 +48,11 @@ export class StepperAtendimentosComponent implements OnInit {
     });
 
     this.formAtendimentos = this.formBuilder.group({
-      estagiario: this.estagiarioControl,
-      professor: this.professorControl,
-      secretaria: this.secretariaControl,
       instante: [new Date()], // não necessario, o back irá retornar
       area: [this.tipoAtendimento],
-      assistido: this.assistidoControl,
-      historico: this.formBuilder.array([this.criarGrupoHistorico()]),
       status: ['', Validators.required],
       ficha: this.formBuilder.group({
+        assinatura: [null],
         dadosSensiveis: [false],
         testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()]),
         parteContraria: this.formBuilder.group({
@@ -76,7 +72,13 @@ export class StepperAtendimentosComponent implements OnInit {
         }),
         medidaJudicial: ['']
       }),
-      assinatura: [null],
+      historico: this.formBuilder.array([this.criarGrupoHistorico()]),
+      envolvidos: this.formBuilder.group({
+        estagiario: this.estagiarioControl,
+        professor: this.professorControl,
+        secretaria: this.secretariaControl,
+        assistido: this.assistidoControl,
+      })
     });
 
     this.formService.setForm(this.formAtendimentos);
@@ -94,7 +96,7 @@ export class StepperAtendimentosComponent implements OnInit {
 
   /* funções para arrays */
   adicionarTestemunha(): void {
-    (this.formAtendimentos.get('testemunhas') as FormArray).push(this.criarGrupoTestemunha());
+    (this.formAtendimentos.get('ficha')?.get('testemunhas') as FormArray).push(this.criarGrupoTestemunha());
   }
 
   criarGrupoTestemunha(): FormGroup {
@@ -129,7 +131,7 @@ export class StepperAtendimentosComponent implements OnInit {
 
 
   get testemunhas(): FormArray {
-    return this.formAtendimentos.get('testemunhas') as FormArray;
+    return this.formAtendimentos.get('ficha')?.get('testemunhas') as FormArray;
   }
 
   get historico(): FormArray {

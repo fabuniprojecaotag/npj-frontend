@@ -51,7 +51,7 @@ import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assi
 import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 import { CardAtalhosComponent } from './shared/card-atalhos/card-atalhos.component';
 import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atendimentos.component';
-import { StepperAtendimentosComponent } from './shared/form-atendimento-civil/form-atendimento-civil.component';
+import { FormAtendimentoCivilComponent } from './shared/form-atendimento-civil/form-atendimento-civil.component';
 import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component';
 import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
@@ -60,7 +60,7 @@ import { FormProcessoComponent } from './shared/form-processo/form-processo.comp
 import { ProcessoAddComponent } from './pages/processos/processo-add/processo-add.component';
 import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
 import { AtendimentoAddComponent } from './pages/atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
-import { StepperAtendimentoTrabalhistaComponent } from './shared/stepper-atendimento-trabalhista/stepper-atendimento-trabalhista.component';
+import { FormAtendimentoTrabalhistaComponent } from './shared/form-atendimento-trabalhista/form-atendimento-trabalhista.component';
 import { FuncionarioAutocompleteComponent } from './shared/funcionario-autocomplete/funcionario-autocomplete.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginatorIntl } from './shared/customMatPaginator/CustomMatPaginator'; // Path to your custom implementation
@@ -96,7 +96,7 @@ import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.co
     AssistidosShortcutsComponent,
     CardAtalhosComponent,
     CardAtendimentosComponent,
-    StepperAtendimentosComponent,
+    FormAtendimentoCivilComponent,
     NovoAtendimentoComponent,
     NavItemComponent,
     AtendimentosComponent,
@@ -105,7 +105,7 @@ import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.co
     ProcessoAddComponent,
     ProcessoEditComponent,
     AtendimentoAddComponent,
-    StepperAtendimentoTrabalhistaComponent,
+    FormAtendimentoTrabalhistaComponent,
     FuncionarioAutocompleteComponent,
     AssistidoAutocompleteComponent,
     ModalProcessoCriadoComponent,

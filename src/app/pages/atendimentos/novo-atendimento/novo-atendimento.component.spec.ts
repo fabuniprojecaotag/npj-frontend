@@ -4,7 +4,7 @@ import { NovoAtendimentoComponent } from './novo-atendimento.component';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component';
-import { StepperAtendimentosComponent } from 'src/app/shared/form-atendimento-civil/form-atendimento-civil.component';
+import { FormAtendimentoCivilComponent } from 'src/app/shared/form-atendimento-civil/form-atendimento-civil.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { NavMenuComponent } from 'src/app/shared/nav-menu/nav-menu.component';
@@ -24,7 +24,7 @@ describe('NovoAtendimentoComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NovoAtendimentoComponent, HeaderComponent, UtilsBarComponent, StepperAtendimentosComponent, NavMenuComponent, UserMenuComponent, NavItemComponent],
+      declarations: [NovoAtendimentoComponent, HeaderComponent, UtilsBarComponent, FormAtendimentoCivilComponent, NavMenuComponent, UserMenuComponent, NavItemComponent],
       imports: [AppModule],
       providers: [
         {

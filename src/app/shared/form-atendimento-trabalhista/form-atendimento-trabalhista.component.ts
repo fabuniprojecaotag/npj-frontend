@@ -4,17 +4,12 @@ import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 
 @Component({
-  selector: 'app-stepper-atendimento-trabalhista',
-  templateUrl: './stepper-atendimento-trabalhista.component.html',
-  styleUrls: ['./stepper-atendimento-trabalhista.component.scss']
+  selector: 'app-form-atendimento-trabalhista',
+  templateUrl: './form-atendimento-trabalhista.component.html',
+  styleUrls: ['./form-atendimento-trabalhista.component.scss']
 })
-export class StepperAtendimentoTrabalhistaComponent implements OnInit {
-  formAtendimentosTrabalhista!: any;
-  primeiroGrupo!: FormGroup;
-  segundoGrupo!: FormGroup;
-  terceiroGrupo!: FormGroup;
-  quartoGrupo!: FormGroup;
-  quintoGrupo!: FormGroup;
+export class FormAtendimentoTrabalhistaComponent implements OnInit {
+  formAtendimentosTrabalhista!: FormGroup;
   status: string[] = [
     'Reprovado',
     'Arquivado',
@@ -30,6 +25,7 @@ export class StepperAtendimentoTrabalhistaComponent implements OnInit {
   assistidoControl: FormControl = new FormControl(null, Validators.required);
 
   @Input() tipoAtendimento: string = 'Trabalhista';
+  @Input() editarComponente: boolean = false;
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<any> = new EventEmitter();
 
@@ -49,40 +45,28 @@ export class StepperAtendimentoTrabalhistaComponent implements OnInit {
       },
     });
 
-    this.primeiroGrupo = this.formBuilder.group({
-      estagiario: this.estagiarioControl,
-      professor: this.professorControl,
-      area: [this.tipoAtendimento],
-    });
-    this.segundoGrupo = this.formBuilder.group({
-      assistido: this.assistidoControl,
-    });
-    this.terceiroGrupo = this.formBuilder.group({
-      nome: ['', Validators.required],
-      tipoPessoa: [''],
-      numCadastro: [''],
-      endereco: this.formBuilder.group({
-        cep: [null],
-        cidade: [null],
-        logradouro: [null],
-        bairro: [null],
-        numero: [null],
-        complemento: [null]
-      }),
-    });
-    this.quartoGrupo = this.formBuilder.group({
-
-    });
-    this.quintoGrupo = this.formBuilder.group({
-
-    });
-
     this.formAtendimentosTrabalhista = this.formBuilder.group({
-      primeiroGrupo: this.primeiroGrupo,
-      segundoGrupo: this.segundoGrupo,
-      terceiroGrupo: this.terceiroGrupo,
-      quartoGrupo: this.quartoGrupo,
-      quintoGrupo: this.quintoGrupo,
+      status: [null],
+      area: [this.tipoAtendimento],
+      ficha: this.formBuilder.group({
+        nome: ['', Validators.required],
+        tipoPessoa: [''],
+        numCadastro: [''],
+        endereco: this.formBuilder.group({
+          cep: [null],
+          cidade: [null],
+          logradouro: [null],
+          bairro: [null],
+          numero: [null],
+          complemento: [null]
+        }),
+      }),
+      envolvidos: this.formBuilder.group({
+        assistido: this.assistidoControl,
+        estagiario: this.estagiarioControl,
+        professor: this.professorControl,
+        secretaria: this.secretariaControl
+      })
     });
 
     this.formService.setForm(this.formAtendimentosTrabalhista);

@@ -22,24 +22,14 @@
       margin-left: auto;
     }
 
-    .subtitulo {
-      font-family: $fonte-padrao;
-      font-size: 28px;
-      font-weight: 400;
-    }
-
-    .titulo-secundario {
-      font-family: $fonte-padrao;
-      font-size: 20px;
-      font-weight: 400;
-      padding-bottom: 1.2em;
-    }
-
     .full {
-      display: flex;
-      flex: inherit inherit inherit;
-      gap: 20px;
       width: 100%;
+
+      .subtitulo {
+        font-family: $fonte-padrao;
+        font-size: 28px;
+        font-weight: 400;
+      }
 
       .arquivos-label {
         display: inline;

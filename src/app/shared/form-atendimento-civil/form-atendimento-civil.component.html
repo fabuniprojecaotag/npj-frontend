@@ -1,143 +1,189 @@
 <section class="secao-form-civil">
   <h3 class="titulo-form">Atendimento {{ tipoAtendimento }}</h3>
   <form [formGroup]="formAtendimentos">
-    <div class="grupo-form">
+
+    <!-- Envolvidos -->
+    <div class="grupo-form" formGroupName="envolvidos">
       <div class="full">
         <h3 class="subtitulo">Envolvidos</h3>
       </div>
       <app-funcionario-autocomplete cargo="Estagiario" [control]="estagiarioControl" class="input-medio" />
       <app-funcionario-autocomplete cargo="Professor" [control]="professorControl" class="input-medio" />
       <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-medio" />
-    </div>
-    <div class="grupo-form">
       <app-assistido-autocomplete [control]="assistidoControl" class="input-grande" />
       <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
     </div>
-    <form formGroupName="parteContraria" class="grupo-form">
-      <div class="full">
-        <h3 class="subtitulo">Parte Contrária</h3>
-      </div>
-      <mat-form-field class="input-grande">
-        <mat-label>Nome</mat-label>
-        <input matInput formControlName="nome" placeholder="nome">
-        <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('nome')?.errors?.['required']">Nome da Parte
-          Contrária é
-          obrigatória</mat-error>
-      </mat-form-field>
-      <mat-form-field class="input-pequeno">
-        <mat-label>Qualificação</mat-label>
-        <input matInput formControlName="qualificacao" placeholder="qualificação">
-        <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('nome')?.errors?.['required']">Qualificação da
-          Parte Contrária é
-          obrigatória</mat-error>
-      </mat-form-field>
-      <mat-form-field class="input-muitoPequeno">
-        <mat-label>RG</mat-label>
-        <input matInput formControlName="rg" placeholder="RG" mask="0.000.000" [showMaskTyped]="true"
-          [dropSpecialCharacters]="false">
-        <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('rg')?.errors?.['pattern']">RG fora
-          do padrão
-          (00.000.0000-00)</mat-error>
-      </mat-form-field>
-      <mat-form-field class="input-muitoPequeno">
-        <mat-label>CPF</mat-label>
-        <input matInput formControlName="cpf" placeholder="CPF" mask="000.000.000-00" [showMaskTyped]="true"
-          [dropSpecialCharacters]="false">
-        <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('cpf')?.errors?.['pattern']">CPF fora do padrão
-          (000.000.000-00)</mat-error>
-      </mat-form-field>
-      <mat-form-field class="input-medio">
-        <mat-label>Telefone</mat-label>
-        <input matInput formControlName="telefone" mask="(00) 00000-0000" [showMaskTyped]="true"
-          [dropSpecialCharacters]="false">
-        <mat-icon matSuffix>phone</mat-icon>
-        <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('telefone')?.errors?.['pattern']">Padrão de
-          telefone inválido! (Ex:(00)
-          00000-0000)</mat-error>
-      </mat-form-field>
-      <mat-form-field class="input-medio">
-        <mat-label>E-mail</mat-label>
-        <input matInput formControlName="email" placeholder="E-mail">
-      </mat-form-field>
-      <mat-form-field class="input-medio">
-        <mat-label>CEP</mat-label>
-        <input matInput formControlName="cep" placeholder="CEP">
-      </mat-form-field>
-      <mat-form-field class="input-pequeno">
-        <mat-label>Logradouro</mat-label>
-        <input matInput formControlName="logradouro" placeholder="Logradouro">
-      </mat-form-field>
-      <mat-form-field class="input-pequeno">
-        <mat-label>Bairro</mat-label>
-        <input matInput formControlName="bairro" placeholder="Bairro">
-      </mat-form-field>
-      <mat-form-field class="input-pequeno">
-        <mat-label>Número</mat-label>
-        <input matInput formControlName="numero" placeholder="Número">
-      </mat-form-field>
-      <mat-form-field class="input-medio">
-        <mat-label>Complemento</mat-label>
-        <input matInput formControlName="complemento" placeholder="Complemento">
-      </mat-form-field>
-      <mat-form-field class="input-medio">
-        <mat-label>Cidade</mat-label>
-        <input matInput formControlName="cidade" placeholder="Cidade">
-      </mat-form-field>
-      <mat-form-field class="full">
-        <mat-label>Informações Complementares</mat-label>
-        <textarea matInput formControlName="informacoesComplementares"
-          placeholder="Informações Complementares"></textarea>
-      </mat-form-field>
-    </form>
-    <div formArrayName="testemunhas" class="grupo-form">
-      <ng-container *ngFor="let testemunha of testemunhas.controls; let i = index" [formGroupName]="i">
+
+    <!-- Ficha -->
+    <ng-container formGroupName="ficha">
+
+      <!-- Parte Contrária -->
+      <div formGroupName="parteContraria" class="grupo-form">
         <div class="full">
-          <h3 class="subtitulo">Testemunha {{ i+1 }}</h3>
+          <h3 class="subtitulo">Parte Contrária</h3>
         </div>
         <mat-form-field class="input-grande">
           <mat-label>Nome</mat-label>
           <input matInput formControlName="nome" placeholder="nome">
+          <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('nome')?.errors?.['required']">Nome da Parte
+            Contrária é
+            obrigatória</mat-error>
         </mat-form-field>
         <mat-form-field class="input-pequeno">
           <mat-label>Qualificação</mat-label>
           <input matInput formControlName="qualificacao" placeholder="qualificação">
+          <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('nome')?.errors?.['required']">Qualificação da
+            Parte Contrária é
+            obrigatória</mat-error>
         </mat-form-field>
-        <ng-container formGroupName="endereco">
+        <mat-form-field class="input-muitoPequeno">
+          <mat-label>RG</mat-label>
+          <input matInput formControlName="rg" placeholder="RG" mask="0.000.000" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false">
+          <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('rg')?.errors?.['pattern']">RG fora
+            do padrão
+            (00.000.0000-00)</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-muitoPequeno">
+          <mat-label>CPF</mat-label>
+          <input matInput formControlName="cpf" placeholder="CPF" mask="000.000.000-00" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false">
+          <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('cpf')?.errors?.['pattern']">CPF fora do padrão
+            (000.000.000-00)</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-medio">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="telefone" mask="(00) 00000-0000" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false">
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('telefone')?.errors?.['pattern']">Padrão de
+            telefone inválido! (Ex:(00)
+            00000-0000)</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-medio">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email" placeholder="E-mail">
+        </mat-form-field>
+        <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>CEP</mat-label>
-            <input matInput formControlName="cep" placeholder="CEP da testemunha">
+            <input matInput formControlName="cep" placeholder="CEP">
           </mat-form-field>
-          <mat-form-field class="input-medio">
-            <mat-label>Cidade</mat-label>
-            <input matInput formControlName="cidade" placeholder="Cidade da testemunha">
-          </mat-form-field>
-          <mat-form-field class="input-medio">
+          <mat-form-field class="input-pequeno">
             <mat-label>Logradouro</mat-label>
-            <input matInput formControlName="logradouro" placeholder="Logradouro da testemunha">
+            <input matInput formControlName="logradouro" placeholder="Logradouro">
           </mat-form-field>
-          <mat-form-field class="input-medio">
+          <mat-form-field class="input-pequeno">
+            <mat-label>Bairro</mat-label>
+            <input matInput formControlName="bairro" placeholder="Bairro da parte contrária">
+          </mat-form-field>
+        </div>
+        <div class="full">
+          <mat-form-field class="input-pequeno">
             <mat-label>Número</mat-label>
-            <input matInput formControlName="numero" placeholder="Número da testemunha">
+            <input matInput formControlName="numero" placeholder="Número">
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Complemento</mat-label>
-            <input matInput formControlName="complemento" placeholder="Complemento da testemunha">
+            <input matInput formControlName="complemento" placeholder="Complemento Parte contrária">
           </mat-form-field>
           <mat-form-field class="input-medio">
-            <mat-label>Bairro</mat-label>
-            <input matInput formControlName="bairro" placeholder="Bairro da testemunha">
+            <mat-label>Cidade</mat-label>
+            <input matInput formControlName="cidade" placeholder="Cidade">
           </mat-form-field>
-        </ng-container>
-      </ng-container>
-      <div class="full">
-        <button mat-raised-button (click)="adicionarTestemunha()" class="botao-criar">Adicionar Testemunha</button>
+        </div>
+        <mat-form-field class="full">
+          <mat-label>Informações Complementares</mat-label>
+          <textarea matInput formControlName="informacoesComplementares"
+            placeholder="Informações Complementares"></textarea>
+        </mat-form-field>
       </div>
-    </div>
-    <div class="grupo-form">
-      <ng-container formArrayName="historico">
+
+      <!-- Testemunhas -->
+
+      <div formArrayName="testemunhas" class="grupo-form">
+        <ng-container *ngFor="let testemunha of testemunhas.controls; let i = index" [formGroupName]="i">
+          <div class="full">
+            <h3 class="subtitulo">Testemunha {{ i+1 }}</h3>
+          </div>
+          <div class="full">
+            <mat-form-field class="input-grande">
+              <mat-label>Nome</mat-label>
+              <input matInput formControlName="nome" placeholder="nome">
+            </mat-form-field>
+            <mat-form-field class="input-pequeno">
+              <mat-label>Qualificação</mat-label>
+              <input matInput formControlName="qualificacao" placeholder="qualificação">
+            </mat-form-field>
+          </div>
+          <ng-container formGroupName="endereco">
+            <div class="full">
+              <mat-form-field class="input-medio">
+                <mat-label>CEP</mat-label>
+                <input matInput formControlName="cep" placeholder="CEP da testemunha">
+              </mat-form-field>
+              <mat-form-field class="input-medio">
+                <mat-label>Cidade</mat-label>
+                <input matInput formControlName="cidade" placeholder="Cidade da testemunha">
+              </mat-form-field>
+              <mat-form-field class="input-medio">
+                <mat-label>Logradouro</mat-label>
+                <input matInput formControlName="logradouro" placeholder="Logradouro da testemunha">
+              </mat-form-field>
+            </div>
+            <div class="full">
+              <mat-form-field class="input-medio">
+                <mat-label>Número</mat-label>
+                <input matInput formControlName="numero" placeholder="Número da testemunha">
+              </mat-form-field>
+              <mat-form-field class="input-medio">
+                <mat-label>Complemento</mat-label>
+                <input matInput formControlName="complemento" placeholder="Complemento da testemunha">
+              </mat-form-field>
+              <mat-form-field class="input-medio">
+                <mat-label>Bairro</mat-label>
+                <input matInput formControlName="bairro" placeholder="Bairro da testemunha">
+              </mat-form-field>
+            </div>
+          </ng-container>
+        </ng-container>
+        <div class="full">
+          <button mat-raised-button (click)="adicionarTestemunha()" class="botao-criar">Adicionar Testemunha</button>
+        </div>
+      </div>
+
+      <div class="grupo-form">
         <div class="full">
           <h3 class="subtitulo">Finalização</h3>
         </div>
+        <div class="full">
+          <h3 class="titulo-secundario">Assinatura</h3>
+        </div>
+        <div class="full">
+          <!-- Exibe o nome do arquivo selecionado se existir -->
+          <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado }} <button mat-icon-button color="warn"
+              (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
+          <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
+            accept=".pdf,.doc,.docx, image/png" formControlName="assinatura">
+          <button mat-raised-button color="primary" (click)="fileInput.click()">
+            <mat-icon>upload_2</mat-icon>Upload
+          </button>
+          <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx</p>
+        </div>
+        <mat-form-field class="input-grande">
+          <mat-label>Medida Jurídica Cabível</mat-label>
+          <input matInput formControlName="medidaJudicial" placeholder="Medida Jurídica">
+        </mat-form-field>
+        <div class="input-grande">
+          <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados
+            Sensiveis:</mat-checkbox>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Finalização -->
+    <div class="grupo-form">
+      <ng-container formArrayName="historico">
         <ng-container *ngFor="let historicoItem of historico.controls; let i = index" [formGroupName]="i">
           <mat-form-field class="full">
             <mat-label>Histórico</mat-label>
@@ -145,10 +191,7 @@
           </mat-form-field>
         </ng-container>
       </ng-container>
-      <mat-form-field class="full">
-        <mat-label>Medida Jurídica Cabível</mat-label>
-        <input matInput formControlName="medidaJudicial" placeholder="Medida Jurídica">
-      </mat-form-field>
+
       <mat-form-field class="input-pequeno">
         <mat-label>Status</mat-label>
         <mat-select matInput formControlName="status" ngDefaultControl>
@@ -156,31 +199,14 @@
             {{ statu }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="formAtendimentos.get('status')?.errors?.['required']">Status é
+        <mat-error *ngIf="formAtendimentos.get('ficha')?.get('status')?.errors?.['required']">Status é
           obrigatório</mat-error>
       </mat-form-field>
+
       <div class="full">
-        <h3 class="subtitulo">Assinatura</h3>
-      </div>
-      <div class="full">
-        <!-- Exibe o nome do arquivo selecionado se existir -->
-        <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado }} <button mat-icon-button color="warn"
-            (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
-        <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
-          accept=".pdf,.doc,.docx, image/png" formControlName="arquivos">
-        <button mat-raised-button color="primary" (click)="fileInput.click()">
-          <mat-icon>upload_2</mat-icon>Upload
-        </button>
-        <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx</p>
-      </div>
-      <div class="full">
-        <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados
-          Sensiveis:</mat-checkbox>
-      </div>
-      <div class="full">
-        <button mat-raised-button *ngIf="editarComponente === true">Excluir</button>
+        <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
         <button mat-raised-button [disabled]="formAtendimentos.invalid" type="submit"
-          (click)="executarAcao()">Concluir</button>
+          (click)="executarAcao()">Submeter</button>
       </div>
     </div>
   </form>
