@@ -3,7 +3,7 @@ import { Atendimento } from 'src/app/core/types/atendimento';
 import { FormsService } from './../../../core/services/forms.service';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 
 @Component({
@@ -24,6 +24,7 @@ export class AtendimentoEditComponent {
     private formBuilder: FormBuilder,
     private atendimentoService: AtendimentosService,
     private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +50,7 @@ export class AtendimentoEditComponent {
   carregarFormulario() {
     this.form = this.formService.getForm();
     this.form?.patchValue({
+      id: this.atendimento.id,
       status: this.atendimento.status,
       area: this.atendimento.area,
       instante: this.atendimento.instante,
@@ -111,18 +113,21 @@ export class AtendimentoEditComponent {
             qualificacao: fichaCivil.parteContraria.qualificacao,
             telefone: fichaCivil.parteContraria.telefone,
             email: fichaCivil.parteContraria.email,
-            cep: fichaCivil.parteContraria.endereco?.cep,
-            cidade: fichaCivil.parteContraria.endereco?.cidade,
-            numero: fichaCivil.parteContraria.endereco?.numero,
-            logradouro: fichaCivil.parteContraria.endereco?.logradouro,
-            complemento: fichaCivil.parteContraria.endereco?.complemento,
-            bairro: fichaCivil.parteContraria.endereco?.bairro,
+            endereco: {
+              cep: fichaCivil.parteContraria.endereco?.cep,
+              cidade: fichaCivil.parteContraria.endereco?.cidade,
+              numero: fichaCivil.parteContraria.endereco?.numero,
+              logradouro: fichaCivil.parteContraria.endereco?.logradouro,
+              complemento: fichaCivil.parteContraria.endereco?.complemento,
+              bairro: fichaCivil.parteContraria.endereco?.bairro,
+            }
           },
           medidaJudicial: fichaCivil.medidaJudicial
         }
       });
     } else {
       const fichaTrabalhista = this.atendimento.ficha as FichaTrabalhista;
+
       this.form?.patchValue({
         ficha: {
           reclamado: {
@@ -137,6 +142,9 @@ export class AtendimentoEditComponent {
               numero: fichaTrabalhista.reclamado.endereco?.numero,
               complemento: fichaTrabalhista.reclamado.endereco?.complemento
             }
+          },
+          relacaoEmpregaticia: {
+            dataAdmissao: fichaTrabalhista.relacaoEmpregaticia?.dataAdmissao
           }
         }
       });
@@ -144,10 +152,85 @@ export class AtendimentoEditComponent {
   }
 
   editarCivil() {
+    const dadosAtualizados: Atendimento = {
+      "@type": this.form?.value['@type'],
+      status: this.form?.value.status,
+      area: this.form?.value.area,
+      ficha: {
+        "@type": this.form?.value.ficha['@type'],
+        assinatura: this.form?.value.ficha.assinatura,
+        dadosSensiveis: this.form?.value.ficha.dadosSensiveis,
+        testemunhas: this.form?.value.ficha.testemunhas,
+        parteContraria: {
+          nome: this.form?.value.ficha.parteContraria.nome,
+          rg: this.form?.value.ficha.parteContraria.rg,
+          cpf: this.form?.value.ficha.parteContraria.cpf,
+          qualificacao: this.form?.value.ficha.parteContraria.qualificacao,
+          telefone: this.form?.value.ficha.parteContraria.telefone,
+          email: this.form?.value.ficha.parteContraria.email,
+          endereco: {
+            cep: this.form?.value.ficha.parteContraria.endereco?.cep,
+            cidade: this.form?.value.ficha.parteContraria.endereco?.cidade,
+            numero: this.form?.value.ficha.parteContraria.endereco?.numero,
+            logradouro: this.form?.value.ficha.parteContraria.endereco?.logradouro,
+            complemento: this.form?.value.ficha.parteContraria.endereco?.complemento,
+            bairro: this.form?.value.ficha.parteContraria.endereco?.bairro,
+          }
+        },
+        medidaJudicial: this.form?.value.ficha.medidaJudicial,
+      },
+      historico: [{
+        titulo: '',
+        descricao: this.form?.value.historico[0].descricao,
+        criadoPor: {
+          nome: this.form?.value.historico[0].criadoPor.nome,
+        },
+      }],
+      envolvidos: {
+        estagiario: {
+          id: this.form?.value.envolvidos.estagiario.id,
+          nome: this.form?.value.envolvidos.estagiario.nome,
+        },
+        professor: {
+          id: this.form?.value.envolvidos.professor.id,
+          nome: this.form?.value.envolvidos.professor.nome,
+        },
+        secretaria: {
+          id: this.form?.value.envolvidos.secretaria.id,
+          nome: this.form?.value.envolvidos.secretaria.nome,
+        },
+        assistido: {
+          id: this.form?.value.envolvidos.assistido.id,
+          nome: this.form?.value.envolvidos.assistido.nome,
+        },
+      }
+    };
 
+    this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento).subscribe({
+      next: () => {
+        alert('Atendimento atualizado com sucesso!');
+        this.router.navigate(['/atendimentos'])
+      },
+      error: (err) => {
+        alert('Erro ao atualizar atendimento!');
+        console.log('Erro at: ', err);
+      }
+    });
   }
 
   editarTrabalhista() {
 
+  }
+
+  excluir(){
+    this.atendimentoService.excluirAtendimento(this.idAtendimento).subscribe({
+      next: () => {
+        alert('Sucesso ao excluir atendimento!');
+      },
+      error: (err) => {
+        alert('Erro ao excluir atendimento');
+        console.log("Erro ao excluir: ", err);
+      }
+    })
   }
 }

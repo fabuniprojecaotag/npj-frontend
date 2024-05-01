@@ -3,7 +3,7 @@ import { UsuarioCriador } from "./usuario";
 
 export interface Atendimento {
   "@type": string,
-  id: string,
+  id?: string,
   status: string,
   area: string,
   instante?: string,
@@ -15,7 +15,7 @@ export interface Atendimento {
 
 export interface Ficha {
   "@type": string,
-  assinatura: string,
+  assinatura: File | string,
   dadosSensiveis: Boolean,
   testemunhas?: Testemunha[],
 }

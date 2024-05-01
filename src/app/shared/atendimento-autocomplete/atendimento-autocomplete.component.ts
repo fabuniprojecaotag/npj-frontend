@@ -16,7 +16,7 @@ export class AtendimentoAutocompleteComponent {
 
   filteredOptions$?: Observable<Atendimento[]>;
 
-  constructor(private atendimentoService: AtendimentosService){}
+  constructor(private atendimentoService: AtendimentosService) { }
 
   ngOnInit(): void {
     this.atendimentoService.listagemAtendimentos().subscribe(
@@ -31,15 +31,16 @@ export class AtendimentoAutocompleteComponent {
   }
 
   filtrarAtendimento(value: string | Atendimento): Atendimento[] {
-    const idAtendimento = typeof value === 'string' ? value : value?.id;
-    const valorFiltrado = idAtendimento?.toLowerCase();
-    const result = this.atendimento.filter(
-      atendimento => atendimento.id.toLowerCase().includes(valorFiltrado)
-    )
+    const valorFiltrado = (typeof value === 'string') ? value.toLowerCase() : '';
+    const result = this.atendimento.filter(atendimento => {
+      const id = atendimento?.id;
+      return id ? id.toLowerCase().includes(valorFiltrado) : false;
+    });
     return result;
   }
 
-  displayFn (atendimento: Atendimento): string {
+
+  displayFn(atendimento: Atendimento): string {
     return atendimento && atendimento.id ? atendimento.id : '';
   }
 }

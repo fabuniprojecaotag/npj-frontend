@@ -21,6 +21,6 @@ export interface Supervisor {
 
 export interface UsuarioCriador {
   email?: string,
-  nome: string
+  nome: string,
   role?: string,
 }

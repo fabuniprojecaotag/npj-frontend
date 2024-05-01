@@ -28,6 +28,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
   @Input() editarComponente: boolean = false;
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<any> = new EventEmitter();
+  @Output() acaoCliqueExcluir: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,6 +49,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
     });
 
     this.formAtendimentos = this.formBuilder.group({
+      id: [null],
       instante: [new Date()], // não necessario, o back irá retornar
       area: [this.tipoAtendimento],
       status: ['', Validators.required],
@@ -62,13 +64,15 @@ export class FormAtendimentoCivilComponent implements OnInit {
           cpf: [null, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),],
           telefone: [null, [Validators.minLength(11)]],
           email: [null],
-          cep: [null],
-          cidade: [null],
-          logradouro: [null],
-          bairro: [null],
-          numero: [null],
-          complemento: [null],
-          informacoesComplementares: [null]
+          endereco: this.formBuilder.group({
+            cep: [null],
+            cidade: [null],
+            logradouro: [null],
+            bairro: [null],
+            numero: [null],
+            complemento: [null],
+            informacoesComplementares: [null]
+          })
         }),
         medidaJudicial: ['']
       }),
@@ -92,7 +96,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
 
 
   removerArquivoSelecionado(): void {
-    this.formAtendimentos.get('arquivos')?.setValue(null);
+    this.formAtendimentos.get('ficha.assinatura')?.setValue(null);
     this.arquivoSelecionado = null; // Reseta o nome do arquivo selecionado
   }
 
@@ -145,6 +149,6 @@ export class FormAtendimentoCivilComponent implements OnInit {
   }
 
   executarAcaoExcluir() {
-    this.acaoClique.emit();
+    this.acaoCliqueExcluir.emit();
   }
 }
