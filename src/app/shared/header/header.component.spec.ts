@@ -4,10 +4,10 @@ import { HeaderComponent } from './header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { NavMenuComponent } from '../nav-menu/nav-menu.component';
-import { UserMenuComponent } from '../user-menu/user-menu.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { UserMenuComponent } from './user-menu/user-menu.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { NavItemComponent } from '../nav-menu/nav-item/nav-item.component';
+import { NavItemComponent } from './nav-menu/nav-item/nav-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 

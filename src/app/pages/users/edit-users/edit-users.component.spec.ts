@@ -5,9 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component';
 import { FormUsersComponent } from 'src/app/shared/form-users/form-users.component';
-import { NavMenuComponent } from 'src/app/shared/nav-menu/nav-menu.component';
-import { UserMenuComponent } from 'src/app/shared/user-menu/user-menu.component';
-import { NavItemComponent } from 'src/app/shared/nav-menu/nav-item/nav-item.component';
+import { NavMenuComponent } from 'src/app/shared/header/nav-menu/nav-menu.component';
+import { UserMenuComponent } from 'src/app/shared/header/user-menu/user-menu.component';
+import { NavItemComponent } from 'src/app/shared/header/nav-menu/nav-item/nav-item.component';
 import { AppModule } from 'src/app/app.module';
 
 describe('EditUsersComponent', () => {

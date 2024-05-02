@@ -167,11 +167,9 @@
         </div>
         <div class="full">
           <!-- Exibe o nome do arquivo selecionado se existir -->
-          <p *ngIf="arquivoSelecionado !== null">{{ arquivoSelecionado.name }} <button mat-icon-button color="warn"
+          <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado.name }} <button mat-icon-button color="warn"
               (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
-          <input type="file" #fileInput hidden (change)="onFileSelected($event)"
-            ccept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-            formControlName="assinatura">
+          <input type="file" #fileInput hidden (change)="onFileSelected($event)">
           <button mat-raised-button color="primary" (click)="fileInput.click()">
             <mat-icon>upload_2</mat-icon>Upload
           </button>
@@ -209,12 +207,11 @@
         <mat-error *ngIf="formAtendimentos.get('ficha')?.get('status')?.errors?.['required']">Status é
           obrigatório</mat-error>
       </mat-form-field>
-
-      <div class="full">
-        <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
-        <button mat-raised-button [disabled]="formAtendimentos.invalid" type="submit"
-          (click)="executarAcao()">Submeter</button>
-      </div>
+    </div>
+    <div class="full">
+      <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
+      <button mat-raised-button [disabled]="formAtendimentos.invalid" type="submit"
+        (click)="executarAcao()">Submeter</button>
     </div>
   </form>
 </section>

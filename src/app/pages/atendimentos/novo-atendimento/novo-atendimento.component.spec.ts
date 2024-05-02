@@ -7,10 +7,10 @@ import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component'
 import { FormAtendimentoCivilComponent } from 'src/app/shared/form-atendimento-civil/form-atendimento-civil.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { NavMenuComponent } from 'src/app/shared/nav-menu/nav-menu.component';
-import { UserMenuComponent } from 'src/app/shared/user-menu/user-menu.component';
+import { NavMenuComponent } from 'src/app/shared/header/nav-menu/nav-menu.component';
+import { UserMenuComponent } from 'src/app/shared/header/user-menu/user-menu.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { NavItemComponent } from 'src/app/shared/nav-menu/nav-item/nav-item.component';
+import { NavItemComponent } from 'src/app/shared/header/nav-menu/nav-item/nav-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';

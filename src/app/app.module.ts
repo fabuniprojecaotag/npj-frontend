@@ -20,8 +20,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
-import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
-import { UserMenuComponent } from './shared/user-menu/user-menu.component';
+import { NavMenuComponent } from './shared/header/nav-menu/nav-menu.component';
+import { UserMenuComponent } from './shared/header/user-menu/user-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
@@ -50,9 +50,9 @@ import { ModalExcluidoComponent } from './shared/modal-excluido/modal-excluido.c
 import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assistidos-edit.component';
 import { AssistidosShortcutsComponent } from './pages/assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 import { CardAtalhosComponent } from './shared/card-atalhos/card-atalhos.component';
-import { CardAtendimentosComponent } from './shared/card-atendimentos/card-atendimentos.component';
+import { ModalAtalhosComponent } from './shared/modal-atalhos/modal-atalhos.component';
 import { FormAtendimentoCivilComponent } from './shared/form-atendimento-civil/form-atendimento-civil.component';
-import { NavItemComponent } from './shared/nav-menu/nav-item/nav-item.component';
+import { NavItemComponent } from './shared/header/nav-menu/nav-item/nav-item.component';
 import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
 import { NovoAtendimentoComponent } from './pages/atendimentos/novo-atendimento/novo-atendimento.component';
 import { ProcessosComponent } from './pages/processos/processos.component';
@@ -69,9 +69,10 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AssistidoAutocompleteComponent } from './shared/assistido-autocomplete/assistido-autocomplete.component';
 import { ModalProcessoCriadoComponent } from './shared/modal-processo-criado/modal-processo-criado.component';
 import { ModalExcluirProcessoComponent } from './shared/modal-excluir-processo/modal-excluir-processo.component';
-import { AtendimentoAutocompleteComponent } from './shared/atendimento-autocomplete/atendimento-autocomplete.component';
+import { AtendimentoAutocompleteComponent } from './shared/form-processo/atendimento-autocomplete/atendimento-autocomplete.component';
 import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
 import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.component';
+import { CardAtendimentosComponent } from './shared/modal-atalhos/card-atendimentos/card-atendimentos.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,7 @@ import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.co
     AssistidosEditComponent,
     AssistidosShortcutsComponent,
     CardAtalhosComponent,
-    CardAtendimentosComponent,
+    ModalAtalhosComponent,
     FormAtendimentoCivilComponent,
     NovoAtendimentoComponent,
     NavItemComponent,
@@ -113,6 +114,7 @@ import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.co
     AtendimentoAutocompleteComponent,
     AtendimentoEditComponent,
     NaoEncontradaComponent,
+    CardAtendimentosComponent,
   ],
   imports: [
     BrowserModule,

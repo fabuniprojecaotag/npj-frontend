@@ -1,0 +1,15 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: -webkit-fill-available;
+  margin: 0.5em;
+
+  &__titulo {
+    font-weight: bold;
+  }
+
+  &__botoes {
+    padding: 0 24px 9px;
+  }
+}

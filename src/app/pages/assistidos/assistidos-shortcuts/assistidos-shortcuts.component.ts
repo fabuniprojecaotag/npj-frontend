@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
+import { Atendimento } from 'src/app/core/types/atendimento';
+import { Processo } from 'src/app/core/types/processo';
+import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
 
 @Component({
   selector: 'app-assistidos-shortcuts',
@@ -11,10 +15,13 @@ export class AssistidosShortcutsComponent implements OnInit {
   tituloDaPagina: string;
   nomeAssistido!: string;
   cpf!: string;
+  listaAtendimento: Atendimento[] = [];
+  listaProcesso: Processo[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private assistidosService: AssistidosService
+    private assistidosService: AssistidosService,
+    private dialog: MatDialog
   ) {
     this.tituloDaPagina = 'Assisitido - ';
   }
@@ -30,6 +37,22 @@ export class AssistidosShortcutsComponent implements OnInit {
       error: () => {
         alert('Erro ao procurar assistido');
       },
+    });
+  }
+
+  abrirModalAtendimento() {
+    this.dialog.open(ModalAtalhosComponent, {
+      width: '1200px',
+      height: '650px',
+      data: { titulo: 'Atendimentos',lista: this.listaAtendimento }
+    });
+  }
+
+  abrirModalProcesso() {
+    this.dialog.open(ModalAtalhosComponent, {
+      width: '1200px',
+      height: '650px',
+      data: { titulo: 'Processos',lista: this.listaProcesso }
     });
   }
 }
