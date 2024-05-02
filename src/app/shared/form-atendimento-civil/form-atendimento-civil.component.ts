@@ -22,7 +22,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
   professorControl: FormControl = new FormControl();
   secretariaControl: FormControl = new FormControl();
   assistidoControl: FormControl = new FormControl(null, Validators.required);
-  arquivoSelecionado: File | null = null; // Variável para armazenar o nome do arquivo selecionado
+  arquivoSelecionado: File | null = null;
 
   @Input() tipoAtendimento!: string;
   @Input() editarComponente: boolean = false;
@@ -49,7 +49,6 @@ export class FormAtendimentoCivilComponent implements OnInit {
     });
 
     this.formAtendimentos = this.formBuilder.group({
-      id: [null],
       instante: [new Date()], // não necessario, o back irá retornar
       area: [this.tipoAtendimento],
       status: ['', Validators.required],
@@ -72,9 +71,10 @@ export class FormAtendimentoCivilComponent implements OnInit {
             numero: [null],
             complemento: [null],
             informacoesComplementares: [null]
-          })
+          }),
+          informacoesComplementares: [null]
         }),
-        medidaJudicial: ['']
+        medidaJudicial: [null]
       }),
       historico: this.formBuilder.array([this.criarGrupoHistorico()]),
       envolvidos: this.formBuilder.group({
@@ -89,15 +89,12 @@ export class FormAtendimentoCivilComponent implements OnInit {
   }
 
   onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
-    this.arquivoSelecionado = file;
-    this.formAtendimentos.get('ficha.assinatura')?.setValue(file);
+    this.arquivoSelecionado = <File>event.target.files[0] ?? null;
   }
 
-
   removerArquivoSelecionado(): void {
-    this.formAtendimentos.get('ficha.assinatura')?.setValue(null);
-    this.arquivoSelecionado = null; // Reseta o nome do arquivo selecionado
+    this.arquivoSelecionado = null;
+    this.formAtendimentos.get('ficha.assinatura')?.setValue(this.arquivoSelecionado);
   }
 
   /* funções para arrays */

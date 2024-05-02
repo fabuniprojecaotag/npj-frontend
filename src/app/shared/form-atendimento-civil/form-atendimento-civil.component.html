@@ -167,10 +167,11 @@
         </div>
         <div class="full">
           <!-- Exibe o nome do arquivo selecionado se existir -->
-          <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado }} <button mat-icon-button color="warn"
+          <p *ngIf="arquivoSelecionado !== null">{{ arquivoSelecionado.name }} <button mat-icon-button color="warn"
               (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
-          <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
-            accept=".pdf,.doc,.docx, image/png" formControlName="assinatura">
+          <input type="file" #fileInput hidden (change)="onFileSelected($event)"
+            ccept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            formControlName="assinatura">
           <button mat-raised-button color="primary" (click)="fileInput.click()">
             <mat-icon>upload_2</mat-icon>Upload
           </button>

@@ -36,9 +36,10 @@
     }
 
     .full {
-      align-items: center;
+      align-content: center;
       display: flex;
       flex: inherit inherit inherit;
+      flex-wrap: wrap;
       gap: 20px;
       width: 100%;
 

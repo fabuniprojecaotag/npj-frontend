@@ -67,9 +67,18 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
         }),
         relacaoEmpregaticia: this.formBuilder.group({
           dataAdmissao: [null],
-          dataSaida: [null]
+          dataSaida: [null],
+          funcaoExercida: [null],
+          valorSalarioCtps: [null],
+          salarioAnotadoCtps: [false],
+          valorUltimaRemuneracao: [null],
+          ctpsAssinadaCerto: [false],
+          dispensa: [null],
+          jornadaTrabalho: [null],
+          tempoAlmoco: [null],
+          faziaHorasExtras: [false],
         }),
-        testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()])
+        testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()]),
       }),
       historico: this.formBuilder.array([this.criarGrupoHistorico()]),
       envolvidos: this.formBuilder.group({

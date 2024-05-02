@@ -144,7 +144,16 @@ export class AtendimentoEditComponent {
             }
           },
           relacaoEmpregaticia: {
-            dataAdmissao: fichaTrabalhista.relacaoEmpregaticia?.dataAdmissao
+            dataAdmissao: fichaTrabalhista.relacaoEmpregaticia?.dataAdmissao,
+            dataSaida: fichaTrabalhista.relacaoEmpregaticia?.dataSaida,
+            funcaoExercida: fichaTrabalhista.relacaoEmpregaticia?.funcaoExercida,
+            valorSalarioCtps: fichaTrabalhista.relacaoEmpregaticia?.valorSalarioCtps,
+            salarioAnotadoCtps: fichaTrabalhista.relacaoEmpregaticia?.salarioAnotadoCtps,
+            valorUltimaRemuneracao: fichaTrabalhista.relacaoEmpregaticia?.valorUltimaRemuneracao,
+            ctpsAssinadaCerto: fichaTrabalhista.relacaoEmpregaticia?.ctpsAssinadaCerto,
+            dispensa: fichaTrabalhista.relacaoEmpregaticia?.dispensa,
+            jornadaTrabalho: fichaTrabalhista.relacaoEmpregaticia?.jornadaTrabalho,
+            tempoAlmoco: fichaTrabalhista.relacaoEmpregaticia?.tempoAlmoco,
           }
         }
       });
@@ -209,7 +218,9 @@ export class AtendimentoEditComponent {
     this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento).subscribe({
       next: () => {
         alert('Atendimento atualizado com sucesso!');
-        this.router.navigate(['/atendimentos'])
+        this.router.navigate(['/atendimentos']);
+        console.log(dadosAtualizados);
+
       },
       error: (err) => {
         alert('Erro ao atualizar atendimento!');
