@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/core/types/usuario';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
+import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 
 @Component({
   selector: 'app-edit-users',
@@ -14,9 +15,11 @@ import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excl
 })
 export class EditUsersComponent implements OnInit {
   tituloDaPagina: string = 'Editar Usuário';
-  form!: FormGroup<any> | null;
   cadastro!: Usuario;
+  errorMessage!: string;
+  form!: FormGroup<any> | null;
   idParam = this.route.snapshot.paramMap.get('id') as string;
+  subtituloErro = "Erro ao Editar";
 
   constructor(
     private router: Router,
@@ -25,7 +28,7 @@ export class EditUsersComponent implements OnInit {
     private formUserService: FormsService,
     private cadastroService: CadastroService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.usuarioService.buscarCadastro(this.idParam).subscribe((usuario) => {
@@ -75,7 +78,41 @@ export class EditUsersComponent implements OnInit {
           this.router.navigate(['/users']);
         },
         error: (err) => {
-          alert('Erro ao atualizar usuário!');
+          switch (err.status) {
+            case 401: {
+              this.errorMessage = "Não Autorizado!";
+              this.mostrarMensagemErro('401', this.errorMessage);
+              break;
+            }
+            case 403: {
+              this.errorMessage = "Cadastro não foi aceito no servidor!";
+              this.mostrarMensagemErro('403', this.errorMessage);
+              break;
+            }
+            case 404: {
+              this.errorMessage = "Recurso não encontrado!";
+              this.mostrarMensagemErro('404', this.errorMessage);
+              break;
+            }
+            case 408: {
+              this.errorMessage = "Servidor demorou muito para respoonder!";
+              this.mostrarMensagemErro('408', this.errorMessage);
+              break;
+            }
+            case 422: {
+              this.errorMessage = `Padrão não correspondente ao do servidor!<br>`;
+              err.error.errors.forEach((error: any) => {
+                this.errorMessage += `${error.field}: ${error.message}<br>`;
+              });
+              this.mostrarMensagemErro('422', this.errorMessage);
+              break;
+            }
+            default: {
+              this.errorMessage = `Por favor tente mais tarde!`;
+              this.mostrarMensagemErro('Desconhecido', this.errorMessage);
+              break;
+            }
+          }
         },
       });
   }
@@ -101,5 +138,14 @@ export class EditUsersComponent implements OnInit {
         deletar: () => this.excluir(user.id),
       },
     });
+  }
+
+  mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
+    this.dialog.open(ModalErrosComponent, {
+      width: '552px',
+      height: '360px',
+      position: { top: '0' },
+      data: { codigoErro: codigoErro, subtituloErro: this.subtituloErro, mensagemErro: mensagemErro }
+    })
   }
 }

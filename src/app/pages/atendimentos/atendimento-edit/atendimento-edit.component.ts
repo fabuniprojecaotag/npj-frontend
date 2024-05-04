@@ -66,12 +66,9 @@ export class AtendimentoEditComponent {
       "@type": this.form?.value['@type'],
       status: this.form?.value.status,
       area: this.form?.value.area,
-      ficha: this.atendimento.ficha,
-      historico: this.atendimento.historico?.map(item => {
-        const { id, ...rest } = item;
-        return rest;
-      }),
-      envolvidos: this.atendimento.envolvidos
+      ficha: this.form?.value.ficha,
+      historico: this.form?.value.historico,
+      envolvidos: this.form?.value.envolvidos
     };
 
     this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento).subscribe({
