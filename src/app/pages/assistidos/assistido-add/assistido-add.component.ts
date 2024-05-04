@@ -5,6 +5,7 @@ import { AssistidosService } from 'src/app/core/services/assistidos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Assistido } from 'src/app/core/types/assistido';
 import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.component';
+import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 
 @Component({
   selector: 'app-assistido-add',
@@ -32,29 +33,40 @@ export class AssistidoAddComponent {
           this.router.navigate(['/assistidos']);
         },
         error: (err) => {
-          switch(err.status) {
+          let errorMessage: string = '';
+
+          switch (err.status) {
             case 401: {
-              alert("Erro 401!\nErro ao Cadastrar! Não Autorizado!");
+              errorMessage = "Não Autorizado!";
+              this.mostrarMensagemErro('401', errorMessage);
               break;
             }
             case 403: {
-              alert("Erro 403!\nErro ao Cadastrar! Cadastro não foi aceito no servidor!");
+              errorMessage = "Cadastro não foi aceito no servidor!";
+              this.mostrarMensagemErro('403', errorMessage);
               break;
             }
             case 404: {
-              alert("Erro 404!\nErro ao Cadastrar! Recurso não encontrado!");
+              errorMessage = "Recurso não encontrado!";
+              this.mostrarMensagemErro('404', errorMessage);
               break;
             }
             case 408: {
-              alert("Erro 408!\nErro ao Cadastrar! Servidor demorou muito para respoonder!");
+              errorMessage = "Servidor demorou muito para responder!";
+              this.mostrarMensagemErro('408', errorMessage);
               break;
             }
             case 422: {
-              alert(`Erro 422!\nErro ao Cadastrar! Padrão não correspondente ao servidor!\n${err.message}`);
+              errorMessage = `Padrão não correspondente ao do servidor!<br>`;
+              err.error.errors.forEach((error: any) => {
+                errorMessage += `${error.field}: ${error.message}<br>`;
+              });
+              this.mostrarMensagemErro('422', errorMessage);
               break;
             }
             default: {
-              alert(`Erro Desconhecido!\nErro ao Cadastrar!\n Por favor tente mais tarde!`);
+              errorMessage = `Por favor tente mais tarde!`;
+              this.mostrarMensagemErro('Desconhecido', errorMessage);
               break;
             }
           }
@@ -68,6 +80,17 @@ export class AssistidoAddComponent {
       width: '552px',
       height: '360px',
       data: { tituloCriado: 'Assistido', nome: novoAssistido.nome, email: novoAssistido.email }
+    })
+  }
+
+  mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
+    let subtituloErro = 'Erro ao cadastrar';
+
+    this.dialog.open(ModalErrosComponent, {
+      width: '552px',
+      height: '360px',
+      position: { top: '0' },
+      data: { codigoErro: codigoErro, subtituloErro: subtituloErro, mensagemErro: mensagemErro }
     })
   }
 }

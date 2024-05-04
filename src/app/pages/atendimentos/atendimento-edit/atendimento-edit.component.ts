@@ -78,7 +78,6 @@ export class AtendimentoEditComponent {
       next: () => {
         alert('Atendimento atualizado com sucesso!');
         this.router.navigate(['/atendimentos']);
-        console.log(dadosAtualizados);
       },
       error: (err) => {
         let errorMessage: string = '';
@@ -137,6 +136,7 @@ export class AtendimentoEditComponent {
 
   mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
     let subtituloErro = 'Erro ao editar';
+    
     this.dialog.open(ModalErrosComponent, {
       width: '552px',
       height: '360px',
