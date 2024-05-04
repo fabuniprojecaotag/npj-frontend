@@ -31,8 +31,33 @@ export class AssistidoAddComponent {
           this.abrirModal(value);
           this.router.navigate(['/assistidos']);
         },
-        error: () => {
-          alert('Erro ao realizar cadastro!');
+        error: (err) => {
+          switch(err.status) {
+            case 401: {
+              alert("Erro 401!\nErro ao Cadastrar! Não Autorizado!");
+              break;
+            }
+            case 403: {
+              alert("Erro 403!\nErro ao Cadastrar! Cadastro não foi aceito no servidor!");
+              break;
+            }
+            case 404: {
+              alert("Erro 404!\nErro ao Cadastrar! Recurso não encontrado!");
+              break;
+            }
+            case 408: {
+              alert("Erro 408!\nErro ao Cadastrar! Servidor demorou muito para respoonder!");
+              break;
+            }
+            case 422: {
+              alert(`Erro 422!\nErro ao Cadastrar! Padrão não correspondente ao servidor!\n${err.message}`);
+              break;
+            }
+            default: {
+              alert(`Erro Desconhecido!\nErro ao Cadastrar!\n Por favor tente mais tarde!`);
+              break;
+            }
+          }
         },
       });
     }

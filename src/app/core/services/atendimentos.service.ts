@@ -31,7 +31,4 @@ export class AtendimentosService {
   excluirAtendimento(idAtendimento: string): Observable<Atendimento> {
     return this.http.delete<Atendimento>(`${this.API}/atendimentos/${idAtendimento}`);
   }
-  getApiUrl(): string {
-    return this.API;
-  }
 }

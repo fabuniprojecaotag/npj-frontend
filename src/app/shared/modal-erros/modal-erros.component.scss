@@ -1,0 +1,33 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  height: -webkit-fill-available;
+  margin: 1em;
+
+  h4 {
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 0.8em;
+    text-align: center;
+  }
+
+  h5 {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  &__conteudo {
+    flex-grow: 3;
+    p {
+      padding-bottom: 0.7em;
+    }
+  }
+
+  &__botoes {
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

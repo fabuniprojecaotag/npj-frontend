@@ -1,0 +1,10 @@
+<section class="modal">
+  <h4 mat-dialog-title>Erro {{ data.codigoErro }}</h4>
+  <h5 mat-dialog-subtitle>{{ data.subtituloErro }}</h5>
+  <div class="modal__conteudo" [innerHTML]="data.mensagemErro">
+
+  </div>
+  <div class="modal__botoes">
+    <button mat-button mat-dialog-close>OK</button>
+  </div>
+</section>

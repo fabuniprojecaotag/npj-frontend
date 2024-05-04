@@ -73,6 +73,7 @@ import { AtendimentoAutocompleteComponent } from './shared/form-processo/atendim
 import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
 import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.component';
 import { CardAtendimentosComponent } from './shared/modal-atalhos/card-atendimentos/card-atendimentos.component';
+import { ModalErrosComponent } from './shared/modal-erros/modal-erros.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { CardAtendimentosComponent } from './shared/modal-atalhos/card-atendimen
     AtendimentoEditComponent,
     NaoEncontradaComponent,
     CardAtendimentosComponent,
+    ModalErrosComponent,
   ],
   imports: [
     BrowserModule,

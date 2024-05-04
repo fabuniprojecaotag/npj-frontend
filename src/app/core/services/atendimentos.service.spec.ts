@@ -1,31 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AtendimentosService } from './atendimentos.service';
-import { Atendimento } from '../types/atendimento';
 
-describe('AtendimentosService', () => {
-  let service: AtendimentosService;
-  let httpTestingController: HttpTestingController;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [AtendimentosService]
-    });
-
-    service = TestBed.inject(AtendimentosService);
-    httpTestingController = TestBed.inject(HttpTestingController);
-  });
-
-  afterEach(() => {
-    httpTestingController.verify();
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  const mockAtendimento: Atendimento = {
+const mockData = {
+  api: 'http://localhost:8080/usuários',
+  atendimento: {
     "@type": "TipoAtendimento",
     id: "ATE00001",
     status: "Aguardando documentos",
@@ -33,7 +12,25 @@ describe('AtendimentosService', () => {
     instante: "4 de março de 2024 às 22:58:48 UTC-3",
     ficha: {
       "@type": "TipoFichaCivil",
-      assinatura: "inseret Assistido",
+      assinatura: {
+        lastModified: 0,
+        name: '',
+        size: 0,
+        type: '',
+        webkitRelativePath: '',
+        arrayBuffer: function (): Promise<ArrayBuffer> {
+          throw new Error('Function not implemented.');
+        },
+        slice: function (start?: number | undefined, end?: number | undefined, contentType?: string | undefined): Blob {
+          throw new Error('Function not implemented.');
+        },
+        stream: function (): ReadableStream<Uint8Array> {
+          throw new Error('Function not implemented.');
+        },
+        text: function (): Promise<string> {
+          throw new Error('Function not implemented.');
+        }
+      },
       dadosSensiveis: false,
       parteContraria: {
         nome: "Nome Parte Contrária",
@@ -72,61 +69,84 @@ describe('AtendimentosService', () => {
       secretaria: { id: "1", nome: "" },
       assistido: { id: "1", nome: "" }
     }
-  };
+  }
+};
+
+describe('AtendimentosService', () => {
+  let service: AtendimentosService;
+  let httpTestingController: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [AtendimentosService]
+    });
+
+    service = TestBed.inject(AtendimentosService);
+    httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 
   it('should retrieve list of atendimentos from API via GET', () => {
     service.listagemAtendimentos().subscribe(atendimentos => {
-      expect(atendimentos).toEqual([mockAtendimento]);
+      expect(atendimentos).toEqual([mockData.atendimento]);
     });
 
-    const req = httpTestingController.expectOne(`${service.getApiUrl()}/atendimentos`);
+    const req = httpTestingController.expectOne(`/atendimentos`);
     expect(req.request.method).toBe('GET');
-    req.flush([mockAtendimento]);
+    req.flush([mockData.atendimento]);
   });
 
   it('should retrieve a specific atendimento from API via GET', () => {
     const idAtendimento = 'ATE00001';
 
     service.consultaAtendimento(idAtendimento).subscribe(atendimento => {
-      expect(atendimento).toEqual(mockAtendimento);
+      expect(atendimento).toEqual(mockData.atendimento);
     });
 
-    const req = httpTestingController.expectOne(`${service.getApiUrl()}}/atendimentos/${idAtendimento}`);
+    const req = httpTestingController.expectOne(`${mockData.api}/atendimentos/${idAtendimento}`);
     expect(req.request.method).toBe('GET');
-    req.flush(mockAtendimento);
+    req.flush(mockData.atendimento);
   });
 
   it('should create a new atendimento via POST', () => {
-    service.cadastrarAtendimento(mockAtendimento).subscribe(atendimento => {
-      expect(atendimento).toEqual(mockAtendimento);
+    service.cadastrarAtendimento(mockData.atendimento).subscribe(atendimento => {
+      expect(atendimento).toEqual(mockData.atendimento);
     });
 
-    const req = httpTestingController.expectOne(`${service.getApiUrl()}/atendimentos`);
+    const req = httpTestingController.expectOne(`${mockData.api}/atendimentos`);
     expect(req.request.method).toBe('POST');
-    req.flush(mockAtendimento);
+    req.flush(mockData.atendimento);
   });
 
   it('should update an existing atendimento via PUT', () => {
     const idAtendimento = 'ATE00001';
 
-    service.atualizarAtendimento(mockAtendimento, idAtendimento).subscribe(atendimento => {
-      expect(atendimento).toEqual(mockAtendimento);
+    service.atualizarAtendimento(mockData.atendimento, idAtendimento).subscribe(atendimento => {
+      expect(atendimento).toEqual(mockData.atendimento);
     });
 
-    const req = httpTestingController.expectOne(`${service.getApiUrl()}/atendimentos/${idAtendimento}`);
+    const req = httpTestingController.expectOne(`${mockData.api}/atendimentos/${idAtendimento}`);
     expect(req.request.method).toBe('PUT');
-    req.flush(mockAtendimento);
+    req.flush(mockData.atendimento);
   });
 
   it('should delete an existing atendimento via DELETE', () => {
     const idAtendimento = 'ATE00001';
 
     service.excluirAtendimento(idAtendimento).subscribe(atendimento => {
-      expect(atendimento).toEqual(mockAtendimento);
+      expect(atendimento).toEqual(mockData.atendimento);
     });
 
-    const req = httpTestingController.expectOne(`${service.getApiUrl()}/atendimentos/${idAtendimento}`);
+    const req = httpTestingController.expectOne(`${mockData.api}/atendimentos/${idAtendimento}`);
     expect(req.request.method).toBe('DELETE');
-    req.flush(mockAtendimento);
+    req.flush(mockData.atendimento);
   });
 });
