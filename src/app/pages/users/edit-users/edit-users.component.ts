@@ -95,7 +95,7 @@ export class EditUsersComponent implements OnInit {
               break;
             }
             case 408: {
-              this.errorMessage = "Servidor demorou muito para respoonder!";
+              this.errorMessage = "Servidor demorou muito para responder!";
               this.mostrarMensagemErro('408', this.errorMessage);
               break;
             }

@@ -29,6 +29,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   @Input() editarComponente: boolean = false;
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<any> = new EventEmitter();
+  @Output() acaoCliqueExcluir: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -94,6 +95,10 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
 
   executarAcao() {
     this.acaoClique.emit();
+  }
+
+  executarAcaoExcluir() {
+    this.acaoCliqueExcluir.emit();
   }
 
   onFileSelected(event: any): void {

@@ -5,5 +5,5 @@
     [editarComponente]="true" />
 </ng-container>
 <ng-template #formTrabalhista>
-  <app-form-atendimento-trabalhista (acaoClique)="editar()" [editarComponente]="true" />
+  <app-form-atendimento-trabalhista (acaoClique)="editar()" (acaoCliqueExcluir)="excluir()" [editarComponente]="true" />
 </ng-template>

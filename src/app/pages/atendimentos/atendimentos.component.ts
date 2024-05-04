@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
+import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 
 @Component({
   selector: 'app-atendimentos',
@@ -15,7 +17,7 @@ export class AtendimentosComponent implements AfterViewInit {
   dataSource: any;
   colunasMostradas: string[] = ['id', 'tipo', 'status', 'dataDeCriacao'];
 
-  constructor(private atendimentoService: AtendimentosService) {}
+  constructor(private atendimentoService: AtendimentosService, private dialog: MatDialog) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -28,8 +30,30 @@ export class AtendimentosComponent implements AfterViewInit {
         );
         this.dataSource.paginator = this.paginator;
       },
-      error: () => {
-        alert('Erro ao listar atendimentos');
+      error: (err) => {
+        let errorMessage = '';
+        switch (err.status) {
+          case 401: {
+            errorMessage = "Não Autorizado!";
+            this.mostrarMensagemErro('401', errorMessage);
+            break;
+          }
+          case 404: {
+            errorMessage = "Recurso não encontrado!";
+            this.mostrarMensagemErro('404', errorMessage);
+            break;
+          }
+          case 408: {
+            errorMessage = "Servidor demorou muito para responder!";
+            this.mostrarMensagemErro('408', errorMessage);
+            break;
+          }
+          default: {
+            errorMessage = `Por favor tente mais tarde!`;
+            this.mostrarMensagemErro('Desconhecido', errorMessage);
+            break;
+          }
+        }
       },
     });
   }
@@ -41,5 +65,15 @@ export class AtendimentosComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
+    let subtituloErro = 'Erro ao listar';
+    this.dialog.open(ModalErrosComponent, {
+      width: '552px',
+      height: '360px',
+      position: { top: '0' },
+      data: { codigoErro: codigoErro, subtituloErro: subtituloErro, mensagemErro: mensagemErro }
+    })
   }
 }

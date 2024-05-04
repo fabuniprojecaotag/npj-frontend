@@ -1,9 +1,11 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
+import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 
 @Component({
   selector: 'app-users',
@@ -23,7 +25,9 @@ export class UsersComponent implements AfterViewInit {
     'status',
   ];
   selection = new SelectionModel<Usuario>(true, []);
-  constructor(private service: CadastroService) {}
+  subtituloErro = "Erro ao listar";
+
+  constructor(private service: CadastroService, private dialog: MatDialog) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -41,8 +45,30 @@ export class UsersComponent implements AfterViewInit {
         this.dataSource = new MatTableDataSource<Usuario>(this.listaUsuarios);
         this.dataSource.paginator = this.paginator;
       },
-      error: () => {
-        alert('Erro ao listar usuários');
+      error: (err) => {
+        let errorMessage = '';
+        switch (err.status) {
+          case 401: {
+            errorMessage = "Não Autorizado!";
+            this.mostrarMensagemErro('401', errorMessage);
+            break;
+          }
+          case 404: {
+            errorMessage = "Recurso não encontrado!";
+            this.mostrarMensagemErro('404', errorMessage);
+            break;
+          }
+          case 408: {
+            errorMessage = "Servidor demorou muito para responder!";
+            this.mostrarMensagemErro('408', errorMessage);
+            break;
+          }
+          default: {
+            errorMessage = `Por favor tente mais tarde!`;
+            this.mostrarMensagemErro('Desconhecido', errorMessage);
+            break;
+          }
+        }
       },
     });
   }
@@ -68,5 +94,14 @@ export class UsersComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
+    this.dialog.open(ModalErrosComponent, {
+      width: '552px',
+      height: '360px',
+      position: { top: '0' },
+      data: { codigoErro: codigoErro, subtituloErro: this.subtituloErro, mensagemErro: mensagemErro }
+    })
   }
 }
