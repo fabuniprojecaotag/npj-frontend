@@ -18,14 +18,12 @@ export class UsersComponent implements AfterViewInit {
   dataSource: any;
   colunasMostradas: string[] = [
     'select',
-    'matricula',
+    'id',
     'nome',
     'role',
-    'semestre',
     'status',
   ];
   selection = new SelectionModel<Usuario>(true, []);
-  subtituloErro = "Erro ao listar";
 
   constructor(private service: CadastroService, private dialog: MatDialog) {}
 
@@ -97,11 +95,13 @@ export class UsersComponent implements AfterViewInit {
   }
 
   mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
+    let subtituloErro = "Erro ao listar";
+
     this.dialog.open(ModalErrosComponent, {
       width: '552px',
       height: '360px',
       position: { top: '0' },
-      data: { codigoErro: codigoErro, subtituloErro: this.subtituloErro, mensagemErro: mensagemErro }
+      data: { codigoErro: codigoErro, subtituloErro: subtituloErro, mensagemErro: mensagemErro }
     })
   }
 }
