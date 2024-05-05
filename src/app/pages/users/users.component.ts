@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
+import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 
 @Component({
   selector: 'app-users',
@@ -21,8 +22,8 @@ export class UsersComponent implements AfterViewInit {
     'id',
     'nome',
     'role',
-    'status',
     'edicao',
+    'exclusao'
   ];
   selection = new SelectionModel<Usuario>(true, []);
 
@@ -104,5 +105,28 @@ export class UsersComponent implements AfterViewInit {
       position: { top: '0' },
       data: { codigoErro: codigoErro, subtituloErro: subtituloErro, mensagemErro: mensagemErro }
     })
+  }
+
+  abrirModalExcluir(user: Usuario) {
+    this.dialog.open(ModalExcluidoComponent, {
+      width: '372px',
+      height: '228px',
+      data: {
+        tituloCriado: 'Usuário',
+        nome: user.nome,
+        deletar: () => this.excluir(user.id),
+      },
+    });
+  }
+
+  excluir(idCadastro: string) {
+    this.service.excluirCadastro(idCadastro).subscribe({
+      next: () => {
+        window.location.reload();
+      },
+      error: () => {
+        alert('Erro ao excluir o usuário!');
+      },
+    });
   }
 }
