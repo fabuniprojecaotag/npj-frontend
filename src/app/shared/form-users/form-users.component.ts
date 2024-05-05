@@ -25,7 +25,9 @@ export class FormUsersComponent implements OnInit {
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
   @Output() acaoClique2: EventEmitter<any> = new EventEmitter<any>();
   @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
-  supervisorControl: FormControl<Usuario | null> = new FormControl<Usuario | null>({value: null, disabled: this.myProfileComponente});
+
+  cadastrarSenhaControl: FormControl<boolean | null> = new FormControl<boolean | null>(false);
+  supervisorControl: FormControl<Usuario | null> = new FormControl<Usuario | null>({ value: null, disabled: this.myProfileComponente });
 
 
   constructor(
@@ -40,14 +42,15 @@ export class FormUsersComponent implements OnInit {
       matricula: [null],
       nome: [null, Validators.required],
       email: [null, [Validators.required, Validators.email, formValidations.domainValidator]],
+      confirmarEmail: [null],
       supervisor: this.supervisorControl,
       semestre: [null],
       unidadeInstitucional: [null, Validators.required],
       status: [{ value: true, disabled: this.myProfileComponente }],
+      cadastrarSenha: this.cadastrarSenhaControl,
       senha: [null, Validators.required],
+      confirmarSenha: [null],
       role: [{ value: null, disabled: this.myProfileComponente }, Validators.required],
-      confirmarEmail: [null, [Validators.required, Validators.email, formValidations.equalTo('email'), formValidations.domainValidator]],
-      confirmarSenha: [null, [Validators.required, Validators.minLength(3), formValidations.equalTo('senha')]],
     });
 
     this.formCadastro.get('role')?.valueChanges.subscribe(role => {
@@ -70,6 +73,22 @@ export class FormUsersComponent implements OnInit {
       matriculaControl?.updateValueAndValidity();
       this.supervisorControl?.updateValueAndValidity();
       semestreControl?.updateValueAndValidity();
+    });
+
+    this.cadastrarSenhaControl.valueChanges.subscribe(valor => {
+      const senhaControl = this.formCadastro.get('senha');
+      const confirmarSenhaControl = this.formCadastro.get('confirmarSenha');
+
+      if (valor === false && this.editComponent === false) {
+        senhaControl?.clearValidators();
+        confirmarSenhaControl?.clearValidators();
+      } else {
+        senhaControl?.setValidators([Validators.required, Validators.email, formValidations.equalTo('email'), formValidations.domainValidator]);
+        confirmarSenhaControl?.setValidators([Validators.required, Validators.minLength(3), formValidations.equalTo('senha')]);
+      }
+
+      senhaControl?.updateValueAndValidity();
+      confirmarSenhaControl?.updateValueAndValidity();
     });
 
     this.formUserService.setForm(this.formCadastro);

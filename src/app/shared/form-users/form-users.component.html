@@ -9,16 +9,12 @@
       <mat-card-content>
         <div class="grid-container">
           <div class="grid-item">
-            <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
-              <mat-label>Matrícula</mat-label>
-              <input matInput formControlName="matricula" placeholder="matricula" mask="000000000">
-              <mat-error *ngIf="formCadastro.get('matricula')?.errors">Matrícula é obrigatória</mat-error>
-            </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Nome</mat-label>
               <input matInput formControlName="nome" placeholder="Nome">
               <mat-error *ngIf="formCadastro.get('nome')?.errors">Nome é obrigatório</mat-error>
             </mat-form-field>
+
             <mat-form-field class="input-container" appearance="outline">
               <mat-label>Selecione o tipo de perfil</mat-label>
               <mat-select matNativeControl formControlName="role">
@@ -47,7 +43,22 @@
               </mat-select>
               <mat-error *ngIf="formCadastro.get('unidadeInstitucional')?.errors">Unidade é obrigatória</mat-error>
             </mat-form-field>
-            <app-funcionario-autocomplete cargo="Professor" [control]="supervisorControl" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'"  />
+            <mat-checkbox formControlName="cadastrarSenha" color="primary" labelPosition="before">Cadastrar Senha</mat-checkbox>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div class="grid-container">
+          <div class="grid-item">
+            <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
+              <mat-label>Matrícula</mat-label>
+              <input matInput formControlName="matricula" placeholder="matricula" mask="000000000">
+              <mat-error *ngIf="formCadastro.get('matricula')?.errors">Matrícula é obrigatória</mat-error>
+            </mat-form-field>
+            <app-funcionario-autocomplete cargo="Professor" [control]="supervisorControl"
+              *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'" />
+          </div>
+          <div class="grid-item">
             <mat-form-field appearance="outline" *ngIf="formCadastro.get('role')?.value === 'ESTAGIARIO'">
               <mat-label>Semestre</mat-label>
               <input matInput formControlName="semestre" placeholder="Digite seu Semestre">
@@ -68,7 +79,7 @@
               <mat-error *ngIf="formCadastro.get('email')?.errors?.['domainValidator']">E-mail inválido, e-mail deve ser
                 de domínio do Projeção</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="cadastrarSenhaControl.value == true">
               <mat-label>Senha</mat-label>
               <input matInput formControlName="senha" [type]="escondido ? 'password' : 'text'"
                 placeholder="Digite sua senha">
@@ -93,7 +104,7 @@
               <mat-error *ngIf="formCadastro.get('confirmarEmail')?.errors?.['equalTo']">E-mails não
                 coincidem</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="cadastrarSenhaControl.value == true">
               <mat-label>Confirmar Senha</mat-label>
               <input matInput formControlName="confirmarSenha" type="password" placeholder="Repita sua senha">
               <mat-error *ngIf="formCadastro.get('confirmarSenha')?.errors?.['required']">Confirmação de Senha é

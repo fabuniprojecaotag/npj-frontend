@@ -40,7 +40,9 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   ngOnInit() {
     this.usuarioService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
-        this.estagiarioControl.setValue(usuario.nome);
+        if (usuario.role.toLowerCase() === 'estagiario' && this.editarComponente === false) {
+          this.estagiarioControl.setValue(usuario);
+        }
       },
       error: () => {
         alert('Usuário não encontrado!');
@@ -78,6 +80,25 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
           jornadaTrabalho: [null],
           tempoAlmoco: [null],
           faziaHorasExtras: [false],
+          horarioHorasExtras: [null],
+          trabalhavaDomingosFeriados: [null],
+          recebiaGratificacoes: [false],
+          cumpriuAvisoPrevio: [false],
+          temFeriasVencidasGozar: [false],
+          recebeu13SalarioAnoAnterior: [false],
+          fgtsDepositado: [false],
+          recebeuGuiasSaqueFgts: [false],
+          recebeuFormSeguroDesemprego: [false],
+          inssRecolhido: [false],
+          pagaAlgumaVerba: [null],
+          saldoSalario: [0],
+          avisoPrevioIndenizado: [null],
+          _13SalarioProporcional: [null],
+          feriasVencidas: [null],
+          feriasProporcionais: [null],
+          umTercoConstitucionalFerias: [0],
+          comissoes: [null],
+          outrasInformacoes: [null],
         }),
         testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()]),
       }),

@@ -13,7 +13,7 @@ import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.comp
   styleUrls: ['./add-users.component.scss'],
 })
 export class AddUsersComponent {
-  tituloDaPagina: string = 'Adicionar Usuários';
+  tituloDaPagina: string = 'Novo Usuário';
   errorMessage!: string;
   subtituloErro = "Erro ao Cadastrar";
 

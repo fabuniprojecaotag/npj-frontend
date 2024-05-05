@@ -4,6 +4,7 @@
 
   mat-card {
     box-shadow: none;
+
     .formUsuario-titulo {
       display: flex;
       flex-direction: row;
@@ -11,21 +12,25 @@
       margin: 12px 16px 12px 0;
     }
 
-    .grid-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 16px;
-      .full-width {
-        grid-column: 1 / span 2;
-      }
+    mat-card-content {
+      padding-bottom: 4em;
 
-      .grid-item {
-        display: flex;
-        flex-direction: column;
-        grid-gap: 8px;
+      .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 16px;
+        .full-width {
+          grid-column: 1 / span 2;
+        }
 
-        mat-checkbox {
-          padding: 0 0 2em;
+        .grid-item {
+          display: flex;
+          flex-direction: column;
+          grid-gap: 8px;
+
+          mat-checkbox {
+            padding: 0 0 2em;
+          }
         }
       }
     }
@@ -49,12 +54,12 @@
     h3 {
       font-weight: 400;
       font-size: 22px;
-      color: #1D1B20;
+      color: #1d1b20;
       margin-left: 16px;
     }
 
     .btn-editar {
-      background: #E6E0E9;
+      background: #e6e0e9;
     }
 
     button {
