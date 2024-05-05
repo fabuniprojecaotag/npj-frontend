@@ -7,6 +7,7 @@ import { FormsService } from 'src/app/core/services/forms.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
+import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
 
 @Component({
   selector: 'app-edit-users',
@@ -55,26 +56,20 @@ export class EditUsersComponent implements OnInit {
   }
 
   editar() {
+    const formValue = this.form?.value;
+
+    const senhaPresente = formValue.senha !== null && formValue.senha !== undefined;
+
     const dadosAtualizados: Usuario = {
-      '@type': this.form?.value.type,
-      id: this.form?.value.id,
-      cpf: this.form?.value.cpf,
-      nome: this.form?.value.nome,
-      matricula: this.form?.value.matricula,
-      semestre: this.form?.value.semestre,
-      role: this.form?.value.role,
-      email: this.form?.value.email,
-      status: this.form?.value.status,
-      senha: this.form?.value.senha,
-      unidadeInstitucional: this.form?.value.unidadeInstitucional,
-      supervisor: this.form?.value.supervisor,
+      ...formValue,
+      ...(senhaPresente && { senha: formValue.senha }),
     };
 
     this.cadastroService
       .editarCadastro(dadosAtualizados, this.idParam)
       .subscribe({
         next: () => {
-          alert('Atualização feita com sucesso!');
+          this.abrirModalEditar(dadosAtualizados);
           this.router.navigate(['/users']);
         },
         error: (err) => {
@@ -128,7 +123,7 @@ export class EditUsersComponent implements OnInit {
     });
   }
 
-  abrirModal(user: Usuario) {
+  abrirModalExcluir(user: Usuario) {
     this.dialog.open(ModalExcluidoComponent, {
       width: '372px',
       height: '228px',
@@ -137,6 +132,14 @@ export class EditUsersComponent implements OnInit {
         nome: user.nome,
         deletar: () => this.excluir(user.id),
       },
+    });
+  }
+
+  abrirModalEditar(usuario: Usuario){
+    this.dialog.open(ModalUsuarioComponent, {
+      width: '552px',
+      height: '360px',
+      data: { operacao: "Editado", nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
     });
   }
 

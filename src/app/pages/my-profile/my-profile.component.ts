@@ -121,7 +121,7 @@ export class MyProfileComponent implements OnInit {
       width: '552px',
       height: '360px',
       data: { operacao: "Editado", nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
-    })
+    });
   }
 
   mostrarMensagemErro(codigoErro: string, mensagemErro: string) {

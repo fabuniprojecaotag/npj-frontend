@@ -22,6 +22,7 @@ export class UsersComponent implements AfterViewInit {
     'nome',
     'role',
     'status',
+    'edicao',
   ];
   selection = new SelectionModel<Usuario>(true, []);
 
