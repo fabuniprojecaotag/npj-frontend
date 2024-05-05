@@ -7,6 +7,7 @@ import { FormsService } from 'src/app/core/services/forms.service';
 import { TokenService } from 'src/app/core/services/token.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
+import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
 
 @Component({
   selector: 'app-my-profile',
@@ -17,12 +18,10 @@ export class MyProfileComponent implements OnInit {
   tituloPagina = 'Meu Perfil';
   perfilComponente = true;
 
-  token = '';
   cadastro!: Usuario;
   form!: FormGroup<any> | null;
 
   constructor(
-    private tokenService: TokenService,
     private cadastroService: CadastroService,
     private formUserService: FormsService,
     private router: Router,
@@ -30,7 +29,6 @@ export class MyProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.token = this.tokenService.retornarToken();
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (user) => {
         this.cadastro = user;
@@ -45,8 +43,10 @@ export class MyProfileComponent implements OnInit {
   carregarFormulario(): void {
     this.form = this.formUserService.getForm();
     this.form?.patchValue({
+      "@type": this.cadastro['@type'],
       nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
+      role: this.cadastro.role,
       cpf: this.cadastro.cpf,
       semestre: this.cadastro.semestre,
       status: this.cadastro.status,
@@ -58,26 +58,20 @@ export class MyProfileComponent implements OnInit {
   }
 
   atualizarUsuario() {
+    const formValue = this.form?.value;
+
+    const senhaPresente = formValue.senha !== null && formValue.senha !== "";
+
     const dadosAtualizados: Usuario = {
-      '@type': this.form?.value.type,
-      id: this.form?.value.id,
-      cpf: this.form?.value.cpf,
-      nome: this.form?.value.nome,
-      matricula: this.form?.value.matricula,
-      semestre: this.form?.value.semestre,
-      status: this.form?.value.status,
-      role: this.form?.value.perfil,
-      email: this.form?.value.email,
-      senha: this.form?.value.senha,
-      unidadeInstitucional: this.form?.value.unidadeInstitucional,
-      supervisor: this.form?.value.supervisor,
+      ...formValue,
+      ...(senhaPresente && { senha: formValue.senha }),
     };
 
     this.cadastroService
       .editarCadastro(dadosAtualizados, dadosAtualizados.email)
       .subscribe({
         next: () => {
-          alert('Cadastro atualizado com sucesso!');
+          this.abrirModal(dadosAtualizados);
           this.router.navigate(['/']);
         },
         error: (err) => {
@@ -120,6 +114,14 @@ export class MyProfileComponent implements OnInit {
           }
         },
       });
+  }
+
+  abrirModal(usuario: Usuario){
+    this.dialog.open(ModalUsuarioComponent, {
+      width: '552px',
+      height: '360px',
+      data: { operacao: "Editado", nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
+    })
   }
 
   mostrarMensagemErro(codigoErro: string, mensagemErro: string) {

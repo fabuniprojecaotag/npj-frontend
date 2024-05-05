@@ -5,9 +5,9 @@ export interface Usuario {
   nome: string,
   cpf?: string,
   unidadeInstitucional: string,
-  senha: string,
   status: boolean,
   role: string,
+  senha?: string,
   // opcionais/estagiário:
   matricula?: string,
   semestre?: string,

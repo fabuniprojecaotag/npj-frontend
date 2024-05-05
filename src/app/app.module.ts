@@ -74,6 +74,7 @@ import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/
 import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.component';
 import { CardAtendimentosComponent } from './shared/modal-atalhos/card-atendimentos/card-atendimentos.component';
 import { ModalErrosComponent } from './shared/modal-erros/modal-erros.component';
+import { ModalUsuarioComponent } from './shared/modal-usuario/modal-usuario.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { ModalErrosComponent } from './shared/modal-erros/modal-erros.component'
     NaoEncontradaComponent,
     CardAtendimentosComponent,
     ModalErrosComponent,
+    ModalUsuarioComponent,
   ],
   imports: [
     BrowserModule,
