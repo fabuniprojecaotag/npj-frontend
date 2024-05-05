@@ -16,8 +16,23 @@ export class ProcessosComponent {
   listaProcesso: Processo[] = [];
   dataSource: any;
   colunasMostradas: string[] = ['id', 'data', 'vara', 'forum'];
-
+  printConfig:any = [
+    {col:'atendimentoId',
+      title:'Cód.Processo'
+    }, 
+    {col:'forum',
+      title:'Fórum'
+    }, 
+    {col:'dataDistribuicao',
+      title:'Data Distribuição',
+      format: 'formatDate'
+    }, 
+    {col:'vara',
+      title:'Vara'
+    }, 
+  ]
   constructor(private service: ProcessosService, private dialog: MatDialog) {}
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -56,7 +71,6 @@ export class ProcessosComponent {
       },
     });
   }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

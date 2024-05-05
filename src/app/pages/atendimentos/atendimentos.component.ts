@@ -16,8 +16,23 @@ export class AtendimentosComponent implements AfterViewInit {
   listaAtendimentos: Atendimento[] = [];
   dataSource: any;
   colunasMostradas: string[] = ['id', 'tipo', 'status', 'dataDeCriacao'];
-
+  printConfig:any = [
+    {col:'id',
+      title:'Cód.Atendimento'
+    }, 
+    {col:'area',
+      title:'Tipo'
+    }, 
+    {col:'dataCriacao',
+      title:'Data Criação',
+      format: 'formatDate'
+    }, 
+    {col:'status',
+      title:'Status'
+    }, 
+  ]
   constructor(private atendimentoService: AtendimentosService, private dialog: MatDialog) {}
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -25,10 +40,9 @@ export class AtendimentosComponent implements AfterViewInit {
     this.atendimentoService.listagemAtendimentos().subscribe({
       next: (response) => {
         this.listaAtendimentos = response;
-        this.dataSource = new MatTableDataSource<Atendimento>(
-          this.listaAtendimentos
-        );
+        this.dataSource = new MatTableDataSource<Atendimento>(this.listaAtendimentos);
         this.dataSource.paginator = this.paginator;
+        console.log('lista de atendimentos:', response);
       },
       error: (err) => {
         let errorMessage = '';

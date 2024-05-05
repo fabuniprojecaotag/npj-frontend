@@ -5,6 +5,7 @@
     <mat-label>Filtro</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ATE00001" #input>
   </mat-form-field>
+  <app-print-button  [dataSet]="listaAtendimentos" pageName="Atendimento" [config]="printConfig" ></app-print-button>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <!-- ID Coluna -->
