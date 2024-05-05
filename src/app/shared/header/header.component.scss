@@ -44,16 +44,32 @@
         }
 
         .botao-menu__usuario {
+          align-items: center;
+          display: flex;
+          justify-content: center;
           font-size: 0.8em;
 
           .icone-usuario {
-            order: -1;
+            background-color: gainsboro;
+            border-radius: 100%;
+            display: inline-block;
+            height: 100%;
+            margin-right: 10px;
+
+            p {
+              font-size: 0.8em;
+              padding: 0.1em 0.8em;
+            }
           }
+
           mat-icon {
             order: 2;
           }
 
           .texto-menu {
+            font-size: 0.8em;
+            font-weight: lighter;
+
             @media screen and (max-width: 768px) {
               display: none;
             }

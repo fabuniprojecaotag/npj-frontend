@@ -38,10 +38,18 @@
       flex-direction: column;
     }
 
-    img {
+    .foto {
+      align-items: center;
       border-radius: 100%;
+      background-color: gainsboro;
+      display: flex;
+      justify-content: center;
       height: 100px;
       width: 100px;
+
+      p {
+        font-size: 2em;
+      }
 
       @media screen and (max-width: 768px) {
         display: none;
