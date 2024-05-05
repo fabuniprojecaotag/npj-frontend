@@ -21,7 +21,7 @@ export class FormProcessoComponent implements OnInit {
     'Processo ativo',
     'Processo arquivado',
   ];
-  atendimentoControl: FormControl = new FormControl(null, [Validators.required]);
+  atendimentoControl: FormControl<string | null> = new FormControl<string | null>(null, [Validators.required]);
 
   constructor(
     private formBuilder: FormBuilder,

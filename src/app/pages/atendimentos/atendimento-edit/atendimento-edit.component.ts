@@ -65,7 +65,7 @@ export class AtendimentoEditComponent {
   }
 
   editar() {
-    const dadosAtualizados: Atendimento = {
+    const dadosAtualizados: any = {
       "@type": this.form?.value['@type'],
       status: this.form?.value.status,
       area: this.form?.value.area,
@@ -136,7 +136,7 @@ export class AtendimentoEditComponent {
 
   mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
     let subtituloErro = 'Erro ao editar';
-    
+
     this.dialog.open(ModalErrosComponent, {
       width: '552px',
       height: '360px',

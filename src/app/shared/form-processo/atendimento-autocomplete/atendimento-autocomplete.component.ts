@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, startWith, map } from 'rxjs';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
 
@@ -30,17 +30,16 @@ export class AtendimentoAutocompleteComponent {
     );
   }
 
-  filtrarAtendimento(value: string | Atendimento): Atendimento[] {
-    const valorFiltrado = (typeof value === 'string') ? value.toLowerCase() : '';
-    const result = this.atendimento.filter(atendimento => {
-      const id = atendimento?.id;
-      return id ? id.toLowerCase().includes(valorFiltrado) : false;
-    });
+  filtrarAtendimento(value: string): Atendimento[] {
+    const valorFiltrado = value ? value.toLowerCase() : '';
+    const result = this.atendimento.filter(
+      atendimento => atendimento.id.toLowerCase().includes(valorFiltrado)
+    )
     return result;
   }
 
 
-  displayFn(atendimento: Atendimento): string {
-    return atendimento && atendimento.id ? atendimento.id : '';
+  displayFn(atendimentoId: string): string {
+    return atendimentoId;
   }
 }
