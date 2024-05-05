@@ -16,6 +16,7 @@ import {
   MatFormFieldModule,
 } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -75,6 +76,9 @@ import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.co
 import { CardAtendimentosComponent } from './shared/modal-atalhos/card-atendimentos/card-atendimentos.component';
 import { ModalErrosComponent } from './shared/modal-erros/modal-erros.component';
 import { ModalUsuarioComponent } from './shared/modal-usuario/modal-usuario.component';
+import { EstatisticasComponent } from './pages/estatisticas/estatisticas.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { PrintButtonComponent } from './shared/print-button/print-button.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +123,8 @@ import { ModalUsuarioComponent } from './shared/modal-usuario/modal-usuario.comp
     CardAtendimentosComponent,
     ModalErrosComponent,
     ModalUsuarioComponent,
+    EstatisticasComponent,
+    PrintButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,6 +143,7 @@ import { ModalUsuarioComponent } from './shared/modal-usuario/modal-usuario.comp
     MatTableModule,
     MatStepperModule,
     MatSortModule,
+    MatTooltipModule,
     MatAutocompleteModule,
     MatExpansionModule,
     MatSelectModule,
@@ -149,6 +156,8 @@ import { ModalUsuarioComponent } from './shared/modal-usuario/modal-usuario.comp
     HttpClientModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    NgxMaskDirective, NgxMaskPipe,
+    MatChipsModule
   ],
   providers: [
     {

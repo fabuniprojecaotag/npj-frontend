@@ -19,6 +19,7 @@ import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-
 import { AtendimentoAddComponent } from './pages/atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
 import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
 import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.component';
+import { EstatisticasComponent } from './pages/estatisticas/estatisticas.component';
 
 const routes: Routes = [
   {
@@ -111,10 +112,16 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'estatisticas',
+    component: EstatisticasComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: '**',
     component: NaoEncontradaComponent,
     canActivate: [authGuard]
-  }
+  },
+ 
 ];
 
 @NgModule({
