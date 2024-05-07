@@ -1,8 +1,7 @@
-import { FichaCivil, Testemunha, FichaTrabalhista, ParteContraria } from './../../../core/types/atendimento';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { FormsService } from './../../../core/services/forms.service';
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
@@ -117,8 +116,6 @@ export class AtendimentoEditComponent {
             break;
           }
         }
-
-        console.log(dadosAtualizados);
       },
     });
   }

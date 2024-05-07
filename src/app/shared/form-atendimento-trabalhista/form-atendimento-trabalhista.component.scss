@@ -1,7 +1,7 @@
 @import "../../../styles.scss";
 
 .secao-form-trabalhista {
-  margin: 0 auto;
+  margin: 2em auto;
   width: 80%;
 
   .titulo-form {
@@ -38,7 +38,6 @@
     .full {
       align-content: center;
       display: flex;
-      flex: inherit inherit inherit;
       flex-wrap: wrap;
       gap: 20px;
       width: 100%;
@@ -60,7 +59,8 @@
       flex-grow: 1.5;
     }
 
-    .input-medio {
+    .input-medio,
+    .input-radio {
       flex-grow: 2;
     }
 
@@ -73,5 +73,24 @@
       height: 100%;
       padding: 16px 16px;
     }
+
+    .input-radio {
+      mat-label {
+        padding-left: 0.6em;
+        width: 100%;
+      }
+
+      mat-radio-group {
+        display: flex;
+        flex-direction: row;
+        gap: 0px 40px;
+      }
+    }
+  }
+
+  .grupo-botoes {
+    display: flex;
+    gap: 10px;
+    width: 100%;
   }
 }

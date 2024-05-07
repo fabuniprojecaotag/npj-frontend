@@ -208,10 +208,10 @@
           obrigatório</mat-error>
       </mat-form-field>
     </div>
-    <div class="full">
+    <div class="grupo-botoes">
       <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
-      <button mat-raised-button [disabled]="formAtendimentos.invalid" type="submit"
-        (click)="executarAcao()">Submeter</button>
+      <button mat-raised-button class="botao-submeter" [disabled]="formAtendimentos.invalid" type="submit"
+        (click)="executarAcao()" color="primary">Submeter</button>
     </div>
   </form>
 </section>

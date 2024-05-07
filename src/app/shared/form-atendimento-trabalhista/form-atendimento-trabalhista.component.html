@@ -91,7 +91,7 @@
             <mat-datepicker #dataDistribuicao></mat-datepicker>
           </mat-form-field>
           <mat-form-field class="input-medio">
-            <mat-label>Data de Saída</mat-label>
+            <mat-label>Data da Saída</mat-label>
             <input matInput [matDatepicker]="dataSaida" formControlName="dataSaida">
             <mat-datepicker-toggle matIconSuffix [for]="dataSaida" color="primary"></mat-datepicker-toggle>
             <mat-datepicker #dataSaida></mat-datepicker>
@@ -100,100 +100,183 @@
             <mat-label>Função Exercida</mat-label>
             <input matInput formControlName="funcaoExercida" placeholder="Função Exercida">
           </mat-form-field>
+          <mat-form-field class="input-medio">
+            <mat-label>Qual o Valor do Sálario anotado na CTPS</mat-label>
+            <input matInput formControlName="valorSalarioCtps" placeholder="Qual o valor do Salário anotado na CTPS?"
+              prefix="R$ " thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+          </mat-form-field>
         </div>
         <div class="full">
-          <div class="input-grande">
-            <mat-checkbox formControlName="salarioAnotadoCtps" color="primary" labelPosition="after">Salário foi anotado
-              na CTPS?</mat-checkbox>
+          <div class="input-radio">
+            <label>O Salário que recebia foi anotado na CTPS?</label>
+            <mat-radio-group formControlName="salarioAnotadoCtps" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
           </div>
           <mat-form-field class="input-medio">
-            <mat-label>Valor do Sálario da CTPS</mat-label>
-            <input matInput formControlName="valorSalarioCtps" placeholder="Valor do Sálario da CTPS" prefix="R$ "
-              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
-          </mat-form-field>
-          <div class="input-grande">
-            <mat-checkbox formControlName="ctpsAssinadaCerto" color="primary" labelPosition="after">CTPS foi assinada
-              corretamente?</mat-checkbox>
-          </div>
-          <mat-form-field class="input-medio">
-            <mat-label>Valor da Última Remuneração</mat-label>
+            <mat-label>Qual o Valor da Última Remuneração Recebida?</mat-label>
             <input matInput formControlName="valorUltimaRemuneracao" placeholder="Valor da Ultima Remuneração"
               prefix="R$ " thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
           </mat-form-field>
         </div>
         <div class="full">
+          <div class="input-radio">
+            <mat-label>A <strong>CTPS</strong> foi assinada corretamente?</mat-label>
+            <mat-radio-group formControlName="ctpsAssinadaCerto" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="input-radio">
+            <mat-label>Como foi a Dipensa?</mat-label>
+            <mat-radio-group formControlName="dispensa" color="primary">
+              <mat-radio-button value="pedido"><strong>A PEDIDO</strong></mat-radio-button>
+              <mat-radio-button value="semJustaCausa"><strong>SEM JUSTA CAUSA</strong></mat-radio-button>
+              <mat-radio-button value="justaCausa"><strong>POR JUSTA CAUSA</strong></mat-radio-button>
+            </mat-radio-group>
+          </div>
           <mat-form-field class="input-medio">
-            <mat-label>Dispensa</mat-label>
-            <input matInput formControlName="dispensa" placeholder="Dispensa">
-          </mat-form-field>
-          <mat-form-field class="input-medio">
-            <mat-label>Jornada de Trabalho</mat-label>
+            <mat-label>Qual a Jornada de Trabalho?</mat-label>
             <input matInput formControlName="jornadaTrabalho" placeholder="Jornada De Trabalho">
           </mat-form-field>
+        </div>
+        <div class="full">
           <mat-form-field class="input-medio">
-            <mat-label>Tempo de Almoço</mat-label>
+            <mat-label>Quanto tempo tinha para almoço?</mat-label>
             <input matInput formControlName="tempoAlmoco" placeholder="Tempo de Almoço">
           </mat-form-field>
-          <div class="input-grande">
-            <mat-checkbox formControlName="faziaHorasExtras" color="primary" labelPosition="after">Fazia horas
-              extras?</mat-checkbox>
+          <div class="input-radio">
+            <mat-label>Fazia horas extras (HE)?</mat-label>
+            <mat-radio-group formControlName="faziaHorasExtras" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
           </div>
+          <mat-form-field class="input-medio">
+            <mat-label>Qual período (HORÁRIO) fazia HE?</mat-label>
+            <input matInput formControlName="horarioHorasExtras" placeholder="Horário">
+          </mat-form-field>
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
-            <mat-label>Horário das Horas Extras</mat-label>
-            <input matInput formControlName="horarioHorasExtras" placeholder="Horário">
+            <mat-label>Trabalhava em Domingos e Feriados?</mat-label>
+            <input matInput formControlName="trabalhavaDomingosFeriados"
+              placeholder="Trabalhava em Domingos e Feriados?">
+            <mat-hint align="start"><strong>(Se positivo, anotar quantos e quais as datas)</strong></mat-hint>
           </mat-form-field>
-          <div class="input-grande">
-            <mat-checkbox formControlName="trabalhavaDomingosFeriados" color="primary" labelPosition="after">Trabalhava
-              em Domingos e Feriados?</mat-checkbox>
+          <div class="input-radio">
+            <mat-label>Recebia gratificações, gorjetas ou comissões?</mat-label>
+            <mat-radio-group formControlName="recebiaGratificacoes" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
           </div>
-          <div class="input-grande">
-            <mat-checkbox formControlName="recebiaGratificacoes" color="primary" labelPosition="after">Recebia
-              Gratificações?</mat-checkbox>
-          </div>
-        </div>
-        <div class="full">
-          <div class="input-grande">
-            <mat-checkbox formControlName="cumpriuAvisoPrevio" color="primary" labelPosition="after">Cumpriu aviso
-              Prévio?</mat-checkbox>
-          </div>
-          <div class="input-grande">
-            <mat-checkbox formControlName="temFeriasVencidasGozar" color="primary" labelPosition="after">Tem férias
-              vencidas a gozar?</mat-checkbox>
-          </div>
-          <div class="input-grande">
-            <mat-checkbox formControlName="recebeu13SalarioAnoAnterior" color="primary" labelPosition="after">Recebeu
-              13º salário no ano anterior?</mat-checkbox>
-          </div>
-          <div class="input-grande">
-            <mat-checkbox formControlName="fgtsDepositado" color="primary" labelPosition="after">O FGTS foi
-              depositado?</mat-checkbox>
+          <div class="input-radio">
+            <mat-label>Cumpriu o AVISO PRÉVIO?</mat-label>
+            <mat-radio-group formControlName="cumpriuAvisoPrevio" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
           </div>
         </div>
         <div class="full">
-          <div class="input-grande">
-            <mat-checkbox formControlName="recebeuGuiasSaqueFgts" color="primary" labelPosition="after">Recebeu as
-              guias de saque do FGTS?</mat-checkbox>
+          <div class="input-radio">
+            <mat-label>Tem FÉRIAS vencidas a gozar?</mat-label>
+            <mat-radio-group formControlName="temFeriasVencidasGozar" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
           </div>
-          <div class="input-grande">
-            <mat-checkbox formControlName="recebeuFormSeguroDesemprego" color="primary" labelPosition="after">Recebeu os
-              formulários para requerer o seguro desemprego?</mat-checkbox>
+          <div class="input-radio">
+            <mat-label>Recebeu 13º salário no ano anterior?</mat-label>
+            <mat-radio-group formControlName="recebeu13SalarioAnoAnterior" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
           </div>
-          <div class="input-grande">
-            <mat-checkbox formControlName="inssRecolhido" color="primary" labelPosition="after">O INSS foi recolhido?</mat-checkbox>
+          <div class="input-radio">
+            <mat-label>O FGTS foi depositado?</mat-label>
+            <mat-radio-group formControlName="fgtsDepositado" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="full">
+          <div class="input-radio">
+            <mat-label>Recebeu as guias de saque do FGTS?</mat-label>
+            <mat-radio-group formControlName="recebeuGuiasSaqueFgts" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="input-radio">
+            <mat-label>Recebeu os formulários para requerer o seguro desemprego?</mat-label>
+            <mat-radio-group formControlName="recebeuFormSeguroDesemprego" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="input-radio">
+            <mat-label>O INSS foi recolhido?</mat-label>
+            <mat-radio-group formControlName="inssRecolhido" color="primary">
+              <mat-radio-button [value]="true">Sim</mat-radio-button>
+              <mat-radio-button [value]="false">Não</mat-radio-button>
+            </mat-radio-group>
           </div>
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>Paga alguma verba</mat-label>
-            <input matInput formControlName="pagaAlgumaVerba" placeholder="Paga alguma verba">
+            <input matInput formControlName="pagaAlgumaVerba" placeholder="Paga alguma verba" prefix="R$ "
+              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+            <mat-hint align="start"><strong>(Caso positivo, anote quais)</strong></mat-hint>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Saldo do salário</mat-label>
-            <input matInput type="number" formControlName="saldoSalario" placeholder="Paga alguma verba">
+            <input matInput formControlName="saldoSalario" placeholder="Saldo do salário" prefix="R$ "
+              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+          </mat-form-field>
+          <mat-form-field class="input-medio">
+            <mat-label>Aviso Prévio Indenizado</mat-label>
+            <input matInput formControlName="avisoPrevioIndenizado" placeholder="Aviso Prévio Indenizado" prefix="R$ "
+              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
           </mat-form-field>
         </div>
+        <div class="full">
+          <mat-form-field class="input-medio">
+            <mat-label>13º Salário Proporcional</mat-label>
+            <input matInput formControlName="_13SalarioProporcional" placeholder="13º Salário Proporcional" prefix="R$ "
+              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+          </mat-form-field>
+          <mat-form-field class="input-medio">
+            <mat-label>Férias Vencidas</mat-label>
+            <input matInput formControlName="feriasVencidas" placeholder="Férias Vencidas" prefix="R$ "
+              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+          </mat-form-field>
+          <mat-form-field class="input-medio">
+            <mat-label>Férias Proporcionais _/12</mat-label>
+            <input matInput formControlName="feriasProporcionais" placeholder="Férias Proporcionais" prefix="R$ "
+              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+          </mat-form-field>
+        </div>
+        <div class="full">
+          <mat-form-field class="input-medio">
+            <mat-label>1/3 Constitucional sobre Férias</mat-label>
+            <input matInput formControlName="umTercoConstitucionalFerias" placeholder="1/3 Constitucional sobre Férias"
+              prefix="R$ " thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+          </mat-form-field>
+          <mat-form-field class="input-medio">
+            <mat-label>Comissões</mat-label>
+            <input matInput formControlName="comissoes" placeholder="Comissões" prefix="R$ " thousandSeparator="."
+              decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+          </mat-form-field>
+        </div>
+        <mat-form-field class="full">
+          <mat-label>Inforamções Complementares</mat-label>
+          <textarea matInput formControlName="informacoesComplementares" placeholder="Informações Complementares"></textarea>
+        </mat-form-field>
       </div>
 
       <!-- Testemunhas -->
@@ -296,10 +379,10 @@
           é obrigatório</mat-error>
       </mat-form-field>
     </div>
-    <div class="full">
+    <div class="grupo-botoes">
       <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
       <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit"
-        (click)="executarAcao()">Submeter</button>
+        (click)="executarAcao()" color="primary">Submeter</button>
     </div>
   </form>
 </section>

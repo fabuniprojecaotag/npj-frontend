@@ -16,7 +16,7 @@ import {
   MatFormFieldModule,
 } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -37,6 +37,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
 import { AddUsersComponent } from './pages/users/add-users/add-users.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { FormUsersComponent } from './shared/form-users/form-users.component';
@@ -77,7 +78,7 @@ import { CardAtendimentosComponent } from './shared/modal-atalhos/card-atendimen
 import { ModalErrosComponent } from './shared/modal-erros/modal-erros.component';
 import { ModalUsuarioComponent } from './shared/modal-usuario/modal-usuario.component';
 import { EstatisticasComponent } from './pages/estatisticas/estatisticas.component';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { PrintButtonComponent } from './shared/print-button/print-button.component';
 
 @NgModule({
@@ -157,7 +158,8 @@ import { PrintButtonComponent } from './shared/print-button/print-button.compone
     NgxMaskDirective,
     NgxMaskPipe,
     NgxMaskDirective, NgxMaskPipe,
-    MatChipsModule
+    MatChipsModule,
+    MatRadioModule
   ],
   providers: [
     {

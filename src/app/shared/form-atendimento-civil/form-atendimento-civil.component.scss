@@ -1,7 +1,7 @@
 @import "../../../styles.scss";
 
 .secao-form-civil {
-  margin: 0 auto;
+  margin: 2em auto;
   width: 80%;
 
   .titulo-form {
@@ -48,6 +48,10 @@
         font-size: 12px;
         height: 30px;
       }
+
+      .botao-submeter {
+        margin-left: 2em;
+      }
     }
 
     .input-muitoPequeno {
@@ -71,5 +75,11 @@
       height: 100%;
       padding: 16px 16px;
     }
+  }
+
+  .grupo-botoes {
+    display: flex;
+    gap: 10px;
+    width: 100%;
   }
 }

@@ -73,30 +73,30 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
           dataSaida: [null],
           funcaoExercida: [null],
           valorSalarioCtps: [null],
-          salarioAnotadoCtps: [false],
+          salarioAnotadoCtps: [null],
           valorUltimaRemuneracao: [null],
-          ctpsAssinadaCerto: [false],
+          ctpsAssinadaCerto: [null],
           dispensa: [null],
           jornadaTrabalho: [null],
           tempoAlmoco: [null],
-          faziaHorasExtras: [false],
+          faziaHorasExtras: [null],
           horarioHorasExtras: [null],
           trabalhavaDomingosFeriados: [null],
-          recebiaGratificacoes: [false],
-          cumpriuAvisoPrevio: [false],
-          temFeriasVencidasGozar: [false],
-          recebeu13SalarioAnoAnterior: [false],
-          fgtsDepositado: [false],
-          recebeuGuiasSaqueFgts: [false],
-          recebeuFormSeguroDesemprego: [false],
-          inssRecolhido: [false],
+          recebiaGratificacoes: [null],
+          cumpriuAvisoPrevio: [null],
+          temFeriasVencidasGozar: [null],
+          recebeu13SalarioAnoAnterior: [null],
+          fgtsDepositado: [null],
+          recebeuGuiasSaqueFgts: [null],
+          recebeuFormSeguroDesemprego: [null],
+          inssRecolhido: [null],
           pagaAlgumaVerba: [null],
-          saldoSalario: [0],
+          saldoSalario: [null, Validators.required],
           avisoPrevioIndenizado: [null],
           _13SalarioProporcional: [null],
           feriasVencidas: [null],
           feriasProporcionais: [null],
-          umTercoConstitucionalFerias: [0],
+          umTercoConstitucionalFerias: [null],
           comissoes: [null],
           outrasInformacoes: [null],
         }),
@@ -123,14 +123,13 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   }
 
   onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
-    this.arquivoSelecionado = file;
-    this.formAtendimentosTrabalhista.get('ficha.assinatura')?.setValue(file);
+    this.formAtendimentosTrabalhista.get('ficha.assinatura')?.setValue(event.target.files[0]);
+    this.arquivoSelecionado = this.formAtendimentosTrabalhista.get('ficha.assinatura')?.value;
   }
 
   removerArquivoSelecionado(): void {
+    this.arquivoSelecionado = null;
     this.formAtendimentosTrabalhista.get('ficha.assinatura')?.setValue(null);
-    this.arquivoSelecionado = null; // Reseta o nome do arquivo selecionado
   }
 
   adicionarHistorico(): void {
