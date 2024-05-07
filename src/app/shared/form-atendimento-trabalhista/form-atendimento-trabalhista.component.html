@@ -103,7 +103,8 @@
           <mat-form-field class="input-medio">
             <mat-label>Qual o Valor do Sálario anotado na CTPS</mat-label>
             <input matInput formControlName="valorSalarioCtps" placeholder="Qual o valor do Salário anotado na CTPS?"
-              prefix="R$ " thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+              prefix="R$ " decimalMarker="." [allowNegativeNumbers]="false" mask="separator"
+              [dropSpecialCharacters]="false" [min]="0">
           </mat-form-field>
         </div>
         <div class="full">
@@ -117,7 +118,8 @@
           <mat-form-field class="input-medio">
             <mat-label>Qual o Valor da Última Remuneração Recebida?</mat-label>
             <input matInput formControlName="valorUltimaRemuneracao" placeholder="Valor da Ultima Remuneração"
-              prefix="R$ " thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+              prefix="R$ " decimalMarker="." [allowNegativeNumbers]="false" mask="separator"
+              [dropSpecialCharacters]="false" [min]="0">
           </mat-form-field>
         </div>
         <div class="full">
@@ -230,13 +232,14 @@
           <mat-form-field class="input-medio">
             <mat-label>Paga alguma verba</mat-label>
             <input matInput formControlName="pagaAlgumaVerba" placeholder="Paga alguma verba" prefix="R$ "
-              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
+              [min]="0">
             <mat-hint align="start"><strong>(Caso positivo, anote quais)</strong></mat-hint>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Saldo do salário</mat-label>
-            <input matInput formControlName="saldoSalario" placeholder="Saldo do salário" prefix="R$ "
-              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+            <input matInput formControlName="saldoSalario" placeholder="Saldo do salário" prefix="R$ " decimalMarker="."
+              [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false" [min]="0">
             <mat-error
               *ngIf="formAtendimentosTrabalhista.get('ficha')?.get('relacaoEmpregaticia')?.get('saldoSalario')?.errors?.['required']">Saldo
               do salário é obrigatório</mat-error>
@@ -244,42 +247,46 @@
           <mat-form-field class="input-medio">
             <mat-label>Aviso Prévio Indenizado</mat-label>
             <input matInput formControlName="avisoPrevioIndenizado" placeholder="Aviso Prévio Indenizado" prefix="R$ "
-              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
+              [min]="0">
           </mat-form-field>
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>13º Salário Proporcional</mat-label>
             <input matInput formControlName="_13SalarioProporcional" placeholder="13º Salário Proporcional" prefix="R$ "
-              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
+              [min]="0">
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Férias Vencidas</mat-label>
             <input matInput formControlName="feriasVencidas" placeholder="Férias Vencidas" prefix="R$ "
-              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
+              [min]="0">
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Férias Proporcionais _/12</mat-label>
             <input matInput formControlName="feriasProporcionais" placeholder="Férias Proporcionais" prefix="R$ "
-              thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
+              [min]="0">
           </mat-form-field>
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>1/3 Constitucional sobre Férias</mat-label>
             <input matInput formControlName="umTercoConstitucionalFerias" placeholder="1/3 Constitucional sobre Férias"
-              prefix="R$ " thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+              prefix="R$ " decimalMarker="." [allowNegativeNumbers]="false" mask="separator"
+              [dropSpecialCharacters]="false" [min]="0">
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Comissões</mat-label>
-            <input matInput formControlName="comissoes" placeholder="Comissões" prefix="R$ " thousandSeparator="."
-              decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+            <input matInput formControlName="comissoes" placeholder="Comissões" prefix="R$ " decimalMarker="."
+              [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false" [min]="0">
           </mat-form-field>
         </div>
         <mat-form-field class="full">
           <mat-label>Inforamções Complementares</mat-label>
-          <textarea matInput formControlName="outrasInformacoes"
-            placeholder="Informações Complementares"></textarea>
+          <textarea matInput formControlName="outrasInformacoes" placeholder="Informações Complementares"></textarea>
         </mat-form-field>
       </div>
 
