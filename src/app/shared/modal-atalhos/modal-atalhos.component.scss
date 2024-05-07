@@ -9,6 +9,13 @@
     font-weight: bold;
   }
 
+  &__conteudo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow-y: auto;
+  }
+
   &__botoes {
     padding: 0 24px 9px;
   }

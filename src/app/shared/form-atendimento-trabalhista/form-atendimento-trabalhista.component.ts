@@ -50,9 +50,11 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
     });
 
     this.formAtendimentosTrabalhista = this.formBuilder.group({
+      '@type': ['Trabalhista'],
       status: [null],
       area: [this.tipoAtendimento],
       ficha: this.formBuilder.group({
+        '@type': ['Trabalhista'],
         dadosSensiveis: [false],
         assinatura: [null],
         reclamado: this.formBuilder.group({

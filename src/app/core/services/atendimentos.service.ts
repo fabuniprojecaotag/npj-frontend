@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Atendimento } from '../types/atendimento';
 import { Observable } from 'rxjs';
+import { filtro } from '../types/filtro';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,15 @@ export class AtendimentosService {
 
   constructor(private http: HttpClient) { }
 
-  listagemAtendimentos(): Observable<Atendimento[]> {
-    return this.http.get<Atendimento[]>(`${this.API}/atendimentos`);
+  listagemAtendimentos(filtro?: filtro): Observable<Atendimento[]> {
+    let params = new HttpParams();
+    if (filtro) {
+      params = params
+        .set('field', filtro.field)
+        .set('filter', filtro.filter)
+        .set('value', filtro.value);
+    }
+    return this.http.get<Atendimento[]>(`${this.API}/atendimentos`, { params });
   };
 
   consultaAtendimento(idAtendimento: string): Observable<Atendimento> {

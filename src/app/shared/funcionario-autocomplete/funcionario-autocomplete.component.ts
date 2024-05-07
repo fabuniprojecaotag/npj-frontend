@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { filtro } from 'src/app/core/types/filtro';
 import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
@@ -20,7 +21,12 @@ export class FuncionarioAutocompleteComponent implements OnInit {
   constructor(private cadastroService: CadastroService){}
 
   ngOnInit(): void {
-    this.cadastroService.listar(this.cargo.toLocaleUpperCase()).subscribe(
+    let filtro: filtro = {
+      field: 'role',
+      filter: 'EQUAL',
+      value: this.cargo.toLocaleUpperCase()
+    }
+    this.cadastroService.listar(filtro).subscribe(
       dados => {
         this.funcionarios = dados;
       }

@@ -1,8 +1,13 @@
 <section class="modal">
   <h4 mat-dialog-title class="modal__titulo">{{ data.titulo }} Envolvidos</h4>
   <div mat-dialog-content class="modal__conteudo">
-    <ng-container *ngIf="data.lista.length > 0; else semRegistros">
-      <p *ngFor="let item of data.listaAtendimentos">{{ item.id }}</p>
+    <ng-container *ngIf="(data.listaAtendimento && data.listaAtendimento.length > 0) || (data.listaProcesso && data.listaProcesso.length > 0); else semRegistros">
+      <ng-container *ngIf="data.listaAtendimento && data.listaAtendimento.length > 0">
+        <app-card-atendimentos [atendimento]="item" *ngFor="let item of data.listaAtendimento"></app-card-atendimentos>
+      </ng-container>
+      <ng-container *ngIf="data.listaProcesso && data.listaProcesso.length > 0">
+        <app-card-processos [processo]="item" *ngFor="let item of data.listaProcesso"></app-card-processos>
+      </ng-container>
     </ng-container>
   </div>
   <div mat-dialog-actions class="modal__botoes">

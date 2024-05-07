@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../types/usuario';
 import { Observable } from 'rxjs';
+import { filtro } from '../types/filtro';
 
 @Injectable({
   providedIn: 'root',
@@ -24,13 +25,13 @@ export class CadastroService {
     return this.http.get<Usuario>(`${this.apiUrl}/usuarios/me`);
   }
 
-  listar(filtro?: string): Observable<Usuario[]> {
+  listar(filtro?: filtro): Observable<Usuario[]> {
     let params = new HttpParams();
     if (filtro) {
       params = params
-        .set('field', 'role')
-        .set('filter', 'EQUAL')
-        .set('value', filtro);
+        .set('field', filtro.field)
+        .set('filter', filtro.filter)
+        .set('value', filtro.value);
     }
     return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`, { params });
   }

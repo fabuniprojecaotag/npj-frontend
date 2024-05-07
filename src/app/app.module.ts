@@ -80,6 +80,7 @@ import { ModalUsuarioComponent } from './shared/modal-usuario/modal-usuario.comp
 import { EstatisticasComponent } from './pages/estatisticas/estatisticas.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { PrintButtonComponent } from './shared/print-button/print-button.component';
+import { CardProcessosComponent } from './shared/modal-atalhos/card-processos/card-processos.component';
 
 @NgModule({
   declarations: [
@@ -126,6 +127,7 @@ import { PrintButtonComponent } from './shared/print-button/print-button.compone
     ModalUsuarioComponent,
     EstatisticasComponent,
     PrintButtonComponent,
+    CardProcessosComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,14 @@
-<p>card-atendimentos works!</p>
+<mat-card class="card-atendimentos">
+  <mat-card-header>
+    <mat-card-title>{{ atendimento.id }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Área: {{ atendimento.area }}</p>
+    <!-- <p>Assistido: {{ atendimento.assistido.nome }}</p> -->
+    <!-- <p>Estagário: {{ atendimento.envolvidos.estagiario.nome }}</p> -->
+    <p>Data: {{ atendimento }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">ABRIR</button>
+  </mat-card-actions>
+</mat-card>

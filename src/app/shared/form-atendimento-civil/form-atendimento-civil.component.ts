@@ -49,10 +49,12 @@ export class FormAtendimentoCivilComponent implements OnInit {
     });
 
     this.formAtendimentos = this.formBuilder.group({
-      instante: [new Date()], // não necessario, o back irá retornar
+      '@type': ['Civil'],
+      // instante: [new Date()], // não necessario, o back irá retornar
       area: [this.tipoAtendimento],
       status: ['', Validators.required],
       ficha: this.formBuilder.group({
+        '@type': ['Civil'],
         assinatura: [null],
         dadosSensiveis: [false],
         testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()]),

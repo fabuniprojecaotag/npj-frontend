@@ -3,7 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
 import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
+import { ProcessosService } from 'src/app/core/services/processos.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
+import { filtro } from 'src/app/core/types/filtro';
 import { Processo } from 'src/app/core/types/processo';
 import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
 
@@ -23,6 +25,7 @@ export class AssistidosShortcutsComponent implements OnInit {
     private route: ActivatedRoute,
     private assistidosService: AssistidosService,
     private atendimentoService: AtendimentosService,
+    private processoService: ProcessosService,
     private dialog: MatDialog
   ) {
     this.tituloDaPagina = 'Assisitido - ';
@@ -30,6 +33,11 @@ export class AssistidosShortcutsComponent implements OnInit {
 
   ngOnInit(): void {
     this.cpf = this.route.snapshot.paramMap.get('cpf') as string;
+    let filtroAtendimentos: filtro = {
+      field: 'envolvidos.assistido',
+      filter: 'EQUAL',
+      value: this.nomeAssistido
+    };
 
     this.assistidosService.consultar(this.cpf).subscribe({
       next: (resposta) => {
@@ -41,14 +49,26 @@ export class AssistidosShortcutsComponent implements OnInit {
       },
     });
 
-    this.atendimentoService.listagemAtendimentos()
+    this.atendimentoService.listagemAtendimentos().subscribe({
+      next: (resposta) => {
+        this.listaAtendimento = resposta;
+        console.log("Atendimentos: " + resposta);
+      }
+    });
+
+    this.processoService.listar().subscribe({
+      next: (resposta) => {
+        this.listaProcesso = resposta;
+        console.log("Processos: " + resposta);
+      }
+    });
   }
 
   abrirModalAtendimento() {
     this.dialog.open(ModalAtalhosComponent, {
       width: '1200px',
       height: '650px',
-      data: { titulo: 'Atendimentos', lista: this.listaAtendimento }
+      data: { titulo: 'Atendimentos', listaAtendimento: this.listaAtendimento }
     });
   }
 
@@ -56,7 +76,7 @@ export class AssistidosShortcutsComponent implements OnInit {
     this.dialog.open(ModalAtalhosComponent, {
       width: '1200px',
       height: '650px',
-      data: { titulo: 'Processos', lista: this.listaProcesso }
+      data: { titulo: 'Processos', listaProcesso: this.listaProcesso }
     });
   }
 }
