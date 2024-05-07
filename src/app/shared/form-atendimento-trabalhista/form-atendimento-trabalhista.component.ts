@@ -93,7 +93,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
           recebeuFormSeguroDesemprego: [null],
           inssRecolhido: [null],
           pagaAlgumaVerba: [null],
-          saldoSalario: [null, Validators.required],
+          saldoSalario: [null],
           avisoPrevioIndenizado: [null],
           _13SalarioProporcional: [null],
           feriasVencidas: [null],
@@ -103,6 +103,20 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
           outrasInformacoes: [null],
         }),
         testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()]),
+        documentosDepositadosNpj: this.formBuilder.group({
+          procuracao: [null],
+          declaracaoPobreza: [null],
+          ctps: [null],
+          identidade: [null],
+          cpf: [null],
+          pis: [null],
+          contrachequeUltimos3Meses: [null],
+          extratoAnaliticoContaFgts: [null],
+          trct: [null],
+          comprovanteRecAntecip13: [null],
+          acordoColetivoTrabalho: [null],
+          outrosDocumentos: [null]
+        })
       }),
       historico: this.formBuilder.array([this.criarGrupoHistorico()]),
       envolvidos: this.formBuilder.group({

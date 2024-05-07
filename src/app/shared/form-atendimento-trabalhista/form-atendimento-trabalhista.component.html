@@ -19,9 +19,11 @@
     </div>
 
     <!-- Ficha -->
+
     <ng-container formGroupName="ficha">
 
       <!-- Reclamado -->
+
       <div formGroupName="reclamado" class="grupo-form">
         <div class="full">
           <h3 class="subtitulo">Reclamado</h3>
@@ -43,6 +45,7 @@
         </mat-form-field>
 
         <!-- Endereço Reclamado -->
+
         <ng-container formGroupName="endereco">
           <div class="full">
             <h3 class="subtitulo">Endereço</h3>
@@ -79,6 +82,7 @@
       </div>
 
       <!-- Relação Empregaticia -->
+
       <div formGroupName="relacaoEmpregaticia" class="grupo-form">
         <div class="full">
           <h3 class="subtitulo">Relação Empregaticia</h3>
@@ -343,6 +347,59 @@
           <button mat-raised-button (click)="adicionarTestemunha()" class="botao-criar">Adicionar Testemunha</button>
         </div>
       </div>
+
+      <!-- Documentos Depositados Lista Check -->
+
+      <div formGroupName="documentosDepositadosNpj" class="grupo-form">
+        <div class="full">
+          <h3 class="subtitulo">Documentação (CÓPIAS) Depositadas no NPJ</h3>
+        </div>
+        <div class="full">
+          <div class="input-grande">
+            <mat-checkbox formControlName="procuracao" color="primary" labelPosition="before">Procuração:</mat-checkbox>
+          </div>
+          <div class="input-grande">
+            <mat-checkbox formControlName="declaracaoPobreza" color="primary" labelPosition="before">Declaração de
+              Pobreza:</mat-checkbox>
+          </div>
+          <div class="input-grande">
+            <mat-checkbox formControlName="ctps" color="primary" labelPosition="before" required>Carteira de Trabalho
+              (CTPS)*:</mat-checkbox>
+          </div>
+          <div class="input-grande">
+            <mat-checkbox formControlName="identidade" color="primary" labelPosition="before">Carteira de
+              Identidade:</mat-checkbox>
+          </div>
+        </div>
+        <div class="full">
+          <div class="input-grande">
+            <mat-checkbox formControlName="cpf" color="primary" labelPosition="before">CPF:</mat-checkbox>
+          </div>
+          <div class="input-grande">
+            <mat-checkbox formControlName="pis" color="primary" labelPosition="before">PIS:</mat-checkbox>
+          </div>
+          <div class="input-grande">
+            <mat-checkbox formControlName="contrachequeUltimos3Meses" color="primary" labelPosition="before">Contracheque dos últimos 3 meses:</mat-checkbox>
+          </div>
+          <div class="input-grande">
+            <mat-checkbox formControlName="extratoAnaliticoContaFgts" color="primary" labelPosition="before">Extrato Analítico do FGTS:</mat-checkbox>
+          </div>
+        </div>
+        <div class="full">
+          <div class="input-grande">
+            <mat-checkbox formControlName="trct" color="primary" labelPosition="before">TRCT:</mat-checkbox>
+          </div>
+          <div class="input-grande">
+            <mat-checkbox formControlName="comprovanteRecAntecip13" color="primary" labelPosition="before">Comprovante de Rec. de Atencip. do 13º, se for o caso:</mat-checkbox>
+          </div>
+          <div class="input-grande">
+            <mat-checkbox formControlName="outrosDocumentos" color="primary" labelPosition="before">Outros docs.:</mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finalização -->
+
       <div class="grupo-form">
         <div class="full">
           <h3 class="subtitulo">Finalização</h3>
