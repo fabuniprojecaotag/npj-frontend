@@ -64,7 +64,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
           rg: [null, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)],
           cpf: [null, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),],
           telefone: [null, [Validators.minLength(11)]],
-          email: [null],
+          email: [null, Validators.email],
           endereco: this.formBuilder.group({
             cep: [null],
             cidade: [null],

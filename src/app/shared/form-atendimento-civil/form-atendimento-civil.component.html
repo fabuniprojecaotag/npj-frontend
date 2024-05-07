@@ -67,12 +67,14 @@
         <mat-form-field class="input-medio">
           <mat-label>E-mail</mat-label>
           <input matInput formControlName="email" placeholder="E-mail">
+          <mat-error *ngIf="formAtendimentos.get('parteContraria')?.get('email')?.errors?.['email']">E-mail
+            invalido!</mat-error>
         </mat-form-field>
         <ng-container formGroupName="endereco">
           <div class="full">
             <mat-form-field class="input-medio">
               <mat-label>CEP</mat-label>
-              <input matInput formControlName="cep" placeholder="CEP">
+              <input matInput formControlName="cep" placeholder="CEP" mask="00000-000" [dropSpecialCharacters]="false">
             </mat-form-field>
             <mat-form-field class="input-pequeno">
               <mat-label>Logradouro</mat-label>
@@ -126,7 +128,8 @@
             <div class="full">
               <mat-form-field class="input-medio">
                 <mat-label>CEP</mat-label>
-                <input matInput formControlName="cep" placeholder="CEP da testemunha">
+                <input matInput formControlName="cep" placeholder="CEP da testemunha" mask="00000-000"
+                  [dropSpecialCharacters]="false">
               </mat-form-field>
               <mat-form-field class="input-medio">
                 <mat-label>Cidade</mat-label>

@@ -50,7 +50,7 @@
           <div class="full">
             <mat-form-field class="input-grande">
               <mat-label>CEP</mat-label>
-              <input matInput formControlName="cep" placeholder="CEP">
+              <input matInput formControlName="cep" placeholder="CEP" mask="00000-000" [dropSpecialCharacters]="false">
             </mat-form-field>
             <mat-form-field class="input-grande">
               <mat-label>Cidade</mat-label>
@@ -237,6 +237,9 @@
             <mat-label>Saldo do salário</mat-label>
             <input matInput formControlName="saldoSalario" placeholder="Saldo do salário" prefix="R$ "
               thousandSeparator="." decimalMarker="," mask="separator.2" [dropSpecialCharacters]="false">
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha')?.get('relacaoEmpregaticia')?.get('saldoSalario')?.errors?.['required']">Saldo
+              do salário é obrigatório</mat-error>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Aviso Prévio Indenizado</mat-label>
@@ -275,7 +278,8 @@
         </div>
         <mat-form-field class="full">
           <mat-label>Inforamções Complementares</mat-label>
-          <textarea matInput formControlName="informacoesComplementares" placeholder="Informações Complementares"></textarea>
+          <textarea matInput formControlName="informacoesComplementares"
+            placeholder="Informações Complementares"></textarea>
         </mat-form-field>
       </div>
 
@@ -300,7 +304,8 @@
             <div class="full">
               <mat-form-field class="input-medio">
                 <mat-label>CEP</mat-label>
-                <input matInput formControlName="cep" placeholder="CEP da testemunha">
+                <input matInput formControlName="cep" placeholder="CEP da testemunha" mask="00000-000"
+                  [dropSpecialCharacters]="false">
               </mat-form-field>
               <mat-form-field class="input-medio">
                 <mat-label>Cidade</mat-label>
@@ -381,8 +386,8 @@
     </div>
     <div class="grupo-botoes">
       <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
-      <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit"
-        (click)="executarAcao()" color="primary">Submeter</button>
+      <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit" (click)="executarAcao()"
+        color="primary">Submeter</button>
     </div>
   </form>
 </section>
