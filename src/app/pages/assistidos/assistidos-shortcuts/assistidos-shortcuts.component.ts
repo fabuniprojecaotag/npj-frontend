@@ -34,7 +34,7 @@ export class AssistidosShortcutsComponent implements OnInit {
   ngOnInit(): void {
     this.cpf = this.route.snapshot.paramMap.get('cpf') as string;
     let filtroAtendimentos: filtro = {
-      field: 'envolvidos.assistido',
+      field: 'envolvidos.assistido.nome',
       filter: 'EQUAL',
       value: this.nomeAssistido
     };
@@ -49,7 +49,7 @@ export class AssistidosShortcutsComponent implements OnInit {
       },
     });
 
-    this.atendimentoService.listagemAtendimentos().subscribe({
+    this.atendimentoService.listagemAtendimentos(filtroAtendimentos).subscribe({
       next: (resposta) => {
         this.listaAtendimento = resposta;
         console.log("Atendimentos: " + resposta);

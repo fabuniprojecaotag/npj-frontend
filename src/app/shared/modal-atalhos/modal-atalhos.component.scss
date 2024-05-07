@@ -10,9 +10,11 @@
   }
 
   &__conteudo {
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    gap: 14px 4px;
+    justify-content: flex-start;
     overflow-y: auto;
   }
 
