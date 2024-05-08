@@ -5,7 +5,7 @@ import { FormsService } from 'src/app/core/services/forms.service';
 import { ProcessosService } from 'src/app/core/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
-import { ModalProcessoCriadoComponent } from 'src/app/shared/modal-processo-criado/modal-processo-criado.component';
+import { ModalProcessoComponent } from 'src/app/shared/modal-processo/modal-processo-criado.component';
 
 @Component({
   selector: 'app-processo-add',
@@ -76,10 +76,11 @@ export class ProcessoAddComponent {
   }
 
   abrirModal(novoProcesso: Processo) {
-    this.dialog.open(ModalProcessoCriadoComponent, {
+    this.dialog.open(ModalProcessoComponent, {
       width: '552px',
       height: '360px',
       data: {
+        operacao: 'criado',
         numero: novoProcesso.numero,
         nome: novoProcesso.nome,
         atendimentoId: novoProcesso.atendimentoId,

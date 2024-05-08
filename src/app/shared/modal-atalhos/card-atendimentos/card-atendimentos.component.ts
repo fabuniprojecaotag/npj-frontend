@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Atendimento } from 'src/app/core/types/atendimento';
 
 @Component({
@@ -6,10 +6,6 @@ import { Atendimento } from 'src/app/core/types/atendimento';
   templateUrl: './card-atendimentos.component.html',
   styleUrls: ['./card-atendimentos.component.scss']
 })
-export class CardAtendimentosComponent implements OnInit {
+export class CardAtendimentosComponent {
   @Input() atendimento!: Atendimento;
-
-  ngOnInit(): void {
-    console.log(this.atendimento);
-  }
 }

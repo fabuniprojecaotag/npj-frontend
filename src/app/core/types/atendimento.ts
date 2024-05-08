@@ -40,6 +40,7 @@ export interface ParteContraria {
   email?: string,
   endereco?: Endereco,
   telefone?: string,
+  informacoesComplementares: string
 }
 
 export interface Testemunha {

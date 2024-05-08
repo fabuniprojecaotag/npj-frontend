@@ -44,7 +44,7 @@ import { FormUsersComponent } from './shared/form-users/form-users.component';
 import { UtilsBarComponent } from './shared/utils-bar/utils-bar.component';
 import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
 import { EditUsersComponent } from './pages/users/edit-users/edit-users.component';
-import { ModalCriadoComponent } from './shared/modal-criado/modal-criado.component';
+import { ModalCriadoComponent } from './shared/modal-assistido/modal-criado.component';
 import { AssistidosComponent } from './pages/assistidos/assistidos.component';
 import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
 import { FormAssistidosComponent } from './shared/form-assistidos/form-assistidos.component';
@@ -69,7 +69,7 @@ import { CustomMatPaginatorIntl } from './shared/customMatPaginator/CustomMatPag
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AssistidoAutocompleteComponent } from './shared/assistido-autocomplete/assistido-autocomplete.component';
-import { ModalProcessoCriadoComponent } from './shared/modal-processo-criado/modal-processo-criado.component';
+import { ModalProcessoComponent } from './shared/modal-processo/modal-processo-criado.component';
 import { ModalExcluirProcessoComponent } from './shared/modal-excluir-processo/modal-excluir-processo.component';
 import { AtendimentoAutocompleteComponent } from './shared/form-processo/atendimento-autocomplete/atendimento-autocomplete.component';
 import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
@@ -117,7 +117,7 @@ import { CardProcessosComponent } from './shared/modal-atalhos/card-processos/ca
     FormAtendimentoTrabalhistaComponent,
     FuncionarioAutocompleteComponent,
     AssistidoAutocompleteComponent,
-    ModalProcessoCriadoComponent,
+    ModalProcessoComponent,
     ModalExcluirProcessoComponent,
     AtendimentoAutocompleteComponent,
     AtendimentoEditComponent,

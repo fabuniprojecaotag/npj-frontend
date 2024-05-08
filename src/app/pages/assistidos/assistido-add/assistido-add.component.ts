@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Assistido } from 'src/app/core/types/assistido';
-import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.component';
+import { ModalCriadoComponent } from 'src/app/shared/modal-assistido/modal-criado.component';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 
 @Component({
@@ -79,7 +79,7 @@ export class AssistidoAddComponent {
     this.dialog.open(ModalCriadoComponent, {
       width: '552px',
       height: '360px',
-      data: { tituloCriado: 'Assistido', nome: novoAssistido.nome, email: novoAssistido.email }
+      data: { tituloCriado: 'Assistido', nome: novoAssistido.nome, email: novoAssistido.email, cpf: novoAssistido.cpf }
     })
   }
 

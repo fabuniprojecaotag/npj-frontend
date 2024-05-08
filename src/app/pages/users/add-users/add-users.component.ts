@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
-import { ModalCriadoComponent } from 'src/app/shared/modal-criado/modal-criado.component';
+import { ModalCriadoComponent } from 'src/app/shared/modal-assistido/modal-criado.component';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 
 @Component({

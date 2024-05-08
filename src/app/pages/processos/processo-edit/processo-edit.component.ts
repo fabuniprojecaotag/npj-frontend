@@ -7,6 +7,7 @@ import { ProcessosService } from 'src/app/core/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 import { ModalExcluirProcessoComponent } from 'src/app/shared/modal-excluir-processo/modal-excluir-processo.component';
+import { ModalProcessoComponent } from 'src/app/shared/modal-processo/modal-processo-criado.component';
 
 @Component({
   selector: 'app-processo-edit',
@@ -67,6 +68,7 @@ export class ProcessoEditComponent implements OnInit {
       .subscribe({
         next: () => {
           this.router.navigate(['/processos']);
+          this.abrirModal(dadosAtualizados);
         },
         error: (err) => {
           let errorMessage: string = '';
@@ -121,7 +123,20 @@ export class ProcessoEditComponent implements OnInit {
     });
   }
 
-  abrirModal() {
+  abrirModal(processo: Processo) {
+    this.dialog.open(ModalProcessoComponent, {
+      width: '552px',
+      height: '360px',
+      data: {
+        operacao: 'editado',
+        numero: processo.numero,
+        nome: processo.nome,
+        atendimentoId: processo.atendimentoId,
+      },
+    });
+  }
+
+  abrirModalExcluir() {
     this.dialog.open(ModalExcluirProcessoComponent, {
       width: '372px',
       height: '228px',

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalProcessoCriadoComponent } from './modal-processo-criado.component';
+import { ModalProcessoComponent } from './modal-processo-criado.component';
 
 describe('ModalProcessoCriadoComponent', () => {
-  let component: ModalProcessoCriadoComponent;
-  let fixture: ComponentFixture<ModalProcessoCriadoComponent>;
+  let component: ModalProcessoComponent;
+  let fixture: ComponentFixture<ModalProcessoComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalProcessoCriadoComponent]
+      declarations: [ModalProcessoComponent]
     });
-    fixture = TestBed.createComponent(ModalProcessoCriadoComponent);
+    fixture = TestBed.createComponent(ModalProcessoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
