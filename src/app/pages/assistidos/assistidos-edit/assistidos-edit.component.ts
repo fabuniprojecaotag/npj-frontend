@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AssistidosService } from 'src/app/core/services/assistidos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Assistido, AssistidoFull } from 'src/app/core/types/assistido';
+import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 
@@ -190,7 +191,7 @@ export class AssistidosEditComponent {
     });
   }
 
-  abrirModal(assistido: Assistido) {
+  abrirModalExcluir(assistido: Assistido) {
     this.dialog.open(ModalExcluidoComponent, {
       width: '372px',
       height: '228px',
@@ -200,6 +201,14 @@ export class AssistidosEditComponent {
         deletar: () => this.excluir(),
       },
     });
+  }
+
+  abrirModal(novoAssistido: Assistido) {
+    this.dialog.open(ModalAssistidoComponent, {
+      width: '552px',
+      height: '360px',
+      data: { operacao: 'editado', nome: novoAssistido.nome, email: novoAssistido.email, cpf: novoAssistido.cpf }
+    })
   }
 
   mostrarMensagemErro(codigoErro: string, mensagemErro: string) {

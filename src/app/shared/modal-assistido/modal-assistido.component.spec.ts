@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalCriadoComponent } from './modal-criado.component';
+import { ModalAssistidoComponent } from './modal-assistido.component';
 import { AppModule } from 'src/app/app.module';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('ModalCriadoComponent', () => {
-  let component: ModalCriadoComponent;
-  let fixture: ComponentFixture<ModalCriadoComponent>;
+  let component: ModalAssistidoComponent;
+  let fixture: ComponentFixture<ModalAssistidoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModalCriadoComponent],
+      declarations: [ModalAssistidoComponent],
       imports: [AppModule],
       providers: [
         {
@@ -25,7 +25,7 @@ describe('ModalCriadoComponent', () => {
         },
       ],
     }).compileComponents();
-    fixture = TestBed.createComponent(ModalCriadoComponent);
+    fixture = TestBed.createComponent(ModalAssistidoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

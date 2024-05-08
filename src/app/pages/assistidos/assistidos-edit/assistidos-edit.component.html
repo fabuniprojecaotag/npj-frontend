@@ -1,4 +1,4 @@
-<app-header [subtitulo]="tituloDaPagina"></app-header>
-<app-utils-bar></app-utils-bar>
-<app-form-assistidos (acaoClique)="editar()" (cliqueExcluir)="abrirModal(this.assistido)" [editComponent]="true"></app-form-assistidos>
-
+<app-header [subtitulo]="tituloDaPagina" />
+<app-utils-bar />
+<app-form-assistidos (acaoClique)="editar()" (cliqueExcluir)="abrirModalExcluir(this.assistido)"
+  [editComponent]="true" />

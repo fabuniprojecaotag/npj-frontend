@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
-import { ModalCriadoComponent } from 'src/app/shared/modal-assistido/modal-criado.component';
+import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 
 @Component({
@@ -77,7 +77,7 @@ export class AddUsersComponent {
   }
 
   abrirModal(novoCadastro: Usuario) {
-    this.dialog.open(ModalCriadoComponent, {
+    this.dialog.open(ModalAssistidoComponent, {
       width: '552px',
       height: '360px',
       data: {
