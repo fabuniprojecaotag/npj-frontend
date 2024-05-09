@@ -1,4 +1,4 @@
-import { AssistidoCivil, AssistidoTrabalhista } from './../../../core/types/assistido';
+import { AssistidoCivil, AssistidoTrabalhista } from './../../core/types/assistido';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';

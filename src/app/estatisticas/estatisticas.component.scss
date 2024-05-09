@@ -1,10 +1,9 @@
-@import "../../../styles.scss";
+@import "../../styles.scss";
 
-
-.display{
-display: visible !important;
+.display {
+  display: visible !important;
 }
-.no-display{
+.no-display {
   display: none !important;
 }
 .sec-error {
@@ -31,41 +30,36 @@ display: visible !important;
   height: 80vh;
   margin: 0 auto;
   width: 90vw;
-.input-container{
-  display: flex;
-  margin: 1em auto;
+  .input-container {
+    display: flex;
+    margin: 1em auto;
 
-  button{
-    margin-left: .5em;
+    button {
+      margin-left: 0.5em;
+    }
   }
-}
 
   p {
     padding-top: 3em;
   }
-  .c-options{
+  .c-options {
     width: 100%;
-    mat-chip-listbox{
+    mat-chip-listbox {
       width: 100%;
       margin-bottom: 2%;
     }
-
   }
-  .main-container{
+  .main-container {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
 
-
-    
-    .c-table, .c-chart{
+    .c-table,
+    .c-chart {
       width: 50%;
     }
-
-    
-
   }
-  .chart-container{
+  .chart-container {
     display: flex;
     justify-content: center;
     align-items: center;

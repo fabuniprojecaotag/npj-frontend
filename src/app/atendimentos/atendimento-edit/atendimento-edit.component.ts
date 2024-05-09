@@ -1,5 +1,5 @@
 import { Atendimento } from 'src/app/core/types/atendimento';
-import { FormsService } from './../../../core/services/forms.service';
+import { FormsService } from './../../core/services/forms.service';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
