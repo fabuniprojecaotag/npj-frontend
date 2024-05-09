@@ -5,14 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
-import { UsersComponent } from './pages/users/users.component';
+import { LoginComponent } from './autenticacao/login/login.component';
+import { UsersComponent } from './autenticacao/users/users.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AddUsersComponent } from './pages/users/add-users/add-users.component';
-import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { AddUsersComponent } from './autenticacao/users/add-users/add-users.component';
+import { MyProfileComponent } from './autenticacao/my-profile/my-profile.component';
 import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
-import { EditUsersComponent } from './pages/users/edit-users/edit-users.component';
+import { EditUsersComponent } from './autenticacao/users/edit-users/edit-users.component';
 import { AssistidosComponent } from './pages/assistidos/assistidos.component';
 import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
 import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assistidos-edit.component';
@@ -25,10 +25,10 @@ import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-
 import { AtendimentoAddComponent } from './pages/atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
-import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.component';
 import { EstatisticasComponent } from './pages/estatisticas/estatisticas.component';
 import { MaterialModule } from './core/material/material.module';
 import { SharedModule } from './shared/shared.module';
+import { ErroModule } from './core/erro/erro.module';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,6 @@ import { SharedModule } from './shared/shared.module';
     ProcessoEditComponent,
     AtendimentoAddComponent,
     AtendimentoEditComponent,
-    NaoEncontradaComponent,
     EstatisticasComponent,
   ],
   imports: [
@@ -62,6 +61,7 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     NgxMaskDirective, NgxMaskPipe,
+    ErroModule
   ],
   providers: [
     {
@@ -69,7 +69,6 @@ import { SharedModule } from './shared/shared.module';
       useClass: AutenticacaoInterceptor,
       multi: true,
     },
-
     provideNgxMask()
   ],
   bootstrap: [AppComponent],

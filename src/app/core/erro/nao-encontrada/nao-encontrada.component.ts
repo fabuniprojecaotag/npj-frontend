@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './nao-encontrada.component.html',
   styleUrls: ['./nao-encontrada.component.scss']
 })
-export class NaoEncontradaComponent {
-  tituloPagina: string = 'Não Encontrada';
-}
+export class NaoEncontradaComponent { }

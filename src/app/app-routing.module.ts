@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
-import { UsersComponent } from './pages/users/users.component';
-import { AddUsersComponent } from './pages/users/add-users/add-users.component';
-import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { LoginComponent } from './autenticacao/login/login.component';
+import { UsersComponent } from './autenticacao/users/users.component';
+import { AddUsersComponent } from './autenticacao/users/add-users/add-users.component';
+import { MyProfileComponent } from './autenticacao/my-profile/my-profile.component';
 import { authGuard } from './core/guards/auth.guard';
-import { EditUsersComponent } from './pages/users/edit-users/edit-users.component';
+import { EditUsersComponent } from './autenticacao/users/edit-users/edit-users.component';
 import { AssistidosComponent } from './pages/assistidos/assistidos.component';
 import { AssistidoAddComponent } from './pages/assistidos/assistido-add/assistido-add.component';
 import { AssistidosEditComponent } from './pages/assistidos/assistidos-edit/assistidos-edit.component';
@@ -18,15 +19,9 @@ import { ProcessoAddComponent } from './pages/processos/processo-add/processo-ad
 import { ProcessoEditComponent } from './pages/processos/processo-edit/processo-edit.component';
 import { AtendimentoAddComponent } from './pages/atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
 import { AtendimentoEditComponent } from './pages/atendimentos/atendimento-edit/atendimento-edit.component';
-import { NaoEncontradaComponent } from './pages/nao-encontrada/nao-encontrada.component';
 import { EstatisticasComponent } from './pages/estatisticas/estatisticas.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full',
-  },
   {
     path: 'home',
     component: HomeComponent,
@@ -117,11 +112,15 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: '**',
-    component: NaoEncontradaComponent,
-    canActivate: [authGuard]
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
   },
- 
+  {
+    path: '**',
+    redirectTo: '/nao-encontrada',
+    pathMatch: 'full',
+  }
 ];
 
 @NgModule({
