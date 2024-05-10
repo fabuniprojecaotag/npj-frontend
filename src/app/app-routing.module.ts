@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './autenticacao/login/login.component';
-import { UsersComponent } from './autenticacao/users/users.component';
 import { MyProfileComponent } from './autenticacao/my-profile/my-profile.component';
 import { authGuard } from './autenticacao/auth.guard';
 import { AssistidosComponent } from './assistidos/assistidos.component';
@@ -11,9 +10,6 @@ import { AssistidosEditComponent } from './assistidos/assistidos-edit/assistidos
 import { AssistidosShortcutsComponent } from './assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 import { AtendimentosComponent } from './atendimentos/atendimentos.component';
 import { NovoAtendimentoComponent } from './atendimentos/novo-atendimento/novo-atendimento.component';
-import { ProcessosComponent } from './processos/processos.component';
-import { ProcessoAddComponent } from './processos/processo-add/processo-add.component';
-import { ProcessoEditComponent } from './processos/processo-edit/processo-edit.component';
 import { AtendimentoAddComponent } from './atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
 import { AtendimentoEditComponent } from './atendimentos/atendimento-edit/atendimento-edit.component';
 import { HomeModule } from './home/home.module';
@@ -81,18 +77,8 @@ const routes: Routes = [
   },
   {
     path: 'processos',
-    component: ProcessosComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'processos/add',
-    component: ProcessoAddComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'processos/edit/:numero',
-    component: ProcessoEditComponent,
-    canActivate: [authGuard],
+    loadChildren: () => import('./processos/processos.module').then(m => m.ProcessosModule),
+    canActivate: [authGuard]
   },
   {
     path: 'estatisticas',

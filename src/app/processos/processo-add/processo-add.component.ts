@@ -30,7 +30,7 @@ export class ProcessoAddComponent {
       this.processsoService.cadastraProcesso(novoCadastro).subscribe({
         next: () => {
           this.abrirModal(novoCadastro);
-          this.router.navigate(['/processos']);
+          this.router.navigate(['/processos/list']);
         },
         error: (err) => {
           let errorMessage: string = '';

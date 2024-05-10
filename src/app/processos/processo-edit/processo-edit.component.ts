@@ -67,7 +67,7 @@ export class ProcessoEditComponent implements OnInit {
       .editarProcesso(this.numeroParam, dadosAtualizados)
       .subscribe({
         next: () => {
-          this.router.navigate(['/processos']);
+          this.router.navigate(['/processos/list']);
           this.abrirModal(dadosAtualizados);
         },
         error: (err) => {
@@ -115,7 +115,7 @@ export class ProcessoEditComponent implements OnInit {
   excluirProcesso(idProcesso: string) {
     this.processsoService.excluirProcesso(idProcesso).subscribe({
       next: () => {
-        this.router.navigate(['/processos']);
+        this.router.navigate(['/processos/list']);
       },
       error: () => {
         alert('Erro ao excluir processo!');
