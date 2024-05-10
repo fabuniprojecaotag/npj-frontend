@@ -1,8 +1,7 @@
 <app-header [subtitulo]="tituloPagina"></app-header>
 <app-utils-bar></app-utils-bar>
-<ng-container *ngIf="tipoAtendimento !== 'Trabalhista'; else formTrabalhista">
-  <app-form-atendimento-civil (acaoClique)="editar()" (acaoCliqueExcluir)="excluir()" [tipoAtendimento]="tipoAtendimento"
-    [editarComponente]="true" />
+<ng-container *ngIf="tipoFicha !== 'Trabalhista'; else formTrabalhista">
+  <app-form-atendimento-civil (acaoClique)="editar()" (acaoCliqueExcluir)="excluir()" [editarComponente]="true" />
 </ng-container>
 <ng-template #formTrabalhista>
   <app-form-atendimento-trabalhista (acaoClique)="editar()" (acaoCliqueExcluir)="excluir()" [editarComponente]="true" />

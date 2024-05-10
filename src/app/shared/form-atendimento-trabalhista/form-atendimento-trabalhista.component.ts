@@ -25,7 +25,6 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   assistidoControl: FormControl = new FormControl(null, Validators.required);
   arquivoSelecionado: File | null = null; // Variável para armazenar o nome do arquivo selecionado
 
-  @Input() tipoAtendimento: string = 'Trabalhista';
   @Input() editarComponente: boolean = false;
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<any> = new EventEmitter();
@@ -52,7 +51,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
     this.formAtendimentosTrabalhista = this.formBuilder.group({
       '@type': ['Trabalhista'],
       status: [null],
-      area: [this.tipoAtendimento],
+      area: ['Trabalhista'],
       ficha: this.formBuilder.group({
         '@type': ['Trabalhista'],
         dadosSensiveis: [false],
@@ -70,6 +69,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
             complemento: [null]
           }),
         }),
+        medidaJuridica: [null, Validators.required],
         relacaoEmpregaticia: this.formBuilder.group({
           dataAdmissao: [null],
           dataSaida: [null],

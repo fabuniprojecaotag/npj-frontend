@@ -18,11 +18,11 @@ export interface Ficha {
   assinatura: File,
   dadosSensiveis: Boolean,
   testemunhas?: Testemunha[],
+  medidaJuridica: string
 }
 
 export interface FichaCivil extends Ficha {
   parteContraria: ParteContraria,
-  medidaJudicial: string,
 }
 
 export interface FichaTrabalhista extends Ficha {

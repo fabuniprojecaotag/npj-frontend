@@ -65,18 +65,18 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'atendimentos/edit/:id/:area',
-    component: AtendimentoEditComponent,
-    canActivate: [authGuard],
-  },
-  {
     path: 'assistidos/novo-atendimento',
     component: NovoAtendimentoComponent,
     canActivate: [authGuard],
   },
   {
-    path: 'assistidos/novo-atendimento/:area',
+    path: 'assistidos/novo-atendimento/:ficha',
     component: AtendimentoAddComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'atendimentos/edit/:id/:ficha',
+    component: AtendimentoEditComponent,
     canActivate: [authGuard],
   },
   {

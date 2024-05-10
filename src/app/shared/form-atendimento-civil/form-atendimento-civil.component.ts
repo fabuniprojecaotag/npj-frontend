@@ -18,13 +18,40 @@ export class FormAtendimentoCivilComponent implements OnInit {
     'Processo ativo',
     'Processo arquivado',
   ];
+  areas: string[] = [
+    'Civil',
+    'Família',
+    'Penal'
+  ];
+  medidasFamilia: string[] = [
+    'Ação de Alimentos',
+    'Ação de Cumprimento de alimentos - prisão',
+    'Ação de Cumprimento de alimentos - penhora',
+    'Ação de Guarda',
+    'Ação de Regulamentação de visitas',
+    'Ação de divórcio',
+    'Ação de reconhecimento e dissolução de união estável',
+    'Ação de reconhecimento e dissolução de união estável post mortem',
+    'Ação de interdição',
+    'Ação de inventário',
+    'Alvará Judicial',
+    'Outro'
+  ];
+  medidasCivil: string[] = [
+    'Ação de reparação por danos materiais',
+    'Ação de reparação por danos morais',
+    'Ação de reparação por danos maateriais com morais',
+    'Obrigação de fazer',
+    'Consignação de Pagamento',
+    'Ação de cobrança'
+  ];
+  medidasJudiciais: string[] = this.medidasCivil;
   estagiarioControl: FormControl = new FormControl(null);
   professorControl: FormControl = new FormControl();
   secretariaControl: FormControl = new FormControl();
   assistidoControl: FormControl = new FormControl(null, Validators.required);
   arquivoSelecionado: File | null = null;
 
-  @Input() tipoAtendimento!: string;
   @Input() editarComponente: boolean = false;
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<any> = new EventEmitter();
@@ -41,6 +68,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
       next: (usuario) => {
         if (usuario.role.toLowerCase() === 'estagiario' && this.editarComponente === false) {
           this.estagiarioControl.setValue(usuario);
+          this.formAtendimentos.get('status')?.disable();
         }
       },
       error: () => {
@@ -50,9 +78,9 @@ export class FormAtendimentoCivilComponent implements OnInit {
 
     this.formAtendimentos = this.formBuilder.group({
       '@type': ['Civil'],
-      // instante: [new Date()], // não necessario, o back irá retornar
-      area: [this.tipoAtendimento],
-      status: ['', Validators.required],
+      area: [null, Validators.required],
+      status: [{ value: 'Aguardando documentos', disabled: false }, Validators.required],
+      instante: [null],
       ficha: this.formBuilder.group({
         '@type': ['Civil'],
         assinatura: [null],
@@ -72,12 +100,12 @@ export class FormAtendimentoCivilComponent implements OnInit {
             bairro: [null],
             numero: [null],
             complemento: [null],
-            informacoesComplementares: [null]
           }),
           informacoesComplementares: [null]
         }),
-        medidaJudicial: [null]
+        medidaJuridica: [null]
       }),
+      prazoEntregaDocumentos: [null],
       historico: this.formBuilder.array([this.criarGrupoHistorico()]),
       envolvidos: this.formBuilder.group({
         estagiario: this.estagiarioControl,
@@ -85,6 +113,14 @@ export class FormAtendimentoCivilComponent implements OnInit {
         secretaria: this.secretariaControl,
         assistido: this.assistidoControl,
       })
+    });
+
+    this.formAtendimentos.get('area')?.valueChanges.subscribe(area => {
+      if (area === 'Civil') {
+        this.medidasJudiciais = this.medidasCivil;
+      } else if (area === 'Penal' || area === 'Família') {
+        this.medidasJudiciais = this.medidasFamilia;
+      }
     });
 
     this.formService.setForm(this.formAtendimentos);

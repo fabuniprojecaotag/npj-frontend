@@ -13,7 +13,6 @@ import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.comp
 })
 export class AtendimentoAddComponent implements OnInit {
   tituloPagina = 'Nova Ficha';
-  tipoAtendimento!: string;
   tipoFicha!: string;
 
   constructor(
@@ -25,13 +24,7 @@ export class AtendimentoAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tipoAtendimento = this.route.snapshot.paramMap.get('area') as string;
-
-    if (this.tipoAtendimento.toLowerCase() !== 'trabalhista') {
-      this.tipoFicha = 'Civil';
-    } else {
-      this.tipoFicha = 'Trabalhista';
-    }
+    this.tipoFicha = this.route.snapshot.paramMap.get('ficha') as string;
   }
 
   cadastrar() {
@@ -43,7 +36,6 @@ export class AtendimentoAddComponent implements OnInit {
       this.atendimentoService.cadastrarAtendimento(novoAtendimento).subscribe({
         next: () => {
           alert('Cadastro realizado!');
-          console.log(novoAtendimento);
           this.router.navigate(['/atendimentos']);
         },
         error: (err) => {

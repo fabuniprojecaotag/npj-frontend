@@ -14,7 +14,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AtendimentoEditComponent {
   tituloPagina = 'Editar - ';
-  tipoAtendimento!: string;
   tipoFicha!: string;
   idAtendimento!: string;
   atendimento!: Atendimento;
@@ -29,20 +28,13 @@ export class AtendimentoEditComponent {
   ) { }
 
   ngOnInit(): void {
-    this.tipoAtendimento = this.route.snapshot.paramMap.get('area') as string;
+    this.tipoFicha = this.route.snapshot.paramMap.get('ficha') as string;
     this.idAtendimento = this.route.snapshot.paramMap.get('id') as string;
     this.tituloPagina += this.idAtendimento;
-
-    if (this.tipoAtendimento.toLowerCase() !== 'trabalhista') {
-      this.tipoFicha = 'Civil';
-    } else {
-      this.tipoFicha = 'Trabalhista';
-    }
 
     this.atendimentoService.consultaAtendimento(this.idAtendimento).subscribe({
       next: (atendimento) => {
         this.atendimento = atendimento;
-        console.log(atendimento);
         this.carregarFormulario();
       }
     })
@@ -59,6 +51,7 @@ export class AtendimentoEditComponent {
         const { id, ...rest } = item;
         return rest;
       }),
+      prazoEntregaDocumentos: this.atendimento.prazoEntregaDocumentos,
       envolvidos: this.atendimento.envolvidos
     });
   }
@@ -70,6 +63,7 @@ export class AtendimentoEditComponent {
       area: this.form?.value.area,
       ficha: this.form?.value.ficha,
       historico: this.form?.value.historico,
+      prazoEntregaDocumentos: this.form?.value.prazoEntregaDocumentos,
       envolvidos: this.form?.value.envolvidos
     };
 

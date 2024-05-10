@@ -1,8 +1,36 @@
 <section class="secao-form-civil">
-  <h3 class="titulo-form">Atendimento {{ tipoAtendimento }}</h3>
+  <h3 class="titulo-form">Ficha Civil</h3>
   <form [formGroup]="formAtendimentos">
 
+    <div class="grupo-form">
+      <div class="full">
+        <mat-form-field class="input-medio">
+          <mat-label>Área</mat-label>
+          <mat-select matInput formControlName="area" ngDefaultControl>
+            <mat-option *ngFor="let area of areas" [value]="area">
+              {{ area }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formAtendimentos.get('area')?.errors?.['required']">Área é
+            obrigatória</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-medio">
+          <mat-label>Instante do atendimento</mat-label>
+          <input matInput [matDatepicker]="instante" formControlName="instante" *ngIf="editarComponente">
+          <mat-datepicker-toggle matIconSuffix [for]="instante" color="primary"></mat-datepicker-toggle>
+          <mat-datepicker #instante></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="input-medio">
+          <mat-label>Prazo de Entrega dos Documentos</mat-label>
+          <input matInput [matDatepicker]="prazoEntregaDocumentos" formControlName="prazoEntregaDocumentos">
+          <mat-datepicker-toggle matIconSuffix [for]="prazoEntregaDocumentos" color="primary"></mat-datepicker-toggle>
+          <mat-datepicker #prazoEntregaDocumentos></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
     <!-- Envolvidos -->
+
     <div class="grupo-form" formGroupName="envolvidos">
       <div class="full">
         <h3 class="subtitulo">Envolvidos</h3>
@@ -180,7 +208,11 @@
         </div>
         <mat-form-field class="input-grande">
           <mat-label>Medida Jurídica Cabível</mat-label>
-          <input matInput formControlName="medidaJudicial" placeholder="Medida Jurídica">
+          <mat-select formControlName="medidaJuridica" ngDefaultControl>
+            <mat-option *ngFor="let medida of medidasJudiciais" [value]="medida">
+              {{ medida }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <div class="input-grande">
           <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados
