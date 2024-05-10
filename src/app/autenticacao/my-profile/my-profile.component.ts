@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { TokenService } from 'src/app/core/services/token.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';

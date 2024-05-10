@@ -70,7 +70,7 @@ export class EditUsersComponent implements OnInit {
       .subscribe({
         next: () => {
           this.abrirModalEditar(dadosAtualizados);
-          this.router.navigate(['/users']);
+          this.router.navigate(['/users/list']);
         },
         error: (err) => {
           switch (err.status) {

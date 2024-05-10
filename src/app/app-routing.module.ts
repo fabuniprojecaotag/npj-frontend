@@ -1,13 +1,10 @@
-import { HomeModule } from './home/home.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './autenticacao/login/login.component';
 import { UsersComponent } from './autenticacao/users/users.component';
-import { AddUsersComponent } from './autenticacao/users/add-users/add-users.component';
 import { MyProfileComponent } from './autenticacao/my-profile/my-profile.component';
 import { authGuard } from './core/guards/auth.guard';
-import { EditUsersComponent } from './autenticacao/users/edit-users/edit-users.component';
 import { AssistidosComponent } from './assistidos/assistidos.component';
 import { AssistidoAddComponent } from './assistidos/assistido-add/assistido-add.component';
 import { AssistidosEditComponent } from './assistidos/assistidos-edit/assistidos-edit.component';
@@ -19,7 +16,8 @@ import { ProcessoAddComponent } from './processos/processo-add/processo-add.comp
 import { ProcessoEditComponent } from './processos/processo-edit/processo-edit.component';
 import { AtendimentoAddComponent } from './atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
 import { AtendimentoEditComponent } from './atendimentos/atendimento-edit/atendimento-edit.component';
-import { EstatisticasComponent } from './estatisticas/estatisticas.component';
+import { HomeModule } from './home/home.module';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -28,23 +26,13 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+    component: HomeComponent,
     canActivate: [authGuard]
   },
   {
     path: 'users',
-    component: UsersComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'users/add',
-    component: AddUsersComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'users/edit/:id',
-    component: EditUsersComponent,
-    canActivate: [authGuard],
+    loadChildren: () => import('./autenticacao/autenticacao.module').then(m => m.AutenticacaoModule),
+    canActivate: [authGuard]
   },
   {
     path: 'profile',
@@ -113,7 +101,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/users/login',
     pathMatch: 'full',
   },
   {
@@ -124,7 +112,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), HomeModule],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

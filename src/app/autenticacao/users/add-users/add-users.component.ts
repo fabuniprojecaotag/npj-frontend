@@ -32,7 +32,7 @@ export class AddUsersComponent {
         next: () => {
           this.abrirModal(novoCadastro);
           if(redirecionar){
-            this.router.navigate(['/users']);
+            this.router.navigate(['/users/list']);
           }
         },
         error: (err) => {
