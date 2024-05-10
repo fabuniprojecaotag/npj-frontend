@@ -70,7 +70,7 @@ export class AtendimentoEditComponent {
     this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento).subscribe({
       next: () => {
         alert('Atendimento atualizado com sucesso!');
-        this.router.navigate(['/atendimentos']);
+        this.router.navigate(['/atendimentos/list']);
       },
       error: (err) => {
         let errorMessage: string = '';

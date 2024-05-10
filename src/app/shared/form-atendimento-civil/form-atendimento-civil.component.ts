@@ -79,8 +79,8 @@ export class FormAtendimentoCivilComponent implements OnInit {
     this.formAtendimentos = this.formBuilder.group({
       '@type': ['Civil'],
       area: [null, Validators.required],
-      status: [{ value: 'Aguardando documentos', disabled: false }, Validators.required],
-      instante: [null],
+      status: ['Aguardando documentos', Validators.required],
+      instante: [{ value: null, disabled: this.editarComponente }],
       ficha: this.formBuilder.group({
         '@type': ['Civil'],
         assinatura: [null],
@@ -121,6 +121,8 @@ export class FormAtendimentoCivilComponent implements OnInit {
       } else if (area === 'Penal' || area === 'Família') {
         this.medidasJudiciais = this.medidasFamilia;
       }
+
+      this.formAtendimentos.get('ficha.medidaJuridica')?.updateValueAndValidity();
     });
 
     this.formService.setForm(this.formAtendimentos);
@@ -170,7 +172,6 @@ export class FormAtendimentoCivilComponent implements OnInit {
       })
     });
   }
-
 
   get testemunhas(): FormArray {
     return this.formAtendimentos.get('ficha')?.get('testemunhas') as FormArray;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
@@ -36,7 +37,7 @@ export class AtendimentoAddComponent implements OnInit {
       this.atendimentoService.cadastrarAtendimento(novoAtendimento).subscribe({
         next: () => {
           alert('Cadastro realizado!');
-          this.router.navigate(['/atendimentos']);
+          this.router.navigate(['/atendimentos/list']);
         },
         error: (err) => {
           let errorMessage: string = '';
@@ -76,8 +77,6 @@ export class AtendimentoAddComponent implements OnInit {
               break;
             }
           }
-
-          console.log(novoAtendimento);
         },
       });
     }

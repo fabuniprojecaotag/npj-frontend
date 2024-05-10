@@ -27,7 +27,6 @@ import { ModalUsuarioComponent } from "./modal-usuario/modal-usuario.component";
 import { PrintButtonComponent } from "./print-button/print-button.component";
 import { MaterialModule } from "../core/material/material.module";
 import { ReactiveFormsModule } from "@angular/forms";
-import { AppRoutingModule } from "../app-routing.module";
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { RouterModule } from "@angular/router";
 
@@ -44,9 +43,9 @@ import { RouterModule } from "@angular/router";
     CardAtalhosComponent,
     ModalAtalhosComponent,
     FormAtendimentoCivilComponent,
+    FormAtendimentoTrabalhistaComponent,
     NavItemComponent,
     FormProcessoComponent,
-    FormAtendimentoTrabalhistaComponent,
     FuncionarioAutocompleteComponent,
     AssistidoAutocompleteComponent,
     ModalProcessoComponent,
@@ -77,9 +76,9 @@ import { RouterModule } from "@angular/router";
     CardAtalhosComponent,
     ModalAtalhosComponent,
     FormAtendimentoCivilComponent,
+    FormAtendimentoTrabalhistaComponent,
     NavItemComponent,
     FormProcessoComponent,
-    FormAtendimentoTrabalhistaComponent,
     FuncionarioAutocompleteComponent,
     AssistidoAutocompleteComponent,
     ModalProcessoComponent,

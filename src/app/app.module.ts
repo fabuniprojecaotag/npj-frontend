@@ -11,10 +11,6 @@ import { AssistidoAddComponent } from './assistidos/assistido-add/assistido-add.
 import { AssistidosEditComponent } from './assistidos/assistidos-edit/assistidos-edit.component';
 import { AssistidosShortcutsComponent } from './assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
 import { AssistidosComponent } from './assistidos/assistidos.component';
-import { AtendimentoEditComponent } from './atendimentos/atendimento-edit/atendimento-edit.component';
-import { AtendimentosComponent } from './atendimentos/atendimentos.component';
-import { AtendimentoAddComponent } from './atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
-import { NovoAtendimentoComponent } from './atendimentos/novo-atendimento/novo-atendimento.component';
 import { AutenticacaoInterceptor } from './autenticacao/autenticacao.interceptor';
 import { ErroModule } from './core/erro/erro.module';
 import { MaterialModule } from './core/material/material.module';
@@ -28,10 +24,6 @@ import { SharedModule } from './shared/shared.module';
     AssistidoAddComponent,
     AssistidosEditComponent,
     AssistidosShortcutsComponent,
-    NovoAtendimentoComponent,
-    AtendimentosComponent,
-    AtendimentoAddComponent,
-    AtendimentoEditComponent,
   ],
   imports: [
     BrowserModule,

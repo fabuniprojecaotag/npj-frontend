@@ -1,18 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './autenticacao/login/login.component';
-import { authGuard } from './autenticacao/auth.guard';
-import { AssistidosComponent } from './assistidos/assistidos.component';
 import { AssistidoAddComponent } from './assistidos/assistido-add/assistido-add.component';
 import { AssistidosEditComponent } from './assistidos/assistidos-edit/assistidos-edit.component';
 import { AssistidosShortcutsComponent } from './assistidos/assistidos-shortcuts/assistidos-shortcuts.component';
-import { AtendimentosComponent } from './atendimentos/atendimentos.component';
-import { NovoAtendimentoComponent } from './atendimentos/novo-atendimento/novo-atendimento.component';
-import { AtendimentoAddComponent } from './atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
-import { AtendimentoEditComponent } from './atendimentos/atendimento-edit/atendimento-edit.component';
-import { HomeModule } from './home/home.module';
+import { AssistidosComponent } from './assistidos/assistidos.component';
+import { authGuard } from './autenticacao/auth.guard';
 import { HomeComponent } from './home/home.component';
+import { HomeModule } from './home/home.module';
 
 const routes: Routes = [
   {
@@ -46,24 +41,10 @@ const routes: Routes = [
   },
   {
     path: 'atendimentos',
-    component: AtendimentosComponent,
+    loadChildren: () => import('./atendimentos/atendimentos.module').then(m => m.AtendimentosModule),
     canActivate: [authGuard],
   },
-  {
-    path: 'assistidos/novo-atendimento',
-    component: NovoAtendimentoComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'assistidos/novo-atendimento/:ficha',
-    component: AtendimentoAddComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'atendimentos/edit/:id/:ficha',
-    component: AtendimentoEditComponent,
-    canActivate: [authGuard],
-  },
+ 
   {
     path: 'processos',
     loadChildren: () => import('./processos/processos.module').then(m => m.ProcessosModule),

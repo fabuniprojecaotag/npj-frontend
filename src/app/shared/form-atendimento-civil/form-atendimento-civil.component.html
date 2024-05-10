@@ -16,7 +16,7 @@
         </mat-form-field>
         <mat-form-field class="input-medio">
           <mat-label>Instante do atendimento</mat-label>
-          <input matInput [matDatepicker]="instante" formControlName="instante" *ngIf="editarComponente">
+          <input matInput [matDatepicker]="instante" formControlName="instante">
           <mat-datepicker-toggle matIconSuffix [for]="instante" color="primary"></mat-datepicker-toggle>
           <mat-datepicker #instante></mat-datepicker>
         </mat-form-field>
