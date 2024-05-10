@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { MatDialog } from '@angular/material/dialog';

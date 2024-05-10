@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';

@@ -5,7 +5,7 @@ import {
   ElementRef,
   OnInit,
 } from '@angular/core';
-import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({

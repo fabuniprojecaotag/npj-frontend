@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 
 @Component({
   selector: 'app-nav-menu',

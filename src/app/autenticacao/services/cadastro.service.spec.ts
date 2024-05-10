@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { CadastroService } from './cadastro.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { Usuario } from '../types/usuario';
+import { Usuario } from '../../core/types/usuario';
 
 const mockUserData = {
   api: 'http://localhost:8080/usuários',

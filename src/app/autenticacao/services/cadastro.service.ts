@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Usuario } from '../types/usuario';
+import { Usuario } from '../../core/types/usuario';
 import { Observable } from 'rxjs';
-import { filtro } from '../types/filtro';
+import { filtro } from '../../core/types/filtro';
 
 @Injectable({
   providedIn: 'root',

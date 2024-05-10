@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';

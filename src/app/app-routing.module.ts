@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './autenticacao/login/login.component';
 import { UsersComponent } from './autenticacao/users/users.component';
 import { MyProfileComponent } from './autenticacao/my-profile/my-profile.component';
-import { authGuard } from './core/guards/auth.guard';
+import { authGuard } from './autenticacao/auth.guard';
 import { AssistidosComponent } from './assistidos/assistidos.component';
 import { AssistidoAddComponent } from './assistidos/assistido-add/assistido-add.component';
 import { AssistidosEditComponent } from './assistidos/assistidos-edit/assistidos-edit.component';
