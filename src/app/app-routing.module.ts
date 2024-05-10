@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './autenticacao/login/login.component';
-import { MyProfileComponent } from './autenticacao/my-profile/my-profile.component';
 import { authGuard } from './autenticacao/auth.guard';
 import { AssistidosComponent } from './assistidos/assistidos.component';
 import { AssistidoAddComponent } from './assistidos/assistido-add/assistido-add.component';
@@ -17,10 +16,6 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
     path: 'home',
     component: HomeComponent,
     canActivate: [authGuard]
@@ -28,12 +23,6 @@ const routes: Routes = [
   {
     path: 'users',
     loadChildren: () => import('./autenticacao/autenticacao.module').then(m => m.AutenticacaoModule),
-    canActivate: [authGuard]
-  },
-  {
-    path: 'profile',
-    component: MyProfileComponent,
-    canActivate: [authGuard],
   },
   {
     path: 'assistidos',
@@ -87,7 +76,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/users/login',
+    redirectTo: 'users/login',
     pathMatch: 'full',
   },
   {

@@ -16,6 +16,6 @@ export class UserMenuComponent {
 
   logout() {
     this.userService.logout();
-    this.router.navigate(['/users/login']);
+    this.router.navigate(['/']);
   }
 }
