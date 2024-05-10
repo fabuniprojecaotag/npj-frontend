@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ProcessosService } from 'src/app/core/services/processos.service';
+import { ProcessosService } from 'src/app/processos/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 
@@ -19,17 +19,17 @@ export class ProcessosComponent {
   printConfig:any = [
     {col:'atendimentoId',
       title:'Cód.Processo'
-    }, 
+    },
     {col:'forum',
       title:'Fórum'
-    }, 
+    },
     {col:'dataDistribuicao',
       title:'Data Distribuição',
       format: 'formatDate'
-    }, 
+    },
     {col:'vara',
       title:'Vara'
-    }, 
+    },
   ]
   constructor(private service: ProcessosService, private dialog: MatDialog) {}
 

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
+import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 
@@ -19,17 +19,17 @@ export class AtendimentosComponent implements AfterViewInit {
   printConfig:any = [
     {col:'id',
       title:'Cód.Atendimento'
-    }, 
+    },
     {col:'area',
       title:'Tipo'
-    }, 
+    },
     {col:'dataCriacao',
       title:'Data Criação',
       format: 'formatDate'
-    }, 
+    },
     {col:'status',
       title:'Status'
-    }, 
+    },
   ]
   constructor(private atendimentoService: AtendimentosService, private dialog: MatDialog) {}
 

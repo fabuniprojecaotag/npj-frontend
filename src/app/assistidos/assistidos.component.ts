@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AssistidosService } from 'src/app/core/services/assistidos.service';
+import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 

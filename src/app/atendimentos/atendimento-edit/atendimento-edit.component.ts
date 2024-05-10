@@ -3,7 +3,7 @@ import { FormsService } from './../../core/services/forms.service';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
+import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 import { MatDialog } from '@angular/material/dialog';
 

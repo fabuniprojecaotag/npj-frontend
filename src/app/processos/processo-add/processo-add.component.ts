@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { ProcessosService } from 'src/app/core/services/processos.service';
+import { ProcessosService } from 'src/app/processos/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 import { ModalProcessoComponent } from 'src/app/shared/modal-processo/modal-processo-criado.component';

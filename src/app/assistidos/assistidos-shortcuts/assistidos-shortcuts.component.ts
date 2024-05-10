@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { AssistidosService } from 'src/app/core/services/assistidos.service';
-import { AtendimentosService } from 'src/app/core/services/atendimentos.service';
-import { ProcessosService } from 'src/app/core/services/processos.service';
+import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
+import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
+import { ProcessosService } from 'src/app/processos/services/processos.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { filtro } from 'src/app/core/types/filtro';
 import { Processo } from 'src/app/core/types/processo';

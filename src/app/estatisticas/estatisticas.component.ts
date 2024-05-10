@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { generatePdf } from './Print';
-import { ProcessosService } from 'src/app/core/services/processos.service';
+import { ProcessosService } from 'src/app/processos/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
 
 @Component({

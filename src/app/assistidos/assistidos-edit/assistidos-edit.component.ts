@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AssistidosService } from 'src/app/core/services/assistidos.service';
+import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Assistido, AssistidoFull } from 'src/app/core/types/assistido';
 import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';

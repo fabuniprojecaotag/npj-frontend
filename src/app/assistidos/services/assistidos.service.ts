@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Assistido, AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from '../types/assistido';
+import { Assistido, AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from '../../core/types/assistido';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
