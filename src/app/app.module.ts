@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './autenticacao/login/login.component';
 import { UsersComponent } from './autenticacao/users/users.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +24,6 @@ import { ProcessoEditComponent } from './processos/processo-edit/processo-edit.c
 import { AtendimentoAddComponent } from './atendimentos/novo-atendimento/atendimento-add/atendimento-add.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AtendimentoEditComponent } from './atendimentos/atendimento-edit/atendimento-edit.component';
-import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { MaterialModule } from './core/material/material.module';
 import { SharedModule } from './shared/shared.module';
 import { ErroModule } from './core/erro/erro.module';
@@ -33,7 +31,6 @@ import { ErroModule } from './core/erro/erro.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginComponent,
     UsersComponent,
     AddUsersComponent,
@@ -50,7 +47,6 @@ import { ErroModule } from './core/erro/erro.module';
     ProcessoEditComponent,
     AtendimentoAddComponent,
     AtendimentoEditComponent,
-    EstatisticasComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
+import { HomeModule } from './home/home.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './autenticacao/login/login.component';
 import { UsersComponent } from './autenticacao/users/users.component';
 import { AddUsersComponent } from './autenticacao/users/add-users/add-users.component';
@@ -23,13 +23,13 @@ import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 
 const routes: Routes = [
   {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [authGuard],
-  },
-  {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+    canActivate: [authGuard]
   },
   {
     path: 'users',
@@ -108,7 +108,7 @@ const routes: Routes = [
   },
   {
     path: 'estatisticas',
-    component: EstatisticasComponent,
+    loadChildren: () => import('./estatisticas/estatisticas.module').then(m => m.EstatisticasModule),
     canActivate: [authGuard],
   },
   {
@@ -127,4 +127,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -29,6 +29,7 @@ import { MaterialModule } from "../core/material/material.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "../app-routing.module";
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    AppRoutingModule,
+    RouterModule,
     NgxMaskDirective, NgxMaskPipe,
   ],
   exports: [
