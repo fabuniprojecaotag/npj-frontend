@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
@@ -39,51 +38,13 @@ export class AtendimentoAddComponent implements OnInit {
           alert('Cadastro realizado!');
           this.router.navigate(['/atendimentos/list']);
         },
-        error: (err) => {
-          let errorMessage: string = '';
-
-          switch (err.status) {
-            case 401: {
-              errorMessage = "Não Autorizado!";
-              this.mostrarMensagemErro('401', errorMessage);
-              break;
-            }
-            case 403: {
-              errorMessage = "Cadastro não foi aceito no servidor!";
-              this.mostrarMensagemErro('403', errorMessage);
-              break;
-            }
-            case 404: {
-              errorMessage = "Recurso não encontrado!";
-              this.mostrarMensagemErro('404', errorMessage);
-              break;
-            }
-            case 408: {
-              errorMessage = "Servidor demorou muito para responder!";
-              this.mostrarMensagemErro('408', errorMessage);
-              break;
-            }
-            case 422: {
-              errorMessage = `Padrão não correspondente ao do servidor!<br>`;
-              err.error.errors.forEach((error: any) => {
-                errorMessage += `${error.field}: ${error.message}<br>`;
-              });
-              this.mostrarMensagemErro('422', errorMessage);
-              break;
-            }
-            default: {
-              errorMessage = `Por favor tente mais tarde!`;
-              this.mostrarMensagemErro('Desconhecido', errorMessage);
-              break;
-            }
-          }
-        },
+        error: (err) => { },
       });
     }
   }
 
   mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
-    let subtituloErro = 'Erro ao cadastrar';
+    const subtituloErro = 'Erro ao cadastrar';
     this.dialog.open(ModalErrosComponent, {
       width: '552px',
       height: '360px',

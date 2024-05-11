@@ -22,7 +22,7 @@ export class AtendimentosService {
         .set('value', filtro.value);
     }
     return this.http.get<Atendimento[]>(`${this.API}/atendimentos`, { params });
-  };
+  }
 
   consultaAtendimento(idAtendimento: string): Observable<Atendimento> {
     return this.http.get<Atendimento>(`${this.API}/atendimentos/${idAtendimento}`);

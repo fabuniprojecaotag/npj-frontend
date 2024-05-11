@@ -21,7 +21,7 @@ export class FuncionarioAutocompleteComponent implements OnInit {
   constructor(private cadastroService: CadastroService){}
 
   ngOnInit(): void {
-    let filtro: filtro = {
+    const filtro: filtro = {
       field: 'role',
       filter: 'EQUAL',
       value: this.cargo.toLocaleUpperCase()

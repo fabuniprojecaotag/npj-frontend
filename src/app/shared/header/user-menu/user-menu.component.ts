@@ -9,8 +9,8 @@ import { UsuarioService } from 'src/app/autenticacao/services/usuario.service';
 })
 export class UserMenuComponent {
   @Input() nome!: string;
-  @Input() tipoUsuario: string = "";
-  @Input() isMenuAtivo: boolean = false;
+  @Input() tipoUsuario!: string;
+  @Input() isMenuAtivo = false;
 
   constructor (private router: Router, private userService: UsuarioService) {}
 

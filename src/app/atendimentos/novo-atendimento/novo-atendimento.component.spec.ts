@@ -2,20 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NovoAtendimentoComponent } from './novo-atendimento.component';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
-import { HttpClientModule } from '@angular/common/http';
 import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component';
 import { FormAtendimentoCivilComponent } from 'src/app/shared/form-atendimento-civil/form-atendimento-civil.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { NavMenuComponent } from 'src/app/shared/header/nav-menu/nav-menu.component';
 import { UserMenuComponent } from 'src/app/shared/header/user-menu/user-menu.component';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { NavItemComponent } from 'src/app/shared/header/nav-menu/nav-item/nav-item.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AppModule } from 'src/app/app.module';
 
 describe('NovoAtendimentoComponent', () => {

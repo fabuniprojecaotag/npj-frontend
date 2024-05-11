@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,9 +14,9 @@ import { AssistidoCivil, AssistidoTrabalhista } from './../../core/types/assisti
   templateUrl: './assistidos-edit.component.html',
   styleUrls: ['./assistidos-edit.component.scss'],
 })
-export class AssistidosEditComponent {
-  tituloDaPagina: string = 'Editar Assistido';
-  form!: FormGroup<any> | null;
+export class AssistidosEditComponent implements OnInit {
+  tituloDaPagina = 'Editar Assistido';
+  form!: FormGroup | null;
   assistido!: AssistidoFull | AssistidoCivil | AssistidoTrabalhista;
   idParam!: string;
 
@@ -90,7 +90,7 @@ export class AssistidosEditComponent {
 
 
   editar() {
-    let tipoSelecionado = this.form?.value['@type'];
+    const tipoSelecionado = this.form?.value['@type'];
     let dadosAtualizados: any = {
       '@type': tipoSelecionado,
       nome: this.form?.value.nome,

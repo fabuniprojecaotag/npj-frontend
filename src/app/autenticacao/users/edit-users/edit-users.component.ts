@@ -14,10 +14,10 @@ import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuari
   styleUrls: ['./edit-users.component.scss'],
 })
 export class EditUsersComponent implements OnInit {
-  tituloDaPagina: string = 'Editar Usuário';
+  tituloDaPagina = 'Editar Usuário';
   cadastro!: Usuario;
   errorMessage!: string;
-  form!: FormGroup<any> | null;
+  form!: FormGroup | null;
   idParam = this.route.snapshot.paramMap.get('id') as string;
   subtituloErro = "Erro ao Editar";
 

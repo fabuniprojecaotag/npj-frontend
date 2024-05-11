@@ -12,7 +12,7 @@ import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-as
   styleUrls: ['./assistido-add.component.scss'],
 })
 export class AssistidoAddComponent {
-  tituloDaPagina: string = 'Novo Assistido';
+  tituloDaPagina = 'Novo Assistido';
 
   constructor(
     private formAssistidosService: FormsService,

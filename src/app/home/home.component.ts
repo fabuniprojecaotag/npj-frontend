@@ -6,16 +6,16 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-  subtituloDaPagina: string = 'Home';
-  tituloDaPagina: string = 'Home';
+export class HomeComponent implements OnInit {
+  subtituloDaPagina = 'Home';
+  tituloDaPagina = 'Home';
 
 
   constructor(public dialog: MatDialog) {
 
   }
 
-  verifyLocalStorageDialogFlag(): any {
+  verifyLocalStorageDialogFlag(): boolean {
     const item = localStorage.getItem(`firstTime`);
     return item ? JSON.parse(item) : null;
   }
@@ -26,7 +26,7 @@ export class HomeComponent {
     }
   }
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       localStorage.setItem('firstTime', JSON.stringify(true));
@@ -36,9 +36,9 @@ export class HomeComponent {
   }
 }
 @Component({
-  selector: 'welcome-dialog',
+  selector: 'app-welcome-dialog',
   templateUrl: 'welcome-dialog.html',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
 })
-export class DialogContentExampleDialog { }
+export class DialogContentExampleDialogComponent { }

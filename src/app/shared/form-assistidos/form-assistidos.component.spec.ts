@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormAssistidosComponent } from './form-assistidos.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AppModule } from 'src/app/app.module';
 
 describe(FormAssistidosComponent.name, () => {

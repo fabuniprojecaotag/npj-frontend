@@ -13,7 +13,7 @@ import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excl
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements AfterViewInit {
-  tituloDaPagina: string = 'Usuários';
+  tituloDaPagina = 'Usuários';
   listaUsuarios: Usuario[] = [];
   dataSource: any;
   colunasMostradas: string[] = [

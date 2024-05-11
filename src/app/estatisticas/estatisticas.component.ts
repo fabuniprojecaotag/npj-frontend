@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
@@ -11,7 +11,7 @@ import { Processo } from 'src/app/core/types/processo';
   templateUrl: './estatisticas.component.html',
   styleUrls: ['./estatisticas.component.scss']
 })
-export class EstatisticasComponent implements OnInit {
+export class EstatisticasComponent implements OnInit, AfterViewInit {
   devMode: boolean = false;
   tituloPagina = 'Estatisticas';
   dataSource: any;

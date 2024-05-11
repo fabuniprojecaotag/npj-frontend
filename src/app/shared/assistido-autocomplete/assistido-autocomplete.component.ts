@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, startWith, map } from 'rxjs';
 import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
@@ -9,7 +9,7 @@ import { Assistido } from 'src/app/core/types/assistido';
   templateUrl: './assistido-autocomplete.component.html',
   styleUrls: ['./assistido-autocomplete.component.scss']
 })
-export class AssistidoAutocompleteComponent {
+export class AssistidoAutocompleteComponent implements OnInit {
   @Input() control!: FormControl;
 
   assistidos: Assistido[] = [];

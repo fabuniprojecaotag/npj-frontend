@@ -1,6 +1,6 @@
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { FormsService } from './../../core/services/forms.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
@@ -12,12 +12,12 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './atendimento-edit.component.html',
   styleUrls: ['./atendimento-edit.component.scss']
 })
-export class AtendimentoEditComponent {
+export class AtendimentoEditComponent implements OnInit {
   tituloPagina = 'Editar - ';
   tipoFicha!: string;
   idAtendimento!: string;
   atendimento!: Atendimento;
-  form!: FormGroup<any> | null;
+  form!: FormGroup | null;
 
   constructor(
     private formService: FormsService,
@@ -114,7 +114,7 @@ export class AtendimentoEditComponent {
     });
   }
 
-  excluir(){
+  excluir() {
     this.atendimentoService.excluirAtendimento(this.idAtendimento).subscribe({
       next: () => {
         alert('Sucesso ao excluir atendimento!');
@@ -126,7 +126,7 @@ export class AtendimentoEditComponent {
   }
 
   mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
-    let subtituloErro = 'Erro ao editar';
+    const subtituloErro = 'Erro ao editar';
 
     this.dialog.open(ModalErrosComponent, {
       width: '552px',

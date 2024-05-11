@@ -1,12 +1,10 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { AssistidosService, AssistidoFull } from './assistidos.service';
-import { HttpClient } from '@angular/common/http';
 
 describe('AssistidosService', () => {
   let service: AssistidosService;
-  let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
@@ -16,7 +14,6 @@ describe('AssistidosService', () => {
     });
 
     service = TestBed.inject(AssistidosService);
-    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
@@ -53,7 +50,7 @@ describe('AssistidosService', () => {
     empregadoAtualmente: true
   };
 
-  it('should retrieve assistidos from the API via GET', () => {
+  it('#should retrieve assistidos from the API via GET', () => {
     const mockAssistidos: AssistidoFull[] = [mockAssistidoGenerico];
 
     service.listarAssistidos().subscribe(assistidos => {
@@ -66,7 +63,7 @@ describe('AssistidosService', () => {
     req.flush(mockAssistidos);
   });
 
-  it('should add a new assistido to the API via POST', () => {
+  it('#should add a new assistido to the API via POST', () => {
     service.cadastrarAssistido(mockAssistidoGenerico).subscribe(assistido => {
       expect(assistido).toEqual(mockAssistidoGenerico);
     });
@@ -76,7 +73,7 @@ describe('AssistidosService', () => {
     req.flush(mockAssistidoGenerico);
   });
 
-  it('should edit an existing assistido via PUT', () => {
+  it('#should edit an existing assistido via PUT', () => {
     service.editar(mockAssistidoGenerico.rg, mockAssistidoGenerico).subscribe(assistido => {
       expect(assistido).toEqual(mockAssistidoGenerico);
     });
@@ -86,7 +83,7 @@ describe('AssistidosService', () => {
     req.flush(mockAssistidoGenerico);
   });
 
-  it('should delete an existing assistido via DELETE', () => {
+  it('#should delete an existing assistido via DELETE', () => {
     service.excluir(mockAssistidoGenerico.rg).subscribe(assistido => {
       expect(assistido).toEqual(mockAssistidoGenerico);
     });
@@ -96,7 +93,7 @@ describe('AssistidosService', () => {
     req.flush(mockAssistidoGenerico);
   });
 
-  it('should retrieve an existing assistido via GET', () => {
+  it('#should retrieve an existing assistido via GET', () => {
   service.consultar(mockAssistidoGenerico.rg).subscribe(assistido => {
       expect(assistido).toEqual(mockAssistidoGenerico);
     });

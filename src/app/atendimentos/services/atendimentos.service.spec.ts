@@ -38,6 +38,7 @@ const mockData = {
         rg: "123456789",
         cpf: "98765432100",
         email: "partecontraria@example.com",
+        telefone: "123456789",
         endereco: {
           logradouro: "Rua da Parte Contrária",
           bairro: "Bairro da Parte Contrária",
@@ -46,9 +47,9 @@ const mockData = {
           cep: "12345-678",
           cidade: "Cidade da Parte Contrária"
         },
-        telefone: "123456789"
+        informacoesComplementares: ""
       },
-      medidaJudicial: "Medida Judicial"
+      medidaJuridica: "Medida Judicial"
     },
     prazoEntregaDocumentos: "2024-04-11",
     historico: [
@@ -72,7 +73,7 @@ const mockData = {
   }
 };
 
-describe('AtendimentosService', () => {
+describe(AtendimentosService.name, () => {
   let service: AtendimentosService;
   let httpTestingController: HttpTestingController;
 
@@ -90,11 +91,11 @@ describe('AtendimentosService', () => {
     httpTestingController.verify();
   });
 
-  it('should be created', () => {
+  it('#should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should retrieve list of atendimentos from API via GET', () => {
+  it('#should retrieve list of atendimentos from API via GET', () => {
     service.listagemAtendimentos().subscribe(atendimentos => {
       expect(atendimentos).toEqual([mockData.atendimento]);
     });
@@ -104,7 +105,7 @@ describe('AtendimentosService', () => {
     req.flush([mockData.atendimento]);
   });
 
-  it('should retrieve a specific atendimento from API via GET', () => {
+  it('#should retrieve a specific atendimento from API via GET', () => {
     const idAtendimento = 'ATE00001';
 
     service.consultaAtendimento(idAtendimento).subscribe(atendimento => {
@@ -116,7 +117,7 @@ describe('AtendimentosService', () => {
     req.flush(mockData.atendimento);
   });
 
-  it('should create a new atendimento via POST', () => {
+  it('#should create a new atendimento via POST', () => {
     service.cadastrarAtendimento(mockData.atendimento).subscribe(atendimento => {
       expect(atendimento).toEqual(mockData.atendimento);
     });
@@ -126,7 +127,7 @@ describe('AtendimentosService', () => {
     req.flush(mockData.atendimento);
   });
 
-  it('should update an existing atendimento via PUT', () => {
+  it('#should update an existing atendimento via PUT', () => {
     const idAtendimento = 'ATE00001';
 
     service.atualizarAtendimento(mockData.atendimento, idAtendimento).subscribe(atendimento => {
@@ -138,7 +139,7 @@ describe('AtendimentosService', () => {
     req.flush(mockData.atendimento);
   });
 
-  it('should delete an existing atendimento via DELETE', () => {
+  it('#should delete an existing atendimento via DELETE', () => {
     const idAtendimento = 'ATE00001';
 
     service.excluirAtendimento(idAtendimento).subscribe(atendimento => {

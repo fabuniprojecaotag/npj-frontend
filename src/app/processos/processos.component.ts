@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Processo } from 'src/app/core/types/processo';
@@ -9,7 +9,7 @@ import { ProcessosService } from 'src/app/processos/services/processos.service';
   templateUrl: './processos.component.html',
   styleUrls: ['./processos.component.scss'],
 })
-export class ProcessosComponent {
+export class ProcessosComponent implements AfterViewInit {
   tituloPagina = 'Processos';
   listaProcesso: Processo[] = [];
   dataSource: any;

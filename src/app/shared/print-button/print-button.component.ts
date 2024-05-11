@@ -9,7 +9,7 @@ import { generatePdf } from './printLista';
 export class PrintButtonComponent {
 
   @Input() dataSet: any = [];
-  @Input() pageName: string = 'NAN';
+  @Input() pageName = 'NAN';
   @Input() config: any = [];
 
   printTable() {

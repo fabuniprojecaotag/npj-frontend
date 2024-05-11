@@ -33,7 +33,7 @@ export class AssistidosShortcutsComponent implements OnInit {
 
   ngOnInit(): void {
     this.cpf = this.route.snapshot.paramMap.get('cpf') as string;
-    let filtroAtendimentos: filtro = {
+    const filtroAtendimentos: filtro = {
       field: 'envolvidos.assistido.nome',
       filter: 'EQUAL',
       value: this.nomeAssistido

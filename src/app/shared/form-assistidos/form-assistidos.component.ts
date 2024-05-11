@@ -35,9 +35,9 @@ export class FormAssistidosComponent implements OnInit {
     'Doutorado',
   ];
   formAssistidos!: FormGroup;
-  @Input() editComponent: boolean = false;
-  @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
-  @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
+  @Input() editComponent = false;
+  @Output() acaoClique: EventEmitter<void> = new EventEmitter<void>();
+  @Output() cliqueExcluir: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private formBuilder: FormBuilder,

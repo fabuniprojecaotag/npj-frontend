@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, startWith, map } from 'rxjs';
 import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
@@ -9,7 +9,7 @@ import { Atendimento } from 'src/app/core/types/atendimento';
   templateUrl: './atendimento-autocomplete.component.html',
   styleUrls: ['./atendimento-autocomplete.component.scss']
 })
-export class AtendimentoAutocompleteComponent {
+export class AtendimentoAutocompleteComponent implements OnInit {
   @Input() control!: FormControl;
 
   atendimento: Atendimento[] = [];

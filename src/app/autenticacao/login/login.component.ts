@@ -11,7 +11,7 @@ import { AutenticacaoService } from 'src/app/autenticacao/services/autenticacao.
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   anoAtual: number = new Date().getFullYear();
-  loading: boolean = false;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,

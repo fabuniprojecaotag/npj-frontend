@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalExcluidoComponent } from './modal-excluido.component';
-import { AppModule } from 'src/app/app.module';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('ModalExcluidoComponent', () => {
   let component: ModalExcluidoComponent;
@@ -11,7 +11,7 @@ describe('ModalExcluidoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ModalExcluidoComponent],
-      imports: [AppModule],
+      imports: [MatDialogModule, NoopAnimationsModule],
       providers: [
         {
           provide: MatDialogRef,
@@ -25,6 +25,7 @@ describe('ModalExcluidoComponent', () => {
         },
       ],
     }).compileComponents();
+
     fixture = TestBed.createComponent(ModalExcluidoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

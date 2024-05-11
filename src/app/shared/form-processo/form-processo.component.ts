@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Atendimento } from 'src/app/core/types/atendimento';
 
 @Component({
   selector: 'app-form-processo',
@@ -9,9 +8,9 @@ import { Atendimento } from 'src/app/core/types/atendimento';
   styleUrls: ['./form-processo.component.scss']
 })
 export class FormProcessoComponent implements OnInit {
-  @Output() acaoClick: EventEmitter<any> = new EventEmitter<any>();
-  @Output() acaoExcluir: EventEmitter<any> = new EventEmitter<any>();
-  @Input() editComponent: boolean = false;
+  @Output() acaoClick: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoExcluir: EventEmitter<void> = new EventEmitter<void>();
+  @Input() editComponent = false;
   formProcessos!: FormGroup;
   atendimentoControl: FormControl<string | null> = new FormControl<string | null>(null, [Validators.required]);
 

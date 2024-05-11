@@ -11,7 +11,7 @@ export class ViacepService {
 
   constructor(private http: HttpClient) { }
 
-  consultarCep(cep: String): Observable<CepDados>{
+  consultarCep(cep: string): Observable<CepDados>{
     return this.http.get<CepDados>(`${this.baseUrl}${cep}/json`);
   }
 }

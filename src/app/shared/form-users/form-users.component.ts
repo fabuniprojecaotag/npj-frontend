@@ -20,11 +20,11 @@ export class FormUsersComponent implements OnInit {
     { perfil: 'PROFESSOR', viewperfil: 'Professor' },
   ];
   unidadeInstitucional = ['Taguatinga', 'Guará', 'Ceilândia'];
-  @Input() myProfileComponente: boolean = false;
-  @Input() editComponent: boolean = false;
-  @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
-  @Output() acaoClique2: EventEmitter<any> = new EventEmitter<any>();
-  @Output() cliqueExcluir: EventEmitter<any> = new EventEmitter<any>();
+  @Input() myProfileComponente = false;
+  @Input() editComponent = false;
+  @Output() acaoClique: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoClique2: EventEmitter<void> = new EventEmitter<void>();
+  @Output() cliqueExcluir: EventEmitter<void> = new EventEmitter<void>();
 
   cadastrarSenhaControl: FormControl<boolean | null> = new FormControl<boolean | null>(false);
   supervisorControl: FormControl<Usuario | null> = new FormControl<Usuario | null>({ value: null, disabled: this.myProfileComponente });

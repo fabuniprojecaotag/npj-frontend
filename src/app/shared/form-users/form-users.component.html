@@ -79,7 +79,7 @@
               <mat-error *ngIf="formCadastro.get('email')?.errors?.['domainValidator']">E-mail inválido, e-mail deve ser
                 de domínio do Projeção</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" *ngIf="cadastrarSenhaControl.value == true">
+            <mat-form-field appearance="outline" *ngIf="cadastrarSenhaControl.value === true">
               <mat-label>Senha</mat-label>
               <input matInput formControlName="senha" [type]="escondido ? 'password' : 'text'"
                 placeholder="Digite sua senha">
@@ -104,7 +104,7 @@
               <mat-error *ngIf="formCadastro.get('confirmarEmail')?.errors?.['equalTo']">E-mails não
                 coincidem</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" *ngIf="cadastrarSenhaControl.value == true">
+            <mat-form-field appearance="outline" *ngIf="cadastrarSenhaControl.value === true">
               <mat-label>Confirmar Senha</mat-label>
               <input matInput formControlName="confirmarSenha" type="password" placeholder="Repita sua senha">
               <mat-error *ngIf="formCadastro.get('confirmarSenha')?.errors?.['required']">Confirmação de Senha é

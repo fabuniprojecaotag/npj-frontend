@@ -17,7 +17,7 @@ export class MyProfileComponent implements OnInit {
   perfilComponente = true;
 
   cadastro!: Usuario;
-  form!: FormGroup<any> | null;
+  form!: FormGroup | null;
 
   constructor(
     private cadastroService: CadastroService,

@@ -7,11 +7,11 @@ import { CadastroService } from 'src/app/autenticacao/services/cadastro.service'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Input() subtitulo: string = '';
-  isMenuAtivo: boolean = false; // logica para abrir e fechar menu de nav
-  isUserMenuAtivo: boolean = false;
-  nomeUser: string = '';
-  nomePerfil: string = '';
+  @Input() subtitulo!: string;
+  isMenuAtivo = false; // logica para abrir e fechar menu de nav
+  isUserMenuAtivo = false;
+  nomeUser!: string;
+  nomePerfil!: string;
 
   constructor(
     private el: ElementRef,

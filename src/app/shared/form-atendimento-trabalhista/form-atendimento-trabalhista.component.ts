@@ -25,10 +25,10 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   assistidoControl: FormControl = new FormControl(null, Validators.required);
   arquivoSelecionado: File | null = null; // Variável para armazenar o nome do arquivo selecionado
 
-  @Input() editarComponente: boolean = false;
+  @Input() editarComponente = false;
   @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
-  @Output() acaoClique: EventEmitter<any> = new EventEmitter();
-  @Output() acaoCliqueExcluir: EventEmitter<any> = new EventEmitter();
+  @Output() acaoClique: EventEmitter<void> = new EventEmitter();
+  @Output() acaoCliqueExcluir: EventEmitter<void> = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -138,6 +138,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
     this.acaoCliqueExcluir.emit();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onFileSelected(event: any): void {
     this.formAtendimentosTrabalhista.get('ficha.assinatura')?.setValue(event.target.files[0]);
     this.arquivoSelecionado = this.formAtendimentosTrabalhista.get('ficha.assinatura')?.value;

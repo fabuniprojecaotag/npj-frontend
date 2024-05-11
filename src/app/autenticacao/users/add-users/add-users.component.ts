@@ -12,7 +12,7 @@ import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-as
   styleUrls: ['./add-users.component.scss'],
 })
 export class AddUsersComponent {
-  tituloDaPagina: string = 'Novo Usuário';
+  tituloDaPagina = 'Novo Usuário';
   errorMessage!: string;
   subtituloErro = "Erro ao Cadastrar";
 
