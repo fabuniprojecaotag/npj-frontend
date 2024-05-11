@@ -8,7 +8,7 @@ import { AssistidosComponent } from "./assistidos.component";
 
 const routes: Routes = [
   {
-    path: '/list',
+    path: 'list',
     component: AssistidosComponent,
     canActivate: [authGuard],
   },
