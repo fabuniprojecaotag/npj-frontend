@@ -1,12 +1,5 @@
-import {
-  Component,
-  HostListener,
-  Input,
-  ElementRef,
-  OnInit,
-} from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
-import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
   selector: 'app-header',
@@ -17,26 +10,23 @@ export class HeaderComponent implements OnInit {
   @Input() subtitulo: string = '';
   isMenuAtivo: boolean = false; // logica para abrir e fechar menu de nav
   isUserMenuAtivo: boolean = false;
-  userData!: Usuario;
   nomeUser: string = '';
   nomePerfil: string = '';
 
   constructor(
     private el: ElementRef,
     private cadastroService: CadastroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.cadastroService.buscarMeuUsuario().subscribe({
       next: (usuario) => {
-        this.userData = usuario;
-        // console.log("sucesso, meu usuário: " + this.userData);
         this.nomeUser = usuario.nome;
         this.nomePerfil = this.formatarNomePerfil(usuario.role);
+        alert('Usuario resgatado com sucesso!');
       },
       error: (err) => {
         alert('Não foi possível carregar usuário logado!');
-        console.log("Erro ao procurar meu usuário: " + err);
       }
     });
   }
@@ -69,7 +59,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  private formatarNomePerfil(word: string): string {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  private formatarNomePerfil(nome: string): string {
+    return nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase();
   }
 }
