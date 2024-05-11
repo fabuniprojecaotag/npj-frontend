@@ -52,9 +52,8 @@
       <mat-form-field>
         <mat-label>Status</mat-label>
         <mat-select matInput="" formControlName="status">
-          <mat-option *ngFor="let statu of status" [value]="statu">
-            {{ statu }}
-          </mat-option>
+          <mat-option value="Ativo">Ativo</mat-option>
+          <mat-option value="Arquivado">Arquivado</mat-option>
         </mat-select>
         <mat-error *ngIf="formProcessos.get('status')?.errors?.['required']">
           Status é obrigatório!

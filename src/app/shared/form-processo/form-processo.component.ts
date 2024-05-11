@@ -13,14 +13,6 @@ export class FormProcessoComponent implements OnInit {
   @Output() acaoExcluir: EventEmitter<any> = new EventEmitter<any>();
   @Input() editComponent: boolean = false;
   formProcessos!: FormGroup;
-  status: string[] = [
-    'Reprovado',
-    'Arquivado',
-    'Aguardando documentos',
-    'Pendente distribuição',
-    'Processo ativo',
-    'Processo arquivado',
-  ];
   atendimentoControl: FormControl<string | null> = new FormControl<string | null>(null, [Validators.required]);
 
   constructor(
@@ -31,7 +23,7 @@ export class FormProcessoComponent implements OnInit {
   ngOnInit(): void {
     this.formProcessos = this.formBuilder.group({
       atendimentoId: this.atendimentoControl,
-      numero: [null, Validators.required],
+      numero: [{value: null, disabled: this.editComponent}, Validators.required],
       nome: [null, Validators.required],
       dataDistribuicao: [null, Validators.required],
       vara: [null, Validators.required],

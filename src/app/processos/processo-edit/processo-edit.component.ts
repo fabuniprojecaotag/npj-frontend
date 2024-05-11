@@ -78,9 +78,7 @@ export class ProcessoEditComponent implements OnInit {
       next: () => {
         this.router.navigate(['/processos/list']);
       },
-      error: () => {
-        alert('Erro ao excluir processo!');
-      },
+      error: () => { },
     });
   }
 
@@ -90,7 +88,7 @@ export class ProcessoEditComponent implements OnInit {
       height: '360px',
       data: {
         operacao: 'editado',
-        numero: processo.numero,
+        numero: this.processo.numero,
         nome: processo.nome,
         atendimentoId: processo.atendimentoId,
       },
