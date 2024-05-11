@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { generatePdf } from './printLista';
 
 @Component({
@@ -10,15 +10,15 @@ export class PrintButtonComponent {
 
   @Input() dataSet: any = [];
   @Input() pageName: string = 'NAN';
-  @Input() config: any= [];
+  @Input() config: any = [];
 
   printTable() {
-    if(this.dataSet.length==0){
+    if (this.dataSet.length == 0) {
       return
     }
     generatePdf(
-       this.config
-      ,this.dataSet
-      ,this.pageName);
+      this.config
+      , this.dataSet
+      , this.pageName);
   }
 }

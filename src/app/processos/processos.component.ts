@@ -1,10 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ProcessosService } from 'src/app/processos/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
-import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
+import { ProcessosService } from 'src/app/processos/services/processos.service';
 
 @Component({
   selector: 'app-processos',
@@ -16,22 +14,26 @@ export class ProcessosComponent {
   listaProcesso: Processo[] = [];
   dataSource: any;
   colunasMostradas: string[] = ['id', 'data', 'vara', 'forum'];
-  printConfig:any = [
-    {col:'atendimentoId',
-      title:'Cód.Processo'
+  printConfig: any = [
+    {
+      col: 'atendimentoId',
+      title: 'Cód.Processo'
     },
-    {col:'forum',
-      title:'Fórum'
+    {
+      col: 'forum',
+      title: 'Fórum'
     },
-    {col:'dataDistribuicao',
-      title:'Data Distribuição',
+    {
+      col: 'dataDistribuicao',
+      title: 'Data Distribuição',
       format: 'formatDate'
     },
-    {col:'vara',
-      title:'Vara'
+    {
+      col: 'vara',
+      title: 'Vara'
     },
   ]
-  constructor(private service: ProcessosService, private dialog: MatDialog) {}
+  constructor(private service: ProcessosService) { }
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -44,32 +46,8 @@ export class ProcessosComponent {
         this.dataSource = new MatTableDataSource<Processo>(this.listaProcesso);
         this.dataSource.paginator = this.paginator;
       },
-      error: (err) => {
-        let errorMessage = '';
-        switch (err.status) {
-          case 401: {
-            errorMessage = "Não Autorizado!";
-            this.mostrarMensagemErro('401', errorMessage);
-            break;
-          }
-          case 404: {
-            errorMessage = "Recurso não encontrado!";
-            this.mostrarMensagemErro('404', errorMessage);
-            break;
-          }
-          case 408: {
-            errorMessage = "Servidor demorou muito para responder!";
-            this.mostrarMensagemErro('408', errorMessage);
-            break;
-          }
-          default: {
-            errorMessage = `Por favor tente mais tarde!`;
-            this.mostrarMensagemErro('Desconhecido', errorMessage);
-            break;
-          }
-        }
-      },
-    });
+      error: (err) => {}
+      });
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -78,16 +56,5 @@ export class ProcessosComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
-    let subtituloErro: string = 'Erro ao listar';
-
-    this.dialog.open(ModalErrosComponent, {
-      width: '552px',
-      height: '360px',
-      position: { top: '0' },
-      data: { codigoErro: codigoErro, subtituloErro: subtituloErro, mensagemErro: mensagemErro }
-    })
   }
 }

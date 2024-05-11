@@ -23,11 +23,8 @@ export class HeaderComponent implements OnInit {
       next: (usuario) => {
         this.nomeUser = usuario.nome;
         this.nomePerfil = this.formatarNomePerfil(usuario.role);
-        alert('Usuario resgatado com sucesso!');
       },
-      error: (err) => {
-        alert('Não foi possível carregar usuário logado!');
-      }
+      error: (err) => { }
     });
   }
 

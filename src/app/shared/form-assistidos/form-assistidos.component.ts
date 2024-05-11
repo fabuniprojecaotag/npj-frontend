@@ -165,9 +165,7 @@ export class FormAssistidosComponent implements OnInit {
             complemento: data.complemento,
           });
         },
-        error: (err) => {
-          alert('Erro ao consultar CEP');
-        }
+        error: (err) => { }
       });
     }
   }

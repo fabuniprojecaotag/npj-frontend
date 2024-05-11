@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
-import { Usuario } from 'src/app/core/types/usuario';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { MatDialog } from '@angular/material/dialog';
+import { Usuario } from 'src/app/core/types/usuario';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
-import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
 
 @Component({
@@ -72,43 +71,7 @@ export class EditUsersComponent implements OnInit {
           this.abrirModalEditar(dadosAtualizados);
           this.router.navigate(['/users/list']);
         },
-        error: (err) => {
-          switch (err.status) {
-            case 401: {
-              this.errorMessage = "Não Autorizado!";
-              this.mostrarMensagemErro('401', this.errorMessage);
-              break;
-            }
-            case 403: {
-              this.errorMessage = "Cadastro não foi aceito no servidor!";
-              this.mostrarMensagemErro('403', this.errorMessage);
-              break;
-            }
-            case 404: {
-              this.errorMessage = "Recurso não encontrado!";
-              this.mostrarMensagemErro('404', this.errorMessage);
-              break;
-            }
-            case 408: {
-              this.errorMessage = "Servidor demorou muito para responder!";
-              this.mostrarMensagemErro('408', this.errorMessage);
-              break;
-            }
-            case 422: {
-              this.errorMessage = `Padrão não correspondente ao do servidor!<br>`;
-              err.error.errors.forEach((error: any) => {
-                this.errorMessage += `${error.field}: ${error.message}<br>`;
-              });
-              this.mostrarMensagemErro('422', this.errorMessage);
-              break;
-            }
-            default: {
-              this.errorMessage = `Por favor tente mais tarde!`;
-              this.mostrarMensagemErro('Desconhecido', this.errorMessage);
-              break;
-            }
-          }
-        },
+        error: (err) => { },
       });
   }
 
@@ -135,20 +98,11 @@ export class EditUsersComponent implements OnInit {
     });
   }
 
-  abrirModalEditar(usuario: Usuario){
+  abrirModalEditar(usuario: Usuario) {
     this.dialog.open(ModalUsuarioComponent, {
       width: '552px',
       height: '360px',
       data: { operacao: "Editado", nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
     });
-  }
-
-  mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
-    this.dialog.open(ModalErrosComponent, {
-      width: '552px',
-      height: '360px',
-      position: { top: '0' },
-      data: { codigoErro: codigoErro, subtituloErro: this.subtituloErro, mensagemErro: mensagemErro }
-    })
   }
 }

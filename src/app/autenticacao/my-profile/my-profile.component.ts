@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
-import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
 
 @Component({
@@ -73,49 +72,11 @@ export class MyProfileComponent implements OnInit {
           this.abrirModal(dadosAtualizados);
           this.router.navigate(['/']);
         },
-        error: (err) => {
-          let errorMessage: string = '';
-
-          switch (err.status) {
-            case 401: {
-              errorMessage = "Não Autorizado!";
-              this.mostrarMensagemErro('401', errorMessage);
-              break;
-            }
-            case 403: {
-              errorMessage = "Cadastro não foi aceito no servidor!";
-              this.mostrarMensagemErro('403', errorMessage);
-              break;
-            }
-            case 404: {
-              errorMessage = "Recurso não encontrado!";
-              this.mostrarMensagemErro('404', errorMessage);
-              break;
-            }
-            case 408: {
-              errorMessage = "Servidor demorou muito para responder!";
-              this.mostrarMensagemErro('408', errorMessage);
-              break;
-            }
-            case 422: {
-              errorMessage = `Padrão não correspondente ao do servidor!<br>`;
-              err.error.errors.forEach((error: any) => {
-                errorMessage += `${error.field}: ${error.message}<br>`;
-              });
-              this.mostrarMensagemErro('422', errorMessage);
-              break;
-            }
-            default: {
-              errorMessage = `Por favor tente mais tarde!`;
-              this.mostrarMensagemErro('Desconhecido', errorMessage);
-              break;
-            }
-          }
-        },
+        error: (err) => { },
       });
   }
 
-  abrirModal(usuario: Usuario){
+  abrirModal(usuario: Usuario) {
     this.dialog.open(ModalUsuarioComponent, {
       width: '552px',
       height: '360px',
@@ -123,14 +84,4 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
-  mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
-    let subtituloErro: string = 'Erro ao atualizar';
-
-    this.dialog.open(ModalErrosComponent, {
-      width: '552px',
-      height: '360px',
-      position: { top: '0' },
-      data: { codigoErro: codigoErro, subtituloErro: subtituloErro, mensagemErro: mensagemErro }
-    })
-  }
 }
