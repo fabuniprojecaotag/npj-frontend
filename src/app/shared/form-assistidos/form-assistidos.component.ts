@@ -151,7 +151,7 @@ export class FormAssistidosComponent implements OnInit {
   }
 
   consultarCep(tipoEndereco: string): void {
-    let enderecoGroup = this.formAssistidos.get('endereco')?.get(`${tipoEndereco}`);
+    const enderecoGroup = this.formAssistidos.get('endereco')?.get(`${tipoEndereco}`);
     let cep = enderecoGroup?.get('cep')?.value;
     cep = cep?.replace(/[.-]/g, '');
 

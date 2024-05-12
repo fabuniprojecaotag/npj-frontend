@@ -7,7 +7,7 @@ import { CadastroService } from 'src/app/autenticacao/services/cadastro.service'
   styleUrls: ['./nav-menu.component.scss'],
 })
 export class NavMenuComponent implements OnInit {
-  @Input() isMenuAtivo: boolean = false;
+  @Input() isMenuAtivo = false;
   panelOpenState = false;
   perfilNome!: string;
 

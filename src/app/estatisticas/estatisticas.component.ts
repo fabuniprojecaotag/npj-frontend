@@ -12,7 +12,7 @@ import { Processo } from 'src/app/core/types/processo';
   styleUrls: ['./estatisticas.component.scss']
 })
 export class EstatisticasComponent implements OnInit, AfterViewInit {
-  devMode: boolean = false;
+  devMode = false;
   tituloPagina = 'Estatisticas';
   dataSource: any;
   colunasMostradas: string[] = ['id', 'data', 'vara', 'forum'];

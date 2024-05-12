@@ -60,9 +60,25 @@ export class EditUsersComponent implements OnInit {
     const senhaPresente = formValue.senha !== null && formValue.senha !== undefined;
 
     const dadosAtualizados: Usuario = {
-      ...formValue,
-      ...(senhaPresente && { senha: formValue.senha }),
+      '@type': formValue['@type'],
+      id: formValue.id,
+      email: formValue.email,
+      nome: formValue.nome,
+      cpf: formValue.cpf,
+      unidadeInstitucional: formValue.unidadeInstitucional,
+      status: formValue.status,
+      role: formValue.role,
     };
+
+    if (senhaPresente) {
+      dadosAtualizados.senha = formValue.senha;
+    }
+
+    if (formValue.role === 'ESTAGIARIO') {
+      dadosAtualizados.matricula = formValue.matricula;
+      dadosAtualizados.semestre = formValue.semestre;
+      dadosAtualizados.supervisor = formValue.supervisor;
+    }
 
     this.cadastroService
       .editarCadastro(dadosAtualizados, this.idParam)

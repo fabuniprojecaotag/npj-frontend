@@ -48,12 +48,14 @@ export interface Testemunha {
   qualificacao: string,
   endereco: Endereco,
 }
+
 export interface Envolvido {
   estagiario: tipoEnvolvido,
   professor: tipoEnvolvido,
   secretaria: tipoEnvolvido,
   assistido: tipoEnvolvido,
 }
+
 export interface tipoEnvolvido {
   id: string,
   nome: string,

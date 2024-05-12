@@ -6,22 +6,22 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 export async function generatePdf(headers: any, data: any, pageName: any) {
   console.log(headers)
   function buildTableBody(data: any, columns: any) {
-    let body = [];
+    const body = [];
 
     // Map column titles to an array of objects containing text and style
-    let columnHeaders = columns.map((column: any) => ({
+    const columnHeaders = columns.map((column: any) => ({
       text: column.title,
       style: 'header'
     }));
     body.push(columnHeaders); // Push the column headers to the body array
 
     data.forEach(function (row: any) {
-      let dataRow: any = [];
+      const dataRow: any = [];
 
       // Iterate over each column
       columns.forEach(function (column: any) {
         // Split column.col by dots to access nested properties
-        let nestedProps = column.col.split('.');
+        const nestedProps = column.col.split('.');
         let value = row;
         nestedProps.forEach((prop: any) => {
           value = value[prop];

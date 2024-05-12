@@ -33,11 +33,6 @@ export class AssistidosShortcutsComponent implements OnInit {
 
   ngOnInit(): void {
     this.cpf = this.route.snapshot.paramMap.get('cpf') as string;
-    const filtroAtendimentos: filtro = {
-      field: 'envolvidos.assistido.nome',
-      filter: 'EQUAL',
-      value: this.nomeAssistido
-    };
 
     this.assistidosService.consultar(this.cpf).subscribe({
       next: (resposta) => {
@@ -48,6 +43,12 @@ export class AssistidosShortcutsComponent implements OnInit {
         alert('Erro ao procurar assistido');
       },
     });
+
+    const filtroAtendimentos: filtro = {
+      field: 'assistido.nome',
+      filter: 'EQUAL',
+      value: this.nomeAssistido
+    };
 
     this.atendimentoService.listagemAtendimentos(filtroAtendimentos).subscribe({
       next: (resposta) => {

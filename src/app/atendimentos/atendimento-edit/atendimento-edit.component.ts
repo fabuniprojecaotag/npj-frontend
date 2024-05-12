@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
-import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 import { ModalAtendimentoComponent } from 'src/app/shared/modal-atendimento/modal-atendimento.component';

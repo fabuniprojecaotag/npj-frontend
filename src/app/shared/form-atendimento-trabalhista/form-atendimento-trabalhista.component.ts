@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { Envolvido } from 'src/app/core/types/atendimento';
 
 @Component({
   selector: 'app-form-atendimento-trabalhista',
@@ -19,9 +20,9 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
     'Processo arquivado',
   ];
 
-  estagiarioControl: FormControl = new FormControl();
-  professorControl: FormControl = new FormControl();
-  secretariaControl: FormControl = new FormControl();
+  estagiarioControl: FormControl = new FormControl<Envolvido | null>(null);
+  professorControl: FormControl = new FormControl<Envolvido | null>(null);
+  secretariaControl: FormControl = new FormControl<Envolvido | null>(null);
   assistidoControl: FormControl = new FormControl(null, Validators.required);
   arquivoSelecionado: File | null = null; // Variável para armazenar o nome do arquivo selecionado
 
@@ -128,6 +129,9 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
         secretaria: this.secretariaControl
       })
     });
+
+    console.log(this.formAtendimentosTrabalhista.get("instante"));
+
 
     this.formService.setForm(this.formAtendimentosTrabalhista);
   }

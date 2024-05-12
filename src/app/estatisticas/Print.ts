@@ -9,8 +9,8 @@ export async function generatePdf() {
       ['Jane Smith', 'janesmith@example.com', 'Canada'],
       ['Bob Johnson', 'bobjohnson@example.com', 'UK']
     ];
-  
-    const docDefinition:any = {
+
+    const docDefinition: any = {
         info: {
             title: 'Relatorio',
             author: 'GPRO',
@@ -25,6 +25,6 @@ export async function generatePdf() {
         header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] }
       }
     };
-  
+
     pdfMake.createPdf(docDefinition).open();
   }
