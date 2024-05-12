@@ -30,8 +30,6 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       localStorage.setItem('firstTime', JSON.stringify(true));
-      console.log(`Dialog result: ${result}`);
-
     });
   }
 }

@@ -93,4 +93,8 @@ export class UsersComponent implements AfterViewInit {
       },
     });
   }
+
+  formatarNomePerfil(nome: string): string {
+    return nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase();
+  }
 }

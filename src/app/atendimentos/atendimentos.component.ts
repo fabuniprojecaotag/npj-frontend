@@ -44,7 +44,6 @@ export class AtendimentosComponent implements AfterViewInit {
         this.listaAtendimentos = response;
         this.dataSource = new MatTableDataSource<Atendimento>(this.listaAtendimentos);
         this.dataSource.paginator = this.paginator;
-        console.log('lista de atendimentos:', response);
       },
       error: (err) => { },
     });

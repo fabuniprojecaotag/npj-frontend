@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Assistido, AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from '../../core/types/assistido';
 import { environment } from 'src/environments/environment';
+import { Atendimento } from 'src/app/core/types/atendimento';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class AssistidosService {
 
   listarAssistidos(): Observable<AssistidoFull[]> {
     return this.http.get<AssistidoFull[]>(`${this.API}/assistidos`);
+  }
+
+  listagemAtendimentosDoAssistido(id: string): Observable<Atendimento[]> {
+    return this.http.get<Atendimento[]>(`${this.API}/assistidos/${id}/atendimentos`);
   }
 
   editar(idParam: string, assistido: Assistido): Observable<AssistidoTrabalhista | AssistidoCivil | AssistidoFull> {

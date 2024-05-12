@@ -23,7 +23,6 @@ export class AssistidosComponent implements AfterViewInit {
     this.service.listarAssistidos().subscribe({
       next: (response) => {
         this.listaAssistidos = response;
-        console.log(response);
 
         this.dataSource = new MatTableDataSource<Assistido>(this.listaAssistidos);
         this.dataSource.paginator = this.paginator;

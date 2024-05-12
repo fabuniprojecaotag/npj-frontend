@@ -33,7 +33,6 @@ export class ProcessoEditComponent implements OnInit {
       .consultarProcesso(this.numeroParam)
       .subscribe((callback) => {
         this.processo = callback;
-        console.log(callback);
 
         this.carregarFormulario();
       });

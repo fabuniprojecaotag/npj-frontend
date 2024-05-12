@@ -13,11 +13,11 @@ export class FormUsersComponent implements OnInit {
   formCadastro!: FormGroup;
   escondido = true;
   perfis = [
+    // { perfil: 'ADMINISTRADOR', viewperfil: 'Administrador' },
     { perfil: 'COORDENADOR', viewperfil: 'Coordenador' },
-    { perfil: 'ADMINISTRADOR', viewperfil: 'Administrador' },
-    { perfil: 'ESTAGIARIO', viewperfil: 'Estagiario' },
     { perfil: 'SECRETARIA', viewperfil: 'Secretária' },
     { perfil: 'PROFESSOR', viewperfil: 'Professor' },
+    { perfil: 'ESTAGIARIO', viewperfil: 'Estagiario' },
   ];
   unidadeInstitucional = ['Taguatinga', 'Guará', 'Ceilândia'];
   @Input() myProfileComponente = false;
@@ -26,7 +26,7 @@ export class FormUsersComponent implements OnInit {
   @Output() acaoClique2: EventEmitter<void> = new EventEmitter<void>();
   @Output() cliqueExcluir: EventEmitter<void> = new EventEmitter<void>();
 
-  cadastrarSenhaControl: FormControl<boolean | null> = new FormControl<boolean | null>(false);
+  cadastrarSenhaControl: FormControl<boolean | null> = new FormControl<boolean | null>({ value: true, disabled: true });
   supervisorControl: FormControl<Usuario | null> = new FormControl<Usuario | null>({ value: null, disabled: this.myProfileComponente });
 
 

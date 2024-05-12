@@ -41,7 +41,6 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.service.listar().subscribe({
       next: (response) => {
-        console.log('Lista de processos:', response);
         this.listaProcesso = response;
 
         // this.dataSource = new MatTableDataSource<Processo>(this.listaProcesso);

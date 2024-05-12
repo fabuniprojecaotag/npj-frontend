@@ -44,23 +44,16 @@ export class AssistidosShortcutsComponent implements OnInit {
       },
     });
 
-    const filtroAtendimentos: filtro = {
-      field: 'assistido.nome',
-      filter: 'EQUAL',
-      value: this.nomeAssistido
-    };
 
-    this.atendimentoService.listagemAtendimentos(filtroAtendimentos).subscribe({
+    this.assistidosService.listagemAtendimentosDoAssistido(this.cpf).subscribe({
       next: (resposta) => {
         this.listaAtendimento = resposta;
-        console.log("Atendimentos: " + resposta);
       }
     });
 
     this.processoService.listar().subscribe({
       next: (resposta) => {
         this.listaProcesso = resposta;
-        console.log("Processos: " + resposta);
       }
     });
   }
