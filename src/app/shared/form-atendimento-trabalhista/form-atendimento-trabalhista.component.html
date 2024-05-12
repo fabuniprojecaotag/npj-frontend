@@ -2,6 +2,31 @@
   <h3 class="titulo-form">Ficha Trabalhista</h3>
   <form [formGroup]="formAtendimentosTrabalhista">
 
+    <div class="grupo-form">
+      <div class="full">
+        <mat-form-field class="input-medio">
+          <mat-label>Área</mat-label>
+          <mat-select matInput formControlName="area" ngDefaultControl>
+            <mat-option value="Trabalhista">Trabalhista</mat-option>
+          </mat-select>
+          <mat-error *ngIf="formAtendimentosTrabalhista.get('area')?.errors?.['required']">Área é
+            obrigatória</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-medio">
+          <mat-label>Instante do atendimento</mat-label>
+          <input matInput [matDatepicker]="instante" formControlName="instante">
+          <mat-datepicker-toggle matIconSuffix [for]="instante" color="primary"></mat-datepicker-toggle>
+          <mat-datepicker #instante></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="input-medio">
+          <mat-label>Prazo de Entrega dos Documentos</mat-label>
+          <input matInput [matDatepicker]="prazoEntregaDocumentos" formControlName="prazoEntregaDocumentos">
+          <mat-datepicker-toggle matIconSuffix [for]="prazoEntregaDocumentos" color="primary"></mat-datepicker-toggle>
+          <mat-datepicker #prazoEntregaDocumentos></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
     <!-- Envolvidos -->
     <div class="grupo-form" formGroupName="envolvidos">
       <div class="full">
@@ -15,7 +40,7 @@
         <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-grande" />
         <app-assistido-autocomplete [control]="assistidoControl" class="input-grande" />
       </div>
-      <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
+      <button mat-raised-button (click)="abrirNovaGuia()" class="botao-cadastro">Cadastrar Assistido</button>
     </div>
 
     <!-- Ficha -->
@@ -415,8 +440,11 @@
           <mat-form-field class="input-grande">
             <mat-label>Medida Jurídica Cabível</mat-label>
             <mat-select formControlName="medidaJuridica" ngDefaultControl>
-              <mat-option value="Reclamação trabalhista" selected>Reclamação trabalhista</mat-option>
+              <mat-option value="Reclamação trabalhista">Reclamação trabalhista</mat-option>
             </mat-select>
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha')?.get('medidaJuridica')?.errors?.['required']">Medida
+              Jurídica é obrigatória</mat-error>
           </mat-form-field>
         </div>
         <div class="full">

@@ -12,7 +12,7 @@ export class MensagemErroService {
   mostrarMensagemErro(codigoErro: number, mensagemErro: string) {
     this.dialog.open(ModalErrosComponent, {
       width: '552px',
-      height: '360px',
+      height: 'auto',
       position: { top: '0' },
       data: { codigoErro: codigoErro, mensagemErro: mensagemErro }
     })

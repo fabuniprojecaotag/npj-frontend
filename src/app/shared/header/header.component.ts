@@ -10,8 +10,8 @@ export class HeaderComponent implements OnInit {
   @Input() subtitulo!: string;
   isMenuAtivo = false; // logica para abrir e fechar menu de nav
   isUserMenuAtivo = false;
-  nomeUser!: string;
-  nomePerfil!: string;
+  nomeUser = '';
+  nomePerfil = '';
 
   constructor(
     private el: ElementRef,

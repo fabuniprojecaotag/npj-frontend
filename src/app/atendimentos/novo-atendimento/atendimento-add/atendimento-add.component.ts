@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
-import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
+import { ModalAtendimentoComponent } from 'src/app/shared/modal-atendimento/modal-atendimento.component';
 
 @Component({
   selector: 'app-atendimento-add',
@@ -14,6 +14,7 @@ import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.comp
 export class AtendimentoAddComponent implements OnInit {
   tituloPagina = 'Nova Ficha';
   tipoFicha!: string;
+  novoAtendimento!: Atendimento;
 
   constructor(
     private formAtendimentoService: FormsService,
@@ -27,15 +28,14 @@ export class AtendimentoAddComponent implements OnInit {
     this.tipoFicha = this.route.snapshot.paramMap.get('ficha') as string;
   }
 
-  cadastrar() {
+  cadastrar(): void {
     const formAtendimento = this.formAtendimentoService.getForm();
 
     if (formAtendimento?.valid) {
-      const novoAtendimento = formAtendimento.getRawValue() as Atendimento;
+      this.novoAtendimento = formAtendimento.getRawValue() as Atendimento;
 
-      this.atendimentoService.cadastrarAtendimento(novoAtendimento).subscribe({
+      this.atendimentoService.cadastrarAtendimento(this.novoAtendimento).subscribe({
         next: () => {
-          alert('Cadastro realizado!');
           this.router.navigate(['/atendimentos/list']);
         },
         error: (err) => { },
@@ -43,13 +43,24 @@ export class AtendimentoAddComponent implements OnInit {
     }
   }
 
-  mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
-    const subtituloErro = 'Erro ao cadastrar';
-    this.dialog.open(ModalErrosComponent, {
+  dialogoCriar(atendimento: Atendimento): void {
+    const dialogRef = this.dialog.open(ModalAtendimentoComponent, {
       width: '552px',
       height: '360px',
-      position: { top: '0' },
-      data: { codigoErro: codigoErro, subtituloErro: subtituloErro, mensagemErro: mensagemErro }
-    })
+      data: {
+        operacao: 'Cadastrar',
+        area: atendimento.area,
+        estagiario: atendimento.envolvidos.estagiario.nome,
+        assistido: atendimento.envolvidos.assistido.nome,
+        status: atendimento.status,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirmado') {
+        this.cadastrar();
+      }
+    });
   }
+
 }

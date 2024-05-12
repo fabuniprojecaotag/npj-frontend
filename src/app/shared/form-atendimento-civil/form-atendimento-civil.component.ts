@@ -25,8 +25,8 @@ export class FormAtendimentoCivilComponent implements OnInit {
   ];
   medidasFamilia: string[] = [
     'Ação de Alimentos',
-    'Ação de Cumprimento de alimentos - prisão',
-    'Ação de Cumprimento de alimentos - penhora',
+    'Ação de Cumprimento de sentença de alimentos - prisão',
+    'Ação de Cumprimento de sentença de alimentos - penhora',
     'Ação de Guarda',
     'Ação de Regulamentação de visitas',
     'Ação de divórcio',
@@ -40,7 +40,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
   medidasCivil: string[] = [
     'Ação de reparação por danos materiais',
     'Ação de reparação por danos morais',
-    'Ação de reparação por danos maateriais com morais',
+    'Ação de reparação por danos materiais com morais',
     'Obrigação de fazer',
     'Consignação de Pagamento',
     'Ação de cobrança'
@@ -80,7 +80,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
       '@type': ['Civil'],
       area: [null, Validators.required],
       status: ['Aguardando documentos', Validators.required],
-      instante: [{ value: null, disabled: this.editarComponente }],
+      instante: [{ value: new Date().toISOString(), disabled: this.editarComponente }],
       ficha: this.formBuilder.group({
         '@type': ['Civil'],
         assinatura: [null],
@@ -103,7 +103,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
           }),
           informacoesComplementares: [null]
         }),
-        medidaJuridica: [null]
+        medidaJuridica: [null, Validators.required]
       }),
       prazoEntregaDocumentos: [null],
       historico: this.formBuilder.array([this.criarGrupoHistorico()]),
@@ -122,6 +122,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
         this.medidasJudiciais = this.medidasFamilia;
       }
 
+      this.formAtendimentos.get('ficha.medidaJuridica')?.patchValue('');
       this.formAtendimentos.get('ficha.medidaJuridica')?.updateValueAndValidity();
     });
 
@@ -144,7 +145,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
     (this.formAtendimentos.get('ficha')?.get('testemunhas') as FormArray).push(this.criarGrupoTestemunha());
   }
 
-  criarGrupoTestemunha(): FormGroup {
+  private criarGrupoTestemunha(): FormGroup {
     return this.formBuilder.group({
       nome: [null],
       qualificacao: [null],
@@ -163,7 +164,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
     (this.formAtendimentos.get('historico') as FormArray).push(this.criarGrupoHistorico());
   }
 
-  criarGrupoHistorico(): FormGroup {
+  private criarGrupoHistorico(): FormGroup {
     return this.formBuilder.group({
       titulo: [null],
       descricao: [null],
@@ -188,5 +189,9 @@ export class FormAtendimentoCivilComponent implements OnInit {
 
   executarAcaoExcluir() {
     this.acaoCliqueExcluir.emit();
+  }
+
+  abrirNovaGuia() {
+    window.open('/assistidos/add', '_blank');
   }
 }

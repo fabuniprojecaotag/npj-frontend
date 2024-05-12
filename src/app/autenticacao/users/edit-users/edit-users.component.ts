@@ -80,9 +80,7 @@ export class EditUsersComponent implements OnInit {
       next: () => {
         this.router.navigate(['/users']);
       },
-      error: () => {
-        alert('Erro ao excluir o usuário!');
-      },
+      error: () => { },
     });
   }
 

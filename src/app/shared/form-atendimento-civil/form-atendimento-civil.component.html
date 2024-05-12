@@ -43,7 +43,7 @@
         <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-grande" />
         <app-assistido-autocomplete [control]="assistidoControl" class="input-grande" />
       </div>
-      <button mat-raised-button routerLink="/assistidos/add" class="botao-cadastro">Cadastrar Assistido</button>
+      <button mat-raised-button (click)="abrirNovaGuia()" class="botao-cadastro">Cadastrar Assistido</button>
     </div>
 
     <!-- Ficha -->
@@ -213,6 +213,7 @@
               {{ medida }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="formAtendimentos.get('ficha')?.get('medidaJuridica')?.errors?.['required']">Medida é obrigatoria!</mat-error>
         </mat-form-field>
         <div class="input-grande">
           <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados

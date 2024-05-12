@@ -50,8 +50,9 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
 
     this.formAtendimentosTrabalhista = this.formBuilder.group({
       '@type': ['Trabalhista'],
+      area: [{ value: 'Trabalhista', disabled: true }, Validators.required],
       status: [null],
-      area: ['Trabalhista'],
+      instante: [{ value: new Date().toISOString(), disabled: true }],
       ficha: this.formBuilder.group({
         '@type': ['Trabalhista'],
         dadosSensiveis: [false],
@@ -69,7 +70,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
             complemento: [null]
           }),
         }),
-        medidaJuridica: [null, Validators.required],
+        medidaJuridica: ['Reclamação trabalhista', Validators.required],
         relacaoEmpregaticia: this.formBuilder.group({
           dataAdmissao: [null],
           dataSaida: [null],
@@ -118,6 +119,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
           outrosDocumentos: [null]
         })
       }),
+      prazoEntregaDocumentos: [null],
       historico: this.formBuilder.array([this.criarGrupoHistorico()]),
       envolvidos: this.formBuilder.group({
         assistido: this.assistidoControl,
@@ -153,7 +155,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
     (this.formAtendimentosTrabalhista.get('historico') as FormArray).push(this.criarGrupoHistorico());
   }
 
-  criarGrupoHistorico(): FormGroup {
+  private criarGrupoHistorico(): FormGroup {
     return this.formBuilder.group({
       titulo: [null],
       descricao: [null],
@@ -168,7 +170,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
     (this.formAtendimentosTrabalhista.get('ficha')?.get('testemunhas') as FormArray).push(this.criarGrupoTestemunha());
   }
 
-  criarGrupoTestemunha(): FormGroup {
+  private criarGrupoTestemunha(): FormGroup {
     return this.formBuilder.group({
       nome: [null],
       qualificacao: [null],
@@ -189,5 +191,9 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
 
   get testemunhas(): FormArray {
     return this.formAtendimentosTrabalhista.get('ficha.testemunhas') as FormArray;
+  }
+
+  abrirNovaGuia() {
+    window.open('/assistidos/add', '_blank');
   }
 }

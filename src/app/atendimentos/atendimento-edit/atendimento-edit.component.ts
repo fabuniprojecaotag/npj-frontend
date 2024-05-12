@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
 import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
+import { ModalAtendimentoComponent } from 'src/app/shared/modal-atendimento/modal-atendimento.component';
 
 @Component({
   selector: 'app-atendimento-edit',
@@ -69,70 +71,50 @@ export class AtendimentoEditComponent implements OnInit {
 
     this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento).subscribe({
       next: () => {
-        alert('Atendimento atualizado com sucesso!');
         this.router.navigate(['/atendimentos/list']);
       },
-      error: (err) => {
-        let errorMessage: string = '';
+      error: (err) => { },
+    });
+  }
 
-        switch (err.status) {
-          case 401: {
-            errorMessage = "Não Autorizado!";
-            this.mostrarMensagemErro('401', errorMessage);
-            break;
-          }
-          case 403: {
-            errorMessage = "Cadastro não foi aceito no servidor!";
-            this.mostrarMensagemErro('403', errorMessage);
-            break;
-          }
-          case 404: {
-            errorMessage = "Recurso não encontrado!";
-            this.mostrarMensagemErro('404', errorMessage);
-            break;
-          }
-          case 408: {
-            errorMessage = "Servidor demorou muito para responder!";
-            this.mostrarMensagemErro('408', errorMessage);
-            break;
-          }
-          case 422: {
-            errorMessage = `Padrão não correspondente ao do servidor!<br>`;
-            err.error.errors.forEach((error: any) => {
-              errorMessage += `${error.field}: ${error.message}<br>`;
-            });
-            this.mostrarMensagemErro('422', errorMessage);
-            break;
-          }
-          default: {
-            errorMessage = `Por favor tente mais tarde!`;
-            this.mostrarMensagemErro('Desconhecido', errorMessage);
-            break;
-          }
-        }
+  excluir(id: string) {
+    this.atendimentoService.excluirAtendimento(id).subscribe({
+      next: () => {
+        alert('Sucesso ao excluir atendimento!');
+      },
+      error: (err) => { }
+    });
+  }
+
+  abrirModalExcluir(atendimento: Atendimento) {
+    this.dialog.open(ModalExcluidoComponent, {
+      width: '372px',
+      height: '228px',
+      data: {
+        tituloCriado: 'Atendimento',
+        nome: atendimento.id,
+        deletar: () => this.excluir(atendimento.id),
       },
     });
   }
 
-  excluir() {
-    this.atendimentoService.excluirAtendimento(this.idAtendimento).subscribe({
-      next: () => {
-        alert('Sucesso ao excluir atendimento!');
-      },
-      error: (err) => {
-        alert('Erro ao excluir atendimento');
-      }
-    })
-  }
-
-  mostrarMensagemErro(codigoErro: string, mensagemErro: string) {
-    const subtituloErro = 'Erro ao editar';
-
-    this.dialog.open(ModalErrosComponent, {
+  abrirModalEditar(atendimento: Atendimento): void {
+    const dialogRef = this.dialog.open(ModalAtendimentoComponent, {
       width: '552px',
       height: '360px',
-      position: { top: '0' },
-      data: { codigoErro: codigoErro, subtituloErro: subtituloErro, mensagemErro: mensagemErro }
-    })
+      data: {
+        operacao: 'Cadastrar',
+        area: atendimento.area,
+        estagiario: atendimento.envolvidos.estagiario.nome,
+        assistido: atendimento.envolvidos.assistido.nome,
+        status: atendimento.status,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirmado') {
+        this.editar();
+      }
+    });
   }
 }

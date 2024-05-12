@@ -29,6 +29,7 @@ import { ModalProcessoComponent } from "./modal-processo/modal-processo-criado.c
 import { ModalUsuarioComponent } from "./modal-usuario/modal-usuario.component";
 import { PrintButtonComponent } from "./print-button/print-button.component";
 import { UtilsBarComponent } from "./utils-bar/utils-bar.component";
+import { ModalAtendimentoComponent } from "./modal-atendimento/modal-atendimento.component";
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { UtilsBarComponent } from "./utils-bar/utils-bar.component";
     ModalUsuarioComponent,
     PrintButtonComponent,
     CardProcessosComponent,
+    ModalAtendimentoComponent
   ],
   imports: [
     CommonModule,
@@ -89,6 +91,7 @@ import { UtilsBarComponent } from "./utils-bar/utils-bar.component";
     ModalUsuarioComponent,
     PrintButtonComponent,
     CardProcessosComponent,
+    ModalAtendimentoComponent
   ],
   providers: [
     provideNgxMask()
