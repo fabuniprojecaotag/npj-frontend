@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
-import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
+import { UsuarioService } from 'src/app/autenticacao/services/usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -8,23 +8,27 @@ import { CadastroService } from 'src/app/autenticacao/services/cadastro.service'
 })
 export class HeaderComponent implements OnInit {
   @Input() subtitulo!: string;
-  isMenuAtivo = false; // logica para abrir e fechar menu de nav
+  isMenuAtivo = false; // lógica para abrir e fechar menu de navegação
   isUserMenuAtivo = false;
-  nomeUser = '';
-  nomePerfil = '';
+  nomeUser: string = '';
+  nomePerfil: string = '';
 
   constructor(
     private el: ElementRef,
-    private cadastroService: CadastroService
+    private usuarioService: UsuarioService
   ) { }
 
-  ngOnInit(): void {
-    this.cadastroService.buscarMeuUsuario().subscribe({
+  ngOnInit() {
+    this.usuarioService.retornarTokenUsuario().subscribe({
       next: (usuario) => {
-        this.nomeUser = usuario.nome;
-        this.nomePerfil = this.formatarNomePerfil(usuario.role);
-      },
-      error: (err) => { }
+        if (usuario) {
+          this.nomeUser = usuario.nome;
+          this.nomePerfil = this.formatarNomePerfil(usuario.role);
+        } else {
+          this.nomeUser = 'Erro';
+          this.nomePerfil = 'Não encontrado!';
+        }
+      }
     });
   }
 
