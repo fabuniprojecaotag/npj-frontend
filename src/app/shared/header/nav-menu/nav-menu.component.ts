@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,17 +6,13 @@ import { CadastroService } from 'src/app/autenticacao/services/cadastro.service'
   styleUrls: ['./nav-menu.component.scss'],
 })
 export class NavMenuComponent implements OnInit {
-  @Input() isMenuAtivo = false;
   panelOpenState = false;
-  perfilNome!: string;
+  @Input() isMenuAtivo = false;
+  @Input() perfilNome!: string;
 
-  constructor(private cadastroService: CadastroService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.cadastroService.buscarMeuUsuario().subscribe({
-      next: (usuario) => {
-        this.perfilNome = usuario.role.toUpperCase();
-      }
-    })
+    this.perfilNome = this.perfilNome.toUpperCase();
   }
 }
