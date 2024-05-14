@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Assistido, AssistidoCivil, AssistidoTrabalhista } from 'src/app/core/types/assistido';
 import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
 import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 import { AssistidoFull, AssistidosService } from '../../services/assistidos.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-modal-edit-assistido',
@@ -25,7 +25,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
     public dialogRef: MatDialogRef<ModalAtalhosComponent>,
     private assistidoService: AssistidosService,
     private dialog: MatDialog,
-    private location: Location
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -147,7 +147,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
     this.assistidoService.excluir(this.idParam).subscribe({
       next: () => {
         this.dialog.closeAll();
-        this.atualizarPagina();
+        this.router.navigate(['/assistidos/list']);
       },
       error: (err) => { },
     });
