@@ -14,11 +14,17 @@
     display: flex;
     flex-wrap: wrap;
     gap: 14px 4px;
-    justify-content: flex-start;
     overflow-y: auto;
+    width: 100%;
   }
 
   &__botoes {
     padding: 0 24px 9px;
   }
+
+  .sem-registros {
+    text-align: center;
+    width: 100%;
+  }
 }
+

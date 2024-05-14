@@ -1,0 +1,12 @@
+<section class="modal">
+  <div></div>
+  <div mat-dialog-content class="modal__conteudo">
+    <ng-container *ngIf="data.assistido; else semRegistros">
+      <app-form-assistidos [editComponent]="true" (acaoClique)="editar()" (cliqueExcluir)="excluir()" />
+    </ng-container>
+  </div>
+  <div></div>
+  <ng-template #semRegistros>
+    <p>Não há registros armazenados.</p>
+  </ng-template>
+</section>

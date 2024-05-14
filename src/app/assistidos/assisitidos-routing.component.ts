@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { authGuard } from "../autenticacao/auth.guard";
 import { AssistidoAddComponent } from "./assistido-add/assistido-add.component";
-import { AssistidosEditComponent } from "./assistidos-edit/assistidos-edit.component";
 import { AssistidosShortcutsComponent } from "./assistidos-shortcuts/assistidos-shortcuts.component";
 import { AssistidosComponent } from "./assistidos.component";
 
@@ -21,12 +20,7 @@ const routes: Routes = [
     path: 'add',
     component: AssistidoAddComponent,
     canActivate: [authGuard],
-  },
-  {
-    path: 'edit/:cpf',
-    component: AssistidosEditComponent,
-    canActivate: [authGuard],
-  },
+  }
 ];
 
 @NgModule({

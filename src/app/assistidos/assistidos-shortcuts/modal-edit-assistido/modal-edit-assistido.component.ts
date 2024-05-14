@@ -1,45 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Assistido, AssistidoFull } from 'src/app/core/types/assistido';
+import { Assistido, AssistidoCivil, AssistidoTrabalhista } from 'src/app/core/types/assistido';
 import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
+import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
-import { AssistidoCivil, AssistidoTrabalhista } from './../../core/types/assistido';
+import { AssistidoFull, AssistidosService } from '../../services/assistidos.service';
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-assistidos-edit',
-  templateUrl: './assistidos-edit.component.html',
-  styleUrls: ['./assistidos-edit.component.scss'],
+  selector: 'app-modal-edit-assistido',
+  templateUrl: './modal-edit-assistido.component.html',
+  styleUrls: ['./modal-edit-assistido.component.scss']
 })
-export class AssistidosEditComponent implements OnInit {
-  tituloDaPagina = 'Editar Assistido';
-  form!: FormGroup | null;
+export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
   assistido!: AssistidoFull | AssistidoCivil | AssistidoTrabalhista;
+  form!: FormGroup | null;
   idParam!: string;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private formService: FormsService,
+    public dialogRef: MatDialogRef<ModalAtalhosComponent>,
     private assistidoService: AssistidosService,
-    private formAssistidosService: FormsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.idParam = this.route.snapshot.paramMap.get('cpf') as string;
+    this.assistido = this.data.assistido;
+    this.idParam = this.data.assistido.cpf;
+  }
 
-    this.assistidoService.consultar(this.idParam).subscribe((callback) => {
-      this.assistido = callback;
-      this.tituloDaPagina = `Editar Assistido - ${this.assistido.nome}`;
+  ngAfterViewInit(): void {
+    setTimeout(() => {
       this.carregarFormulario();
     });
   }
 
   carregarFormulario() {
-    this.form = this.formAssistidosService.getForm();
+    this.form = this.formService.getForm();
     const assistidoType = this.assistido['@type'];
 
     this.form?.patchValue({
@@ -88,9 +89,9 @@ export class AssistidosEditComponent implements OnInit {
     }
   }
 
-
   editar() {
     const tipoSelecionado = this.form?.value['@type'];
+
     let dadosAtualizados: any = {
       '@type': tipoSelecionado,
       nome: this.form?.value.nome,
@@ -135,7 +136,8 @@ export class AssistidosEditComponent implements OnInit {
 
     this.assistidoService.editar(this.idParam, dadosAtualizados).subscribe({
       next: () => {
-        this.router.navigate(['/assistidos']);
+        this.dialog.closeAll();
+        this.atualizarPagina();
       },
       error: (err) => { },
     });
@@ -144,7 +146,8 @@ export class AssistidosEditComponent implements OnInit {
   excluir() {
     this.assistidoService.excluir(this.idParam).subscribe({
       next: () => {
-        this.router.navigate(['/assistidos']);
+        this.dialog.closeAll();
+        this.atualizarPagina();
       },
       error: (err) => { },
     });
@@ -167,6 +170,14 @@ export class AssistidosEditComponent implements OnInit {
       width: '552px',
       height: '360px',
       data: { operacao: 'editado', nome: novoAssistido.nome, email: novoAssistido.email, cpf: novoAssistido.cpf }
-    })
+    });
+  }
+
+  fechar() {
+    this.dialogRef.close();
+  }
+
+  atualizarPagina() {
+    window.location.reload();
   }
 }

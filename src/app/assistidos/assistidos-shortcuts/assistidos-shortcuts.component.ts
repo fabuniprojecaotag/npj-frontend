@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
-import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
-import { ProcessosService } from 'src/app/processos/services/processos.service';
+import { Assistido } from 'src/app/core/types/assistido';
 import { Atendimento } from 'src/app/core/types/atendimento';
-import { filtro } from 'src/app/core/types/filtro';
 import { Processo } from 'src/app/core/types/processo';
+import { ProcessosService } from 'src/app/processos/services/processos.service';
 import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
+import { ModalEditAssistidoComponent } from './modal-edit-assistido/modal-edit-assistido.component';
 
 @Component({
   selector: 'app-assistidos-shortcuts',
@@ -15,8 +15,8 @@ import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalho
   styleUrls: ['./assistidos-shortcuts.component.scss'],
 })
 export class AssistidosShortcutsComponent implements OnInit {
+  assistido!: Assistido;
   tituloDaPagina: string;
-  nomeAssistido!: string;
   cpf!: string;
   listaAtendimento: Atendimento[] = [];
   listaProcesso: Processo[] = [];
@@ -24,7 +24,6 @@ export class AssistidosShortcutsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private assistidosService: AssistidosService,
-    private atendimentoService: AtendimentosService,
     private processoService: ProcessosService,
     private dialog: MatDialog
   ) {
@@ -36,14 +35,11 @@ export class AssistidosShortcutsComponent implements OnInit {
 
     this.assistidosService.consultar(this.cpf).subscribe({
       next: (resposta) => {
-        this.nomeAssistido = resposta.nome;
-        this.tituloDaPagina = `Assisitido - ${this.nomeAssistido}`;
+        this.assistido = resposta;
+        this.tituloDaPagina = `Assisitido - ${this.assistido.nome}`;
       },
-      error: () => {
-        alert('Erro ao procurar assistido');
-      },
+      error: () => { },
     });
-
 
     this.assistidosService.listagemAtendimentosDoAssistido(this.cpf).subscribe({
       next: (resposta) => {
@@ -58,10 +54,22 @@ export class AssistidosShortcutsComponent implements OnInit {
     });
   }
 
+  abrirModalEditar() {
+    if (this.assistido) {
+      this.dialog.open(ModalEditAssistidoComponent, {
+        width: '1200px',
+        height: '650px',
+        data: { assistido: this.assistido }
+      });
+    }
+  }
+
+
   abrirModalAtendimento() {
     this.dialog.open(ModalAtalhosComponent, {
       width: '1200px',
       height: '650px',
+      maxHeight: '100vh',
       data: { titulo: 'Atendimentos', listaAtendimento: this.listaAtendimento }
     });
   }

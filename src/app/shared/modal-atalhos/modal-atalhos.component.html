@@ -1,7 +1,8 @@
 <section class="modal">
   <h4 mat-dialog-title class="modal__titulo">{{ data.titulo }} Envolvidos</h4>
   <div mat-dialog-content class="modal__conteudo">
-    <ng-container *ngIf="(data.listaAtendimento && data.listaAtendimento.length > 0) || (data.listaProcesso && data.listaProcesso.length > 0); else semRegistros">
+    <ng-container
+      *ngIf="(data.listaAtendimento && data.listaAtendimento.length > 0) || (data.listaProcesso && data.listaProcesso.length > 0); else semRegistros">
       <ng-container *ngIf="data.listaAtendimento && data.listaAtendimento.length > 0">
         <app-card-atendimentos [atendimento]="item" *ngFor="let item of data.listaAtendimento"></app-card-atendimentos>
       </ng-container>
@@ -15,5 +16,5 @@
   </div>
 </section>
 <ng-template #semRegistros>
-  <p>Não há registros armazenados.</p>
+  <p class="sem-registros">Não há registros armazenados.</p>
 </ng-template>

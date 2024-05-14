@@ -1,13 +1,13 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { SharedModule } from "../shared/shared.module";
-import { MaterialModule } from "../core/material/material.module";
 import { RouterModule } from "@angular/router";
-import { AssistidoAddComponent } from "./assistido-add/assistido-add.component";
-import { AssistidosComponent } from "./assistidos.component";
-import { AssistidosShortcutsComponent } from "./assistidos-shortcuts/assistidos-shortcuts.component";
+import { MaterialModule } from "../core/material/material.module";
+import { SharedModule } from "../shared/shared.module";
 import { AssistidosRoutingModule } from "./assisitidos-routing.component";
-import { AssistidosEditComponent } from "./assistidos-edit/assistidos-edit.component";
+import { AssistidoAddComponent } from "./assistido-add/assistido-add.component";
+import { AssistidosShortcutsComponent } from "./assistidos-shortcuts/assistidos-shortcuts.component";
+import { ModalEditAssistidoComponent } from './assistidos-shortcuts/modal-edit-assistido/modal-edit-assistido.component';
+import { AssistidosComponent } from "./assistidos.component";
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { AssistidosEditComponent } from "./assistidos-edit/assistidos-edit.compo
     AssistidosComponent,
     AssistidosShortcutsComponent,
     AssistidosComponent,
-    AssistidosEditComponent
+    ModalEditAssistidoComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +29,6 @@ import { AssistidosEditComponent } from "./assistidos-edit/assistidos-edit.compo
     AssistidosComponent,
     AssistidosShortcutsComponent,
     AssistidosComponent,
-    AssistidosEditComponent
   ]
 })
 export class AssistidosModule { }

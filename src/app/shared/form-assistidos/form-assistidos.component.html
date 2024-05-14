@@ -1,4 +1,4 @@
-<section class="container">
+<section class="form-assistidos" [ngClass]="{ 'container': !editComponent }">
   <h3>Identificação do Assistido</h3>
   <form [formGroup]="formAssistidos">
     <div class="row">
@@ -268,7 +268,7 @@
         </div>
       </ng-container>
     </ng-container>
-    <div class="btn-group">
+    <div class="btn-group" [ngClass]="{ 'sticky-bottom': editComponent }">
       <button type="button" *ngIf="editComponent === true" mat-flat-button class="btn" color="warn"
         (click)="excluir()">EXCLUIR</button>
       <button mat-flat-button type="reset" class="btn btn-basic">LIMPAR</button>
