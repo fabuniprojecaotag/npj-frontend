@@ -369,7 +369,7 @@
           </ng-container>
         </ng-container>
         <div class="full">
-          <button mat-raised-button (click)="adicionarTestemunha()" class="botao-criar">Adicionar Testemunha</button>
+          <button mat-raised-button color="accent" (click)="adicionarTestemunha()" class="botao-criar">Adicionar Testemunha</button>
         </div>
       </div>
 
@@ -453,7 +453,7 @@
               (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
           <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
             accept=".pdf,.doc,.docx, image/png" formControlName="assinatura">
-          <button mat-raised-button color="primary" (click)="fileInput.click()">
+          <button mat-raised-button color="accent" (click)="fileInput.click()">
             <mat-icon>upload_2</mat-icon>Upload
           </button>
           <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx</p>
@@ -491,7 +491,7 @@
     <div class="grupo-botoes">
       <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
       <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit" (click)="executarAcao()"
-        color="primary">Submeter</button>
+        color="accent">Submeter</button>
     </div>
   </form>
 </section>

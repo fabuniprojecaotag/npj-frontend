@@ -73,7 +73,6 @@
         <mat-form-field class="full-width">
           <mat-label for="estadoCivil">Estado civil</mat-label>
           <mat-select matNativeControl formControlName="estadoCivil" id="estadoCivil">
-            <mat-option label="Selecione o Estado Civil:"></mat-option>
             <mat-option *ngFor="let estado of estadosCivis" [value]="estado">
               {{ estado }}
             </mat-option>
@@ -274,7 +273,7 @@
       <button mat-flat-button type="reset" class="btn btn-basic">LIMPAR</button>
       <button mat-flat-button type="submit" (click)="executarAcao()" class="btn btn-basic"
         [disabled]="formAssistidos.invalid">SALVAR</button>
-      <button mat-flat-button type="submit" (click)="executarAcao()" class="btn" color="primary"
+      <button mat-flat-button type="submit" (click)="executarAcao()" class="btn" color="accent"
         [disabled]="formAssistidos.invalid">SUBMETER</button>
     </div>
   </form>

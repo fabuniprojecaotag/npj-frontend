@@ -1,0 +1,105 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define as cores
+$roxo: #393053;
+$roxo-claro: #635985;
+$roxo-escuro: #18122b;
+$azul: rgba(63, 81, 181, 1); // Azul do accent
+
+$custom-primary-palette: mat.define-palette((
+  50: $roxo-claro,
+  100: $roxo-claro,
+  200: $roxo-claro,
+  300: $roxo,
+  400: $roxo,
+  500: $roxo,
+  600: $roxo,
+  700: $roxo-escuro,
+  800: $roxo-escuro,
+  900: $roxo-escuro,
+  A100: $roxo-claro,
+  A200: $roxo,
+  A400: $roxo,
+  A700: $roxo-escuro,
+  contrast: (
+    50: black,
+    100: black,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+));
+
+$custom-accent-palette: mat.define-palette((
+  50: #e3f2fd,
+  100: #bbdefb,
+  200: #90caf9,
+  300: #64b5f6,
+  400: #42a5f5,
+  500: $azul,
+  600: #3949ab,
+  700: #303f9f,
+  800: #283593,
+  900: #1a237e,
+  A100: #8c9eff,
+  A200: #536dfe,
+  A400: #3d5afe,
+  A700: #304ffe,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+));
+
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+// configurações de tipografia de alguns elementos
+$custom-typography: mat.define-typography-config(
+  $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em, $font-family: '"DM Sans", sans-serif'),
+  $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em, $font-family: '"DM Sans Headline Medium", sans-serif'),
+  $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em, $font-family: '"DM Sans/Title Large", sans-serif'),
+  $headline-4: mat.define-typography-level(34px, 40px, 400, $font-family: '"DM Sans", sans-serif'),
+  $headline-5: mat.define-typography-level(24px, 32px, 400, $font-family: '"DM Sans Headline Medium", sans-serif'),
+  $headline-6: mat.define-typography-level(20px, 32px, 500, $font-family: '"DM Sans", sans-serif'),
+  $subtitle-1: mat.define-typography-level(16px, 24px, 400, $font-family: '"DM Sans", sans-serif'),
+  $subtitle-2: mat.define-typography-level(14px, 24px, 500, $font-family: '"DM Sans", sans-serif'),
+  $body-1: mat.define-typography-level(16px, 24px, 400, $font-family: '"DM Sans", sans-serif'),
+  $body-2: mat.define-typography-level(14px, 24px, 400, $font-family: '"DM Sans", sans-serif'),
+  $button: mat.define-typography-level(16px, 24px, 500, $font-family: '"Roboto", sans-serif'),
+  $caption: mat.define-typography-level(12px, 20px, 400, $font-family: '"DM Sans", sans-serif'),
+  $overline: mat.define-typography-level(10px, 16px, 400, $font-family: '"DM Sans", sans-serif')
+);
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $custom-primary-palette,
+    accent: $custom-accent-palette,
+    warn: $warn-palette,
+  ),
+  typography: $custom-typography,
+));
+
+@include mat.all-component-themes($my-theme);

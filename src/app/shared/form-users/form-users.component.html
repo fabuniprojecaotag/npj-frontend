@@ -43,7 +43,7 @@
               </mat-select>
               <mat-error *ngIf="formCadastro.get('unidadeInstitucional')?.errors">Unidade é obrigatória</mat-error>
             </mat-form-field>
-            <mat-checkbox formControlName="cadastrarSenha" color="primary" labelPosition="before">Cadastrar Senha Manualmente</mat-checkbox>
+            <mat-checkbox formControlName="cadastrarSenha" color="primary" labelPosition="after">Cadastrar Senha Manualmente</mat-checkbox>
           </div>
         </div>
       </mat-card-content>
@@ -120,7 +120,7 @@
         </button>
         <button mat-flat-button [disabled]="formCadastro.invalid" (executarAcaoSemRedirecionar)="acaoClique2">SALVAR
         </button>
-        <button mat-flat-button [disabled]="formCadastro.invalid" color="primary" (executarAcao)="acaoClique">SUBMETER
+        <button mat-flat-button [disabled]="formCadastro.invalid" color="accent" (executarAcao)="acaoClique">SUBMETER
         </button>
       </mat-card-actions>
     </form>

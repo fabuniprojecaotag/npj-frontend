@@ -3,7 +3,7 @@
 <section class="secao-usuarios">
     <mat-form-field class="secao-usuarios__filtro">
       <mat-label>Filtro</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Carlos" #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 0001175-18.2013.5.05" #input>
     </mat-form-field>
     <app-print-button  [dataSet]="listaProcesso" pageName="Processo" [config]="printConfig" ></app-print-button>
     <div class="mat-elevation-z8">
