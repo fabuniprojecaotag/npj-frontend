@@ -79,6 +79,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
 
     this.formAtendimentos = this.formBuilder.group({
       '@type': ['Civil'],
+      id: [null],
       area: [null, Validators.required],
       status: ['Aguardando documentos', Validators.required],
       instante: [{ value: new Date().toISOString(), disabled: this.editarComponente }],

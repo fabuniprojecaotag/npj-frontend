@@ -481,7 +481,7 @@
         <mat-label>Status</mat-label>
         <mat-select matInput formControlName="status" ngDefaultControl>
           <mat-option *ngFor="let statu of status" [value]="statu">
-            {{ statu }}
+            {{ status }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formAtendimentosTrabalhista.get('status')?.errors?.['required']">Status
@@ -489,6 +489,7 @@
       </mat-form-field>
     </div>
     <div class="grupo-botoes">
+      <app-print-button  [dataSet]="formAtendimentosTrabalhista.value" pageName="Atendimento Trabalhista" [config]="[]" [solo]="true" [visible]="editarComponente === true"  ></app-print-button>
       <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
       <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit" (click)="executarAcao()"
         color="accent">Submeter</button>

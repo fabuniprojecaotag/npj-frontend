@@ -44,6 +44,7 @@ export class AtendimentoEditComponent implements OnInit {
   carregarFormulario() {
     this.form = this.formService.getForm();
     this.form?.patchValue({
+      id:this.idAtendimento,
       status: this.atendimento.status,
       area: this.atendimento.area,
       instante: this.atendimento.instante,
