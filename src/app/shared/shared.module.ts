@@ -22,6 +22,7 @@ import { ModalAssistidoComponent } from "./modal-assistido/modal-assistido.compo
 import { CardAtendimentosComponent } from "./modal-atalhos/card-atendimentos/card-atendimentos.component";
 import { CardProcessosComponent } from "./modal-atalhos/card-processos/card-processos.component";
 import { ModalAtalhosComponent } from "./modal-atalhos/modal-atalhos.component";
+import { ModalAtendimentoComponent } from "./modal-atendimento/modal-atendimento.component";
 import { ModalErrosComponent } from "./modal-erros/modal-erros.component";
 import { ModalExcluidoComponent } from "./modal-excluido/modal-excluido.component";
 import { ModalExcluirProcessoComponent } from "./modal-excluir-processo/modal-excluir-processo.component";
@@ -29,7 +30,6 @@ import { ModalProcessoComponent } from "./modal-processo/modal-processo-criado.c
 import { ModalUsuarioComponent } from "./modal-usuario/modal-usuario.component";
 import { PrintButtonComponent } from "./print-button/print-button.component";
 import { UtilsBarComponent } from "./utils-bar/utils-bar.component";
-import { ModalAtendimentoComponent } from "./modal-atendimento/modal-atendimento.component";
 
 @NgModule({
   declarations: [

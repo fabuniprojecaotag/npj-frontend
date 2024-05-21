@@ -48,7 +48,7 @@
       width: 100px;
 
       p {
-        font-size: 2em;
+        font-size: 32px;
       }
 
       @media screen and (max-width: 768px) {
@@ -67,17 +67,22 @@
       padding-left: 1.5em;
 
       &___nome {
-        color: $branco;
         font-family: $fonte-padraoMedia;
-        font-size: 24px;
+        font-size: 26px;
         word-break: break-word;
       }
 
       &___perfil {
         color: rgba(255, 255, 255, 0.5);
         font-size: 16px;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.0015em;
         padding-top: 0.6em;
+        text-align: center;
+        word-break: break-word;
+      }
+
+      @media screen and (max-width: 768px) {
+        display: none;
       }
     }
   }
@@ -85,8 +90,7 @@
   &__acoes {
     align-items: flex-start;
     display: flex;
-    color: $branco;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid $branco;
     flex-direction: column;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -101,7 +105,8 @@
       align-items: center;
       color: $branco;
       display: flex;
-      font-family: $fonte-padraoLarga;
+      font-family: $fonte-titulo-larga;
+      font-weight: 500;
       font-size: 22px;
       line-height: 28px;
       text-decoration: none;
@@ -118,18 +123,17 @@
   }
 
   &__versao {
-    display: flex;
     align-items: center;
+    display: flex;
     justify-content: center;
     height: 75px;
     width: 100%;
 
     p {
       color: $branco;
-      font-family: $fonte-padraoMedia;
+      font-family: $fonte-titulo-medio;
       font-size: 16px;
-      letter-spacing: 0.1em;
-      text-align: center;
+      letter-spacing: 0.0015em;
     }
   }
 

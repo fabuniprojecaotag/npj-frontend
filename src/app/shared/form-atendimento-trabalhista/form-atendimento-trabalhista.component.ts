@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Envolvido, tipoEnvolvido } from 'src/app/core/types/atendimento';
+import { tipoEnvolvido } from 'src/app/core/types/atendimento';
 
 @Component({
   selector: 'app-form-atendimento-trabalhista',
@@ -27,7 +27,6 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   arquivoSelecionado: File | null = null; // Variável para armazenar o nome do arquivo selecionado
 
   @Input() editarComponente = false;
-  @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<void> = new EventEmitter();
   @Output() acaoCliqueExcluir: EventEmitter<void> = new EventEmitter();
 
@@ -142,9 +141,13 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onFileSelected(event: any): void {
-    this.formAtendimentosTrabalhista.get('ficha.assinatura')?.setValue(event.target.files[0]);
-    this.arquivoSelecionado = this.formAtendimentosTrabalhista.get('ficha.assinatura')?.value;
+  onFileSelected(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      this.arquivoSelecionado = inputElement.files[0];
+    } else {
+      this.arquivoSelecionado = null;
+    }
   }
 
   removerArquivoSelecionado(): void {

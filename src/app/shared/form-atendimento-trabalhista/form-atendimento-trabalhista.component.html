@@ -369,7 +369,8 @@
           </ng-container>
         </ng-container>
         <div class="full">
-          <button mat-raised-button color="accent" (click)="adicionarTestemunha()" class="botao-criar">Adicionar Testemunha</button>
+          <button mat-raised-button color="accent" (click)="adicionarTestemunha()" class="botao-criar">Adicionar
+            Testemunha</button>
         </div>
       </div>
 
@@ -449,7 +450,7 @@
         </div>
         <div class="full">
           <!-- Exibe o nome do arquivo selecionado se existir -->
-          <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado }} <button mat-icon-button color="warn"
+          <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado.name }} <button mat-icon-button color="warn"
               (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
           <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
             accept=".pdf,.doc,.docx, image/png" formControlName="assinatura">

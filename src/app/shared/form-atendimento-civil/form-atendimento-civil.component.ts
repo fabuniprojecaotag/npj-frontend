@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Envolvido } from './../../core/types/atendimento';
+import { Envolvido, tipoEnvolvido } from './../../core/types/atendimento';
 
 @Component({
   selector: 'app-form-atendimento-civil',
@@ -47,14 +47,13 @@ export class FormAtendimentoCivilComponent implements OnInit {
     'Ação de cobrança'
   ];
   medidasJudiciais: string[] = this.medidasCivil;
-  estagiarioControl: FormControl = new FormControl<Envolvido | null>(null);
-  professorControl: FormControl = new FormControl<Envolvido | null>(null);
-  secretariaControl: FormControl = new FormControl<Envolvido | null>(null);
+  estagiarioControl: FormControl = new FormControl<tipoEnvolvido | null>(null);
+  professorControl: FormControl = new FormControl<tipoEnvolvido | null>(null);
+  secretariaControl: FormControl = new FormControl<tipoEnvolvido | null>(null);
   assistidoControl: FormControl = new FormControl(null, Validators.required);
   arquivoSelecionado: File | null = null;
 
   @Input() editarComponente = false;
-  @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
   @Output() acaoClique: EventEmitter<void> = new EventEmitter();
   @Output() acaoCliqueExcluir: EventEmitter<void> = new EventEmitter();
 
@@ -171,7 +170,8 @@ export class FormAtendimentoCivilComponent implements OnInit {
       descricao: [null],
       instante: [new Date()], // não necessario, o back irá retornar
       criadoPor: this.formBuilder.group({
-        nome: [null]
+        id: [null],
+        nome: [null],
       })
     });
   }
