@@ -91,8 +91,8 @@ describe(CadastroService.name, () => {
     httpController.expectOne(`${mockUserData.api}/${email}`).flush(usuarioEsperado);
   });
 
-  it(`#${CadastroService.prototype.listar.name} should return a user list`, done => {
-    service.listar().subscribe(userList => {
+  it(`#${CadastroService.prototype.listarUsuarios.name} should return a user list`, done => {
+    service.listarUsuarios().subscribe(userList => {
       expect(userList).not.toBeFalsy();
       done();
     });

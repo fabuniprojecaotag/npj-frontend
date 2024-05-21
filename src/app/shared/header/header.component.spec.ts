@@ -18,7 +18,7 @@ class MockUsuarioService {
   }
 }
 
-fdescribe(HeaderComponent.name, () => {
+describe(HeaderComponent.name, () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let usuarioService: UsuarioService;

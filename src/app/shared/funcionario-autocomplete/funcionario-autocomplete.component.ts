@@ -26,7 +26,7 @@ export class FuncionarioAutocompleteComponent implements OnInit {
       filter: 'EQUAL',
       value: this.cargo.toLocaleUpperCase()
     };
-    this.cadastroService.listar(filtro).subscribe(
+    this.cadastroService.listarUsuarios(filtro).subscribe(
       dados => {
         this.funcionarios = dados;
       }
@@ -46,7 +46,7 @@ export class FuncionarioAutocompleteComponent implements OnInit {
     return result;
   }
 
-  displayFn (usuario: Usuario): string {
+  displayFn(usuario: Usuario | null): string {
     return usuario && usuario.nome ? usuario.nome : '';
   }
 }

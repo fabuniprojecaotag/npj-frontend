@@ -31,7 +31,7 @@ export class UsersComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit(): void {
-    this.service.listar().subscribe({
+    this.service.listarUsuarios().subscribe({
       next: (response) => {
         this.listaUsuarios = response;
 

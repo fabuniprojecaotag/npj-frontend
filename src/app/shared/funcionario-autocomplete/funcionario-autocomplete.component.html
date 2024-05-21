@@ -1,10 +1,10 @@
 <mat-form-field appearance="outline">
   <mat-label>{{ cargo }}</mat-label>
-  <input matInput placeholder="Digite o nome do(a) {{ cargo }}" [formControl]="control" ngDefaultControl [matAutocomplete]="auto">
+  <input matInput placeholder="Digite o nome do(a) {{ cargo }}" [formControl]="control" [matAutocomplete]="auto">
   <mat-icon matSuffix>search</mat-icon>
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
     <mat-option *ngFor="let funcionario of filteredOptions$ | async" [value]="funcionario">
-      {{funcionario.nome}}
+      {{ funcionario.nome }}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>

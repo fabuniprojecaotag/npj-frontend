@@ -25,7 +25,7 @@ export class CadastroService {
     return this.http.get<Usuario>(`${this.apiUrl}/usuarios/me`);
   }
 
-  listar(filtro?: filtro): Observable<Usuario[]> {
+  listarUsuarios(filtro?: filtro): Observable<Usuario[]> {
     let params = new HttpParams();
     if (filtro) {
       params = params
