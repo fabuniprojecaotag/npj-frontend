@@ -27,7 +27,7 @@ export class AssistidoAutocompleteComponent implements OnInit {
     this.filteredOptions$ = this.control.valueChanges.pipe(
       startWith(''),
       map(value => this.filtrarAssistidos(value))
-    )
+    );
   }
 
   filtrarAssistidos(value: string | Assistido): Assistido[] {
@@ -35,7 +35,7 @@ export class AssistidoAutocompleteComponent implements OnInit {
     const valorFiltrado = nomeAssistido?.toLowerCase();
     const result = this.assistidos.filter(
       assistido => assistido.nome.toLowerCase().includes(valorFiltrado)
-    )
+    );
     return result;
   }
 

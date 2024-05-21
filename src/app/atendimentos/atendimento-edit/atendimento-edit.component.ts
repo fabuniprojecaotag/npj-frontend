@@ -38,7 +38,7 @@ export class AtendimentoEditComponent implements OnInit {
         this.atendimento = atendimento;
         this.carregarFormulario();
       }
-    })
+    });
   }
 
   carregarFormulario() {

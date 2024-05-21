@@ -38,7 +38,7 @@ export class ErrosInterceptor implements HttpInterceptor {
           errorMessage = 'Erro interno do Servidor!';
         }
 
-        this.mensagemErroService.mostrarMensagemErro(error.status, errorMessage)
+        this.mensagemErroService.mostrarMensagemErro(error.status, errorMessage);
 
         return throwError(() => new Error('Ops, ocorreu um erro'));
       })

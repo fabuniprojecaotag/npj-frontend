@@ -7,7 +7,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 const mockData = {
   api: 'https://viacep.com.br/ws/',
   cep: '01001000'
-}
+};
 
 describe(ViacepService.name, () => {
   let service: ViacepService;

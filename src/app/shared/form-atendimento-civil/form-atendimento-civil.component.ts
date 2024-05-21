@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Envolvido, tipoEnvolvido } from './../../core/types/atendimento';
+import { tipoEnvolvido } from './../../core/types/atendimento';
 
 @Component({
   selector: 'app-form-atendimento-civil',

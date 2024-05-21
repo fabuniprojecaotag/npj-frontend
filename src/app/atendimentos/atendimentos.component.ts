@@ -32,7 +32,7 @@ export class AtendimentosComponent implements AfterViewInit {
       col: 'status',
       title: 'Status'
     },
-  ]
+  ];
   constructor(private atendimentoService: AtendimentosService) { }
 
 

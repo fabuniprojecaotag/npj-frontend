@@ -44,5 +44,5 @@ describe('HomeComponent', () => {
 
   it('should verify home title', () => {
     expect(component.subtituloDaPagina).toEqual('Home');
-  })
+  });
 });

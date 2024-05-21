@@ -41,6 +41,6 @@ export class AssistidoAddComponent {
       width: '552px',
       height: '360px',
       data: { operacao: 'criado', nome: novoAssistido.nome, email: novoAssistido.email, cpf: novoAssistido.cpf }
-    })
+    });
   }
 }

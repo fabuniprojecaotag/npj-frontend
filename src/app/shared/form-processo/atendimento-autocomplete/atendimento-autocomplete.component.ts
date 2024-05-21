@@ -34,7 +34,7 @@ export class AtendimentoAutocompleteComponent implements OnInit {
     const valorFiltrado = value ? value.toLowerCase() : '';
     const result = this.atendimento.filter(
       atendimento => atendimento.id.toLowerCase().includes(valorFiltrado)
-    )
+    );
     return result;
   }
 

@@ -7,7 +7,7 @@ const routes: Routes = [
     path: 'nao-encontrada',
     component: NaoEncontradaComponent
   }
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

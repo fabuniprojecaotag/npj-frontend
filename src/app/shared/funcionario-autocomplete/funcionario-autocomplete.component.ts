@@ -25,7 +25,7 @@ export class FuncionarioAutocompleteComponent implements OnInit {
       field: 'role',
       filter: 'EQUAL',
       value: this.cargo.toLocaleUpperCase()
-    }
+    };
     this.cadastroService.listar(filtro).subscribe(
       dados => {
         this.funcionarios = dados;
@@ -34,7 +34,7 @@ export class FuncionarioAutocompleteComponent implements OnInit {
     this.filteredOptions$ = this.control.valueChanges.pipe(
       startWith(''),
       map(value => this.filtrarSupervisores(value))
-    )
+    );
   }
 
   filtrarSupervisores(value: string | Usuario): Usuario[] {
@@ -42,7 +42,7 @@ export class FuncionarioAutocompleteComponent implements OnInit {
     const valorFiltrado = nomeSupervisor?.toLowerCase();
     const result = this.funcionarios.filter(
       usuario => usuario.nome.toLowerCase().includes(valorFiltrado)
-    )
+    );
     return result;
   }
 

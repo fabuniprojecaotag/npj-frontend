@@ -16,8 +16,8 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
   tituloPagina = 'Estatisticas';
   dataSource: any;
   colunasMostradas: string[] = ['id', 'data', 'vara', 'forum'];
-  listaProcesso: Processo[] = []
-  controlSection: any = `assistidos`
+  listaProcesso: Processo[] = [];
+  controlSection: any = `assistidos`;
   chart: any;
   chartProcesso: any;
   chartAtendimento: any;
@@ -52,7 +52,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
     });
   }
   changeSection(section: string) {
-    this.controlSection = section
+    this.controlSection = section;
 
     // if(this.chart!=undefined){
     //   this.chart.update()
@@ -192,9 +192,9 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
 
   async downloadPdf() {
     try {
-      await generatePdf()
+      await generatePdf();
     } catch (error) {
-      console.log('erro ao imprimir:' + error)
+      console.log('erro ao imprimir:' + error);
     }
   }
 }

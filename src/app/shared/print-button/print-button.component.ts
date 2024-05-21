@@ -9,16 +9,16 @@ import { generatePdf as generatePdfSolo } from './printAtendimento';
 })
 export class PrintButtonComponent {
 
-  @Input() dataSet: any = [];
-  @Input() pageName: string = 'NAN';
-  @Input() config: any= [];
-  @Input() solo: any = false;
-  @Input() visible: any = true;
+  @Input() dataSet: any[] = [];
+  @Input() pageName = 'NAN';
+  @Input() config: any[] = [];
+  @Input() solo = false;
+  @Input() visible = true;
 
 
   printTable() {
     if (this.dataSet.length == 0) {
-      return
+      return;
     }
     generatePdf(
       this.config
@@ -28,7 +28,7 @@ export class PrintButtonComponent {
 
 
   printSolo() {
-    console.log(this.dataSet)
-    generatePdfSolo(this.dataSet,this.pageName)
+    console.log(this.dataSet);
+    generatePdfSolo(this.dataSet, this.pageName);
   }
 }

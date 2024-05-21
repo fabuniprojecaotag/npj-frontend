@@ -27,7 +27,7 @@ const routes: Routes = [
     component: AtendimentoEditComponent,
     canActivate: [authGuard],
   },
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

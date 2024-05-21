@@ -22,7 +22,7 @@ const routes: Routes = [
     component: ProcessoEditComponent,
     canActivate: [authGuard],
   },
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

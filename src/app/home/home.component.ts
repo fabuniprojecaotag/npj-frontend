@@ -22,13 +22,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.verifyLocalStorageDialogFlag()) {
-      this.openDialog()
+      this.openDialog();
     }
   }
   openDialog() {
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       localStorage.setItem('firstTime', JSON.stringify(true));
     });
   }

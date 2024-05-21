@@ -4,7 +4,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 export async function generatePdf(headers: any, data: any, pageName: any) {
-  console.log(headers)
+  console.log(headers);
   function buildTableBody(data: any, columns: any) {
     const body = [];
 
@@ -34,7 +34,7 @@ export async function generatePdf(headers: any, data: any, pageName: any) {
           // Otherwise, convert the cell value to a string
           dataRow.push(value.toString());
         }
-      })
+      });
 
       body.push(dataRow); // Push the row data to the body array
     });
@@ -102,7 +102,7 @@ function getCurrentFormat(format: string) {
 
   const formatList: any = {
     'formatDate': formatDate
-  }
+  };
 
   return formatList[format];
 }

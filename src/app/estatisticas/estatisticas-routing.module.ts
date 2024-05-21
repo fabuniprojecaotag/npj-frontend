@@ -10,7 +10,7 @@ const routes: Routes = [
     component: EstatisticasComponent,
     canActivate: [authGuard]
   }
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

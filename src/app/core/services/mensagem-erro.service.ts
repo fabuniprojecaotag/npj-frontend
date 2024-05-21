@@ -15,6 +15,6 @@ export class MensagemErroService {
       height: 'auto',
       position: { top: '0' },
       data: { codigoErro: codigoErro, mensagemErro: mensagemErro }
-    })
+    });
   }
 }

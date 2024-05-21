@@ -32,9 +32,9 @@ export class ProcessosComponent implements AfterViewInit {
       col: 'vara',
       title: 'Vara'
     },
-  ]
-  constructor(private service: ProcessosService) { }
+  ];
 
+  constructor(private service: ProcessosService) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
