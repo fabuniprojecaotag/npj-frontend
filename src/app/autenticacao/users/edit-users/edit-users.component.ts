@@ -19,7 +19,7 @@ export class EditUsersComponent implements OnInit {
   errorMessage!: string;
   form!: FormGroup | null;
   idParam = this.route.snapshot.paramMap.get('id') as string;
-  subtituloErro = "Erro ao Editar";
+  subtituloErro = 'Erro ao Editar';
 
   constructor(
     private router: Router,
@@ -116,7 +116,7 @@ export class EditUsersComponent implements OnInit {
     this.dialog.open(ModalUsuarioComponent, {
       width: '552px',
       height: '360px',
-      data: { operacao: "Editado", nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
+      data: { operacao: 'Editado', nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
     });
   }
 }

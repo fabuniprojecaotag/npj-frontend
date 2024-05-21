@@ -60,7 +60,7 @@ export class AtendimentoEditComponent implements OnInit {
 
   editar() {
     const dadosAtualizados: any = {
-      "@type": this.form?.value['@type'],
+      '@type': this.form?.value['@type'],
       status: this.form?.value.status,
       area: this.form?.value.area,
       ficha: this.form?.value.ficha,

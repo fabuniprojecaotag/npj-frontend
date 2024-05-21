@@ -31,7 +31,7 @@ export class AssistidosService {
 
   excluir(idParam: string): Observable<AssistidoFull> {
     return this.http.delete<AssistidoFull>(`${this.API}/assistidos/${idParam}`);
-   }
+  }
 
   consultar(idParam: string): Observable<AssistidoFull | AssistidoCivil | AssistidoTrabalhista> {
     return this.http.get<AssistidoFull | AssistidoCivil | AssistidoTrabalhista>(`${this.API}/assistidos/${idParam}`);

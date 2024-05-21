@@ -41,7 +41,7 @@ export class MyProfileComponent implements OnInit {
   carregarFormulario(): void {
     this.form = this.formUserService.getForm();
     this.form?.patchValue({
-      "@type": this.cadastro['@type'],
+      '@type': this.cadastro['@type'],
       nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
       role: this.cadastro.role,
@@ -58,7 +58,7 @@ export class MyProfileComponent implements OnInit {
   atualizarUsuario() {
     const formValue = this.form?.value;
 
-    const senhaPresente = formValue.senha !== null && formValue.senha !== "";
+    const senhaPresente = formValue.senha !== null && formValue.senha !== '';
 
     const dadosAtualizados: Usuario = {
       ...formValue,
@@ -80,7 +80,7 @@ export class MyProfileComponent implements OnInit {
     this.dialog.open(ModalUsuarioComponent, {
       width: '552px',
       height: '360px',
-      data: { operacao: "Editado", nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
+      data: { operacao: 'Editado', nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
     });
   }
 

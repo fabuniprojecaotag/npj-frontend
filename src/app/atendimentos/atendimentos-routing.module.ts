@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { authGuard } from "../autenticacao/auth.guard";
-import { AtendimentoEditComponent } from "./atendimento-edit/atendimento-edit.component";
-import { AtendimentoAddComponent } from "./novo-atendimento/atendimento-add/atendimento-add.component";
-import { NovoAtendimentoComponent } from "./novo-atendimento/novo-atendimento.component";
-import { AtendimentosComponent } from "./atendimentos.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { authGuard } from '../autenticacao/auth.guard';
+import { AtendimentoEditComponent } from './atendimento-edit/atendimento-edit.component';
+import { AtendimentoAddComponent } from './novo-atendimento/atendimento-add/atendimento-add.component';
+import { NovoAtendimentoComponent } from './novo-atendimento/novo-atendimento.component';
+import { AtendimentosComponent } from './atendimentos.component';
 
 const routes: Routes = [
   {

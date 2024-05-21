@@ -30,7 +30,7 @@ export class ErrosInterceptor implements HttpInterceptor {
         } else if (error.status === 408) {
           errorMessage = 'Servidor demorou muito para responder!';
         } else if (error.status === 422) {
-          errorMessage = `Padrão não correspondente ao do servidor!<br>`;
+          errorMessage = 'Padrão não correspondente ao do servidor!<br>';
           error.error.errors.forEach((error: any) => {
             errorMessage += `${error.field}: ${error.message}<br>`;
           });

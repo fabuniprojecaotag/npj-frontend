@@ -5,13 +5,13 @@ import { AtendimentosService } from './atendimentos.service';
 const mockData = {
   api: 'http://localhost:8080/usuários',
   atendimento: {
-    "@type": "TipoAtendimento",
-    id: "ATE00001",
-    status: "Aguardando documentos",
-    area: "Cívil",
-    instante: "4 de março de 2024 às 22:58:48 UTC-3",
+    '@type': 'TipoAtendimento',
+    id: 'ATE00001',
+    status: 'Aguardando documentos',
+    area: 'Cívil',
+    instante: '4 de março de 2024 às 22:58:48 UTC-3',
     ficha: {
-      "@type": "TipoFichaCivil",
+      '@type': 'TipoFichaCivil',
       assinatura: {
         lastModified: 0,
         name: '',
@@ -33,42 +33,42 @@ const mockData = {
       },
       dadosSensiveis: false,
       parteContraria: {
-        nome: "Nome Parte Contrária",
-        qualificacao: "Qualificação Parte Contrária",
-        rg: "123456789",
-        cpf: "98765432100",
-        email: "partecontraria@example.com",
-        telefone: "123456789",
+        nome: 'Nome Parte Contrária',
+        qualificacao: 'Qualificação Parte Contrária',
+        rg: '123456789',
+        cpf: '98765432100',
+        email: 'partecontraria@example.com',
+        telefone: '123456789',
         endereco: {
-          logradouro: "Rua da Parte Contrária",
-          bairro: "Bairro da Parte Contrária",
-          numero: "123",
-          complemento: "Complemento Parte Contrária",
-          cep: "12345-678",
-          cidade: "Cidade da Parte Contrária"
+          logradouro: 'Rua da Parte Contrária',
+          bairro: 'Bairro da Parte Contrária',
+          numero: '123',
+          complemento: 'Complemento Parte Contrária',
+          cep: '12345-678',
+          cidade: 'Cidade da Parte Contrária'
         },
-        informacoesComplementares: ""
+        informacoesComplementares: ''
       },
-      medidaJuridica: "Medida Judicial"
+      medidaJuridica: 'Medida Judicial'
     },
-    prazoEntregaDocumentos: "2024-04-11",
+    prazoEntregaDocumentos: '2024-04-11',
     historico: [
       {
-        id: "1",
-        titulo: "",
-        descricao: "Atendimento criado",
+        id: '1',
+        titulo: '',
+        descricao: 'Atendimento criado',
         criadoPor: {
-          email: "teste@email.com",
-          nome: "",
-          role: ""
+          email: 'teste@email.com',
+          nome: '',
+          role: ''
         }
       }
     ],
     envolvidos: {
-      estagiario: { id: "1", nome: "" },
-      professor: { id: "1", nome: "" },
-      secretaria: { id: "1", nome: "" },
-      assistido: { id: "1", nome: "" }
+      estagiario: { id: '1', nome: '' },
+      professor: { id: '1', nome: '' },
+      secretaria: { id: '1', nome: '' },
+      assistido: { id: '1', nome: '' }
     }
   }
 };
@@ -100,7 +100,7 @@ describe(AtendimentosService.name, () => {
       expect(atendimentos).toEqual([mockData.atendimento]);
     });
 
-    const req = httpTestingController.expectOne(`/atendimentos`);
+    const req = httpTestingController.expectOne('/atendimentos');
     expect(req.request.method).toBe('GET');
     req.flush([mockData.atendimento]);
   });

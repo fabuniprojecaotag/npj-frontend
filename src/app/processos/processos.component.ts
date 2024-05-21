@@ -46,8 +46,8 @@ export class ProcessosComponent implements AfterViewInit {
         this.dataSource = new MatTableDataSource<Processo>(this.listaProcesso);
         this.dataSource.paginator = this.paginator;
       },
-      error: (err) => {}
-      });
+      error: (err) => { }
+    });
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

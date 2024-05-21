@@ -1,4 +1,4 @@
-import { Endereco } from "./endereco";
+import { Endereco } from './endereco';
 
 export interface CepDados extends Endereco {
   uf: string,

@@ -94,7 +94,7 @@ describe('AssistidosService', () => {
   });
 
   it('#should retrieve an existing assistido via GET', () => {
-  service.consultar(mockAssistidoGenerico.rg).subscribe(assistido => {
+    service.consultar(mockAssistidoGenerico.rg).subscribe(assistido => {
       expect(assistido).toEqual(mockAssistidoGenerico);
     });
 

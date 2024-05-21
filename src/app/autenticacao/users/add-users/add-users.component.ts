@@ -14,7 +14,7 @@ import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-as
 export class AddUsersComponent {
   tituloDaPagina = 'Novo Usuário';
   errorMessage!: string;
-  subtituloErro = "Erro ao Cadastrar";
+  subtituloErro = 'Erro ao Cadastrar';
 
   constructor(
     private formularioService: FormsService,

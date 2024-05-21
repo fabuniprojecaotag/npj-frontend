@@ -10,7 +10,7 @@ import { Assistido } from 'src/app/core/types/assistido';
   styleUrls: ['./assistidos.component.scss'],
 })
 export class AssistidosComponent implements AfterViewInit {
-  tituloPagina = `Assistidos`;
+  tituloPagina = 'Assistidos';
   listaAssistidos: Assistido[] = [];
   dataSource: any;
   colunasMostradas: string[] = ['nome', 'email', 'cpf', 'telefone'];

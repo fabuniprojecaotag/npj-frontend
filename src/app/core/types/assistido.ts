@@ -1,7 +1,7 @@
-import { Endereco } from "./endereco";
+import { Endereco } from './endereco';
 
 export interface Assistido {
-  "@type"?: string,
+  '@type'?: string,
   nome: string,
   email?: string,
   cpf?: string,

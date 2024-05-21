@@ -25,7 +25,7 @@ describe(TokenService.name, () => {
     service.salvarToken(token);
     service.excluirToken();
     expect(service.retornarToken()).toBeFalsy();
-});
+  });
 
   it(`#${TokenService.prototype.possuiToken.name} should return true when a token is present`, () => {
     const token = 'my-token';

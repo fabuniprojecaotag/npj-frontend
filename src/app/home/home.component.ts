@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   }
 
   verifyLocalStorageDialogFlag(): boolean {
-    const item = localStorage.getItem(`firstTime`);
+    const item = localStorage.getItem('firstTime');
     return item ? JSON.parse(item) : null;
   }
 

@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { authGuard } from "../autenticacao/auth.guard";
-import { ProcessoAddComponent } from "./processo-add/processo-add.component";
-import { ProcessoEditComponent } from "./processo-edit/processo-edit.component";
-import { ProcessosComponent } from "./processos.component";
+import { authGuard } from '../autenticacao/auth.guard';
+import { ProcessoAddComponent } from './processo-add/processo-add.component';
+import { ProcessoEditComponent } from './processo-edit/processo-edit.component';
+import { ProcessosComponent } from './processos.component';
 
 const routes: Routes = [
   {

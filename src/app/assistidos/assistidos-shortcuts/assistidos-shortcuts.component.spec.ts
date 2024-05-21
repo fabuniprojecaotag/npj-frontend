@@ -51,65 +51,65 @@ describe('AssistidosShortcutsComponent', () => {
   };
 
   const mockAtendimento: Atendimento = {
-    "@type": "Tipo",
-    id: "123456",
-    status: "Status",
-    area: "Área",
+    '@type': 'Tipo',
+    id: '123456',
+    status: 'Status',
+    area: 'Área',
     ficha: {
-      "@type": "FichaCivil",
+      '@type': 'FichaCivil',
       assinatura: null,
       dadosSensiveis: true,
       testemunhas: [{
-        nome: "Testemunha",
-        qualificacao: "Qualificação",
+        nome: 'Testemunha',
+        qualificacao: 'Qualificação',
         endereco: undefined
       }],
-      medidaJuridica: "Medida",
+      medidaJuridica: 'Medida',
       parteContraria: {
-        nome: "Parte",
-        qualificacao: "Qualificação",
-        informacoesComplementares: "Informações",
+        nome: 'Parte',
+        qualificacao: 'Qualificação',
+        informacoesComplementares: 'Informações',
       },
     },
-    prazoEntregaDocumentos: "Prazo",
+    prazoEntregaDocumentos: 'Prazo',
     historico: [{
-      id: "1",
-      titulo: "Título",
-      descricao: "Descrição",
-      instante: "2024-05-17T10:00:00Z",
+      id: '1',
+      titulo: 'Título',
+      descricao: 'Descrição',
+      instante: '2024-05-17T10:00:00Z',
       criadoPor: {
-        role: "123",
-        nome: "Usuário",
+        role: '123',
+        nome: 'Usuário',
       },
     }],
     envolvidos: {
       estagiario: {
-        id: "456",
-        nome: "Estagiário",
+        id: '456',
+        nome: 'Estagiário',
       },
       professor: {
-        id: "789",
-        nome: "Professor",
+        id: '789',
+        nome: 'Professor',
       },
       secretaria: {
-        id: "101",
-        nome: "Secretária",
+        id: '101',
+        nome: 'Secretária',
       },
       assistido: {
-        id: "202",
-        nome: "Assistido",
+        id: '202',
+        nome: 'Assistido',
       },
     },
   };
 
   const mockProcesso: Processo = {
-    atendimentoId: "123456",
-    numero: "ABC123",
-    nome: "Nome",
-    dataDistribuicao: "2024-05-17",
-    vara: "Civil",
-    forum: "Forum",
-    status: "Status",
+    atendimentoId: '123456',
+    numero: 'ABC123',
+    nome: 'Nome',
+    dataDistribuicao: '2024-05-17',
+    vara: 'Civil',
+    forum: 'Forum',
+    status: 'Status',
   };
 
   beforeEach(() => {

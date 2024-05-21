@@ -36,7 +36,7 @@ describe(ViacepService.name, () => {
         done();
       },
       error: (err) => {
-        fail('Erro inesperado: ' + err);
+        fail(`Erro inesperado: ${err}`);
       }
     });
 

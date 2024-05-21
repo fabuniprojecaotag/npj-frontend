@@ -1,8 +1,8 @@
-import { Endereco } from "./endereco";
-import { UsuarioCriador } from "./usuario";
+import { Endereco } from './endereco';
+import { UsuarioCriador } from './usuario';
 
 export interface Atendimento {
-  "@type": string,
+  '@type': string,
   id: string,
   status: string,
   area: string,
@@ -14,7 +14,7 @@ export interface Atendimento {
 }
 
 export interface Ficha {
-  "@type": string,
+  '@type': string,
   assinatura: File |null,
   dadosSensiveis: boolean,
   testemunhas?: Testemunha[],

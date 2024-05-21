@@ -17,7 +17,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
   dataSource: any;
   colunasMostradas: string[] = ['id', 'data', 'vara', 'forum'];
   listaProcesso: Processo[] = [];
-  controlSection: any = `assistidos`;
+  controlSection: any = 'assistidos';
   chart: any;
   chartProcesso: any;
   chartAtendimento: any;
@@ -63,7 +63,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
   }
   createChart() {
 
-    this.chart = new Chart("MyChart", {
+    this.chart = new Chart('MyChart', {
       type: 'pie', //this denotes tha type of chart
       data: {// values on X-Axis
         labels: ['Lucas', 'Pedro', 'Afonso', 'Thomas',
@@ -79,7 +79,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
           // },
           {
             // label: "Profit",
-            label: "Quantidade de Processos",
+            label: 'Quantidade de Processos',
             data: ['542', '542', '536', '327', '17',
               '0.00', '538', '541'],
             // backgroundColor: 'limegreen'
@@ -102,7 +102,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
       }
 
     });
-    this.chartProcesso = new Chart("chartProcesso", {
+    this.chartProcesso = new Chart('chartProcesso', {
       type: 'bar', //this denotes tha type of chart
       data: {// values on X-Axis
         labels: ['Lucas', 'Pedro', 'Afonso', 'Thomas',
@@ -118,7 +118,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
           // },
           {
             // label: "Profit",
-            label: "Quantidade de Processos",
+            label: 'Quantidade de Processos',
             data: ['542', '542', '536', '327', '17',
               '0.00', '538', '541'],
             // backgroundColor: 'limegreen'
@@ -141,7 +141,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
       }
 
     });
-    this.chartAtendimento = new Chart("chartAtendimento", {
+    this.chartAtendimento = new Chart('chartAtendimento', {
       type: 'bar', //this denotes tha type of chart
       data: {// values on X-Axis
         labels: ['Lucas', 'Pedro', 'Afonso', 'Thomas',
@@ -157,7 +157,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
           // },
           {
             // label: "Profit",
-            label: "Quantidade de Processos",
+            label: 'Quantidade de Processos',
             data: ['542', '542', '536', '327', '17',
               '0.00', '538', '541'],
             // backgroundColor: 'limegreen'
@@ -194,7 +194,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
     try {
       await generatePdf();
     } catch (error) {
-      console.log('erro ao imprimir:' + error);
+      console.log(`erro ao imprimir:${  error}`);
     }
   }
 }

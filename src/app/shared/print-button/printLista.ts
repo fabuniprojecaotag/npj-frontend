@@ -55,19 +55,19 @@ export async function generatePdf(headers: any, data: any, pageName: any) {
 
   const docDefinition: any = {
     info: {
-      title: 'Relatorio ' + pageName,
+      title: `Relatorio ${pageName}`,
       author: 'GPRO',
-      subject: 'Relatorio de ' + pageName,
-      keywords: 'relatorio,' + pageName,
+      subject: `Relatorio de ${pageName}`,
+      keywords: `relatorio,${pageName}`,
     },
     pageMargins: [10, 20, 10, 20],
     content: [
       {
         table: {
-          widths: ["*", "*", "*"],
+          widths: ['*', '*', '*'],
           body: [
             [
-              { text: 'Relatório de ' + pageName, colSpan: 3, border: [1, 1, 1, 0], margin: [10, 10, 10, 10], style: 'header' },
+              { text: `Relatório de ${pageName}`, colSpan: 3, border: [1, 1, 1, 0], margin: [10, 10, 10, 10], style: 'header' },
               '',
               ''
             ]
@@ -77,10 +77,10 @@ export async function generatePdf(headers: any, data: any, pageName: any) {
       table(data, headers),
       {
         table: {
-          widths: ["*", "*", "*"],
+          widths: ['*', '*', '*'],
           body: [
             [
-              { text: `Quantidade de registros: ` + data.length, colSpan: 2, border: [1, 0, 1, 1], },
+              { text: `Quantidade de registros: ${data.length}`, colSpan: 2, border: [1, 0, 1, 1], },
               '',
               { text: `Data de emissão:${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, border: [1, 0, 1, 1], },
 

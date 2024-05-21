@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { AssistidoTrabalhista } from 'src/app/core/types/assistido';
 import { AssistidosService } from '../services/assistidos.service';
 
@@ -26,7 +26,7 @@ describe('AssistidoAddComponent', () => {
         { provide: MatDialogRef, useValue: {} }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -44,7 +44,18 @@
             }
           }
         ],
-        "semi": ["error", "always"]
+        "indent": ["error", 2],
+        "semi": ["error", "always"],
+        "quotes": [
+          "error",
+          "single",
+          {
+            "avoidEscape": true
+          }
+        ],
+        "prefer-template": "error",
+        "no-console": "warn",
+        "no-implicit-globals": "error"
       }
     },
     {

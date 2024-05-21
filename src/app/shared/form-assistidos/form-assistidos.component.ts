@@ -47,7 +47,7 @@ export class FormAssistidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.formAssistidos = this.formBuilder.group({
-      "@type": [null, Validators.required],
+      '@type': [null, Validators.required],
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       email: [null, Validators.email],
       cpf: [{ value: null, disabled: this.editComponent }, [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],

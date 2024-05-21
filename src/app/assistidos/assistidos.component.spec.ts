@@ -53,7 +53,7 @@ describe('AssistidosComponent', () => {
         AssistidosService
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

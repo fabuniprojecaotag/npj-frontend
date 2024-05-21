@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { CadastroService } from './cadastro.service';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Usuario } from '../../core/types/usuario';
 
 const mockUserData = {
@@ -75,7 +75,7 @@ describe(CadastroService.name, () => {
       senha: data?.senha ?? '',
       role: data?.role ?? '',
       unidadeInstitucional: '',
-      "@type": ''
+      '@type': ''
     };
 
     if (!usuarioEsperado) {
