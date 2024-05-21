@@ -245,9 +245,10 @@
       </mat-form-field>
     </div>
     <div class="grupo-botoes">
+      <app-print-button  [dataSet]="formAtendimentos.value" pageName="Atendimento Civil" [config]="[]" [solo]="true" [visible]="editarComponente === true"  ></app-print-button>
       <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
       <button mat-raised-button class="botao-submeter" [disabled]="formAtendimentos.invalid" type="submit"
-        (click)="executarAcao()" color="accent">Submeter</button>
+        (click)="executarAcao()" color="primary">Submeter</button>
     </div>
   </form>
 </section>

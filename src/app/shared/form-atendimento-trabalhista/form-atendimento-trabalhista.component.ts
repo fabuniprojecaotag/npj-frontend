@@ -52,6 +52,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
       '@type': ['Trabalhista'],
       area: [{ value: 'Trabalhista', disabled: true }, Validators.required],
       status: [null],
+      id:[null],
       instante: [{ value: new Date().toISOString(), disabled: true }],
       ficha: this.formBuilder.group({
         '@type': ['Trabalhista'],

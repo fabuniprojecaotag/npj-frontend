@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { generatePdf } from './printLista';
+import { generatePdf as generatePdfSolo } from './printAtendimento';
 
 @Component({
   selector: 'app-print-button',
@@ -9,8 +10,11 @@ import { generatePdf } from './printLista';
 export class PrintButtonComponent {
 
   @Input() dataSet: any = [];
-  @Input() pageName = 'NAN';
-  @Input() config: any = [];
+  @Input() pageName: string = 'NAN';
+  @Input() config: any= [];
+  @Input() solo: any = false;
+  @Input() visible: any = true;
+
 
   printTable() {
     if (this.dataSet.length == 0) {
@@ -20,5 +24,11 @@ export class PrintButtonComponent {
       this.config
       , this.dataSet
       , this.pageName);
+  }
+
+
+  printSolo() {
+    console.log(this.dataSet)
+    generatePdfSolo(this.dataSet,this.pageName)
   }
 }
