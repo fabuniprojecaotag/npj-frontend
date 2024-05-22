@@ -18,7 +18,7 @@ const mockUsuariosLista = [
     nome: 'Augusto Silva Alves',
     role: 'PROFESSOR',
     email: 'augusto.silva@projecao.br',
-    unidadeInstitucional: "Taguatinga",
+    unidadeInstitucional: 'Taguatinga',
     status: true,
     senha: ''
   },
@@ -28,7 +28,7 @@ const mockUsuariosLista = [
     nome: 'Larissa Barbossa Rodrigues',
     role: 'PROFESSOR',
     email: 'larissa.barbossa@projecao.br',
-    unidadeInstitucional: "Guará",
+    unidadeInstitucional: 'Guará',
     status: true,
     senha: ''
   },
@@ -130,7 +130,7 @@ describe(FuncionarioAutocompleteComponent.name, () => {
       nome: 'Teste Nome',
       role: 'TEST_ROLE',
       email: 'teste@projecao.br',
-      unidadeInstitucional: "Teste",
+      unidadeInstitucional: 'Teste',
       status: true,
       senha: ''
     };

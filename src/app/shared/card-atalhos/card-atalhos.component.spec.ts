@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CardAtalhosComponent } from './card-atalhos.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { CardAtalhosComponent } from './card-atalhos.component';
 
-describe('CardAtalhosComponent', () => {
+describe(CardAtalhosComponent.name, () => {
   let component: CardAtalhosComponent;
   let fixture: ComponentFixture<CardAtalhosComponent>;
 
