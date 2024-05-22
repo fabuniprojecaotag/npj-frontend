@@ -7,7 +7,7 @@ import { CepDados } from '../types/cep';
   providedIn: 'root'
 })
 export class ViacepService {
-  private baseUrl = 'https://viacep.com.br/ws/';
+  private readonly baseUrl = 'https://viacep.com.br/ws/';
 
   constructor(private http: HttpClient) { }
 
