@@ -15,6 +15,7 @@ describe('AssistidosComponent', () => {
   let assistidosService: AssistidosService;
 
   const mockAssistidoGenerico: AssistidoFull = {
+    cpf: '123.456.789-00',
     nome: 'Fulano de Teste',
     rg: '1234567',
     endereco: {

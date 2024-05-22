@@ -4,7 +4,7 @@ export interface Assistido {
   '@type'?: string,
   nome: string,
   email?: string,
-  cpf?: string,
+  cpf: string,
   rg: string,
   nacionalidade?: string,
   estadoCivil?: string,

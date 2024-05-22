@@ -151,7 +151,7 @@ describe('AssistidosShortcutsComponent', () => {
   });
 
   it('should open modal for editing assistido', () => {
-    mockAssistidosService.consultar.and.returnValue(of(mockAssistido));
+    mockAssistidosService.consultarAssistido.and.returnValue(of(mockAssistido));
     component.abrirModalEditar();
     expect(mockMatDialog.open).toHaveBeenCalledWith(ModalEditAssistidoComponent, {
       width: '1200px',

@@ -48,6 +48,7 @@ describe('AssistidoAddComponent', () => {
 
   it('should call AssistidosService.cadastrarAssistido() on cadastrar()', () => {
     const mockAssistido: AssistidoTrabalhista = {
+      cpf: '123.456.789-00',
       ctps: {
         numero: '123456',
         serie: '789',

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../../core/types/usuario';
 import { Observable } from 'rxjs';
-import { filtro } from '../../core/types/filtro';
+import { Filtro } from '../../core/types/filtro';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,7 @@ export class CadastroService {
     return this.http.get<Usuario>(`${this.apiUrl}/usuarios/me`);
   }
 
-  listarUsuarios(filtro?: filtro): Observable<Usuario[]> {
+  listarUsuarios(filtro?: Filtro): Observable<Usuario[]> {
     let params = new HttpParams();
     if (filtro) {
       params = params

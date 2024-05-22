@@ -3,11 +3,11 @@ import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Assistido, AssistidoCivil, AssistidoTrabalhista } from 'src/app/core/types/assistido';
+import { Assistido, AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from 'src/app/core/types/assistido';
 import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
 import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
-import { AssistidoFull, AssistidosService } from '../../services/assistidos.service';
+import { AssistidosService } from '../../services/assistidos.service';
 
 @Component({
   selector: 'app-modal-edit-assistido',
@@ -96,7 +96,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
       '@type': tipoSelecionado,
       nome: this.form?.value.nome,
       email: this.form?.value.email,
-      cpf: this.form?.value.cpf,
+      // cpf: this.form?.value.cpf, - não enviar para o back na edição!
       rg: this.form?.value.rg,
       estadoCivil: this.form?.value.estadoCivil,
       telefone: this.form?.value.telefone,
@@ -134,7 +134,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
       };
     }
 
-    this.assistidoService.editar(this.idParam, dadosAtualizados).subscribe({
+    this.assistidoService.editarAssistido(this.idParam, dadosAtualizados).subscribe({
       next: () => {
         this.dialog.closeAll();
         this.atualizarPagina();
@@ -144,7 +144,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
   }
 
   excluir() {
-    this.assistidoService.excluir(this.idParam).subscribe({
+    this.assistidoService.excluirAssistido(this.idParam).subscribe({
       next: () => {
         this.dialog.closeAll();
         this.router.navigate(['/assistidos/list']);

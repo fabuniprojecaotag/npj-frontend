@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Atendimento } from '../../core/types/atendimento';
 import { Observable } from 'rxjs';
-import { filtro } from '../../core/types/filtro';
+import { Filtro } from '../../core/types/filtro';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class AtendimentosService {
 
   constructor(private http: HttpClient) { }
 
-  listagemAtendimentos(filtro?: filtro): Observable<Atendimento[]> {
+  listagemAtendimentos(filtro?: Filtro): Observable<Atendimento[]> {
     let params = new HttpParams();
     if (filtro) {
       params = params

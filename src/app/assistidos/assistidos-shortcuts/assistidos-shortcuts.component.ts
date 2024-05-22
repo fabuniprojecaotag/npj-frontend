@@ -33,7 +33,7 @@ export class AssistidosShortcutsComponent implements OnInit {
   ngOnInit(): void {
     this.cpf = this.route.snapshot.paramMap.get('cpf') as string;
 
-    this.assistidosService.consultar(this.cpf).subscribe({
+    this.assistidosService.consultarAssistido(this.cpf).subscribe({
       next: (resposta) => {
         this.assistido = resposta;
         this.tituloDaPagina = `Assisitido - ${this.assistido.nome}`;

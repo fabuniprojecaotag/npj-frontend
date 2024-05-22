@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
-import { filtro } from 'src/app/core/types/filtro';
+import { Filtro } from 'src/app/core/types/filtro';
 import { Usuario } from 'src/app/core/types/usuario';
 
 @Component({
@@ -21,7 +21,7 @@ export class FuncionarioAutocompleteComponent implements OnInit {
   constructor(private cadastroService: CadastroService){}
 
   ngOnInit(): void {
-    const filtro: filtro = {
+    const filtro: Filtro = {
       field: 'role',
       filter: 'EQUAL',
       value: this.cargo.toLocaleUpperCase()

@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { FuncionarioAutocompleteComponent } from './funcionario-autocomplete.component';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
-import { filtro } from 'src/app/core/types/filtro';
+import { Filtro } from 'src/app/core/types/filtro';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Usuario } from 'src/app/core/types/usuario';
 
@@ -35,7 +35,7 @@ const mockUsuariosLista = [
 ];
 
 class MockCadastroService {
-  listarUsuarios(filtro: filtro) {
+  listarUsuarios(filtro: Filtro) {
     return of(mockUsuariosLista);
   }
 }
@@ -106,7 +106,7 @@ describe(FuncionarioAutocompleteComponent.name, () => {
     component.ngOnInit();
     fixture.detectChanges();
 
-    const expectedFilter: filtro = {
+    const expectedFilter: Filtro = {
       field: 'role',
       filter: 'EQUAL',
       value: 'PROFESSOR'
