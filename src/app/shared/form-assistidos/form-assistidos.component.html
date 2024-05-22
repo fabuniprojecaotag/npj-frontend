@@ -71,12 +71,14 @@
       </div>
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-label for="estadoCivil">Estado civil</mat-label>
-          <mat-select matNativeControl formControlName="estadoCivil" id="estadoCivil">
+          <mat-label>Estado civil</mat-label>
+          <mat-select formControlName="estadoCivil">
             <mat-option *ngFor="let estado of estadosCivis" [value]="estado">
               {{ estado }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="formAssistidos.get('estadoCivil')?.errors?.['required']">Selecione um estado
+            civil</mat-error>
         </mat-form-field>
       </div>
       <div class="col">

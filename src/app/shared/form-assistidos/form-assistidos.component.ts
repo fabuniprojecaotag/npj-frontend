@@ -164,8 +164,7 @@ export class FormAssistidosComponent implements OnInit {
             logradouro: data.logradouro,
             complemento: data.complemento,
           });
-        },
-        error: (err) => { }
+        }
       });
     }
   }
