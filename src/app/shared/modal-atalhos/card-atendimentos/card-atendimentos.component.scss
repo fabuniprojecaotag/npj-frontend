@@ -1,4 +1,16 @@
 .card-atendimentos {
+  display: flex;
   height: 250px;
   width: 370px;
+
+  &__conteudo {
+    flex-grow: 10;
+    height: auto;
+  }
+
+  &__botoes {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
 }

@@ -2,13 +2,15 @@
   <mat-card-header>
     <mat-card-title>{{ atendimento.id }}</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content class="card-atendimentos__conteudo">
     <p>Área: {{ atendimento.area }}</p>
-    <!-- <p>Assistido: {{ atendimento.assistido.nome }}</p> -->
+    <!-- <p>Assistido: {{ atendimento.envolvidos.assistido.nome }}</p> -->
     <!-- <p>Estagário: {{ atendimento.envolvidos.estagiario.nome }}</p> -->
-    <p>Data: {{ atendimento }}</p>
+    <p>Data: {{ atendimento.instante }}</p>
+    <p>Status: {{ atendimento.status }}</p>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="accent">ABRIR</button>
+  <mat-card-actions class="card-atendimentos__botoes">
+    <button mat-raised-button mat-dialog-close color="accent"
+      [routerLink]="'atendimentos/edit/' + atendimento.id + '/' + atendimento.area">ABRIR</button>
   </mat-card-actions>
 </mat-card>
