@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-utils-bar',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./utils-bar.component.scss']
 })
 export class UtilsBarComponent {
-  constructor(private location: Location){}
+  constructor(private router: Router, private location: Location) {}
 
   avancar(): void {
     this.location.forward();
@@ -17,7 +18,9 @@ export class UtilsBarComponent {
     this.location.back();
   }
 
-  recarregar() {
-    window.location.reload();
+  recarregar(): void {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.router.url]);
+    });
   }
 }

@@ -12,7 +12,9 @@ import { FormAssistidosComponent } from './form-assistidos.component';
 import { FormsService } from 'src/app/core/services/forms.service';
 
 class MockFormsService {
-  setForm() { }
+  setForm() {
+    return;
+  }
 }
 
 const mockViacepResponse = {

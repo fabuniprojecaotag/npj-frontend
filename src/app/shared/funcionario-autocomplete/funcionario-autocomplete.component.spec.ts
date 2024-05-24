@@ -35,7 +35,7 @@ const mockUsuariosLista = [
 ];
 
 class MockCadastroService {
-  listarUsuarios(filtro: Filtro) {
+  listarUsuarios() {
     return of(mockUsuariosLista);
   }
 }

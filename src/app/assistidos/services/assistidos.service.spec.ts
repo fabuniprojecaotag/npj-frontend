@@ -56,7 +56,7 @@ const mockListaAtendimento = [
     instante: '4 de março de 2024 às 22:58:48 UTC-3',
     ficha: {
       '@type': 'TipoFichaCivil',
-      assinatura: new File([""], "assinatura.pdf", { type: "application/pdf" }),
+      assinatura: new File([''], 'assinatura.pdf', { type: 'application/pdf' }),
       dadosSensiveis: false,
       parteContraria: {
         nome: 'Nome Parte Contrária',

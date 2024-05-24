@@ -10,8 +10,6 @@ export class NavMenuComponent implements OnInit {
   @Input() isMenuAtivo = false;
   @Input() perfilNome!: string;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.perfilNome = this.perfilNome.toUpperCase();
   }

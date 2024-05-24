@@ -24,9 +24,6 @@ export class HeaderComponent implements OnInit {
         if (usuario) {
           this.nomeUser = usuario.nome;
           this.nomePerfil = this.formatarNomePerfil(usuario.role);
-        } else {
-          this.nomeUser = 'Erro';
-          this.nomePerfil = 'Não encontrado!';
         }
       }
     });
