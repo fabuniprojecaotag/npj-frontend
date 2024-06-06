@@ -138,4 +138,20 @@ describe(FormAtendimentoCivilComponent.name, () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit acaoClique event when executarAcao is called', () => {
+    spyOn(component.acaoClique, 'emit');
+
+    component.executarAcao();
+
+    expect(component.acaoClique.emit).toHaveBeenCalled();
+  });
+
+  it('should emit acaoCliqueExcluir event when excluir is called', () => {
+    spyOn(component.acaoCliqueExcluir, 'emit');
+
+    component.executarAcaoExcluir();
+
+    expect(component.acaoCliqueExcluir.emit).toHaveBeenCalled();
+  });
 });

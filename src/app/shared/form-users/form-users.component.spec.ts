@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HeaderComponent } from '../header/header.component';
 import { FormUsersComponent } from './form-users.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 describe(FormUsersComponent.name, () => {
   let component: FormUsersComponent;
@@ -18,7 +19,20 @@ describe(FormUsersComponent.name, () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FormUsersComponent, HeaderComponent],
-      imports: [MatCardModule, MatFormFieldModule, MatSelectModule, MatCheckboxModule, MatIconModule, ReactiveFormsModule, MatInputModule, BrowserAnimationsModule]
+      imports: [
+        MatCardModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        NgxMaskDirective, NgxMaskPipe,
+      ],
+      providers: [
+        provideNgxMask()
+      ]
     });
     fixture = TestBed.createComponent(FormUsersComponent);
     component = fixture.componentInstance;
