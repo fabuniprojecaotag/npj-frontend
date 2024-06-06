@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { of } from 'rxjs';
 import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
@@ -96,7 +98,7 @@ class mockAssistidoService {
   }
 }
 
-fdescribe(FormAtendimentoCivilComponent.name, () => {
+describe(FormAtendimentoCivilComponent.name, () => {
   let component: FormAtendimentoCivilComponent;
   let fixture: ComponentFixture<FormAtendimentoCivilComponent>;
 
@@ -109,6 +111,7 @@ fdescribe(FormAtendimentoCivilComponent.name, () => {
         PrintButtonComponent
       ],
       imports: [
+        BrowserAnimationsModule,
         MatFormFieldModule,
         MatSelectModule,
         MatDatepickerModule,
@@ -116,6 +119,7 @@ fdescribe(FormAtendimentoCivilComponent.name, () => {
         MatIconModule,
         MatCheckboxModule,
         MatAutocompleteModule,
+        MatInputModule,
         ReactiveFormsModule,
         NgxMaskDirective, NgxMaskPipe,
       ],
