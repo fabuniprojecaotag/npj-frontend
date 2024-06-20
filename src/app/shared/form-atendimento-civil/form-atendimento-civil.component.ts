@@ -60,22 +60,10 @@ export class FormAtendimentoCivilComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formService: FormsService,
-    private usuarioService: CadastroService
+    private cadastroService: CadastroService
   ) { }
 
   ngOnInit(): void {
-    this.usuarioService.buscarMeuUsuario().subscribe({
-      next: (usuario) => {
-        if (usuario.role.toLowerCase() === 'estagiario' && this.editarComponente === false) {
-          this.estagiarioControl.setValue(usuario);
-          this.formAtendimentos.get('status')?.disable();
-        }
-      },
-      error: () => {
-        alert('Usuário não encontrado!');
-      },
-    });
-
     this.formAtendimentos = this.formBuilder.group({
       '@type': ['Civil'],
       id: [null],
@@ -114,6 +102,18 @@ export class FormAtendimentoCivilComponent implements OnInit {
         secretaria: this.secretariaControl,
         assistido: this.assistidoControl,
       })
+    });
+
+    this.cadastroService.buscarMeuUsuario().subscribe({
+      next: (usuario) => {
+        if (usuario.role.toLowerCase() === 'estagiario' && this.editarComponente === false) {
+          this.estagiarioControl.setValue(usuario);
+          this.formAtendimentos.get('status')?.disable();
+        }
+      },
+      error: () => {
+        alert('Usuário não encontrado!');
+      },
     });
 
     this.formAtendimentos.get('area')?.valueChanges.subscribe(area => {
