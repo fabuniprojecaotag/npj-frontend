@@ -15,7 +15,7 @@ export interface Atendimento {
 
 export interface Ficha {
   '@type': string,
-  assinatura: File |null,
+  assinatura: File | null,
   dadosSensiveis: boolean,
   testemunhas?: Testemunha[],
   medidaJuridica: string
