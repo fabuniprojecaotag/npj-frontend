@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
@@ -37,10 +38,10 @@ export class EditUsersComponent implements OnInit {
     });
   }
 
-  carregarFormulario() {
+  private carregarFormulario() {
     this.form = this.formUserService.getForm();
     this.form?.patchValue({
-      // "@type": this.cadastro['@type'],
+      "@type": this.cadastro['@type'],
       id: this.cadastro.id,
       nome: this.cadastro.nome,
       matricula: this.cadastro.matricula,
@@ -54,7 +55,7 @@ export class EditUsersComponent implements OnInit {
     });
   }
 
-  editar() {
+  editarUsuario() {
     const formValue = this.form?.value;
 
     const senhaPresente = formValue.senha !== null && formValue.senha !== undefined;
@@ -82,6 +83,7 @@ export class EditUsersComponent implements OnInit {
 
     this.cadastroService
       .editarCadastro(dadosAtualizados, this.idParam)
+      .pipe(debounceTime(500))
       .subscribe({
         next: () => {
           this.abrirModalEditar(dadosAtualizados);
@@ -91,8 +93,10 @@ export class EditUsersComponent implements OnInit {
       });
   }
 
-  excluir(idCadastro: string) {
-    this.cadastroService.excluirCadastro(idCadastro).subscribe({
+  private excluir(idCadastro: string) {
+    this.cadastroService.excluirCadastro(idCadastro)
+    .pipe(debounceTime(500))
+    .subscribe({
       next: () => {
         this.router.navigate(['/users']);
       },
@@ -112,7 +116,7 @@ export class EditUsersComponent implements OnInit {
     });
   }
 
-  abrirModalEditar(usuario: Usuario) {
+  private abrirModalEditar(usuario: Usuario) {
     this.dialog.open(ModalUsuarioComponent, {
       width: '552px',
       height: '360px',

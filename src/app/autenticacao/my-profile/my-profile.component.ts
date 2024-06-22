@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
@@ -38,7 +39,7 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
-  carregarFormulario(): void {
+  private carregarFormulario(): void {
     this.form = this.formUserService.getForm();
     this.form?.patchValue({
       '@type': this.cadastro['@type'],
@@ -67,6 +68,7 @@ export class MyProfileComponent implements OnInit {
 
     this.cadastroService
       .editarCadastro(dadosAtualizados, dadosAtualizados.email)
+      .pipe(debounceTime(500))
       .subscribe({
         next: () => {
           this.abrirModal(dadosAtualizados);
@@ -76,7 +78,7 @@ export class MyProfileComponent implements OnInit {
       });
   }
 
-  abrirModal(usuario: Usuario) {
+  private abrirModal(usuario: Usuario) {
     this.dialog.open(ModalUsuarioComponent, {
       width: '552px',
       height: '360px',
