@@ -48,7 +48,7 @@ const mockListaAtendimentos: Atendimento[] = [
       },
     }
   }
-]
+];
 
 class MockAtendimentosService {
   listagemAtendimentos(filtro?: Filtro) {
@@ -83,7 +83,7 @@ describe(AtendimentoAutocompleteComponent.name, () => {
     component = fixture.componentInstance;
     component.control = new FormControl();
     fixture.detectChanges();
-  })
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

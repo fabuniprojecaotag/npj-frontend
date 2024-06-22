@@ -2,11 +2,11 @@
   <div class="card">
     <img src="assets/images/logoGPROTransparente.png" alt="logo do GPRO">
     <h2>Login</h2>
-    <div class="card__carregando" *ngIf="loading">
+    <div class="card__carregando" *ngIf="isLoading">
       <p>Carregando</p>
       <mat-spinner></mat-spinner>
     </div>
-    <form [formGroup]="loginForm" *ngIf="!loading" class="login__form">
+    <form [formGroup]="loginForm" *ngIf="!isLoading" class="login__form">
       <mat-form-field appearance="fill">
         <mat-label>Prefixo email/matricula</mat-label>
         <input matInput type="text" placeholder="Digite o começo do seu e-mail ou matricula" formControlName="email">
