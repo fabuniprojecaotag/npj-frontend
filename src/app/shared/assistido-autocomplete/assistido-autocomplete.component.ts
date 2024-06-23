@@ -16,18 +16,34 @@ export class AssistidoAutocompleteComponent implements OnInit {
 
   filteredOptions$?: Observable<Assistido[]>;
 
+  private carregouAssistidos = false;
+  carregando = false;
+
   constructor(private assistidosService: AssistidosService){}
 
   ngOnInit(): void {
-    this.assistidosService.listarAssistidos().subscribe(
-      dados => {
-        this.assistidos = dados;
-      }
-    );
     this.filteredOptions$ = this.control.valueChanges.pipe(
       startWith(''),
       map(value => this.filtrarAssistidos(value))
     );
+  }
+
+  carregarAssistidos(): void {
+    if (!this.carregouAssistidos && !this.carregando) {
+      this.carregando = true;
+      this.assistidosService.listarAssistidos().subscribe(
+        dados => {
+          this.assistidos = dados;
+          this.carregouAssistidos = true;
+          this.carregando = false;
+        },
+        error => {
+          this.carregando = false;
+          alert('Falha ao carregar dados de assistidos.');
+        }
+      );
+    };
+    
   }
 
   filtrarAssistidos(value: string | Assistido): Assistido[] {
@@ -41,5 +57,9 @@ export class AssistidoAutocompleteComponent implements OnInit {
 
   displayFn (assistido: Assistido): string {
     return assistido && assistido.nome ? assistido.nome : '';
+  }
+
+  onInputFocus(): void {
+    this.carregarAssistidos();
   }
 }
