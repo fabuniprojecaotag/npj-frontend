@@ -16,18 +16,33 @@ export class AtendimentoAutocompleteComponent implements OnInit {
 
   filteredOptions$?: Observable<Atendimento[]>;
 
+  private carregouAtendimentos = false;
+  carregando = false;
+
   constructor(private atendimentoService: AtendimentosService) { }
 
   ngOnInit(): void {
-    this.atendimentoService.listagemAtendimentos().subscribe(
-      dados => {
-        this.atendimento = dados;
-      }
-    );
     this.filteredOptions$ = this.control.valueChanges.pipe(
       startWith(''),
       map(value => this.filtrarAtendimento(value))
     );
+  }
+
+  carregarAtendimentos(): void {
+    if (!this.carregouAtendimentos && !this.carregando) {
+      this.carregando = true;
+      this.atendimentoService.listagemAtendimentos().subscribe(
+        dados => {
+          this.atendimento = dados;
+          this.carregouAtendimentos = true;
+          this.carregando = false;
+        },
+        error => {
+          this.carregando = false;
+          alert('Falha ao carregar dados de atendimentos.');
+        }
+      );
+    }
   }
 
   filtrarAtendimento(value: string): Atendimento[] {
@@ -38,8 +53,11 @@ export class AtendimentoAutocompleteComponent implements OnInit {
     return result;
   }
 
-
   displayFn(atendimentoId: string): string {
     return atendimentoId;
+  }
+
+  onInputFocus(): void {
+    this.carregarAtendimentos();
   }
 }
