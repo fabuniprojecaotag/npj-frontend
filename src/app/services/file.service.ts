@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -17,10 +17,11 @@ export class FileService {
     });
   }
 
-  uploadFile(file: File): Observable<any> {
+  uploadFile(files: File[]): Observable<any> {
     const formData: FormData = new FormData();
-    formData.append('file', file, file.name);
-
+    files.forEach(file => {
+      formData.append('files', file, file.name);
+    });
     return this.http.post(`${this.API}/storage`, formData, {
       responseType: 'text'
     });

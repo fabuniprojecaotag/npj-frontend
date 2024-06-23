@@ -8,25 +8,26 @@ import { FileService } from 'src/app/services/file.service';
 })
 export class FileUploadComponent {
 
-  selectedFile: File | null = null;
+  selectedFiles: File[] | null = null;
 
   constructor(private fileService: FileService) { }
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    this.selectedFile = file;
+  onFilesSelected(event: any) {
+    const files: FileList = event.target.files;
+    this.selectedFiles = Array.from(files);
+    console.log('Files selected:', this.selectedFiles);
   }
 
-  uploadFile() {
-    if (this.selectedFile) {
-      this.fileService.uploadFile(this.selectedFile).subscribe(response => {
-        alert('File uploaded successfully!');
+  uploadFiles() {
+    if (this.selectedFiles) {
+      this.fileService.uploadFile(this.selectedFiles).subscribe(response => {
+        alert('Files uploaded successfully!');
       }, error => {
         console.error(error);
-        alert('Failed to upload file.');
+        alert('Failed to upload files.');
       });
     } else {
-      alert('Please select a file first.');
+      alert('Please select a files first.');
     }
   }
 }
