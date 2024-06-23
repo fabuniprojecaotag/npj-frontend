@@ -41,15 +41,15 @@ export class FormUsersComponent implements OnInit {
       cpf: [null, Validators.minLength(11)],
       matricula: [null],
       nome: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email, formValidations.domainValidator]],
-      confirmarEmail: [null, [Validators.required, Validators.email, formValidations.equalTo('email'), formValidations.domainValidator]],
+      email: [null, [Validators.required, Validators.email, formValidations.domainValidator()]],
+      confirmarEmail: [null, [Validators.required, Validators.email, formValidations.equalTo('email'), formValidations.domainValidator()]],
       supervisor: this.supervisorControl,
       semestre: [null],
       unidadeInstitucional: [null, Validators.required],
       status: [{ value: true, disabled: this.myProfileComponente }],
       cadastrarSenha: this.cadastrarSenhaControl,
-      senha: [null],
-      confirmarSenha: [null],
+      senha: [null, [Validators.required, Validators.minLength(6)]],
+      confirmarSenha: [null, [Validators.required, Validators.minLength(6), formValidations.equalTo('senha')]],
       role: [{ value: null, disabled: this.myProfileComponente }, Validators.required],
     });
 
@@ -83,8 +83,8 @@ export class FormUsersComponent implements OnInit {
         senhaControl?.clearValidators();
         confirmarSenhaControl?.clearValidators();
       } else {
-        senhaControl?.setValidators(Validators.required);
-        confirmarSenhaControl?.setValidators([Validators.required, Validators.minLength(3), formValidations.equalTo('senha')]);
+        senhaControl?.setValidators([Validators.required, Validators.minLength(6)]);
+        confirmarSenhaControl?.setValidators([Validators.required, Validators.minLength(6), formValidations.equalTo('senha')]);
       }
 
       senhaControl?.updateValueAndValidity();

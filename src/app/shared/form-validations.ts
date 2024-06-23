@@ -25,7 +25,7 @@ export class formValidations {
 
       const domain = email.substring(email.lastIndexOf('@') + 1);
       if (!allowedDomains.includes(domain)) {
-        return { invalidDomain: true };
+        return { domainValidator: true };
       }
 
       return null;
