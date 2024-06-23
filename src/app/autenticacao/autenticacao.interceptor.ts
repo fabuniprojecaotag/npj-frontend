@@ -18,8 +18,7 @@ export class AutenticacaoInterceptor implements HttpInterceptor {
     if(this.tokenService.possuiToken()){
       request = request.clone({
         setHeaders: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Authorization': `Bearer ${token}`
         }
       });
     }
