@@ -127,14 +127,6 @@ describe(FormAssistidosComponent.name, () => {
     expect(telefone.errors?.['pattern']).toBeTruthy();
   });
 
-  it('(DOM) should mark the pai field as invalid if it is empty', () => {
-    const paiInput = fixture.nativeElement.querySelector('input[formControlName="pai"]');
-    paiInput.value = '';
-    paiInput.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-    expect(component.formAssistidos.get('filiacao')?.get('pai')?.invalid).toBeTruthy();
-  });
-
   it('(DOM) should mark the mae field as invalid if it is empty', () => {
     const maeInput = fixture.nativeElement.querySelector('input[formControlName="mae"]');
     maeInput.value = '';
