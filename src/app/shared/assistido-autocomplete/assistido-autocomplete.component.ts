@@ -31,7 +31,7 @@ export class AssistidoAutocompleteComponent implements OnInit {
   carregarAssistidos(): void {
     if (!this.carregouAssistidos && !this.carregando) {
       this.carregando = true;
-      this.assistidosService.listarAssistidos().subscribe(
+      this.assistidosService.listarAssistidosMin().subscribe(
         dados => {
           this.assistidos = dados;
           this.carregouAssistidos = true;

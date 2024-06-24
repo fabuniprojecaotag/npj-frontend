@@ -21,6 +21,10 @@ export class AssistidosService {
     return this.http.get<(AssistidoCivil | AssistidoFull | AssistidoTrabalhista)[]>(`${this.API}/assistidos`);
   }
 
+  listarAssistidosMin(): Observable<(AssistidoCivil | AssistidoFull | AssistidoTrabalhista)[]> {
+    return this.http.get<(AssistidoCivil | AssistidoFull | AssistidoTrabalhista)[]>(`${this.API}/assistidos/min`);
+  }
+
   listagemAtendimentosDoAssistido(id: string): Observable<Atendimento[]> {
     return this.http.get<Atendimento[]>(`${this.API}/assistidos/${id}/atendimentos`);
   }

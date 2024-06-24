@@ -31,7 +31,7 @@ export class AtendimentoAutocompleteComponent implements OnInit {
   carregarAtendimentos(): void {
     if (!this.carregouAtendimentos && !this.carregando) {
       this.carregando = true;
-      this.atendimentoService.listagemAtendimentos().subscribe(
+      this.atendimentoService.listagemAtendimentoAutocomplete().subscribe(
         dados => {
           this.atendimento = dados;
           this.carregouAtendimentos = true;

@@ -24,6 +24,10 @@ export class AtendimentosService {
     return this.http.get<Atendimento[]>(`${this.API}/atendimentos`, { params });
   }
 
+  listagemAtendimentoAutocomplete(): Observable<Atendimento[]> {
+    return this.http.get<Atendimento[]>(`${this.API}/atendimentos/min`);
+  }
+
   consultaAtendimento(idAtendimento: string): Observable<Atendimento> {
     return this.http.get<Atendimento>(`${this.API}/atendimentos/${idAtendimento}`);
   }
