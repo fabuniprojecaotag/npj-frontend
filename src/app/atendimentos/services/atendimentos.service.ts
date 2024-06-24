@@ -36,8 +36,8 @@ export class AtendimentosService {
     return this.http.post<Atendimento>(`${this.API}/atendimentos`, atendimento);
   }
 
-  atualizarAtendimento(atendimento: Atendimento, id: string): Observable<Atendimento> {
-    return this.http.put<Atendimento>(`${this.API}/atendimentos/${id}`, atendimento);
+  atualizarAtendimento(atendimento: Atendimento, id: string, clazz: string): Observable<Atendimento> {
+    return this.http.put<Atendimento>(`${this.API}/atendimentos/${id}/${clazz}`, atendimento);
   }
 
   excluirAtendimento(idAtendimento: string): Observable<Atendimento> {

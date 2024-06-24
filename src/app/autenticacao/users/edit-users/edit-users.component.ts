@@ -57,6 +57,7 @@ export class EditUsersComponent implements OnInit {
 
   editarUsuario() {
     const formValue = this.form?.value;
+    const tipoSelecionado: string = this.form?.value['@type'];
 
     const senhaPresente = formValue.senha !== null && formValue.senha !== undefined;
 
@@ -82,7 +83,7 @@ export class EditUsersComponent implements OnInit {
     }
 
     this.cadastroService
-      .editarCadastro(dadosAtualizados, this.idParam)
+      .editarCadastro(dadosAtualizados, this.idParam, tipoSelecionado)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {

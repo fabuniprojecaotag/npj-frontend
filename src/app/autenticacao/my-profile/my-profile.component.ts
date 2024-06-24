@@ -58,6 +58,7 @@ export class MyProfileComponent implements OnInit {
 
   atualizarUsuario() {
     const formValue = this.form?.value;
+    const tipoSelecionado = this.form?.value['@type'];
 
     const senhaPresente = formValue.senha !== null && formValue.senha !== '';
 
@@ -67,7 +68,7 @@ export class MyProfileComponent implements OnInit {
     };
 
     this.cadastroService
-      .editarCadastro(dadosAtualizados, dadosAtualizados.email)
+      .editarCadastro(dadosAtualizados, dadosAtualizados.email, tipoSelecionado)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {

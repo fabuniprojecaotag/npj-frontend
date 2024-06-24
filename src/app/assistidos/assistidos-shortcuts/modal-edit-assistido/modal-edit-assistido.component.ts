@@ -134,7 +134,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
       };
     }
 
-    this.assistidoService.editarAssistido(this.idParam, dadosAtualizados).subscribe({
+    this.assistidoService.editarAssistido(this.idParam, dadosAtualizados, tipoSelecionado).subscribe({
       next: () => {
         this.dialog.closeAll();
         this.atualizarPagina();

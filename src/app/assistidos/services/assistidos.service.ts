@@ -29,8 +29,8 @@ export class AssistidosService {
     return this.http.get<Atendimento[]>(`${this.API}/assistidos/${id}/atendimentos`);
   }
 
-  editarAssistido(idParam: string, assistido: Assistido): Observable<AssistidoTrabalhista | AssistidoCivil | AssistidoFull> {
-    return this.http.put<AssistidoTrabalhista | AssistidoCivil | AssistidoFull>(`${this.API}/assistidos/${idParam}`, assistido);
+  editarAssistido(idParam: string, assistido: Assistido, clazz: String): Observable<AssistidoTrabalhista | AssistidoCivil | AssistidoFull> {
+    return this.http.put<AssistidoTrabalhista | AssistidoCivil | AssistidoFull>(`${this.API}/assistidos/${idParam}/${clazz}`, assistido);
   }
 
   excluirAssistido(idParam: string): Observable<AssistidoFull | AssistidoCivil | AssistidoTrabalhista> {

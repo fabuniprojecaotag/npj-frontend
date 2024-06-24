@@ -1,8 +1,8 @@
 <app-header [subtitulo]="tituloPagina"></app-header>
 <app-utils-bar></app-utils-bar>
 <ng-container *ngIf="tipoFicha !== 'Trabalhista'; else formTrabalhista">
-  <app-form-atendimento-civil (acaoClique)="dialogoCriar(this.novoAtendimento)" [editarComponente]="false" />
+  <app-form-atendimento-civil (acaoClique)="cadastrar()" [editarComponente]="false" />
 </ng-container>
 <ng-template #formTrabalhista>
-  <app-form-atendimento-trabalhista (acaoClique)="dialogoCriar(this.novoAtendimento)" />
+  <app-form-atendimento-trabalhista (acaoClique)="cadastrar()" />
 </ng-template>

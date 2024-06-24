@@ -36,7 +36,7 @@ export class AtendimentoAddComponent implements OnInit {
 
       this.atendimentoService.cadastrarAtendimento(this.novoAtendimento).subscribe({
         next: () => {
-          this.router.navigate(['/atendimentos/list']);
+          this.dialogoCriar(this.novoAtendimento);
         },
         error: (err) => { },
       });
@@ -58,7 +58,7 @@ export class AtendimentoAddComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirmado') {
-        this.cadastrar();
+        this.router.navigate(['/atendimentos/list']);
       }
     });
   }

@@ -47,9 +47,9 @@ export class CadastroService {
     return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios/min`, { params });
   }
 
-  editarCadastro(usuario: Usuario, userEmail: string): Observable<Usuario> {
+  editarCadastro(usuario: Usuario, userEmail: string, clazz: string): Observable<Usuario> {
     return this.http.put<Usuario>(
-      `${this.apiUrl}/usuarios/${userEmail}`,
+      `${this.apiUrl}/usuarios/${userEmail}/${clazz}`,
       usuario
     );
   }

@@ -69,7 +69,7 @@ export class AtendimentoEditComponent implements OnInit {
       envolvidos: this.form?.value.envolvidos
     };
 
-    this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento).subscribe({
+    this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento, dadosAtualizados.area).subscribe({
       next: () => {
         this.router.navigate(['/atendimentos/list']);
       },
