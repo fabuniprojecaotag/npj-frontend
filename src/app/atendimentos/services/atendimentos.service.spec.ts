@@ -129,8 +129,9 @@ describe(AtendimentosService.name, () => {
 
   it('#should update an existing atendimento via PUT', () => {
     const idAtendimento = 'ATE00001';
+    const TipoAtendimento = 'Civil';
 
-    service.atualizarAtendimento(mockAtendimento, idAtendimento).subscribe(atendimento => {
+    service.atualizarAtendimento(mockAtendimento, idAtendimento, TipoAtendimento).subscribe(atendimento => {
       expect(atendimento).toEqual(mockAtendimento);
     });
 

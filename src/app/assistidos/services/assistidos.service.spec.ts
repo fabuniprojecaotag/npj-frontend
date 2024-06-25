@@ -156,7 +156,7 @@ describe(AssistidosService.name, () => {
 
   it('#should edit an existing assistido via PUT', () => {
     const id = mockAssistidosLista[0].cpf;
-    service.editarAssistido(id, mockAssistidosLista[0]).subscribe(assistido => {
+    service.editarAssistido(id, mockAssistidosLista[0], 'Civil').subscribe(assistido => {
       expect(assistido).toEqual(mockAssistidosLista[0]);
     });
 
