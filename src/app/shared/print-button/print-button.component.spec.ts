@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PrintButtonComponent } from './print-button.component';
 
-describe('PrintButtonComponent', () => {
+describe(PrintButtonComponent.name, () => {
   let component: PrintButtonComponent;
   let fixture: ComponentFixture<PrintButtonComponent>;
 

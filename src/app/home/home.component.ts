@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
