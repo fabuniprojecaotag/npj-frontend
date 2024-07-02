@@ -24,7 +24,7 @@ export class TokenService {
 
     const tokenData = this.parseJwt(token);
     const agora = new Date().getTime() / 1000;
-    if (agora > tokenData.exp || !tokenData || !tokenData.ex) {
+    if (agora > tokenData.exp || !tokenData) {
       this.excluirToken();
       return false;
     }
