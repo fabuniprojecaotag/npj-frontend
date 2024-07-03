@@ -1,14 +1,16 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { authGuard } from './autenticacao/auth.guard';
-import { HomeComponent } from './home/home.component';
+import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './autenticacao/login/login.component';
+import { authGuard } from './autenticacao/auth.guard';
 
 class MockAuthGuard {
   canActivate() {
+    return true;
+  }
+
+  canLoad() {
     return true;
   }
 }

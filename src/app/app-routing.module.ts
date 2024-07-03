@@ -8,6 +8,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canLoad: [authGuard],
     canActivate: [authGuard]
   },
   {
@@ -17,23 +18,27 @@ const routes: Routes = [
   {
     path: 'assistidos',
     loadChildren: () => import('./assistidos/assistidos.module').then(m => m.AssistidosModule),
+    canLoad: [authGuard],
     canActivate: [authGuard]
   },
   {
     path: 'atendimentos',
     loadChildren: () => import('./atendimentos/atendimentos.module').then(m => m.AtendimentosModule),
-    canActivate: [authGuard],
+    canLoad: [authGuard],
+    canActivate: [authGuard]
   },
 
   {
     path: 'processos',
     loadChildren: () => import('./processos/processos.module').then(m => m.ProcessosModule),
+    canLoad: [authGuard],
     canActivate: [authGuard]
   },
   {
     path: 'estatisticas',
     loadChildren: () => import('./estatisticas/estatisticas.module').then(m => m.EstatisticasModule),
-    canActivate: [authGuard],
+    canLoad: [authGuard],
+    canActivate: [authGuard]
   },
   {
     path: '',
