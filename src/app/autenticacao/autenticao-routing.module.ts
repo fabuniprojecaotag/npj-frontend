@@ -7,6 +7,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { AddUsersComponent } from './users/add-users/add-users.component';
 import { EditUsersComponent } from './users/edit-users/edit-users.component';
 import { UsersComponent } from './users/users.component';
+import { pendingChangesGuard } from '../core/guards/pending-changes.guard';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     path: 'edit/:id',
     component: EditUsersComponent,
     canActivate: [authGuard],
+    canDeactivate: [pendingChangesGuard]
   },
   {
     path: 'list',
@@ -27,7 +29,8 @@ const routes: Routes = [
   {
     path: 'profile',
     component: MyProfileComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    canDeactivate: [pendingChangesGuard]
   },
   {
     path: 'login',
