@@ -152,4 +152,15 @@ describe(AtendimentosService.name, () => {
     expect(req.request.method).toBe('DELETE');
     req.flush(mockAtendimento);
   });
+
+  it('#should retrieve list of atendimentos to autocomplete from API via GET', () => {
+    service.listagemAtendimentoAutocomplete().subscribe(atendimentos => {
+      expect(atendimentos).toEqual([mockAtendimento]);
+    });
+
+    const req = httpTestingController.expectOne(`${environment.API_URL}/atendimentos/min`);
+
+    expect(req.request.method).toBe('GET');
+    req.flush([mockAtendimento]);
+  });
 });
