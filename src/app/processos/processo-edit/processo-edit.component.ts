@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Processo } from 'src/app/core/types/processo';
 import { ProcessosService } from 'src/app/processos/services/processos.service';
 import { ModalExcluirProcessoComponent } from 'src/app/shared/modal-excluir-processo/modal-excluir-processo.component';
@@ -13,7 +14,7 @@ import { ModalProcessoComponent } from 'src/app/shared/modal-processo/modal-proc
   templateUrl: './processo-edit.component.html',
   styleUrls: ['./processo-edit.component.scss'],
 })
-export class ProcessoEditComponent implements OnInit {
+export class ProcessoEditComponent implements OnInit, PendingChanges {
   tituloPagina = 'Editar Processo';
   numeroParam!: string;
   processo!: Processo;
@@ -103,5 +104,9 @@ export class ProcessoEditComponent implements OnInit {
         deletar: () => this.excluirProcesso(this.numeroParam),
       },
     });
+  }
+
+  hasUnsavedChanges(): boolean {
+    return this.form ? this.form.dirty : false;
   }
 }

@@ -7,13 +7,14 @@ import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.
 import { MatDialog } from '@angular/material/dialog';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 import { ModalAtendimentoComponent } from 'src/app/shared/modal-atendimento/modal-atendimento.component';
+import { PendingChanges } from 'src/app/core/types/pending-changes';
 
 @Component({
   selector: 'app-atendimento-edit',
   templateUrl: './atendimento-edit.component.html',
   styleUrls: ['./atendimento-edit.component.scss']
 })
-export class AtendimentoEditComponent implements OnInit {
+export class AtendimentoEditComponent implements OnInit, PendingChanges {
   tituloPagina = 'Editar - ';
   tipoFicha!: string;
   idAtendimento!: string;
@@ -116,5 +117,9 @@ export class AtendimentoEditComponent implements OnInit {
         this.editar();
       }
     });
+  }
+
+  hasUnsavedChanges(): boolean {
+    return this.form ? this.form.dirty : false;
   }
 }
