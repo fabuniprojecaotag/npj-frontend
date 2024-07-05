@@ -16,7 +16,7 @@ export class ProcessosService {
     return this.http.post<Processo>(`${this.API}/processos`, processo);
   }
 
-  listar(): Observable<Processo[]> {
+  listarProcessos(): Observable<Processo[]> {
     return this.http.get<Processo[]>(`${this.API}/processos`);
   }
 

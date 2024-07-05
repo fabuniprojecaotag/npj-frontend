@@ -39,7 +39,7 @@ export class ProcessosComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit(): void {
-    this.service.listar().subscribe({
+    this.service.listarProcessos().subscribe({
       next: (response) => {
         this.listaProcesso = response;
 

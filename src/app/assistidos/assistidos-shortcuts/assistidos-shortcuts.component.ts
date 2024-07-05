@@ -47,7 +47,7 @@ export class AssistidosShortcutsComponent implements OnInit {
       }
     });
 
-    this.processoService.listar().subscribe({
+    this.processoService.listarProcessos().subscribe({
       next: (resposta) => {
         this.listaProcesso = resposta;
       }

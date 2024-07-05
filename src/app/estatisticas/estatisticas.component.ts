@@ -39,7 +39,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.service.listar().subscribe({
+    this.service.listarProcessos().subscribe({
       next: (response) => {
         this.listaProcesso = response;
 

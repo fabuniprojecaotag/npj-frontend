@@ -25,4 +25,10 @@ describe(CustomMatPaginatorIntl.name, () => {
     expect(paginatorIntl.getRangeLabel(1, 10, 25)).toBe('11 - 20 de 25');
     expect(paginatorIntl.getRangeLabel(2, 10, 25)).toBe('21 - 25 de 25');
   });
+
+  it('should correctly handle when startIndex is greater than or equal to length', () => {
+    // Teste para startIndex >= length
+    expect(paginatorIntl.getRangeLabel(3, 10, 25)).toBe('31 - 35 de 25');
+    expect(paginatorIntl.getRangeLabel(4, 10, 35)).toBe('41 - 45 de 35');
+  });
 });
