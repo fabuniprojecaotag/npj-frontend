@@ -23,7 +23,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CustomMatPaginatorIntl } from 'src/app/shared/customMatPaginator/CustomMatPaginator';
+import { CustomMatPaginatorIntl } from 'src/app/shared/customMatPaginator/custom-mat-paginator';
 
 @NgModule({
   exports: [

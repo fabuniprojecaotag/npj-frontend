@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
 
@@ -13,7 +14,7 @@ import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuari
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.scss'],
 })
-export class MyProfileComponent implements OnInit {
+export class MyProfileComponent implements OnInit, PendingChanges {
   tituloPagina = 'Meu Perfil';
   perfilComponente = true;
 
@@ -58,6 +59,7 @@ export class MyProfileComponent implements OnInit {
 
   atualizarUsuario() {
     const formValue = this.form?.value;
+    const tipoSelecionado = this.form?.value['@type'];
 
     const senhaPresente = formValue.senha !== null && formValue.senha !== '';
 
@@ -67,7 +69,7 @@ export class MyProfileComponent implements OnInit {
     };
 
     this.cadastroService
-      .editarCadastro(dadosAtualizados, dadosAtualizados.email)
+      .editarCadastro(dadosAtualizados, dadosAtualizados.email, tipoSelecionado)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
@@ -86,4 +88,7 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
+  hasUnsavedChanges(): boolean {
+    return this.form ? this.form.dirty : false;
+  }
 }

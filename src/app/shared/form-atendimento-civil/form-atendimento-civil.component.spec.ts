@@ -21,65 +21,65 @@ import { PrintButtonComponent } from '../print-button/print-button.component';
 import { FormAtendimentoCivilComponent } from './form-atendimento-civil.component';
 import { UsuarioService } from 'src/app/autenticacao/services/usuario.service';
 
+const mockUsuario: Usuario = {
+  '@type': 'ESTAGIARIO',
+  id: '1',
+  nome: 'Luciano Neves',
+  senha: '12345',
+  email: 'luciano.neves@projecao.br',
+  status: true,
+  role: 'ESTAGIARIO',
+  unidadeInstitucional: 'Taguatinga'
+};
+
+const mockAssistido: AssistidoFull = {
+  cpf: '123.456.789-00',
+  nome: 'Ednaldo Pereira Cardoso',
+  rg: '1234567',
+  endereco: {
+    residencial: {
+      logradouro: 'Rua Principal',
+      bairro: 'Centro',
+      numero: '123',
+      complemento: 'Ap. 101',
+      cep: '12345-678',
+      cidade: 'Cidade Exemplo'
+    }
+  },
+  filiacao: {
+    pai: 'Ednaldo Pai',
+    mae: 'Edna Mãe'
+  },
+  ctps: {
+    numero: '123456',
+    serie: '789',
+    uf: 'SP'
+  },
+  pis: '12345678900',
+  empregadoAtualmente: true
+};
+
+class MockCadastroService {
+  buscarMeuUsuario(): Observable<Usuario> {
+    return of(mockUsuario);
+  }
+
+  listarUsuarios() {
+    return of([mockUsuario]);
+  }
+}
+
+class MockAssistidoService {
+  listarAssistidos() {
+    return of([mockAssistido]);
+  }
+}
+
 describe(FormAtendimentoCivilComponent.name, () => {
   let component: FormAtendimentoCivilComponent;
   let fixture: ComponentFixture<FormAtendimentoCivilComponent>;
   let cadastroService: CadastroService;
   let usuarioService: UsuarioService;
-
-  const mockUsuario: Usuario = {
-    '@type': 'ESTAGIARIO',
-    id: '1',
-    nome: 'Luciano Neves',
-    senha: '12345',
-    email: 'luciano.neves@projecao.br',
-    status: true,
-    role: 'ESTAGIARIO',
-    unidadeInstitucional: 'Taguatinga'
-  };
-
-  const mockAssistido: AssistidoFull = {
-    cpf: '123.456.789-00',
-    nome: 'Ednaldo Pereira Cardoso',
-    rg: '1234567',
-    endereco: {
-      residencial: {
-        logradouro: 'Rua Principal',
-        bairro: 'Centro',
-        numero: '123',
-        complemento: 'Ap. 101',
-        cep: '12345-678',
-        cidade: 'Cidade Exemplo'
-      }
-    },
-    filiacao: {
-      pai: 'Ednaldo Pai',
-      mae: 'Edna Mãe'
-    },
-    ctps: {
-      numero: '123456',
-      serie: '789',
-      uf: 'SP'
-    },
-    pis: '12345678900',
-    empregadoAtualmente: true
-  };
-
-  class MockCadastroService {
-    buscarMeuUsuario(): Observable<Usuario> {
-      return of(mockUsuario);
-    }
-
-    listarUsuarios() {
-      return of([mockUsuario]);
-    }
-  }
-
-  class MockAssistidoService {
-    listarAssistidos() {
-      return of([mockAssistido]);
-    }
-  }
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

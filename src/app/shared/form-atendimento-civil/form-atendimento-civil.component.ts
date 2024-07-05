@@ -104,18 +104,6 @@ export class FormAtendimentoCivilComponent implements OnInit {
       })
     });
 
-    this.cadastroService.buscarMeuUsuario().subscribe({
-      next: (usuario) => {
-        if (usuario.role.toLowerCase() === 'estagiario' && this.editarComponente === false) {
-          this.estagiarioControl.setValue(usuario);
-          this.formAtendimentos.get('status')?.disable();
-        }
-      },
-      error: () => {
-        alert('Usuário não encontrado!');
-      },
-    });
-
     this.formAtendimentos.get('area')?.valueChanges.subscribe(area => {
       if (area === 'Civil') {
         this.medidasJudiciais = this.medidasCivil;

@@ -26,7 +26,7 @@ import { ModalAtendimentoComponent } from './modal-atendimento/modal-atendimento
 import { ModalErrosComponent } from './modal-erros/modal-erros.component';
 import { ModalExcluidoComponent } from './modal-excluido/modal-excluido.component';
 import { ModalExcluirProcessoComponent } from './modal-excluir-processo/modal-excluir-processo.component';
-import { ModalProcessoComponent } from './modal-processo/modal-processo-criado.component';
+import { ModalProcessoComponent } from './modal-processo/modal-processo.component';
 import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
 import { PrintButtonComponent } from './print-button/print-button.component';
 import { UtilsBarComponent } from './utils-bar/utils-bar.component';

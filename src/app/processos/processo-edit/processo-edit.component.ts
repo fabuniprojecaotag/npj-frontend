@@ -6,7 +6,7 @@ import { FormsService } from 'src/app/core/services/forms.service';
 import { Processo } from 'src/app/core/types/processo';
 import { ProcessosService } from 'src/app/processos/services/processos.service';
 import { ModalExcluirProcessoComponent } from 'src/app/shared/modal-excluir-processo/modal-excluir-processo.component';
-import { ModalProcessoComponent } from 'src/app/shared/modal-processo/modal-processo-criado.component';
+import { ModalProcessoComponent } from 'src/app/shared/modal-processo/modal-processo.component';
 
 @Component({
   selector: 'app-processo-edit',

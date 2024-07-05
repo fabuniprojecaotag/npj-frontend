@@ -156,11 +156,12 @@ describe(AssistidosService.name, () => {
 
   it('#should edit an existing assistido via PUT', () => {
     const id = mockAssistidosLista[0].cpf;
-    service.editarAssistido(id, mockAssistidosLista[0]).subscribe(assistido => {
+    const tipo = 'Civil';
+    service.editarAssistido(id, mockAssistidosLista[0], tipo).subscribe(assistido => {
       expect(assistido).toEqual(mockAssistidosLista[0]);
     });
 
-    const req = httpTestingController.expectOne(`${environment.API_URL}/assistidos/${id}`);
+    const req = httpTestingController.expectOne(`${environment.API_URL}/assistidos/${id}/${tipo}`);
     expect(req.request.method).toBe('PUT');
     req.flush(mockAssistidosLista[0]);
   });
@@ -185,5 +186,16 @@ describe(AssistidosService.name, () => {
     const req = httpTestingController.expectOne(`${environment.API_URL}/assistidos/${id}`);
     expect(req.request.method).toBe('GET');
     req.flush(mockAssistidosLista[0]);
+  });
+
+  it('#should retrieve assistidos min from the API via GET', () => {
+    service.listarAssistidosMin().subscribe(assistidos => {
+      expect(assistidos.length).toBe(2);
+      expect(assistidos).toEqual(mockAssistidosLista);
+    });
+
+    const req = httpTestingController.expectOne(`${environment.API_URL}/assistidos/min`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockAssistidosLista);
   });
 });

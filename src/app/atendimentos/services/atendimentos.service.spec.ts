@@ -129,8 +129,9 @@ describe(AtendimentosService.name, () => {
 
   it('#should update an existing atendimento via PUT', () => {
     const idAtendimento = 'ATE00001';
+    const TipoAtendimento = 'Civil';
 
-    service.atualizarAtendimento(mockAtendimento, idAtendimento).subscribe(atendimento => {
+    service.atualizarAtendimento(mockAtendimento, idAtendimento, TipoAtendimento).subscribe(atendimento => {
       expect(atendimento).toEqual(mockAtendimento);
     });
 
@@ -150,5 +151,16 @@ describe(AtendimentosService.name, () => {
     const req = httpTestingController.expectOne(`${environment.API_URL}/atendimentos/${idAtendimento}`);
     expect(req.request.method).toBe('DELETE');
     req.flush(mockAtendimento);
+  });
+
+  it('#should retrieve list of atendimentos to autocomplete from API via GET', () => {
+    service.listagemAtendimentoAutocomplete().subscribe(atendimentos => {
+      expect(atendimentos).toEqual([mockAtendimento]);
+    });
+
+    const req = httpTestingController.expectOne(`${environment.API_URL}/atendimentos/min`);
+
+    expect(req.request.method).toBe('GET');
+    req.flush([mockAtendimento]);
   });
 });

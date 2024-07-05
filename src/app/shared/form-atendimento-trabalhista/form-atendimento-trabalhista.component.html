@@ -482,7 +482,7 @@
         <mat-label>Status</mat-label>
         <mat-select matInput formControlName="status" ngDefaultControl>
           <mat-option *ngFor="let statu of status" [value]="statu">
-            {{ status }}
+            {{ statu }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="formAtendimentosTrabalhista.get('status')?.errors?.['required']">Status

@@ -29,7 +29,7 @@ export class AssistidoAddComponent {
       this.assistidoService.cadastrarAssistido(novoAssistido).subscribe({
         next: (value) => {
           this.abrirModal(value);
-          this.router.navigate(['/assistidos']);
+          this.router.navigate(['assistidos/list']);
         },
         error: (err) => { },
       });

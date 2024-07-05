@@ -37,17 +37,6 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.usuarioService.buscarMeuUsuario().subscribe({
-      next: (usuario) => {
-        if (usuario.role.toLowerCase() === 'estagiario' && this.editarComponente === false) {
-          this.estagiarioControl.setValue(usuario);
-        }
-      },
-      error: () => {
-        alert('Usuário não encontrado!');
-      },
-    });
-
     this.formAtendimentosTrabalhista = this.formBuilder.group({
       '@type': ['Trabalhista'],
       area: [{ value: 'Trabalhista', disabled: true }, Validators.required],
@@ -128,6 +117,17 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
         professor: this.professorControl,
         secretaria: this.secretariaControl
       })
+    });
+
+    this.usuarioService.buscarMeuUsuario().subscribe({
+      next: (usuario) => {
+        if (usuario.role.toLowerCase() === 'estagiario' && this.editarComponente === false) {
+          this.estagiarioControl.setValue(usuario);
+        }
+      },
+      error: () => {
+        alert('Usuário não encontrado!');
+      },
     });
 
     this.formService.setForm(this.formAtendimentosTrabalhista);

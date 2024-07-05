@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
@@ -14,7 +15,7 @@ import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuari
   templateUrl: './edit-users.component.html',
   styleUrls: ['./edit-users.component.scss'],
 })
-export class EditUsersComponent implements OnInit {
+export class EditUsersComponent implements OnInit, PendingChanges {
   tituloDaPagina = 'Editar Usuário';
   cadastro!: Usuario;
   errorMessage!: string;
@@ -57,6 +58,7 @@ export class EditUsersComponent implements OnInit {
 
   editarUsuario() {
     const formValue = this.form?.value;
+    const tipoSelecionado: string = this.form?.value['@type'];
 
     const senhaPresente = formValue.senha !== null && formValue.senha !== undefined;
 
@@ -82,7 +84,7 @@ export class EditUsersComponent implements OnInit {
     }
 
     this.cadastroService
-      .editarCadastro(dadosAtualizados, this.idParam)
+      .editarCadastro(dadosAtualizados, this.idParam, tipoSelecionado)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
@@ -122,5 +124,9 @@ export class EditUsersComponent implements OnInit {
       height: '360px',
       data: { operacao: 'Editado', nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
     });
+  }
+
+  hasUnsavedChanges(): boolean {
+    return this.form ? this.form.dirty : false;
   }
 }

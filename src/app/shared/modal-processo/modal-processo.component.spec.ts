@@ -1,27 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalUsuarioComponent } from './modal-usuario.component';
+import { ModalProcessoComponent } from './modal-processo.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 const dialogDataMock = {
-  tipo: 'COORDENADOR',
-  nome: 'Rodrigo Pacheco',
-  email: 'rodrigo.pacheco@projecao.br',
-  senha: '123456'
+  operacao: 'Alterado',
+  numero: '0001175-18.2013.5.05.0551',
+  nome: 'Indenização por Danos Morais',
+  atendimentoId: 'ATE000004'
 };
 
-describe(ModalUsuarioComponent.name, () => {
-  let component: ModalUsuarioComponent;
-  let fixture: ComponentFixture<ModalUsuarioComponent>;
+describe(ModalProcessoComponent.name, () => {
+  let component: ModalProcessoComponent;
+  let fixture: ComponentFixture<ModalProcessoComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalUsuarioComponent],
+      declarations: [ModalProcessoComponent],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: dialogDataMock }
       ]
     });
-    fixture = TestBed.createComponent(ModalUsuarioComponent);
+    fixture = TestBed.createComponent(ModalProcessoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

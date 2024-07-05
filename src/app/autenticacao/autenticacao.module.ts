@@ -8,7 +8,7 @@ import { AddUsersComponent } from './users/add-users/add-users.component';
 import { EditUsersComponent } from './users/edit-users/edit-users.component';
 import { MaterialModule } from '../core/material/material.module';
 import { SharedModule } from '../shared/shared.module';
-import { AutenticaoRoutingModule } from './autenticao-routing.module';
+import { AutenticaoRoutingModule } from './autenticacao-routing.module';
 import { UsersComponent } from './users/users.component';
 import { ReactiveFormsModule } from '@angular/forms';
 

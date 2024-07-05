@@ -59,7 +59,7 @@ export class FormAssistidosComponent implements OnInit {
       escolaridade: [null],
       telefone: [null, [Validators.minLength(11), Validators.pattern(/^\(\d{2}\)\s\d{5}-\d{4}$/), Validators.required]],
       filiacao: this.formBuilder.group({
-        pai: [null, Validators.required],
+        pai: [null],
         mae: [null, Validators.required],
       }),
       endereco: this.formBuilder.group({

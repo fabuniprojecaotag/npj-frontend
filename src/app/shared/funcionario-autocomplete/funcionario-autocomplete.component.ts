@@ -18,23 +18,38 @@ export class FuncionarioAutocompleteComponent implements OnInit {
 
   filteredOptions$?: Observable<Usuario[]>;
 
+  private carregouUsuarios = false;
+  carregando = false;
+
   constructor(private cadastroService: CadastroService){}
 
   ngOnInit(): void {
-    const filtro: Filtro = {
-      field: 'role',
-      filter: 'EQUAL',
-      value: this.cargo.toLocaleUpperCase()
-    };
-    this.cadastroService.listarUsuarios(filtro).subscribe(
-      dados => {
-        this.funcionarios = dados;
-      }
-    );
     this.filteredOptions$ = this.control.valueChanges.pipe(
       startWith(''),
       map(value => this.filtrarSupervisores(value))
     );
+  }
+
+  carregarUsuarios(): void {
+    if (!this.carregouUsuarios && !this.carregando) {
+      this.carregando = true;
+      const filtro: Filtro = {
+        field: 'role',
+        filter: 'EQUAL',
+        value: this.cargo.toLocaleUpperCase()
+      };
+      this.cadastroService.listarUsuariosMin(filtro).subscribe(
+        dados => {
+          this.funcionarios = dados;
+          this.carregouUsuarios = true;
+          this.carregando = false;
+        },
+        error => {
+          this.carregando = false;
+          alert('Falha ao carregar dados de usuários.');
+        }
+      );
+    }
   }
 
   filtrarSupervisores(value: string | Usuario): Usuario[] {
@@ -48,5 +63,9 @@ export class FuncionarioAutocompleteComponent implements OnInit {
 
   displayFn(usuario: Usuario | null): string {
     return usuario && usuario.nome ? usuario.nome : '';
+  }
+
+  onInputFocus(): void {
+    this.carregarUsuarios();
   }
 }
