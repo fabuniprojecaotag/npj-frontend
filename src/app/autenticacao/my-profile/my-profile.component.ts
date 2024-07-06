@@ -17,7 +17,6 @@ import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuari
 export class MyProfileComponent implements OnInit, PendingChanges {
   tituloPagina = 'Meu Perfil';
   perfilComponente = true;
-
   cadastro!: Usuario;
   form!: FormGroup | null;
 
@@ -28,19 +27,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
     private dialog: MatDialog
   ) { }
 
-  ngOnInit(): void {
-    this.cadastroService.buscarMeuUsuario().subscribe({
-      next: (user) => {
-        this.cadastro = user;
-        this.carregarFormulario();
-      },
-      error: () => {
-        alert('Erro ao recuperar usuário');
-      },
-    });
-  }
-
-  private carregarFormulario(): void {
+  private async carregarFormulario(): Promise<void> {
     this.form = this.formUserService.getForm();
     this.form?.patchValue({
       '@type': this.cadastro['@type'],
@@ -54,6 +41,21 @@ export class MyProfileComponent implements OnInit, PendingChanges {
       email: this.cadastro.email,
       senha: null,
       unidadeInstitucional: this.cadastro.unidadeInstitucional,
+    });
+  }
+
+  ngOnInit(): void {
+    this.cadastroService.buscarMeuUsuario().subscribe({
+      next: (user) => {
+        this.cadastro = user;
+        this.carregarFormulario();
+        setTimeout(() => {
+          this.form?.markAsPristine();
+        });
+      },
+      error: () => {
+        alert('Erro ao recuperar usuário');
+      },
     });
   }
 
@@ -84,7 +86,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
     this.dialog.open(ModalUsuarioComponent, {
       width: '552px',
       height: '360px',
-      data: { operacao: 'Editado', nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha }
+      data: { operacao: 'Editado', nome: usuario.nome, tipo: usuario.role, email: usuario.email, senha: usuario.senha },
     });
   }
 

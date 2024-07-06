@@ -34,8 +34,10 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
       .consultarProcesso(this.numeroParam)
       .subscribe((callback) => {
         this.processo = callback;
-
         this.carregarFormulario();
+        setTimeout(() => {
+          this.form?.markAsPristine();
+        });
       });
   }
 

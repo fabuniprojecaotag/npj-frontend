@@ -38,6 +38,9 @@ export class AtendimentoEditComponent implements OnInit, PendingChanges {
       next: (atendimento) => {
         this.atendimento = atendimento;
         this.carregarFormulario();
+        setTimeout(() => {
+          this.form?.markAsPristine();
+        });
       }
     });
   }

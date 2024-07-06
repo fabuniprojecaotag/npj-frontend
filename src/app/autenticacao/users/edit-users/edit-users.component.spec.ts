@@ -16,20 +16,17 @@ describe('EditUsersComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditUsersComponent, HeaderComponent, UtilsBarComponent, FormUsersComponent, NavMenuComponent, UserMenuComponent, NavItemComponent],
+      declarations: [
+        EditUsersComponent, 
+        HeaderComponent, 
+        UtilsBarComponent, 
+        FormUsersComponent, 
+        NavMenuComponent, 
+        UserMenuComponent, 
+        NavItemComponent
+      ],
       imports: [AppModule],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              paramMap: {
-                get: (key: string) => 'test'
-              }
-            }
-          }
-        }
-      ]
+      providers: [ ]
     });
     fixture = TestBed.createComponent(EditUsersComponent);
     component = fixture.componentInstance;

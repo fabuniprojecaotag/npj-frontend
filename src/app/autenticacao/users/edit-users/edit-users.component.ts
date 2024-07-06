@@ -36,6 +36,9 @@ export class EditUsersComponent implements OnInit, PendingChanges {
     this.usuarioService.buscarCadastro(this.idParam).subscribe((usuario) => {
       this.cadastro = usuario;
       this.carregarFormulario();
+      setTimeout(() => {
+        this.form?.markAsPristine();
+      });
     });
   }
 
