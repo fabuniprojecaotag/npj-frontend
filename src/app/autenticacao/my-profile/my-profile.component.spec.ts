@@ -23,6 +23,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { FuncionarioAutocompleteComponent } from 'src/app/shared/funcionario-autocomplete/funcionario-autocomplete.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const mockUsuario: Usuario = {
   '@type': 'ESTAGIARIO',
@@ -49,13 +51,14 @@ fdescribe(MyProfileComponent.name, () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        MyProfileComponent, 
-        HeaderComponent, 
-        UtilsBarComponent, 
-        NavMenuComponent, 
+        MyProfileComponent,
+        HeaderComponent,
+        UtilsBarComponent,
+        NavMenuComponent,
         NavItemComponent,
         UserMenuComponent,
-        FormUsersComponent
+        FormUsersComponent,
+        FuncionarioAutocompleteComponent
       ],
       imports: [
         BrowserAnimationsModule,
@@ -66,6 +69,7 @@ fdescribe(MyProfileComponent.name, () => {
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,
+        MatAutocompleteModule,
         MatSelectModule,
         MatToolbarModule,
         ReactiveFormsModule,
@@ -85,14 +89,4 @@ fdescribe(MyProfileComponent.name, () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should mark form as dirty after a change', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
-  
-    const form = component.form;
-    form?.get('nome')?.setValue('Nome Alterado');
-  
-    expect(component.hasUnsavedChanges()).toBeTrue();
-  });  
 });

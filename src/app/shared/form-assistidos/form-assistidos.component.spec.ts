@@ -120,6 +120,13 @@ describe(FormAssistidosComponent.name, () => {
     expect(telefone.errors?.['required']).toBeTruthy();
   });
 
+  it('(DOM) should mark the remuneracao field as invalid if it has an invalid monetary format', () => {
+    const remuneracao = component.formAssistidos.controls['remuneracao'];
+    remuneracao.setValue('12345');
+    expect(remuneracao.valid).toBeFalsy();
+    expect(remuneracao.errors?.['pattern']).toBeTruthy();
+  });
+
   it('(DOM) should mark the telefone field as invalid if it has an invalid phone number format', () => {
     const telefone = component.formAssistidos.controls['telefone'];
     telefone.setValue('12345');
