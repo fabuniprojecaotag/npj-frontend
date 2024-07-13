@@ -131,9 +131,12 @@
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Qual o Valor do Sálario anotado na CTPS</mat-label>
-            <input matInput formControlName="valorSalarioCtps" placeholder="Qual o valor do Salário anotado na CTPS?"
-              prefix="R$ " decimalMarker="." [allowNegativeNumbers]="false" mask="separator"
-              [dropSpecialCharacters]="false" [min]="0">
+            <input matInput formControlName="valorSalarioCtps"
+              placeholder="Qual o valor do Salário anotado na CTPS? (R$ 0.000)">
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.valorSalarioCtps')?.errors?.['pattern']">
+              Padrão incorreto (Esperado: R$ 00.000)
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="full">
@@ -146,9 +149,11 @@
           </div>
           <mat-form-field class="input-medio">
             <mat-label>Qual o Valor da Última Remuneração Recebida?</mat-label>
-            <input matInput formControlName="valorUltimaRemuneracao" placeholder="Valor da Ultima Remuneração"
-              prefix="R$ " decimalMarker="." [allowNegativeNumbers]="false" mask="separator"
-              [dropSpecialCharacters]="false" [min]="0">
+            <input matInput formControlName="valorUltimaRemuneracao" placeholder="Valor da Ultima Remuneração">
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.valorUltimaRemuneracao')?.errors?.['pattern']">
+              Padrão incorreto (Esperado: R$ 00.000)
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="full">
@@ -259,58 +264,72 @@
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
-            <mat-label>Paga alguma verba</mat-label>
-            <input matInput formControlName="pagaAlgumaVerba" placeholder="Paga alguma verba" prefix="R$ "
-              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
-              [min]="0">
+            <mat-label>Paga alguma verba?</mat-label>
+            <input matInput formControlName="pagaAlgumaVerba" placeholder="Valor (R$ 0.000)">
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.pagaAlgumaVerba')?.errors?.['pattern']">
+              Padrão incorreto (Esperado: R$ 00.000)
+            </mat-error>
             <mat-hint align="start"><strong>(Caso positivo, anote quais)</strong></mat-hint>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Saldo do salário</mat-label>
-            <input matInput formControlName="saldoSalario" placeholder="Saldo do salário" prefix="R$ " decimalMarker="."
-              [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false" [min]="0">
+            <input matInput formControlName="saldoSalario" placeholder="Saldo do salário">
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha')?.get('relacaoEmpregaticia')?.get('saldoSalario')?.errors?.['required']">Saldo
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.saldoSalario')?.errors?.['required']">Saldo
               do salário é obrigatório</mat-error>
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.saldoSalario')?.errors?.['pattern']">
+              Padrão incorreto (Esperado: R$ 00.000)
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Aviso Prévio Indenizado</mat-label>
-            <input matInput formControlName="avisoPrevioIndenizado" placeholder="Aviso Prévio Indenizado" prefix="R$ "
-              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
-              [min]="0">
+            <input matInput formControlName="avisoPrevioIndenizado" placeholder="Aviso Prévio Indenizado">
           </mat-form-field>
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>13º Salário Proporcional</mat-label>
-            <input matInput formControlName="_13SalarioProporcional" placeholder="13º Salário Proporcional" prefix="R$ "
-              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
-              [min]="0">
+            <input matInput formControlName="_13SalarioProporcional" placeholder="13º Salário Proporcional">
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia._13SalarioProporcional')?.errors?.['pattern']">
+              Padrão incorreto (Esperado: R$ 00.000)
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Férias Vencidas</mat-label>
-            <input matInput formControlName="feriasVencidas" placeholder="Férias Vencidas" prefix="R$ "
-              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
-              [min]="0">
+            <input matInput formControlName="feriasVencidas" placeholder="Férias Vencidas">
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.feriasVencidas')?.errors?.['pattern']">
+              Padrão incorreto (Esperado: R$ 00.000)
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Férias Proporcionais _/12</mat-label>
-            <input matInput formControlName="feriasProporcionais" placeholder="Férias Proporcionais" prefix="R$ "
-              decimalMarker="." [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false"
-              [min]="0">
+            <input matInput formControlName="feriasProporcionais" placeholder="Férias Proporcionais">
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.feriasProporcionais')?.errors?.['pattern']">
+              Padrão incorreto (Esperado: R$ 00.000)
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>1/3 Constitucional sobre Férias</mat-label>
-            <input matInput formControlName="umTercoConstitucionalFerias" placeholder="1/3 Constitucional sobre Férias"
-              prefix="R$ " decimalMarker="." [allowNegativeNumbers]="false" mask="separator"
-              [dropSpecialCharacters]="false" [min]="0">
+            <input matInput formControlName="umTercoConstitucionalFerias" placeholder="1/3 Constitucional sobre Férias">
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.umTercoConstitucionalFerias')?.errors?.['pattern']">
+              Padrão incorreto (Esperado: R$ 00.000)
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Comissões</mat-label>
-            <input matInput formControlName="comissoes" placeholder="Comissões" prefix="R$ " decimalMarker="."
-              [allowNegativeNumbers]="false" mask="separator" [dropSpecialCharacters]="false" [min]="0">
+            <input matInput formControlName="comissoes" placeholder="Comissões">
+            <mat-error
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.comissoes')?.errors?.['pattern']">
+              Padrão incorreto (Esperado: R$ 00.000)
+            </mat-error>
           </mat-form-field>
         </div>
         <mat-form-field class="full">
@@ -490,7 +509,8 @@
       </mat-form-field>
     </div>
     <div class="grupo-botoes">
-      <app-print-button  [dataSet]="formAtendimentosTrabalhista.value" pageName="Atendimento Trabalhista" [config]="[]" [solo]="true" [visible]="editarComponente === true"  ></app-print-button>
+      <app-print-button [dataSet]="formAtendimentosTrabalhista.value" pageName="Atendimento Trabalhista" [config]="[]"
+        [solo]="true" [visible]="editarComponente === true"></app-print-button>
       <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
       <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit" (click)="executarAcao()"
         color="accent">Submeter</button>

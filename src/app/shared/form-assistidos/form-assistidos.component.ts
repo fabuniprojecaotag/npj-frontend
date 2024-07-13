@@ -55,7 +55,7 @@ export class FormAssistidosComponent implements OnInit {
       naturalidade: [null],
       estadoCivil: [null],
       profissao: [null],
-      remuneracao: [null],
+      remuneracao: [null, [Validators.pattern(/^R\$ \d{1,3}(?:[.,]\d{3})*(?:,\d{1,2})?$/)]],
       escolaridade: [null],
       telefone: [null, [Validators.minLength(11), Validators.pattern(/^\(\d{2}\)\s\d{5}-\d{4}$/), Validators.required]],
       filiacao: this.formBuilder.group({
@@ -63,20 +63,20 @@ export class FormAssistidosComponent implements OnInit {
         mae: [null, Validators.required],
       }),
       endereco: this.formBuilder.group({
-        residencial: this.formBuilder.group({
-          cep: [null, [Validators.minLength(8), Validators.required]],
-          bairro: [null, Validators.required],
-          complemento: [null],
-          cidade: [null, Validators.required],
-          logradouro: [null, Validators.required],
-          numero: [null]
-        }),
         comercial: this.formBuilder.group({
           cep: [null, Validators.minLength(8)],
           bairro: [null],
           complemento: [null],
           cidade: [null],
           logradouro: [null],
+          numero: [null]
+        }),
+        residencial: this.formBuilder.group({
+          cep: [null, [Validators.minLength(8), Validators.required]],
+          bairro: [null, Validators.required],
+          complemento: [null],
+          cidade: [null, Validators.required],
+          logradouro: [null, Validators.required],
           numero: [null]
         }),
       }),

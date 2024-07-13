@@ -56,7 +56,7 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
 
   editarProcesso() {
     const dadosAtualizados: Processo = {
-      //numero :this.form?.value.numero, não enviar CPF, pois ocorrera conflito entre documentId e CPF
+      //numero :this.form?.value.numero, não enviar Número, pois ocorrera conflito entre documentId e Número
       nome: this.form?.value.nome,
       dataDistribuicao: this.form?.value.dataDistribuicao,
       vara: this.form?.value.vara,

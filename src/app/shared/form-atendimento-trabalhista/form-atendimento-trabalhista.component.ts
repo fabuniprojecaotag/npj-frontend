@@ -19,6 +19,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
     'Processo ativo',
     'Processo arquivado',
   ];
+  regexMonetaria: RegExp = /^R\$ \d{1,3}(?:[.,]\d{3})*(?:,\d{1,2})?$/;
 
   estagiarioControl: FormControl = new FormControl<tipoEnvolvido | null>(null);
   professorControl: FormControl = new FormControl<tipoEnvolvido | null>(null);
@@ -41,7 +42,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
       '@type': ['Trabalhista'],
       area: [{ value: 'Trabalhista', disabled: true }, Validators.required],
       status: [null],
-      id:[null],
+      id: [null],
       instante: [{ value: new Date().toISOString(), disabled: true }],
       ficha: this.formBuilder.group({
         '@type': ['Trabalhista'],
@@ -65,9 +66,9 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
           dataAdmissao: [null],
           dataSaida: [null],
           funcaoExercida: [null],
-          valorSalarioCtps: [null],
+          valorSalarioCtps: [null, [Validators.pattern(this.regexMonetaria)]],
           salarioAnotadoCtps: [null],
-          valorUltimaRemuneracao: [null],
+          valorUltimaRemuneracao: [null, [Validators.pattern(this.regexMonetaria)]],
           ctpsAssinadaCerto: [null],
           dispensa: [null],
           jornadaTrabalho: [null],
@@ -83,14 +84,14 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
           recebeuGuiasSaqueFgts: [null],
           recebeuFormSeguroDesemprego: [null],
           inssRecolhido: [null],
-          pagaAlgumaVerba: [null],
-          saldoSalario: [null],
-          avisoPrevioIndenizado: [null],
-          _13SalarioProporcional: [null],
-          feriasVencidas: [null],
-          feriasProporcionais: [null],
-          umTercoConstitucionalFerias: [null],
-          comissoes: [null],
+          pagaAlgumaVerba: [null, [Validators.pattern(this.regexMonetaria)]],
+          saldoSalario: [null, [Validators.pattern(this.regexMonetaria)]],
+          avisoPrevioIndenizado: [null, [Validators.pattern(this.regexMonetaria)]],
+          _13SalarioProporcional: [null, [Validators.pattern(this.regexMonetaria)]],
+          feriasVencidas: [null, [Validators.pattern(this.regexMonetaria)]],
+          feriasProporcionais: [null, [Validators.pattern(this.regexMonetaria)]],
+          umTercoConstitucionalFerias: [null, [Validators.pattern(this.regexMonetaria)]],
+          comissoes: [null, [Validators.pattern(this.regexMonetaria)]],
           outrasInformacoes: [null],
         }),
         testemunhas: this.formBuilder.array([this.criarGrupoTestemunha(), this.criarGrupoTestemunha()]),
