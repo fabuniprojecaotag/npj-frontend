@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { tipoEnvolvido } from './../../core/types/atendimento';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-atendimento-civil',
@@ -60,7 +61,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formService: FormsService,
-    private cadastroService: CadastroService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -174,7 +175,11 @@ export class FormAtendimentoCivilComponent implements OnInit {
   }
 
   executarAcao() {
-    this.acaoClique.emit();
+    var msg = "Estou ciente de este que atendimento foi devidamente preenchido e que deve ser classificado pelo professor";
+    var res = window.confirm(msg);
+    if (res) this.acaoClique.emit();
+    window.alert("Atendimento registrado no sistema.");
+    this.router.navigate(['/home']);
   }
 
   executarAcaoExcluir() {
