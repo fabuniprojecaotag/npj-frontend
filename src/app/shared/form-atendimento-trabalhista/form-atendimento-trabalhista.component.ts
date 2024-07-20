@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { tipoEnvolvido } from 'src/app/core/types/atendimento';
@@ -34,7 +35,8 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private usuarioService: CadastroService,
-    private formService: FormsService
+    private formService: FormsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -135,7 +137,11 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
   }
 
   executarAcao() {
-    this.acaoClique.emit();
+    var msg = "Estou ciente de este que atendimento foi devidamente preenchido e que deve ser classificado pelo professor";
+    var res = window.confirm(msg);
+    if (res) this.acaoClique.emit();
+    window.alert("Atendimento registrado no sistema.");
+    this.router.navigate(['/home']);
   }
 
   executarAcaoExcluir() {
