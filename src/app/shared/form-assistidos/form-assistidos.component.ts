@@ -53,10 +53,10 @@ export class FormAssistidosComponent implements OnInit {
       cpf: [{ value: null, disabled: this.editComponent }, [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
       rg: [null, [Validators.required, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)]],
       naturalidade: [null],
-      estadoCivil: [null],
+      estadoCivil: [null, Validators.required],
       profissao: [null],
       remuneracao: [null, [Validators.pattern(/^R\$ \d{1,3}(?:[.,]\d{3})*(?:,\d{1,2})?$/)]],
-      escolaridade: [null],
+      escolaridade: [null, Validators.required],
       telefone: [null, [Validators.minLength(11), Validators.pattern(/^\(\d{2}\)\s\d{5}-\d{4}$/), Validators.required]],
       filiacao: this.formBuilder.group({
         pai: [null],

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Assistido } from 'src/app/core/types/assistido';
+import { Assistido, AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from 'src/app/core/types/assistido';
 import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
 
 @Component({
@@ -13,6 +14,7 @@ import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-as
 })
 export class AssistidoAddComponent {
   tituloDaPagina = 'Novo Assistido';
+  form!: FormGroup<any> | null;
 
   constructor(
     private formAssistidosService: FormsService,
@@ -22,11 +24,53 @@ export class AssistidoAddComponent {
   ) { }
 
   cadastrar(): void {
-    const formCadastroAssistido = this.formAssistidosService.getForm();
+    this.form = this.formAssistidosService.getForm();
 
-    if (formCadastroAssistido?.valid) {
-      const novoAssistido = formCadastroAssistido.getRawValue() as Assistido;
-      this.assistidoService.cadastrarAssistido(novoAssistido).subscribe({
+    let dadosAtualizados: any = {
+      '@type': this.form?.value['@type'],
+      nome: this.form?.value.nome,
+      email: this.form?.value.email,
+      cpf: this.form?.value.cpf,
+      rg: this.form?.value.rg,
+      estadoCivil: this.form?.value.estadoCivil,
+      telefone: this.form?.value.telefone,
+      endereco: this.form?.value.endereco,
+      escolaridade: this.form?.value.escolaridade,
+      filiacao: this.form?.value.filiacao,
+      profissao: this.form?.value.profissao,
+      remuneracao: this.form?.value.remuneracao,
+      nacionalidade: this.form?.value.nacionalidade
+    };
+
+    // Remover campos dependendo do tipo selecionado
+    if (this.form?.value['@type'] === 'Civil') {
+      dadosAtualizados = {
+        ...dadosAtualizados,
+        dataNascimento: this.form?.value.dataNascimento,
+        naturalidade: this.form?.value.naturalidade,
+        dependentes: this.form?.value.dependentes,
+      };
+    } else if (this.form?.value['@type'] === 'Trabalhista') {
+      dadosAtualizados = {
+        ...dadosAtualizados,
+        ctps: this.form?.value.ctps,
+        pis: this.form?.value.pis,
+        empregadoAtualmente: this.form?.value.empregadoAtualmente,
+      };
+    } else if (this.form?.value['@type'] === 'Full') {
+      dadosAtualizados = {
+        ...dadosAtualizados,
+        dataNascimento: this.form?.value.dataNascimento,
+        naturalidade: this.form?.value.naturalidade,
+        dependentes: this.form?.value.dependentes,
+        ctps: this.form?.value.ctps,
+        pis: this.form?.value.pis,
+        empregadoAtualmente: this.form?.value.empregadoAtualmente,
+      };
+    }
+
+    if (this.form?.valid) {
+      this.assistidoService.cadastrarAssistido(dadosAtualizados).subscribe({
         next: (value) => {
           this.abrirModal(value);
           this.router.navigate(['assistidos/list']);

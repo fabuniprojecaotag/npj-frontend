@@ -76,6 +76,8 @@
             <mat-option *ngFor="let estado of estadosCivis" [value]="estado">
               {{ estado }}
             </mat-option>
+            <mat-error *ngIf="formAssistidos.get('estadoCivil')?.errors?.['required']">Estado Civil é
+              obrigatório</mat-error>
           </mat-select>
           <mat-error *ngIf="formAssistidos.get('estadoCivil')?.errors?.['required']">Selecione um estado
             civil</mat-error>
@@ -135,6 +137,8 @@
               {{ escolaridade }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="formAssistidos.get('escolaridade')?.errors?.['required']">Escolaridade é
+            obrigatória</mat-error>
         </mat-form-field>
       </div>
       <div class="col">

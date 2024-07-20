@@ -105,6 +105,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
       filiacao: this.form?.value.filiacao,
       profissao: this.form?.value.profissao,
       remuneracao: this.form?.value.remuneracao,
+      nacionalidade: this.form?.value.nacionalidade
     };
 
     // Remover campos dependendo do tipo selecionado
