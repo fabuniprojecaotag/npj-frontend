@@ -23,6 +23,7 @@ describe(ModalErrosComponent.name, () => {
         { provide: MAT_DIALOG_DATA, useValue: dialogDataMock }
       ]
     });
+
     fixture = TestBed.createComponent(ModalErrosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

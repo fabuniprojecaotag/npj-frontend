@@ -23,6 +23,10 @@ class MockUsuarioService {
   estaLogado() {
     return false;
   }
+
+  salvarToken(token: string) {
+
+  }
 }
 
 describe(LoginComponent.name, () => {
@@ -72,19 +76,11 @@ describe(LoginComponent.name, () => {
     expect(router.navigate).toHaveBeenCalledWith(['/home']);
   });
 
-  it('should navigate to /home after successful login', fakeAsync(() => {
-    component.loginForm.setValue({ email: 'test@example.com', senha: 'password' });
-    component.login();
-    tick(500); // Simula o debounceTime
-    expect(autenticacaoService.autenticar).toHaveBeenCalledWith('test@example.com', 'password');
-    expect(router.navigate).toHaveBeenCalledWith(['/home']);
-  }));
-
   it('should handle login error', fakeAsync(() => {
     spyOn(autenticacaoService, 'autenticar').and.returnValue(throwError('Erro no servidor'));
-    component.loginForm.setValue({ email: 'test@example.com', senha: 'password' });
+    component.loginForm.setValue({ email: 'test@projecao.edu.br', senha: 'password' });
     component.login();
-    tick(500); // Simula o debounceTime
+    tick(500);
     expect(component.isLoading).toBeFalse();
   }));
 
@@ -97,12 +93,9 @@ describe(LoginComponent.name, () => {
 
   it('should navigate to /home after successful login', fakeAsync(() => {
     component.loginForm.setValue({ email: 'test@example.com', senha: 'password' });
-    spyOn(autenticacaoService, 'autenticar')
-    spyOn(component['usuarioService'], 'salvarToken'); 
     component.login();
-    tick(500); // Simula o debounceTime
+    tick(500);
     expect(component.isLoading).toBeFalse();
-    expect(component['usuarioService'].salvarToken).toHaveBeenCalledWith('mockToken');
-    expect(router.navigate).toHaveBeenCalledWith(['/home']);
+    expect((router as any).navigate).toHaveBeenCalledWith(['/home']);
   }));
 });

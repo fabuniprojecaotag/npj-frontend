@@ -52,10 +52,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
         setTimeout(() => {
           this.form?.markAsPristine();
         });
-      },
-      error: () => {
-        alert('Erro ao recuperar usuário');
-      },
+      }
     });
   }
 
@@ -66,6 +63,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
     const senhaPresente = formValue.senha !== null && formValue.senha !== '';
 
     const dadosAtualizados: Usuario = {
+      ...this.cadastro,
       ...formValue,
       ...(senhaPresente && { senha: formValue.senha }),
     };
@@ -77,8 +75,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
         next: () => {
           this.abrirModal(dadosAtualizados);
           this.router.navigate(['/']);
-        },
-        error: (err) => { },
+        }
       });
   }
 
