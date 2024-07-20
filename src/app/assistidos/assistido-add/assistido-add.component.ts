@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Assistido, AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from 'src/app/core/types/assistido';
+import { Assistido } from 'src/app/core/types/assistido';
 import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
 
 @Component({
@@ -26,7 +26,7 @@ export class AssistidoAddComponent {
   cadastrar(): void {
     this.form = this.formAssistidosService.getForm();
 
-    let dadosAtualizados: any = {
+    let novoAssistido: any = {
       '@type': this.form?.value['@type'],
       nome: this.form?.value.nome,
       email: this.form?.value.email,
@@ -44,22 +44,22 @@ export class AssistidoAddComponent {
 
     // Remover campos dependendo do tipo selecionado
     if (this.form?.value['@type'] === 'Civil') {
-      dadosAtualizados = {
-        ...dadosAtualizados,
+      novoAssistido = {
+        ...novoAssistido,
         dataNascimento: this.form?.value.dataNascimento,
         naturalidade: this.form?.value.naturalidade,
         dependentes: this.form?.value.dependentes,
       };
     } else if (this.form?.value['@type'] === 'Trabalhista') {
-      dadosAtualizados = {
-        ...dadosAtualizados,
+      novoAssistido = {
+        ...novoAssistido,
         ctps: this.form?.value.ctps,
         pis: this.form?.value.pis,
         empregadoAtualmente: this.form?.value.empregadoAtualmente,
       };
     } else if (this.form?.value['@type'] === 'Full') {
-      dadosAtualizados = {
-        ...dadosAtualizados,
+      novoAssistido = {
+        ...novoAssistido,
         dataNascimento: this.form?.value.dataNascimento,
         naturalidade: this.form?.value.naturalidade,
         dependentes: this.form?.value.dependentes,
@@ -70,7 +70,7 @@ export class AssistidoAddComponent {
     }
 
     if (this.form?.valid) {
-      this.assistidoService.cadastrarAssistido(dadosAtualizados).subscribe({
+      this.assistidoService.cadastrarAssistido(novoAssistido).subscribe({
         next: (value) => {
           this.abrirModal(value);
           this.router.navigate(['assistidos/list']);

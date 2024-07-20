@@ -54,7 +54,7 @@ export class FormAssistidosComponent implements OnInit {
       rg: [null, [Validators.required, Validators.pattern(/^\d{1,2}\.\d{3}\.\d{3}$/)]],
       naturalidade: [null],
       estadoCivil: [null, Validators.required],
-      profissao: [null],
+      profissao: [null, Validators.required],
       remuneracao: [null, [Validators.pattern(/^R\$ \d{1,3}(?:[.,]\d{3})*(?:,\d{1,2})?$/)]],
       escolaridade: [null, Validators.required],
       telefone: [null, [Validators.minLength(11), Validators.pattern(/^\(\d{2}\)\s\d{5}-\d{4}$/), Validators.required]],
@@ -97,6 +97,7 @@ export class FormAssistidosComponent implements OnInit {
     this.formAssistidos.get('@type')?.valueChanges.subscribe(tipo => {
       const dataNascimentoControler = this.formAssistidos.get('dataNascimento');
       const naturalidade = this.formAssistidos.get('naturalidade');
+      const nacionalidade = this.formAssistidos.get('nacionalidade');
       const dependentes = this.formAssistidos.get('dependentes');
       const pis = this.formAssistidos.get('pis');
       const ctpsNumero = this.formAssistidos.get('ctps')?.get('numero');
@@ -105,22 +106,25 @@ export class FormAssistidosComponent implements OnInit {
 
       if (tipo === 'Civil') {
         dataNascimentoControler?.setValidators(Validators.required);
+        nacionalidade?.setValidators(Validators.required);
         naturalidade?.setValidators(Validators.required);
         dependentes?.setValidators(Validators.required);
-        pis?.clearValidators();
         ctpsNumero?.clearValidators();
         ctpsSerie?.clearValidators();
         ctpsUF?.clearValidators();
+        pis?.clearValidators();
       } else if (tipo === 'Trabalhista') {
         pis?.setValidators(Validators.required);
         ctpsNumero?.setValidators(Validators.required);
         ctpsSerie?.setValidators(Validators.required);
         ctpsUF?.setValidators(Validators.required);
         dataNascimentoControler?.clearValidators();
+        nacionalidade?.clearValidators();
         naturalidade?.clearValidators();
         dependentes?.clearValidators();
       } else if (tipo === 'Ambos') {
         dataNascimentoControler?.setValidators(Validators.required);
+        nacionalidade?.setValidators(Validators.required);
         naturalidade?.setValidators(Validators.required);
         dependentes?.setValidators(Validators.required);
         ctpsNumero?.setValidators(Validators.required);
