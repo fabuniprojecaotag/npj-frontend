@@ -8,6 +8,5 @@ import { Component, Input } from '@angular/core';
 export class NavItemComponent {
   @Input() titulo!: string;
   @Input() icon!: string;
-  @Input() caminhoAdd!: string;
-  @Input() caminhoListar!: string;
+  @Input() items: { label: string, caminho: string, icon: string }[] = [];
 }

@@ -11,27 +11,60 @@
       </mat-expansion-panel-header>
     </mat-expansion-panel>
 
-    <!-- Novo modulo -->
-    <app-nav-item titulo="Assistidos" icon="person_search" caminhoListar="/assistidos/list"
-      caminhoAdd="/assistidos/add"></app-nav-item>
-    <app-nav-item titulo="Atendimentos" icon="check" caminhoListar="/atendimentos/list"
-      caminhoAdd="/atendimentos/novo-atendimento"></app-nav-item>
-    <app-nav-item titulo="Processos" icon="info" caminhoListar="/processos/list"
-      caminhoAdd="/processos/add"></app-nav-item>
+    <!-- Assistidos -->
+    <app-nav-item titulo="Assistidos" icon="person_search" [items]="[
+        { label: 'Visualizar', caminho: '/assistidos/list', icon: 'list' },
+        { label: 'Adicionar', caminho: '/assistidos/add', icon: 'add' }
+      ]">
+    </app-nav-item>
+
+    <!-- Atendimentos -->
+    <app-nav-item titulo="Atendimentos" icon="check" [items]="[
+        { label: 'Visualizar', caminho: '/atendimentos/list', icon: 'list' },
+        { label: 'Novo Atendimento', caminho: '/atendimentos/novo-atendimento', icon: 'add' }
+      ]">
+    </app-nav-item>
+
+    <!-- Processos -->
+    <app-nav-item titulo="Processos" icon="info" [items]="[
+        { label: 'Visualizar', caminho: '/processos/list', icon: 'list' },
+        { label: 'Adicionar', caminho: '/processos/add', icon: 'add' }
+      ]">
+    </app-nav-item>
+
     <div *ngIf="perfilNome === 'COORDENADOR' || perfilNome === 'ADMINISTRADOR'">
-      <app-nav-item titulo="Usuários" icon="manage_accounts" caminhoListar="/users/list"
-        caminhoAdd="/users/add"></app-nav-item>
+      <!-- Usuários -->
+      <app-nav-item titulo="Usuários" icon="manage_accounts" [items]="[
+          { label: 'Visualizar', caminho: '/users/list', icon: 'list' },
+          { label: 'Adicionar', caminho: '/users/add', icon: 'add' }
+        ]">
+      </app-nav-item>
+
+      <!-- Medidas Juridicas -->
+      <app-nav-item titulo="Medidas" icon="assignment" [items]="[
+      { label: 'Visualizar', caminho: '/medidas/list', icon: 'list' },
+      { label: 'Adicionar', caminho: '/medidas/add', icon: 'add' }
+    ]">
+      </app-nav-item>
     </div>
-    <app-nav-item titulo="Agenda" icon="schedule" caminhoListar="/agenda" caminhoAdd="/agenda/add"></app-nav-item>
+
+    <!-- Agenda -->
+    <app-nav-item titulo="Agenda" icon="schedule" [items]="[
+        { label: 'Visualizar', caminho: '/agenda', icon: 'list' },
+        { label: 'Adicionar', caminho: '/agenda/add', icon: 'add' }
+      ]">
+    </app-nav-item>
+
     <!-- Estatísticas -->
     <mat-expansion-panel hideToggle disabled>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <a routerLink="/estatisticas" class="nav__link"><mat-icon aria-hidden="false" aria-label="Analytics icon"
-              fontIcon="analytics" class="icone-nav"></mat-icon>Estatísticas</a>
+          <a routerLink="/estatisticas" class="nav__link">
+            <mat-icon aria-hidden="false" aria-label="Analytics icon" fontIcon="analytics" class="icone-nav"></mat-icon>
+            Estatísticas
+          </a>
         </mat-panel-title>
       </mat-expansion-panel-header>
     </mat-expansion-panel>
-
   </mat-accordion>
 </nav>

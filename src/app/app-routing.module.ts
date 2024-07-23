@@ -35,6 +35,12 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'medidas',
+    loadChildren: () => import('./medidas/medidas.module').then(m => m.MedidasModule),
+    canLoad: [authGuard],
+    canActivate: [authGuard]
+  },
+  {
     path: 'estatisticas',
     loadChildren: () => import('./estatisticas/estatisticas.module').then(m => m.EstatisticasModule),
     canLoad: [authGuard],
