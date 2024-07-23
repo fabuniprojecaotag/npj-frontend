@@ -1,0 +1,27 @@
+@import "../../styles.scss";
+
+.secao-medidas {
+  height: 80vh;
+  margin: 0 auto;
+  width: 90vw;
+
+  p {
+    padding-top: 3em;
+  }
+
+  &__filtro {
+    margin: 1em auto;
+    width: 90vw;
+  }
+
+  .mat-mdc-table thead,
+  .mat-mdc-table .mat-mdc-header-cell {
+    background: $roxo-escuro;
+    color: $branco;
+    text-align: center;
+  }
+
+  .mat-mdc-cell {
+    text-align: center;
+  }
+}

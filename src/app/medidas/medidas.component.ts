@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Atendimento } from '../core/types/atendimento';
+import { Medida } from '../core/types/medida';
+import { MedidasService } from './service/medidas.service';
 
 @Component({
   selector: 'app-medidas',
@@ -6,5 +11,48 @@ import { Component } from '@angular/core';
   styleUrls: ['./medidas.component.scss']
 })
 export class MedidasComponent {
+  tituloPagina = 'Lista de Medidas';
+  listaMedidasJuridicas: Medida[] = [];
+  dataSource: any;
+  colunasMostradas: string[] = ['nome', 'area', 'descricao'];
+  printConfig: any = [
+    {
+      col: 'nome',
+      title: 'Nome'
+    },
+    {
+      col: 'area',
+      title: 'Área',
+    },
+    {
+      col: 'descricao',
+      title: 'Descrição'
+    },
+  ];
+  constructor(private medidasService: MedidasService) { }
 
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit(): void {
+    this.medidasService.listagemMedidas().subscribe({
+      next: (response) => {
+        this.listaMedidasJuridicas = response;
+        console.log(response);
+
+        this.dataSource = new MatTableDataSource<Medida>(this.listaMedidasJuridicas);
+        this.dataSource.paginator = this.paginator;
+      },
+      error: (err) => { },
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }
