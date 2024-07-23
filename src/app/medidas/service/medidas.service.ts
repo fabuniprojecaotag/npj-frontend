@@ -15,4 +15,8 @@ export class MedidasService {
   listagemMedidas(): Observable<Medida[]> {
     return this.http.get<Medida[]>(`${this.API}/medidas-juridicas`);
   }
+
+  cadastrarMedida(medida: Medida): Observable<Medida> {
+    return this.http.post<Medida>(`${this.API}/medidas-juridicas`, medida);
+  }
 }

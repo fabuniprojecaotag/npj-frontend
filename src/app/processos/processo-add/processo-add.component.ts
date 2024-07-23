@@ -12,7 +12,7 @@ import { ModalProcessoComponent } from 'src/app/shared/modal-processo/modal-proc
   styleUrls: ['./processo-add.component.scss'],
 })
 export class ProcessoAddComponent {
-  tituloPagina = 'Processo';
+  tituloPagina = 'Novo Processo';
 
   constructor(
     private processsoService: ProcessosService,

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
-import { generatePdf } from './Print';
+// import { generatePdf } from './Print';
 import { ProcessosService } from 'src/app/processos/services/processos.service';
 import { Processo } from 'src/app/core/types/processo';
 
@@ -192,7 +192,7 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
 
   async downloadPdf() {
     try {
-      await generatePdf();
+      // await generatePdf();
     } catch (error) {
       console.log(`erro ao imprimir:${  error}`);
     }

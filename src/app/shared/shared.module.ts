@@ -10,6 +10,7 @@ import { CardAtalhosComponent } from './card-atalhos/card-atalhos.component';
 import { FormAssistidosComponent } from './form-assistidos/form-assistidos.component';
 import { FormAtendimentoCivilComponent } from './form-atendimento-civil/form-atendimento-civil.component';
 import { FormAtendimentoTrabalhistaComponent } from './form-atendimento-trabalhista/form-atendimento-trabalhista.component';
+import { FormMedidasComponent } from './form-medidas/form-medidas.component';
 import { AtendimentoAutocompleteComponent } from './form-processo/atendimento-autocomplete/atendimento-autocomplete.component';
 import { FormProcessoComponent } from './form-processo/form-processo.component';
 import { FormUsersComponent } from './form-users/form-users.component';
@@ -57,7 +58,8 @@ import { UtilsBarComponent } from './utils-bar/utils-bar.component';
     ModalUsuarioComponent,
     PrintButtonComponent,
     CardProcessosComponent,
-    ModalAtendimentoComponent
+    ModalAtendimentoComponent,
+    FormMedidasComponent
   ],
   imports: [
     CommonModule,
@@ -91,7 +93,8 @@ import { UtilsBarComponent } from './utils-bar/utils-bar.component';
     ModalUsuarioComponent,
     PrintButtonComponent,
     CardProcessosComponent,
-    ModalAtendimentoComponent
+    ModalAtendimentoComponent,
+    FormMedidasComponent
   ],
   providers: [
     provideNgxMask()

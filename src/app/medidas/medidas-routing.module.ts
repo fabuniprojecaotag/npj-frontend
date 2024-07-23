@@ -11,11 +11,11 @@ const routes: Routes = [
     component: MedidasComponent,
   },
   {
-    path: 'add/:id',
+    path: 'add',
     component: MedidasAddComponent,
   },
   {
-    path: 'edit/:id',
+    path: 'edit/:nome',
     component: MedidasEditComponent,
     canDeactivate: [pendingChangesGuard]
   },
