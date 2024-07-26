@@ -19,4 +19,16 @@ export class MedidasService {
   cadastrarMedida(medida: Medida): Observable<Medida> {
     return this.http.post<Medida>(`${this.API}/medidas-juridicas`, medida);
   }
+
+  consultarMedida(nome: string): Observable<Medida> {
+    return this.http.get<Medida>(`${this.API}/medidas-juridicas/${nome}`);
+  }
+
+  atualizarMedida(nome: string, medida: Medida): Observable<Medida> {
+    return this.http.put<Medida>(`${this.API}/medidas-juridicas/${nome}`, medida);
+  }
+
+  excluirMedida(nome: string): Observable<Medida> {
+    return this.http.delete<Medida>(`${this.API}/medidas-juridicas/${nome}`);
+  }
 }
