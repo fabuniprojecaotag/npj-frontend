@@ -73,7 +73,7 @@ export class AtendimentoEditComponent implements OnInit, PendingChanges {
       envolvidos: this.form?.value.envolvidos
     };
 
-    this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento, dadosAtualizados.area).subscribe({
+    this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento, this.atendimento.area).subscribe({
       next: () => {
         this.router.navigate(['/atendimentos/list']);
       },
@@ -107,7 +107,7 @@ export class AtendimentoEditComponent implements OnInit, PendingChanges {
       width: '552px',
       height: '360px',
       data: {
-        operacao: 'Cadastrar',
+        operacao: 'Atualizar',
         area: atendimento.area,
         estagiario: atendimento.envolvidos.estagiario.nome,
         assistido: atendimento.envolvidos.assistido.nome,

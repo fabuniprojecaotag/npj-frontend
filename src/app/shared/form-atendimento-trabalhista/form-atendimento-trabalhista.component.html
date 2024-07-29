@@ -467,8 +467,8 @@
               Jurídica é obrigatória</mat-error>
           </mat-form-field>
         </div>
-        <div class="full">
-          <!-- Exibe o nome do arquivo selecionado se existir -->
+        <!-- Input de arquivos: -->
+        <!-- <div class="full">
           <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado.name }} <button mat-icon-button color="warn"
               (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
           <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
@@ -477,7 +477,7 @@
             <mat-icon>upload_2</mat-icon>Upload
           </button>
           <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx</p>
-        </div>
+        </div> -->
         <div class="input-medio">
           <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados
             Sensiveis:</mat-checkbox>

@@ -5,9 +5,11 @@
     <p>Estagiário: {{ data.estagiario }}</p>
     <p>Assistido: {{ data.assistido }}</p>
     <p>Status: {{ data.status }}</p>
+    <p><strong>Estou ciente de este que atendimento foi devidamente preenchido e que deve ser classificado pelo
+        professor</strong></p>
   </div>
   <div mat-dialog-actions class="modal__botoes">
-    <button mat-raised-button mat-dialog-close (click)="cancelar()">NÂO</button>
+    <button mat-raised-button mat-dialog-close (click)="cancelar()">NÃO</button>
     <button mat-raised-button mat-dialog-close color="accent" (click)="confirmar()">SIM</button>
   </div>
 </section>

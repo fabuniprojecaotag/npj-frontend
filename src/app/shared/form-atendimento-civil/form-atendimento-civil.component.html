@@ -43,7 +43,7 @@
         <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-grande" />
         <app-assistido-autocomplete [control]="assistidoControl" class="input-grande" />
       </div>
-      <button mat-raised-button (click)="abrirNovaGuia()" class="botao-cadastro">Cadastrar Assistido</button>
+      <button mat-raised-button (click)="abrirPaginaAdicionar()" class="botao-cadastro">Cadastrar Assistido</button>
     </div>
 
     <!-- Ficha -->
@@ -196,8 +196,8 @@
         <div class="full">
           <h3 class="titulo-secundario">Assinatura</h3>
         </div>
-        <div class="full">
-          <!-- Exibe o nome do arquivo selecionado se existir -->
+        <!-- Input de arquivos: -->
+        <!-- <div class="full">
           <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado.name }} <button mat-icon-button color="warn"
               (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
           <input type="file" #fileInput hidden (change)="onFileSelected($event)">
@@ -205,7 +205,7 @@
             <mat-icon>upload_2</mat-icon>Upload
           </button>
           <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx</p>
-        </div>
+        </div> -->
         <mat-form-field class="input-grande">
           <mat-label>Medida Jurídica Cabível</mat-label>
           <mat-select formControlName="medidaJuridica" ngDefaultControl>

@@ -175,18 +175,14 @@ export class FormAtendimentoCivilComponent implements OnInit {
   }
 
   executarAcao() {
-    var msg = "Estou ciente de este que atendimento foi devidamente preenchido e que deve ser classificado pelo professor";
-    var res = window.confirm(msg);
-    if (res) this.acaoClique.emit();
-    window.alert("Atendimento registrado no sistema.");
-    this.router.navigate(['/home']);
+    this.acaoClique.emit();
   }
 
   executarAcaoExcluir() {
     this.acaoCliqueExcluir.emit();
   }
 
-  abrirNovaGuia() {
+  abrirPaginaAdicionar() {
     window.open('/assistidos/add', '_blank');
   }
 }
