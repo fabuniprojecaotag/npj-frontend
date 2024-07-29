@@ -6,6 +6,7 @@ import { CadastroService } from 'src/app/autenticacao/services/cadastro.service'
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
+import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
 
 @Component({
   selector: 'app-add-users',
@@ -37,19 +38,20 @@ export class AddUsersComponent {
               this.router.navigate(['/users/list']);
             }
           },
-          error: (err) => { },
         });
     }
   }
 
   private abrirModal(novoCadastro: Usuario) {
-    this.dialog.open(ModalAssistidoComponent, {
+    this.dialog.open(ModalUsuarioComponent, {
       width: '552px',
       height: '360px',
       data: {
         tituloCriado: 'Usuário',
         nome: novoCadastro.nome,
         email: novoCadastro.email,
+        senha: novoCadastro.senha,
+        tipo: novoCadastro.role
       },
     });
   }

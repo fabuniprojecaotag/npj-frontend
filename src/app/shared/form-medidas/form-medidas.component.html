@@ -7,7 +7,7 @@
         <mat-label>Nome da ação</mat-label>
         <input matInput placeholder="Nome da ação" formControlName="nome" />
         <mat-error *ngIf="formMedidas.get('nome')?.errors?.['required']">
-          Nome da ação é obrigatória!
+          Nome da ação é obrigatório!
         </mat-error>
       </mat-form-field>
     </div>
@@ -21,6 +21,7 @@
         </mat-error>
       </mat-form-field>
     </div>
+
     <div class="linha">
       <mat-form-field class="inputs-medios">
         <mat-label>Descrição</mat-label>
@@ -31,9 +32,12 @@
     <div class="espacador"></div>
 
     <div class="btn-group">
-      <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true"
-        (click)="excluir()">Excluir</button>
-      <button mat-flat-button class="btn btn-basic" [disabled]="formMedidas.invalid">Salvar</button>
+      <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true" (click)="excluir()">
+        Excluir
+      </button>
+      <button mat-flat-button class="btn btn-basic" [disabled]="formMedidas.invalid">
+        Salvar
+      </button>
       <button mat-flat-button class="btn" color="accent" (click)="executarAcao()" [disabled]="formMedidas.invalid">
         Submeter
       </button>

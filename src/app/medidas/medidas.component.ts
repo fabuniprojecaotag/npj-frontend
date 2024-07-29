@@ -15,20 +15,21 @@ export class MedidasComponent {
   listaMedidasJuridicas: Medida[] = [];
   dataSource: any;
   colunasMostradas: string[] = ['nome', 'area', 'descricao'];
-  printConfig: any = [
-    {
-      col: 'nome',
-      title: 'Nome'
-    },
-    {
-      col: 'area',
-      title: 'Área',
-    },
-    {
-      col: 'descricao',
-      title: 'Descrição'
-    },
-  ];
+  // colunas pra impressão que possivelmente serão utilziadas:
+  // printConfig: any = [
+  //   {
+  //     col: 'nome',
+  //     title: 'Nome'
+  //   },
+  //   {
+  //     col: 'area',
+  //     title: 'Área',
+  //   },
+  //   {
+  //     col: 'descricao',
+  //     title: 'Descrição'
+  //   },
+  // ];
   constructor(private medidasService: MedidasService) { }
 
 
@@ -38,8 +39,6 @@ export class MedidasComponent {
     this.medidasService.listagemMedidas().subscribe({
       next: (response) => {
         this.listaMedidasJuridicas = response;
-        console.log(response);
-
         this.dataSource = new MatTableDataSource<Medida>(this.listaMedidasJuridicas);
         this.dataSource.paginator = this.paginator;
       },

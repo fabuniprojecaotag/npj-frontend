@@ -20,7 +20,7 @@ export class FormMedidasComponent implements OnInit {
 
   ngOnInit(): void {
     this.formMedidas = this.formBuilder.group({
-      nome: [{value: null, disabled: this.editComponent}, Validators.required],
+      nome: [{ value: null, disabled: this.editComponent }, Validators.required],
       area: [null, Validators.required],
       descricao: [null]
     });

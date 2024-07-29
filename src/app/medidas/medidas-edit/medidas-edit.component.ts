@@ -5,6 +5,7 @@ import { MedidasService } from '../service/medidas.service';
 import { Medida } from 'src/app/core/types/medida';
 import { FormGroup } from '@angular/forms';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-medidas-edit',
@@ -47,13 +48,15 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
   }
 
   editar() {
-    const dadosAtualizados = {
+    const dadosAtualizados: any = {
       //nome :this.form?.value.nome, não enviar Nome, pois ocorrera conflito entre documentId e Nome
       descricao: this.form?.value.descricao,
       area: this.form?.value.area,
     };
+
     this.medidasService
-      .atualizarMedida(this.numeroParam, dadosAtualizados)
+      .atualizarMedida(this.numeroParam, dadosAtualizados as Medida)
+      .pipe(debounceTime(500))
       .subscribe({
         next: () => {
           this.form?.markAsPristine();
@@ -63,13 +66,15 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
   }
 
   excluir() {
-    this.medidasService.excluirMedida(this.nome).subscribe({
-      next: () => {
-        this.form?.markAsPristine();
-        this.router.navigate(['/medidas/list']);
-      },
-      error: () => { },
-    });
+    this.medidasService.excluirMedida(this.nome)
+      .pipe(debounceTime(500))
+      .subscribe({
+        next: () => {
+          this.form?.markAsPristine();
+          this.router.navigate(['/medidas/list']);
+        },
+        error: () => { },
+      });
   }
 
   @HostListener('window:beforeunload', ['$event'])
