@@ -24,7 +24,7 @@ export class AtendimentosComponent implements AfterViewInit {
       title: 'Tipo'
     },
     {
-      col: 'dataCriacao',
+      col: 'instante',
       title: 'Data Criação',
       format: 'formatDate'
     },
