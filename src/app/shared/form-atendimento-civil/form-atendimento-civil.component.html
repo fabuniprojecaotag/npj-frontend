@@ -209,8 +209,8 @@
         <mat-form-field class="input-grande">
           <mat-label>Medida Jurídica Cabível</mat-label>
           <mat-select formControlName="medidaJuridica" ngDefaultControl>
-            <mat-option *ngFor="let medida of medidasJudiciais" [value]="medida">
-              {{ medida }}
+            <mat-option *ngFor="let medida of medidasJudiciais" [value]="medida.nome">
+              {{ medida.nome }}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="formAtendimentos.get('ficha')?.get('medidaJuridica')?.errors?.['required']">Medida é obrigatoria!</mat-error>

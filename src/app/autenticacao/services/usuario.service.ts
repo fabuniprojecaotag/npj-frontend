@@ -43,4 +43,9 @@ export class UsuarioService {
   estaLogado(): boolean {
     return this.tokenService.possuiToken();
   }
+
+  obterRoles(): string {
+    const usuario = this.userSubject.getValue();
+    return usuario?.role || '';
+  }
 }

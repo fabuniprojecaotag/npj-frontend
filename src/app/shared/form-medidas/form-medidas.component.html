@@ -13,12 +13,15 @@
     </div>
 
     <div class="linha">
-      <mat-form-field class="inputs-medios">
+      <mat-form-field class="input-pequeno">
         <mat-label>Área</mat-label>
-        <input matInput placeholder="Área" formControlName="area" />
-        <mat-error *ngIf="formMedidas.get('area')?.errors?.['required']">
-          Área é obrigatória!
-        </mat-error>
+        <mat-select matInput formControlName="area" ngDefaultControl>
+          <mat-option *ngFor="let area of areas" [value]="area">
+            {{ area }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formMedidas.get('area')?.errors?.['required']">Área
+          é obrigatória!</mat-error>
       </mat-form-field>
     </div>
 

@@ -12,6 +12,10 @@ export class FormMedidasComponent implements OnInit {
   @Output() acaoExcluir: EventEmitter<void> = new EventEmitter<void>();
   @Input() editComponent = false;
   formMedidas!: FormGroup;
+  areas: string[] = [
+    'Cívil',
+    'Família'
+  ]
 
   constructor(
     private formBuilder: FormBuilder,

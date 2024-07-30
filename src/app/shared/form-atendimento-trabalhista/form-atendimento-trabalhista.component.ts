@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { tipoEnvolvido } from 'src/app/core/types/atendimento';
+import { Medida } from 'src/app/core/types/medida';
+import { MedidasService } from 'src/app/medidas/service/medidas.service';
 
 @Component({
   selector: 'app-form-atendimento-trabalhista',
@@ -20,6 +23,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
     'Processo ativo',
     'Processo arquivado',
   ];
+  medidasJudiciais: Medida[] = [];
   regexMonetaria: RegExp = /^R\$ \d{1,3}(?:[.,]\d{3})*(?:,\d{1,2})?$/;
 
   estagiarioControl: FormControl = new FormControl<tipoEnvolvido | null>(null);
@@ -36,7 +40,7 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private usuarioService: CadastroService,
     private formService: FormsService,
-    private router: Router
+    private medidasService: MedidasService
   ) { }
 
   ngOnInit() {
@@ -132,6 +136,16 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
         alert('Usuário não encontrado!');
       },
     });
+
+    this.medidasService.listagemMedidas()
+      .pipe(
+        map(medidas => medidas.filter(medida => medida.area === "Trabalhista"))
+      )
+      .subscribe(filteredMedidas => {
+        this.medidasJudiciais = filteredMedidas;
+        this.formAtendimentosTrabalhista.get('ficha.medidaJuridica')?.setValue('');
+        this.formAtendimentosTrabalhista.get('ficha.medidaJuridica')?.updateValueAndValidity();
+      });
 
     this.formService.setForm(this.formAtendimentosTrabalhista);
   }

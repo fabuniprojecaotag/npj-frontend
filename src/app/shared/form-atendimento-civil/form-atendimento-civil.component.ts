@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
+import { Router } from '@angular/router';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { tipoEnvolvido } from './../../core/types/atendimento';
-import { Router } from '@angular/router';
+import { MedidasService } from 'src/app/medidas/service/medidas.service';
+import { Medida } from 'src/app/core/types/medida';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-form-atendimento-civil',
@@ -25,29 +27,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
     'Família',
     'Penal'
   ];
-  medidasFamilia: string[] = [
-    'Ação de Alimentos',
-    'Ação de Cumprimento de sentença de alimentos - prisão',
-    'Ação de Cumprimento de sentença de alimentos - penhora',
-    'Ação de Guarda',
-    'Ação de Regulamentação de visitas',
-    'Ação de divórcio',
-    'Ação de reconhecimento e dissolução de união estável',
-    'Ação de reconhecimento e dissolução de união estável post mortem',
-    'Ação de interdição',
-    'Ação de inventário',
-    'Alvará Judicial',
-    'Outro'
-  ];
-  medidasCivil: string[] = [
-    'Ação de reparação por danos materiais',
-    'Ação de reparação por danos morais',
-    'Ação de reparação por danos materiais com morais',
-    'Obrigação de fazer',
-    'Consignação de Pagamento',
-    'Ação de cobrança'
-  ];
-  medidasJudiciais: string[] = this.medidasCivil;
+  medidasJudiciais!: Medida[];
   estagiarioControl: FormControl = new FormControl<tipoEnvolvido | null>(null);
   professorControl: FormControl = new FormControl<tipoEnvolvido | null>(null);
   secretariaControl: FormControl = new FormControl<tipoEnvolvido | null>(null);
@@ -61,7 +41,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formService: FormsService,
-    private router: Router
+    private medidasService: MedidasService
   ) { }
 
   ngOnInit(): void {
@@ -105,16 +85,21 @@ export class FormAtendimentoCivilComponent implements OnInit {
       })
     });
 
-    this.formAtendimentos.get('area')?.valueChanges.subscribe(area => {
-      if (area === 'Civil') {
-        this.medidasJudiciais = this.medidasCivil;
-      } else if (area === 'Penal' || area === 'Família') {
-        this.medidasJudiciais = this.medidasFamilia;
-      }
-
-      this.formAtendimentos.get('ficha.medidaJuridica')?.patchValue('');
-      this.formAtendimentos.get('ficha.medidaJuridica')?.updateValueAndValidity();
-    });
+    this.formAtendimentos.get('area')?.valueChanges
+    .pipe(
+      map(area => {
+        this.medidasService.listagemMedidas()
+          .pipe(
+            map(medidas => medidas.filter(medida => medida.area === area))
+          )
+          .subscribe(filteredMedidas => {
+            this.medidasJudiciais = filteredMedidas;
+            this.formAtendimentos.get('ficha.medidaJuridica')?.setValue('');
+            this.formAtendimentos.get('ficha.medidaJuridica')?.updateValueAndValidity();
+          });
+      })
+    )
+    .subscribe();
 
     this.formService.setForm(this.formAtendimentos);
   }

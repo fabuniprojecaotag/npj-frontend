@@ -8,23 +8,24 @@ import { AddUsersComponent } from './users/add-users/add-users.component';
 import { EditUsersComponent } from './users/edit-users/edit-users.component';
 import { UsersComponent } from './users/users.component';
 import { pendingChangesGuard } from '../core/guards/pending-changes.guard';
+import { roleGuard } from '../core/guards/role.guard';
 
 const routes: Routes = [
   {
     path: 'add',
     component: AddUsersComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, roleGuard],
   },
   {
     path: 'edit/:id',
     component: EditUsersComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, roleGuard],
     canDeactivate: [pendingChangesGuard]
   },
   {
     path: 'list',
     component: UsersComponent,
-    canActivate: [authGuard]
+    canActivate: [roleGuard]
   },
   {
     path: 'profile',

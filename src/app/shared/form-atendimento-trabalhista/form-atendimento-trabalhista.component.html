@@ -460,14 +460,16 @@
           <mat-form-field class="input-grande">
             <mat-label>Medida Jurídica Cabível</mat-label>
             <mat-select formControlName="medidaJuridica" ngDefaultControl>
-              <mat-option value="Reclamação trabalhista">Reclamação trabalhista</mat-option>
+              <mat-option *ngFor="let medida of medidasJudiciais" [value]="medida.nome">
+                {{ medida.nome }}
+              </mat-option>
             </mat-select>
             <mat-error
               *ngIf="formAtendimentosTrabalhista.get('ficha')?.get('medidaJuridica')?.errors?.['required']">Medida
               Jurídica é obrigatória</mat-error>
           </mat-form-field>
         </div>
-        <!-- Input de arquivos: -->
+        <!-- Input de arquivos -->
         <!-- <div class="full">
           <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado.name }} <button mat-icon-button color="warn"
               (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>

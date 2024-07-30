@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { authGuard } from './autenticacao/auth.guard';
 import { HomeComponent } from './home/home.component';
+import { roleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
   {
@@ -38,7 +39,7 @@ const routes: Routes = [
     path: 'medidas',
     loadChildren: () => import('./medidas/medidas.module').then(m => m.MedidasModule),
     canLoad: [authGuard],
-    canActivate: [authGuard]
+    canActivate: [authGuard, roleGuard]
   },
   {
     path: 'estatisticas',
