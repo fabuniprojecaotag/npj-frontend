@@ -14,7 +14,6 @@ import { debounceTime } from 'rxjs';
 })
 export class MedidasEditComponent implements OnInit, PendingChanges {
   tituloPagina = 'Editar Medida Jurídica';
-  numeroParam!: string;
   medida!: Medida;
   form!: FormGroup<any> | null;
   id!: string;
@@ -56,7 +55,7 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
     };
 
     this.medidasService
-      .atualizarMedida(this.numeroParam, dadosAtualizados as Medida)
+      .atualizarMedida(this.id, dadosAtualizados as Medida)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
