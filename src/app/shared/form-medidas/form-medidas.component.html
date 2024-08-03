@@ -5,7 +5,7 @@
     <div class="linha">
       <mat-form-field>
         <mat-label>ID</mat-label>
-        <input matInput formControlName="id" />
+        <input matInput formControlName="id"/>
       </mat-form-field>
     </div>
 
@@ -42,11 +42,14 @@
     <div class="espacador"></div>
 
     <div class="btn-group">
-      <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true" (click)="excluir()">
+      <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true" (click)="emitirAcaoExcluir()">
         Excluir
       </button>
-      <button mat-flat-button class="btn btn-basic" (click)="emitirAcaoSalvar()" [disabled]="formMedidas.invalid">
-        Salvar
+      <button mat-flat-button class="btn" (click)="emitirAcaoInserir()" [disabled]="formMedidas.invalid">
+        Inserir
+      </button>
+      <button mat-flat-button class="btn" (click)="emitirAcaoInserirEPermanecer()" [disabled]="formMedidas.invalid">
+        Inserir e Permancer
       </button>
       <button mat-flat-button class="btn" color="accent" (click)="emitirAcaoSubmeter()" [disabled]="formMedidas.invalid">
         Submeter
