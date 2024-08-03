@@ -17,7 +17,7 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
   numeroParam!: string;
   medida!: Medida;
   form!: FormGroup<any> | null;
-  nome!: string;
+  id!: string;
 
   constructor(
     private formService: FormsService,
@@ -27,9 +27,9 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
   ) { }
 
   ngOnInit(): void {
-    this.nome = this.route.snapshot.paramMap.get('nome') as string;
+    this.id = this.route.snapshot.paramMap.get('id') as string;
     this.medidasService
-      .consultarMedida(this.nome)
+      .consultarMedida(this.id)
       .subscribe((callback) => {
         this.medida = callback;
         this.carregarFormulario();
@@ -39,6 +39,7 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
   carregarFormulario() {
     this.form = this.formService.getForm();
     this.form?.patchValue({
+      id: this.medida.id,
       nome: this.medida.nome,
       descricao: this.medida.descricao,
       area: this.medida.area,
@@ -49,7 +50,7 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
 
   editar() {
     const dadosAtualizados: any = {
-      //nome :this.form?.value.nome, não enviar Nome, pois ocorrera conflito entre documentId e Nome
+      nome: this.form?.value.nome,
       descricao: this.form?.value.descricao,
       area: this.form?.value.area,
     };
@@ -66,7 +67,7 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
   }
 
   excluir() {
-    this.medidasService.excluirMedida(this.nome)
+    this.medidasService.excluirMedida(this.id)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {

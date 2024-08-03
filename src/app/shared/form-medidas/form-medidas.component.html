@@ -4,6 +4,13 @@
   <form class="formulario" [formGroup]="formMedidas">
     <div class="linha">
       <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" />
+      </mat-form-field>
+    </div>
+
+    <div class="linha">
+      <mat-form-field>
         <mat-label>Nome da ação</mat-label>
         <input matInput placeholder="Nome da ação" formControlName="nome" />
         <mat-error *ngIf="formMedidas.get('nome')?.errors?.['required']">

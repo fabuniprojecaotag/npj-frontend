@@ -1,5 +1,6 @@
 export interface Medida {
-  nome?: string,
+  id: string,
+  nome: string,
   descricao?: string,
   area: string
 }
