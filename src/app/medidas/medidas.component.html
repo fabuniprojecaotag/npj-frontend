@@ -18,7 +18,8 @@
       <!-- Nome Coluna -->
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
-        <td mat-cell *matCellDef="let medida"><a [routerLink]="'/medidas/edit/' + medida.nome">{{ medida.nome }}</a>
+        <td mat-cell *matCellDef="let medida">
+          {{ medida.nome }}
         </td>
       </ng-container>
 
