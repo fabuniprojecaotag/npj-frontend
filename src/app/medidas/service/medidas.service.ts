@@ -20,15 +20,15 @@ export class MedidasService {
     return this.http.post<Medida>(`${this.API}/medidas-juridicas`, medida);
   }
 
-  consultarMedida(nome: string): Observable<Medida> {
-    return this.http.get<Medida>(`${this.API}/medidas-juridicas/${nome}`);
+  consultarMedida(id: string): Observable<Medida> {
+    return this.http.get<Medida>(`${this.API}/medidas-juridicas/${id}`);
   }
 
-  atualizarMedida(nome: string, medida: Medida): Observable<Medida> {
-    return this.http.put<Medida>(`${this.API}/medidas-juridicas/${nome}`, medida);
+  atualizarMedida(id: string, medida: Medida): Observable<Medida> {
+    return this.http.put<Medida>(`${this.API}/medidas-juridicas/${id}`, medida);
   }
 
-  excluirMedida(nome: string): Observable<Medida> {
-    return this.http.delete<Medida>(`${this.API}/medidas-juridicas/${nome}`);
+  excluirMedida(id: string): Observable<Medida> {
+    return this.http.delete<Medida>(`${this.API}/medidas-juridicas/${id}`);
   }
 }
