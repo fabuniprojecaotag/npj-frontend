@@ -8,7 +8,8 @@ import { FormsService } from 'src/app/core/services/forms.service';
   styleUrls: ['./form-medidas.component.scss']
 })
 export class FormMedidasComponent implements OnInit {
-  @Output() acaoClick: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoSalvar: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoSubmeter: EventEmitter<void> = new EventEmitter<void>();
   @Output() acaoExcluir: EventEmitter<void> = new EventEmitter<void>();
   @Input() editComponent = false;
   formMedidas!: FormGroup;
@@ -33,8 +34,12 @@ export class FormMedidasComponent implements OnInit {
     this.formService.setForm(this.formMedidas);
   }
 
-  executarAcao() {
-    this.acaoClick.emit();
+  emitirAcaoSalvar() {
+    this.acaoSalvar.emit();
+  }
+
+  emitirAcaoSubmeter() {
+    this.acaoSubmeter.emit();
   }
 
   excluir() {

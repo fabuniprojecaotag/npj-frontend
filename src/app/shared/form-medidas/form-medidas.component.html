@@ -45,10 +45,10 @@
       <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true" (click)="excluir()">
         Excluir
       </button>
-      <button mat-flat-button class="btn btn-basic" [disabled]="formMedidas.invalid">
+      <button mat-flat-button class="btn btn-basic" (click)="emitirAcaoSalvar()" [disabled]="formMedidas.invalid">
         Salvar
       </button>
-      <button mat-flat-button class="btn" color="accent" (click)="executarAcao()" [disabled]="formMedidas.invalid">
+      <button mat-flat-button class="btn" color="accent" (click)="emitirAcaoSubmeter()" [disabled]="formMedidas.invalid">
         Submeter
       </button>
     </div>

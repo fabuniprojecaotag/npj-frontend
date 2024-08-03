@@ -65,6 +65,24 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
       });
   }
 
+  salvar() {
+    const dadosAtualizados: any = {
+      nome: this.form?.value.nome,
+      descricao: this.form?.value.descricao,
+      area: this.form?.value.area,
+    };
+
+    this.medidasService
+      .atualizarMedida(this.id, dadosAtualizados as Medida)
+      .pipe(debounceTime(500))
+      .subscribe({
+        next: () => {
+          this.form?.markAsPristine();
+          window.alert('Edição realizada com sucesso.');
+        },
+      });
+  }
+
   excluir() {
     this.medidasService.excluirMedida(this.id)
       .pipe(debounceTime(500))
