@@ -31,19 +31,17 @@ export class AssistidoAutocompleteComponent implements OnInit {
   carregarAssistidos(): void {
     if (!this.carregouAssistidos && !this.carregando) {
       this.carregando = true;
-      this.assistidosService.listarAssistidosMin().subscribe(
-        dados => {
+      this.assistidosService.listarAssistidosMin().subscribe({
+        next: (dados) => {
           this.assistidos = dados;
           this.carregouAssistidos = true;
           this.carregando = false;
         },
-        error => {
+        error: () => {
           this.carregando = false;
-          alert('Falha ao carregar dados de assistidos.');
         }
-      );
+      });
     };
-    
   }
 
   filtrarAssistidos(value: string | Assistido): Assistido[] {
@@ -57,9 +55,5 @@ export class AssistidoAutocompleteComponent implements OnInit {
 
   displayFn (assistido: Assistido): string {
     return assistido && assistido.nome ? assistido.nome : '';
-  }
-
-  onInputFocus(): void {
-    this.carregarAssistidos();
   }
 }

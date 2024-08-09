@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -27,8 +27,9 @@ export class MyProfileComponent implements OnInit, PendingChanges {
     private dialog: MatDialog
   ) { }
 
-  private async carregarFormulario(): Promise<void> {
+  carregarFormulario() {
     this.form = this.formUserService.getForm();
+    
     this.form?.patchValue({
       '@type': this.cadastro['@type'],
       nome: this.cadastro.nome,
@@ -42,6 +43,8 @@ export class MyProfileComponent implements OnInit, PendingChanges {
       senha: null,
       unidadeInstitucional: this.cadastro.unidadeInstitucional,
     });
+
+    this.form?.markAsPristine();
   }
 
   ngOnInit(): void {
@@ -49,9 +52,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
       next: (user) => {
         this.cadastro = user;
         this.carregarFormulario();
-        setTimeout(() => {
-          this.form?.markAsPristine();
-        });
+        this.form?.markAsPristine();
       }
     });
   }
@@ -73,6 +74,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
+          this.form?.markAsPristine();
           this.abrirModal(dadosAtualizados);
           this.router.navigate(['/']);
         }

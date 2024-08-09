@@ -51,6 +51,7 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
       vara: this.processo.vara,
       forum: this.processo.forum,
       status: this.processo.status,
+      assistidoId: this.processo.assistidoId
     });
   }
 
@@ -62,7 +63,8 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
       vara: this.form?.value.vara,
       forum: this.form?.value.forum,
       atendimentoId: this.form?.value.atendimentoId,
-      status: this.form?.value.status
+      status: this.form?.value.status,
+      assistidoId: this.form?.value.assistidoId
     };
     this.processsoService
       .editarProcesso(this.numeroParam, dadosAtualizados)

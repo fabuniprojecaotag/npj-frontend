@@ -1,6 +1,6 @@
 <mat-form-field appearance="outline">
   <mat-label>Assistido</mat-label>
-  <input matInput placeholder="Digite o nome do Assistido" [formControl]="control" ngDefaultControl [matAutocomplete]="auto" (focus)="onInputFocus()">
+  <input matInput placeholder="Digite o nome do Assistido" [formControl]="control" ngDefaultControl [matAutocomplete]="auto" (focus)="carregarAssistidos()">
   <mat-icon matSuffix>search</mat-icon>
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
     <mat-option *ngFor="let assistido of filteredOptions$ | async" [value]="assistido">
