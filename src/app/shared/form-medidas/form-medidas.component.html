@@ -4,6 +4,13 @@
   <form class="formulario" [formGroup]="formMedidas">
     <div class="linha">
       <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id"/>
+      </mat-form-field>
+    </div>
+
+    <div class="linha">
+      <mat-form-field>
         <mat-label>Nome da ação</mat-label>
         <input matInput placeholder="Nome da ação" formControlName="nome" />
         <mat-error *ngIf="formMedidas.get('nome')?.errors?.['required']">
@@ -35,13 +42,16 @@
     <div class="espacador"></div>
 
     <div class="btn-group">
-      <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true" (click)="excluir()">
+      <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true" (click)="emitirAcaoExcluir()">
         Excluir
       </button>
-      <button mat-flat-button class="btn btn-basic" [disabled]="formMedidas.invalid">
-        Salvar
+      <button mat-flat-button class="btn" (click)="emitirAcaoInserir()" [disabled]="formMedidas.invalid">
+        Inserir
       </button>
-      <button mat-flat-button class="btn" color="accent" (click)="executarAcao()" [disabled]="formMedidas.invalid">
+      <button mat-flat-button class="btn" (click)="emitirAcaoInserirEPermanecer()" [disabled]="formMedidas.invalid">
+        Inserir e Permancer
+      </button>
+      <button mat-flat-button class="btn" color="accent" (click)="emitirAcaoSubmeter()" [disabled]="formMedidas.invalid">
         Submeter
       </button>
     </div>

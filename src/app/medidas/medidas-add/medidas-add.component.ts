@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-medidas-add',
   templateUrl: './medidas-add.component.html',
-  styleUrls: ['./medidas-add.component.scss']
+  styleUrls: ['./medidas-add.component.scss'],
 })
 export class MedidasAddComponent {
   tituloPagina = 'Nova Medida Jurídica';
@@ -16,19 +16,46 @@ export class MedidasAddComponent {
     private formService: FormsService,
     private medidasService: MedidasService,
     private router: Router
-  ) { }
+  ) {}
 
-  cadastrar() {
-    const formCadastroProcesso = this.formService.getForm();
+  private getForm(): Medida {
+    return this.formService.getForm()?.getRawValue() as Medida;
+  }
 
-    if (formCadastroProcesso?.valid) {
-      const novoCadastro = formCadastroProcesso.getRawValue() as Medida;
-      this.medidasService.cadastrarMedida(novoCadastro).subscribe({
-        next: () => {
-          this.router.navigate(['/medidas/list']);
-          alert('Medida Jurídica cadastrada com sucesso!')
-        }
-      });
-    }
+  private emitSucessAlert(): void {
+    alert('Medida Jurídica cadastrada com sucesso.');
+  }
+
+  inserir() {
+    const form = this.getForm();
+
+    this.medidasService.cadastrarMedida(form).subscribe({
+      next: () => {
+        this.emitSucessAlert();
+        window.location.reload();
+      },
+    });
+  }
+
+  inserirEPermanecer() {
+    const form = this.getForm();
+
+    this.medidasService.cadastrarMedida(form).subscribe({
+      next: () => {
+        this.emitSucessAlert();
+        // TODO: Chamar serviço ou método que recupera o registro criado e atualiza a URL para o registro criado
+      },
+    });
+  }
+
+  submeter() {
+    const form = this.getForm();
+
+    this.medidasService.cadastrarMedida(form).subscribe({
+      next: () => {
+        this.router.navigate(['/medidas/list']);
+        this.emitSucessAlert();
+      },
+    });
   }
 }

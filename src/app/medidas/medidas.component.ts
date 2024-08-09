@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Atendimento } from '../core/types/atendimento';
 import { Medida } from '../core/types/medida';
 import { MedidasService } from './service/medidas.service';
 
@@ -14,7 +13,7 @@ export class MedidasComponent {
   tituloPagina = 'Lista de Medidas';
   listaMedidasJuridicas: Medida[] = [];
   dataSource: any;
-  colunasMostradas: string[] = ['nome', 'area', 'descricao'];
+  colunasMostradas: string[] = ['id', 'nome', 'area', 'descricao'];
   // colunas pra impressão que possivelmente serão utilziadas:
   // printConfig: any = [
   //   {

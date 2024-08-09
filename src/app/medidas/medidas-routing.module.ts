@@ -15,7 +15,7 @@ const routes: Routes = [
     component: MedidasAddComponent,
   },
   {
-    path: 'edit/:nome',
+    path: 'edit/:id',
     component: MedidasEditComponent,
     canDeactivate: [pendingChangesGuard]
   },

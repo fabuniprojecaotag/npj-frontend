@@ -8,8 +8,11 @@ import { FormsService } from 'src/app/core/services/forms.service';
   styleUrls: ['./form-medidas.component.scss']
 })
 export class FormMedidasComponent implements OnInit {
-  @Output() acaoClick: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoInserir: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoInserirEPermanecer: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoSubmeter: EventEmitter<void> = new EventEmitter<void>();
   @Output() acaoExcluir: EventEmitter<void> = new EventEmitter<void>();
+  @Input() salvarComponent = false;
   @Input() editComponent = false;
   formMedidas!: FormGroup;
   areas: string[] = [
@@ -24,7 +27,8 @@ export class FormMedidasComponent implements OnInit {
 
   ngOnInit(): void {
     this.formMedidas = this.formBuilder.group({
-      nome: [{ value: null, disabled: this.editComponent }, Validators.required],
+      id: [{ value: null, disabled: this.salvarComponent }],
+      nome: [null, Validators.required],
       area: [null, Validators.required],
       descricao: [null]
     });
@@ -32,11 +36,19 @@ export class FormMedidasComponent implements OnInit {
     this.formService.setForm(this.formMedidas);
   }
 
-  executarAcao() {
-    this.acaoClick.emit();
+  emitirAcaoInserir() {
+    this.acaoInserir.emit();
   }
 
-  excluir() {
+  emitirAcaoInserirEPermanecer() {
+    this.acaoInserirEPermanecer.emit();
+  }
+
+  emitirAcaoSubmeter() {
+    this.acaoSubmeter.emit();
+  }
+
+  emitirAcaoExcluir() {
     this.acaoExcluir.emit();
   }
 }
