@@ -37,13 +37,11 @@ export class AssistidoAutocompleteComponent implements OnInit {
           this.carregouAssistidos = true;
           this.carregando = false;
         },
-        error => {
+        error: () => {
           this.carregando = false;
-          alert('Falha ao carregar dados de assistidos.');
         }
-      );
+      });
     };
-    
   }
 
   filtrarAssistidos(value: string | Assistido): Assistido[] {
@@ -57,9 +55,5 @@ export class AssistidoAutocompleteComponent implements OnInit {
 
   displayFn (assistido: Assistido): string {
     return assistido && assistido.nome ? assistido.nome : '';
-  }
-
-  onInputFocus(): void {
-    this.carregarAssistidos();
   }
 }

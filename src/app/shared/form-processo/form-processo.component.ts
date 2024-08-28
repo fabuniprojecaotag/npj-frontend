@@ -27,7 +27,8 @@ export class FormProcessoComponent implements OnInit {
       dataDistribuicao: [null, Validators.required],
       vara: [null, Validators.required],
       forum: [null, Validators.required],
-      status: [null, Validators.required]
+      status: [null, Validators.required],
+      assistidoId: [null, Validators.required]
     });
     this.formService.setForm(this.formProcessos);
   }

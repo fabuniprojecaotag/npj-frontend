@@ -40,7 +40,7 @@
       <ng-container matColumnDef="dataDeCriacao">
         <th mat-header-cell *matHeaderCellDef>Data de Criação</th>
         <td mat-cell *matCellDef="let atendimento">
-          {{ atendimento.instante | date:'dd/MM/yyyy HH:mm:ss' }}
+          {{ atendimento.instante | date:'HH:mm - dd/MM/yyyy' }}
         </td>
       </ng-container>
 
