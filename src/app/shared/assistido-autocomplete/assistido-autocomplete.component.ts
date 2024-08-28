@@ -37,10 +37,10 @@ export class AssistidoAutocompleteComponent implements OnInit {
           this.carregouAssistidos = true;
           this.carregando = false;
         },
-        error: () => {
+        error => {
           this.carregando = false;
         }
-      });
+      );
     };
   }
 
