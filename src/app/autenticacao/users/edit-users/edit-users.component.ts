@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { Payload } from 'src/app/core/types/payload';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
@@ -20,7 +21,7 @@ export class EditUsersComponent implements OnInit, PendingChanges {
   cadastro!: Usuario;
   errorMessage!: string;
   form!: FormGroup | null;
-  idParam = this.route.snapshot.paramMap.get('id') as string;
+  id = this.route.snapshot.paramMap.get('id') as string;
   subtituloErro = 'Erro ao Editar';
 
   constructor(
@@ -33,7 +34,7 @@ export class EditUsersComponent implements OnInit, PendingChanges {
   ) { }
 
   ngOnInit(): void {
-    this.usuarioService.buscarCadastro(this.idParam).subscribe((usuario) => {
+    this.usuarioService.buscarCadastro(this.id).subscribe((usuario) => {
       this.cadastro = usuario;
       this.carregarFormulario();
       setTimeout(() => {
@@ -86,8 +87,13 @@ export class EditUsersComponent implements OnInit, PendingChanges {
       dadosAtualizados.supervisor = formValue.supervisor;
     }
 
+    const payload: Payload = {
+      body: dadosAtualizados,
+      classType: tipoSelecionado
+    };
+
     this.cadastroService
-      .editarCadastro(dadosAtualizados, this.idParam, tipoSelecionado)
+      .editarCadastro(payload, this.id)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {

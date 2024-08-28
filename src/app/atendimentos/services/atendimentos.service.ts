@@ -4,16 +4,19 @@ import { environment } from 'src/environments/environment';
 import { Atendimento } from '../../core/types/atendimento';
 import { Observable } from 'rxjs';
 import { Filtro } from '../../core/types/filtro';
+import { Response } from 'src/app/core/types/response';
+import { Payload } from 'src/app/core/types/payload';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AtendimentosService {
   private API = environment.API_URL;
+  private url = this.API + '/atendimentos';
 
   constructor(private http: HttpClient) { }
 
-  listagemAtendimentos(filtro?: Filtro): Observable<Atendimento[]> {
+  listagemAtendimentos(filtro?: Filtro): Observable<Response> {
     let params = new HttpParams();
     if (filtro) {
       params = params
@@ -21,26 +24,28 @@ export class AtendimentosService {
         .set('filter', filtro.filter)
         .set('value', filtro.value);
     }
-    return this.http.get<Atendimento[]>(`${this.API}/atendimentos`, { params });
+    return this.http.get<Response>(`${this.url}`, { params });
   }
 
-  listagemAtendimentoAutocomplete(): Observable<Atendimento[]> {
-    return this.http.get<Atendimento[]>(`${this.API}/atendimentos/min`);
+  listagemAtendimentoAutocomplete(): Observable<any> {
+    let params = new HttpParams().set('returnType', 'autoComplete');
+    return this.http.get<Atendimento[]>(`${this.url}`, { params });
   }
 
-  consultaAtendimento(idAtendimento: string): Observable<Atendimento> {
-    return this.http.get<Atendimento>(`${this.API}/atendimentos/${idAtendimento}`);
+  consultaAtendimento(id: string): Observable<Atendimento> {
+    return this.http.get<Atendimento>(`${this.url}/${id}`);
   }
 
   cadastrarAtendimento(atendimento: Atendimento): Observable<Atendimento> {
-    return this.http.post<Atendimento>(`${this.API}/atendimentos`, atendimento);
+    return this.http.post<Atendimento>(`${this.url}`, atendimento);
   }
 
-  atualizarAtendimento(atendimento: Atendimento, id: string, clazz: string): Observable<Atendimento> {
-    return this.http.put<Atendimento>(`${this.API}/atendimentos/${id}/${clazz}`, atendimento);
+  atualizarAtendimento(payload: Payload, id: string): Observable<Atendimento> {
+    return this.http.put<Atendimento>(`${this.url}/${id}`, payload);
   }
 
-  excluirAtendimento(idAtendimento: string): Observable<Atendimento> {
-    return this.http.delete<Atendimento>(`${this.API}/atendimentos/${idAtendimento}`);
+  excluirAtendimento(id: string): Observable<Atendimento> {
+    let body = {'ids': [id]};
+    return this.http.delete<Atendimento>(`${this.url}/${id}`, { body });
   }
 }

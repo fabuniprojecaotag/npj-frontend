@@ -38,7 +38,6 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private usuarioService: CadastroService,
     private formService: FormsService,
     private medidasService: MedidasService
   ) { }
@@ -126,26 +125,15 @@ export class FormAtendimentoTrabalhistaComponent implements OnInit {
       })
     });
 
-    this.usuarioService.buscarMeuUsuario().subscribe({
-      next: (usuario) => {
-        if (usuario.role.toLowerCase() === 'estagiario' && this.editarComponente === false) {
-          this.estagiarioControl.setValue(usuario);
-        }
-      },
-      error: () => {
-        alert('Usuário não encontrado!');
-      },
-    });
-
-    this.medidasService.listagemMedidas()
-      .pipe(
-        map(medidas => medidas.filter(medida => medida.area === "Trabalhista"))
-      )
-      .subscribe(filteredMedidas => {
-        this.medidasJudiciais = filteredMedidas;
-        this.formAtendimentosTrabalhista.get('ficha.medidaJuridica')?.setValue('');
-        this.formAtendimentosTrabalhista.get('ficha.medidaJuridica')?.updateValueAndValidity();
-      });
+    // this.medidasService.listagemMedidas()
+    //   .pipe(
+    //     map(medidas => medidas.list.filter(medida => medida.area === "Trabalhista"))
+    //   )
+    //   .subscribe(filteredMedidas => {
+    //     this.medidasJudiciais = filteredMedidas;
+    //     this.formAtendimentosTrabalhista.get('ficha.medidaJuridica')?.setValue('');
+    //     this.formAtendimentosTrabalhista.get('ficha.medidaJuridica')?.updateValueAndValidity();
+    //   });
 
     this.formService.setForm(this.formAtendimentosTrabalhista);
   }

@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { Payload } from 'src/app/core/types/payload';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Processo } from 'src/app/core/types/processo';
 import { ProcessosService } from 'src/app/processos/services/processos.service';
@@ -64,8 +65,14 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
       atendimentoId: this.form?.value.atendimentoId,
       status: this.form?.value.status
     };
+
+    const payload: Payload = {
+      body: dadosAtualizados,
+      classType: null
+    };
+
     this.processsoService
-      .editarProcesso(this.numeroParam, dadosAtualizados)
+      .editarProcesso(this.numeroParam, payload)
       .subscribe({
         next: () => {
           this.router.navigate(['/processos/list']);

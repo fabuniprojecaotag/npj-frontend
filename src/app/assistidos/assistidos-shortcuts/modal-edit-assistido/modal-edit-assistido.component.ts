@@ -8,6 +8,7 @@ import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-as
 import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 import { AssistidosService } from '../../services/assistidos.service';
+import { Payload } from 'src/app/core/types/payload';
 
 @Component({
   selector: 'app-modal-edit-assistido',
@@ -17,7 +18,7 @@ import { AssistidosService } from '../../services/assistidos.service';
 export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
   assistido!: AssistidoFull | AssistidoCivil | AssistidoTrabalhista;
   form!: FormGroup | null;
-  idParam!: string;
+  id!: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -30,7 +31,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.assistido = this.data.assistido;
-    this.idParam = this.data.assistido.cpf;
+    this.id = this.data.assistido.cpf;
   }
 
   ngAfterViewInit(): void {
@@ -135,7 +136,12 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
       };
     }
 
-    this.assistidoService.editarAssistido(this.idParam, dadosAtualizados, tipoSelecionado).subscribe({
+    const payload: Payload = {
+      body: dadosAtualizados,
+      classType: dadosAtualizados.area
+    };
+
+    this.assistidoService.editarAssistido(this.id, payload).subscribe({
       next: () => {
         this.dialog.closeAll();
         this.atualizarPagina();
@@ -145,7 +151,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
   }
 
   excluir() {
-    this.assistidoService.excluirAssistido(this.idParam).subscribe({
+    this.assistidoService.excluirAssistido(this.id).subscribe({
       next: () => {
         this.dialog.closeAll();
         this.router.navigate(['/assistidos/list']);

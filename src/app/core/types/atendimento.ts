@@ -9,7 +9,7 @@ export interface Atendimento {
   instante?: string,
   ficha: FichaCivil | FichaTrabalhista,
   prazoEntregaDocumentos?: string,
-  historico?: EntradaHistorico[],
+  historico?: string,
   envolvidos: Envolvido
 }
 

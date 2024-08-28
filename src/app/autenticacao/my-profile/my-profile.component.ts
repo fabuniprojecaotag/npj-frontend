@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
+import { Payload } from 'src/app/core/types/payload';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
@@ -68,8 +69,13 @@ export class MyProfileComponent implements OnInit, PendingChanges {
       ...(senhaPresente && { senha: formValue.senha }),
     };
 
+    const payload: Payload = {
+      body: dadosAtualizados,
+      classType: tipoSelecionado
+    };
+
     this.cadastroService
-      .editarCadastro(dadosAtualizados, dadosAtualizados.email, tipoSelecionado)
+      .editarCadastro(payload, dadosAtualizados.email)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {

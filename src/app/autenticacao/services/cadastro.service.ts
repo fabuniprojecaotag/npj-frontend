@@ -4,28 +4,31 @@ import { environment } from 'src/environments/environment';
 import { Usuario } from '../../core/types/usuario';
 import { Observable } from 'rxjs';
 import { Filtro } from '../../core/types/filtro';
+import { Response } from 'src/app/core/types/response';
+import { Payload } from 'src/app/core/types/payload';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CadastroService {
-  private apiUrl = environment.API_URL;
+  private API = environment.API_URL;
+  private url = this.API + '/usuarios';
 
   constructor(private http: HttpClient) {}
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/usuarios`, usuario);
+    return this.http.post<Usuario>(`${this.url}`, usuario);
   }
 
   buscarCadastro(email: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/usuarios/${email}`);
+    return this.http.get<Usuario>(`${this.url}/${email}`);
   }
 
   buscarMeuUsuario(): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/usuarios/me`);
+    return this.http.get<Usuario>(`${this.url}/me`);
   }
 
-  listarUsuarios(filtro?: Filtro): Observable<Usuario[]> {
+  listarUsuarios(filtro?: Filtro): Observable<Response> {
     let params = new HttpParams();
     if (filtro) {
       params = params
@@ -33,28 +36,27 @@ export class CadastroService {
         .set('filter', filtro.filter)
         .set('value', filtro.value);
     }
-    return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios`, { params });
+    return this.http.get<Response>(`${this.url}`, { params });
   }
 
-  listarUsuariosMin(filtro?: Filtro): Observable<Usuario[]> {
+  listarUsuariosForAutoComplete(filtro?: Filtro): Observable<Response> {
     let params = new HttpParams();
     if (filtro) {
       params = params
         .set('field', filtro.field)
         .set('filter', filtro.filter)
-        .set('value', filtro.value);
+        .set('value', filtro.value)
+        .set('returnType', 'autoComplete');
     }
-    return this.http.get<Usuario[]>(`${this.apiUrl}/usuarios/min`, { params });
+    return this.http.get<Response>(`${this.url}`, { params });
   }
 
-  editarCadastro(usuario: Usuario, userEmail: string, clazz: string): Observable<Usuario> {
-    return this.http.put<Usuario>(
-      `${this.apiUrl}/usuarios/${userEmail}/${clazz}`,
-      usuario
-    );
+  editarCadastro(payload: Payload, userEmail: string): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.url}/${userEmail}`, payload);
   }
 
   excluirCadastro(userEmail: string) {
-    return this.http.delete(`${this.apiUrl}/usuarios/${userEmail}`);
+    let body = {'ids': [userEmail]};
+    return this.http.delete(`${this.url}`, { body });
   }
 }

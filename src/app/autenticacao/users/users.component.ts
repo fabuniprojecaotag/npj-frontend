@@ -33,7 +33,7 @@ export class UsersComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.service.listarUsuarios().subscribe({
       next: (response) => {
-        this.listaUsuarios = response;
+        this.listaUsuarios = response.list;
 
         // Inicializa a seleção com base no status dos usuários
         this.selection = new SelectionModel<Usuario>(

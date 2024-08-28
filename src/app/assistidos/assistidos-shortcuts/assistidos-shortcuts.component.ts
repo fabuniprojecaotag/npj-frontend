@@ -41,15 +41,15 @@ export class AssistidosShortcutsComponent implements OnInit {
       error: () => { },
     });
 
-    this.assistidosService.listagemAtendimentosDoAssistido(this.cpf).subscribe({
+    this.assistidosService.listarAtendimentosVinculados(this.cpf).subscribe({
       next: (resposta) => {
-        this.listaAtendimento = resposta;
+        this.listaAtendimento = resposta.list;
       }
     });
 
     this.processoService.listarProcessos().subscribe({
       next: (resposta) => {
-        this.listaProcesso = resposta;
+        this.listaProcesso = resposta.list;
       }
     });
   }

@@ -85,21 +85,21 @@ export class FormAtendimentoCivilComponent implements OnInit {
       })
     });
 
-    this.formAtendimentos.get('area')?.valueChanges
-    .pipe(
-      map(area => {
-        this.medidasService.listagemMedidas()
-          .pipe(
-            map(medidas => medidas.filter(medida => medida.area === area))
-          )
-          .subscribe(filteredMedidas => {
-            this.medidasJudiciais = filteredMedidas;
-            this.formAtendimentos.get('ficha.medidaJuridica')?.setValue('');
-            this.formAtendimentos.get('ficha.medidaJuridica')?.updateValueAndValidity();
-          });
-      })
-    )
-    .subscribe();
+    // this.formAtendimentos.get('area')?.valueChanges
+    // .pipe(
+    //   map(area => {
+    //     this.medidasService.listagemMedidas()
+    //       .pipe(
+    //         map(medidas => medidas.filter(medida => medida.area === area))
+    //       )
+    //       .subscribe(filteredMedidas => {
+    //         this.medidasJudiciais = filteredMedidas;
+    //         this.formAtendimentos.get('ficha.medidaJuridica')?.setValue('');
+    //         this.formAtendimentos.get('ficha.medidaJuridica')?.updateValueAndValidity();
+    //       });
+    //   })
+    // )
+    // .subscribe();
 
     this.formService.setForm(this.formAtendimentos);
   }

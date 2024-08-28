@@ -6,6 +6,7 @@ import { Medida } from 'src/app/core/types/medida';
 import { FormGroup } from '@angular/forms';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { debounceTime } from 'rxjs';
+import { Payload } from 'src/app/core/types/payload';
 
 @Component({
   selector: 'app-medidas-edit',
@@ -54,8 +55,13 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
       area: this.form?.value.area,
     };
 
+    const payload: Payload = {
+      body: dadosAtualizados,
+      classType: null
+    };
+
     this.medidasService
-      .atualizarMedida(this.id, dadosAtualizados as Medida)
+      .atualizarMedida(this.id, payload)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
@@ -72,8 +78,13 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
       area: this.form?.value.area,
     };
 
+    const payload: Payload = {
+      body: dadosAtualizados,
+      classType: null
+    };
+
     this.medidasService
-      .atualizarMedida(this.id, dadosAtualizados as Medida)
+      .atualizarMedida(this.id, payload)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {

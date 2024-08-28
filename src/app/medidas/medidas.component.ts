@@ -37,7 +37,7 @@ export class MedidasComponent {
   ngAfterViewInit(): void {
     this.medidasService.listagemMedidas().subscribe({
       next: (response) => {
-        this.listaMedidasJuridicas = response;
+        this.listaMedidasJuridicas = response.list;
         this.dataSource = new MatTableDataSource<Medida>(this.listaMedidasJuridicas);
         this.dataSource.paginator = this.paginator;
       },

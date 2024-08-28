@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 import { ModalAtendimentoComponent } from 'src/app/shared/modal-atendimento/modal-atendimento.component';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
+import { Payload } from 'src/app/core/types/payload';
 
 @Component({
   selector: 'app-atendimento-edit',
@@ -17,7 +18,7 @@ import { PendingChanges } from 'src/app/core/types/pending-changes';
 export class AtendimentoEditComponent implements OnInit, PendingChanges {
   tituloPagina = 'Editar - ';
   tipoFicha!: string;
-  idAtendimento!: string;
+  id!: string;
   atendimento!: Atendimento;
   form!: FormGroup | null;
 
@@ -31,10 +32,10 @@ export class AtendimentoEditComponent implements OnInit, PendingChanges {
 
   ngOnInit(): void {
     this.tipoFicha = this.route.snapshot.paramMap.get('ficha') as string;
-    this.idAtendimento = this.route.snapshot.paramMap.get('id') as string;
-    this.tituloPagina += this.idAtendimento;
+    this.id = this.route.snapshot.paramMap.get('id') as string;
+    this.tituloPagina += this.id;
 
-    this.atendimentoService.consultaAtendimento(this.idAtendimento).subscribe({
+    this.atendimentoService.consultaAtendimento(this.id).subscribe({
       next: (atendimento) => {
         this.atendimento = atendimento;
         this.carregarFormulario();
@@ -48,15 +49,12 @@ export class AtendimentoEditComponent implements OnInit, PendingChanges {
   carregarFormulario() {
     this.form = this.formService.getForm();
     this.form?.patchValue({
-      id:this.idAtendimento,
+      id:this.id,
       status: this.atendimento.status,
       area: this.atendimento.area,
       instante: this.atendimento.instante,
       ficha: this.atendimento.ficha,
-      historico: this.atendimento.historico?.map(item => {
-        const { id, ...rest } = item;
-        return rest;
-      }),
+      historico: this.atendimento.historico,
       prazoEntregaDocumentos: this.atendimento.prazoEntregaDocumentos,
       envolvidos: this.atendimento.envolvidos
     });
@@ -73,7 +71,12 @@ export class AtendimentoEditComponent implements OnInit, PendingChanges {
       envolvidos: this.form?.value.envolvidos
     };
 
-    this.atendimentoService.atualizarAtendimento(dadosAtualizados, this.idAtendimento, this.atendimento.area).subscribe({
+    const payload: Payload = {
+      body: dadosAtualizados,
+      classType: dadosAtualizados.area
+    };
+
+    this.atendimentoService.atualizarAtendimento(payload, this.id).subscribe({
       next: () => {
         this.router.navigate(['/atendimentos/list']);
       },

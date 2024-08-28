@@ -38,9 +38,9 @@ export class FuncionarioAutocompleteComponent implements OnInit {
         filter: 'EQUAL',
         value: this.cargo.toLocaleUpperCase()
       };
-      this.cadastroService.listarUsuariosMin(filtro).subscribe(
+      this.cadastroService.listarUsuariosForAutoComplete(filtro).subscribe(
         dados => {
-          this.funcionarios = dados;
+          this.funcionarios = dados.list;
           this.carregouUsuarios = true;
           this.carregando = false;
         },

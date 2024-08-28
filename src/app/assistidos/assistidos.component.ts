@@ -22,7 +22,7 @@ export class AssistidosComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.service.listarAssistidos().subscribe({
       next: (response) => {
-        this.listaAssistidos = response;
+        this.listaAssistidos = response.list;
 
         this.dataSource = new MatTableDataSource<Assistido>(this.listaAssistidos);
         this.dataSource.paginator = this.paginator;

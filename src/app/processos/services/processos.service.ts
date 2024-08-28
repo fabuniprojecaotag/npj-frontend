@@ -1,34 +1,38 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Processo } from '../../core/types/processo';
+import { Payload } from 'src/app/core/types/payload';
+import { Response } from 'src/app/core/types/response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessosService {
   private API = environment.API_URL;
+  private url = this.API + '/processos';
 
   constructor(private http: HttpClient) { }
 
   cadastraProcesso(processo: Processo): Observable<Processo> {
-    return this.http.post<Processo>(`${this.API}/processos`, processo);
+    return this.http.post<Processo>(`${this.url}`, processo);
   }
 
-  listarProcessos(): Observable<Processo[]> {
-    return this.http.get<Processo[]>(`${this.API}/processos`);
+  listarProcessos(): Observable<Response> {
+    return this.http.get<Response>(`${this.url}`);
   }
 
-  consultarProcesso(idProcesso: string): Observable<Processo> {
-    return this.http.get<Processo>(`${this.API}/processos/${idProcesso}`);
+  consultarProcesso(id: string): Observable<Processo> {
+    return this.http.get<Processo>(`${this.url}/${id}`);
   }
 
-  editarProcesso(idProcesso: string, processo: Processo): Observable<Processo> {
-    return this.http.put<Processo>(`${this.API}/processos/${idProcesso}`, processo);
+  editarProcesso(id: string, payload: Payload): Observable<Processo> {
+    return this.http.put<Processo>(`${this.url}/${id}`, payload);
   }
 
-  excluirProcesso(idProcesso: string): Observable<Processo> {
-    return this.http.delete<Processo>(`${this.API}/processos/${idProcesso}`);
+  excluirProcesso(id: string): Observable<Processo> {
+    let body = {'ids': [id]};
+    return this.http.delete<Processo>(`${this.url}`, { body });
   }
 }

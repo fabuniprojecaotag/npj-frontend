@@ -161,7 +161,7 @@ describe('AssistidosShortcutsComponent', () => {
   });
 
   it('should open modal for displaying atendimentos', () => {
-    mockAssistidosService.listagemAtendimentosDoAssistido.and.returnValue(of([mockAtendimento]));
+    mockAssistidosService.listarAtendimentosVinculados.and.returnValue(of([mockAtendimento]));
     component.abrirModalAtendimento();
     expect(mockMatDialog.open).toHaveBeenCalledWith(ModalAtalhosComponent, {
       width: '1200px',
@@ -172,7 +172,7 @@ describe('AssistidosShortcutsComponent', () => {
   });
 
   it('should open modal for displaying processos', () => {
-    mockAssistidosService.listagemAtendimentosDoAssistido.and.returnValue(of([mockAtendimento]));
+    mockAssistidosService.listarAtendimentosVinculados.and.returnValue(of([mockAtendimento]));
     component.abrirModalProcesso();
     expect(mockMatDialog.open).toHaveBeenCalledWith(ModalAtalhosComponent, {
       width: '1200px',

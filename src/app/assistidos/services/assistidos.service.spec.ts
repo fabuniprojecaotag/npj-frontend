@@ -134,7 +134,7 @@ describe(AssistidosService.name, () => {
 
   it('#should retrieve atendimentos related to assistido from the API via GET', () => {
     const id = mockAssistidosLista[0].cpf;
-    service.listagemAtendimentosDoAssistido(id).subscribe(atendimento => {
+    service.listarAtendimentosVinculados(id).subscribe(atendimento => {
       expect(atendimento.length).toBe(1);
       expect(atendimento[0].id).toEqual(mockListaAtendimento[0].id);
     });
@@ -189,7 +189,7 @@ describe(AssistidosService.name, () => {
   });
 
   it('#should retrieve assistidos min from the API via GET', () => {
-    service.listarAssistidosMin().subscribe(assistidos => {
+    service.listarAssistidosForAutoComplete().subscribe(assistidos => {
       expect(assistidos.length).toBe(2);
       expect(assistidos).toEqual(mockAssistidosLista);
     });
