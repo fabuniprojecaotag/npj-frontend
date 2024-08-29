@@ -30,7 +30,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
 
   carregarFormulario() {
     this.form = this.formUserService.getForm();
-    
+
     this.form?.patchValue({
       '@type': this.cadastro['@type'],
       nome: this.cadastro.nome,
@@ -44,8 +44,6 @@ export class MyProfileComponent implements OnInit, PendingChanges {
       senha: null,
       unidadeInstitucional: this.cadastro.unidadeInstitucional,
     });
-
-    this.form?.markAsPristine();
   }
 
   ngOnInit(): void {
@@ -53,7 +51,9 @@ export class MyProfileComponent implements OnInit, PendingChanges {
       next: (user) => {
         this.cadastro = user;
         this.carregarFormulario();
-        this.form?.markAsPristine();
+        setTimeout(() => {
+          this.form?.markAsPristine();
+        });
       }
     });
   }
@@ -75,12 +75,13 @@ export class MyProfileComponent implements OnInit, PendingChanges {
       classType: tipoSelecionado
     };
 
+    this.form?.markAsPristine();
+
     this.cadastroService
       .editarCadastro(payload, dadosAtualizados.email)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
-          this.form?.markAsPristine();
           this.abrirModal(dadosAtualizados);
           this.router.navigate(['/']);
         }

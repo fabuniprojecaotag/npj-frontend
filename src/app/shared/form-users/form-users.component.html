@@ -82,11 +82,11 @@
             </mat-form-field>
             <mat-form-field appearance="outline" *ngIf="cadastrarSenhaControl.value === true">
               <mat-label>Senha</mat-label>
-              <input matInput formControlName="senha" [type]="escondido ? 'password' : 'text'"
+              <input matInput formControlName="senha" [type]="senhaEscondida ? 'password' : 'text'"
                 placeholder="Digite sua senha">
-              <button mat-icon-button matSuffix type="button" (click)="escondido = !escondido"
-                [attr.aria-label]="'Esconder a senha'" [attr.aria-pressed]="escondido">
-                <mat-icon>{{escondido ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <button mat-icon-button matSuffix type="button" (click)="senhaEscondida = !senhaEscondida"
+                [attr.aria-label]="'Esconder a senha'" [attr.aria-pressed]="senhaEscondida">
+                <mat-icon>{{senhaEscondida ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
               <mat-error *ngIf="formCadastro.get('senha')?.errors?.['required']">Senha é obrigatória</mat-error>
               <mat-error *ngIf="formCadastro.get('senha')?.errors?.['minlength']">Senha deve ter pelo menos 6
@@ -119,7 +119,7 @@
       <mat-card-actions class="full-width">
         <button type="button" *ngIf="editComponent === true" (click)="excluir()" mat-flat-button color="warn">EXCLUIR
         </button>
-        <button mat-flat-button [disabled]="formCadastro.invalid" (executarAcaoSemRedirecionar)="acaoClique2">SALVAR
+        <button mat-flat-button [disabled]="formCadastro.invalid" (executarAcaoPermanecendo)="acaoCliquePermanecendo">SALVAR
         </button>
         <button mat-flat-button [disabled]="formCadastro.invalid" color="accent" (executarAcao)="acaoClique">SUBMETER
         </button>

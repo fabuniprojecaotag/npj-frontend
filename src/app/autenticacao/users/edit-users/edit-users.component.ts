@@ -92,15 +92,15 @@ export class EditUsersComponent implements OnInit, PendingChanges {
       classType: tipoSelecionado
     };
 
+    this.form?.markAsPristine();
+
     this.cadastroService
       .editarCadastro(payload, this.id)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
           this.abrirModalEditar(dadosAtualizados);
-          this.router.navigate(['/users/list']);
-        },
-        error: (err) => { },
+        }
       });
   }
 
@@ -109,9 +109,8 @@ export class EditUsersComponent implements OnInit, PendingChanges {
     .pipe(debounceTime(500))
     .subscribe({
       next: () => {
-        this.router.navigate(['/users']);
-      },
-      error: () => { },
+        this.router.navigate(['/users/list']);
+      }
     });
   }
 

@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { formValidations } from '../form-validations';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { Usuario } from 'src/app/core/types/usuario'; // Certifique-se de importar o tipo Usuario
+import { Usuario } from 'src/app/core/types/usuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-users',
@@ -11,9 +12,9 @@ import { Usuario } from 'src/app/core/types/usuario'; // Certifique-se de import
 })
 export class FormUsersComponent implements OnInit {
   formCadastro!: FormGroup;
-  escondido = true;
+  senhaEscondida = true;
   perfis = [
-    // { perfil: 'ADMINISTRADOR', viewperfil: 'Administrador' },
+    // { perfil: 'ADMINISTRADOR', viewperfil: 'Administrador' }, // EM BREVE
     { perfil: 'COORDENADOR', viewperfil: 'Coordenador' },
     { perfil: 'SECRETARIA', viewperfil: 'Secretária' },
     { perfil: 'PROFESSOR', viewperfil: 'Professor' },
@@ -23,21 +24,21 @@ export class FormUsersComponent implements OnInit {
   @Input() myProfileComponente = false;
   @Input() editComponent = false;
   @Output() acaoClique: EventEmitter<void> = new EventEmitter<void>();
-  @Output() acaoClique2: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoCliquePermanecendo: EventEmitter<void> = new EventEmitter<void>();
   @Output() cliqueExcluir: EventEmitter<void> = new EventEmitter<void>();
 
   cadastrarSenhaControl: FormControl<boolean | null> = new FormControl<boolean | null>({ value: true, disabled: true });
   supervisorControl: FormControl<Usuario | null> = new FormControl<Usuario | null>({ value: null, disabled: this.myProfileComponente });
 
-
   constructor(
     private formBuilder: FormBuilder,
     private formUserService: FormsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.formCadastro = this.formBuilder.group({
-      '@type': [null],
+      '@type': [null], // Campo do Back = Users/Usuários
       cpf: [null, Validators.minLength(11)],
       matricula: [null],
       nome: [null, Validators.required],
@@ -59,13 +60,13 @@ export class FormUsersComponent implements OnInit {
       const typeControl = this.formCadastro.get('@type');
 
       if (role === 'ESTAGIARIO') {
-        matriculaControl?.setValidators(Validators.required);
         this.supervisorControl?.setValidators(Validators.required);
+        matriculaControl?.setValidators(Validators.required);
         semestreControl?.setValidators(Validators.required);
         typeControl?.setValue('Estagiario');
       } else {
-        matriculaControl?.clearValidators();
         this.supervisorControl?.clearValidators();
+        matriculaControl?.clearValidators();
         semestreControl?.clearValidators();
         typeControl?.setValue('Usuario');
       }
@@ -96,9 +97,10 @@ export class FormUsersComponent implements OnInit {
 
   executarAcao() {
     this.acaoClique.emit();
+    this.router.navigate(['users/list']);
   }
 
-  executarAcaoSemRedirecionar() {
+  executarAcaoPermanecendo() {
     this.acaoClique.emit();
   }
 
