@@ -58,7 +58,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
     });
   }
 
-  atualizarUsuario() {
+  atualizarUsuario(navegar: boolean) {
     const formValue = this.form?.value;
     const tipoSelecionado = this.form?.value['@type'];
 
@@ -83,7 +83,9 @@ export class MyProfileComponent implements OnInit, PendingChanges {
       .subscribe({
         next: () => {
           this.abrirModal(dadosAtualizados);
-          this.router.navigate(['/']);
+          if(navegar){
+            this.router.navigate(['/']);
+          }
         }
       });
   }

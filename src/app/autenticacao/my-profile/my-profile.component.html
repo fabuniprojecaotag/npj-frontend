@@ -1,5 +1,5 @@
 <app-header [subtitulo]="tituloPagina"></app-header>
 <app-utils-bar></app-utils-bar>
 <section>
-  <app-form-users (acaoClique)="atualizarUsuario()" (acaoCliquePermanecendo)="atualizarUsuario()" [myProfileComponente]="perfilComponente"></app-form-users>
+  <app-form-users (acaoNavegando)="atualizarUsuario(true)" (acaoPermanecendo)="atualizarUsuario(false)" [myProfileComponente]="perfilComponente"></app-form-users>
 </section>

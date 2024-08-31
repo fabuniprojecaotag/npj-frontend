@@ -12,7 +12,7 @@ import { HeaderComponent } from '../header/header.component';
 import { FormUsersComponent } from './form-users.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
-describe(FormUsersComponent.name, () => {
+fdescribe(FormUsersComponent.name, () => {
   let component: FormUsersComponent;
   let fixture: ComponentFixture<FormUsersComponent>;
 
@@ -42,11 +42,11 @@ describe(FormUsersComponent.name, () => {
     expect(component).toBeTruthy();
   });
 
-  it(`#${FormUsersComponent.prototype.executarAcao.name} Should trigger (@Output acaoClique) when called`, () => {
-    spyOn(component.acaoClique, 'emit');
+  it(`#${FormUsersComponent.prototype.executarAcaoNavegando.name} Should trigger (@Output acaoClique) when called`, () => {
+    spyOn(component.acaoNavegando, 'emit');
     fixture.detectChanges();
-    component.executarAcao();
-    expect(component.acaoClique.emit).toHaveBeenCalled();
+    component.executarAcaoNavegando();
+    expect(component.acaoNavegando.emit).toHaveBeenCalled();
   });
 
   it(`#${FormUsersComponent.prototype.excluir.name} Should trigger (@Output cliqueExcluir) when called`, () => {

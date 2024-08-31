@@ -19,7 +19,6 @@ import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuari
 export class EditUsersComponent implements OnInit, PendingChanges {
   tituloDaPagina = 'Editar Usuário';
   cadastro!: Usuario;
-  errorMessage!: string;
   form!: FormGroup | null;
   id = this.route.snapshot.paramMap.get('id') as string;
   subtituloErro = 'Erro ao Editar';
@@ -104,14 +103,19 @@ export class EditUsersComponent implements OnInit, PendingChanges {
       });
   }
 
+  editarNavegando() {
+    this.editarUsuario();
+    this.router.navigate(['/users/list']);
+  }
+
   private excluir(idCadastro: string) {
     this.cadastroService.excluirCadastro(idCadastro)
-    .pipe(debounceTime(500))
-    .subscribe({
-      next: () => {
-        this.router.navigate(['/users/list']);
-      }
-    });
+      .pipe(debounceTime(500))
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/users/list']);
+        }
+      });
   }
 
   abrirModalExcluir(user: Usuario) {

@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { formValidations } from '../form-validations';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
-import { Router } from '@angular/router';
+import { formValidations } from '../form-validations';
 
 @Component({
   selector: 'app-form-users',
@@ -23,8 +22,8 @@ export class FormUsersComponent implements OnInit {
   unidadeInstitucional = ['Taguatinga', 'Guará', 'Ceilândia'];
   @Input() myProfileComponente = false;
   @Input() editComponent = false;
-  @Output() acaoClique: EventEmitter<void> = new EventEmitter<void>();
-  @Output() acaoCliquePermanecendo: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoNavegando: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoPermanecendo: EventEmitter<void> = new EventEmitter<void>();
   @Output() cliqueExcluir: EventEmitter<void> = new EventEmitter<void>();
 
   cadastrarSenhaControl: FormControl<boolean | null> = new FormControl<boolean | null>({ value: true, disabled: true });
@@ -33,12 +32,11 @@ export class FormUsersComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formUserService: FormsService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.formCadastro = this.formBuilder.group({
-      '@type': [null], // Campo do Back = Users/Usuários
+      '@type': [null], // Campo do Back = Users/Usuários ou Estagiário
       cpf: [null, Validators.minLength(11)],
       matricula: [null],
       nome: [null, Validators.required],
@@ -95,13 +93,12 @@ export class FormUsersComponent implements OnInit {
     this.formUserService.setForm(this.formCadastro);
   }
 
-  executarAcao() {
-    this.acaoClique.emit();
-    this.router.navigate(['users/list']);
+  executarAcaoNavegando() {
+    this.acaoNavegando.emit();
   }
 
   executarAcaoPermanecendo() {
-    this.acaoClique.emit();
+    this.acaoPermanecendo.emit();
   }
 
   excluir() {

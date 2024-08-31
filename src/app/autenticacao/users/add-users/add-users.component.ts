@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
@@ -17,6 +18,7 @@ export class AddUsersComponent {
   constructor(
     private formularioService: FormsService,
     private cadastroService: CadastroService,
+    private router: Router,
     private dialog: MatDialog
   ) { }
 
@@ -34,6 +36,11 @@ export class AddUsersComponent {
           }
         });
     }
+  }
+
+  cadastrarNavegando(){
+    this.cadastrarUsuario();
+    this.router.navigate(['/users/list']);
   }
 
   private abrirModal(novoCadastro: Usuario) {
