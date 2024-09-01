@@ -4,7 +4,10 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 @Injectable()
 export class CustomMatPaginatorIntl extends MatPaginatorIntl {
   override itemsPerPageLabel = 'Itens por página';
-  override getRangeLabel= (page: number, pageSize: number, length: number) => {
+  override nextPageLabel = 'proximo';
+  override previousPageLabel = 'anterior';
+
+  override getRangeLabel = (page: number, pageSize: number, length: number) => {
     if (length === 0 || pageSize === 0) {
       return `0 de ${length}`;
     }
