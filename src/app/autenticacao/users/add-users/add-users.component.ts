@@ -33,6 +33,7 @@ export class AddUsersComponent {
         .subscribe({
           next: () => {
             this.abrirModal(novoCadastro);
+            formCadastro.reset();
           }
         });
     }

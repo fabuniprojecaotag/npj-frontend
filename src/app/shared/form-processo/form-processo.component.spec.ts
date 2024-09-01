@@ -102,11 +102,11 @@ describe(FormProcessoComponent.name, () => {
   });
 
   it('should emit acaoClick event when executarAcao is called', () => {
-    spyOn(component.acaoClick, 'emit');
+    spyOn(component.acaoNavegando, 'emit');
 
-    component.executarAcao();
+    component.executarAcaoNavegando();
 
-    expect(component.acaoClick.emit).toHaveBeenCalled();
+    expect(component.acaoNavegando.emit).toHaveBeenCalled();
   });
 
   it('should emit acaoExcluir event when excluir is called', () => {

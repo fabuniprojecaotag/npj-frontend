@@ -8,11 +8,13 @@ import { FormsService } from 'src/app/core/services/forms.service';
   styleUrls: ['./form-processo.component.scss']
 })
 export class FormProcessoComponent implements OnInit {
-  @Output() acaoClick: EventEmitter<void> = new EventEmitter<void>();
-  @Output() acaoExcluir: EventEmitter<void> = new EventEmitter<void>();
-  @Input() editComponent = false;
   formProcessos!: FormGroup;
   atendimentoControl: FormControl<string | null> = new FormControl<string | null>(null, [Validators.required]);
+
+  @Output() acaoNavegando: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoPermanecendo: EventEmitter<void> = new EventEmitter<void>();
+  @Output() acaoExcluir: EventEmitter<void> = new EventEmitter<void>();
+  @Input() editComponent = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,8 +35,12 @@ export class FormProcessoComponent implements OnInit {
     this.formService.setForm(this.formProcessos);
   }
 
-  executarAcao() {
-    this.acaoClick.emit();
+  executarAcaoNavegando() {
+    this.acaoNavegando.emit();
+  }
+
+  executarAcaoPermanecendo() {
+    this.acaoPermanecendo.emit();
   }
 
   excluir() {

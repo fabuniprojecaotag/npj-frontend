@@ -59,6 +59,13 @@
           Status é obrigatório!
         </mat-error>
       </mat-form-field>
+      <mat-form-field class="inputs-medios">
+        <mat-label>CPF do Assistido</mat-label>
+        <input matInput placeholder="CPF do Assistido" formControlName="assistidoId" />
+        <mat-error *ngIf="formProcessos.get('assistidoId')?.errors?.['required']">
+          CPF do Assistido é obrigatório!
+        </mat-error>
+      </mat-form-field>
     </div>
 
     <div class="espacador"></div>
@@ -66,8 +73,10 @@
     <div class="btn-group">
       <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true"
         (click)="excluir()">Excluir</button>
-      <button mat-flat-button class="btn btn-basic" [disabled]="formProcessos.invalid">Salvar</button>
-      <button mat-flat-button class="btn" color="accent" (click)="executarAcao()" [disabled]="formProcessos.invalid">
+      <button mat-flat-button class="btn btn-basic" (click)="executarAcaoPermanecendo()"
+        [disabled]="formProcessos.invalid">Salvar</button>
+      <button mat-flat-button class="btn" color="accent" (click)="executarAcaoNavegando()"
+        [disabled]="formProcessos.invalid">
         Submeter
       </button>
     </div>

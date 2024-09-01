@@ -77,11 +77,15 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
       .editarProcesso(this.numeroParam, payload)
       .subscribe({
         next: () => {
-          this.router.navigate(['/processos/list']);
           this.abrirModal(dadosAtualizados);
         },
         error: (err) => { },
       });
+  }
+
+  editarNavegando() {
+    this.editarProcesso();
+    this.router.navigate(['/processos/list']);
   }
 
   excluirProcesso(idProcesso: string) {
@@ -102,6 +106,7 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
         numero: this.processo.numero,
         nome: processo.nome,
         atendimentoId: processo.atendimentoId,
+        assistidoId: processo.assistidoId
       },
     });
   }

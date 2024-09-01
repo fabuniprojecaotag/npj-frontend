@@ -29,11 +29,16 @@ export class ProcessoAddComponent {
       this.processsoService.cadastraProcesso(novoCadastro).subscribe({
         next: () => {
           this.abrirModal(novoCadastro);
-          this.router.navigate(['/processos/list']);
+          formCadastroProcesso.reset();
         },
         error: (err) => { },
       });
     }
+  }
+
+  cadastrarNavegando() {
+    this.cadastrar();
+    this.router.navigate(['/processos/list']);
   }
 
   abrirModal(novoProcesso: Processo) {
@@ -45,6 +50,7 @@ export class ProcessoAddComponent {
         numero: novoProcesso.numero,
         nome: novoProcesso.nome,
         atendimentoId: novoProcesso.atendimentoId,
+        assistidoId: novoProcesso.assistidoId,
       },
     });
   }
