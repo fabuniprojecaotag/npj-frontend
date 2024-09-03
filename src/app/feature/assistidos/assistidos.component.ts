@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
+import { AssistidosService } from 'src/app/feature/assistidos/services/assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
 
 @Component({

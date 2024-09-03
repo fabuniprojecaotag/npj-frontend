@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Processo } from 'src/app/core/types/processo';
-import { ProcessosService } from 'src/app/processos/services/processos.service';
+import { ProcessosService } from 'src/app/feature/processos/services/processos.service';
 
 @Component({
   selector: 'app-processos',

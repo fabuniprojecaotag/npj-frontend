@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
+import { AssistidosService } from 'src/app/feature/assistidos/services/assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { Processo } from 'src/app/core/types/processo';
-import { ProcessosService } from 'src/app/processos/services/processos.service';
+import { ProcessosService } from 'src/app/feature/processos/services/processos.service';
 import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
 import { ModalEditAssistidoComponent } from './modal-edit-assistido/modal-edit-assistido.component';
 

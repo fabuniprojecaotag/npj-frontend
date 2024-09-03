@@ -1,10 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Processo } from '../../core/types/processo';
 import { Payload } from 'src/app/core/types/payload';
 import { Response } from 'src/app/core/types/response';
+import { environment } from 'src/environments/environment';
+import { Processo } from '../../../core/types/processo';
 
 @Injectable({
   providedIn: 'root'

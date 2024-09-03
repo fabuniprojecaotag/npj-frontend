@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/autenticacao/services/usuario.service';
+import { UsuarioService } from 'src/app/feature/autenticacao/services/usuario.service';
 import { CanActivateFn, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { map, catchError, of } from 'rxjs';
 

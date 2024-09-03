@@ -1,9 +1,9 @@
 import { Atendimento } from 'src/app/core/types/atendimento';
-import { FormsService } from './../../core/services/forms.service';
+import { FormsService } from './../../../core/services/forms.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
+import { AtendimentosService } from 'src/app/feature/atendimentos/services/atendimentos.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 import { ModalAtendimentoComponent } from 'src/app/shared/modal-atendimento/modal-atendimento.component';

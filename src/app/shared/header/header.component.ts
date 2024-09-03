@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
-import { UsuarioService } from 'src/app/autenticacao/services/usuario.service';
+import { UsuarioService } from 'src/app/feature/autenticacao/services/usuario.service';
 
 @Component({
   selector: 'app-header',

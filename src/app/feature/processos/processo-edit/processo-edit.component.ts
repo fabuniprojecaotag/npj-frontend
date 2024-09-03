@@ -6,7 +6,7 @@ import { FormsService } from 'src/app/core/services/forms.service';
 import { Payload } from 'src/app/core/types/payload';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Processo } from 'src/app/core/types/processo';
-import { ProcessosService } from 'src/app/processos/services/processos.service';
+import { ProcessosService } from 'src/app/feature/processos/services/processos.service';
 import { ModalExcluirProcessoComponent } from 'src/app/shared/modal-excluir-processo/modal-excluir-processo.component';
 import { ModalProcessoComponent } from 'src/app/shared/modal-processo/modal-processo.component';
 

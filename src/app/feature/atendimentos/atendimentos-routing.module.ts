@@ -5,7 +5,7 @@ import { AtendimentoEditComponent } from './atendimento-edit/atendimento-edit.co
 import { AtendimentoAddComponent } from './novo-atendimento/atendimento-add/atendimento-add.component';
 import { NovoAtendimentoComponent } from './novo-atendimento/novo-atendimento.component';
 import { AtendimentosComponent } from './atendimentos.component';
-import { pendingChangesGuard } from '../core/guards/pending-changes.guard';
+import { pendingChangesGuard } from '../../core/guards/pending-changes.guard';
 
 const routes: Routes = [
   {

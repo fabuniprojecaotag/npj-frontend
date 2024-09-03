@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, startWith, map } from 'rxjs';
-import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
+import { AssistidosService } from 'src/app/feature/assistidos/services/assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
 
 @Component({

@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Atendimento } from '../../core/types/atendimento';
+import { Atendimento } from '../../../core/types/atendimento';
 import { Observable } from 'rxjs';
-import { Filtro } from '../../core/types/filtro';
+import { Filtro } from '../../../core/types/filtro';
 import { Response } from 'src/app/core/types/response';
 import { Payload } from 'src/app/core/types/payload';
 

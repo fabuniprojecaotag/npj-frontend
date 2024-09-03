@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { FormsService } from 'src/app/core/services/forms.service';
-import { tipoEnvolvido } from './../../core/types/atendimento';
-import { MedidasService } from 'src/app/medidas/service/medidas.service';
 import { Medida } from 'src/app/core/types/medida';
-import { map } from 'rxjs';
+import { MedidasService } from 'src/app/feature/medidas/service/medidas.service';
+import { tipoEnvolvido } from './../../core/types/atendimento';
 
 @Component({
   selector: 'app-form-atendimento-civil',

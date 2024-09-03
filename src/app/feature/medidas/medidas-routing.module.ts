@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MedidasComponent } from './medidas.component';
 import { MedidasAddComponent } from './medidas-add/medidas-add.component';
 import { MedidasEditComponent } from './medidas-edit/medidas-edit.component';
-import { pendingChangesGuard } from '../core/guards/pending-changes.guard';
+import { pendingChangesGuard } from '../../core/guards/pending-changes.guard';
 
 const routes: Routes = [
   {

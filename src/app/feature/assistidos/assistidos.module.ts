@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '../core/material/material.module';
-import { SharedModule } from '../shared/shared.module';
+import { MaterialModule } from '../../core/material/material.module';
+import { SharedModule } from '../../shared/shared.module';
 import { AssistidosRoutingModule } from './assisitidos-routing.component';
 import { AssistidoAddComponent } from './assistido-add/assistido-add.component';
 import { AssistidosShortcutsComponent } from './assistidos-shortcuts/assistidos-shortcuts.component';

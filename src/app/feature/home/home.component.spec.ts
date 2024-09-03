@@ -9,8 +9,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { NavMenuComponent } from 'src/app/shared/header/nav-menu/nav-menu.component';
 import { UserMenuComponent } from 'src/app/shared/header/user-menu/user-menu.component';
-import { NavItemComponent } from '../shared/header/nav-menu/nav-item/nav-item.component';
-import { UtilsBarComponent } from '../shared/utils-bar/utils-bar.component';
+import { NavItemComponent } from '../../shared/header/nav-menu/nav-item/nav-item.component';
+import { UtilsBarComponent } from '../../shared/utils-bar/utils-bar.component';
 import { DialogContentExampleDialogComponent, HomeComponent } from './home.component';
 import { of } from 'rxjs';
 

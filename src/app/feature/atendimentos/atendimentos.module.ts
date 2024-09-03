@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '../core/material/material.module';
-import { SharedModule } from '../shared/shared.module';
+import { MaterialModule } from '../../core/material/material.module';
+import { SharedModule } from '../../shared/shared.module';
 import { AtendimentoEditComponent } from './atendimento-edit/atendimento-edit.component';
 import { AtendimentosRoutingModule } from './atendimentos-routing.module';
 import { AtendimentosComponent } from './atendimentos.component';

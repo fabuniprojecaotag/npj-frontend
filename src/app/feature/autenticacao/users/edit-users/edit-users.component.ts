@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
-import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
+import { CadastroService } from 'src/app/feature/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Payload } from 'src/app/core/types/payload';
 import { PendingChanges } from 'src/app/core/types/pending-changes';

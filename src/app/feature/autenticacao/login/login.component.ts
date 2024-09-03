@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AutenticacaoService } from 'src/app/autenticacao/services/autenticacao.service';
+import { AutenticacaoService } from 'src/app/feature/autenticacao/services/autenticacao.service';
 import { UsuarioService } from '../services/usuario.service';
 import { debounceTime } from 'rxjs';
 

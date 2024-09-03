@@ -1,12 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { map } from 'rxjs';
-import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { tipoEnvolvido } from 'src/app/core/types/atendimento';
 import { Medida } from 'src/app/core/types/medida';
-import { MedidasService } from 'src/app/medidas/service/medidas.service';
+import { MedidasService } from 'src/app/feature/medidas/service/medidas.service';
 
 @Component({
   selector: 'app-form-atendimento-trabalhista',

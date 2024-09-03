@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
-import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
+import { CadastroService } from 'src/app/feature/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';

@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
+import { CadastroService } from 'src/app/feature/autenticacao/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AtendimentosService } from 'src/app/atendimentos/services/atendimentos.service';
+import { AtendimentosService } from 'src/app/feature/atendimentos/services/atendimentos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { ModalAtendimentoComponent } from 'src/app/shared/modal-atendimento/modal-atendimento.component';

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Medida } from '../core/types/medida';
+import { Medida } from '../../core/types/medida';
 import { MedidasService } from './service/medidas.service';
 
 @Component({

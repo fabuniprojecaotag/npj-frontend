@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Assistido, AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from '../../core/types/assistido';
+import { Assistido, AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from '../../../core/types/assistido';
 import { Response } from 'src/app/core/types/response';
 import { Payload } from 'src/app/core/types/payload';
 
@@ -27,7 +27,7 @@ export class AssistidosService {
     let params = new HttpParams().set('returnType', 'autoComplete');
     return this.http.get<Response>(`${this.url}`, { params });
   }
-  
+
   listarAtendimentosVinculados(id: string): Observable<Response> {
     let params = new HttpParams().set('returnType', 'forAssistido');
     return this.http.get<Response>(`${this.url}/${id}/atendimentos`, { params });
