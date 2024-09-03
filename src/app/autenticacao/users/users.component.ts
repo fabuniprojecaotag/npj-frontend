@@ -1,7 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
@@ -12,39 +12,57 @@ import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excl
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements AfterViewInit {
+export class UsersComponent implements OnInit {
   tituloDaPagina = 'Usuários';
   listaUsuarios: Usuario[] = [];
-  dataSource: any;
+  dataSource = new MatTableDataSource<Usuario>(this.listaUsuarios);
   colunasMostradas: string[] = [
     'select',
     'id',
     'nome',
     'role',
     'edicao',
-    'exclusao'
+    'exclusao',
   ];
   selection = new SelectionModel<Usuario>(true, []);
+  filter = { field: '', operator: '', value: '' };
+  pageSize: number = 5;
 
-  constructor(private service: CadastroService, private dialog: MatDialog) { }
+  constructor(private service: CadastroService, private dialog: MatDialog) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit(): void {
-    this.service.listarUsuarios().subscribe({
-      next: (response) => {
-        this.listaUsuarios = response.list;
+  ngOnInit(): void {
+    this.loadInitialData(this.pageSize);
+  }
 
-        // Inicializa a seleção com base no status dos usuários
-        this.selection = new SelectionModel<Usuario>(
-          true,
-          this.listaUsuarios.filter((user) => user.status)
-        );
+  loadInitialData(pageSize: number): void {
+    this.service.getPaginatedData(pageSize).subscribe((data) => {
+      // Inicializa a seleção com base no status dos usuários
+      this.selection = new SelectionModel<Usuario>(
+        true,
+        this.listaUsuarios.filter((user) => user.status)
+      );
 
-        this.dataSource = new MatTableDataSource<Usuario>(this.listaUsuarios);
-        this.dataSource.paginator = this.paginator;
-      },
-      error: (err) => { },
+      this.dataSource.data = data.list.slice(0, pageSize);
+      this.paginator.length = data.totalSize; // Ajusta o tamanho total
+    });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    const pageIndex = event.pageIndex;
+
+    // Calcular índices baseados no tamanho da página e no índice atual
+    const startIndex = pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+
+    const numPages = this.paginator.getNumberOfPages();
+
+    this.service.getPaginatedData(this.pageSize, startIndex, endIndex).subscribe((data) => {
+      const list = data.list; 
+      this.dataSource.data = list;
+      this.paginator.length = data.totalSize;
     });
   }
 
