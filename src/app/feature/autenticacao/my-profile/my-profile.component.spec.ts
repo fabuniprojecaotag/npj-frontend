@@ -141,7 +141,7 @@ describe(MyProfileComponent.name, () => {
 
     fixture.detectChanges();
 
-    component.atualizarUsuario();
+    component.atualizarUsuario(false);
 
     expect(abrirModalSpy).toHaveBeenCalledWith(jasmine.objectContaining({
       nome: 'Luciano Neves',
