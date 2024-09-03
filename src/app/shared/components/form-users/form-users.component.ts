@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
-import { formValidations } from '../../form-validations';
+import { formValidations } from '../../helpers/form-validations';
 
 @Component({
   selector: 'app-form-users',
