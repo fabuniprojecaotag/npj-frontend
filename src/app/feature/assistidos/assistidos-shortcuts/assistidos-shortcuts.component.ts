@@ -6,7 +6,7 @@ import { Assistido } from 'src/app/core/types/assistido';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { Processo } from 'src/app/core/types/processo';
 import { ProcessosService } from 'src/app/feature/processos/services/processos.service';
-import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
+import { ModalAtalhosComponent } from 'src/app/shared/components/modal-atalhos/modal-atalhos.component';
 import { ModalEditAssistidoComponent } from './modal-edit-assistido/modal-edit-assistido.component';
 
 @Component({

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Medida } from 'src/app/core/types/medida';
 import { MedidasService } from 'src/app/feature/medidas/service/medidas.service';
-import { tipoEnvolvido } from './../../core/types/atendimento';
+import { tipoEnvolvido } from '../../../core/types/atendimento';
 
 @Component({
   selector: 'app-form-atendimento-civil',

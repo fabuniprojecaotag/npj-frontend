@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CadastroService } from 'src/app/feature/autenticacao/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
-import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
+import { ModalExcluidoComponent } from 'src/app/shared/components/modal-excluido/modal-excluido.component';
 
 @Component({
   selector: 'app-users',

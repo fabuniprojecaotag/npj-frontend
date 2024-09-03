@@ -4,7 +4,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NavItemComponent } from './nav-item/nav-item.component';
+import { NavItemComponent } from '../nav-item/nav-item.component';
 import { NavMenuComponent } from './nav-menu.component';
 
 describe(NavMenuComponent.name, () => {

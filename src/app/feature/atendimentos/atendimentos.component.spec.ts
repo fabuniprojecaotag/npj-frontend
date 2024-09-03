@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AtendimentosComponent } from './atendimentos.component';
-import { HeaderComponent } from 'src/app/shared/header/header.component';
-import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component';
-import { NavMenuComponent } from 'src/app/shared/header/nav-menu/nav-menu.component';
-import { UserMenuComponent } from 'src/app/shared/header/user-menu/user-menu.component';
-import { NavItemComponent } from 'src/app/shared/header/nav-menu/nav-item/nav-item.component';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { UtilsBarComponent } from 'src/app/shared/components/utils-bar/utils-bar.component';
+import { NavMenuComponent } from 'src/app/shared/nav-menu/nav-menu.component';
+import { UserMenuComponent } from 'src/app/shared/components/header/user-menu/user-menu.component';
+import { NavItemComponent } from 'src/app/shared/nav-item/nav-item.component';
 import { ActivatedRoute } from '@angular/router';
 import { AppModule } from 'src/app/app.module';
 

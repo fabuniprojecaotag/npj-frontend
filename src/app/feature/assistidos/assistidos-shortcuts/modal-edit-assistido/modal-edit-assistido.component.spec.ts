@@ -10,14 +10,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { of } from 'rxjs';
 import { ViacepService } from 'src/app/core/services/viacep.service';
-import { FormAssistidosComponent } from 'src/app/shared/form-assistidos/form-assistidos.component';
+import { FormAssistidosComponent } from 'src/app/shared/components/form-assistidos/form-assistidos.component';
 import { AssistidosService } from '../../services/assistidos.service';
 import { ModalEditAssistidoComponent } from './modal-edit-assistido.component';
 
 const mockDialogData = {
-  assistido: { 
-    cpf: '12345678900', 
-    nome: 'Rodrigo Santos Aires', 
+  assistido: {
+    cpf: '12345678900',
+    nome: 'Rodrigo Santos Aires',
     email: 'rodrigo.santos@gmail.com',
     rg: '111.111.11-111',
     filiacao: {
@@ -122,7 +122,7 @@ describe(ModalEditAssistidoComponent.name, () => {
   it('should load form data on init', fakeAsync(() => {
     spyOn(component, 'carregarFormulario').and.callThrough();
     component.ngAfterViewInit();
-    tick();  
+    tick();
     expect(component.carregarFormulario).toHaveBeenCalled();
   }));
 

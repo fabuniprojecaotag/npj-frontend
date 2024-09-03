@@ -1,4 +1,86 @@
-@import "../../../styles.scss";
+@import "../../../../styles.scss";
+
+.secao-form-civil {
+  margin: 2em auto;
+  width: 80%;
+
+  .titulo-form {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .grupo-form {
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 1em 0;
+    width: 100%;
+
+    .botao-criar {
+      margin-left: auto;
+    }
+
+    .subtitulo {
+      font-size: 28px;
+      font-weight: 400;
+    }
+
+    .titulo-secundario {
+      font-size: 20px;
+      font-weight: 400;
+      padding-bottom: 1.2em;
+    }
+
+    .full {
+      display: flex;
+      flex: inherit inherit inherit;
+      gap: 20px;
+      width: 100%;
+
+      .arquivos-label {
+        display: inline;
+        color: #cccccc;
+        font-weight: 400;
+        font-size: 12px;
+        height: 30px;
+      }
+
+      .botao-submeter {
+        margin-left: 2em;
+      }
+    }
+
+    .input-muitoPequeno {
+      flex-grow: 1;
+    }
+
+    .input-pequeno {
+      flex-grow: 1.5;
+    }
+
+    .input-medio {
+      flex-grow: 2;
+    }
+
+    .input-grande,
+    .espacador {
+      flex-grow: 3;
+    }
+
+    .botao-cadastro {
+      height: 100%;
+      padding: 16px 16px;
+    }
+  }
+
+  .grupo-botoes {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+}
 
 .secao-form-trabalhista {
   margin: 2em auto;

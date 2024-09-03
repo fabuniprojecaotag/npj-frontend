@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsersComponent } from './users.component';
-import { HeaderComponent } from 'src/app/shared/header/header.component';
-import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { UtilsBarComponent } from 'src/app/shared/components/utils-bar/utils-bar.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { AppModule } from 'src/app/app.module';
 

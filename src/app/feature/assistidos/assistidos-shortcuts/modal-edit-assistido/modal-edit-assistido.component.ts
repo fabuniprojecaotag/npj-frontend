@@ -4,9 +4,9 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Assistido, AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from 'src/app/core/types/assistido';
-import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
-import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
-import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
+import { ModalAssistidoComponent } from 'src/app/shared/components/modal-assistido/modal-assistido.component';
+import { ModalAtalhosComponent } from 'src/app/shared/components/modal-atalhos/modal-atalhos.component';
+import { ModalExcluidoComponent } from 'src/app/shared/components/modal-excluido/modal-excluido.component';
 import { AssistidosService } from '../../services/assistidos.service';
 import { Payload } from 'src/app/core/types/payload';
 

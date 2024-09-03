@@ -5,8 +5,8 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AtendimentosService } from 'src/app/feature/atendimentos/services/atendimentos.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
-import { ModalAtendimentoComponent } from 'src/app/shared/modal-atendimento/modal-atendimento.component';
+import { ModalExcluidoComponent } from 'src/app/shared/components/modal-excluido/modal-excluido.component';
+import { ModalAtendimentoComponent } from 'src/app/shared/components/modal-atendimento/modal-atendimento.component';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Payload } from 'src/app/core/types/payload';
 

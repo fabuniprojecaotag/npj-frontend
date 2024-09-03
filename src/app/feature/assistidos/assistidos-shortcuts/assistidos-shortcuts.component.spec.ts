@@ -6,13 +6,13 @@ import { AssistidosService } from 'src/app/assistidos/services/assistidos.servic
 import { Assistido } from 'src/app/core/types/assistido';
 import { Atendimento } from 'src/app/core/types/atendimento';
 import { Processo } from 'src/app/core/types/processo';
-import { ModalAtalhosComponent } from 'src/app/shared/modal-atalhos/modal-atalhos.component';
+import { ModalAtalhosComponent } from 'src/app/shared/components/modal-atalhos/modal-atalhos.component';
 import { AppModule } from 'src/app/app.module';
-import { HeaderComponent } from 'src/app/shared/header/header.component';
-import { CardAtalhosComponent } from 'src/app/shared/card-atalhos/card-atalhos.component';
-import { NavMenuComponent } from 'src/app/shared/header/nav-menu/nav-menu.component';
-import { UserMenuComponent } from 'src/app/shared/header/user-menu/user-menu.component';
-import { NavItemComponent } from 'src/app/shared/header/nav-menu/nav-item/nav-item.component';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { CardAtalhosComponent } from 'src/app/shared/components/card-atalhos/card-atalhos.component';
+import { NavMenuComponent } from 'src/app/shared/nav-menu/nav-menu.component';
+import { UserMenuComponent } from 'src/app/shared/components/header/user-menu/user-menu.component';
+import { NavItemComponent } from 'src/app/shared/nav-item/nav-item.component';
 import { AssistidosShortcutsComponent } from './assistidos-shortcuts.component';
 import { ModalEditAssistidoComponent } from './modal-edit-assistido/modal-edit-assistido.component';
 

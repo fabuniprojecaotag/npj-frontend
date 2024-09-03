@@ -8,8 +8,8 @@ import { FormsService } from 'src/app/core/services/forms.service';
 import { Payload } from 'src/app/core/types/payload';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Usuario } from 'src/app/core/types/usuario';
-import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
-import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
+import { ModalExcluidoComponent } from 'src/app/shared/components/modal-excluido/modal-excluido.component';
+import { ModalUsuarioComponent } from 'src/app/shared/components/modal-usuario/modal-usuario.component';
 
 @Component({
   selector: 'app-edit-users',

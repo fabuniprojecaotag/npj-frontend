@@ -8,7 +8,7 @@ import { FormsService } from 'src/app/core/services/forms.service';
 import { Payload } from 'src/app/core/types/payload';
 import { PendingChanges } from 'src/app/core/types/pending-changes';
 import { Usuario } from 'src/app/core/types/usuario';
-import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
+import { ModalUsuarioComponent } from 'src/app/shared/components/modal-usuario/modal-usuario.component';
 
 @Component({
   selector: 'app-my-profile',

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AssistidosService } from 'src/app/feature/assistidos/services/assistidos.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Assistido } from 'src/app/core/types/assistido';
-import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
+import { ModalAssistidoComponent } from 'src/app/shared/components/modal-assistido/modal-assistido.component';
 
 @Component({
   selector: 'app-assistido-add',

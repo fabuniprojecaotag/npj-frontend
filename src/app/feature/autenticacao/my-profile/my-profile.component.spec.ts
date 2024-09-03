@@ -15,17 +15,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { of } from 'rxjs';
+import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
-import { FormUsersComponent } from 'src/app/shared/form-users/form-users.component';
-import { FuncionarioAutocompleteComponent } from 'src/app/shared/funcionario-autocomplete/funcionario-autocomplete.component';
-import { HeaderComponent } from 'src/app/shared/header/header.component';
-import { NavItemComponent } from 'src/app/shared/header/nav-menu/nav-item/nav-item.component';
-import { NavMenuComponent } from 'src/app/shared/header/nav-menu/nav-menu.component';
-import { UserMenuComponent } from 'src/app/shared/header/user-menu/user-menu.component';
-import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component';
+import { FormUsersComponent } from 'src/app/shared/components/form-users/form-users.component';
+import { FuncionarioAutocompleteComponent } from 'src/app/shared/components/funcionario-autocomplete/funcionario-autocomplete.component';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { NavItemComponent } from 'src/app/shared/components/header/nav-menu/nav-item/nav-item.component';
+import { NavMenuComponent } from 'src/app/shared/components/header/nav-menu/nav-menu.component';
+import { UserMenuComponent } from 'src/app/shared/components/header/user-menu/user-menu.component';
+import { UtilsBarComponent } from 'src/app/shared/components/utils-bar/utils-bar.component';
 import { CadastroService } from '../services/cadastro.service';
 import { MyProfileComponent } from './my-profile.component';
-import { FormsService } from 'src/app/core/services/forms.service';
 
 const mockUsuario: Usuario = {
   '@type': 'ESTAGIARIO',

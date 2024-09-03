@@ -9,14 +9,14 @@ import { AssistidosService } from '../services/assistidos.service';
 import { AssistidoAddComponent } from './assistido-add.component';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { ViacepService } from 'src/app/core/services/viacep.service';
-import { HeaderComponent } from 'src/app/shared/header/header.component';
-import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component';
-import { FormAssistidosComponent } from 'src/app/shared/form-assistidos/form-assistidos.component';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { UtilsBarComponent } from 'src/app/shared/components/utils-bar/utils-bar.component';
+import { FormAssistidosComponent } from 'src/app/shared/components/form-assistidos/form-assistidos.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { NavMenuComponent } from 'src/app/shared/header/nav-menu/nav-menu.component';
-import { UserMenuComponent } from 'src/app/shared/header/user-menu/user-menu.component';
-import { NavItemComponent } from 'src/app/shared/header/nav-menu/nav-item/nav-item.component';
+import { NavMenuComponent } from 'src/app/shared/nav-menu/nav-menu.component';
+import { UserMenuComponent } from 'src/app/shared/components/header/user-menu/user-menu.component';
+import { NavItemComponent } from 'src/app/shared/nav-item/nav-item.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,7 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
-import { ModalAssistidoComponent } from 'src/app/shared/modal-assistido/modal-assistido.component';
+import { ModalAssistidoComponent } from 'src/app/shared/components/modal-assistido/modal-assistido.component';
 
 const mockAssistido: Assistido = {
   cpf: '123.456.789-00',
@@ -80,7 +80,7 @@ describe(AssistidoAddComponent.name, () => {
   let dialog: MatDialog;
   let formsService: FormsService;
   let router: Router;
-  let ngZone: NgZone; 
+  let ngZone: NgZone;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

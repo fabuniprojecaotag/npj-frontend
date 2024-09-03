@@ -19,17 +19,17 @@ import { of } from 'rxjs';
 import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { Atendimento } from 'src/app/core/types/atendimento';
-import { FormAtendimentoCivilComponent } from 'src/app/shared/form-atendimento-civil/form-atendimento-civil.component';
-import { HeaderComponent } from 'src/app/shared/header/header.component';
-import { NavItemComponent } from 'src/app/shared/header/nav-menu/nav-item/nav-item.component';
-import { NavMenuComponent } from 'src/app/shared/header/nav-menu/nav-menu.component';
-import { UserMenuComponent } from 'src/app/shared/header/user-menu/user-menu.component';
-import { UtilsBarComponent } from 'src/app/shared/utils-bar/utils-bar.component';
+import { FormAtendimentoCivilComponent } from 'src/app/shared/components/form-atendimento-civil/form-atendimento-civil.component';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { NavItemComponent } from 'src/app/shared/nav-item/nav-item.component';
+import { NavMenuComponent } from 'src/app/shared/nav-menu/nav-menu.component';
+import { UserMenuComponent } from 'src/app/shared/components/header/user-menu/user-menu.component';
+import { UtilsBarComponent } from 'src/app/shared/components/utils-bar/utils-bar.component';
 import { AtendimentosService } from '../../services/atendimentos.service';
 import { AtendimentoAddComponent } from './atendimento-add.component';
-import { FuncionarioAutocompleteComponent } from 'src/app/shared/funcionario-autocomplete/funcionario-autocomplete.component';
-import { AssistidoAutocompleteComponent } from 'src/app/shared/assistido-autocomplete/assistido-autocomplete.component';
-import { PrintButtonComponent } from 'src/app/shared/print-button/print-button.component';
+import { FuncionarioAutocompleteComponent } from 'src/app/shared/components/funcionario-autocomplete/funcionario-autocomplete.component';
+import { AssistidoAutocompleteComponent } from 'src/app/shared/components/assistido-autocomplete/assistido-autocomplete.component';
+import { PrintButtonComponent } from 'src/app/shared/components/print-button/print-button.component';
 
 const mockAtendimento: Atendimento = {
   '@type': 'Tipo',

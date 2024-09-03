@@ -5,7 +5,7 @@ import { debounceTime } from 'rxjs';
 import { CadastroService } from 'src/app/feature/autenticacao/services/cadastro.service';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
-import { ModalUsuarioComponent } from 'src/app/shared/modal-usuario/modal-usuario.component';
+import { ModalUsuarioComponent } from 'src/app/shared/components/modal-usuario/modal-usuario.component';
 
 @Component({
   selector: 'app-add-users',

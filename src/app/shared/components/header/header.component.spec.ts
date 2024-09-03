@@ -9,7 +9,7 @@ import { of } from 'rxjs';
 import { UsuarioService } from 'src/app/autenticacao/services/usuario.service';
 import { HeaderComponent } from './header.component';
 import { NavItemComponent } from './nav-menu/nav-item/nav-item.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { NavMenuComponent } from '../../nav-menu/nav-menu.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 
 class MockUsuarioService {
