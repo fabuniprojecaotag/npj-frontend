@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
+import { ModalErrosComponent } from 'src/app/shared/components/modal-erros/modal-erros.component';
 import { MensagemErroService } from './mensagem-erro.service';
 
 describe(MensagemErroService.name, () => {

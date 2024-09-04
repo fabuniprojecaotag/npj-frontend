@@ -1,0 +1,25 @@
+@import '../../../../styles.scss';
+
+.card-atalhos {
+  height: 224px;
+  text-align: center;
+  width: 360px;
+
+  mat-icon {
+    margin: 0.5em auto auto;
+    scale: 8;
+  }
+
+  mat-card-content {
+    height: 2em;
+    padding-bottom: 1em;
+    p {
+      color: $preto;
+      text-decoration: none;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

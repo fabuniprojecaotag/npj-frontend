@@ -1,0 +1,21 @@
+@import '../../../../styles.scss';
+
+mat-toolbar-row {
+  align-items: center;
+  background-color: #efefef;
+  color: $preto;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .botoes-acoes {
+    button {
+      margin-right: 0.5em;
+    }
+  }
+}

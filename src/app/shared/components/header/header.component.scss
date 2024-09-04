@@ -1,0 +1,86 @@
+@import "../../../../styles.scss";
+
+.cabecalho {
+  mat-toolbar {
+    background-color: $roxo-escuro;
+    color: $branco;
+    flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    mat-toolbar-row {
+      justify-content: space-between;
+      div {
+        align-items: center;
+        display: flex;
+        justify-content: none;
+
+        .cabecalho__titulo {
+          font-size: 40px;
+          font-family: $fonte-logo;
+          font-weight: bold;
+          padding-left: 0.8em;
+          transition: visibility 0.1s;
+          min-width: 200px;
+
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
+
+          &.oculto {
+            visibility: hidden;
+          }
+        }
+
+        .cabecalho__subtitulo {
+          border: 2px solid $branco;
+          border-radius: 16px;
+          font-weight: lighter;
+          padding: 0 3em;
+        }
+
+        .botao-menu__usuario {
+          .icone-usuario {
+            background-color: gainsboro;
+            border-radius: 100%;
+            display: inline-block;
+            height: 100%;
+            margin-right: 10px;
+
+            p {
+              font-size: 0.8em;
+              padding: 0.1em 1em;
+            }
+          }
+
+          mat-icon {
+            order: 2;
+          }
+
+          .texto-menu {
+            align-self: baseline;
+            font-size: 0.8em;
+            font-weight: lighter;
+
+            @media screen and (max-width: 768px) {
+              display: none;
+            }
+          }
+        }
+
+        #botao-ajuda {
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
+        }
+      }
+
+      .example-spacer {
+        flex: 1 1 auto;
+      }
+    }
+  }
+}
