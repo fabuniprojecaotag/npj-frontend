@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AssistidosService } from 'src/app/assistidos/services/assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
@@ -9,25 +9,39 @@ import { Assistido } from 'src/app/core/types/assistido';
   templateUrl: './assistidos.component.html',
   styleUrls: ['./assistidos.component.scss'],
 })
-export class AssistidosComponent implements AfterViewInit {
+export class AssistidosComponent implements OnInit {
   tituloPagina = 'Assistidos';
   listaAssistidos: Assistido[] = [];
-  dataSource: any;
+  dataSource = new MatTableDataSource<Assistido>(this.listaAssistidos);
   colunasMostradas: string[] = ['nome', 'email', 'cpf', 'telefone'];
+  pageSize: number = 10;
 
-  constructor(private service: AssistidosService) { }
+  constructor(private service: AssistidosService) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit(): void {
-    this.service.listarAssistidos().subscribe({
-      next: (response) => {
-        this.listaAssistidos = response.list;
+  ngOnInit(): void {
+    this.loadInitialData(this.pageSize);
+  }
 
-        this.dataSource = new MatTableDataSource<Assistido>(this.listaAssistidos);
-        this.dataSource.paginator = this.paginator;
-      },
-      error: (err) => { },
+  loadInitialData(pageSize: number): void {
+    this.service.getPaginatedData(pageSize).subscribe((data) => {
+      this.dataSource.data = data.list.slice(0, pageSize);
+      this.paginator.length = data.totalSize; 
+    });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    const pageIndex = event.pageIndex;
+
+    // Calcular índices baseados no tamanho da página e no índice atual
+    const startIndex = pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+
+    this.service.getPaginatedData(this.pageSize, startIndex, endIndex).subscribe((data) => {
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize;
     });
   }
 

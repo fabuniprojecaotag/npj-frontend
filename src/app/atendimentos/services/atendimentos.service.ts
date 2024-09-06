@@ -2,19 +2,33 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Atendimento } from '../../core/types/atendimento';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Filtro } from '../../core/types/filtro';
 import { Response } from 'src/app/core/types/response';
 import { Payload } from 'src/app/core/types/payload';
+import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
+import { PaginationService } from 'src/app/services/pagination.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AtendimentosService {
   private API = environment.API_URL;
   private url = this.API + '/atendimentos';
+  filter = { field: '', operator: '', value: '' };
+  cache: ListCacheEntry = {
+    list: [],
+    firstDoc: null,
+    lastDoc: null,
+    pageSize: 0,
+    totalSize: 0,
+  };
+  currentPageSize!: number;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private paginationService: PaginationService
+  ) {}
 
   listagemAtendimentos(filtro?: Filtro): Observable<Response> {
     let params = new HttpParams();
@@ -25,6 +39,30 @@ export class AtendimentosService {
         .set('value', filtro.value);
     }
     return this.http.get<Response>(`${this.url}`, { params });
+  }
+
+  getPaginatedData(
+    pageSize: number,
+    startIndex: number = 0,
+    endIndex: number = 0,
+    filtro?: Filtro
+  ): Observable<ListCacheEntry> {
+    return this.paginationService
+      .getPaginatedData(
+        pageSize,
+        startIndex,
+        endIndex,
+        this.cache,
+        this.currentPageSize,
+        this.url
+      )
+      .pipe(
+        map((response) => {
+          this.currentPageSize = response.pageSize;
+
+          return response;
+        })
+      );
   }
 
   listagemAtendimentoAutocomplete(): Observable<any> {
@@ -45,7 +83,7 @@ export class AtendimentosService {
   }
 
   excluirAtendimento(id: string): Observable<Atendimento> {
-    let body = {'ids': [id]};
+    let body = { ids: [id] };
     return this.http.delete<Atendimento>(`${this.url}/${id}`, { body });
   }
 }

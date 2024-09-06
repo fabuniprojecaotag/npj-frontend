@@ -17,6 +17,7 @@ export class PaginationService {
     cache: ListCacheEntry,
     currentPageSize: number,
     url: string,
+    entity?: string,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
     // Modulariza o cache.list em uma constante para reuso
@@ -61,10 +62,14 @@ export class PaginationService {
     else if (pageSize > currentPageSize) {
       const list = listCache.slice(startIndex, endIndex);
 
-      const thereAreAllTheDatabaseRecordsLocally = cache.list.length == cache.totalSize;
+      const thereAreAllTheDatabaseRecordsLocally =
+        cache.list.length == cache.totalSize;
 
       // Verifica se a quantidade é grande o suficiente ou se todos os registros foram armazenados do banco para retornar o cache
-      if (list.length > currentPageSize || thereAreAllTheDatabaseRecordsLocally) {
+      if (
+        list.length > currentPageSize ||
+        thereAreAllTheDatabaseRecordsLocally
+      ) {
         let nCache: ListCacheEntry = {
           list: list,
           firstDoc: cache.firstDoc,
@@ -78,17 +83,19 @@ export class PaginationService {
     }
 
     // Caso não tenha no cache ou não tenha registros suficientes, faz a requisição; e sobreescreve o cache passado como arg.
-    return this.fetchApi(url, pageSize, currentPageSize, cache).pipe(
+    return this.fetchApi(url, pageSize, currentPageSize, cache, entity).pipe(
       map((response) => {
-        // Como o argumento `cache` não fica limitado a este escopo, então 'automaticamente' o objeto `cache` passado pelo outro service é sobreescrito  
+        // Como o argumento `cache` não fica limitado a este escopo, então 'automaticamente' o objeto `cache` passado pelo outro service é sobreescrito
         cache.lastDoc = response.lastDoc;
         cache.list.push(...response.list);
         cache.pageSize = response.pageSize;
         cache.totalSize = response.totalSize;
 
         const isInitialPage = endIndex == 0;
-        const listForReturn = isInitialPage ? cache.list : cache.list.slice(startIndex, endIndex);
-        
+        const listForReturn = isInitialPage
+          ? cache.list
+          : cache.list.slice(startIndex, endIndex);
+
         // Cria uma nova estrutura de cache local para retornar apenas os registros especificados
         let nCache: ListCacheEntry = {
           list: listForReturn,
@@ -108,6 +115,7 @@ export class PaginationService {
     pageSize: number,
     currentPageSize: number,
     cache: ListCacheEntry,
+    entity?: string,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
     const lastDoc = cache.lastDoc;
@@ -121,7 +129,15 @@ export class PaginationService {
         .set('value', filtro.value);
     }
 
-    if (lastDoc != null && lastDoc != 'Not available') params = params.set('startAfter', lastDoc.id);
+    if (lastDoc != null && lastDoc != 'Not available') {
+      switch (entity) {
+        case 'assistido':
+          params = params.set('startAfter', lastDoc.cpf);
+          break;
+        default:
+          params = params.set('startAfter', lastDoc.id);
+      }
+    }
 
     let incrementPageSize = currentPageSize && pageSize - currentPageSize > 0;
 

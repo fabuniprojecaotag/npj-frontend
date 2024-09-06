@@ -3,41 +3,53 @@
 <section class="secao-assistidos">
   <mat-form-field class="secao-assistidos__filtro">
     <mat-label>Filtro</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ATE00001" #input>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. ATE00001"
+      #input
+    />
   </mat-form-field>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <!-- Nome Coluna -->
       <ng-container matColumnDef="nome">
-        <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let assistido"> {{assistido.nome}} </td>
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let assistido">{{ assistido.nome }}</td>
       </ng-container>
 
       <!-- E-mail Coluna -->
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> E-mail </th>
-        <td mat-cell *matCellDef="let assistido"> {{assistido.email}} </td>
+        <th mat-header-cell *matHeaderCellDef>E-mail</th>
+        <td mat-cell *matCellDef="let assistido">{{ assistido.email }}</td>
       </ng-container>
 
       <!-- CPF Coluna -->
       <ng-container matColumnDef="cpf">
-        <th mat-header-cell *matHeaderCellDef> CPF </th>
-        <td mat-cell *matCellDef="let assistido"><a
-            [routerLink]="'/assistidos/shortcut/' + assistido.cpf">{{assistido.cpf}}</a></td>
+        <th mat-header-cell *matHeaderCellDef>CPF</th>
+        <td mat-cell *matCellDef="let assistido">
+          <a [routerLink]="'/assistidos/shortcut/' + assistido.cpf">{{
+            assistido.cpf
+          }}</a>
+        </td>
       </ng-container>
 
       <!-- Telefone Coluna -->
       <ng-container matColumnDef="telefone">
-        <th mat-header-cell *matHeaderCellDef> Telefone </th>
-        <td mat-cell *matCellDef="let assistido"> {{assistido.telefone}} </td>
+        <th mat-header-cell *matHeaderCellDef>Telefone</th>
+        <td mat-cell *matCellDef="let assistido">{{ assistido.telefone }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="colunasMostradas"></tr>
-      <tr mat-row *matRowDef="let row; columns: colunasMostradas;"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunasMostradas"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="items por página:">
+    <mat-paginator
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 20, 50, 100]"
+      aria-label="items por página:"
+      (page)="onPageChange($event)"
+    >
     </mat-paginator>
   </div>
-
 </section>

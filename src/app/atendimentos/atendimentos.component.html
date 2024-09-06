@@ -3,9 +3,17 @@
 <section class="secao-atendimentos">
   <mat-form-field class="secao-atendimentos__filtro">
     <mat-label>Filtro</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ATE00001" #input>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. ATE00001"
+      #input
+    />
   </mat-form-field>
-  <app-print-button  [dataSet]="dataSource" pageName="Atendimento" [config]="printConfig" ></app-print-button>
+  <app-print-button
+    pageName="Atendimento"
+    [config]="printConfig"
+  ></app-print-button>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <!-- ID Coluna -->
@@ -17,14 +25,21 @@
       <!-- Assistido Coluna -->
       <ng-container matColumnDef="assistido">
         <th mat-header-cell *matHeaderCellDef>assistido</th>
-        <td mat-cell *matCellDef="let atendimento">{{ atendimento.envolvidos.assistido.nome }}</td>
+        <td mat-cell *matCellDef="let atendimento">
+          {{ atendimento.envolvidos.assistido.nome }}
+        </td>
       </ng-container>
 
       <!-- Tipo Coluna -->
       <ng-container matColumnDef="tipo">
         <th mat-header-cell *matHeaderCellDef>Tipo</th>
         <td mat-cell *matCellDef="let atendimento">
-          <a [routerLink]="'/atendimentos/edit/' + atendimento.id + '/' + atendimento.area">{{atendimento.area}}</a>
+          <a
+            [routerLink]="
+              '/atendimentos/edit/' + atendimento.id + '/' + atendimento.area
+            "
+            >{{ atendimento.area }}</a
+          >
         </td>
       </ng-container>
 
@@ -40,7 +55,7 @@
       <ng-container matColumnDef="dataDeCriacao">
         <th mat-header-cell *matHeaderCellDef>Data de Criação</th>
         <td mat-cell *matCellDef="let atendimento">
-          {{ atendimento.instante | date:'HH:mm - dd/MM/yyyy' }}
+          {{ atendimento.instante | date : "HH:mm - dd/MM/yyyy" }}
         </td>
       </ng-container>
 
@@ -48,7 +63,12 @@
       <tr mat-row *matRowDef="let row; columns: colunasMostradas"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="items por página::">
+    <mat-paginator
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 20, 50, 100]"
+      aria-label="items por página:"
+      (page)="onPageChange($event)"
+    >
     </mat-paginator>
   </div>
 </section>
