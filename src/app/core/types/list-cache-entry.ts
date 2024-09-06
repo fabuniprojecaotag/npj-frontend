@@ -1,4 +1,4 @@
-export interface CacheEntry {
+export interface ListCacheEntry {
   list: any[];
   firstDoc: any;
   lastDoc: any;
@@ -6,4 +6,4 @@ export interface CacheEntry {
   totalSize: number;
 }
 
-export const cache: { [count: number]: CacheEntry } = {};
+export const cache: { [count: number]: ListCacheEntry } = {};

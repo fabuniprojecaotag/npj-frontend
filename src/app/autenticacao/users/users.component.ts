@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,8 +25,7 @@ export class UsersComponent implements OnInit {
     'exclusao',
   ];
   selection = new SelectionModel<Usuario>(true, []);
-  filter = { field: '', operator: '', value: '' };
-  pageSize: number = 5;
+  pageSize: number = 10;
 
   constructor(private service: CadastroService, private dialog: MatDialog) {}
 
@@ -57,11 +56,8 @@ export class UsersComponent implements OnInit {
     const startIndex = pageIndex * this.pageSize;
     const endIndex = startIndex + this.pageSize;
 
-    const numPages = this.paginator.getNumberOfPages();
-
     this.service.getPaginatedData(this.pageSize, startIndex, endIndex).subscribe((data) => {
-      const list = data.list; 
-      this.dataSource.data = list;
+      this.dataSource.data = data.list;
       this.paginator.length = data.totalSize;
     });
   }
