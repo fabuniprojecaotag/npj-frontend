@@ -39,7 +39,8 @@ export class EstatisticasComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.service.listarProcessos().subscribe({
+    // TODO: corrigir lógica para obter registros
+    this.service.getPaginatedData(10).subscribe({
       next: (response) => {
         this.listaProcesso = response.list;
 

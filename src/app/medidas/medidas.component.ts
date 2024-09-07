@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Medida } from '../core/types/medida';
 import { MedidasService } from './service/medidas.service';
@@ -12,8 +12,9 @@ import { MedidasService } from './service/medidas.service';
 export class MedidasComponent {
   tituloPagina = 'Lista de Medidas';
   listaMedidasJuridicas: Medida[] = [];
-  dataSource: any;
+  dataSource = new MatTableDataSource<Medida>(this.listaMedidasJuridicas);
   colunasMostradas: string[] = ['id', 'nome', 'area', 'descricao'];
+  pageSize: number = 10;
   // colunas pra impressão que possivelmente serão utilziadas:
   // printConfig: any = [
   //   {
@@ -29,19 +30,32 @@ export class MedidasComponent {
   //     title: 'Descrição'
   //   },
   // ];
-  constructor(private medidasService: MedidasService) { }
-
+  constructor(private service: MedidasService) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit(): void {
-    this.medidasService.listagemMedidas().subscribe({
-      next: (response) => {
-        this.listaMedidasJuridicas = response.list;
-        this.dataSource = new MatTableDataSource<Medida>(this.listaMedidasJuridicas);
-        this.dataSource.paginator = this.paginator;
-      },
-      error: (err) => { },
+  ngOnInit(): void {
+    this.loadInitialData(this.pageSize);
+  }
+
+  loadInitialData(pageSize: number): void {
+    this.service.getPaginatedData(pageSize).subscribe((data) => {
+      this.dataSource.data = data.list.slice(0, pageSize);
+      this.paginator.length = data.totalSize; 
+    });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    const pageIndex = event.pageIndex;
+
+    // Calcular índices baseados no tamanho da página e no índice atual
+    const startIndex = pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+
+    this.service.getPaginatedData(this.pageSize, startIndex, endIndex).subscribe((data) => {
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize;
     });
   }
 

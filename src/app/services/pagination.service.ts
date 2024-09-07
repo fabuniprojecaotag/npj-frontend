@@ -134,6 +134,9 @@ export class PaginationService {
         case 'assistido':
           params = params.set('startAfter', lastDoc.cpf);
           break;
+        case 'processo':
+          params = params.set('startAfter', lastDoc.numero);
+          break;
         default:
           params = params.set('startAfter', lastDoc.id);
       }
