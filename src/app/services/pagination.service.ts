@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable, of } from 'rxjs';
 import { ListCacheEntry } from '../core/types/list-cache-entry';
 import { PageEvent } from '@angular/material/paginator';
-import { DEFAULT_PAGE_SIZE } from '../shared/constants/constants';
+import { DEFAULT_PAGE_SIZE, TEN_MINUTES_IN_MILLISECONDS } from '../shared/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -167,5 +167,12 @@ export class PaginationService {
       pageSize: DEFAULT_PAGE_SIZE,
       totalSize: -1, // O valor tem que ser diferente de zero para não conflitar com uma lógica definida na PaginationService
     };
+  }
+
+  startCacheCleaner(callback: (cache: ListCacheEntry, currentPageSize: number) => void, intervalTime: number = TEN_MINUTES_IN_MILLISECONDS) {
+    setInterval(() => {
+      const clearedCache = this.clearCache();
+      callback(clearedCache, 0);
+    }, intervalTime);
   }
 }

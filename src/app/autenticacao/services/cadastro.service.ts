@@ -9,7 +9,6 @@ import { Payload } from 'src/app/core/types/payload';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { PageEvent } from '@angular/material/paginator';
-import { CacheHandlerService } from 'src/app/services/cache-handler.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,13 +28,17 @@ export class CadastroService {
 
   constructor(
     private http: HttpClient,
-    private paginationService: PaginationService,
-    private cacheHandlerService: CacheHandlerService
+    private paginationService: PaginationService
   ) {
-    this.cacheHandlerService.startCacheCleaner((cache, currentPageSize) => {
+    this.paginationService.startCacheCleaner((cache, currentPageSize) => {
       this.cache = cache;
       this.currentPageSize = currentPageSize;
     });
+  }
+
+  clearCache() {
+    this.cache = this.paginationService.clearCache();
+    this.currentPageSize = 0;
   }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
@@ -49,7 +52,6 @@ export class CadastroService {
   buscarMeuUsuario(): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.url}/me`);
   }
-
   
   getPaginatedData(
     event?: PageEvent,
