@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -7,6 +7,7 @@ import { Payload } from 'src/app/core/types/payload';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { Filtro } from 'src/app/core/types/filtro';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
+import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({
   providedIn: 'root',
@@ -34,19 +35,15 @@ export class ProcessosService {
   }
 
   getPaginatedData(
-    pageSize: number,
-    startIndex: number = 0,
-    endIndex: number = 0,
+    event?: PageEvent,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
     return this.paginationService
       .getPaginatedData(
-        pageSize,
-        startIndex,
-        endIndex,
         this.cache,
         this.currentPageSize,
         this.url,
+        event,
         'processo'
       )
       .pipe(

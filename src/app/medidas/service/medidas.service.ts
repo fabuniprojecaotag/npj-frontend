@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { map, Observable } from 'rxjs';
 import { Filtro } from 'src/app/core/types/filtro';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
@@ -30,19 +31,15 @@ export class MedidasService {
   ) {}
 
   getPaginatedData(
-    pageSize: number,
-    startIndex: number = 0,
-    endIndex: number = 0,
+    event?: PageEvent,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
     return this.paginationService
       .getPaginatedData(
-        pageSize,
-        startIndex,
-        endIndex,
         this.cache,
         this.currentPageSize,
-        this.url
+        this.url,
+        event
       )
       .pipe(
         map((response) => {

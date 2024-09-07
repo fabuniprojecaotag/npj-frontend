@@ -5,6 +5,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CadastroService } from 'src/app/autenticacao/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
+import { DEFAULT_PAGE_SIZE } from 'src/app/shared/constants/constants';
 import { ModalExcluidoComponent } from 'src/app/shared/modal-excluido/modal-excluido.component';
 
 @Component({
@@ -25,38 +26,31 @@ export class UsersComponent implements OnInit {
     'exclusao',
   ];
   selection = new SelectionModel<Usuario>(true, []);
-  pageSize: number = 10;
+  initialPageSize: number = DEFAULT_PAGE_SIZE;
 
   constructor(private service: CadastroService, private dialog: MatDialog) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.loadInitialData(this.pageSize);
+    this.loadInitialData();
   }
 
-  loadInitialData(pageSize: number): void {
-    this.service.getPaginatedData(pageSize).subscribe((data) => {
+  loadInitialData(): void {
+    this.service.getPaginatedData().subscribe((data) => {
       // Inicializa a seleção com base no status dos usuários
       this.selection = new SelectionModel<Usuario>(
         true,
         this.listaUsuarios.filter((user) => user.status)
       );
 
-      this.dataSource.data = data.list.slice(0, pageSize);
-      this.paginator.length = data.totalSize; // Ajusta o tamanho total
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize;
     });
   }
 
   onPageChange(event: PageEvent): void {
-    this.pageSize = event.pageSize;
-    const pageIndex = event.pageIndex;
-
-    // Calcular índices baseados no tamanho da página e no índice atual
-    const startIndex = pageIndex * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-
-    this.service.getPaginatedData(this.pageSize, startIndex, endIndex).subscribe((data) => {
+    this.service.getPaginatedData(event).subscribe((data) => {
       this.dataSource.data = data.list;
       this.paginator.length = data.totalSize;
     });

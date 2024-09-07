@@ -13,6 +13,7 @@ import { Payload } from 'src/app/core/types/payload';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { Filtro } from 'src/app/core/types/filtro';
 import { PaginationService } from 'src/app/services/pagination.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({
   providedIn: 'root',
@@ -44,19 +45,15 @@ export class AssistidosService {
   }
 
   getPaginatedData(
-    pageSize: number,
-    startIndex: number = 0,
-    endIndex: number = 0,
+    event?: PageEvent,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
     return this.paginationService
       .getPaginatedData(
-        pageSize,
-        startIndex,
-        endIndex,
         this.cache,
         this.currentPageSize,
         this.url,
+        event,
         "assistido"
       )
       .pipe(

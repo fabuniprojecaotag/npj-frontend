@@ -3,6 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Medida } from '../core/types/medida';
 import { MedidasService } from './service/medidas.service';
+import { DEFAULT_PAGE_SIZE } from '../shared/constants/constants';
 
 @Component({
   selector: 'app-medidas',
@@ -14,7 +15,7 @@ export class MedidasComponent {
   listaMedidasJuridicas: Medida[] = [];
   dataSource = new MatTableDataSource<Medida>(this.listaMedidasJuridicas);
   colunasMostradas: string[] = ['id', 'nome', 'area', 'descricao'];
-  pageSize: number = 10;
+  initialPageSize: number = DEFAULT_PAGE_SIZE;
   // colunas pra impressão que possivelmente serão utilziadas:
   // printConfig: any = [
   //   {
@@ -35,25 +36,18 @@ export class MedidasComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.loadInitialData(this.pageSize);
+    this.loadInitialData();
   }
 
-  loadInitialData(pageSize: number): void {
-    this.service.getPaginatedData(pageSize).subscribe((data) => {
-      this.dataSource.data = data.list.slice(0, pageSize);
+  loadInitialData(): void {
+    this.service.getPaginatedData().subscribe((data) => {
+      this.dataSource.data = data.list;
       this.paginator.length = data.totalSize; 
     });
   }
 
   onPageChange(event: PageEvent): void {
-    this.pageSize = event.pageSize;
-    const pageIndex = event.pageIndex;
-
-    // Calcular índices baseados no tamanho da página e no índice atual
-    const startIndex = pageIndex * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-
-    this.service.getPaginatedData(this.pageSize, startIndex, endIndex).subscribe((data) => {
+    this.service.getPaginatedData(event).subscribe((data) => {
       this.dataSource.data = data.list;
       this.paginator.length = data.totalSize;
     });

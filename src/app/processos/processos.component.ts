@@ -3,6 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Processo } from 'src/app/core/types/processo';
 import { ProcessosService } from 'src/app/processos/services/processos.service';
+import { DEFAULT_PAGE_SIZE } from '../shared/constants/constants';
 
 @Component({
   selector: 'app-processos',
@@ -33,7 +34,7 @@ export class ProcessosComponent implements OnInit {
       title: 'Vara'
     },
   ];
-  pageSize: number = 10;
+  initialPageSize: number = DEFAULT_PAGE_SIZE;
 
   constructor(private service: ProcessosService) { }
 
@@ -49,25 +50,18 @@ export class ProcessosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadInitialData(this.pageSize);
+    this.loadInitialData();
   }
 
-  loadInitialData(pageSize: number): void {
-    this.service.getPaginatedData(pageSize).subscribe((data) => {
-      this.dataSource.data = data.list.slice(0, pageSize);
+  loadInitialData(): void {
+    this.service.getPaginatedData().subscribe((data) => {
+      this.dataSource.data = data.list;
       this.paginator.length = data.totalSize; 
     });
   }
 
   onPageChange(event: PageEvent): void {
-    this.pageSize = event.pageSize;
-    const pageIndex = event.pageIndex;
-
-    // Calcular índices baseados no tamanho da página e no índice atual
-    const startIndex = pageIndex * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-
-    this.service.getPaginatedData(this.pageSize, startIndex, endIndex).subscribe((data) => {
+    this.service.getPaginatedData(event).subscribe((data) => {
       this.dataSource.data = data.list;
       this.paginator.length = data.totalSize;
     });

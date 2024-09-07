@@ -3,6 +3,8 @@ import { Filtro } from '../core/types/filtro';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable, of } from 'rxjs';
 import { ListCacheEntry } from '../core/types/list-cache-entry';
+import { PageEvent } from '@angular/material/paginator';
+import { DEFAULT_PAGE_SIZE } from '../shared/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +13,22 @@ export class PaginationService {
   constructor(private http: HttpClient) {}
 
   getPaginatedData(
-    pageSize: number,
-    startIndex: number = 0,
-    endIndex: number = 0,
     cache: ListCacheEntry,
     currentPageSize: number,
     url: string,
+    event?: PageEvent,
     entity?: string,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
-    // Modulariza o cache.list em uma constante para reuso
+
+    const pageSize = event?.pageSize || DEFAULT_PAGE_SIZE;
+    const pageIndex = event?.pageIndex || 0;
+
+    // Calcula índices baseados no tamanho da página e no índice atual
+    const startIndex = pageIndex * pageSize;
+    const endIndex = startIndex + pageSize;
+
+    // Extrai o cache.list para reuso
     const listCache = cache.list;
 
     // Mantém sincronizado o `pageSize` do cache assim como deve ocorrer com o `currentPageSize` passado

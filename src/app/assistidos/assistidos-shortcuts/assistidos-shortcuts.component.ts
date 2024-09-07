@@ -48,7 +48,7 @@ export class AssistidosShortcutsComponent implements OnInit {
     });
 
     // TODO: corrigir lógica para obter registros
-    this.processoService.getPaginatedData(10).subscribe({
+    this.processoService.getPaginatedData().subscribe({
       next: (resposta) => {
         this.listaProcesso = resposta.list;
       }

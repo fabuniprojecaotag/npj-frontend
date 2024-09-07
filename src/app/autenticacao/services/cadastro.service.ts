@@ -8,6 +8,7 @@ import { Response } from 'src/app/core/types/response';
 import { Payload } from 'src/app/core/types/payload';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { PaginationService } from 'src/app/services/pagination.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({
   providedIn: 'root',
@@ -54,19 +55,15 @@ export class CadastroService {
 
   // TODO: trabalhar lógica para que filtragem de registros funcione com paginação
   getPaginatedData(
-    pageSize: number,
-    startIndex: number = 0,
-    endIndex: number = 0,
+    event?: PageEvent,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
     return this.paginationService
       .getPaginatedData(
-        pageSize,
-        startIndex,
-        endIndex,
         this.cache,
         this.currentPageSize,
-        this.url
+        this.url,
+        event
       )
       .pipe(
         map((response) => {
