@@ -2,13 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../../core/types/usuario';
-import { map, Observable, of, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Filtro } from '../../core/types/filtro';
 import { Response } from 'src/app/core/types/response';
 import { Payload } from 'src/app/core/types/payload';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { PageEvent } from '@angular/material/paginator';
+import { CacheHandlerService } from 'src/app/services/cache-handler.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +29,14 @@ export class CadastroService {
 
   constructor(
     private http: HttpClient,
-    private paginationService: PaginationService
-  ) {}
+    private paginationService: PaginationService,
+    private cacheHandlerService: CacheHandlerService
+  ) {
+    this.cacheHandlerService.startCacheCleaner((cache, currentPageSize) => {
+      this.cache = cache;
+      this.currentPageSize = currentPageSize;
+    });
+  }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.url}`, usuario);
@@ -43,28 +50,13 @@ export class CadastroService {
     return this.http.get<Usuario>(`${this.url}/me`);
   }
 
-  clearCache() {
-    this.cache = {
-      list: [],
-      firstDoc: null,
-      lastDoc: null,
-      pageSize: 0,
-      totalSize: 0,
-    };
-  }
-
-  // TODO: trabalhar lógica para que filtragem de registros funcione com paginação
+  
   getPaginatedData(
     event?: PageEvent,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
     return this.paginationService
-      .getPaginatedData(
-        this.cache,
-        this.currentPageSize,
-        this.url,
-        event
-      )
+      .getPaginatedData(this.cache, this.currentPageSize, this.url, event)
       .pipe(
         map((response) => {
           this.currentPageSize = response.pageSize;

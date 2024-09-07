@@ -9,6 +9,7 @@ import { Payload } from 'src/app/core/types/payload';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { PageEvent } from '@angular/material/paginator';
+import { CacheHandlerService } from 'src/app/services/cache-handler.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +29,14 @@ export class AtendimentosService {
 
   constructor(
     private http: HttpClient,
-    private paginationService: PaginationService
-  ) {}
+    private paginationService: PaginationService,
+    private cacheHandlerService: CacheHandlerService
+  ) {
+    this.cacheHandlerService.startCacheCleaner((cache, currentPageSize) => {
+      this.cache = cache;
+      this.currentPageSize = currentPageSize;
+    });
+  }
 
   listagemAtendimentos(filtro?: Filtro): Observable<Response> {
     let params = new HttpParams();
@@ -47,12 +54,7 @@ export class AtendimentosService {
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
     return this.paginationService
-      .getPaginatedData(
-        this.cache,
-        this.currentPageSize,
-        this.url,
-        event
-      )
+      .getPaginatedData(this.cache, this.currentPageSize, this.url, event)
       .pipe(
         map((response) => {
           this.currentPageSize = response.pageSize;

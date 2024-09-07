@@ -14,6 +14,7 @@ import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { Filtro } from 'src/app/core/types/filtro';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { PageEvent } from '@angular/material/paginator';
+import { CacheHandlerService } from 'src/app/services/cache-handler.service';
 
 @Injectable({
   providedIn: 'root',
@@ -33,8 +34,14 @@ export class AssistidosService {
 
   constructor(
     private http: HttpClient,
-    private paginationService: PaginationService
-  ) {}
+    private paginationService: PaginationService,
+    private cacheHandlerService: CacheHandlerService
+  ) {
+    this.cacheHandlerService.startCacheCleaner((cache, currentPageSize) => {
+      this.cache = cache;
+      this.currentPageSize = currentPageSize;
+    });
+  }
 
   cadastrarAssistido(
     assistido: Assistido
@@ -54,7 +61,7 @@ export class AssistidosService {
         this.currentPageSize,
         this.url,
         event,
-        "assistido"
+        'assistido'
       )
       .pipe(
         map((response) => {

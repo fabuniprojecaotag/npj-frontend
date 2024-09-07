@@ -6,6 +6,7 @@ import { Filtro } from 'src/app/core/types/filtro';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { Medida } from 'src/app/core/types/medida';
 import { Payload } from 'src/app/core/types/payload';
+import { CacheHandlerService } from 'src/app/services/cache-handler.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { environment } from 'src/environments/environment';
 
@@ -27,20 +28,21 @@ export class MedidasService {
 
   constructor(
     private http: HttpClient,
-    private paginationService: PaginationService
-  ) {}
+    private paginationService: PaginationService,
+    private cacheHandlerService: CacheHandlerService
+  ) {
+    this.cacheHandlerService.startCacheCleaner((cache, currentPageSize) => {
+      this.cache = cache;
+      this.currentPageSize = currentPageSize;
+    });
+  }
 
   getPaginatedData(
     event?: PageEvent,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
     return this.paginationService
-      .getPaginatedData(
-        this.cache,
-        this.currentPageSize,
-        this.url,
-        event
-      )
+      .getPaginatedData(this.cache, this.currentPageSize, this.url, event)
       .pipe(
         map((response) => {
           this.currentPageSize = response.pageSize;

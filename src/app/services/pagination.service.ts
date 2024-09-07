@@ -12,6 +12,7 @@ import { DEFAULT_PAGE_SIZE } from '../shared/constants/constants';
 export class PaginationService {
   constructor(private http: HttpClient) {}
 
+  // TODO: trabalhar lógica para que filtragem de registros funcione com paginação
   getPaginatedData(
     cache: ListCacheEntry,
     currentPageSize: number,
@@ -20,7 +21,6 @@ export class PaginationService {
     entity?: string,
     filtro?: Filtro
   ): Observable<ListCacheEntry> {
-
     const pageSize = event?.pageSize || DEFAULT_PAGE_SIZE;
     const pageIndex = event?.pageIndex || 0;
 
@@ -157,5 +157,15 @@ export class PaginationService {
     else params = params.set('pageSize', pageSize);
 
     return this.http.get<ListCacheEntry>(`${url}`, { params });
+  }
+
+  clearCache(): ListCacheEntry {
+    return {
+      list: [],
+      firstDoc: null,
+      lastDoc: null,
+      pageSize: DEFAULT_PAGE_SIZE,
+      totalSize: -1, // O valor tem que ser diferente de zero para não conflitar com uma lógica definida na PaginationService
+    };
   }
 }
