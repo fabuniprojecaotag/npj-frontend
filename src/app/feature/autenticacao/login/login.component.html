@@ -1,0 +1,36 @@
+<section class="login-page">
+  <div class="card">
+    <img src="../../../../assets/images/logoGPROTransparente.png" alt="logo do GPRO">
+    <h2>Login</h2>
+    <div class="card__carregando" *ngIf="isLoading">
+      <p>Carregando</p>
+      <mat-spinner></mat-spinner>
+    </div>
+    <form [formGroup]="loginForm" *ngIf="!isLoading" class="login__form">
+      <mat-form-field appearance="fill">
+        <mat-label>Prefixo email/matricula</mat-label>
+        <input matInput type="text" placeholder="Digite o começo do seu e-mail ou matricula" formControlName="email">
+        <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Email/Matrícula obrigatório(a)!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" placeholder="Digite sua senha" formControlName="senha">
+        <mat-error *ngIf="loginForm.get('senha')?.errors?.['required']">Senha é obrigatória!</mat-error>
+      </mat-form-field>
+
+      <button [disabled]="loginForm.invalid" class="form__botao" type="submit" (click)="login()">Login</button>
+    </form>
+    <a href="#">Esqueceu a senha?</a>
+  </div>
+  <div class="info-footer">
+    <ul>
+      <li><a href="#">Sobre</a></li>
+      <li><a href="#">Privacidade</a></li>
+      <li><a href="#">Termos de uso</a></li>
+    </ul>
+    <span>
+      © {{anoAtual}} GPRO
+    </span>
+  </div>
+</section>
