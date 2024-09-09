@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Atendimento } from 'src/app/core/types/atendimento';
@@ -10,7 +10,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/shared/constants/constants';
   templateUrl: './atendimentos.component.html',
   styleUrls: ['./atendimentos.component.scss'],
 })
-export class AtendimentosComponent implements OnInit {
+export class AtendimentosComponent implements AfterViewInit {
   tituloPagina = 'Lista de Atendimentos';
   dataSource = new MatTableDataSource<Atendimento>();
   colunasMostradas: string[] = ['id', 'tipo', 'status', 'dataDeCriacao'];
@@ -39,8 +39,8 @@ export class AtendimentosComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
-    this.loadInitialData();
+  ngAfterViewInit(): void {
+    Promise.resolve().then(() => this.loadInitialData());
   }
 
   loadInitialData(): void {

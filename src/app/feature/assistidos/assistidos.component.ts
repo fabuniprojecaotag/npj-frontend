@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AssistidosService } from 'src/app/feature/assistidos/services/assistidos.service';
@@ -10,7 +10,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/shared/constants/constants';
   templateUrl: './assistidos.component.html',
   styleUrls: ['./assistidos.component.scss'],
 })
-export class AssistidosComponent implements OnInit {
+export class AssistidosComponent implements AfterViewInit {
   tituloPagina = 'Assistidos';
   listaAssistidos: Assistido[] = [];
   dataSource = new MatTableDataSource<Assistido>(this.listaAssistidos);
@@ -21,8 +21,8 @@ export class AssistidosComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
-    this.loadInitialData();
+  ngAfterViewInit(): void {
+    Promise.resolve().then(() => this.loadInitialData());
   }
 
   loadInitialData(): void {

@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +13,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/shared/constants/constants';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements AfterViewInit {
   tituloDaPagina = 'Usuários';
   listaUsuarios: Usuario[] = [];
   dataSource = new MatTableDataSource<Usuario>(this.listaUsuarios);
@@ -30,11 +30,11 @@ export class UsersComponent implements OnInit {
 
   constructor(private service: CadastroService, private dialog: MatDialog) {}
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  ngOnInit(): void {
-    this.loadInitialData();
+  ngAfterViewInit(): void {
+    Promise.resolve().then(() => this.loadInitialData());
   }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   loadInitialData(): void {
     this.service.getPaginatedData().subscribe((data) => {

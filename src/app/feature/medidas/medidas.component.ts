@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Medida } from '../../core/types/medida';
@@ -10,7 +10,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/shared/constants/constants';
   templateUrl: './medidas.component.html',
   styleUrls: ['./medidas.component.scss']
 })
-export class MedidasComponent {
+export class MedidasComponent implements AfterViewInit {
   tituloPagina = 'Lista de Medidas';
   listaMedidasJuridicas: Medida[] = [];
   dataSource = new MatTableDataSource<Medida>(this.listaMedidasJuridicas);
@@ -35,8 +35,8 @@ export class MedidasComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
-    this.loadInitialData();
+  ngAfterViewInit(): void {
+    Promise.resolve().then(() => this.loadInitialData());
   }
 
   loadInitialData(): void {
