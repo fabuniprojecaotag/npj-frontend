@@ -1,0 +1,59 @@
+<section class="secao-form-medidas">
+  <h3>Medida Jurídica</h3>
+
+  <form class="formulario" [formGroup]="formMedidas">
+    <div class="linha">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id"/>
+      </mat-form-field>
+    </div>
+
+    <div class="linha">
+      <mat-form-field>
+        <mat-label>Nome da ação</mat-label>
+        <input matInput placeholder="Nome da ação" formControlName="nome" />
+        <mat-error *ngIf="formMedidas.get('nome')?.errors?.['required']">
+          Nome da ação é obrigatório!
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="linha">
+      <mat-form-field class="input-pequeno">
+        <mat-label>Área</mat-label>
+        <mat-select matInput formControlName="area" ngDefaultControl>
+          <mat-option *ngFor="let area of areas" [value]="area">
+            {{ area }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formMedidas.get('area')?.errors?.['required']">Área
+          é obrigatória!</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="linha">
+      <mat-form-field class="inputs-medios">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="descricao" placeholder="Descrição"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="espacador"></div>
+
+    <div class="btn-group">
+      <button mat-flat-button class="btn" color="warn" type="button" *ngIf="editComponent === true" (click)="emitirAcaoExcluir()">
+        Excluir
+      </button>
+      <button mat-flat-button class="btn" (click)="emitirAcaoInserir()" [disabled]="formMedidas.invalid">
+        Inserir
+      </button>
+      <button mat-flat-button class="btn" (click)="emitirAcaoInserirEPermanecer()" [disabled]="formMedidas.invalid">
+        Inserir e Permancer
+      </button>
+      <button mat-flat-button class="btn" color="accent" (click)="emitirAcaoSubmeter()" [disabled]="formMedidas.invalid">
+        Submeter
+      </button>
+    </div>
+  </form>
+</section>

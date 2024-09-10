@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalErrosComponent } from 'src/app/shared/modal-erros/modal-erros.component';
+import { ModalErrosComponent } from 'src/app/shared/components/modal-erros/modal-erros.component';
 
 @Injectable({
   providedIn: 'root'

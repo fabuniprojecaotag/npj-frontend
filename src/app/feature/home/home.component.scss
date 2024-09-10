@@ -1,0 +1,21 @@
+@import "../../../styles.scss";
+
+.principal {
+  text-align: center;
+  padding: 200px 0;
+
+  &__logo {
+    font-size: 60px;
+    font-family: $fonte-logo;
+    font-weight: bold;
+  }
+
+  &__texto {
+    font-family: $fonte-logo;
+    font-size: 2em;
+  }
+}
+
+.cabecalho-linha {
+  padding: 0;
+}

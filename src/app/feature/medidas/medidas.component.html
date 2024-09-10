@@ -1,0 +1,49 @@
+<app-header [subtitulo]="tituloPagina"></app-header>
+<app-utils-bar></app-utils-bar>
+<section class="secao-medidas">
+  <mat-form-field class="secao-medidas__filtro">
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ATE00001" #input>
+  </mat-form-field>
+  <!-- <app-print-button [dataSet]="listaMedidasJuridicas" pageName="Medida" [config]="printConfig"></app-print-button> -->
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- ID Coluna -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let medida"><a [routerLink]="'/medidas/edit/' + medida.id">{{ medida.id }}</a>
+        </td>
+      </ng-container>
+
+      <!-- Nome Coluna -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let medida">
+          {{ medida.nome }}
+        </td>
+      </ng-container>
+
+      <!-- Área Coluna -->
+      <ng-container matColumnDef="area">
+        <th mat-header-cell *matHeaderCellDef>Área</th>
+        <td mat-cell *matCellDef="let medida">
+          {{ medida.area }}
+        </td>
+      </ng-container>
+
+      <!-- Descrição Coluna -->
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef>Descrição</th>
+        <td mat-cell *matCellDef="let medida">
+          {{ medida.descricao }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunasMostradas"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunasMostradas"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="items por página::">
+    </mat-paginator>
+  </div>
+</section>

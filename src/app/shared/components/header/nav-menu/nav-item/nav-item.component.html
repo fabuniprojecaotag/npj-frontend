@@ -1,0 +1,20 @@
+<div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <p class="nav__link">
+          <mat-icon aria-hidden="false" aria-label="People icon" fontIcon="{{ icon }}" class="icone-nav"></mat-icon>
+          {{ titulo }}
+        </p>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- Sub-items -->
+    <div *ngFor="let item of items">
+      <a [routerLink]="item.caminho" class="nav__link--filha">
+        <mat-icon aria-hidden="false" aria-label="list icon" fontIcon="{{ item.icon }}" class="icone-nav"></mat-icon>
+        {{ item.label }}
+      </a>
+    </div>
+  </mat-expansion-panel>
+</div>

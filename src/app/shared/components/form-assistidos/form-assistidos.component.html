@@ -1,0 +1,287 @@
+<section class="form-assistidos" [ngClass]="{ 'container': !editComponent }">
+  <h3>Identificação do Assistido</h3>
+  <form [formGroup]="formAssistidos">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome">
+          <mat-error *ngIf="formAssistidos.get('nome')?.errors?.['required']">Nome é
+            obrigatório</mat-error>
+          <mat-error *ngIf="formAssistidos.get('nome')?.errors?.['minlength']">Nome deve conter mais de 2
+            caracteres!</mat-error>
+          <mat-error *ngIf="formAssistidos.get('nome')?.errors?.['maxlength']">Nome deve conter ate 60
+            caracteres!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email">
+          <mat-error *ngIf="formAssistidos.get('email')?.errors?.['email']">Padrão de E-mail inválido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>CPF</mat-label>
+          <input matInput type="text" formControlName="cpf" mask="000.000.000-00" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false">
+          <mat-error *ngIf="formAssistidos.get('cpf')?.errors?.['pattern']">CPF fora do padrão
+            (000.000.000-00)</mat-error>
+          <mat-error *ngIf="formAssistidos.get('cpf')?.errors?.['required']">CPF é obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>RG</mat-label>
+          <input matInput type="text" formControlName="rg" mask="0.000.000" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false">
+          <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['pattern']">RG fora do padrão
+            (00.000.0000-00)</mat-error>
+          <mat-error *ngIf="formAssistidos.get('rg')?.errors?.['required']">RG é obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col"
+        *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
+        <mat-form-field class="full-width">
+          <mat-label>Naturalidade</mat-label>
+          <input matInput formControlName="naturalidade">
+          <mat-error *ngIf="formAssistidos.get('naturalidade')?.errors?.['required']">Naturalidade é
+            obrigatória</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Nacionalidade</mat-label>
+          <input matInput formControlName="nacionalidade">
+          <mat-error *ngIf="formAssistidos.get('naturalidade')?.errors?.['required']">Nacionalidade é
+            obrigatória</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col"
+        *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
+        <mat-form-field class="full-width">
+          <mat-label>Data de Nascimento</mat-label>
+          <input matInput [matDatepicker]="dataNascimento" formControlName="dataNascimento">
+          <mat-datepicker-toggle matIconSuffix [for]="dataNascimento" color="primary"></mat-datepicker-toggle>
+          <mat-datepicker #dataNascimento></mat-datepicker>
+          <mat-error *ngIf="formAssistidos.get('dataNascimento')?.errors?.['required']">Data de Nascimento é
+            obrigatória</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Estado civil</mat-label>
+          <mat-select formControlName="estadoCivil">
+            <mat-option *ngFor="let estado of estadosCivis" [value]="estado">
+              {{ estado }}
+            </mat-option>
+            <mat-error *ngIf="formAssistidos.get('estadoCivil')?.errors?.['required']">Estado Civil é
+              obrigatório</mat-error>
+          </mat-select>
+          <mat-error *ngIf="formAssistidos.get('estadoCivil')?.errors?.['required']">Selecione um estado
+            civil</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="telefone" mask="(00) 00000-0000" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false">
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['minlength']">Telefone precisa ter no mínimo 11
+            dígitos</mat-error>
+          <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['pattern']">Padrão de telefone inválido! (Ex:(00)
+            00000-0000)</mat-error>
+          <mat-error *ngIf="formAssistidos.get('telefone')?.errors?.['required']">Telefone é obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Tipo de Assistido</mat-label>
+          <mat-select matNativeControl formControlName="@type">
+            <mat-option *ngFor="let tipo of tipoAssistido" [value]="tipo.valor">
+              {{ tipo.texto }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formAssistidos.get('@type')?.errors?.['required']">
+            Tipo de assistido é obrigatório!
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <ng-container formGroupName="filiacao">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nome do pai</mat-label>
+            <input matInput formControlName="pai">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nome da mãe</mat-label>
+            <input matInput formControlName="mae">
+            <mat-error *ngIf="formAssistidos.get('filiacao')?.get('mae')?.errors?.['required']">Nome da Mãe é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Escolaridade</mat-label>
+          <mat-select matNativeControl formControlName="escolaridade">
+            <mat-option *ngFor="let escolaridade of escolaridades" [value]="escolaridade">
+              {{ escolaridade }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formAssistidos.get('escolaridade')?.errors?.['required']">Escolaridade é
+            obrigatória</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Profissão</mat-label>
+          <input matInput formControlName="profissao">
+          <mat-error *ngIf="formAssistidos.get('profissao')?.errors?.['required']">Profissão é
+            obrigatória</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Remuneração</mat-label>
+          <input matInput formControlName="remuneracao" placeholder="R$ 0.000">
+          <mat-error *ngIf="formAssistidos.get('remuneracao')?.errors?.['pattern']">
+            Padrão incorreto (Esperado: R$ 00.000)
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col"
+        *ngIf="formAssistidos.get('@type')?.value === 'Civil' || formAssistidos.get('@type')?.value === 'Full'">
+        <mat-form-field class="full-width">
+          <mat-label>Nº de dependentes</mat-label>
+          <input matInput type="number" formControlName="dependentes" mask="09">
+          <mat-error *ngIf="formAssistidos.get('dependentes')?.errors?.['required']">Dependentes é
+            obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row"
+      *ngIf="formAssistidos.get('@type')?.value === 'Trabalhista' || formAssistidos.get('@type')?.value === 'Full'">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>PIS</mat-label>
+          <input matInput formControlName="pis" mask="000.000000.0-0" [dropSpecialCharacters]="false">
+          <mat-error *ngIf="formAssistidos.get('pis')?.errors?.['required']">PIS é
+            obrigatório</mat-error>
+        </mat-form-field>
+      </div>
+      <ng-container formGroupName="ctps">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Número da CTPS</mat-label>
+            <input matInput formControlName="numero">
+            <mat-error *ngIf="formAssistidos.get('ctps')?.get('numero')?.errors?.['required']">Número da CTPS é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Série (CTPS)</mat-label>
+            <input matInput formControlName="serie">
+            <mat-error *ngIf="formAssistidos.get('ctps')?.get('serie')?.errors?.['required']">Número da CTPS é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>UF (CTPS)</mat-label>
+            <input matInput type="text" formControlName="uf" mask="AA">
+            <mat-error *ngIf="formAssistidos.get('ctps')?.get('uf')?.errors?.['required']">UF da CTPS é
+              obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+    <div class="row"
+      *ngIf="formAssistidos.get('@type')?.value === 'Trabalhista' || formAssistidos.get('@type')?.value === 'Full'">
+      <mat-checkbox formControlName="empregadoAtualmente" color="primary" labelPosition="before">Empregado
+        Atualmente:</mat-checkbox>
+    </div>
+    <ng-container formGroupName="endereco" *ngFor="let tipoEndereco of ['residencial', 'comercial']">
+      <ng-container [formGroupName]="tipoEndereco">
+        <div class="row">
+          <h4>{{ "Endereço " + tipoEndereco }}</h4>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>CEP</mat-label>
+              <input matInput formControlName="cep" (blur)="consultarCep(tipoEndereco)" mask="00000-000"
+                [dropSpecialCharacters]="false">
+              <mat-error *ngIf="formAssistidos.get(tipoEndereco)?.get('cep')?.errors?.['minlength']">CEP precisa ter no
+                mínimo 8 dígitos</mat-error>
+              <mat-error
+                *ngIf="tipoEndereco === 'residencial' && formAssistidos.get('residencial')?.get('cep')?.errors?.['required']">CEP
+                é obrigatório</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Cidade</mat-label>
+              <input matInput formControlName="cidade">
+              <mat-error
+                *ngIf="tipoEndereco === 'residencial' && formAssistidos.get('residencial')?.get('cidade')?.errors?.['required']">Cidade
+                é obrigatória</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Logradouro</mat-label>
+              <input matInput formControlName="logradouro">
+              <mat-error
+                *ngIf="tipoEndereco === 'residencial' && formAssistidos.get('residencial')?.get('logradouro')?.errors?.['required']">Logradouro
+                é obrigatório</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Bairro</mat-label>
+              <input matInput formControlName="bairro">
+              <mat-error
+                *ngIf="tipoEndereco === 'residencial' && formAssistidos.get('residencial')?.get('bairro')?.errors?.['required']">Bairro
+                é obrigatório</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Número</mat-label>
+              <input matInput formControlName="numero">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Complemento</mat-label>
+              <input matInput formControlName="complemento">
+            </mat-form-field>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <div class="btn-group" [ngClass]="{ 'sticky-bottom': editComponent }">
+      <button type="button" *ngIf="editComponent === true" mat-flat-button class="btn" color="warn"
+        (click)="excluir()">EXCLUIR</button>
+      <button mat-flat-button type="reset" class="btn btn-basic">LIMPAR</button>
+      <button mat-flat-button type="submit" (click)="executarAcao()" class="btn btn-basic"
+        [disabled]="formAssistidos.invalid">SALVAR</button>
+      <button mat-flat-button type="submit" (click)="executarAcao()" class="btn" color="accent"
+        [disabled]="formAssistidos.invalid">SUBMETER</button>
+    </div>
+  </form>
+</section>

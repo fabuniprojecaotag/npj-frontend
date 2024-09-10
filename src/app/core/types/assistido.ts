@@ -31,7 +31,7 @@ export interface AssistidoTrabalhista extends Assistido {
 export interface AssistidoFull extends AssistidoCivil, AssistidoTrabalhista { }
 
 export interface Filiacao {
-  pai: string,
+  pai?: string,
   mae: string,
 }
 

@@ -1,0 +1,85 @@
+@import "../../../styles.scss";
+
+.display {
+  display: visible !important;
+}
+.no-display {
+  display: none !important;
+}
+.sec-error {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 83vh;
+
+  .titulo-erro {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 5em auto 1em;
+    text-align: center;
+  }
+
+  p {
+    color: gray;
+    font-style: italic;
+    font-weight: lighter;
+  }
+}
+
+.secao-atendimentos {
+  height: 80vh;
+  margin: 0 auto;
+  width: 90vw;
+  .input-container {
+    display: flex;
+    margin: 1em auto;
+
+    button {
+      margin-left: 0.5em;
+    }
+  }
+
+  p {
+    padding-top: 3em;
+  }
+  .c-options {
+    width: 100%;
+    mat-chip-listbox {
+      width: 100%;
+      margin-bottom: 2%;
+    }
+  }
+  .main-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    .c-table,
+    .c-chart {
+      width: 50%;
+    }
+  }
+  .chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+  }
+
+  &__filtro {
+    margin: 1em auto;
+    width: 80vw;
+  }
+
+  .mat-mdc-table thead,
+  .mat-mdc-table .mat-mdc-header-cell {
+    background: $roxo-escuro;
+    color: $branco;
+    text-align: center;
+  }
+
+  .mat-mdc-cell {
+    text-align: center;
+  }
+}

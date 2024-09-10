@@ -1,0 +1,12 @@
+<section class="modal">
+  <h4 mat-dialog-title>Processo {{ data.operacao }} com sucesso!</h4>
+  <div mat-dialog-content class="modal__conteudo">
+    <p>N°: {{ data.numero }}</p>
+    <p>Nome: {{ data.nome }}</p>
+    <p>Atendimento vinculado: {{ data.atendimentoId }}</p>
+    <p>Assistido vinculado: {{ data.assistidoId }}</p>
+  </div>
+  <div mat-dialog-actions class="modal__botoes">
+    <button mat-button mat-dialog-close>FECHAR</button>
+  </div>
+</section>
