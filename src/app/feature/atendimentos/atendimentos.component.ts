@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Atendimento } from 'src/app/core/types/atendimento';
 import { AtendimentosService } from 'src/app/feature/atendimentos/services/atendimentos.service';
+import { DEFAULT_PAGE_SIZE } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-atendimentos',
@@ -10,38 +12,48 @@ import { AtendimentosService } from 'src/app/feature/atendimentos/services/atend
 })
 export class AtendimentosComponent implements AfterViewInit {
   tituloPagina = 'Lista de Atendimentos';
-  dataSource: any;
+  dataSource = new MatTableDataSource<Atendimento>();
   colunasMostradas: string[] = ['id', 'tipo', 'status', 'dataDeCriacao'];
   printConfig: any = [
     {
       col: 'id',
-      title: 'Cód.Atendimento'
+      title: 'Cód.Atendimento',
     },
     {
       col: 'area',
-      title: 'Tipo'
+      title: 'Tipo',
     },
     {
       col: 'instante',
       title: 'Data Criação',
-      format: 'formatDate'
+      format: 'formatDate',
     },
     {
       col: 'status',
-      title: 'Status'
+      title: 'Status',
     },
   ];
-  constructor(private atendimentoService: AtendimentosService) { }
+  initialPageSize: number = DEFAULT_PAGE_SIZE;
+
+  constructor(private service: AtendimentosService) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit(): void {
-    this.atendimentoService.listagemAtendimentos().subscribe({
-      next: (response) => {
-        this.dataSource = new MatTableDataSource(response.list);
-        this.dataSource.paginator = this.paginator;
-      },
-      error: (err) => { },
+    Promise.resolve().then(() => this.loadInitialData());
+  }
+
+  loadInitialData(): void {
+    this.service.getPaginatedData().subscribe((data) => {
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize;
+    });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.service.getPaginatedData(event).subscribe((data) => {
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize;
     });
   }
 

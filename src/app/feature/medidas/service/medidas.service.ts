@@ -1,22 +1,59 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
+import { map, Observable } from 'rxjs';
+import { Filtro } from 'src/app/core/types/filtro';
+import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { Medida } from 'src/app/core/types/medida';
 import { Payload } from 'src/app/core/types/payload';
-import { Response } from 'src/app/core/types/response';
+import { PaginationService } from 'src/app/core/services/pagination.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MedidasService {
   private API = environment.API_URL;
   private url = this.API + '/medidas juridicas';
+  filter = { field: '', operator: '', value: '' };
+  cache: ListCacheEntry = {
+    list: [],
+    firstDoc: null,
+    lastDoc: null,
+    pageSize: 0,
+    totalSize: 0,
+  };
+  currentPageSize!: number;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private paginationService: PaginationService
+  ) {
+    this.paginationService.startCacheCleaner((cache, currentPageSize) => {
+      this.cache = cache;
+      this.currentPageSize = currentPageSize;
+    });
+  }
 
-  listagemMedidas(): Observable<Response> {
-    return this.http.get<Response>(`${this.url}`);
+
+  getPaginatedData(
+    event?: PageEvent,
+    filtro?: Filtro
+  ): Observable<ListCacheEntry> {
+    return this.paginationService
+      .getPaginatedData(this.cache, this.currentPageSize, this.url, event)
+      .pipe(
+        map((response) => {
+          this.currentPageSize = response.pageSize;
+
+          return response;
+        })
+      );
+  }
+
+  clearCache() {
+    this.cache = this.paginationService.clearCache();
+    this.currentPageSize = 0;
   }
 
   cadastrarMedida(medida: Medida): Observable<Medida> {
@@ -32,7 +69,7 @@ export class MedidasService {
   }
 
   excluirMedida(id: string): Observable<Medida> {
-    let body = {'ids': [id]};
+    let body = { ids: [id] };
     return this.http.delete<Medida>(`${this.url}`, { body });
   }
 }

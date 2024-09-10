@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AssistidosService } from 'src/app/feature/assistidos/services/assistidos.service';
 import { Assistido } from 'src/app/core/types/assistido';
+import { DEFAULT_PAGE_SIZE } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-assistidos',
@@ -12,22 +13,29 @@ import { Assistido } from 'src/app/core/types/assistido';
 export class AssistidosComponent implements AfterViewInit {
   tituloPagina = 'Assistidos';
   listaAssistidos: Assistido[] = [];
-  dataSource: any;
+  dataSource = new MatTableDataSource<Assistido>(this.listaAssistidos);
   colunasMostradas: string[] = ['nome', 'email', 'cpf', 'telefone'];
+  initialPageSize: number = DEFAULT_PAGE_SIZE;
 
-  constructor(private service: AssistidosService) { }
+  constructor(private service: AssistidosService) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit(): void {
-    this.service.listarAssistidos().subscribe({
-      next: (response) => {
-        this.listaAssistidos = response.list;
+    Promise.resolve().then(() => this.loadInitialData());
+  }
 
-        this.dataSource = new MatTableDataSource<Assistido>(this.listaAssistidos);
-        this.dataSource.paginator = this.paginator;
-      },
-      error: (err) => { },
+  loadInitialData(): void {
+    this.service.getPaginatedData().subscribe((data) => {
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize; 
+    });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.service.getPaginatedData(event).subscribe((data) => {
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize;
     });
   }
 

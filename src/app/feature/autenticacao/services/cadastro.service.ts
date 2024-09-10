@@ -2,10 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../../../core/types/usuario';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Filtro } from '../../../core/types/filtro';
 import { Response } from 'src/app/core/types/response';
 import { Payload } from 'src/app/core/types/payload';
+import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
+import { PaginationService } from 'src/app/core/services/pagination.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +16,30 @@ import { Payload } from 'src/app/core/types/payload';
 export class CadastroService {
   private API = environment.API_URL;
   private url = this.API + '/usuarios';
+  filter = { field: '', operator: '', value: '' };
+  cache: ListCacheEntry = {
+    list: [],
+    firstDoc: null,
+    lastDoc: null,
+    pageSize: 0,
+    totalSize: 0,
+  };
+  currentPageSize!: number;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private paginationService: PaginationService
+  ) {
+    this.paginationService.startCacheCleaner((cache, currentPageSize) => {
+      this.cache = cache;
+      this.currentPageSize = currentPageSize;
+    });
+  }
+
+  clearCache() {
+    this.cache = this.paginationService.clearCache();
+    this.currentPageSize = 0;
+  }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.url}`, usuario);
@@ -27,19 +52,23 @@ export class CadastroService {
   buscarMeuUsuario(): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.url}/me`);
   }
+  
+  getPaginatedData(
+    event?: PageEvent,
+    filtro?: Filtro
+  ): Observable<ListCacheEntry> {
+    return this.paginationService
+      .getPaginatedData(this.cache, this.currentPageSize, this.url, event)
+      .pipe(
+        map((response) => {
+          this.currentPageSize = response.pageSize;
 
-  listarUsuarios(filtro?: Filtro): Observable<Response> {
-    let params = new HttpParams();
-    if (filtro) {
-      params = params
-        .set('field', filtro.field)
-        .set('filter', filtro.filter)
-        .set('value', filtro.value);
-    }
-    return this.http.get<Response>(`${this.url}`, { params });
+          return response;
+        })
+      );
   }
 
-  listarUsuariosForAutoComplete(filtro?: Filtro): Observable<Response> {
+  fetchUsuariosFromApiForAutoComplete(filtro?: Filtro): Observable<Response> {
     let params = new HttpParams();
     if (filtro) {
       params = params
@@ -56,7 +85,7 @@ export class CadastroService {
   }
 
   excluirCadastro(userEmail: string) {
-    let body = {'ids': [userEmail]};
+    let body = { ids: [userEmail] };
     return this.http.delete(`${this.url}`, { body });
   }
 }
