@@ -1,0 +1,12 @@
+<app-file-upload [directory]="directory" (fileUploaded)="onFileUploaded()" />
+
+<div id="title" style="margin-top: 25px;">List of Files</div>
+<ul>
+  <li *ngFor="let file of fileUploads">
+    <app-file-details 
+      [file]="file"
+      (fileDeleted)="onFileDeleted($event)"
+    >
+  </app-file-details>
+  </li>
+</ul>

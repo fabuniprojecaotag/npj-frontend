@@ -1,0 +1,18 @@
+#title {
+    display: block;
+    background-color: #F7F7F7;
+    padding: 15px;
+    border: 1px solid #EAEAEA;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li:first-child {
+    border-top-style: none;
+}
+
+li:last-child {
+    border-bottom: 1px solid #EAEAEA;
+}
