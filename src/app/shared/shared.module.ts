@@ -32,6 +32,9 @@ import { CardAtendimentosComponent } from './components/modal-atalhos/card-atend
 import { CardProcessosComponent } from './components/modal-atalhos/card-processos/card-processos.component';
 import { ModalAtalhosComponent } from './components/modal-atalhos/modal-atalhos.component';
 import { UtilsBarComponent } from './components/utils-bar/utils-bar.component';
+import { FileDetailsComponent } from '../core/components/file-details/file-details.component';
+import { FileListComponent } from '../core/components/file-list/file-list.component';
+import { FileUploadComponent } from '../core/components/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { UtilsBarComponent } from './components/utils-bar/utils-bar.component';
     PrintButtonComponent,
     CardProcessosComponent,
     ModalAtendimentoComponent,
-    FormMedidasComponent
+    FormMedidasComponent,
+    FileUploadComponent,
+    FileListComponent,
+    FileDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -95,7 +101,10 @@ import { UtilsBarComponent } from './components/utils-bar/utils-bar.component';
     PrintButtonComponent,
     CardProcessosComponent,
     ModalAtendimentoComponent,
-    FormMedidasComponent
+    FormMedidasComponent,
+    FileUploadComponent,
+    FileListComponent,
+    FileDetailsComponent
   ],
   providers: [
     provideNgxMask()

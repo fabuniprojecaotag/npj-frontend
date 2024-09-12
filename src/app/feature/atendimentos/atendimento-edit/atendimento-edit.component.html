@@ -1,10 +1,18 @@
 <app-header [subtitulo]="tituloPagina"></app-header>
 <app-utils-bar></app-utils-bar>
 <ng-container *ngIf="tipoFicha !== 'Trabalhista'; else formTrabalhista">
-  <app-form-atendimento-civil (acaoClique)="abrirModalEditar(this.atendimento)"
-    (acaoCliqueExcluir)="abrirModalEditar(this.atendimento)" [editarComponente]="true" />
+  <app-form-atendimento-civil
+    (acaoClique)="abrirModalEditar(this.atendimento)"
+    (acaoCliqueExcluir)="abrirModalEditar(this.atendimento)"
+    [editarComponente]="true"
+    [atendimentoId]="id"
+  />
 </ng-container>
 <ng-template #formTrabalhista>
-  <app-form-atendimento-trabalhista (acaoClique)="abrirModalEditar(this.atendimento)"
-    (acaoCliqueExcluir)="abrirModalExcluir(this.atendimento)" [editarComponente]="true" />
+  <app-form-atendimento-trabalhista
+    (acaoClique)="abrirModalEditar(this.atendimento)"
+    (acaoCliqueExcluir)="abrirModalExcluir(this.atendimento)"
+    [editarComponente]="true"
+    [atendimentoId]="id"
+  />
 </ng-template>

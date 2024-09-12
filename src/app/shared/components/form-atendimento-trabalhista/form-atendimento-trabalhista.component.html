@@ -1,7 +1,6 @@
 <section class="secao-form-trabalhista">
   <h3 class="titulo-form">Ficha Trabalhista</h3>
   <form [formGroup]="formAtendimentosTrabalhista">
-
     <div class="grupo-form">
       <div class="full">
         <mat-form-field class="input-medio">
@@ -9,19 +8,37 @@
           <mat-select matInput formControlName="area" ngDefaultControl>
             <mat-option value="Trabalhista">Trabalhista</mat-option>
           </mat-select>
-          <mat-error *ngIf="formAtendimentosTrabalhista.get('area')?.errors?.['required']">Área é
-            obrigatória</mat-error>
+          <mat-error
+            *ngIf="formAtendimentosTrabalhista.get('area')?.errors?.['required']"
+            >Área é obrigatória</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="input-medio">
           <mat-label>Instante do atendimento</mat-label>
-          <input matInput [matDatepicker]="instante" formControlName="instante">
-          <mat-datepicker-toggle matIconSuffix [for]="instante" color="primary"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="instante"
+            formControlName="instante"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="instante"
+            color="primary"
+          ></mat-datepicker-toggle>
           <mat-datepicker #instante></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="input-medio">
           <mat-label>Prazo de Entrega dos Documentos</mat-label>
-          <input matInput [matDatepicker]="prazoEntregaDocumentos" formControlName="prazoEntregaDocumentos">
-          <mat-datepicker-toggle matIconSuffix [for]="prazoEntregaDocumentos" color="primary"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="prazoEntregaDocumentos"
+            formControlName="prazoEntregaDocumentos"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="prazoEntregaDocumentos"
+            color="primary"
+          ></mat-datepicker-toggle>
           <mat-datepicker #prazoEntregaDocumentos></mat-datepicker>
         </mat-form-field>
       </div>
@@ -33,20 +50,40 @@
         <h3 class="subtitulo">Envolvidos</h3>
       </div>
       <div class="full">
-        <app-funcionario-autocomplete cargo="Estagiario" [control]="estagiarioControl" class="input-medio" />
-        <app-funcionario-autocomplete cargo="Professor" [control]="professorControl" class="input-medio" />
+        <app-funcionario-autocomplete
+          cargo="Estagiario"
+          [control]="estagiarioControl"
+          class="input-medio"
+        />
+        <app-funcionario-autocomplete
+          cargo="Professor"
+          [control]="professorControl"
+          class="input-medio"
+        />
       </div>
       <div class="full">
-        <app-funcionario-autocomplete cargo="Secretaria" [control]="secretariaControl" class="input-grande" />
-        <app-assistido-autocomplete [control]="assistidoControl" class="input-grande" />
+        <app-funcionario-autocomplete
+          cargo="Secretaria"
+          [control]="secretariaControl"
+          class="input-grande"
+        />
+        <app-assistido-autocomplete
+          [control]="assistidoControl"
+          class="input-grande"
+        />
       </div>
-      <button mat-raised-button (click)="abrirNovaGuia()" class="botao-cadastro">Cadastrar Assistido</button>
+      <button
+        mat-raised-button
+        (click)="abrirNovaGuia()"
+        class="botao-cadastro"
+      >
+        Cadastrar Assistido
+      </button>
     </div>
 
     <!-- Ficha -->
 
     <ng-container formGroupName="ficha">
-
       <!-- Reclamado -->
 
       <div formGroupName="reclamado" class="grupo-form">
@@ -55,18 +92,27 @@
         </div>
         <mat-form-field class="input-grande">
           <mat-label>Nome</mat-label>
-          <input matInput formControlName="nome" placeholder="nome">
+          <input matInput formControlName="nome" placeholder="nome" />
           <mat-error
-            *ngIf="formAtendimentosTrabalhista.get('ficha')?.get('reclamado')?.get('nome')?.errors?.['required']">Nome
-            do Reclamado é obrigatório</mat-error>
+            *ngIf="formAtendimentosTrabalhista.get('ficha')?.get('reclamado')?.get('nome')?.errors?.['required']"
+            >Nome do Reclamado é obrigatório</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="input-grande">
           <mat-label>Tipo de Pessoa</mat-label>
-          <input matInput formControlName="tipoPessoa" placeholder="Tipo de Pessoa">
+          <input
+            matInput
+            formControlName="tipoPessoa"
+            placeholder="Tipo de Pessoa"
+          />
         </mat-form-field>
         <mat-form-field class="input-grande">
           <mat-label>Número Cadastro</mat-label>
-          <input matInput formControlName="numCadastro" placeholder="Número Cadastro">
+          <input
+            matInput
+            formControlName="numCadastro"
+            placeholder="Número Cadastro"
+          />
         </mat-form-field>
 
         <!-- Endereço Reclamado -->
@@ -78,29 +124,43 @@
           <div class="full">
             <mat-form-field class="input-grande">
               <mat-label>CEP</mat-label>
-              <input matInput formControlName="cep" placeholder="CEP" mask="00000-000" [dropSpecialCharacters]="false">
+              <input
+                matInput
+                formControlName="cep"
+                placeholder="CEP"
+                mask="00000-000"
+                [dropSpecialCharacters]="false"
+              />
             </mat-form-field>
             <mat-form-field class="input-grande">
               <mat-label>Cidade</mat-label>
-              <input matInput formControlName="cidade" placeholder="Cidade">
+              <input matInput formControlName="cidade" placeholder="Cidade" />
             </mat-form-field>
             <mat-form-field class="input-grande">
               <mat-label>Logradouro</mat-label>
-              <input matInput formControlName="logradouro" placeholder="Logradouro">
+              <input
+                matInput
+                formControlName="logradouro"
+                placeholder="Logradouro"
+              />
             </mat-form-field>
           </div>
           <div class="full">
             <mat-form-field class="input-grande">
               <mat-label>Bairro</mat-label>
-              <input matInput formControlName="bairro" placeholder="Bairro">
+              <input matInput formControlName="bairro" placeholder="Bairro" />
             </mat-form-field>
             <mat-form-field class="input-grande">
               <mat-label>Número</mat-label>
-              <input matInput formControlName="numero" placeholder="Número">
+              <input matInput formControlName="numero" placeholder="Número" />
             </mat-form-field>
             <mat-form-field class="input-grande">
               <mat-label>Complemento</mat-label>
-              <input matInput formControlName="complemento" placeholder="Complemento">
+              <input
+                matInput
+                formControlName="complemento"
+                placeholder="Complemento"
+              />
             </mat-form-field>
           </div>
         </ng-container>
@@ -115,26 +175,50 @@
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>Data da admissão</mat-label>
-            <input matInput [matDatepicker]="dataDistribuicao" formControlName="dataAdmissao">
-            <mat-datepicker-toggle matIconSuffix [for]="dataDistribuicao" color="primary"></mat-datepicker-toggle>
+            <input
+              matInput
+              [matDatepicker]="dataDistribuicao"
+              formControlName="dataAdmissao"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="dataDistribuicao"
+              color="primary"
+            ></mat-datepicker-toggle>
             <mat-datepicker #dataDistribuicao></mat-datepicker>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Data da Saída</mat-label>
-            <input matInput [matDatepicker]="dataSaida" formControlName="dataSaida">
-            <mat-datepicker-toggle matIconSuffix [for]="dataSaida" color="primary"></mat-datepicker-toggle>
+            <input
+              matInput
+              [matDatepicker]="dataSaida"
+              formControlName="dataSaida"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="dataSaida"
+              color="primary"
+            ></mat-datepicker-toggle>
             <mat-datepicker #dataSaida></mat-datepicker>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Função Exercida</mat-label>
-            <input matInput formControlName="funcaoExercida" placeholder="Função Exercida">
+            <input
+              matInput
+              formControlName="funcaoExercida"
+              placeholder="Função Exercida"
+            />
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Qual o Valor do Sálario anotado na CTPS</mat-label>
-            <input matInput formControlName="valorSalarioCtps"
-              placeholder="Qual o valor do Salário anotado na CTPS? (R$ 0.000)">
+            <input
+              matInput
+              formControlName="valorSalarioCtps"
+              placeholder="Qual o valor do Salário anotado na CTPS? (R$ 0.000)"
+            />
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.valorSalarioCtps')?.errors?.['pattern']">
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.valorSalarioCtps')?.errors?.['pattern']"
+            >
               Padrão incorreto (Esperado: R$ 00.000)
             </mat-error>
           </mat-form-field>
@@ -142,24 +226,37 @@
         <div class="full">
           <div class="input-radio">
             <label>O Salário que recebia foi anotado na CTPS?</label>
-            <mat-radio-group formControlName="salarioAnotadoCtps" color="primary">
+            <mat-radio-group
+              formControlName="salarioAnotadoCtps"
+              color="primary"
+            >
               <mat-radio-button [value]="true">Sim</mat-radio-button>
               <mat-radio-button [value]="false">Não</mat-radio-button>
             </mat-radio-group>
           </div>
           <mat-form-field class="input-medio">
             <mat-label>Qual o Valor da Última Remuneração Recebida?</mat-label>
-            <input matInput formControlName="valorUltimaRemuneracao" placeholder="Valor da Ultima Remuneração">
+            <input
+              matInput
+              formControlName="valorUltimaRemuneracao"
+              placeholder="Valor da Ultima Remuneração"
+            />
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.valorUltimaRemuneracao')?.errors?.['pattern']">
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.valorUltimaRemuneracao')?.errors?.['pattern']"
+            >
               Padrão incorreto (Esperado: R$ 00.000)
             </mat-error>
           </mat-form-field>
         </div>
         <div class="full">
           <div class="input-radio">
-            <mat-label>A <strong>CTPS</strong> foi assinada corretamente?</mat-label>
-            <mat-radio-group formControlName="ctpsAssinadaCerto" color="primary">
+            <mat-label
+              >A <strong>CTPS</strong> foi assinada corretamente?</mat-label
+            >
+            <mat-radio-group
+              formControlName="ctpsAssinadaCerto"
+              color="primary"
+            >
               <mat-radio-button [value]="true">Sim</mat-radio-button>
               <mat-radio-button [value]="false">Não</mat-radio-button>
             </mat-radio-group>
@@ -167,20 +264,34 @@
           <div class="input-radio">
             <mat-label>Como foi a Dipensa?</mat-label>
             <mat-radio-group formControlName="dispensa" color="primary">
-              <mat-radio-button value="pedido"><strong>A PEDIDO</strong></mat-radio-button>
-              <mat-radio-button value="semJustaCausa"><strong>SEM JUSTA CAUSA</strong></mat-radio-button>
-              <mat-radio-button value="justaCausa"><strong>POR JUSTA CAUSA</strong></mat-radio-button>
+              <mat-radio-button value="pedido"
+                ><strong>A PEDIDO</strong></mat-radio-button
+              >
+              <mat-radio-button value="semJustaCausa"
+                ><strong>SEM JUSTA CAUSA</strong></mat-radio-button
+              >
+              <mat-radio-button value="justaCausa"
+                ><strong>POR JUSTA CAUSA</strong></mat-radio-button
+              >
             </mat-radio-group>
           </div>
           <mat-form-field class="input-medio">
             <mat-label>Qual a Jornada de Trabalho?</mat-label>
-            <input matInput formControlName="jornadaTrabalho" placeholder="Jornada De Trabalho">
+            <input
+              matInput
+              formControlName="jornadaTrabalho"
+              placeholder="Jornada De Trabalho"
+            />
           </mat-form-field>
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>Quanto tempo tinha para almoço?</mat-label>
-            <input matInput formControlName="tempoAlmoco" placeholder="Tempo de Almoço">
+            <input
+              matInput
+              formControlName="tempoAlmoco"
+              placeholder="Tempo de Almoço"
+            />
           </mat-form-field>
           <div class="input-radio">
             <mat-label>Fazia horas extras (HE)?</mat-label>
@@ -191,26 +302,43 @@
           </div>
           <mat-form-field class="input-medio">
             <mat-label>Qual período (HORÁRIO) fazia HE?</mat-label>
-            <input matInput formControlName="horarioHorasExtras" placeholder="Horário">
+            <input
+              matInput
+              formControlName="horarioHorasExtras"
+              placeholder="Horário"
+            />
           </mat-form-field>
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>Trabalhava em Domingos e Feriados?</mat-label>
-            <input matInput formControlName="trabalhavaDomingosFeriados"
-              placeholder="Trabalhava em Domingos e Feriados?">
-            <mat-hint align="start"><strong>(Se positivo, anotar quantos e quais as datas)</strong></mat-hint>
+            <input
+              matInput
+              formControlName="trabalhavaDomingosFeriados"
+              placeholder="Trabalhava em Domingos e Feriados?"
+            />
+            <mat-hint align="start"
+              ><strong
+                >(Se positivo, anotar quantos e quais as datas)</strong
+              ></mat-hint
+            >
           </mat-form-field>
           <div class="input-radio">
             <mat-label>Recebia gratificações, gorjetas ou comissões?</mat-label>
-            <mat-radio-group formControlName="recebiaGratificacoes" color="primary">
+            <mat-radio-group
+              formControlName="recebiaGratificacoes"
+              color="primary"
+            >
               <mat-radio-button [value]="true">Sim</mat-radio-button>
               <mat-radio-button [value]="false">Não</mat-radio-button>
             </mat-radio-group>
           </div>
           <div class="input-radio">
             <mat-label>Cumpriu o AVISO PRÉVIO?</mat-label>
-            <mat-radio-group formControlName="cumpriuAvisoPrevio" color="primary">
+            <mat-radio-group
+              formControlName="cumpriuAvisoPrevio"
+              color="primary"
+            >
               <mat-radio-button [value]="true">Sim</mat-radio-button>
               <mat-radio-button [value]="false">Não</mat-radio-button>
             </mat-radio-group>
@@ -219,14 +347,20 @@
         <div class="full">
           <div class="input-radio">
             <mat-label>Tem FÉRIAS vencidas a gozar?</mat-label>
-            <mat-radio-group formControlName="temFeriasVencidasGozar" color="primary">
+            <mat-radio-group
+              formControlName="temFeriasVencidasGozar"
+              color="primary"
+            >
               <mat-radio-button [value]="true">Sim</mat-radio-button>
               <mat-radio-button [value]="false">Não</mat-radio-button>
             </mat-radio-group>
           </div>
           <div class="input-radio">
             <mat-label>Recebeu 13º salário no ano anterior?</mat-label>
-            <mat-radio-group formControlName="recebeu13SalarioAnoAnterior" color="primary">
+            <mat-radio-group
+              formControlName="recebeu13SalarioAnoAnterior"
+              color="primary"
+            >
               <mat-radio-button [value]="true">Sim</mat-radio-button>
               <mat-radio-button [value]="false">Não</mat-radio-button>
             </mat-radio-group>
@@ -242,14 +376,23 @@
         <div class="full">
           <div class="input-radio">
             <mat-label>Recebeu as guias de saque do FGTS?</mat-label>
-            <mat-radio-group formControlName="recebeuGuiasSaqueFgts" color="primary">
+            <mat-radio-group
+              formControlName="recebeuGuiasSaqueFgts"
+              color="primary"
+            >
               <mat-radio-button [value]="true">Sim</mat-radio-button>
               <mat-radio-button [value]="false">Não</mat-radio-button>
             </mat-radio-group>
           </div>
           <div class="input-radio">
-            <mat-label>Recebeu os formulários para requerer o seguro desemprego?</mat-label>
-            <mat-radio-group formControlName="recebeuFormSeguroDesemprego" color="primary">
+            <mat-label
+              >Recebeu os formulários para requerer o seguro
+              desemprego?</mat-label
+            >
+            <mat-radio-group
+              formControlName="recebeuFormSeguroDesemprego"
+              color="primary"
+            >
               <mat-radio-button [value]="true">Sim</mat-radio-button>
               <mat-radio-button [value]="false">Não</mat-radio-button>
             </mat-radio-group>
@@ -265,51 +408,83 @@
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>Paga alguma verba?</mat-label>
-            <input matInput formControlName="pagaAlgumaVerba" placeholder="Valor (R$ 0.000)">
+            <input
+              matInput
+              formControlName="pagaAlgumaVerba"
+              placeholder="Valor (R$ 0.000)"
+            />
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.pagaAlgumaVerba')?.errors?.['pattern']">
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.pagaAlgumaVerba')?.errors?.['pattern']"
+            >
               Padrão incorreto (Esperado: R$ 00.000)
             </mat-error>
-            <mat-hint align="start"><strong>(Caso positivo, anote quais)</strong></mat-hint>
+            <mat-hint align="start"
+              ><strong>(Caso positivo, anote quais)</strong></mat-hint
+            >
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Saldo do salário</mat-label>
-            <input matInput formControlName="saldoSalario" placeholder="Saldo do salário">
+            <input
+              matInput
+              formControlName="saldoSalario"
+              placeholder="Saldo do salário"
+            />
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.saldoSalario')?.errors?.['required']">Saldo
-              do salário é obrigatório</mat-error>
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.saldoSalario')?.errors?.['required']"
+              >Saldo do salário é obrigatório</mat-error
+            >
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.saldoSalario')?.errors?.['pattern']">
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.saldoSalario')?.errors?.['pattern']"
+            >
               Padrão incorreto (Esperado: R$ 00.000)
             </mat-error>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Aviso Prévio Indenizado</mat-label>
-            <input matInput formControlName="avisoPrevioIndenizado" placeholder="Aviso Prévio Indenizado">
+            <input
+              matInput
+              formControlName="avisoPrevioIndenizado"
+              placeholder="Aviso Prévio Indenizado"
+            />
           </mat-form-field>
         </div>
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>13º Salário Proporcional</mat-label>
-            <input matInput formControlName="_13SalarioProporcional" placeholder="13º Salário Proporcional">
+            <input
+              matInput
+              formControlName="_13SalarioProporcional"
+              placeholder="13º Salário Proporcional"
+            />
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia._13SalarioProporcional')?.errors?.['pattern']">
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia._13SalarioProporcional')?.errors?.['pattern']"
+            >
               Padrão incorreto (Esperado: R$ 00.000)
             </mat-error>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Férias Vencidas</mat-label>
-            <input matInput formControlName="feriasVencidas" placeholder="Férias Vencidas">
+            <input
+              matInput
+              formControlName="feriasVencidas"
+              placeholder="Férias Vencidas"
+            />
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.feriasVencidas')?.errors?.['pattern']">
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.feriasVencidas')?.errors?.['pattern']"
+            >
               Padrão incorreto (Esperado: R$ 00.000)
             </mat-error>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Férias Proporcionais _/12</mat-label>
-            <input matInput formControlName="feriasProporcionais" placeholder="Férias Proporcionais">
+            <input
+              matInput
+              formControlName="feriasProporcionais"
+              placeholder="Férias Proporcionais"
+            />
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.feriasProporcionais')?.errors?.['pattern']">
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.feriasProporcionais')?.errors?.['pattern']"
+            >
               Padrão incorreto (Esperado: R$ 00.000)
             </mat-error>
           </mat-form-field>
@@ -317,79 +492,131 @@
         <div class="full">
           <mat-form-field class="input-medio">
             <mat-label>1/3 Constitucional sobre Férias</mat-label>
-            <input matInput formControlName="umTercoConstitucionalFerias" placeholder="1/3 Constitucional sobre Férias">
+            <input
+              matInput
+              formControlName="umTercoConstitucionalFerias"
+              placeholder="1/3 Constitucional sobre Férias"
+            />
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.umTercoConstitucionalFerias')?.errors?.['pattern']">
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.umTercoConstitucionalFerias')?.errors?.['pattern']"
+            >
               Padrão incorreto (Esperado: R$ 00.000)
             </mat-error>
           </mat-form-field>
           <mat-form-field class="input-medio">
             <mat-label>Comissões</mat-label>
-            <input matInput formControlName="comissoes" placeholder="Comissões">
+            <input
+              matInput
+              formControlName="comissoes"
+              placeholder="Comissões"
+            />
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.comissoes')?.errors?.['pattern']">
+              *ngIf="formAtendimentosTrabalhista.get('ficha.relacaoEmpregaticia.comissoes')?.errors?.['pattern']"
+            >
               Padrão incorreto (Esperado: R$ 00.000)
             </mat-error>
           </mat-form-field>
         </div>
         <mat-form-field class="full">
           <mat-label>Informações Complementares</mat-label>
-          <textarea matInput formControlName="outrasInformacoes" placeholder="Informações Complementares"></textarea>
+          <textarea
+            matInput
+            formControlName="outrasInformacoes"
+            placeholder="Informações Complementares"
+          ></textarea>
         </mat-form-field>
       </div>
 
       <!-- Testemunhas -->
 
       <div formArrayName="testemunhas" class="grupo-form">
-        <ng-container *ngFor="let testemunha of testemunhas.controls; let i = index" [formGroupName]="i">
+        <ng-container
+          *ngFor="let testemunha of testemunhas.controls; let i = index"
+          [formGroupName]="i"
+        >
           <div class="full">
-            <h3 class="subtitulo">Testemunha {{ i+1 }}</h3>
+            <h3 class="subtitulo">Testemunha {{ i + 1 }}</h3>
           </div>
           <div class="full">
             <mat-form-field class="input-grande">
               <mat-label>Nome</mat-label>
-              <input matInput formControlName="nome" placeholder="nome">
+              <input matInput formControlName="nome" placeholder="nome" />
             </mat-form-field>
             <mat-form-field class="input-pequeno">
               <mat-label>Qualificação</mat-label>
-              <input matInput formControlName="qualificacao" placeholder="qualificação">
+              <input
+                matInput
+                formControlName="qualificacao"
+                placeholder="qualificação"
+              />
             </mat-form-field>
           </div>
           <ng-container formGroupName="endereco">
             <div class="full">
               <mat-form-field class="input-medio">
                 <mat-label>CEP</mat-label>
-                <input matInput formControlName="cep" placeholder="CEP da testemunha" mask="00000-000"
-                  [dropSpecialCharacters]="false">
+                <input
+                  matInput
+                  formControlName="cep"
+                  placeholder="CEP da testemunha"
+                  mask="00000-000"
+                  [dropSpecialCharacters]="false"
+                />
               </mat-form-field>
               <mat-form-field class="input-medio">
                 <mat-label>Cidade</mat-label>
-                <input matInput formControlName="cidade" placeholder="Cidade da testemunha">
+                <input
+                  matInput
+                  formControlName="cidade"
+                  placeholder="Cidade da testemunha"
+                />
               </mat-form-field>
               <mat-form-field class="input-medio">
                 <mat-label>Logradouro</mat-label>
-                <input matInput formControlName="logradouro" placeholder="Logradouro da testemunha">
+                <input
+                  matInput
+                  formControlName="logradouro"
+                  placeholder="Logradouro da testemunha"
+                />
               </mat-form-field>
             </div>
             <div class="full">
               <mat-form-field class="input-medio">
                 <mat-label>Número</mat-label>
-                <input matInput formControlName="numero" placeholder="Número da testemunha">
+                <input
+                  matInput
+                  formControlName="numero"
+                  placeholder="Número da testemunha"
+                />
               </mat-form-field>
               <mat-form-field class="input-medio">
                 <mat-label>Complemento</mat-label>
-                <input matInput formControlName="complemento" placeholder="Complemento da testemunha">
+                <input
+                  matInput
+                  formControlName="complemento"
+                  placeholder="Complemento da testemunha"
+                />
               </mat-form-field>
               <mat-form-field class="input-medio">
                 <mat-label>Bairro</mat-label>
-                <input matInput formControlName="bairro" placeholder="Bairro da testemunha">
+                <input
+                  matInput
+                  formControlName="bairro"
+                  placeholder="Bairro da testemunha"
+                />
               </mat-form-field>
             </div>
           </ng-container>
         </ng-container>
         <div class="full">
-          <button mat-raised-button color="accent" (click)="adicionarTestemunha()" class="botao-criar">Adicionar
-            Testemunha</button>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="adicionarTestemunha()"
+            class="botao-criar"
+          >
+            Adicionar Testemunha
+          </button>
         </div>
       </div>
 
@@ -401,48 +628,98 @@
         </div>
         <div class="full">
           <div class="input-grande">
-            <mat-checkbox formControlName="procuracao" color="primary" labelPosition="before">Procuração:</mat-checkbox>
+            <mat-checkbox
+              formControlName="procuracao"
+              color="primary"
+              labelPosition="before"
+              >Procuração:</mat-checkbox
+            >
           </div>
           <div class="input-grande">
-            <mat-checkbox formControlName="declaracaoPobreza" color="primary" labelPosition="before">Declaração de
-              Pobreza:</mat-checkbox>
+            <mat-checkbox
+              formControlName="declaracaoPobreza"
+              color="primary"
+              labelPosition="before"
+              >Declaração de Pobreza:</mat-checkbox
+            >
           </div>
           <div class="input-grande">
-            <mat-checkbox formControlName="ctps" color="primary" labelPosition="before" required>Carteira de Trabalho
-              (CTPS)*:</mat-checkbox>
+            <mat-checkbox
+              formControlName="ctps"
+              color="primary"
+              labelPosition="before"
+              required
+              >Carteira de Trabalho (CTPS)*:</mat-checkbox
+            >
           </div>
           <div class="input-grande">
-            <mat-checkbox formControlName="identidade" color="primary" labelPosition="before">Carteira de
-              Identidade:</mat-checkbox>
+            <mat-checkbox
+              formControlName="identidade"
+              color="primary"
+              labelPosition="before"
+              >Carteira de Identidade:</mat-checkbox
+            >
           </div>
         </div>
         <div class="full">
           <div class="input-grande">
-            <mat-checkbox formControlName="cpf" color="primary" labelPosition="before">CPF:</mat-checkbox>
+            <mat-checkbox
+              formControlName="cpf"
+              color="primary"
+              labelPosition="before"
+              >CPF:</mat-checkbox
+            >
           </div>
           <div class="input-grande">
-            <mat-checkbox formControlName="pis" color="primary" labelPosition="before">PIS:</mat-checkbox>
+            <mat-checkbox
+              formControlName="pis"
+              color="primary"
+              labelPosition="before"
+              >PIS:</mat-checkbox
+            >
           </div>
           <div class="input-grande">
-            <mat-checkbox formControlName="contrachequeUltimos3Meses" color="primary"
-              labelPosition="before">Contracheque dos últimos 3 meses:</mat-checkbox>
+            <mat-checkbox
+              formControlName="contrachequeUltimos3Meses"
+              color="primary"
+              labelPosition="before"
+              >Contracheque dos últimos 3 meses:</mat-checkbox
+            >
           </div>
           <div class="input-grande">
-            <mat-checkbox formControlName="extratoAnaliticoContaFgts" color="primary" labelPosition="before">Extrato
-              Analítico do FGTS:</mat-checkbox>
+            <mat-checkbox
+              formControlName="extratoAnaliticoContaFgts"
+              color="primary"
+              labelPosition="before"
+              >Extrato Analítico do FGTS:</mat-checkbox
+            >
           </div>
         </div>
         <div class="full">
           <div class="input-grande">
-            <mat-checkbox formControlName="trct" color="primary" labelPosition="before">TRCT:</mat-checkbox>
+            <mat-checkbox
+              formControlName="trct"
+              color="primary"
+              labelPosition="before"
+              >TRCT:</mat-checkbox
+            >
           </div>
           <div class="input-grande">
-            <mat-checkbox formControlName="comprovanteRecAntecip13" color="primary" labelPosition="before">Comprovante
-              de Rec. de Atencip. do 13º, se for o caso:</mat-checkbox>
+            <mat-checkbox
+              formControlName="comprovanteRecAntecip13"
+              color="primary"
+              labelPosition="before"
+              >Comprovante de Rec. de Atencip. do 13º, se for o
+              caso:</mat-checkbox
+            >
           </div>
           <div class="input-grande">
-            <mat-checkbox formControlName="outrosDocumentos" color="primary" labelPosition="before">Outros
-              docs.:</mat-checkbox>
+            <mat-checkbox
+              formControlName="outrosDocumentos"
+              color="primary"
+              labelPosition="before"
+              >Outros docs.:</mat-checkbox
+            >
           </div>
         </div>
       </div>
@@ -460,29 +737,36 @@
           <mat-form-field class="input-grande">
             <mat-label>Medida Jurídica Cabível</mat-label>
             <mat-select formControlName="medidaJuridica" ngDefaultControl>
-              <mat-option *ngFor="let medida of medidasJudiciais" [value]="medida.nome">
+              <mat-option
+                *ngFor="let medida of medidasJudiciais"
+                [value]="medida.nome"
+              >
                 {{ medida.nome }}
               </mat-option>
             </mat-select>
             <mat-error
-              *ngIf="formAtendimentosTrabalhista.get('ficha')?.get('medidaJuridica')?.errors?.['required']">Medida
-              Jurídica é obrigatória</mat-error>
+              *ngIf="formAtendimentosTrabalhista.get('ficha')?.get('medidaJuridica')?.errors?.['required']"
+              >Medida Jurídica é obrigatória</mat-error
+            >
           </mat-form-field>
         </div>
+
         <!-- Input de arquivos -->
-        <!-- <div class="full">
-          <p *ngIf="arquivoSelecionado">{{ arquivoSelecionado.name }} <button mat-icon-button color="warn"
-              (click)="removerArquivoSelecionado()"><mat-icon>close</mat-icon></button></p>
-          <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)"
-            accept=".pdf,.doc,.docx, image/png" formControlName="assinatura">
-          <button mat-raised-button color="accent" (click)="fileInput.click()">
-            <mat-icon>upload_2</mat-icon>Upload
-          </button>
-          <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx</p>
-        </div> -->
+        <div style="width: 100%; display: flex; justify-content: left">
+          <app-file-list
+            *ngIf="editarComponente"
+            [directory]="atendimentoId"
+            style="width: 600px; margin-bottom: 2%"
+          />
+        </div>
+
         <div class="input-medio">
-          <mat-checkbox formControlName="dadosSensiveis" color="primary" labelPosition="before">Dados
-            Sensiveis:</mat-checkbox>
+          <mat-checkbox
+            formControlName="dadosSensiveis"
+            color="primary"
+            labelPosition="before"
+            >Dados Sensiveis:</mat-checkbox
+          >
         </div>
       </div>
     </ng-container>
@@ -490,10 +774,17 @@
     <!-- Finalização -->
     <div class="grupo-form">
       <ng-container formArrayName="historico">
-        <ng-container *ngFor="let historicoItem of historico.controls; let i = index" [formGroupName]="i">
+        <ng-container
+          *ngFor="let historicoItem of historico.controls; let i = index"
+          [formGroupName]="i"
+        >
           <mat-form-field class="full">
             <mat-label>Histórico</mat-label>
-            <textarea matInput formControlName="descricao" placeholder="Histórico do atendimento"></textarea>
+            <textarea
+              matInput
+              formControlName="descricao"
+              placeholder="Histórico do atendimento"
+            ></textarea>
           </mat-form-field>
         </ng-container>
       </ng-container>
@@ -506,16 +797,36 @@
             {{ statu }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="formAtendimentosTrabalhista.get('status')?.errors?.['required']">Status
-          é obrigatório</mat-error>
+        <mat-error
+          *ngIf="formAtendimentosTrabalhista.get('status')?.errors?.['required']"
+          >Status é obrigatório</mat-error
+        >
       </mat-form-field>
     </div>
     <div class="grupo-botoes">
-      <app-print-button [dataSet]="formAtendimentosTrabalhista.value" pageName="Atendimento Trabalhista" [config]="[]"
-        [solo]="true" [visible]="editarComponente === true"></app-print-button>
-      <button mat-raised-button *ngIf="editarComponente === true" (click)="executarAcaoExcluir()">Excluir</button>
-      <button mat-raised-button [disabled]="formAtendimentosTrabalhista.invalid" type="submit" (click)="executarAcao()"
-        color="accent">Submeter</button>
+      <app-print-button
+        [dataSet]="formAtendimentosTrabalhista.value"
+        pageName="Atendimento Trabalhista"
+        [config]="[]"
+        [solo]="true"
+        [visible]="editarComponente === true"
+      ></app-print-button>
+      <button
+        mat-raised-button
+        *ngIf="editarComponente === true"
+        (click)="executarAcaoExcluir()"
+      >
+        Excluir
+      </button>
+      <button
+        mat-raised-button
+        [disabled]="formAtendimentosTrabalhista.invalid"
+        type="submit"
+        (click)="executarAcao()"
+        color="accent"
+      >
+        Submeter
+      </button>
     </div>
   </form>
 </section>

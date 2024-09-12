@@ -1,11 +1,29 @@
 <div>
-  <input type="file" multiple (change)="onFilesSelected($event)" />
-  <button id="button" mat-flat-button (click)="uploadFiles()">Upload</button>
+  <input
+    type="file"
+    multiple
+    #fileInput
+    style="display: none"
+    (change)="onFilesSelected($event)"
+    accept=".pdf,.doc,.docx, image/png"
+  />
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="fileInput.click()"
+    style="margin-right: 15px"
+  >
+    Selecionar
+  </button>
+  <button id="button" mat-flat-button (click)="uploadFiles()">
+    <mat-icon>upload_2</mat-icon>Upload
+  </button>
+  <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx, png</p>
 </div>
 
 <mat-progress-bar
   *ngIf="uploadProgress > 0"
   mode="indeterminate"
   [value]="uploadProgress"
-  style="margin-top: 20px;"
+  style="margin-top: 20px"
 ></mat-progress-bar>
