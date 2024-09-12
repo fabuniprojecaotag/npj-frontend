@@ -3,7 +3,7 @@
 <div id="title" style="margin-top: 25px;">List of Files</div>
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 <div *ngIf="!isLoading">
-  <ul>
+  <ul class="file-list-container">
     <li *ngFor="let file of fileUploads">
       <app-file-details 
         [file]="file"
