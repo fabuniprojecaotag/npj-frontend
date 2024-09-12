@@ -30,6 +30,7 @@ export class FileUploadComponent {
           complete: () => {
             this.fileUploaded.emit(); // Notifica o sucesso do upload
             this.uploadProgress = 0;  // Reseta a barra
+            this.selectedFiles = null; // Reseta os arquivos selecionados
           },
           error: (err) => {
             console.error('Erro ao carregar arquivos: ', err);

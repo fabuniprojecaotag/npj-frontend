@@ -5,7 +5,7 @@
     #fileInput
     style="display: none"
     (change)="onFilesSelected($event)"
-    accept=".pdf,.doc,.docx, image/png"
+    accept=".pdf,.doc,.docx,image/png"
   />
   <button
     mat-raised-button
@@ -19,6 +19,10 @@
     <mat-icon>upload_2</mat-icon>Upload
   </button>
   <p class="arquivos-label">Arquivos aceitos: pdf, doc, docx, png</p>
+  <p *ngIf="selectedFiles" style="margin-top: 20px;">
+    Arquivo(s) selecionados: 
+    <span *ngFor="let file of selectedFiles" style="margin-right: 10px;">{{ file.name }}</span>
+  </p>
 </div>
 
 <mat-progress-bar
