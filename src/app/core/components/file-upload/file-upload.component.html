@@ -2,3 +2,10 @@
   <input type="file" multiple (change)="onFilesSelected($event)" />
   <button id="button" mat-flat-button (click)="uploadFiles()">Upload</button>
 </div>
+
+<mat-progress-bar
+  *ngIf="uploadProgress > 0"
+  mode="indeterminate"
+  [value]="uploadProgress"
+  style="margin-top: 20px;"
+></mat-progress-bar>

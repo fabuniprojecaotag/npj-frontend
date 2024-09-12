@@ -10,6 +10,7 @@ export class FileUploadComponent {
   @Input() directory!: string;
   @Output() fileUploaded = new EventEmitter<void>();
   selectedFiles: File[] | null = null;
+  uploadProgress = 0; // Progresso inicial do upload
 
   constructor(private fileService: FileService) {}
 
@@ -21,14 +22,18 @@ export class FileUploadComponent {
   uploadFiles() {
     if (this.selectedFiles) {
       this.fileService
-        .uploadFile(this.selectedFiles, this.directory)
+        .uploadFiles(this.selectedFiles, this.directory)
         .subscribe({
-          next: () => {
+          next: (progress: number) => {
+            this.uploadProgress = progress; // Atualiza a barra de progresso
+          },
+          complete: () => {
             this.fileUploaded.emit(); // Notifica o sucesso do upload
-            alert('Upload efetuado com sucesso!');
+            this.uploadProgress = 0;  // Reseta a barra
           },
           error: (err) => {
             console.error('Erro ao carregar arquivos: ', err);
+            this.uploadProgress = 0;  // Reseta a barra em caso de erro
           },
         });
     } else {
