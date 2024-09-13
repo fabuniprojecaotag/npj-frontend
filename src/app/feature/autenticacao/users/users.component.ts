@@ -1,11 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CadastroService } from 'src/app/feature/autenticacao/services/cadastro.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { ModalExcluidoComponent } from 'src/app/shared/components/modal-excluido/modal-excluido.component';
+import { DEFAULT_PAGE_SIZE } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-users',
@@ -15,36 +16,43 @@ import { ModalExcluidoComponent } from 'src/app/shared/components/modal-excluido
 export class UsersComponent implements AfterViewInit {
   tituloDaPagina = 'Usuários';
   listaUsuarios: Usuario[] = [];
-  dataSource: any;
+  dataSource = new MatTableDataSource<Usuario>(this.listaUsuarios);
   colunasMostradas: string[] = [
     'select',
     'id',
     'nome',
     'role',
     'edicao',
-    'exclusao'
+    'exclusao',
   ];
   selection = new SelectionModel<Usuario>(true, []);
+  initialPageSize: number = DEFAULT_PAGE_SIZE;
 
-  constructor(private service: CadastroService, private dialog: MatDialog) { }
+  constructor(private service: CadastroService, private dialog: MatDialog) {}
+
+  ngAfterViewInit(): void {
+    Promise.resolve().then(() => this.loadInitialData());
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit(): void {
-    this.service.listarUsuarios().subscribe({
-      next: (response) => {
-        this.listaUsuarios = response.list;
+  loadInitialData(): void {
+    this.service.getPaginatedData().subscribe((data) => {
+      // Inicializa a seleção com base no status dos usuários
+      this.selection = new SelectionModel<Usuario>(
+        true,
+        this.listaUsuarios.filter((user) => user.status)
+      );
 
-        // Inicializa a seleção com base no status dos usuários
-        this.selection = new SelectionModel<Usuario>(
-          true,
-          this.listaUsuarios.filter((user) => user.status)
-        );
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize;
+    });
+  }
 
-        this.dataSource = new MatTableDataSource<Usuario>(this.listaUsuarios);
-        this.dataSource.paginator = this.paginator;
-      },
-      error: (err) => { },
+  onPageChange(event: PageEvent): void {
+    this.service.getPaginatedData(event).subscribe((data) => {
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize;
     });
   }
 

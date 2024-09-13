@@ -6,8 +6,8 @@
     125deg,
     white 0%,
     white 25%,
-    $roxo 25%,
-    $roxo 75%,
+    #6b608b 25%,
+    #6b608b 75%,
     white 75%,
     white 100%
   );
@@ -21,7 +21,7 @@
     align-items: center;
     background-color: $branco;
     border-radius: 4px;
-    box-shadow: 0px 1px 10px 2px $roxo-escuro;
+    box-shadow: 0px 1px 0px 2px $roxo-escuro;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -35,7 +35,7 @@
     }
 
     h2 {
-      font-size: 40px;
+      font-size: 52px;
       font-family: $fonte-logo;
       text-transform: uppercase;
     }
@@ -63,7 +63,6 @@
         min-width: 20em;
         margin: 0.6em 0;
       }
-
 
       .form__botao {
         background: $roxo;

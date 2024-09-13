@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Processo } from 'src/app/core/types/processo';
 import { ProcessosService } from 'src/app/feature/processos/services/processos.service';
+import { DEFAULT_PAGE_SIZE } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-processos',
@@ -12,7 +13,7 @@ import { ProcessosService } from 'src/app/feature/processos/services/processos.s
 export class ProcessosComponent implements AfterViewInit {
   tituloPagina = 'Processos';
   listaProcesso: Processo[] = [];
-  dataSource: any;
+  dataSource = new MatTableDataSource<Processo>(this.listaProcesso);
   colunasMostradas: string[] = ['id', 'data', 'vara', 'forum'];
   printConfig: any = [
     {
@@ -33,22 +34,30 @@ export class ProcessosComponent implements AfterViewInit {
       title: 'Vara'
     },
   ];
+  initialPageSize: number = DEFAULT_PAGE_SIZE;
 
   constructor(private service: ProcessosService) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit(): void {
-    this.service.listarProcessos().subscribe({
-      next: (response) => {
-        this.listaProcesso = response.list;
-
-        this.dataSource = new MatTableDataSource<Processo>(this.listaProcesso);
-        this.dataSource.paginator = this.paginator;
-      },
-      error: (err) => { }
+    Promise.resolve().then(() => this.loadInitialData());
+  }
+  
+  loadInitialData(): void {
+    this.service.getPaginatedData().subscribe((data) => {
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize; 
     });
   }
+  
+  onPageChange(event: PageEvent): void {
+    this.service.getPaginatedData(event).subscribe((data) => {
+      this.dataSource.data = data.list;
+      this.paginator.length = data.totalSize;
+    });
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
