@@ -1,14 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from '../../../core/types/assistido';
-import { Response } from 'src/app/core/types/response';
-import { Payload } from 'src/app/core/types/payload';
-import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
-import { Filtro } from 'src/app/core/types/filtro';
-import { PaginationService } from 'src/app/core/services/pagination.service';
 import { PageEvent } from '@angular/material/paginator';
+import { map, Observable } from 'rxjs';
 import { GenericService } from 'src/app/core/services/generic.service';
+import { PaginationService } from 'src/app/core/services/pagination.service';
+import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
+import { Payload } from 'src/app/core/types/payload';
+import { Response } from 'src/app/core/types/response';
+import { AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from '../../../core/types/assistido';
 
 @Injectable({
   providedIn: 'root',
@@ -72,15 +71,5 @@ export class AssistidosService extends GenericService<AssistidoTrabalhista | Ass
     return this.http.get<Response>(`${this.url}/${id}/atendimentos`, {
       params,
     });
-  }
-
-  editarAssistido(
-    id: string,
-    payload: Payload
-  ): Observable<AssistidoTrabalhista | AssistidoCivil | AssistidoFull> {
-    return this.http.put<AssistidoTrabalhista | AssistidoCivil | AssistidoFull>(
-      `${this.url}/${id}`,
-      payload
-    );
   }
 }

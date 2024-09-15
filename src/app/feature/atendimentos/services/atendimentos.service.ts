@@ -1,14 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { map, Observable } from 'rxjs';
+import { PaginationService } from 'src/app/core/services/pagination.service';
+import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
+import { Payload } from 'src/app/core/types/payload';
+import { Response } from 'src/app/core/types/response';
 import { environment } from 'src/environments/environment';
 import { Atendimento } from '../../../core/types/atendimento';
-import { map, Observable } from 'rxjs';
 import { Filtro } from '../../../core/types/filtro';
-import { Response } from 'src/app/core/types/response';
-import { Payload } from 'src/app/core/types/payload';
-import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
-import { PaginationService } from 'src/app/core/services/pagination.service';
-import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({
   providedIn: 'root',

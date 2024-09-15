@@ -138,10 +138,10 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
 
     const payload: Payload = {
       body: dadosAtualizados,
-      classType: dadosAtualizados.area
+      classType: tipoSelecionado
     };
 
-    this.assistidoService.editarAssistido(this.id, payload).subscribe({
+    this.assistidoService.update(this.id, payload).subscribe({
       next: () => {
         this.dialog.closeAll();
         this.atualizarPagina();

@@ -7,7 +7,6 @@ import { PaginationService } from 'src/app/core/services/pagination.service';
 import { Filtro } from 'src/app/core/types/filtro';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { Medida } from 'src/app/core/types/medida';
-import { Payload } from 'src/app/core/types/payload';
 
 @Injectable({
   providedIn: 'root',
@@ -53,18 +52,5 @@ export class MedidasService extends GenericService<Medida> {
   clearCache() {
     this.cache = this.paginationService.clearCache();
     this.currentPageSize = 0;
-  }
-
-  cadastrarMedida(medida: Medida): Observable<Medida> {
-    return this.http.post<Medida>(`${this.url}`, medida);
-  }
-
-  consultarMedida(id: string): Observable<Medida> {
-    return this.http.get<Medida>(`${this.url}/${id}`);
-  }
-
-  excluirMedida(id: string): Observable<Medida> {
-    let body = { ids: [id] };
-    return this.http.delete<Medida>(`${this.url}`, { body });
   }
 }

@@ -97,7 +97,7 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
   }
 
   excluir() {
-    this.medidasService.excluirMedida(this.id)
+    this.medidasService.delete(this.id)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
