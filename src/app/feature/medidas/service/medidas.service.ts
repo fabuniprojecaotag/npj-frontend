@@ -14,24 +14,12 @@ import { Medida } from 'src/app/core/types/medida';
 export class MedidasService extends GenericService<Medida> {
   private url = this.API + '/medidas juridicas';
   filter = { field: '', operator: '', value: '' };
-  cache: ListCacheEntry = {
-    list: [],
-    firstDoc: null,
-    lastDoc: null,
-    pageSize: 0,
-    totalSize: 0,
-  };
-  currentPageSize!: number;
 
   constructor(
     protected override http: HttpClient,
-    private paginationService: PaginationService
+    protected override paginationService: PaginationService
   ) {
-    super(http, 'medidas juridicas')
-    this.paginationService.startCacheCleaner((cache, currentPageSize) => {
-      this.cache = cache;
-      this.currentPageSize = currentPageSize;
-    });
+    super(http, 'medidas juridicas', paginationService)
   }
 
   getPaginatedData(
@@ -47,10 +35,5 @@ export class MedidasService extends GenericService<Medida> {
           return response;
         })
       );
-  }
-
-  clearCache() {
-    this.cache = this.paginationService.clearCache();
-    this.currentPageSize = 0;
   }
 }

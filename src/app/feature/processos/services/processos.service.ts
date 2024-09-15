@@ -14,24 +14,12 @@ import { Processo } from '../../../core/types/processo';
 export class ProcessosService extends GenericService<Processo> {
   private url = this.API + '/processos';
   filter = { field: '', operator: '', value: '' };
-  cache: ListCacheEntry = {
-    list: [],
-    firstDoc: null,
-    lastDoc: null,
-    pageSize: 0,
-    totalSize: 0,
-  };
-  currentPageSize!: number;
 
   constructor(
     protected override http: HttpClient,
-    private paginationService: PaginationService
+    protected override paginationService: PaginationService
   ) {
-    super(http, 'processos')
-    this.paginationService.startCacheCleaner((cache, currentPageSize) => {
-      this.cache = cache;
-      this.currentPageSize = currentPageSize;
-    });
+    super(http, 'processos', paginationService)
   }
 
   getPaginatedData(
@@ -53,10 +41,5 @@ export class ProcessosService extends GenericService<Processo> {
           return response;
         })
       );
-  }
-
-  clearCache() {
-    this.cache = this.paginationService.clearCache();
-    this.currentPageSize = 0;
   }
 }

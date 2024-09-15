@@ -4,14 +4,38 @@ import { Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CrudService } from '../types/crud-service';
 import { Payload } from '../types/payload';
+import { ListCacheEntry } from '../types/list-cache-entry';
+import { PaginationService } from './pagination.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export abstract class GenericService<T> implements CrudService<T> {
   protected API = environment.API_URL;
+  protected cache: ListCacheEntry = {
+    list: [],
+    firstDoc: null,
+    lastDoc: null,
+    pageSize: 0,
+    totalSize: 0,
+  };
+  currentPageSize!: number;
 
-  constructor(protected http: HttpClient, protected endPoint: string) { }
+  constructor(
+    protected http: HttpClient,
+    protected endPoint: string,
+    protected paginationService: PaginationService
+  ) {
+    this.paginationService.startCacheCleaner((cache, currentPageSize) => {
+      this.cache = cache;
+      this.currentPageSize = currentPageSize;
+    });
+  }
+
+  clearCache() {
+    this.cache = this.paginationService.clearCache();
+    this.currentPageSize = 0;
+  }
 
   getById(id: any): Observable<T> {
     return this.http.get<T>(`${this.API}/${this.endPoint}/${id}`)

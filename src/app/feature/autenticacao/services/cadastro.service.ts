@@ -15,29 +15,12 @@ import { Usuario } from '../../../core/types/usuario';
 export class CadastroService extends GenericService<Usuario> {
   private url = this.API + '/usuarios';
   filter = { field: '', operator: '', value: '' };
-  cache: ListCacheEntry = {
-    list: [],
-    firstDoc: null,
-    lastDoc: null,
-    pageSize: 0,
-    totalSize: 0,
-  };
-  currentPageSize!: number;
 
   constructor(
     protected override http: HttpClient,
-    private paginationService: PaginationService
+    protected override paginationService: PaginationService
   ) {
-    super(http, 'usuarios')
-    this.paginationService.startCacheCleaner((cache, currentPageSize) => {
-      this.cache = cache;
-      this.currentPageSize = currentPageSize;
-    });
-  }
-
-  clearCache() {
-    this.cache = this.paginationService.clearCache();
-    this.currentPageSize = 0;
+    super(http, 'usuarios', paginationService)
   }
 
   buscarMeuUsuario(): Observable<Usuario> {

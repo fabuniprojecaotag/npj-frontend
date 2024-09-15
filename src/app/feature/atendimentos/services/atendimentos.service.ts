@@ -15,24 +15,12 @@ import { Filtro } from '../../../core/types/filtro';
 export class AtendimentosService extends GenericService<Atendimento> {
   private url = this.API + '/atendimentos';
   filter = { field: '', operator: '', value: '' };
-  cache: ListCacheEntry = {
-    list: [],
-    firstDoc: null,
-    lastDoc: null,
-    pageSize: 0,
-    totalSize: 0,
-  };
-  currentPageSize!: number;
 
   constructor(
     protected override http: HttpClient,
-    private paginationService: PaginationService
+    protected override paginationService: PaginationService
   ) {
-    super(http, 'atendimentos');
-    this.paginationService.startCacheCleaner((cache, currentPageSize) => {
-      this.cache = cache;
-      this.currentPageSize = currentPageSize;
-    });
+    super(http, 'atendimentos', paginationService);
   }
 
 
@@ -60,11 +48,6 @@ export class AtendimentosService extends GenericService<Atendimento> {
           return response;
         })
       );
-  }
-
-  clearCache() {
-    this.cache = this.paginationService.clearCache();
-    this.currentPageSize = 0;
   }
 
   listagemAtendimentoAutocomplete(): Observable<any> {
