@@ -13,7 +13,7 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export abstract class GenericService<T> implements CrudService<T> {
   protected API = environment.API_URL;
-  protected cache: ListCacheEntry = {
+  protected cache: ListCacheEntry<T | null>= {
     list: [],
     firstDoc: null,
     lastDoc: null,
@@ -46,7 +46,7 @@ export abstract class GenericService<T> implements CrudService<T> {
   getAllPaginated(
     event?: PageEvent,
     // filtro?: Filtro
-  ): Observable<ListCacheEntry> {
+  ): Observable<ListCacheEntry<T>> {
     return this.paginationService
       .getPaginatedData(
         this.cache,
