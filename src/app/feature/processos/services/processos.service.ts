@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { Payload } from 'src/app/core/types/payload';
-import { environment } from 'src/environments/environment';
-import { Processo } from '../../../core/types/processo';
 import { PageEvent } from '@angular/material/paginator';
+import { map, Observable } from 'rxjs';
+import { GenericService } from 'src/app/core/services/generic.service';
+import { PaginationService } from 'src/app/core/services/pagination.service';
 import { Filtro } from 'src/app/core/types/filtro';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
-import { PaginationService } from 'src/app/core/services/pagination.service';
-import { GenericService } from 'src/app/core/services/generic.service';
+import { Processo } from '../../../core/types/processo';
 
 @Injectable({
   providedIn: 'root',

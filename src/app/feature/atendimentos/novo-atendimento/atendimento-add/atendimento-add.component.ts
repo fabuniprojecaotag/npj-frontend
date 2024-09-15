@@ -34,7 +34,7 @@ export class AtendimentoAddComponent implements OnInit {
     if (formAtendimento?.valid) {
       this.novoAtendimento = formAtendimento.getRawValue() as Atendimento;
 
-      this.atendimentoService.cadastrarAtendimento(this.novoAtendimento).subscribe({
+      this.atendimentoService.save(this.novoAtendimento).subscribe({
         next: () => {
           this.dialogoCriar(this.novoAtendimento);
         },

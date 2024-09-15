@@ -35,7 +35,7 @@ export class AtendimentoEditComponent implements OnInit, PendingChanges {
     this.id = this.route.snapshot.paramMap.get('id') as string;
     this.tituloPagina += this.id;
 
-    this.atendimentoService.consultaAtendimento(this.id).subscribe({
+    this.atendimentoService.getById(this.id).subscribe({
       next: (atendimento) => {
         this.atendimento = atendimento;
         this.carregarFormulario();
@@ -73,11 +73,12 @@ export class AtendimentoEditComponent implements OnInit, PendingChanges {
 
     const payload: Payload = {
       body: dadosAtualizados,
-      classType: dadosAtualizados.area
+      classType: this.tipoFicha
     };
 
-    this.atendimentoService.atualizarAtendimento(payload, this.id).subscribe({
+    this.atendimentoService.update(this.id, payload).subscribe({
       next: () => {
+        this.form?.markAsPristine();
         this.router.navigate(['/atendimentos/list']);
       },
       error: (err) => { },
@@ -85,8 +86,9 @@ export class AtendimentoEditComponent implements OnInit, PendingChanges {
   }
 
   excluir(id: string) {
-    this.atendimentoService.excluirAtendimento(id).subscribe({
+    this.atendimentoService.delete(id).subscribe({
       next: () => {
+        this.router.navigate(['/atendimentos/list']);
         alert('Sucesso ao excluir atendimento!');
       },
       error: (err) => { }
