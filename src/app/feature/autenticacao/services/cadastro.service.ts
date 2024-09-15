@@ -9,12 +9,12 @@ import { Payload } from 'src/app/core/types/payload';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { PaginationService } from 'src/app/core/services/pagination.service';
 import { PageEvent } from '@angular/material/paginator';
+import { GenericService } from 'src/app/core/services/generic.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CadastroService {
-  private API = environment.API_URL;
+export class CadastroService extends GenericService<Usuario> {
   private url = this.API + '/usuarios';
   filter = { field: '', operator: '', value: '' };
   cache: ListCacheEntry = {
@@ -27,9 +27,10 @@ export class CadastroService {
   currentPageSize!: number;
 
   constructor(
-    private http: HttpClient,
+    protected override http: HttpClient,
     private paginationService: PaginationService
   ) {
+    super(http, 'usuarios')
     this.paginationService.startCacheCleaner((cache, currentPageSize) => {
       this.cache = cache;
       this.currentPageSize = currentPageSize;
@@ -41,18 +42,10 @@ export class CadastroService {
     this.currentPageSize = 0;
   }
 
-  cadastrar(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.url}`, usuario);
-  }
-
-  buscarCadastro(email: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.url}/${email}`);
-  }
-
   buscarMeuUsuario(): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.url}/me`);
   }
-  
+
   getPaginatedData(
     event?: PageEvent,
     filtro?: Filtro
@@ -78,14 +71,5 @@ export class CadastroService {
         .set('returnType', 'autoComplete');
     }
     return this.http.get<Response>(`${this.url}`, { params });
-  }
-
-  editarCadastro(payload: Payload, userEmail: string): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.url}/${userEmail}`, payload);
-  }
-
-  excluirCadastro(userEmail: string) {
-    let body = { ids: [userEmail] };
-    return this.http.delete(`${this.url}`, { body });
   }
 }

@@ -27,7 +27,6 @@ export class FormMedidasComponent implements OnInit {
 
   ngOnInit(): void {
     this.formMedidas = this.formBuilder.group({
-      id: [{ value: null, disabled: this.salvarComponent }],
       nome: [null, Validators.required],
       area: [null, Validators.required],
       descricao: [null]

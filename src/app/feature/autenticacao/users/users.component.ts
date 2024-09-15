@@ -92,7 +92,7 @@ export class UsersComponent implements AfterViewInit {
   }
 
   excluir(idCadastro: string) {
-    this.service.excluirCadastro(idCadastro).subscribe({
+    this.service.delete(idCadastro).subscribe({
       next: () => {
         window.location.reload();
       },

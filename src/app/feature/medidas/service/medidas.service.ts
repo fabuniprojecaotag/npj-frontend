@@ -2,18 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { map, Observable } from 'rxjs';
+import { GenericService } from 'src/app/core/services/generic.service';
+import { PaginationService } from 'src/app/core/services/pagination.service';
 import { Filtro } from 'src/app/core/types/filtro';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { Medida } from 'src/app/core/types/medida';
 import { Payload } from 'src/app/core/types/payload';
-import { PaginationService } from 'src/app/core/services/pagination.service';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MedidasService {
-  private API = environment.API_URL;
+export class MedidasService extends GenericService<Medida> {
   private url = this.API + '/medidas juridicas';
   filter = { field: '', operator: '', value: '' };
   cache: ListCacheEntry = {
@@ -26,15 +25,15 @@ export class MedidasService {
   currentPageSize!: number;
 
   constructor(
-    private http: HttpClient,
+    protected override http: HttpClient,
     private paginationService: PaginationService
   ) {
+    super(http, 'medidas juridicas')
     this.paginationService.startCacheCleaner((cache, currentPageSize) => {
       this.cache = cache;
       this.currentPageSize = currentPageSize;
     });
   }
-
 
   getPaginatedData(
     event?: PageEvent,
@@ -62,10 +61,6 @@ export class MedidasService {
 
   consultarMedida(id: string): Observable<Medida> {
     return this.http.get<Medida>(`${this.url}/${id}`);
-  }
-
-  atualizarMedida(id: string, payload: Payload): Observable<Medida> {
-    return this.http.put<Medida>(`${this.url}/${id}`, payload);
   }
 
   excluirMedida(id: string): Observable<Medida> {

@@ -33,7 +33,7 @@ export class EditUsersComponent implements OnInit, PendingChanges {
   ) { }
 
   ngOnInit(): void {
-    this.usuarioService.buscarCadastro(this.id).subscribe((usuario) => {
+    this.usuarioService.getById(this.id).subscribe((usuario) => {
       this.cadastro = usuario;
       this.carregarFormulario();
       setTimeout(() => {
@@ -94,7 +94,7 @@ export class EditUsersComponent implements OnInit, PendingChanges {
     this.form?.markAsPristine();
 
     this.cadastroService
-      .editarCadastro(payload, this.id)
+      .update(this.id, payload)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
@@ -109,7 +109,7 @@ export class EditUsersComponent implements OnInit, PendingChanges {
   }
 
   private excluir(idCadastro: string) {
-    this.cadastroService.excluirCadastro(idCadastro)
+    this.cadastroService.delete(idCadastro)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {

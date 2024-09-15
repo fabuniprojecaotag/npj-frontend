@@ -151,7 +151,7 @@ export class ModalEditAssistidoComponent implements OnInit, AfterViewInit {
   }
 
   excluir() {
-    this.assistidoService.excluirAssistido(this.id).subscribe({
+    this.assistidoService.delete(this.id).subscribe({
       next: () => {
         this.dialog.closeAll();
         this.router.navigate(['/assistidos/list']);
