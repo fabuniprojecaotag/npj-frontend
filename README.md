@@ -2,7 +2,7 @@
 
 Este repositório contém o front-end do sistema **GProJurídico**, um sistema **eficiente** para gestão e controle de **processos** e **atendimentos jurídicos**, destinado a uma organização que presta atendimentos às pessoas de baixa renda.
 
-As tecnologias envolvidas no front-end são: **Typescript**, **HTML**, **SCSS**, **Angular**, **Angular Material**, **JWT** (JSON Web Token), **Firebase/Firestore**, **Jasmine**, **Karma** e **Node.js**.
+As tecnologias envolvidas no front-end são: **Typescript**, **HTML**, **SCSS**, **Angular**, **Angular Material**, **JWT** (JSON Web Token), **Firebase/Firestore**, **Jasmine**, **Karma**, **ESLint** e **Node.js**.
 
 As versões das tecnologias acima encontram-se no arquivo **package.json**.
 
@@ -30,6 +30,8 @@ As versões das tecnologias acima encontram-se no arquivo **package.json**.
         install
         ```
 
+Observação: Recomendado usar o Node entre as versões: 15 a 20
+
 ## Uso
 
 1. Inicie a aplicação no CLI com:
@@ -37,6 +39,19 @@ As versões das tecnologias acima encontram-se no arquivo **package.json**.
         serve --o
         ```
 3. Realize o login (de algum usuário cadastrado) para acessar a aplicação.
+
+## Autorização
+
+Dado o login efetuado com sucesso, o usuário precisará ter a **role** necessária para acessar alguns **recursos protegidos**.
+
+A API usa o **Spring Security** para o controle de autenticação. As seguintes roles estão disponíveis:
+
+````
+ESTAGIARIO → Possui acesso para executar GET em todos os endpoints
+PROFESSOR → possui acesso para executar GET e POST em todos e um endpoint, respectivamente
+SECRETARIA → possui acesso para executar GET, POST e PUT em todos os endpoints
+COORDENADOR → Possui acesso total
+````
 
 ## Mais sobre o Projeto
 
