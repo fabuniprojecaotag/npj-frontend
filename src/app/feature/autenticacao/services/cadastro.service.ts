@@ -27,21 +27,6 @@ export class CadastroService extends GenericService<Usuario> {
     return this.http.get<Usuario>(`${this.url}/me`);
   }
 
-  getPaginatedData(
-    event?: PageEvent,
-    filtro?: Filtro
-  ): Observable<ListCacheEntry> {
-    return this.paginationService
-      .getPaginatedData(this.cache, this.currentPageSize, this.url, event)
-      .pipe(
-        map((response) => {
-          this.currentPageSize = response.pageSize;
-
-          return response;
-        })
-      );
-  }
-
   fetchUsuariosFromApiForAutoComplete(filtro?: Filtro): Observable<Response> {
     let params = new HttpParams();
     if (filtro) {

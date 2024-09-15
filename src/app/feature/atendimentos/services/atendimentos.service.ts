@@ -35,21 +35,6 @@ export class AtendimentosService extends GenericService<Atendimento> {
     return this.http.get<Response>(`${this.url}`, { params });
   }
 
-  getPaginatedData(
-    event?: PageEvent,
-    filtro?: Filtro
-  ): Observable<ListCacheEntry> {
-    return this.paginationService
-      .getPaginatedData(this.cache, this.currentPageSize, this.url, event)
-      .pipe(
-        map((response) => {
-          this.currentPageSize = response.pageSize;
-
-          return response;
-        })
-      );
-  }
-
   listagemAtendimentoAutocomplete(): Observable<any> {
     let params = new HttpParams().set('returnType', 'autoComplete');
     return this.http.get<Atendimento[]>(`${this.url}`, { params });

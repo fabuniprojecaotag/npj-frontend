@@ -21,25 +21,4 @@ export class ProcessosService extends GenericService<Processo> {
   ) {
     super(http, 'processos', paginationService)
   }
-
-  getPaginatedData(
-    event?: PageEvent,
-    filtro?: Filtro
-  ): Observable<ListCacheEntry> {
-    return this.paginationService
-      .getPaginatedData(
-        this.cache,
-        this.currentPageSize,
-        this.url,
-        event,
-        'processo'
-      )
-      .pipe(
-        map((response) => {
-          this.currentPageSize = response.pageSize;
-
-          return response;
-        })
-      );
-  }
 }

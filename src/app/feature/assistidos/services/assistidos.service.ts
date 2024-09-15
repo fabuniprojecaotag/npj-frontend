@@ -22,27 +22,6 @@ export class AssistidosService extends GenericService<AssistidoTrabalhista | Ass
     super(http, 'assistidos', paginationService);
   }
 
-  getPaginatedData(
-    event?: PageEvent,
-    // filtro?: Filtro
-  ): Observable<ListCacheEntry> {
-    return this.paginationService
-      .getPaginatedData(
-        this.cache,
-        this.currentPageSize,
-        this.url,
-        event,
-        'assistido'
-      )
-      .pipe(
-        map((response) => {
-          this.currentPageSize = response.pageSize;
-
-          return response;
-        })
-      );
-  }
-
   listarAssistidosForAutoComplete(): Observable<Response> {
     let params = new HttpParams().set('returnType', 'autoComplete');
     return this.http.get<Response>(`${this.url}`, { params });

@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, take } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CrudService } from '../types/crud-service';
 import { Payload } from '../types/payload';
 import { ListCacheEntry } from '../types/list-cache-entry';
 import { PaginationService } from './pagination.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({
   providedIn: 'root'
@@ -42,14 +43,26 @@ export abstract class GenericService<T> implements CrudService<T> {
       .pipe(take(1));
   }
 
-  // getAll(page: string, search?: string): Observable<T> {
-  //   const params = new HttpParams()
-  //     .set('page', page)
-  //     .set('payload', JSON.stringify(search || {}));
+  getAllPaginated(
+    event?: PageEvent,
+    // filtro?: Filtro
+  ): Observable<ListCacheEntry> {
+    return this.paginationService
+      .getPaginatedData(
+        this.cache,
+        this.currentPageSize,
+        `${this.API}/${this.endPoint}`,
+        event,
+        this.endPoint
+      )
+      .pipe(
+        map((response) => {
+          this.currentPageSize = response.pageSize;
 
-  //   return this.http.get<T>(`${this.API}/${this.endPoint}`, { params })
-  //     .pipe(take(1));
-  // }
+          return response;
+        })
+      );
+  }
 
 
   save(data: T): Observable<T> {

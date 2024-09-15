@@ -40,14 +40,14 @@ export class MedidasComponent implements AfterViewInit {
   }
 
   loadInitialData(): void {
-    this.service.getPaginatedData().subscribe((data) => {
+    this.service.getAllPaginated().subscribe((data) => {
       this.dataSource.data = data.list;
-      this.paginator.length = data.totalSize; 
+      this.paginator.length = data.totalSize;
     });
   }
 
   onPageChange(event: PageEvent): void {
-    this.service.getPaginatedData(event).subscribe((data) => {
+    this.service.getAllPaginated(event).subscribe((data) => {
       this.dataSource.data = data.list;
       this.paginator.length = data.totalSize;
     });
