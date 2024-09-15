@@ -32,7 +32,7 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
   ngOnInit(): void {
     this.numeroParam = this.route.snapshot.paramMap.get('numero') as string;
     this.processsoService
-      .consultarProcesso(this.numeroParam)
+      .getById(this.numeroParam)
       .subscribe((callback) => {
         this.processo = callback;
         this.carregarFormulario();
@@ -74,9 +74,10 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
     };
 
     this.processsoService
-      .editarProcesso(this.numeroParam, payload)
+      .update(this.numeroParam, payload)
       .subscribe({
         next: () => {
+          this.form?.markAsPristine();
           this.abrirModal(dadosAtualizados);
         },
         error: (err) => { },
@@ -89,7 +90,7 @@ export class ProcessoEditComponent implements OnInit, PendingChanges {
   }
 
   excluirProcesso(idProcesso: string) {
-    this.processsoService.excluirProcesso(idProcesso).subscribe({
+    this.processsoService.delete(idProcesso).subscribe({
       next: () => {
         this.router.navigate(['/processos/list']);
       },

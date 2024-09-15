@@ -8,12 +8,12 @@ import { PageEvent } from '@angular/material/paginator';
 import { Filtro } from 'src/app/core/types/filtro';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { PaginationService } from 'src/app/core/services/pagination.service';
+import { GenericService } from 'src/app/core/services/generic.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProcessosService {
-  private API = environment.API_URL;
+export class ProcessosService extends GenericService<Processo> {
   private url = this.API + '/processos';
   filter = { field: '', operator: '', value: '' };
   cache: ListCacheEntry = {
@@ -26,18 +26,14 @@ export class ProcessosService {
   currentPageSize!: number;
 
   constructor(
-    private http: HttpClient,
+    protected override http: HttpClient,
     private paginationService: PaginationService
   ) {
+    super(http, 'processos')
     this.paginationService.startCacheCleaner((cache, currentPageSize) => {
       this.cache = cache;
       this.currentPageSize = currentPageSize;
     });
-  }
-
-
-  cadastraProcesso(processo: Processo): Observable<Processo> {
-    return this.http.post<Processo>(`${this.url}`, processo);
   }
 
   getPaginatedData(
@@ -64,18 +60,5 @@ export class ProcessosService {
   clearCache() {
     this.cache = this.paginationService.clearCache();
     this.currentPageSize = 0;
-  }
-
-  consultarProcesso(id: string): Observable<Processo> {
-    return this.http.get<Processo>(`${this.url}/${id}`);
-  }
-
-  editarProcesso(id: string, payload: Payload): Observable<Processo> {
-    return this.http.put<Processo>(`${this.url}/${id}`, payload);
-  }
-
-  excluirProcesso(id: string): Observable<Processo> {
-    let body = { ids: [id] };
-    return this.http.delete<Processo>(`${this.url}`, { body });
   }
 }
