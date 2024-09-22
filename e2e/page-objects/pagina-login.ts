@@ -1,4 +1,13 @@
 import { expect, Locator, Page } from "@playwright/test";
+import { test as base } from "@playwright/test";
+
+export const test = base.extend<{ paginaLogin: PaginaLogin }>({
+  paginaLogin: async ({ page }, use) => {
+    const paginaLogin = new PaginaLogin(page);
+    await paginaLogin.visitar();
+    await use(paginaLogin);
+  }
+});
 
 export default class PaginaLogin {
   private readonly page: Page;
@@ -24,7 +33,24 @@ export default class PaginaLogin {
     await this.botaoLogin.click();
   }
 
+  async preencherOsCamposVazio() {
+    await this.inputSenha.fill('');
+    await this.inputEmail.fill('');
+    await this.inputEmail.blur();
+}
+
+
+  async clicarNoCampoSenha() {
+    await this.inputSenha.click();
+  }
+
   async loginFeitoComSucesso() {
     await expect(this.page).toHaveURL('/home');
+  }
+
+  async estaMostrandoMensagemDeErro(mensagem: string) {
+    const elementoErro = this.page.getByText(mensagem);
+    await elementoErro.waitFor({ state: 'visible' });
+    await expect(elementoErro).toBeVisible();
   }
 }
