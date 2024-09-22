@@ -8,17 +8,18 @@
     <form [formGroup]="loginForm" *ngIf="!isLoading" class="login__form">
       <mat-form-field appearance="fill">
         <mat-label>Prefixo email/matricula</mat-label>
-        <input matInput type="text" placeholder="Digite o começo do seu e-mail ou matricula" formControlName="email">
+        <input matInput type="text" placeholder="Digite o começo do seu e-mail ou matricula" formControlName="email"
+          data-testid="input-email">
         <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Email/Matrícula obrigatório(a)!</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Senha</mat-label>
-        <input matInput type="password" placeholder="Digite sua senha" formControlName="senha">
+        <input matInput type="password" placeholder="Digite sua senha" formControlName="senha" data-testid="input-senha">
         <mat-error *ngIf="loginForm.get('senha')?.errors?.['required']">Senha é obrigatória!</mat-error>
       </mat-form-field>
 
-      <button [disabled]="loginForm.invalid" class="form__botao" type="submit" (click)="login()">Login</button>
+      <button [disabled]="loginForm.invalid" class="form__botao" type="submit" (click)="login()" data-testid="botao-login">Login</button>
     </form>
     <a href="#">Esqueceu a senha?</a>
   </div>
