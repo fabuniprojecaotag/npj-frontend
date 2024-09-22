@@ -45,3 +45,10 @@ Thumbs.db
 
 # arquivos do fake back-end a parte
 fake-backend/node_modules
+
+# playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
