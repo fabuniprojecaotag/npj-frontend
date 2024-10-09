@@ -8,6 +8,8 @@ As versões das tecnologias acima encontram-se no arquivo **package.json**.
 
 ## Instalação
 
+Pré-requisitos para a instalação e execução do projeto localmente: para você poder instalar e executar o front-end do GPRO é necessário você tenha instalado o [NodeJS](https://nodejs.org/pt), depois o [TypeScript](https://www.npmjs.com/package/typescript) e por o [Angular CLI](https://angular.dev/tools/cli/setup-local).
+
 1. Clone o repositório:
 
    1. Via HTTPS
@@ -20,17 +22,12 @@ As versões das tecnologias acima encontram-se no arquivo **package.json**.
         git clone git@github.com:fabuniprojecaotag/npj-frontend.git
         ```
 
-2. Instale o Angular CLI na versão do projeto:
-        ```npm
-        install -g @angular/cli@16.2.12
-        ```
-
-3. Instale as dependências com o Node:
+2. Instale as dependências node_modules do projeto:
         ```npm
         install
         ```
 
-Observação: Recomendado usar o Node entre as versões: 15 a 20
+Observação: Recomendado usar o Node a partir da versão 16
 
 ## Uso
 
@@ -38,7 +35,7 @@ Observação: Recomendado usar o Node entre as versões: 15 a 20
        ```ng
         serve --o
         ```
-3. Realize o login (de algum usuário cadastrado) para acessar a aplicação.
+2. Realize o login (de algum usuário cadastrado) para acessar a aplicação.
 
 ## Autorização
 
