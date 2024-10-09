@@ -8,7 +8,7 @@ As versões das tecnologias acima encontram-se no arquivo **package.json**.
 
 ## Instalação
 
-Pré-requisitos para a instalação e execução do projeto localmente: para você poder instalar e executar o front-end do GPRO é necessário você tenha instalado o [NodeJS](https://nodejs.org/pt), depois o [TypeScript](https://www.npmjs.com/package/typescript) e por o [Angular CLI](https://angular.dev/tools/cli/setup-local).
+Pré-requisitos para a instalação e execução do projeto localmente: para você poder instalar e executar o front-end do GPRO é necessário você tenha instalado o [NodeJS](https://nodejs.org/pt), depois o [TypeScript](https://www.npmjs.com/package/typescript) e por fim o [Angular CLI](https://angular.dev/tools/cli/setup-local).
 
 1. Clone o repositório:
 
