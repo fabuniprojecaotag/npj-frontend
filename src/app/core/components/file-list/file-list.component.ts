@@ -2,6 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { FileService } from '../../services/file.service';
 import { FileData } from '../../types/file-data';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MensagemErroService } from '../../services/mensagem-erro.service';
 
 @Component({
   selector: 'app-file-list',
@@ -14,7 +15,10 @@ export class FileListComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   isLoading = true;
 
-  constructor(private fileService: FileService) {}
+  constructor(
+    private fileService: FileService,
+    private mensagemErro: MensagemErroService
+  ) {}
 
   ngOnInit(): void {
     this.loadFiles();
@@ -41,8 +45,7 @@ export class FileListComponent implements OnInit {
           });
 
           list.forEach((file) => {
-            let formattedName = file.name.split('/')[1]; // Ex.: ATE00025/document.pdf → document.pdf
-            file.name = formattedName;
+            file.name = this.formatFileName(file.name); // Ex.: ATE00025/document.pdf → document.pdf
             file.directory = this.directory;
 
             // Inclui o arquivo se não houver localmente
@@ -60,10 +63,14 @@ export class FileListComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.error('Erro ao carregar arquivos: ', err);
+        this.mensagemErro.mostrarMensagemErro(500, 'Erro ao excluir arquivo');
         this.isLoading = false;
       },
     });
+  }
+
+  private formatFileName(fileName: string): string {
+    return fileName.split('/')[1]; // Ex.: ATE00025/document.pdf → document.pdf
   }
 
   private openSnackBar(message: string) {

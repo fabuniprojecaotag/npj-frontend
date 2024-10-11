@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FileService } from '../../services/file.service';
+import { MensagemErroService } from '../../services/mensagem-erro.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -12,7 +13,10 @@ export class FileUploadComponent {
   selectedFiles: File[] | null = null;
   uploadProgress = 0; // Progresso inicial do upload
 
-  constructor(private fileService: FileService) {}
+  constructor(
+    private fileService: FileService,
+    private mensagemErro: MensagemErroService
+  ) {}
 
   onFilesSelected(event: any) {
     const files: FileList = event.target.files;
@@ -29,12 +33,15 @@ export class FileUploadComponent {
           },
           complete: () => {
             this.fileUploaded.emit(); // Notifica o sucesso do upload
-            this.uploadProgress = 0;  // Reseta a barra
+            this.uploadProgress = 0; // Reseta a barra
             this.selectedFiles = null; // Reseta os arquivos selecionados
           },
           error: (err) => {
-            console.error('Erro ao carregar arquivos: ', err);
-            this.uploadProgress = 0;  // Reseta a barra em caso de erro
+            this.mensagemErro.mostrarMensagemErro(
+              500,
+              'Erro ao excluir arquivo'
+            );
+            this.uploadProgress = 0; // Reseta a barra em caso de erro
           },
         });
     } else {

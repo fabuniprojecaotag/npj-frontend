@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FileService } from '../../services/file.service';
 import { FileData } from '../../types/file-data';
+import { MensagemErroService } from '../../services/mensagem-erro.service';
 
 @Component({
   selector: 'app-file-details',
@@ -11,7 +12,10 @@ export class FileDetailsComponent {
   @Input() file!: FileData;
   @Output() fileDeleted = new EventEmitter<string>();
 
-  constructor(private fileService: FileService) {}
+  constructor(
+    private fileService: FileService,
+    private mensagemErro: MensagemErroService
+  ) {}
 
   deleteFile(): void {
     this.fileService.deleteFile(this.file.name, this.file.directory).subscribe({
@@ -19,7 +23,7 @@ export class FileDetailsComponent {
         this.fileDeleted.emit(this.file.name);
       },
       error: (err) => {
-        console.error('Erro ao excluir arquivo:', err);
+        this.mensagemErro.mostrarMensagemErro(500, 'Erro ao excluir arquivo');
       },
     });
   }
