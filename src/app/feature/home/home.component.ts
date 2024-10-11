@@ -11,7 +11,6 @@ export class HomeComponent implements OnInit {
   subtituloDaPagina = 'Home';
   tituloDaPagina = 'Home';
 
-
   constructor(public dialog: MatDialog) {
 
   }
@@ -34,6 +33,7 @@ export class HomeComponent implements OnInit {
     });
   }
 }
+
 @Component({
   selector: 'app-welcome-dialog',
   templateUrl: 'welcome-dialog.html',

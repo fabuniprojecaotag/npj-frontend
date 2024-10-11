@@ -1,0 +1,23 @@
+#title {
+  display: block;
+  background-color: #f7f7f7;
+  padding: 15px;
+  border: 1px solid #eaeaea;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.file-list-container {
+  max-height: 300px; /* Define a altura máxima */
+  overflow-y: auto; /* Ativa o scroll vertical quando exceder */
+}
+
+li:first-child {
+  border-top-style: none;
+}
+
+li:last-child {
+  border-bottom: 1px solid #eaeaea;
+}

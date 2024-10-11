@@ -35,6 +35,7 @@ export class FormAtendimentoCivilComponent implements OnInit {
   @Input() editarComponente = false;
   @Output() acaoClique: EventEmitter<void> = new EventEmitter();
   @Output() acaoCliqueExcluir: EventEmitter<void> = new EventEmitter();
+  @Input() atendimentoId!: string;
 
   constructor(
     private formBuilder: FormBuilder,
