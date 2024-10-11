@@ -37,7 +37,7 @@ export class UsersComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   loadInitialData(): void {
-    this.service.getPaginatedData().subscribe((data) => {
+    this.service.getAllPaginated().subscribe((data) => {
       // Inicializa a seleção com base no status dos usuários
       this.selection = new SelectionModel<Usuario>(
         true,
@@ -50,7 +50,7 @@ export class UsersComponent implements AfterViewInit {
   }
 
   onPageChange(event: PageEvent): void {
-    this.service.getPaginatedData(event).subscribe((data) => {
+    this.service.getAllPaginated(event).subscribe((data) => {
       this.dataSource.data = data.list;
       this.paginator.length = data.totalSize;
     });
@@ -92,7 +92,7 @@ export class UsersComponent implements AfterViewInit {
   }
 
   excluir(idCadastro: string) {
-    this.service.excluirCadastro(idCadastro).subscribe({
+    this.service.delete(idCadastro).subscribe({
       next: () => {
         window.location.reload();
       },

@@ -46,6 +46,14 @@
           Forúm é obrigatório!
         </mat-error>
       </mat-form-field>
+      <mat-form-field class="inputs-medios">
+        <mat-label>CPF (Assistido Envolvido)</mat-label>
+        <input matInput placeholder="CPF do Assistido envolvido" formControlName="assistidoId" mask="000.000.000-00"
+          [showMaskTyped]="true" [dropSpecialCharacters]="false" />
+        <mat-error *ngIf="formProcessos.get('assistidoId')?.errors?.['required']">
+          CPF do assistido é obrigatório!
+        </mat-error>
+      </mat-form-field>
     </div>
     <div class="linha linha-menor">
       <app-atendimento-autocomplete [control]="atendimentoControl" class="input-pequeno" />
@@ -57,13 +65,6 @@
         </mat-select>
         <mat-error *ngIf="formProcessos.get('status')?.errors?.['required']">
           Status é obrigatório!
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="inputs-medios">
-        <mat-label>CPF do Assistido</mat-label>
-        <input matInput placeholder="CPF do Assistido" formControlName="assistidoId" />
-        <mat-error *ngIf="formProcessos.get('assistidoId')?.errors?.['required']">
-          CPF do Assistido é obrigatório!
         </mat-error>
       </mat-form-field>
     </div>

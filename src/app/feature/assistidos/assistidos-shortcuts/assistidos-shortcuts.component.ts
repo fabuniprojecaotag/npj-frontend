@@ -33,7 +33,7 @@ export class AssistidosShortcutsComponent implements OnInit {
   ngOnInit(): void {
     this.cpf = this.route.snapshot.paramMap.get('cpf') as string;
 
-    this.assistidosService.consultarAssistido(this.cpf).subscribe({
+    this.assistidosService.getById(this.cpf).subscribe({
       next: (resposta) => {
         this.assistido = resposta;
         this.tituloDaPagina = `Assisitido - ${this.assistido.nome}`;
@@ -48,7 +48,7 @@ export class AssistidosShortcutsComponent implements OnInit {
     });
 
     // TODO: corrigir lógica para obter registros
-    this.processoService.getPaginatedData().subscribe({
+    this.processoService.getAllPaginated().subscribe({
       next: (resposta) => {
         this.listaProcesso = resposta.list;
       }

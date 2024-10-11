@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, MaxLengthValidator, Validators } from '@angular/forms';
 import { FormsService } from 'src/app/core/services/forms.service';
 import { Usuario } from 'src/app/core/types/usuario';
 import { formValidations } from '../../helpers/form-validations';
@@ -47,7 +47,7 @@ export class FormUsersComponent implements OnInit {
       unidadeInstitucional: [null, Validators.required],
       status: [{ value: true, disabled: this.myProfileComponente }],
       cadastrarSenha: this.cadastrarSenhaControl,
-      senha: [null, [Validators.required, Validators.minLength(6)]],
+      senha: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       confirmarSenha: [null, [Validators.required, Validators.minLength(6), formValidations.equalTo('senha')]],
       role: [{ value: null, disabled: this.myProfileComponente }, Validators.required],
     });

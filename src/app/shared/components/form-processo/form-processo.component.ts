@@ -30,7 +30,7 @@ export class FormProcessoComponent implements OnInit {
       vara: [null, Validators.required],
       forum: [null, Validators.required],
       status: [null, Validators.required],
-      assistidoId: [null, Validators.required]
+      assistidoId: [null, [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]]
     });
     this.formService.setForm(this.formProcessos);
   }

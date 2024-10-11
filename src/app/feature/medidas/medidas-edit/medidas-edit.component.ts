@@ -14,7 +14,7 @@ import { Payload } from 'src/app/core/types/payload';
   styleUrls: ['./medidas-edit.component.scss']
 })
 export class MedidasEditComponent implements OnInit, PendingChanges {
-  tituloPagina = 'Editar Medida Jurídica';
+  tituloPagina = 'Editar Medida - ';
   medida!: Medida;
   form!: FormGroup<any> | null;
   id!: string;
@@ -28,8 +28,10 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') as string;
+    this.tituloPagina += this.id;
+
     this.medidasService
-      .consultarMedida(this.id)
+      .getById(this.id)
       .subscribe((callback) => {
         this.medida = callback;
         this.carregarFormulario();
@@ -48,8 +50,8 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
     this.form?.markAsPristine();
   }
 
-  editar() {
-    const dadosAtualizados: any = {
+  editarNavegando() {
+    const dadosAtualizados: Medida = {
       nome: this.form?.value.nome,
       descricao: this.form?.value.descricao,
       area: this.form?.value.area,
@@ -61,7 +63,7 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
     };
 
     this.medidasService
-      .atualizarMedida(this.id, payload)
+      .update(this.id, payload)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
@@ -71,8 +73,8 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
       });
   }
 
-  salvar() {
-    const dadosAtualizados: any = {
+  editarPermanecendo() {
+    const dadosAtualizados: Medida = {
       nome: this.form?.value.nome,
       descricao: this.form?.value.descricao,
       area: this.form?.value.area,
@@ -84,7 +86,7 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
     };
 
     this.medidasService
-      .atualizarMedida(this.id, payload)
+      .update(this.id, payload)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {
@@ -95,7 +97,7 @@ export class MedidasEditComponent implements OnInit, PendingChanges {
   }
 
   excluir() {
-    this.medidasService.excluirMedida(this.id)
+    this.medidasService.delete(this.id)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {

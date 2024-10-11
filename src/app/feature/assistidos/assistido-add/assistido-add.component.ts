@@ -48,7 +48,7 @@ export class AssistidoAddComponent {
         ...novoAssistido,
         dataNascimento: this.form?.value.dataNascimento,
         naturalidade: this.form?.value.naturalidade,
-        dependentes: this.form?.value.dependentes,
+        dependentes: Number(this.form?.value.dependentes) || 0,
       };
     } else if (this.form?.value['@type'] === 'Trabalhista') {
       novoAssistido = {
@@ -70,7 +70,7 @@ export class AssistidoAddComponent {
     }
 
     if (this.form?.valid) {
-      this.assistidoService.cadastrarAssistido(novoAssistido).subscribe({
+      this.assistidoService.save(novoAssistido).subscribe({
         next: (value) => {
           this.abrirModal(value);
           this.router.navigate(['assistidos/list']);

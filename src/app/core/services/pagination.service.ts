@@ -14,13 +14,13 @@ export class PaginationService {
 
   // TODO: trabalhar lógica para que filtragem de registros funcione com paginação
   getPaginatedData(
-    cache: ListCacheEntry,
+    cache: ListCacheEntry<any>,
     currentPageSize: number,
     url: string,
     event?: PageEvent,
     entity?: string,
     filtro?: Filtro
-  ): Observable<ListCacheEntry> {
+  ): Observable<ListCacheEntry<any>> {
     const pageSize = event?.pageSize || DEFAULT_PAGE_SIZE;
     const pageIndex = event?.pageIndex || 0;
 
@@ -41,7 +41,7 @@ export class PaginationService {
 
       // Retorna o cache se houver algum registro
       if (areThereAnyRecords) {
-        let nCache: ListCacheEntry = {
+        let nCache: ListCacheEntry<any> = {
           list: list,
           firstDoc: list.at(0),
           lastDoc: list.at(-1),
@@ -55,7 +55,7 @@ export class PaginationService {
 
     // Retorna o cache paginado em menor quantidade
     else if (pageSize < currentPageSize) {
-      let nCache: ListCacheEntry = {
+      let nCache: ListCacheEntry<any> = {
         list: listCache.slice(startIndex, endIndex),
         firstDoc: cache.firstDoc,
         lastDoc: listCache.slice(startIndex, endIndex).at(-1),
@@ -78,7 +78,7 @@ export class PaginationService {
         list.length > currentPageSize ||
         thereAreAllTheDatabaseRecordsLocally
       ) {
-        let nCache: ListCacheEntry = {
+        let nCache: ListCacheEntry<any> = {
           list: list,
           firstDoc: cache.firstDoc,
           lastDoc: list.at(-1),
@@ -105,7 +105,7 @@ export class PaginationService {
           : cache.list.slice(startIndex, endIndex);
 
         // Cria uma nova estrutura de cache local para retornar apenas os registros especificados
-        let nCache: ListCacheEntry = {
+        let nCache: ListCacheEntry<any> = {
           list: listForReturn,
           firstDoc: cache.firstDoc,
           lastDoc: cache.lastDoc,
@@ -122,10 +122,10 @@ export class PaginationService {
     url: string,
     pageSize: number,
     currentPageSize: number,
-    cache: ListCacheEntry,
+    cache: ListCacheEntry<any>,
     entity?: string,
     filtro?: Filtro
-  ): Observable<ListCacheEntry> {
+  ): Observable<ListCacheEntry<any>> {
     const lastDoc = cache.lastDoc;
 
     let params = new HttpParams();
@@ -156,10 +156,10 @@ export class PaginationService {
       params = params.set('pageSize', pageSize - currentPageSize);
     else params = params.set('pageSize', pageSize);
 
-    return this.http.get<ListCacheEntry>(`${url}`, { params });
+    return this.http.get<ListCacheEntry<any>>(`${url}`, { params });
   }
 
-  clearCache(): ListCacheEntry {
+  clearCache(): ListCacheEntry<any> {
     return {
       list: [],
       firstDoc: null,
@@ -169,7 +169,7 @@ export class PaginationService {
     };
   }
 
-  startCacheCleaner(callback: (cache: ListCacheEntry, currentPageSize: number) => void, intervalTime: number = TEN_MINUTES_IN_MILLISECONDS) {
+  startCacheCleaner(callback: (cache: ListCacheEntry<any>, currentPageSize: number) => void, intervalTime: number = TEN_MINUTES_IN_MILLISECONDS) {
     setInterval(() => {
       const clearedCache = this.clearCache();
       callback(clearedCache, 0);

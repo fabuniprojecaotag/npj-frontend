@@ -78,7 +78,7 @@ export class MyProfileComponent implements OnInit, PendingChanges {
     this.form?.markAsPristine();
 
     this.cadastroService
-      .editarCadastro(payload, dadosAtualizados.email)
+      .update(dadosAtualizados.email, payload)
       .pipe(debounceTime(500))
       .subscribe({
         next: () => {

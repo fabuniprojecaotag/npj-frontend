@@ -28,7 +28,7 @@ export class AddUsersComponent {
     if (formCadastro?.valid) {
       const novoCadastro = formCadastro.getRawValue() as Usuario;
 
-      this.cadastroService.cadastrar(novoCadastro)
+      this.cadastroService.save(novoCadastro)
         .pipe(debounceTime(500))
         .subscribe({
           next: () => {

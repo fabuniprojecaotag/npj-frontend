@@ -26,7 +26,7 @@ export class ProcessoAddComponent {
 
     if (formCadastroProcesso?.valid) {
       const novoCadastro = formCadastroProcesso.getRawValue() as Processo;
-      this.processsoService.cadastraProcesso(novoCadastro).subscribe({
+      this.processsoService.save(novoCadastro).subscribe({
         next: () => {
           this.abrirModal(novoCadastro);
           formCadastroProcesso.reset();
