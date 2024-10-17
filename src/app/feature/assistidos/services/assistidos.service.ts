@@ -7,6 +7,8 @@ import { PaginationService } from 'src/app/core/services/pagination.service';
 import { ListCacheEntry } from 'src/app/core/types/list-cache-entry';
 import { Response } from 'src/app/core/types/response';
 import { AssistidoCivil, AssistidoFull, AssistidoTrabalhista } from '../../../core/types/assistido';
+import { ListResponse } from 'src/app/core/types/ListResponse';
+import { Atendimento } from 'src/app/core/types/atendimento';
 
 @Injectable({
   providedIn: 'root',
@@ -27,9 +29,10 @@ export class AssistidosService extends GenericService<AssistidoTrabalhista | Ass
     return this.http.get<Response>(`${this.url}`, { params });
   }
 
-  listarAtendimentosVinculados(id: string): Observable<Response> {
+  // método para listar atendimentos
+  listarAtendimentosVinculados(id: string): Observable<ListResponse<Atendimento>> {
     let params = new HttpParams().set('returnType', 'forAssistido');
-    return this.http.get<Response>(`${this.url}/${id}/atendimentos`, {
+    return this.http.get<ListResponse<Atendimento>>(`${this.url}/${id}/atendimentos`, {
       params,
     });
   }
