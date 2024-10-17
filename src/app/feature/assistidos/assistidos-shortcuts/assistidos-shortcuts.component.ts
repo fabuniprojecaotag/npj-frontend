@@ -27,7 +27,7 @@ export class AssistidosShortcutsComponent implements OnInit {
     private processoService: ProcessosService,
     private dialog: MatDialog
   ) {
-    this.tituloDaPagina = 'Assisitido - ';
+    this.tituloDaPagina = 'Assistido - ';
   }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class AssistidosShortcutsComponent implements OnInit {
     this.assistidosService.getById(this.cpf).subscribe({
       next: (resposta) => {
         this.assistido = resposta;
-        this.tituloDaPagina = `Assisitido - ${this.assistido.nome}`;
+        this.tituloDaPagina = `Assistido - ${this.assistido.nome}`;
       },
       error: () => { },
     });
@@ -47,8 +47,8 @@ export class AssistidosShortcutsComponent implements OnInit {
       }
     });
 
-    // TODO: corrigir lógica para obter registros
-    this.processoService.getAllPaginated().subscribe({
+    
+    this.processoService.listarProcessos(this.cpf).subscribe({
       next: (resposta) => {
         this.listaProcesso = resposta.list;
       }
