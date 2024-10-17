@@ -14,7 +14,7 @@ import { ListResponse } from 'src/app/core/types/ListResponse';
   providedIn: 'root',
 })
 export class ProcessosService extends GenericService<Processo> {
-  private url = this.API + '/assistidos';// O erro estava aqui...
+  private url = `${this.API}/assistidos`; // O erro estava aqui...
   filter = { field: '', operator: '', value: '' };
 
   constructor(
@@ -26,7 +26,7 @@ export class ProcessosService extends GenericService<Processo> {
 
   // método para listar os processos vinculados
   listarProcessos(id: string): Observable<ListResponse<Processo>>{
-    let params = new HttpParams().set('returnType', 'forAssistido');
+    const params = new HttpParams().set('returnType', 'forAssistido');
     return this.http.get<ListResponse<Processo>>(`${this.url}/${id}/processos`, {params});
   }
 
